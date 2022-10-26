@@ -1,11 +1,12 @@
 import './common.css';
 import Header from './Header';
+import Login from './LoginPage/Login';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      수정
+      <Login />
     </div>
   );
 }
