@@ -72,14 +72,68 @@ function ItemDetail({ match, location, history }) {
                                 <th scope="row">업로드날짜</th>
                                 <td>{data.itemDate}</td>                  
                             </tr>
-                            {/* <tr>
+                            <tr>
                                 <th scope="row">상품명</th>
-                                <td><input type="text" value={itemName} onChange={handlerChangeName} /></td>                  
+                                <td>{data.itemName}</td> 
+                                {/* <td><input type="text" value={itemName} onChange={handlerChangeName} /></td>                   */}
                             </tr>
                             <tr>
                                 <th scope="row">가격</th>
-                                <td><input type="text" value={itemPrice} onChange={handlerChangePrice} /></td>                  
-                            </tr> */}
+                                <td>{data.itemPrice}</td> 
+                                {/* <td><input type="text" value={itemPrice} onChange={handlerChangePrice} /></td>                   */}
+                            </tr>
+                            <tr>
+                                <th scope="row">대분류</th>
+                                <td>{data.itemMaincategory}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">소분류</th>
+                                <td>{data.itemSubcategory}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">보증금</th>
+                                <td>{data.itemDeposit}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">조회수</th>
+                                <td>{data.itemReadcount}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">내용</th>
+                                <td>{data.itemDetail}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">작성자</th>
+                                <td>{data.itemWriter}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">날씨</th>
+                                <td>{data.itemWeather}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">상품사진</th>
+                                <td>{data.itemImage}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">상의사이즈</th>
+                                <td>{data.itemTopsize}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">하의사이즈</th>
+                                <td>{data.itemBottomsize}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">겉옷사이즈</th>
+                                <td>{data.itemEtcsize}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">키</th>
+                                <td>{data.itemHeight}</td>                  
+                            </tr>
+                            <tr>
+                                <th scope="row">대여기간</th>
+                                <td>{data.itemRentalperiod}</td>                  
+                            </tr>
                         </tbody>
                     </table>      
                 </form>   
