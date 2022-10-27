@@ -1,11 +1,19 @@
+import React from 'react';
+
 import './common.css';
-import Header from './Header';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Join from './pages/Join';
 
 function App() {
   return (
+    
     <div className="App">
-      <Header />
-    </div>
+        <Header />
+          <Join />
+        <Footer />
+      </div>
+
   );
 }
 

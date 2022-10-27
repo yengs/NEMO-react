@@ -1,66 +1,125 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+.App {
+  width: 100%;
+  height: 100vh;
+  font-family: 'Pretendard-Regular' !important;
+}
+
+.requiredInfo {
+  text-align: end;
+}
 
 .requiredMark::before {
   content: "*";
   color: rgb(202, 43, 43);
 }
 
-input[type=button], input[type=submit] {
-  border: none;
+.requiredMark > span {
+  font-size: 13px;
+  font-weight: 100;
+  color: #777;
+}
+
+.btnWrap .btn {
+  font-family: 'Pretendard-Regular' !important;
+  font-weight: 100;
+  margin: 20px 15px 0;
+  font-size: 15px;
+  padding: 10px 50px;
+  cursor: pointer;
   border-radius: 3px;
-  padding: 8px 30px;
-  font-weight: 800;
-  font-size: 0.8rem;
+  font-weight: 100;
 }
 
 .grayBtn {
+  border: #999;
   background-color: #999;
   color: #fff;
 }
 
+.grayLineBtn {
+  border: 2px solid #ccc !important;
+  background-color: transparent;
+  color: #777;
+}
+
 .greenBtn {
-  background-color: rgb(77, 185, 122);
+  border: rgb(100, 165, 127);
+  background-color: rgb(100, 165, 127);
   color: #fff;
+}
+
+.greenLineBtn {
+  border: 2px solid rgb(100, 165, 127) !important;
+  background-color: transparent;
+  color: rgb(88, 145, 112);
+}
+
+.beigeBtn {
+  border: 2px solid rgb(252, 233, 173) !important;
+  background-color: rgb(252, 233, 173);
+  color: rgb(153, 129, 49);
+}
+
+.beigeLineBtn {
+  border: 2px solid rgb(243, 222, 155) !important;
+  background-color: transparent;
+  color: rgb(153, 129, 49);
 }
 
 /* ---------------------------------------------------------- */
 
-.App {
-  width: 100%;
-  height: 100vh;
-  font-family: 'Nanum-Gothic';
-}
+/* header */
 
 header .topHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 40px;
+  height: 45px;
   background-color: #fff;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-header .topHeader .logo {
-  width: 40px;
-  height: 40px;
+header .topHeader > div, header .navBar > div {
+  width: 33.3%;
 }
 
 header .topHeader .logo img {
-  width: 100%;
-  height: 100%;
+  width: 30px;
 }
 
 header .topHeader .mainTitle h2 {
-  font-weight: 400;
-  font-size: 19px;
+  font-weight: 600;
+  font-size: 23px;
+  text-align: center;
+}
+
+header .topHeader .member > button {
+  float: right;
+  border: none;
+  background-color: transparent;
+  margin: 0 3px 0;
+}
+
+header .topHeader .member > button > p{
+  line-height: 0;
+  font-size: 12px;
+  color: #666;
+  margin: 8px 0 0 0;
 }
 
 header .navBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #000;
+  background-color: rgb(88, 145, 112);
   padding: 0 2rem;
 }
 
@@ -69,17 +128,163 @@ header .navBar .location, header .navBar .weather, header .navBar .nav {
   font-weight: 700;
 }
 
+header .navBar .navWrap {
+  width: 70%;
+}
+
 header .navBar .nav {
   margin: 0;
   padding: 0;
-  height: 53px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
 }
 
 header .navBar .nav li {
   list-style: none;
   float: left;
-  font-weight: 800;
-  font-size: 18px;
+  font-weight: 100;
+  font-size: 1.1rem;
   padding: 0 1.5rem;
-  line-height: 53px;
+  line-height: 70px;
 }
+
+header .headerIcons {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+header .navIcons {
+  color: #fff;
+  font-size: 1.1rem;
+  margin-right: 4px;
+}
+
+header .navBar .location, header .navBar .weather {
+  font-size: 1rem;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  width: 15%;
+}
+
+header .navBar .weather {
+  justify-content: end;
+}
+
+/* footer */
+footer {
+  width: 100%;
+  background-color: #333;
+  color: rgb(179, 179, 179);
+  font-size: 12px;
+  font-weight: 100;
+  text-align: center;
+  line-height: 40px;
+  bottom: 0;
+}
+
+
+
+/* 로그인, 회원가입 페이지 */
+.memberPage {
+  width: 900px;
+  margin: 100px auto;
+}
+
+.memberPage .pageTitle h2 {
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+.memberPage .inputTable {
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+}
+
+.memberPage .inputTable table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.memberPage .inputTable table tr > td {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.memberPage .inputTable table tr:first-child >td {
+  border: none;
+}
+
+.memberPage .inputTable table tr > td:first-child {
+  width: 25%;
+  padding-left: 50px;
+  font-size: 14px;
+  color: #333;
+}
+
+.memberPage .inputTable table tr > td:nth-child(2) {
+  width: 45%
+}
+
+.memberPage .inputTable table tr > td > input {
+  border: 1px solid #ddd;
+  width: 95%;
+  padding: 8px 6px;
+  border-radius: 3px;
+}
+
+.memberPage .inputTable table tr > .memberTableBtn > button {
+  padding: 6px 15px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.memberPage .inputTable table .memberAddress select {
+  border: 1px solid #ddd;
+  padding: 8px 6px;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+.memberPage .accept ul {
+  padding: 0;
+}
+
+.memberPage .accept .wholeCheck {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.memberPage .accept .wholeCheck .wholeCheckInfo {
+  font-size: 13px;
+  color: #999;
+  display: block;
+  font-weight: 300;
+  line-height: 18px;
+  margin-top: 5px;
+}
+
+.memberPage .accept li {
+  width: 100%;
+  padding: 12px;
+  margin: 3px 0;
+  background-color: #eee;
+  font-size: 15px;
+  color: #555;
+}
+
+.memberPage .accept li:first-child {
+  background-color: transparent;
+} 
+
+.memberPage .btnWrap {
+  width: 100%;
+  text-align: center;
+}
+
+
+
