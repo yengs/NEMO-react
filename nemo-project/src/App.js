@@ -11,9 +11,9 @@ function App() {
     <>
      <Header/>
       <Route path="/" component={Main} exact={true} />
-      <Route path="/itemList" component={ItemList} exact={true} />
-      <Route path="/itemList/itemUpload" component={ItemUpload}/>
-      <Route path="/itemList/itemDetail/:itemNum" component={ItemDetail}/>
+      <Route path="/item" component={ItemList} exact={true} />
+      <Route path="/item/write" component={ItemUpload}/>
+      <Route path="/item/detail/:itemNum" component={ItemDetail}/>
      
     </>
   );
