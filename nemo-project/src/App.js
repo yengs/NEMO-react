@@ -1,14 +1,21 @@
 import './common.css';
 import Header from './Header';
-import ItemList from './pages/ItemList';
-import ItemUpload from './pages/ItemUpload';
+import ItemList from './Item/ItemList';
+import ItemUpload from './Item/ItemUpload';
+import { Route } from 'react-router-dom';
+import Main from './Main';
+import ItemDetail from './Item/ItemDetail';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <ItemUpload/>
-    </div>
+    <>
+     <Header/>
+      <Route path="/" component={Main} exact={true} />
+      <Route path="/itemList" component={ItemList} exact={true} />
+      <Route path="/itemList/itemUpload" component={ItemUpload}/>
+      <Route path="/itemList/itemDetail/:itemNum" component={ItemDetail}/>
+     
+    </>
   );
 }
 
