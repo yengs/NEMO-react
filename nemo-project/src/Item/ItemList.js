@@ -39,9 +39,8 @@ function ItemList() {
                             <tr key={item.itemNum}>
                                 <td>{item.itemNum}</td>
                                 <td className="title">
-                                <Link to={`/itemList/itemDetail/${item.itemNum}`}>{item.itemNum}</Link>
+                                <Link to={`/item/detail/${item.itemNum}`}>{item.itemName}</Link>
                                 </td>
-                                <td>{item.itemName}</td>
                                 <td>{item.itemPrice}</td>
                                 <td>{item.itemRentalperiod}</td>
                                 <td>{item.itemWriter}</td>
@@ -58,7 +57,7 @@ function ItemList() {
                     }
                 </tbody>
                 </table>
-                <Link className="btn" to="/itemList/itemUpload">상품등록</Link>
+                <Link className="btn" to="/item/write">상품등록</Link>
             </div>
         </>
     );

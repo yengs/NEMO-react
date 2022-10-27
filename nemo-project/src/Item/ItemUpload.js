@@ -83,7 +83,7 @@ function ItemUpload({ history }) {
                         </tr>
                         <tr>
                             <td>이미지</td>
-                            <td> <input class="form-control" type = "file" name="file"/></td>
+                            <td> <input className="form-control" type = "file" name="file"/></td>
                         </tr>
                         <tr>
                             <td>상의 사이즈</td>
