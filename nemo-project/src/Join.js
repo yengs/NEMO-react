@@ -34,10 +34,7 @@ function Join() {
             "memberAddress" : mAddress
         }
 
-        axios.post('http://localhost:8080/api/member/join', 
-        {
-            memberInfo
-        })
+        axios.post('http://localhost:8080/api/member/join', memberInfo)
         .then(response => {
             if(response.status === 200) {
                 alert("회원가입완료");
