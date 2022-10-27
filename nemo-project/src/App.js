@@ -8,6 +8,7 @@ import ItemUpload from './Item/ItemUpload';
 import { Route } from 'react-router-dom';
 import Main from './Main';
 import ItemDetail from './Item/ItemDetail';
+import Join from './pages/Join';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
       <Route path="/item" component={ItemList} exact={true} />
       <Route path="/item/write" component={ItemUpload}/>
       <Route path="/item/detail/:itemNum" component={ItemDetail}/>
+      <Route path="/member" component={Join}/>
+
      <Footer />
     </>
   );

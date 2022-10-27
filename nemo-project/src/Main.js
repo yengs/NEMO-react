@@ -24,7 +24,8 @@ function Main() {
     return (
         <>
             <div style={styles.container}>
-                <div style={styles.menu}><Link to="/itemList">상품리스트</Link></div>
+                <div style={styles.menu}><Link to="/item">상품리스트</Link></div>
+                <div style={styles.menu}><Link to="/member">회원가입</Link></div>
             </div>
         </>
     );
