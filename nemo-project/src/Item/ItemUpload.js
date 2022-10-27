@@ -13,7 +13,7 @@ function ItemUpload({ history }) {
     const [itemBottomsize, setitemBottomsize] = useState('');
     const [itemEtcsize, setitemEtcsize] = useState('');
     const [itemHeight, setitemHeight] = useState('');
-    // const [itemRentalperiod, setitemRentalperiod] = useState('');
+        // const [itemRentalperiod, setitemRentalperiod] = useState('');
 
     
     const handlerChangeiName = (e) => setiName(e.target.value);
@@ -29,12 +29,20 @@ function ItemUpload({ history }) {
     const handlerChangeitemHeight=(e) => setitemHeight(e.target.value);
     // const handlerChangeitemRentalperiod=(e) => setitemRentalperiod(e.target.value);
 
+
+    
+
+    // const handleUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+    //     if (event.target.files) {
+    //       setFiles(event.target.files[0])
+    //     }
+
     const handlerClickSubmit = (e) => {
         e.preventDefault();
 
         axios.post('http://localhost:8080/api/item', { "itemName": iName, "itemPrice": iPrice, "iName": iName, "iPrice": iPrice,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
                                                         "itemDetail":itemDetail,"itemWeather":itemWeather,"itemTopsize":itemTopsize,"itemBottomsize":itemBottomsize,
-                                                        "itemEtcsize":itemEtcsize,"itemHeight":itemHeight })
+                                                        "itemEtcsize":itemEtcsize,"itemHeight":itemHeight})
         .then(response => {
             if (response.status === 200) {
                 alert("정상적으로 등록되었습니다.");
@@ -50,7 +58,8 @@ function ItemUpload({ history }) {
         <>
             <div className="container">
                 <h2>상품 등록</h2>
-                <form id="frm" name="frm">
+                <form id="frm" name="frm" method="post" enctype="multipart/form-dat">
+
                     <table className="board_detail">
                         <tr>
                             <td>상품명</td>
@@ -83,7 +92,8 @@ function ItemUpload({ history }) {
                         </tr>
                         <tr>
                             <td>이미지</td>
-                            <td> <input class="form-control" type = "file" name="file"/></td>
+                            <td> <input type = "file" name="file" /></td>
+                     
                         </tr>
                         <tr>
                             <td>상의 사이즈</td>

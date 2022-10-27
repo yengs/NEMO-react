@@ -39,9 +39,8 @@ function ItemList() {
                             <tr key={item.itemNum}>
                                 <td>{item.itemNum}</td>
                                 <td className="title">
-                                <Link to={`/itemList/itemDetail/${item.itemNum}`}>{item.itemNum}</Link>
+                                <Link to={`/itemList/itemDetail/${item.itemNum}`}>{item.itemName}</Link>
                                 </td>
-                                <td>{item.itemName}</td>
                                 <td>{item.itemPrice}</td>
                                 <td>{item.itemRentalperiod}</td>
                                 <td>{item.itemWriter}</td>
