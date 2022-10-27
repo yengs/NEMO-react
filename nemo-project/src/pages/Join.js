@@ -1,7 +1,35 @@
 import { useState } from "react";
 import axios from "axios";
 
+// 주소 api사용 (팝업방식)
+import { useDaumPostcodePopup } from 'react-daum-postcode';
+
 function Join() {
+
+    
+    const handleComplete = (data) => {
+        let fullAddress = data.address;
+        let extraAddress = '';
+        
+        if (data.addressType === 'R') {
+            if (data.bname !== '') {
+                extraAddress += data.bname;
+            }
+            if (data.buildingName !== '') {
+                extraAddress += extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+            }
+            fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+        }
+        
+        setMaddress(fullAddress);
+        console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+    };
+
+    // 주소검색창 팝업열기
+    const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
+    const handleOpenSearchAddress = () => {
+        open({ onComplete: handleComplete });
+    };
 
     const [mName, setMname] = useState('');
     const [mNickname, setMnickname] = useState('');
@@ -19,34 +47,33 @@ function Join() {
     const handlerChangePwCheck = (e) => setMpwCheck(e.target.value);
     const handlerChangeEmail = (e) => setMemail(e.target.value);
     const handlerChangePhone = (e) => setMphone(e.target.value);
-    const handlerChangeAddress = (e) => setMaddress(e.target.value);
 
     const memberDataInsert = (e) => {
         e.preventDefault();
 
         const memberInfo = {
-            "memberName" : mName,
-            "memberNickname" : mNickname,
-            "memberId" : mId,
-            "memberPw" : mPw,
-            "memberEmail" : mEmail,
-            "memberPhone" : mPhone,
-            "memberAddress" : mAddress
+            "memberName": mName,
+            "memberNickname": mNickname,
+            "memberId": mId,
+            "memberPw": mPw,
+            "memberEmail": mEmail,
+            "memberPhone": mPhone,
+            "memberAddress": mAddress
         }
 
         axios.post('http://localhost:8080/api/member/join', memberInfo)
-        .then(response => {
-            if(response.status === 200) {
-                alert("회원가입완료");
-            } else {
-                alert("회원가입 실패");
-                return;
-            }
-        })
-        .catch(error => {
-            alert("에러");
-            console.log(memberInfo);
-        });
+            .then(response => {
+                if (response.status === 200) {
+                    alert("회원가입완료");
+                } else {
+                    alert("회원가입 실패");
+                    return;
+                }
+            })
+            .catch(error => {
+                alert("에러");
+                console.log(memberInfo);
+            });
     };
 
     return (
@@ -79,7 +106,7 @@ function Join() {
                                     <input type="text" name="mId" value={mId} onChange={handlerChangeId} required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn">중복확인</button>
+                                    <button className="beigeBtn btn">중복확인</button>
                                 </td>
                             </tr>
                             <tr>
@@ -102,7 +129,7 @@ function Join() {
                                     <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn">중복확인</button>
+                                    <button className="beigeBtn btn">중복확인</button>
                                 </td>
                             </tr>
                             <tr>
@@ -115,45 +142,17 @@ function Join() {
                             <tr className="memberAddress">
                                 <td className="requiredMark">주소</td>
                                 <td>
-                                    <input type="text" name="mAddress" value={mAddress} onChange={handlerChangeAddress} required />
-                                    <select>
-                                        <option>서울</option>
-                                        <option>경기</option>
-                                        <option>강원</option>
-                                        <option>충북</option>
-                                        <option>충남</option>
-                                        <option>경븍</option>
-                                        <option>경남</option>
-                                        <option>전북</option>
-                                        <option>전남</option>
-                                    </select>
-                                    <select>
-                                        <option>강남구</option>
-                                        <option>강북구</option>
-                                        <option>강동구</option>
-                                        <option>강서구</option>
-                                        <option>송파구</option>
-                                        <option>관악구</option>
-                                        <option>등등</option>
-                                    </select>
-                                    <select>
-                                        <option>봉천동</option>
-                                        <option>행운동</option>
-                                        <option>신림동</option>
-                                        <option>남현동</option>
-                                        <option>보라매동</option>
-                                        <option>청림동</option>
-                                        <option>성현동</option>
-                                        <option>등등</option>
-                                    </select>
+                                    <input type="text" name="mAddress" value={mAddress} required />
                                 </td>
-                                <td></td>
+                                <td className="memberTableBtn">
+                                    <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div className="accept">
-                    <ul style={{"listStyle":"none"}}>
+                    <ul style={{ "listStyle": "none" }}>
                         <li>
                             <label className="wholeCheck">
                                 <input type="checkbox" />
@@ -168,25 +167,25 @@ function Join() {
                             </label>
                         </li>
                         <li>
-                        <label className="req">
+                            <label className="req">
                                 <input type="checkbox" />
                                 &nbsp;&nbsp;이용약관 동의 (필수)
                             </label>
                         </li>
                         <li>
-                        <label className="req">
+                            <label className="req">
                                 <input type="checkbox" />
                                 &nbsp;&nbsp;개인정보 수집 및 이용에 대한 동의 (필수)
                             </label>
                         </li>
                         <li>
-                        <label className="req">
+                            <label className="req">
                                 <input type="checkbox" />
                                 &nbsp;&nbsp;개인정보 제3자 제공에 대한 동의 (필수)
                             </label>
                         </li>
                         <li>
-                        <label className="selective">
+                            <label className="selective">
                                 <input type="checkbox" />
                                 &nbsp;&nbsp;개인정보 제3자 제공에 대한 동의 (선택)
                             </label>
