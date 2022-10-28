@@ -10,10 +10,19 @@ import { FaUserAlt } from "react-icons/fa";
 
 
 function Header() {
+
+    const handlerLogin = () => {
+        window.location.href="/member/login";
+    }
+
+    const handlerGoMain = () => {
+        window.location.href="/";
+    }
+
     return(
         <header>
             <div className="topHeader">
-                <div className="logo">
+                <div className="logo" onClick={handlerGoMain}>
                     <img src={logo} alt="로고"></img>
                 </div>
                 <div className="mainTitle">
@@ -32,7 +41,7 @@ function Header() {
                         </IconContext.Provider>
                         <p>MY</p>
                     </button>
-                    <button>
+                    <button onClick={handlerLogin}>
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaLock />
                         </IconContext.Provider>
