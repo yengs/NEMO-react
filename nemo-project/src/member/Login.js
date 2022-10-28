@@ -12,9 +12,9 @@ function Login ({ history }) {
         e.preventDefault();
         axios.post('http://localhost:8080/member/login', {"memberId": id, "memberPw": pw})
         .then(response => { 
-            if (response.status === 200 && response.data != "") {
+            if (response.status === 200 && response.data !== "") {
                 sessionStorage.setItem("token", response.data);
-                history.push('/member');
+                history.push('/member/login');
             } else {
                 sessionStorage.clear();
             }
@@ -31,7 +31,7 @@ function Login ({ history }) {
                     Id: <input type="id" value={id} onChange={changeId} />
                 </p>
                 <p>
-                    Password: <input type="pw" value={pw} onChange={changePw} />
+                    Pw: <input type="password" value={pw} onChange={changePw} />
                 </p>
                 <p>
                     <input type="submit" onClick={handlerSubmit} value="로그인" />

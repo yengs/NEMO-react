@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Main() {
     const styles = {
         container: {
-            width: 300, 
+            width: 400, 
             marginLeft: 'auto', 
             marginRight: 'auto', 
             display: 'flex', 
@@ -25,7 +25,8 @@ function Main() {
         <>
             <div style={styles.container}>
                 <div style={styles.menu}><Link to="/item">상품리스트</Link></div>
-                <div style={styles.menu}><Link to="/member">회원가입</Link></div>
+                <div style={styles.menu}><Link to="/member/join">회원가입</Link></div>
+                <div style={styles.menu}><Link to="/member/login">로그인</Link></div>
             </div>
         </>
     );
