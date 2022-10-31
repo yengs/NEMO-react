@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-function ItemList() {
+function ItemList({match}) {
+    const { itemMaincategory } = match.params;
+
     const [ datas, setDatas ] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item`)
+        axios.get(`http://localhost:8080/api/item/cate/${itemMaincategory}`)
             .then(response => setDatas(response.data))
             .catch(error => console.log(error));
     }, []);
@@ -21,6 +23,7 @@ function ItemList() {
                     <col width="15%" />
                     <col width="20%" />
                     <col width="20%" />
+                    <col width="20%" />
                 </colgroup>
                 <thead>
                     <tr>
@@ -30,6 +33,8 @@ function ItemList() {
                         <th scope="col">대여기간</th>
                         <th scope="col">작성자</th>
                         <th scope="col">상품사진</th>
+                        <th scope="col">분류</th>
+
        
                     </tr>   
 
@@ -46,6 +51,7 @@ function ItemList() {
                                 <td>{item.itemRentalstart} ~ {item.itemRentalend}</td>
                                 <td>{item.itemWriter}</td>
                                 <td>{item.itemImage}</td>
+                                <td>{item.itemMaincategory}</td>
                             </tr>
                         ))
                     }
