@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-function Login ({ history }) {
+function Login () {
 
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
@@ -10,18 +10,17 @@ function Login ({ history }) {
     const changePw = (e) => setPw(e.target.value);
     const handlerSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/member/login', {"memberId": id, "memberPw": pw})
-        .then(response => { 
-            if (response.status === 200 && response.data != "") {
-                sessionStorage.setItem("token", response.data);
-                history.push('/member');
+        axios.post('http://localhost:8080/login', {"memberId": id, "memberPw": pw})
+        .then(response => {
+            if (response.status === 200) {
+                alert("로그인완료");
             } else {
-                sessionStorage.clear();
+                alert("회원가입 실패");
+                return;
             }
         })
         .catch(error => {
-            console.log(error);
-            sessionStorage.clear();
+            alert("에러");
         });
     };
     return (

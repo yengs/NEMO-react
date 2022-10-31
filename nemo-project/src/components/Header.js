@@ -1,4 +1,4 @@
-import logo from '../img/logo5.svg';
+import logo from '../img/logo7.svg';
 
 import { IconContext } from "react-icons";
 

@@ -9,7 +9,7 @@ import { Route } from 'react-router-dom';
 import Main from './Main';
 import Login from './member/Login';
 import ItemDetail from './Item/ItemDetail';
-import Join from './pages/Join';
+import Join from './member/Join';
 
 function App() {
   
