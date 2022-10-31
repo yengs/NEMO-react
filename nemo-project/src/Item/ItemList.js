@@ -20,6 +20,7 @@ function ItemList() {
                     <col width="*" />
                     <col width="15%" />
                     <col width="20%" />
+                    <col width="20%" />
                 </colgroup>
                 <thead>
                     <tr>
@@ -42,7 +43,7 @@ function ItemList() {
                                 <Link to={`/item/detail/${item.itemNum}`}>{item.itemName}</Link>
                                 </td>
                                 <td>{item.itemPrice}</td>
-                                <td>{item.itemRentalperiod}</td>
+                                <td>{item.itemRentalstart} ~ {item.itemRentalend}</td>
                                 <td>{item.itemWriter}</td>
                                 <td>{item.itemImage}</td>
                             </tr>
