@@ -1,4 +1,4 @@
-import logo from '../img/logo5.svg';
+import logo from '../img/logo7.svg';
 
 import { IconContext } from "react-icons";
 
@@ -10,10 +10,37 @@ import { FaUserAlt } from "react-icons/fa";
 
 
 function Header() {
-    return(
+
+    const handlerLogin = () => {
+        window.location.href = "/member/login";
+    }
+
+    const handlerGoMain = () => {
+        window.location.href = "/";
+    }
+
+    // 헤더 상품 카테고리 구분
+    //상의
+    const handlerGoTop = () => {
+        window.location.href = "/item/cate/상의";
+    }
+    //하의
+    const handlerGoBottom = () => {
+        window.location.href = "/item/cate/하의";
+    }
+    //아우터
+    const handlerGoOuter = () => {
+        window.location.href = "/item/cate/아우터";
+    }
+    //원피스
+    const handlerGoDress = () => {
+        window.location.href = "/item/cate/원피스";
+    }
+
+    return (
         <header>
             <div className="topHeader">
-                <div className="logo">
+                <div className="logo" onClick={handlerGoMain}>
                     <img src={logo} alt="로고"></img>
                 </div>
                 <div className="mainTitle">
@@ -32,7 +59,7 @@ function Header() {
                         </IconContext.Provider>
                         <p>MY</p>
                     </button>
-                    <button>
+                    <button onClick={handlerLogin}>
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaLock />
                         </IconContext.Provider>
@@ -40,26 +67,28 @@ function Header() {
                     </button>
                 </div>
             </div>
-            <div className="navBar">
-                <div className="location">
-                    <IconContext.Provider value={{ className: "navIcons" }}>
-                        <FaMapMarkerAlt />
-                    </IconContext.Provider>
-                    <span>종로 2가</span>
-                </div>
-                <div className='navWrap'>
-                    <ul className="nav">
-                        <li>상의</li>
-                        <li>하의</li>
-                        <li>아우터</li>
-                        <li>원피스</li>
-                    </ul>
-                </div>
-                <div className="weather">
-                    <IconContext.Provider value={{ className: "navIcons" }}>
-                        <FaTemperatureHigh />
-                    </IconContext.Provider>
-                    <span>내일의 날씨는?</span>
+            <div className='underHeader'>
+                <div className="navBar">
+                    <div className="location">
+                        <IconContext.Provider value={{ className: "navIcons" }}>
+                            <FaMapMarkerAlt />
+                        </IconContext.Provider>
+                        <span>종로 2가</span>
+                    </div>
+                    <div className='navWrap'>
+                        <ul className="nav">
+                            <li onClick={handlerGoTop}>상의</li>
+                            <li onClick={handlerGoBottom}>하의</li>
+                            <li onClick={handlerGoOuter}>아우터</li>
+                            <li onClick={handlerGoDress}>원피스</li>
+                        </ul>
+                    </div>
+                    <div className="weather">
+                        <IconContext.Provider value={{ className: "navIcons" }}>
+                            <FaTemperatureHigh />
+                        </IconContext.Provider>
+                        <span>내일의 날씨는?</span>
+                    </div>
                 </div>
             </div>
         </header>

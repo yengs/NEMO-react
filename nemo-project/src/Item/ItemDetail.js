@@ -130,14 +130,12 @@ function ItemDetail({ match, location, history }) {
                                 <th scope="row">겉옷사이즈</th>
                                 <td>{data.itemEtcsize}</td>                  
                             </tr>
-                            <tr>
-                                <th scope="row">키</th>
-                                <td>{data.itemHeight}</td>                  
-                            </tr>
+                        
                             <tr>
                                 <th scope="row">대여기간</th>
-                                <td>{data.itemRentalperiod}</td>                  
+                                <td>{data.itemRentalstart} ~ {data.itemRentalend}</td>                  
                             </tr>
+                          
                         </tbody>
                     </table>      
                 </form>   
