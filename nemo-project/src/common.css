@@ -13,7 +13,7 @@
 }
 
 .container {
-  height: calc(100vh - 155px);
+  height: 100vh;
 }
 
 .requiredInfo {
