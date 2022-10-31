@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Login() {
 
@@ -54,6 +55,7 @@ function Login() {
                     <input type="button" value="취소" className="grayBtn btn" />
                     <input type="submit" className="greenBtn btn" onClick={handlerSubmit} value="로그인" />
                 </div>
+                <div><Link to="/member/join">회원가입</Link></div>
                 {/* <div className="socialLogin">
                 <p>소셜로 로그인하기</p>
                 <div className="btnWrap">
