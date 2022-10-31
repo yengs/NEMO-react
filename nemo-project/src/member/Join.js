@@ -77,7 +77,7 @@ function Join() {
     };
 
     return (
-        <div className="joinWrap memberPage">
+        <div className="joinWrap memberPage container">
             <div className="pageTitle">
                 <h2>회원가입</h2>
             </div>

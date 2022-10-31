@@ -7,9 +7,20 @@
   font-family: 'Pretendard-Regular' !important;
 }
 
-.App {
+.wholeWrap {
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.containerWrap {
+  flex: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .requiredInfo {
@@ -21,7 +32,7 @@
   color: rgb(202, 43, 43);
 }
 
-.requiredMark > span {
+.requiredMark>span {
   font-size: 13px;
   font-weight: 100;
   color: #777;
@@ -76,6 +87,13 @@
   color: rgb(153, 129, 49);
 }
 
+.plusBtn {
+  border: none;
+  background-color: transparent;
+  font-size: 13px;
+  color: #666;
+}
+
 /* ---------------------------------------------------------- */
 
 /* header */
@@ -84,13 +102,15 @@ header .topHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 45px;
+  height: 60px;
   background-color: #fff;
   margin: 0 auto;
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
+  max-width: 1200px;
 }
 
-header .topHeader > div, header .navBar > div {
+header .topHeader>div,
+header .navBar>div {
   width: 33.3%;
 }
 
@@ -104,29 +124,36 @@ header .topHeader .mainTitle h2 {
   text-align: center;
 }
 
-header .topHeader .member > button {
+header .topHeader .member>button {
   float: right;
   border: none;
   background-color: transparent;
   margin: 0 3px 0;
 }
 
-header .topHeader .member > button > p{
+header .topHeader .member>button>p {
   line-height: 0;
   font-size: 12px;
   color: #666;
   margin: 8px 0 0 0;
 }
 
+header .underHeader {
+  background-color: rgb(88, 145, 112);
+}
+
 header .navBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(88, 145, 112);
   padding: 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-header .navBar .location, header .navBar .weather, header .navBar .nav {
+header .navBar .location,
+header .navBar .weather,
+header .navBar .nav {
   color: #fff;
   font-weight: 700;
 }
@@ -138,7 +165,7 @@ header .navBar .navWrap {
 header .navBar .nav {
   margin: 0;
   padding: 0;
-  height: 70px;
+  height: 40px;
   display: flex;
   justify-content: center;
 }
@@ -149,7 +176,7 @@ header .navBar .nav li {
   font-weight: 100;
   font-size: 1.1rem;
   padding: 0 1.5rem;
-  line-height: 70px;
+  line-height: 40px;
 }
 
 header .headerIcons {
@@ -163,7 +190,8 @@ header .navIcons {
   margin-right: 4px;
 }
 
-header .navBar .location, header .navBar .weather {
+header .navBar .location,
+header .navBar .weather {
   font-size: 1rem;
   font-weight: 600;
   display: flex;
@@ -175,6 +203,11 @@ header .navBar .weather {
   justify-content: end;
 }
 
+
+
+
+/* ---------------------------------------------------------- */
+
 /* footer */
 footer {
   width: 100%;
@@ -184,10 +217,11 @@ footer {
   font-weight: 100;
   text-align: center;
   line-height: 40px;
-  bottom: 0;
 }
 
 
+
+/* ---------------------------------------------------------- */
 
 /* 로그인, 회원가입 페이지 */
 .memberPage {
@@ -211,35 +245,35 @@ footer {
   border-spacing: 0;
 }
 
-.memberPage .inputTable table tr > td {
+.memberPage .inputTable table tr>td {
   padding-top: 15px;
   padding-bottom: 15px;
   border-top: 1px solid #ddd;
 }
 
-.memberPage .inputTable table tr:first-child >td {
+.memberPage .inputTable table tr:first-child>td {
   border: none;
 }
 
-.memberPage .inputTable table tr > td:first-child {
+.memberPage .inputTable table tr>td:first-child {
   width: 25%;
   padding-left: 50px;
   font-size: 14px;
   color: #333;
 }
 
-.memberPage .inputTable table tr > td:nth-child(2) {
+.memberPage .inputTable table tr>td:nth-child(2) {
   width: 45%
 }
 
-.memberPage .inputTable table tr > td > input {
+.memberPage .inputTable table tr>td>input {
   border: 1px solid #ddd;
   width: 95%;
   padding: 8px 6px;
   border-radius: 3px;
 }
 
-.memberPage .inputTable table tr > .memberTableBtn > button {
+.memberPage .inputTable table tr>.memberTableBtn>button {
   padding: 6px 15px;
   border-radius: 3px;
   font-size: 12px;
@@ -282,7 +316,7 @@ footer {
 
 .memberPage .accept li:first-child {
   background-color: transparent;
-} 
+}
 
 .memberPage .btnWrap {
   width: 100%;
@@ -291,3 +325,131 @@ footer {
 
 
 
+/* ------------------------------------------------------------ */
+
+/* item */
+
+.titleNplusBtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.titleNplusBtn>h3 {
+  margin: 10px 0;
+  font-size: 23px;
+}
+
+.tomorrowWeather {
+  display: flex;
+  align-items: center;
+  margin-bottom: -18px;
+}
+
+.tomorrowWeather .weatherIcon {
+  font-size: 38px;
+  margin-right: 7px;
+}
+
+.tomorrowWeather .temp {
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.recWeather,
+.recBestStore,
+.recWeeklyWrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 90px 0;
+}
+
+.recWeekly {
+  background-color: #eee;
+}
+
+.itemWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  ;
+}
+
+.itemInfoWrap {
+  width: 22%;
+  height: 360px;
+  background-color: rgb(250, 250, 250);
+  border-radius: 10px;
+  padding: 1%;
+}
+
+.itemInfoWrap > .itemImg {
+  width: 100% !important;
+  height: 65%;
+  /* border: 1px solid #000; */
+  border-radius: 5px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.itemInfoWrap .itemInfo p {
+  margin: 5px 0;
+}
+
+.itemInfoWrap .itemInfo .price {
+  font-size: 20px;
+  font-weight: 800;
+  margin-right: 2px;
+  color: rgb(88, 145, 112);
+}
+
+.itemInfoWrap .itemInfo .itemDeposit {
+  font-size: 15px;
+  color: #444;
+}
+
+.itemInfoWrap .itemInfo .itemDeposit .depositTitle {
+  font-size: 14px;
+  color: #666;
+  margin-right: 5px;
+}
+
+.itemInfoWrap .itemInfo .itemDeposit .deposit {
+  font-size: 15px;
+  font-weight: bold;
+  color: #555;
+}
+
+.itemInfoWrap .itemInfo .itemName {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.itemInfoWrap .itemInfo .itemPeriod {
+  font-size: 14px;
+  color: #666;
+  margin-top: 12px;
+}
+
+.itemInfoWrap .itemInfo .period {
+  font-size: 16px;
+}
+
+.storeInfoWrap {
+  width: 47.2%;
+  height: 360px;
+  background-color: rgb(236, 236, 236);
+  border-radius: 10px;
+  padding: 1%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.storeInfoWrap > img {
+  width: 49%;
+  border: 1px solid #000;
+}
+
+.storeInfo {
+  width:49%;
+}
