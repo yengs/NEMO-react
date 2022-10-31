@@ -1,14 +1,15 @@
 @font-face {
   font-family: 'Pretendard-Regular';
   src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
+}
+
+* {
+  font-family: 'Pretendard-Regular' !important;
 }
 
 .App {
   width: 100%;
   height: 100vh;
-  font-family: 'Pretendard-Regular' !important;
 }
 
 .requiredInfo {
@@ -26,13 +27,15 @@
   color: #777;
 }
 
+.btn {
+  cursor: pointer;
+}
+
 .btnWrap .btn {
-  font-family: 'Pretendard-Regular' !important;
   font-weight: 100;
   margin: 20px 15px 0;
   font-size: 15px;
   padding: 10px 50px;
-  cursor: pointer;
   border-radius: 3px;
   font-weight: 100;
 }
@@ -92,7 +95,7 @@ header .topHeader > div, header .navBar > div {
 }
 
 header .topHeader .logo img {
-  width: 30px;
+  width: 33px;
 }
 
 header .topHeader .mainTitle h2 {
@@ -162,7 +165,7 @@ header .navIcons {
 
 header .navBar .location, header .navBar .weather {
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 600;
   display: flex;
   align-items: center;
   width: 15%;

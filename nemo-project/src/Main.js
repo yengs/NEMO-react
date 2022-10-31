@@ -25,8 +25,7 @@ function Main() {
         <>
             <div style={styles.container}>
                 <div style={styles.menu}><Link to="/item">상품리스트</Link></div>
-                <div style={styles.menu}><Link to="/member">회원가입</Link></div>
-
+                <div style={styles.menu}><Link to="/member/join">회원가입</Link></div>
             </div>
         </>
     );
