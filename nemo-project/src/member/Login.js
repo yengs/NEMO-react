@@ -1,40 +1,41 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Login ({ history }) {
+function Login () {
 
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
 
-    const changeId = (e) => setId(e.target.value);
-    const changePw = (e) => setPw(e.target.value);
-    const handlerSubmit = (e) => {
-        e.preventDefault();
-        axios.post('http://localhost:8080/member/login', {"memberId": id, "memberPw": pw})
-        .then(response => { 
-            if (response.status === 200 && response.data !== "") {
-                sessionStorage.setItem("token", response.data);
-                history.push('/member/login');
-            } else {
-                sessionStorage.clear();
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            sessionStorage.clear();
-        });
-    };
+    const handleId = (e) => {
+        setId(e.target.value)
+    }
+
+    const handlePw = (e) => {
+        setPw(e.target.value)
+    }
+
+    const onClickLogin = () => {
+        console.log('click login')
+    }
+
+    useEffect(() => {
+        axios.get('/member/login')
+        .then(res => console.log(res))
+        .catch()
+    },
+    [])
+    
     return (
         <>
             <form>
                 <p>
-                    Id: <input type="id" value={id} onChange={changeId} />
+                    Id: <input type="id" value={id} onChange={handleId} />
                 </p>
                 <p>
-                    Pw: <input type="password" value={pw} onChange={changePw} />
+                    Pw: <input type="password" value={pw} onChange={handlePw} />
                 </p>
                 <p>
-                    <input type="submit" onClick={handlerSubmit} value="로그인" />
+                    <input type="submit" onClick={onClickLogin} value="로그인" />
                 </p>
             </form>
         </>
