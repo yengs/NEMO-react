@@ -19,6 +19,24 @@ function Header() {
         window.location.href="/";
     }
 
+// 헤더 상품 카테고리 구분
+    //상의
+    const handlerGoTop = () => {
+        window.location.href="/item/cate/상의";
+    }
+    //하의
+    const handlerGoBottom = () => {
+        window.location.href="/item/cate/하의";
+    }
+    //아우터
+    const handlerGoOuter = () => {
+        window.location.href="/item/cate/아우터";
+    }
+    //원피스
+    const handlerGoDress = () => {
+        window.location.href="/item/cate/원피스";
+    }
+
     return(
         <header>
             <div className="topHeader">
@@ -58,10 +76,10 @@ function Header() {
                 </div>
                 <div className='navWrap'>
                     <ul className="nav">
-                        <li>상의</li>
-                        <li>하의</li>
-                        <li>아우터</li>
-                        <li>원피스</li>
+                        <li onClick={handlerGoTop}>상의</li>
+                        <li onClick={handlerGoBottom}>하의</li>
+                        <li onClick={handlerGoOuter}>아우터</li>
+                        <li onClick={handlerGoDress}>원피스</li>
                     </ul>
                 </div>
                 <div className="weather">

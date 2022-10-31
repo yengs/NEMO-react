@@ -79,6 +79,7 @@ function ItemUpload({ history }) {
                         <tr>
                             <td>상품 대분류</td>
                             <td> <select type="text" id="itemMaincategory" name="itemMaincategory" value={itemMaincategory} onChange={handlerChangeitemMaincategory} >
+                                <option value="">선택</option>
                                 <option value="상의">상의</option>
                                 <option value="하의">하의</option>
                                 <option value="아우터">아우터</option>
@@ -94,6 +95,7 @@ function ItemUpload({ history }) {
                                 (function() {
                                     if( itemMaincategory ==="상의"){
                                    return <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
+                                    <option value="">선택</option>
                                     <option value="반팔">반팔</option>
                                    <option value="긴팔">긴팔</option>
                                    <option value="니트">니트</option>
@@ -103,6 +105,7 @@ function ItemUpload({ history }) {
                                    }
                                    else if(itemMaincategory ==="하의"){
                                    return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
+                                   <option value="">선택</option>
                                    <option value="바지">바지</option>
                                   <option value="치마">치마</option>
                                   <option value="반바지">반바지</option> 
@@ -110,6 +113,7 @@ function ItemUpload({ history }) {
                              
                                   </select>;}
                                   else {return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
+                                     <option value="">선택</option>
                                      <option value="패딩">패딩</option>
                                      <option value="코트">코트</option>
                                      <option value="바람막이">바람막이</option> 
@@ -125,6 +129,7 @@ function ItemUpload({ history }) {
                                 (function() {
                                     if( itemMaincategory ==="상의"){
                                    return <select type="text" id="itemTopsize" name="itemTopsize"  value={itemTopsize} onChange={handlerChangeitemTopsize}>
+                                   <option value="">선택</option>
                                     <option value="44이하">44이하</option>
                                    <option value="55">55</option>
                                    <option value="66">66</option>
@@ -135,6 +140,7 @@ function ItemUpload({ history }) {
                                    }
                                    else if(itemMaincategory ==="하의"){
                                    return  <select type="text" id="itemBottomsize" name="itemBottomsize"  value={itemBottomsize} onChange={handlerChangeitemBottomsize}>
+                                  <option value="">선택</option>
                                    <option value="25이하">25이하</option>
                                   <option value="26">26</option>
                                   <option value="27">27</option> 
@@ -146,6 +152,7 @@ function ItemUpload({ history }) {
                                   <option value="33이상">33이상</option> 
                                   </select>;}
                                   else {return <select type="text" id="itemEtcsize" name="itemEtcsize"  value={itemEtcsize} onChange={handlerChangeitemEtcsize}>
+                                    <option value="">선택</option>
                                      <option value="S">S</option>
                                      <option value="M">M</option>
                                      <option value="L">L</option> 
@@ -170,6 +177,7 @@ function ItemUpload({ history }) {
                             {/* <td><input type="text" id="itemWeather" name="itemWeather" value={itemWeather} onChange={handlerChangeitemWeather} /></td> */}
                              <td>  
                              <select type="text" id="itemWeather" name="itemWeather"  value={itemWeather} onChange={handlerChangeitemWeather}>
+                             <option value="">선택</option>
                                      <option value="봄">봄</option>
                                     <option value="여름">여름</option>
                                     <option value="가을">가을</option> 
