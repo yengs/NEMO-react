@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function ItemDetail({ match, location, history }) {
-    const { itemNum, itemMaincategory } = match.params;
+    const { itemNum } = match.params;
     
     const [ data, setData ] = useState({});
     const [ itemName, setItemName ] = useState('');

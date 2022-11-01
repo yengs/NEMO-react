@@ -10,6 +10,7 @@ import Main from './Main';
 import Login from './member/Login';
 import ItemDetail from './Item/ItemDetail';
 import Join from './member/Join';
+import ItemsubList from './Item/ItemsubList';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
         <Route path="/" component={Main} exact={true} />
         <Route path="/item/cate/:itemMaincategory" component={ItemList} exact={true} />
+        <Route path="/item/cate/sub/:itemSubcategory" component={ItemsubList} exact={true} />
         <Route path="/item/write" component={ItemUpload} />
         <Route path="/item/detail/:itemNum" component={ItemDetail} />
         <Route path="/member/join" component={Join} />
