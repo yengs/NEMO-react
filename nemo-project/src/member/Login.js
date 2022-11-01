@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import GoogleLogin from "../img/btn_google_signin_dark_normal_web@2x.png";
+
 function Login() {
 
     const [id, setId] = useState('');
@@ -25,7 +27,7 @@ function Login() {
             });
     };
     return (
-        <div className="joinWrap memberPage container">
+        <div className="joinWrap memberPage container loginForm">
             <div className="pageTitle">
                 <h2>로그인</h2>
             </div>
@@ -38,24 +40,42 @@ function Login() {
                                 <td>
                                     <input type="id" value={id} onChange={changeId} required />
                                 </td>
-                                <td></td>
+                                <td rowSpan={2}>
+                                    <div className="btnWrap">
+                                        <input type="submit" className="greenBtn btn loginBtn" onClick={handlerSubmit} value="로그인" />
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
-                                <td>패스워드</td>
-                                <td>
+                                <td style={{ borderTop: 'none' }}>패스워드</td>
+                                <td style={{ borderTop: 'none' }}>
                                     <input type="pw" value={pw} onChange={changePw} required />
                                 </td>
-                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2} className="rememberId">
+                                    <label className="rememberIdLabel">
+                                        <input type="checkbox" id="rememberIdCheckbox" />
+                                        <p>아이디 기억하기</p>
+                                    </label>
+                                </td>
+                                <td className="findMemberInfo">
+                                    <div>
+                                        <Link>아이디 찾기</Link>
+                                        <Link>비밀번호 찾기</Link>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div className="btnWrap">
-                    <input type="button" value="취소" className="grayBtn btn" />
-                    <input type="submit" className="greenBtn btn" onClick={handlerSubmit} value="로그인" />
+                    <Link to="/member/join" className="btn grayBtn joinBtn">회원가입</Link>
+                    <Link to="/" className="btn googleLoginBtnLink">
+                        <div style={{backgroundImage: `url(${GoogleLogin})`}} className="googleLoginBtn"></div>
+                    </Link>
                 </div>
-                <div><Link to="/member/join">회원가입</Link></div>
                 {/* <div className="socialLogin">
                 <p>소셜로 로그인하기</p>
                 <div className="btnWrap">
