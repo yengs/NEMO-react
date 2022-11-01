@@ -1,0 +1,138 @@
+/* ---------------------------------------------------------- */
+
+/* 로그인, 회원가입 페이지 */
+.memberPage2 {
+  width: 600px;
+  margin: 70px auto;
+}
+
+.memberPage2 .pageTitle h2 {
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+.memberPage2 .pageTitle{
+  /* border-top: 1px solid rgb(207, 205, 205);
+  border-bottom: 1px solid rgb(207, 205, 205);
+  border-right: 1px solid rgb(207, 205, 205);
+  border-left: 1px solid rgb(207, 205, 205);
+  padding-top: 80px;
+  padding-bottom: 40px; */
+}
+
+.memberPage2 .pageTitle p{
+  margin-left: 120px;
+  color:rgb(121, 121, 121);
+}
+
+.memberPage2 .inputTable {
+  border-top: 1px solid rgb(207, 205, 205);
+  border-bottom: 1px solid rgb(207, 205, 205);
+  border-right: 1px solid rgb(207, 205, 205);
+  border-left: 1px solid rgb(207, 205, 205);
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+
+.memberPage2 .inputTable table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.memberPage2 .inputTable table tr>td {
+  padding-top: 15px;
+  padding-bottom: 2px;
+  /* border-top: 1px solid #ddd; */
+}
+
+.memberPage2 .inputTable table tr:first-child>td {
+  border: none;
+}
+
+.memberPage2 .inputTable table tr>td:first-child {
+  width: 25%;
+  padding-left: 50px;
+  font-size: 14px;
+  color: #333;
+}
+
+.memberPage2 .inputTable table tr>td:nth-child(2) {
+  width: 45%
+}
+
+.memberPage2 .inputTable table tr>td>input {
+  border: 1px solid rgb(241, 241, 241) ;
+  background-color: rgb(241, 241, 241);
+  width: 200px;
+  padding: 14px 110px;
+  border-radius: 3px;
+  margin-left: 40px;
+}
+
+.memberPage2 .inputTable table tr>.memberTableBtn>button {
+  padding: 6px 15px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.memberPage2 .inputTable table .memberAddress select {
+  border: 1px solid #ddd;
+  padding: 8px 6px;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+.memberPage2 .accept ul {
+  padding: 0;
+}
+
+.memberPage2 .accept .wholeCheck {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.memberPage2 .accept .wholeCheck .wholeCheckInfo {
+  font-size: 13px;
+  color: #999;
+  display: block;
+  font-weight: 300;
+  line-height: 18px;
+  margin-top: 5px;
+}
+
+.memberPage2 .accept li {
+  width: 100%;
+  padding: 12px;
+  margin: 3px 0;
+  background-color: #eee;
+  font-size: 15px;
+  color: #555;
+}
+
+.memberPage2 .accept li:first-child {
+  background-color: transparent;
+}
+
+.memberPage2 .btnWrap {
+  width: 100%;
+  text-align: center;
+}
+
+
+a:-webkit-any-link {
+  color: -webkit-link;
+  cursor: pointer;
+  color:white;
+  text-decoration: none;
+}
+
+ .btnlog{
+  margin: 30px 90px 0;
+  font-size: 15px;
+  border-radius: 3px;
+  width: 420px;
+  padding: 14px 140px;
+  
+}
