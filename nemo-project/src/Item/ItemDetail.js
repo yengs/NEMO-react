@@ -145,7 +145,7 @@ function ItemDetail({ match, location, history }) {
                     <input type="button" id="edit"   className="greenBtn" value="수정하기" onClick={handlerClickUpdate} />
                     <input type="button" id="delete" className="redBtn" value="삭제하기" onClick={handlerClickDelete} />   
                 </div>
-            </div>            
+            </div>         
         </>
 
     );
