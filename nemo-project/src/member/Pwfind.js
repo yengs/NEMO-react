@@ -1,51 +1,63 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-function Pwfind() {
+import "./find.css";
+function Idfind() {
 
    
     return (
-        <div className="joinWrap memberPage container">
+        <div className="inputLogTable">
+        <div className="joinWrap memberPagelog container">
+            
             <div className="pageTitle">
-                <h2>비밀번호찾기</h2>
+                <h2>비밀번호 찾기</h2>
+                <hr />
+                <br></br>
+                <p>회원 가입시 등록하신 정보로 비밀번호를 찾을수 있습니다</p>
+              
+                <br></br>
+                <br></br>
+
             </div>
             <form>
                 <div className="inputTable">
                     <table>
                         <tbody>
                             <tr>
-                                <td>아이디</td>
-                                <td>
-                                {/* <input type="id" value={id} onChange={findId} required />   */}
-                                <input type ="text"/>
 
+                                <td>
+                                    {/* <input type="name" value={Iname} onChange={findId} required />
+                                     */}
+                                     <input className="holder" type ="id" placeholder="아이디를 입력하세요"/>
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td>이메일</td>
                                 <td>
                                     {/* <input type="email" value={Iemail} onChange={findEmail} required /> */}
-                                    <input type ="text"/>
+                                    <input type ="text"  placeholder="이메일을 입력하세요"/>
                                 </td>
                                 <td></td>
                             </tr>
                         </tbody>
+                        <br/>
+                        <div className="btnWrap">
+                        <Link to ="/Pw/find"><input type="submit" className="greenBtn btnlog"  value="확인"/></Link>
+                            <Link to="/id"><button  className="grayBtn btnlog">아이디 찾기</button></Link>
+                </div>
                     </table>
                 </div>
+                <br/>
+                <br/>
+                <li>비밀번호를 찾지 못하셨다면 고객센터(1111-1111)로 문의주세요</li>
+                <li>아직 내모 회원이 아니시라면 회원가입을 해주세요. &nbsp; 
+                    <Link to="/member/join"> 바로가기</Link>
 
-                <div className="btnWrap">
-                    <input type="button" value="취소" className="grayBtn btn" />
-                    {/* <input type="submit" className="greenBtn btn" onClick={handlerIdsubmit} value="아이디찾기" /> */}
-                    <input type="submit" className="greenBtn btn" value="비밀번호찾기" />
-
-                </div>
-                {/* <div><Link to="/member/join">회원가입</Link></div> */}
-              
+               </li>
             </form>
+            </div>
         </div>
     );
 }
 
-export default Pwfind;
+export default Idfind;

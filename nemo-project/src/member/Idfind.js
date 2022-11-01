@@ -6,10 +6,12 @@ function Idfind() {
 
    
     return (
-        <div className="joinWrap memberPage2 container">
+        <div className="inputLogTable">
+        <div className="joinWrap memberPagelog container">
+            
             <div className="pageTitle">
                 <h2>아이디찾기</h2>
-                <hr></hr>
+                <hr />
                 <br></br>
                 <p>회원 가입시 등록하신 정보로 아이디를 찾을수 있습니다</p>
               
@@ -26,7 +28,7 @@ function Idfind() {
                                 <td>
                                     {/* <input type="name" value={Iname} onChange={findId} required />
                                      */}
-                                     <input type ="name" placeholder="이름을 입력하세요"/>
+                                     <input className="holder" type ="name" placeholder="이름을 입력하세요"/>
                                 </td>
                                 <td></td>
                             </tr>
@@ -40,18 +42,22 @@ function Idfind() {
                         </tbody>
                         <br/>
                         <div className="btnWrap">
-                        <input type="submit" className="greenBtn btnlog"  value="확인"  />
+                        <Link to ="/Id/find"><input type="submit" className="greenBtn btnlog"  value="확인"  /></Link>
                     {/* <input type="button" value="취소" className="grayBtn btn" /> */}
                     <Link to="/pw"><button  className="grayBtn btnlog">비밀번호 찾기</button></Link>
 
                 </div>
                     </table>
                 </div>
+                <br/>
+                <br/>
+                <li>아이디를 찾지 못하셨다면 고객센터(1111-1111)로 문의주세요</li>
+                <li>아직 내모 회원이 아니시라면 회원가입을 해주세요. &nbsp; 
+                    <Link to="/member/join"> 바로가기</Link>
 
-                
-                {/* <div><Link to="/member/join">회원가입</Link></div> */}
-              
+               </li>
             </form>
+            </div>
         </div>
     );
 }

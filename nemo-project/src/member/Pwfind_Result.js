@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./find.css";
-function Idfind_Result() {
+function Pwfind_Result() {
 
    
     return (
@@ -10,10 +10,10 @@ function Idfind_Result() {
         <div className="joinWrap memberPagelog container">
             
             <div className="pageTitle">
-                <h2>아이디찾기 결과</h2>
+                <h2>비밀번호찾기 결과</h2>
                 <hr />
                 <br></br>
-                <h3>본인인증으로 가입된 아이디가 있습니다.</h3>
+                <h3>본인인증으로 가입된 비밀번호가 있습니다.</h3>
               
                 <br></br>
                 <br></br>
@@ -26,12 +26,12 @@ function Idfind_Result() {
                             <div className="find">
                             <tr>
                                 <td>
-                                     아이디 : 이예린
+                                     비밀번호 : 1234
                                 </td>
                                 </tr>
                                <tr>
                                 <td >
-                                가입날짜 : 2022.11.01 
+                                    가입날짜 : 2022.11.01 
                                 </td>
                                </tr>
                                </div>
@@ -39,8 +39,7 @@ function Idfind_Result() {
                         <br/>
                         <div className="btnWrap">
                         <Link to ="/member/login" ><input type="submit" className="greenBtn btnlog"  value="로그인하러가기"  /></Link>
-                    {/* <input type="button" value="취소" className="grayBtn btn" /> */}
-                    <Link to="/pw"><button  className="grayBtn btnlog">비밀번호 찾기</button></Link>
+                        <Link to="/id"><button  className="grayBtn btnlog">아이디 찾기</button></Link>
 
                 </div>
                     </table>
@@ -51,4 +50,4 @@ function Idfind_Result() {
     );
 }
 
-export default Idfind_Result;
+export default Pwfind_Result;
