@@ -10,6 +10,7 @@ import Main from './Main';
 import Login from './member/Login';
 import ItemDetail from './Item/ItemDetail';
 import Join from './member/Join';
+import MyPage from './MyPage';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/item/detail/:itemNum" component={ItemDetail} />
         <Route path="/member/join" component={Join} />
         <Route path="/member/login" component={Login} />
+        <Route path="/mypage" component={MyPage} />
       </div>
 
       <Footer />
