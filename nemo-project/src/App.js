@@ -46,7 +46,6 @@ function App() {
         <Route path="/review/myReview/:reviewNum" component={MyReviewDetail} />
         <Route path="/review/yourReview" component={YourReviewList} />
         <Route path="/review/yourReview/:reviewNum" component={YourReviewDetail} />
-        <ReviewUploadPage/>
       </div>
       <Footer />
     </div>
