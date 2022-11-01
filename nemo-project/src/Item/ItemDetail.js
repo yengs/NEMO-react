@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Route } from "react-router-dom";
 import "./ItemDetail.css";
 
 function ItemDetail({ match, location, history }) {
@@ -59,23 +60,28 @@ function ItemDetail({ match, location, history }) {
 
     return (
         <>
-            <div className="container">
+            <div className="DetailContainer">
                 <h2>상품 상세</h2>
+                <div className="clickList">
+                    <a onClick={handlerClickList}>목록으로</a>
+                    <p>👀 {data.itemReadcount} 📅 {data.itemDate}</p>
+                </div>
+                <br></br>
                 <form method="post" id="frm" name="frm">
                     <table className="board_detail">
                         <colgroup>
-                            <col width="30%" />
-                            <col width="70%" />
+                            <col width="40%" />
+                            <col width="60%" />
                         </colgroup>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                                 <th scope="row">상품번호</th>
                                 <td>{data.itemNum}</td>
                             </tr>
-                            <tr>
-                                <th scope="row">작성날짜</th>
-                                <td>{data.itemDate}</td>                  
-                            </tr>
+                            <tr className="writeDate">
+                                <th scope="row">작성일</th>
+                                <td>{data.itemDate}</td>               
+                            </tr>  */}  
                             <tr>
                                 <th scope="row">상품명</th>
                                 {/* <td>{data.itemName}</td>  */}
@@ -98,10 +104,10 @@ function ItemDetail({ match, location, history }) {
                                 <th scope="row">보증금</th>
                                 <td>{data.itemDeposit}</td>                  
                             </tr>
-                            <tr>
+                            {/* <tr>
                                 <th scope="row">조회수</th>
                                 <td>{data.itemReadcount}</td>                  
-                            </tr>
+                            </tr> */}
                             <tr>
                                 <th scope="row">내용</th>
                                 <td><input type="text" value={itemDetail} onChange={handlerChangeDetail} /></td>
@@ -132,11 +138,9 @@ function ItemDetail({ match, location, history }) {
                                    }
                                   else {return  <td>{data.itemEtcsize}</td>  }
                                 })()
-                            }
-                                                  
+                            }                      
                             </tr>
                             
-                        
                             <tr>
                                 <th scope="row">대여기간</th>
                                 <td>{data.itemRentalstart} ~ {data.itemRentalend}</td>                  
@@ -144,9 +148,8 @@ function ItemDetail({ match, location, history }) {
                           
                         </tbody>
                     </table>      
-                </form>   
+                </form>
                 <div className="buttonDiv">
-                    <input type="button" id="list"   className="grayBtn" value="목록으로" onClick={handlerClickList} />
                     <input type="button" id="edit"   className="greenBtn" value="수정하기" onClick={handlerClickUpdate} />
                     <input type="button" id="delete" className="redBtn" value="삭제하기" onClick={handlerClickDelete} />   
                 </div>
