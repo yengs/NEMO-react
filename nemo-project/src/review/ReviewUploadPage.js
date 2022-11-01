@@ -23,15 +23,19 @@ function ReviewUploadPage({ history }) {
             })
             .then(response => {
                 if (response.status === 200) {
-                    alert("정상적으로 등록되었습니다.");
-                    history.push("/review/myReview");
+                    if (reviewContents && reviewSatisfaction != null) {
+                        alert("정상적으로 등록되었습니다.");
+                        history.push("/review/myReview");
+                    } else {
+                        alert("내용과 만족도를 입력하세요.")
+                    }
                 } else {
                     alert("등록에 실패했습니다.");
-                    return ;
+                    return;
                 }
             })
             .catch(error => console.log(error));
-            
+
     };
 
     const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
@@ -70,14 +74,14 @@ function ReviewUploadPage({ history }) {
                                 onChange={handlerChangesetReviewImage} />
                         </div>
                         <div className="review-text-box">
-                            <textarea className="review-box" rows={1} 
+                            <textarea className="review-box" rows={1}
                                 placeholder="내용을 입력해 주세요." value={reviewContents}
                                 onChange={handlerChangeReviewContents} />
                         </div>
                     </div>
                     <div className="clean">
                         상품의 만족도는 어떠셨나요? :
-                        <input type='number' value={reviewSatisfaction}
+                        <input type='number' value={reviewSatisfaction} required
                             onChange={handlerChangeReviewSatisfaction}></input>
                     </div>
                     <button type="submit" onClick={handlerClickSubmit}>등록</button>
