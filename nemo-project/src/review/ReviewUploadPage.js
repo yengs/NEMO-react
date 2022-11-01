@@ -12,7 +12,7 @@ export default function ReviewUploadPage({ history }) {
     const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
 
     useEffect(() => {
-        Axios.get(`http://localhost:8080/api/`)
+        Axios.get(`http://localhost:8080/api/s`)
             .then(response => {
                 console.log(response);
                 setData(response.data);
