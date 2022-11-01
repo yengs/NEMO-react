@@ -217,7 +217,7 @@ header .navBar .weather {
 
 /* ----------------dropdown-------------- */
 
-
+/* 
 .dropbtn {
   background-color: #4CAF50;
   color: white;
@@ -225,7 +225,7 @@ header .navBar .weather {
   font-size: 16px;
   border: none;
   cursor: pointer;
-}
+} */
 
 .dropdown {
   position: relative;
@@ -254,9 +254,9 @@ header .navBar .weather {
   display: block;
 }
 
-.dropdown:hover .dropbtn {
+/* .dropdown:hover .dropbtn {
   background-color: #3e8e41;
-}
+} */
 
 
 
