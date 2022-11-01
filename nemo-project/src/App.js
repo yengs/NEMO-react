@@ -13,20 +13,23 @@ import Join from './member/Join';
 
 
 function App() {
-  
+
   return (
 
-    <>
-     <Header/>
-      <Route path="/" component={Main} exact={true} />
-      <Route path="/item/cate/:itemMaincategory" component={ItemList} exact={true} />
-      <Route path="/item/write" component={ItemUpload}/>
-      <Route path="/item/detail/:itemNum" component={ItemDetail}/>
-      <Route path="/member/join" component={Join}/>
-      <Route path="/member/login" component={Login}/>
-      
-     <Footer />
-    </>
+    <div className='wholeWrap'>
+      <div className='containerWrap'>
+        <Header />
+
+        <Route path="/" component={Main} exact={true} />
+        <Route path="/item/cate/:itemMaincategory" component={ItemList} exact={true} />
+        <Route path="/item/write" component={ItemUpload} />
+        <Route path="/item/detail/:itemNum" component={ItemDetail} />
+        <Route path="/member/join" component={Join} />
+        <Route path="/member/login" component={Login} />
+      </div>
+
+      <Footer />
+    </div>
   );
 }
 
