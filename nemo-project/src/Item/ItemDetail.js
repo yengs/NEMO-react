@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import "./ItemDetail.css";
 
 function ItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
@@ -24,7 +25,7 @@ function ItemDetail({ match, location, history }) {
     const handlerChangePrice = (e) => setItemPrice(e.target.value);
     const handlerChangeDetail = (e) => setItemDetail(e.target.value);
     
-    const handlerClickList = () => history.push('/item');
+    const handlerClickList = () => history.goBack();
     const handlerClickDelete = () => {
         axios.delete(`http://localhost:8080/api/item/${itemNum}`)
         .then(response => { 
@@ -72,7 +73,7 @@ function ItemDetail({ match, location, history }) {
                                 <td>{data.itemNum}</td>
                             </tr>
                             <tr>
-                                <th scope="row">업로드날짜</th>
+                                <th scope="row">작성날짜</th>
                                 <td>{data.itemDate}</td>                  
                             </tr>
                             <tr>
@@ -119,17 +120,22 @@ function ItemDetail({ match, location, history }) {
                                 <td>{data.itemImage}</td>                  
                             </tr>
                             <tr>
-                                <th scope="row">상의사이즈</th>
-                                <td>{data.itemTopsize}</td>                  
+                                <th scope="row">사이즈</th>
+                                
+                                {
+                                (function() {
+                                    if( data.itemMaincategory ==="상의"){
+                                   return  <td>{data.itemTopsize}</td>
+                                   }
+                                   else if( data.itemMaincategory ==="하의"){
+                                   return  <td>{data.itemBottomsize}</td>  
+                                   }
+                                  else {return  <td>{data.itemEtcsize}</td>  }
+                                })()
+                            }
+                                                  
                             </tr>
-                            <tr>
-                                <th scope="row">하의사이즈</th>
-                                <td>{data.itemBottomsize}</td>                  
-                            </tr>
-                            <tr>
-                                <th scope="row">겉옷사이즈</th>
-                                <td>{data.itemEtcsize}</td>                  
-                            </tr>
+                            
                         
                             <tr>
                                 <th scope="row">대여기간</th>
@@ -139,10 +145,11 @@ function ItemDetail({ match, location, history }) {
                         </tbody>
                     </table>      
                 </form>   
-                
-                <input type="button" id="list"   className="btn" value="목록으로" onClick={handlerClickList} />
-                <input type="button" id="edit"   className="btn" value="수정하기" onClick={handlerClickUpdate} />
-                <input type="button" id="delete" className="btn" value="삭제하기" onClick={handlerClickDelete} />   
+                <div className="buttonDiv">
+                    <input type="button" id="list"   className="grayBtn" value="목록으로" onClick={handlerClickList} />
+                    <input type="button" id="edit"   className="greenBtn" value="수정하기" onClick={handlerClickUpdate} />
+                    <input type="button" id="delete" className="redBtn" value="삭제하기" onClick={handlerClickDelete} />   
+                </div>
             </div>            
         </>
 

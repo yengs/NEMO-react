@@ -94,7 +94,7 @@ function Header() {
                              </div>
                             </li>
                             <li class = "dropdown">
-                            <a onClick={handlerGoBottom}>아우터</a>
+                            <a onClick={handlerGoOuter}>아우터</a>
                              <div class="dropdown-content">
                              <a>패딩</a>
                              <a>코트</a>
