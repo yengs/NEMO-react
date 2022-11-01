@@ -1,0 +1,16 @@
+.buttonDiv {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 50px;
+}
+
+.buttonDiv .input{
+    font-weight: 100;
+    margin: 20px 15px 0;
+    font-size: 15px;
+    padding: 10px 50px;
+    border-radius: 3px;
+    font-weight: 100;
+}
+
