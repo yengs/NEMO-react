@@ -1,36 +1,59 @@
-import { useState } from "react";
-import { axios } from "axios";
+import { useEffect, useState } from "react";
+import { Axios } from "axios";
+import { Link } from "react-router-dom";
 
-export default function ReviewUploadPage() {
+export default function ReviewUploadPage({ history }) {
 
-    const [textValue, setTextValue] = useState('');
-    const [cleanLv, setCleanLv] = useState('');
+    const [data, setData] = useState([]);
+    const [reviewContents, setReviewContents] = useState('');
+    const [reviewSatisfaction, setReviewSatisfaction] = useState('');
 
-    const handleSetValue = (e) => {
-        setTextValue(e.target.value);
+    const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
+    const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
+
+    useEffect(() => {
+        Axios.get(`http://localhost:8080/api/`)
+            .then(response => {
+                console.log(response);
+                setData(response.data);
+            })
+            .catch(error => console.log(error));
+    }, []);
+
+    const handlerClickSubmit = (e) => {
+        e.preventDefault();
+
+        window.confirm('등록하시겠습니까?')
+        Axios.post(`http://localhost8080/api/review/reviewWrite`,
+            { "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction })
+            .then(response => {
+                if (response.status === 200) {
+                    alert("정상적으로 등록되었습니다.");
+                    history.push("/review");
+                } else {
+                    alert("등록에 실패했습니다.");
+                    return;
+                }
+            })
+            .catch(error => console.log(error));
     };
 
-    const handlerSetclean = (e) => {
-        setCleanLv(e.target.value);
-    }
 
     const useConfirm = (message = "", onConfirm, onCancel) => {
         // 유효성 검사 (Validator)
         if (!onConfirm || typeof onConfirm !== "function") {
-            // 없거나, 함수가 아니면 빠져나옴 
-            // 즉, 있고, 함수일때만 실행된다는 얘기
+            // 없거나, 함수가 아니면 빠져나옴 = 함수일때만 실행된다는 얘기
             return;
         }
         if (onCancel && typeof onCancel !== "function") {
-            // (선택사항) 있고 함수가 아닐때만 나온다. 
-            // 즉, 없어도 되고 만약 있다면 function 이어야 만 실행됨
+            // (선택사항) 있고 함수가 아닐때만 나온다. = 없어도 되고 만약 있다면 function 이어야 만 실행됨
             return;
         }
 
         // 알림창 및 해당 콜백 함수 실행
         const confirmAction = () => {
             if (window.confirm(message)) {
-                // 주의! window를 써줘야 confirm이 무슨 함수인지 인지함
+                // 주의 window를 써줘야 confirm이 무슨 함수인지 인지함
                 onConfirm();
             } else {
                 onCancel();
@@ -39,7 +62,7 @@ export default function ReviewUploadPage() {
         return confirmAction;
     };
 
-    const deleteWorld = () => { <a href="http://www.naver.com"></a> };
+    const deleteWorld = () => { <Link to={`/member`}></Link> };
     const abort = () => console.log("Aborted")
     const confirmDelete = useConfirm("작성을 취소하시겠습니까?", deleteWorld, abort);
 
@@ -59,29 +82,28 @@ export default function ReviewUploadPage() {
                                     width="150px" height="150px" />
                             </div>
                             <div className="review-img-info-box-title">
-                                {/* {item_name} 으로 변경 예정 */}
-                                <h3>아디다스 로우</h3>
-                                {/* 대여료 {item_price} 으로 변경 예정 */}
-                                <h3>대여료 50000</h3><hr />
+                                <h3>{data.item_name}</h3>
+                                <h3>대여료 {data.item_price}</h3><hr />
                             </div>
                         </div>
                         <div className="add-img-box">
                             <input type="file"
-                                id="real-input"
+                                id="item_review_input"
                                 className="image_inputType_file"
                                 accept=" .jpg, .png"
                                 required multiple />
-                            <button className="browse-btn"><img src="../image/review-add-img.png" alt="" />사진 업로드</button>
                         </div>
                         <div className="review-text-box">
-                            <textarea className="review-box" rows={1} placeholder="내용을 입력해 주세요." value={textValue}
-                                onChange={(e) => { handleSetValue(e) }} />
+                            <textarea className="review-box" rows={1} placeholder="내용을 입력해 주세요." value={reviewContents}
+                                onChange={handlerChangeReviewContents} />
                         </div>
                     </div>
                     <div className="clean">
-                        상품의 만족도는 어떠셨나요? : <input type='number' onChange={handlerSetclean} min='1' max='100'></input>
+                        상품의 만족도는 어떠셨나요? :
+                        <input type='number' value={reviewSatisfaction}
+                            onChange={handlerChangeReviewSatisfaction} min='1' max='100'></input>
                     </div>
-                    <button type="submit">등록</button>
+                    <button type="submit" onClick={handlerClickSubmit}>등록</button>
                     <button onClick={confirmDelete}>취소</button>
 
                 </div>
