@@ -10,6 +10,7 @@ import Main from './Main';
 import Login from './member/Login';
 import ItemDetail from './Item/ItemDetail';
 import Join from './member/Join';
+import MyPage from './mypage/MyPage';
 import Idfind from './member/Idfind';
 import Idfind_Result from './member/Idfind_Result';
 import Pwfind from './member/Pwfind';
@@ -37,6 +38,7 @@ function App() {
         <Route path="/item/detail/:itemNum" component={ItemDetail} />
         <Route path="/member/join" component={Join} />
         <Route path="/member/login" component={Login} />
+        <Route path="/mypage" component={MyPage} />
       </div>
 
       <Footer />
