@@ -40,6 +40,7 @@
 
 .btn {
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btnWrap .btn {
@@ -51,8 +52,12 @@
   font-weight: 100;
 }
 
+.btnWrap a {
+  display: inline-block;
+} 
+
 .grayBtn {
-  border: #999;
+  border: 2px solid #999 !important;
   background-color: #999;
   color: #fff;
 }
@@ -105,7 +110,7 @@ header .topHeader {
   height: 60px;
   background-color: #fff;
   margin: 0 auto;
-  /* padding: 0 2rem; */
+  padding: 0 2rem;
   max-width: 1200px;
 }
 
@@ -323,6 +328,90 @@ footer {
   text-align: center;
 }
 
+.loginForm {
+  margin-top: 180px;
+}
+
+.loginForm form {
+  height: 200px;
+}
+
+.loginForm form .inputTable {
+  margin-bottom: 40px;
+}
+
+.loginForm form .inputTable tr td{
+  border: none;
+}
+
+.loginForm form .inputTable tr:first-child td {
+  padding-bottom: 10px !important;
+  padding-top: 30px !important;
+}
+
+.loginForm form .inputTable tr:nth-child(2) td {
+  padding-bottom: 0 !important;
+  padding-top: 10px !important;
+}
+
+.loginForm form .inputTable .rememberId {
+  padding-top: 0;
+  padding-bottom: 10px;
+  padding-left: 223px !important;
+}
+
+.loginForm form .inputTable .findMemberInfo {
+  padding-top: 0;
+  padding-bottom: 10px;
+  padding-right: 60px;
+  text-align: right;
+}
+
+.loginForm form .inputTable .findMemberInfo a {
+  font-size: 13px;
+  color: #999;
+  padding: 0 5px;
+}
+
+.loginForm .btnWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm .btnWrap a {
+  margin: 0 25px;
+}
+
+.rememberId .rememberIdLabel {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.rememberId .rememberIdLabel p {
+  font-size: 13px;
+  color: #666;
+}
+
+.loginBtn {
+  height: 95px;
+  width: 180px;
+}
+
+.googleLoginBtnLink {
+  padding: 0 !important;
+}
+
+.googleLoginBtnLink .googleLoginBtn {
+  width: 210px;
+  height: 50px;
+  background-size: cover;
+  display: inline-block;
+}
+
+
+
 
 
 /* ------------------------------------------------------------ */
@@ -367,11 +456,10 @@ footer {
   background-color: #eee;
 }
 
-.itemWrap {
+.itemWrap, .storeWrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  ;
 }
 
 .itemInfoWrap {
@@ -389,7 +477,7 @@ footer {
   border-radius: 5px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
 }
 
 .itemInfoWrap .itemInfo p {
@@ -436,20 +524,31 @@ footer {
 }
 
 .storeInfoWrap {
-  width: 47.2%;
-  height: 360px;
-  background-color: rgb(236, 236, 236);
-  border-radius: 10px;
-  padding: 1%;
+  /* background-color: #ddd; */
+  width: 200px;
+  height: 270px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.storeInfoWrap > img {
-  width: 49%;
-  border: 1px solid #000;
+.storeInfoWrap > .storeImg {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .storeInfo {
-  width:49%;
+  width:100%;
+  text-align: center;
+}
+
+.storeInfo .storeName {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 7px 0;
 }
