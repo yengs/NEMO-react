@@ -374,6 +374,13 @@ footer {
   ;
 }
 
+.itemWrap2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .itemInfoWrap {
   width: 22%;
   height: 360px;
