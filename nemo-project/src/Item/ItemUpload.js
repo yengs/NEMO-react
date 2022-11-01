@@ -83,6 +83,7 @@ function ItemUpload({ history }) {
                                 <option value="상의">상의</option>
                                 <option value="하의">하의</option>
                                 <option value="아우터">아우터</option>
+                                <option value="원피스">원피스</option>
                                 </select>
                             </td>
                     
@@ -112,11 +113,19 @@ function ItemUpload({ history }) {
                                   <option value="레깅스">레깅스</option>
                              
                                   </select>;}
-                                  else {return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
-                                     <option value="">선택</option>
+                                   else if(itemMaincategory ==="아우터"){
+                                    return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
+                                    <option value="">선택</option>
                                      <option value="패딩">패딩</option>
                                      <option value="코트">코트</option>
                                      <option value="바람막이">바람막이</option> 
+                              
+                                   </select>;}
+                                  else {return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
+                                     <option value="">선택</option>
+                                     <option value="패딩">롱</option>
+                                     <option value="코트">미디</option>
+                                     <option value="바람막이">미니</option> 
                                  </select>;}
                                 })()
                             }</td>

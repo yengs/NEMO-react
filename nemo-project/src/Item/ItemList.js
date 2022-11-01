@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import Shirt from '../img/shirt.jpg';
+
 function ItemList({match}) {
     const { itemMaincategory } = match.params;
 
@@ -14,45 +16,24 @@ function ItemList({match}) {
     }, []);
     return (
         <>
-            <div className="container">
-                <h2>상품 목록</h2>
-                <table className="board_list">
-                <colgroup>
-                    <col width="15%" />
-                    <col width="*" />
-                    <col width="15%" />
-                    <col width="20%" />
-                    <col width="20%" />
-                    <col width="20%" />
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th scope="col">일련번호</th>
-                        <th scope="col">상품명</th>
-                        <th scope="col">가격</th>
-                        <th scope="col">대여기간</th>
-                        <th scope="col">작성자</th>
-                        <th scope="col">상품사진</th>
-                        <th scope="col">분류</th>
-
-       
-                    </tr>   
-
-                </thead>
-                <tbody>
+            <div className="recWeather">
+                
+                <div className="titleNplusBtn">
+                    <h3>{itemMaincategory}</h3>
+                    <Link className="btn" to="/item/write">상품등록</Link>
+                </div>
+                <div className="itemWrap2">
                     {
                         datas && datas.map(item => (
-                            <tr key={item.itemNum}>
-                                <td>{item.itemNum}</td>
-                                <td className="title">
-                                <Link to={`/item/detail/${item.itemNum}`}>{item.itemName}</Link>
-                                </td>
-                                <td>{item.itemPrice}</td>
-                                <td>{item.itemRentalstart} ~ {item.itemRentalend}</td>
-                                <td>{item.itemWriter}</td>
-                                <td>{item.itemImage}</td>
-                                <td>{item.itemMaincategory}</td>
-                            </tr>
+                         <div className="itemInfoWrap" key={item.itemNum}>
+                            <div className="itemImg" style={{backgroundImage: `url(${Shirt})`}}></div>
+                            <div className="itemInfo">
+                            <p class="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
+                            <p class="itemName"><Link to={`/item/detail/${item.itemNum}`}>{item.itemName}</Link></p>
+                            <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                            <p class="itemPeriod">대여기간<br/><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
+                            </div>
+                         </div>
                         ))
                     }
                     {
@@ -61,10 +42,8 @@ function ItemList({match}) {
                                 <td colSpan="4">일치하는 데이터가 없습니다!.</td>
                             </tr>
                         )
-                    }
-                </tbody>
-                </table>
-                <Link className="btn" to="/item/write">상품등록</Link>
+                    }  
+                </div>
             </div>
         </>
     );
