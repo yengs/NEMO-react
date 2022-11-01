@@ -8,8 +8,8 @@ import "./ItemUpload.css";
 
 function ItemUpload({ history }) {
 
-    const [iName, setiName] = useState('');
-    const [iPrice, setiPrice] = useState('');
+    const [itemName, setitemName] = useState('');
+    const [itemPrice, setitemPrice] = useState('');
     const [itemMaincategory, setitemMaincategory] = useState('');
     const [itemSubcategory, setitemSubcategory] = useState('');
     const [itemDeposit, setitemDeposit] = useState('');
@@ -21,8 +21,8 @@ function ItemUpload({ history }) {
     // const [itemRentalperiod, setitemRentalperiod] = useState('');
 
     
-    const handlerChangeiName = (e) => setiName(e.target.value);
-    const handlerChangeiPrice = (e) => setiPrice(e.target.value);
+    const handlerChangeitemName = (e) => setitemName(e.target.value);
+    const handlerChangeitemPrice = (e) => setitemPrice(e.target.value);
     const handlerChangeitemMaincategory =(e) => setitemMaincategory(e.target.value);
     const handlerChangeitemSubcategory =(e) => setitemSubcategory(e.target.value);
     const handlerChangeitemDeposit=(e) => setitemDeposit (e.target.value);
@@ -43,7 +43,7 @@ function ItemUpload({ history }) {
     const handlerClickSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8080/api/item', { "itemName": iName, "itemPrice": iPrice, "iName": iName, "iPrice": iPrice,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
+        axios.post('http://localhost:8080/api/item', { "itemName": itemName, "itemPrice": itemPrice,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
                                                         "itemDetail":itemDetail,"itemWeather":itemWeather,"itemTopsize":itemTopsize,"itemBottomsize":itemBottomsize,
                                                         "itemEtcsize":itemEtcsize,"itemRentalstart" :startDate,"itemRentalend":endDate})
         .then(response => {
@@ -70,7 +70,13 @@ function ItemUpload({ history }) {
                         <tr>
                             <td>상품명</td>
                         
-                            <td><input type="text" id="iName" name="iName" value={iName} onChange={handlerChangeiName} required /></td>
+
+                            <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} /></td>
+                        </tr>
+                        <tr>
+                            <td>가격</td>
+                            <td><input type="text" id="itemPrice" name="itemPrice" value={itemPrice} onChange={handlerChangeitemPrice} /></td>
+
                         </tr>
 
                         <tr>
@@ -187,7 +193,7 @@ function ItemUpload({ history }) {
 
                         <tr>
                             <td>가격</td>
-                            <td><input type="text" id="iPrice" name="iPrice" value={iPrice} onChange={handlerChangeiPrice} required/></td>
+                            <td><input type="text" id="itemPrice" name="itemPrice" value={itemPrice} onChange={handlerChangeitemPrice} required/></td>
                         </tr>
                         <tr>
                             <td>보증금</td>

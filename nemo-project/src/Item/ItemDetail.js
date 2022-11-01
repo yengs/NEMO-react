@@ -120,17 +120,22 @@ function ItemDetail({ match, location, history }) {
                                 <td>{data.itemImage}</td>                  
                             </tr>
                             <tr>
-                                <th scope="row">상의사이즈</th>
-                                <td>{data.itemTopsize}</td>                  
+                                <th scope="row">사이즈</th>
+                                
+                                {
+                                (function() {
+                                    if( data.itemMaincategory ==="상의"){
+                                   return  <td>{data.itemTopsize}</td>
+                                   }
+                                   else if( data.itemMaincategory ==="하의"){
+                                   return  <td>{data.itemBottomsize}</td>  
+                                   }
+                                  else {return  <td>{data.itemEtcsize}</td>  }
+                                })()
+                            }
+                                                  
                             </tr>
-                            <tr>
-                                <th scope="row">하의사이즈</th>
-                                <td>{data.itemBottomsize}</td>                  
-                            </tr>
-                            <tr>
-                                <th scope="row">겉옷사이즈</th>
-                                <td>{data.itemEtcsize}</td>                  
-                            </tr>
+                            
                         
                             <tr>
                                 <th scope="row">대여기간</th>
