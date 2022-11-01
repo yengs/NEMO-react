@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function MyReviewList() {
 
     const [ datas, setDatas ] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/myReview')
+        axios.get('http://localhost:8080/api/review/myReview')
         .then(response => {console.log(response);
             setDatas(response.data)
         })
@@ -22,7 +23,7 @@ function MyReviewList() {
             <col width="15%"/>
             <col width="15%"/>
             <col width="15%"/>
-            <col width="*"/>
+            <col width="25%"/>
             <col width="15%"/>
         </colgroup>
         <thead>
@@ -40,10 +41,15 @@ function MyReviewList() {
                     datas && datas.map(review => (
                         <tr key={review.reviewNum}>
                             <td>{review.reviewNum}</td>
-                            <td>{review.reviewProductIdx}</td>
+                            <td className="product">{review.reviewProductIdx}</td>
                             <td>{review.itemPrice}</td>
                             <td>{review.reviewImage}</td>
+                            <td>
+                                <Link to={`/myReview/${review.reviewNum}`}>{review.reviewContents}</Link>
+                            </td>
                             <td>{review.reviewSatisfaction}</td>
+                            <input type="button" id="edit"   className="btn" value="수정하기" />
+                            <input type="button" id="delete" className="btn" value="삭제하기" /> 
                         </tr>
                     ))
                 }
@@ -54,8 +60,6 @@ function MyReviewList() {
                         </tr>
                     )
                 }
-                 <input type="button" id="edit"   className="btn" value="수정하기" />
-                 <input type="button" id="delete" className="btn" value="삭제하기" /> 
             </tbody>
            
     </table>
