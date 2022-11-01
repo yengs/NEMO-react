@@ -77,10 +77,44 @@ function Header() {
                     </div>
                     <div className='navWrap'>
                         <ul className="nav">
-                            <li onClick={handlerGoTop}>상의</li>
+                            <li class = "dropdown">
+                            <a onClick={handlerGoTop}>상의</a>
+                             <div class="dropdown-content">
+                             <a>반팔</a>
+                             <a>긴팔</a>
+                             <a>니트</a>
+                             </div>
+                            </li>
+                            <li class = "dropdown">
+                            <a onClick={handlerGoBottom}>하의</a>
+                             <div class="dropdown-content">
+                             <a>바지</a>
+                             <a>치마</a>
+                             <a>반바지</a>
+                             </div>
+                            </li>
+                            <li class = "dropdown">
+                            <a onClick={handlerGoBottom}>아우터</a>
+                             <div class="dropdown-content">
+                             <a>패딩</a>
+                             <a>코트</a>
+                             <a>바람막이</a>
+                             </div>
+                            </li>
+                            <li class = "dropdown">
+                            <a onClick={handlerGoDress}>원피스</a>
+                             <div class="dropdown-content">
+                             <a>롱</a>
+                             <a>미디</a>
+                             <a>미니</a>
+                             </div>
+                            </li>
+
+                            {/* <li onClick={handlerGoTop}>상의</li>
                             <li onClick={handlerGoBottom}>하의</li>
                             <li onClick={handlerGoOuter}>아우터</li>
-                            <li onClick={handlerGoDress}>원피스</li>
+                            <li onClick={handlerGoDress}>원피스</li> */}
+
                         </ul>
                     </div>
                     <div className="weather">
