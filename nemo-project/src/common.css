@@ -69,6 +69,12 @@
   color: #fff;
 }
 
+.redBtn {
+  border: rgb(196, 98, 98);
+  background-color: rgb(196, 98, 98);
+  color: #fff;
+}
+
 .greenLineBtn {
   border: 2px solid rgb(100, 165, 127) !important;
   background-color: transparent;
