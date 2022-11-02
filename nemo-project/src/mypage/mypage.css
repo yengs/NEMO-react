@@ -94,14 +94,15 @@
     align-items: center;
 }
 
-.regiUserItemWrap .prev {
-    font-size: 35px;
+.prev {
+    font-size: 100px;
     color: #666;
     cursor: pointer;
 }
 
-.regiUserItemWrap .back {
-    font-size: 35px;
+.back {
+    color: #666;
+    font-size: 100px;
     cursor: pointer;
 }
 
