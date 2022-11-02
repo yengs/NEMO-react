@@ -1,0 +1,75 @@
+.buttonDiv {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 50px;
+}
+
+.buttonDiv .input{
+    font-weight: 100;
+    margin: 20px 15px 0;
+    font-size: 15px;
+    padding: 10px 30px;
+    border-radius: 3px;
+}
+
+.grayBtn, .greenBtn, .redBtn{
+    padding: 10px 10px;
+    margin : 10px 2px 0;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 3px;
+}
+
+.writeDate{
+    flex-direction: row-reverse;
+}
+
+.myDetailContainer form>th>td {
+    display: inline;
+    justify-content: center;
+    align-content: center;
+}
+
+.myDetailContainer th{
+    text-align: left;
+    vertical-align: middle;
+}
+
+.myDetailContainer td {
+    text-align: left;
+    vertical-align: middle;
+    width: 20%;
+    height: 25px;
+    /* padding-inline: 20px; */
+    /* padding-top: 10px; */
+}
+
+.myDetailContainer form tr>td>input {
+    border: 1px solid #ddd;
+    width: 95%;
+    padding: 8px 6px;
+    border-radius: 3px;
+  }
+
+.clickList, .p {
+    position: relative;
+    /* top: 10px; */
+    right: 30px;
+    text-align: right;
+}
+
+.myDetailContainer{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.myDetailContainer h2{
+    position: relative;
+    left: 30px;
+    text-align: left;
+}
+
+.my_board_detail{
+    align-items: center;
+}
