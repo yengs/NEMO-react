@@ -1,5 +1,3 @@
-import Chart from 'chart.js/auto';
-import { Bar } from 'react-chartjs-2';
 import { Link, Route } from 'react-router-dom';
 
 function MyMenu() {
