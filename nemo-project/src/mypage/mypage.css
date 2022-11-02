@@ -184,3 +184,8 @@
     width: 150px;
     font-size: 12px;
 }
+
+/* 다른사람이 보는 마이페이지 신고하기 팝업 */
+.myPageWrap.forOthers {
+    position: relative;
+}

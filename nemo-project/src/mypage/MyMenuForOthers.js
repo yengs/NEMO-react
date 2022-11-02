@@ -1,4 +1,5 @@
 import { Link, Route } from 'react-router-dom';
+import UserDec from './UserDec';
 
 function MyMenu() {
 
@@ -13,6 +14,7 @@ function MyMenu() {
                 <div></div>
                 <button className="warnBtn">신고하기</button>
             </div>
+            {/* <UserDec /> */}
         </div>
     );
 }
