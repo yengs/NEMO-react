@@ -34,7 +34,7 @@ function MypageReview() {
             <div className="myStoreReview">
                 <div className='reviewTitle'>
                     <h2 className="reviewTitle">내 상점 후기</h2>
-                    <span><a href="" className='moreReviewDetailPage'>더보기 > </a></span>
+                    <span><a href="" className='moreReviewDetailPage'>더보기  </a></span>
                 </div>
             </div>
             <hr className='lineH' />
@@ -72,7 +72,7 @@ function MypageReview() {
             </div>
 
             {/* ------------------------------------------------------------------------------------ */}
-
+        
             <div className="myStoreReview">
                 <div className='reviewTitle'>
                     <h2 className="reviewTitle">내 상점 후기</h2>

@@ -80,7 +80,6 @@
     margin-left: 5px;
     margin-bottom: -8px;
     margin-top: 15px;
-    justify-content: flex-end;
 }
 
 .moreReviewDetailPage { 
@@ -88,20 +87,20 @@
     margin-bottom: 6px;
     margin-top: -5px;
     text-decoration: none;
+    font-size: 13px;
 }
 
+.myReviewListAboutStore {
+    border-spacing: 0;
+}
 
-
-
+.myReviewListAboutStore .middleLine {
+    font-size: 13px;
+}
 
 .lineH {
     height: 1.2px;
     width: 100%;
-}
-
-.ReviewItemImageOrigin {
-    width: 10%;
-    font-size: 7px;
 }
 
 .ReviewItemImg div {
@@ -126,4 +125,10 @@
 
 .ReviewWriter {
     text-align: center;
+}
+
+th, td {
+    border-bottom: 1px solid #444444;
+    padding: 7px 3px;
+    font-size: 15px;
 }

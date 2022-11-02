@@ -11,8 +11,9 @@ function MyPage() {
     return(
         <div className="myPageWrap">
             <MyMenu />
-            {/* <Route path="/mypage/userstore" component={MyUserStore} exact={true} /> */}
+            <Route path="/mypage/userstore" component={MyUserStore} exact={true} />
             <MypageReview/>
+            {/* <MyUserStore/> */}
         </div>
     );
 }
