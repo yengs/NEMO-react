@@ -13,7 +13,6 @@ function MyPage() {
             <MyMenu />
             <Route path="/mypage/userstore" component={MyUserStore} exact={true} />
             <MypageReview/>
-            {/* <MyUserStore/> */}
         </div>
     );
 }
