@@ -11,6 +11,7 @@ import Login from './member/Login';
 import ItemDetail from './Item/ItemDetail';
 import Join from './member/Join';
 import ItemsubList from './Item/ItemsubList';
+import MyPage from './mypage/MyPage';
 import Idfind from './member/Idfind';
 import Idfind_Result from './member/Idfind_Result';
 import Pwfind from './member/Pwfind';
@@ -42,12 +43,12 @@ function App() {
         <Route path="/item/detail/:itemNum" component={ItemDetail} />
         <Route path="/member/join" component={Join} />
         <Route path="/member/login" component={Login} />
-        <Route path="/member/login" component={Login} />
         <Route path="/reivew/reviewWrite" component={ReviewUploadPage} />
         <Route path="/review/myReview" component={MyReviewList} exact={true} />
         <Route path="/review/myReview/:reviewNum" component={MyReviewDetail} />
         <Route path="/review/yourReview" component={YourReviewList} />
         <Route path="/review/yourReview/:reviewNum" component={YourReviewDetail} />
+        <Route path="/mypage" component={MyPage} />
       </div>
       <Footer />
     </div>
