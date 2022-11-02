@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import Shirt from '../img/shirt.jpg';
 
 function MypageReview() {
 
@@ -27,16 +28,6 @@ function MypageReview() {
             })
             .catch(error => console.log(error));
     }, []);
-    
-    // 아이템 리스트 데이터
-    useEffect(() => {
-        axios.get('http://localhost:8080/api/review/yourReview')
-            .then(response => {
-                console.log(response);
-                yourReviewData(response.data)
-            })
-            .catch(error => console.log(error));
-    }, []);
 
     return (
         <div className="mypageInnerPage">
@@ -54,18 +45,7 @@ function MypageReview() {
                     <tbody>
                         <tr>
                             <td rowSpan={3} className="myReviewList">
-                                {
-                                    myReviewData && myReviewData.map(review => (
-                                        <tr key={review.reviewNum}>
-                                            <td>{review.reviewNum}</td>
-                                            <td>{review.reviewImage}</td>
-                                            <td>
-                                                <Link to={`/review/myReview/${review.reviewNum}`}>{review.reviewContents}</Link>
-                                            </td>
-                                            <td>{review.reviewSatisfaction}</td>
-                                        </tr>
-                                    ))
-                                }
+                            <div style={{ "backgroundImage": `url(${Shirt})` }}></div>
                             </td>
                         </tr>
                         <tr>
