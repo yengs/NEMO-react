@@ -1,14 +1,13 @@
-import MyMenu from "./MyMenu";
+import MyMenuForOthers from "./MyMenuForOthers";
 import MyUserStore from "./MyUserStore";
 
 import './mypage.css';
-import { Route } from "react-router-dom";
 
 function MyPage() {
     return(
         <div className="myPageWrap">
-            <MyMenu />
-            <Route path="/mypage/userstore" component={MyUserStore} exact={true} />
+            <MyMenuForOthers />
+            <MyUserStore />
         </div>
     );
 }
