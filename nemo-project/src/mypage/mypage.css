@@ -50,8 +50,13 @@
     list-style: none;
     padding: 10px 0;
     font-size: 15px;
-    color: #333;
     cursor: pointer;
+}
+
+.myMenuWrap .menu li a {
+    color: #333;
+    font-weight: 100;
+    text-decoration: none;
 }
 
 .warnBtn {
@@ -89,14 +94,15 @@
     align-items: center;
 }
 
-.regiUserItemWrap .prev {
-    font-size: 35px;
+.prev {
+    font-size: 100px;
     color: #666;
     cursor: pointer;
 }
 
-.regiUserItemWrap .back {
-    font-size: 35px;
+.back {
+    color: #666;
+    font-size: 100px;
     cursor: pointer;
 }
 
@@ -178,3 +184,5 @@
     width: 150px;
     font-size: 12px;
 }
+
+

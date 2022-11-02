@@ -1,13 +1,16 @@
 import MyMenu from "./MyMenu";
-import MyStore from "./MyStore";
+import MyUserStore from "./MyUserStore";
 
-import './mypage.css';
+import './singo.css';
+import { Route } from "react-router-dom";
+import Singo from "./Singo";
 
 function MyPage() {
     return(
         <div className="myPageWrap">
             <MyMenu />
-            <MyStore />
+            <Singo/>
+            {/* <Route path="/mypage/userstore" component={MyUserStore} exact={true} /> */}
         </div>
     );
 }
