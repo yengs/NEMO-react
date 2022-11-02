@@ -1,6 +1,4 @@
-import Chart from 'chart.js/auto';
-import { Bar } from 'react-chartjs-2';
-import { Route } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
 function MyMenu() {
 
@@ -14,7 +12,7 @@ function MyMenu() {
             <div className="menu">
                 <ul>
                     {/* <li>나의 계정 설정</li> */}
-                    <li><Route>내 스토어</Route></li>
+                    <li><Link to="/mypage/userstore">내 스토어</Link></li>
                     <li><Route>등록상품 조회</Route></li>
                     <li><Route>후기 조회</Route></li>
                     <li><Route>회원정보 수정</Route></li>
