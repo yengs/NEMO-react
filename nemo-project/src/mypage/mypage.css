@@ -50,8 +50,13 @@
     list-style: none;
     padding: 10px 0;
     font-size: 15px;
-    color: #333;
     cursor: pointer;
+}
+
+.myMenuWrap .menu li a {
+    color: #333;
+    font-weight: 100;
+    text-decoration: none;
 }
 
 .warnBtn {
@@ -77,6 +82,11 @@
     border-bottom-right-radius: 20px;
 }
 
+.mypageInnerPage .pageTitle {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
 /* 다른사람이 보는 마이페이지 */
 .regiUserItemWrap {
     display: flex;
@@ -84,14 +94,15 @@
     align-items: center;
 }
 
-.regiUserItemWrap .prev {
-    font-size: 35px;
+.prev {
+    font-size: 100px;
     color: #666;
     cursor: pointer;
 }
 
-.regiUserItemWrap .back {
-    font-size: 35px;
+.back {
+    color: #666;
+    font-size: 100px;
     cursor: pointer;
 }
 
@@ -105,11 +116,12 @@
 }
 
 .userReviewListAboutStoreWrap {
-    margin-top: 65px;
+    margin-top: 58px;
 }
 
 .userReviewListAboutStoreWrap .userReviewListAboutStore {
     width: 100%;
+    height: 100%;
     border-spacing: 0;
 }
 
@@ -120,13 +132,15 @@
 
 .userReviewListAboutStoreWrap .userReviewListAboutStore tbody td {
     border-bottom: 1px solid #ddd;
-    height: 30px;
     padding: 7px 3px;
     font-size: 15px;
 }
 
 .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
     border: none;
+}
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent{
+    padding: 0;
 }
 
 .ReviewItemImageOrigin {
@@ -156,13 +170,19 @@
 }
 
 .ReviewItemImg div {
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
     background-size: cover;
     background-position: center;
 }
 
+.ReviewContent {
+    font-size: 13px !important;
+}
+
 .satisfing div {
     width: 150px;
-    font-size: 13px;
+    font-size: 12px;
 }
+
+

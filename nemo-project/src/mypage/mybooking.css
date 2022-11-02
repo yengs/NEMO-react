@@ -1,0 +1,177 @@
+/* 마이페이지 내의 페이지 */
+.mypageInnerPage {
+    width: calc(100% - 230px);
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.mypageInnerPage .pageTitle {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+
+/* 다른사람이 보는 마이페이지 */
+.regiUserItemWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.regiUserItemWrap .prev {
+    font-size: 35px;
+    color: #666;
+    cursor: pointer;
+}
+
+.regiUserItemWrap .back {
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.regiUserItemWrap .regiUserItem {
+    width: 17%;
+    height: 210px;
+    border: 1px solid #ddd;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+
+/* 빌려줬어요 */
+.userReviewListAboutStoreWrapBooking{
+    margin-top: 2px;
+}
+
+.userReviewListAboutStoreWrapBooking .userReviewListAboutStore2 {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+}
+
+.userReviewListAboutStoreWrapBooking .userReviewListAboutStore2 thead th {
+    border-bottom: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+    padding: 10px 5px;
+}
+
+
+
+.userReviewListAboutStoreWrapBooking .userReviewListAboutStore2 tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: 7px 3px;
+    font-size: 15px;
+}
+
+.userReviewListAboutStoreWrapBooking .userReviewListAboutStore2 tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
+    border: none;
+}
+.userReviewListAboutStoreWrapBooking .userReviewListAboutStore2 tbody .ReviewContent{
+    padding: 0;
+}
+/* ---------------------- */
+
+
+/* 빌려왔어요 */
+.userReviewListAboutStoreWrapBooking2{
+    margin-top: 60px;
+}
+
+.userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+}
+
+.userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 thead th {
+    border-bottom: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+    padding: 10px 5px;
+}
+
+.userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: 7px 3px;
+    font-size: 15px;
+}
+
+.userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
+    border: none;
+}
+.userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 tbody .ReviewContent{
+    padding: 0;
+}
+ 
+/* ---------------------------- */
+
+
+
+.ReviewItemImageOrigin {
+    width: 10%;
+    height: 52px;
+}
+
+.ReviewItemImageOrigin div {
+    width: 100%;
+    height: 75px;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.ReviewItemNameOrigin {
+    width: 10%;
+    text-align: center;
+}
+
+
+.ReviewWriter {
+    width: 10%;
+    text-align: center;
+}
+
+.ReviewWriter td{
+    width: 10%;
+    text-align: center;
+
+}
+.ReviewWriter td{
+    border-bottom: none !important;
+}
+
+
+
+.btnBok{
+  font-size: 15px;
+  border-radius: 3px;
+  width: 80px;
+  padding: 5px 10px;
+}
+
+
+
+
+
+.ReviewItemImg, .ReviewContent, .satisfing {
+    width: 45%;
+}
+
+.ReviewItemImg div {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.ReviewContent {
+    font-size: 13px !important;
+}
+
+.satisfing div {
+    width: 150px;
+    font-size: 12px;
+}

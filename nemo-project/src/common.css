@@ -135,18 +135,20 @@ header .topHeader .mainTitle h2 {
   text-align: center;
 }
 
-header .topHeader .member>button {
-  float: right;
-  border: none;
-  background-color: transparent;
-  margin: 0 3px 0;
+header .topHeader .member {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-header .topHeader .member>button>p {
+header .topHeader .member a {
   line-height: 0;
   font-size: 12px;
-  color: #666;
-  margin: 8px 0 0 0;
+  color: #777;
+  margin: 8px 4px 0;
+  text-decoration: none;
+  display: block;
+  text-align: center;
 }
 
 header .underHeader {
@@ -230,6 +232,7 @@ header .navBar .weather {
 .dropdown {
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .dropdown-content {
@@ -246,6 +249,7 @@ header .navBar .weather {
   padding: 12px 16px;
   text-decoration: none;
   display: block;
+  cursor: pointer;
 }
 
 .dropdown-content a:hover {background-color: #f1f1f1}
