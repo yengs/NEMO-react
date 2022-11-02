@@ -2,20 +2,14 @@ import Shirt from '../img/shirt.jpg';
 import { GrFormPrevious } from "react-icons/gr";
 import { GrFormNext } from "react-icons/gr";
 
+import ItemSlider from "./ItemSlider.js";
+
 function MyStore() {
     return (
         <div className="mypageInnerPage">
             <div className="regiUserItemList">
                 <h3 className="pageTitle">대여 가능 목록</h3>
-                <div className="regiUserItemWrap">
-                    <GrFormPrevious className="prev" />
-                    <div className="regiUserItem" style={{ "backgroundImage": `url(${Shirt})` }}></div>
-                    <div className="regiUserItem" style={{ "backgroundImage": `url(${Shirt})` }}></div>
-                    <div className="regiUserItem" style={{ "backgroundImage": `url(${Shirt})` }}></div>
-                    <div className="regiUserItem" style={{ "backgroundImage": `url(${Shirt})` }}></div>
-                    <div className="regiUserItem" style={{ "backgroundImage": `url(${Shirt})` }}></div>
-                    <GrFormNext className='back' />
-                </div>
+                <ItemSlider />
             </div>
             <div className="userReviewListAboutStoreWrap">
                 <h3 className="pageTitle">상점 후기</h3>
