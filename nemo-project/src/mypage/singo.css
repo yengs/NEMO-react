@@ -1,0 +1,383 @@
+.myPageWrap {
+    width: 100%;
+    height: calc(100vh - 250px);
+    max-width: 1200px;
+    margin: 55px auto;
+    display: flex;
+}
+
+.myMenuWrap {
+    width: 230px;
+    background-color: rgba(88, 145, 112, 0.253);
+    padding: 50px 35px;
+    box-sizing: border-box;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.myMenuWrap .memberImg, .myMenuWrap .cleanG, .myMenuWrap .myMenuWrap {
+    margin: auto;
+}
+
+.myMenuWrap .cleanG {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.myMenuWrap .memberImg {
+    background-color: rgb(255, 255, 255);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.myMenuWrap .menu {
+    height: calc(100% - 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.myMenuWrap .menu ul {
+    margin: 50px 0 0 0;
+    padding: 0;
+    width: 100%;
+}
+
+.myMenuWrap .menu li {
+    list-style: none;
+    padding: 10px 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.myMenuWrap .menu li a {
+    color: #333;
+    font-weight: 100;
+    text-decoration: none;
+}
+
+.warnBtn {
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+/* ----------------------------- */
+/* 마이페이지 내의 페이지 */
+.mypageInnerPage {
+    width: calc(100% - 230px);
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.mypageInnerPage .pageTitle {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+/* 다른사람이 보는 마이페이지 */
+.regiUserItemWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prev {
+    font-size: 100px;
+    color: #666;
+    cursor: pointer;
+}
+
+.back {
+    color: #666;
+    font-size: 100px;
+    cursor: pointer;
+}
+
+.regiUserItemWrap .regiUserItem {
+    width: 17%;
+    height: 210px;
+    border: 1px solid #ddd;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+.userReviewListAboutStoreWrap {
+    margin-top: 58px;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore thead th {
+    border-bottom: 1px solid #bbb;
+    padding: 10px 5px;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: 7px 3px;
+    font-size: 15px;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
+    border: none;
+}
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent{
+    padding: 0;
+}
+
+.ReviewItemImageOrigin {
+    width: 10%;
+}
+
+.ReviewItemImageOrigin div {
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.ReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.ReviewWriter {
+    width: 20%;
+    text-align: center;
+}
+
+.ReviewItemImg, .ReviewContent, .satisfing {
+    width: 45%;
+}
+
+.ReviewItemImg div {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.ReviewContent {
+    font-size: 13px !important;
+}
+
+.satisfing div {
+    width: 150px;
+    font-size: 12px;
+}
+
+.memberPage {
+    width: 900px;
+    margin: 100px auto;
+  }
+  
+  .memberPage .pageTitle h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    text-align: center;
+  }
+  
+  .memberPage .inputTable {
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+  }
+  
+  .memberPage .inputTable table {
+    width: 100%;
+    border-spacing: 0;
+  }
+  
+  .memberPage .inputTable table tr>td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    /* border-top: 1px solid #ddd; */
+  }
+  
+  .memberPage .inputTable table tr:first-child>td {
+    border: none;
+  }
+  
+  .memberPage .inputTable table tr>td:first-child {
+    width: 25%;
+    padding-left: 50px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .memberPage .inputTable table tr>td:nth-child(2) {
+    width: 45%
+  }
+  
+  .memberPage .inputTable table tr>td>input {
+    border: 1px solid #ddd;
+    width: 95%;
+    padding: 8px 6px;
+    border-radius: 3px;
+  }
+  
+  .memberPage .inputTable table tr>.memberTableBtn>button {
+    padding: 6px 15px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .memberPage .inputTable table .memberAddress select {
+    border: 1px solid #ddd;
+    padding: 8px 6px;
+    border-radius: 3px;
+    margin-right: 10px;
+  }
+  
+  .memberPage .accept ul {
+    padding: 0;
+  }
+  
+  .memberPage .accept .wholeCheck {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .memberPage .accept .wholeCheck .wholeCheckInfo {
+    font-size: 13px;
+    color: #999;
+    display: block;
+    font-weight: 300;
+    line-height: 18px;
+    margin-top: 5px;
+  }
+  
+  .memberPage .accept li {
+    width: 100%;
+    padding: 12px;
+    margin: 3px 0;
+    background-color: #eee;
+    font-size: 15px;
+    color: #555;
+  }
+  
+  .memberPage .accept li:first-child {
+    background-color: transparent;
+  }
+  
+  .memberPage .btnWrap {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .loginForm {
+    margin-top: 180px;
+  }
+  
+  .loginForm form {
+    height: 200px;
+  }
+  
+  .loginForm form .inputTable {
+    margin-bottom: 40px;
+  }
+  
+  .loginForm form .inputTable tr td{
+    border: none;
+  }
+  
+  .loginForm form .inputTable tr:first-child td {
+    padding-bottom: 10px !important;
+    padding-top: 30px !important;
+  }
+  
+  .loginForm form .inputTable tr:nth-child(2) td {
+    padding-bottom: 0 !important;
+    padding-top: 10px !important;
+  }
+  
+  .loginForm form .inputTable .rememberId {
+    padding-top: 0;
+    padding-bottom: 10px;
+    padding-left: 223px !important;
+  }
+  
+  .loginForm form .inputTable .findMemberInfo {
+    padding-top: 0;
+    padding-bottom: 10px;
+    padding-right: 60px;
+    text-align: right;
+  }
+  
+  .loginForm form .inputTable .findMemberInfo a {
+    font-size: 13px;
+    color: #999;
+    padding: 0 5px;
+  }
+  
+  .loginForm .btnWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loginForm .btnWrap a {
+    margin: 0 25px;
+  }
+  
+  .rememberId .rememberIdLabel {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  
+  .rememberId .rememberIdLabel p {
+    font-size: 13px;
+    color: #666;
+  }
+  
+  .loginBtn {
+    height: 95px;
+    width: 180px;
+  }
+  
+  .googleLoginBtnLink {
+    padding: 0 !important;
+  }
+  
+  .googleLoginBtnLink .googleLoginBtn {
+    width: 210px;
+    height: 50px;
+    background-size: cover;
+    display: inline-block;
+  }
+
+  select {
+    width: 500px; 
+    padding: .8em .5em; 
+    border: 1px solid #999;
+    /* font-family: inherit;   */
+    border-radius: 0px; 
+    }
+
+   .singobox{
+    height: 200px;
+   }
+    
+    
+
+
