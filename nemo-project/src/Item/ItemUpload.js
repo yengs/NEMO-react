@@ -73,12 +73,7 @@ function ItemUpload({ history }) {
 
                             <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} /></td>
                         </tr>
-                        <tr>
-                            <td>가격</td>
-                            <td><input type="text" id="itemPrice" name="itemPrice" value={itemPrice} onChange={handlerChangeitemPrice} /></td>
-
-                        </tr>
-
+                        
                         <tr>
                             <td>상품 대분류</td>
                             <td> <select type="text" id="itemMaincategory" name="itemMaincategory" value={itemMaincategory} onChange={handlerChangeitemMaincategory} required>
