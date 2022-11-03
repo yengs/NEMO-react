@@ -41,7 +41,7 @@ hr{
 }
 
 .memberPagelog .pageTitle p{
-  margin-left: 120px;
+  text-align: center;
   color:rgb(121, 121, 121);
 }
 
@@ -55,7 +55,7 @@ hr{
   border-bottom: 1px solid rgb(207, 205, 205);
   border-right: 1px solid rgb(207, 205, 205);
   border-left: 1px solid rgb(207, 205, 205);
-  padding-top: 80px;
+  padding-top: 40px;
   padding-bottom: 40px;
 
 }
@@ -91,7 +91,6 @@ hr{
 .memberPagelog .inputTable table tr>td>input {
   border: 1px solid rgb(241, 241, 241) ;
   background-color: rgb(241, 241, 241);
-  width: 200px;
   padding: 14px 195px;
   padding-left: 20px !important;
   border-radius: 3px;

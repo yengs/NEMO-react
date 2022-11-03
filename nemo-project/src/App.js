@@ -23,6 +23,7 @@ import YourReviewDetail from './review/YourReviewDetail';
 import MyBooking from './mypage/MyBooking';
 import ReviewUpload from './review/ReviewUpload';
 import Payment from './Item/Payment';
+import BookingUpload from './Item/BookingUpload';
 
 
 
@@ -34,7 +35,7 @@ function App() {
       <div className='containerWrap'>
         <Header />
         
-        <Route path="/payment" component={Payment} exact={true} />
+        <Route path="/payment" component={BookingUpload} exact={true} />
         
         
         <Route path="/" component={Main} exact={true} />
