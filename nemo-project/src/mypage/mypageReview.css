@@ -79,8 +79,7 @@
 .myStoreReview .reviewTitle {
     margin-left: 5px;
     margin-bottom: -8px;
-    margin-top: 15px;
-    justify-content: flex-end;
+    margin-top: 30px;
 }
 
 .moreReviewDetailPage { 
@@ -88,20 +87,20 @@
     margin-bottom: 6px;
     margin-top: -5px;
     text-decoration: none;
+    font-size: 13px;
 }
 
+.yourReviewListAboutStore {
+    border-spacing: 0;
+}
 
-
-
+.yourReviewListAboutStore .middleLine {
+    font-size: 13px;
+}
 
 .lineH {
     height: 1.2px;
     width: 100%;
-}
-
-.ReviewItemImageOrigin {
-    width: 10%;
-    font-size: 7px;
 }
 
 .ReviewItemImg div {
@@ -127,3 +126,125 @@
 .ReviewWriter {
     text-align: center;
 }
+
+th {
+    border-bottom: 1px solid #444444;
+    font-size: 15px;
+    height: 10px;
+    padding-top: 0px;
+}
+
+.tableWrap {
+    border-bottom: 1px solid #444444;
+}
+
+.marging {
+    height: 60px;
+}
+
+table {
+table-layout: fixed;
+
+}
+/* ------------------------ */
+
+
+/* 다른사람이 보는 마이페이지 */
+.regiUserItemWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prev {
+    font-size: 100px;
+    color: #666;
+    cursor: pointer;
+}
+
+.back {
+    color: #666;
+    font-size: 100px;
+    cursor: pointer;
+}
+
+.regiUserItemWrap .regiUserItem {
+    width: 17%;
+    height: 210px;
+    border: 1px solid #ddd;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+.userReviewListAboutStoreWrap {
+    margin-top: 58px;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore thead th {
+    border-bottom: 1px solid #bbb;
+    padding: 10px 5px;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: 7px 3px;
+    font-size: 15px;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
+    border: none;
+}
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent{
+    padding: 0;
+}
+
+.ReviewItemImageOrigin {
+    width: 10%;
+}
+
+.ReviewItemImageOrigin div {
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.ReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.ReviewWriter {
+    width: 20%;
+    text-align: center;
+}
+
+.ReviewItemImg, .ReviewContent, .satisfing {
+    width: 45%;
+}
+
+.ReviewItemImg div {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.ReviewContent {
+    font-size: 13px !important;
+}
+
+.satisfing div {
+    width: 150px;
+    font-size: 12px;
+}
+
+

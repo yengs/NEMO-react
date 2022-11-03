@@ -21,6 +21,7 @@ import YourReviewList from './review/YourReviewList';
 import ReviewUploadPage from './review/ReviewUploadPage';
 import MyReviewDetail from './review/MyReviewDetail';
 import YourReviewDetail from './review/YourReviewDetail';
+import MyBooking from './mypage/MyBooking';
 
 
 function App() {
