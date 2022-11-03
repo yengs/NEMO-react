@@ -1,17 +1,20 @@
 import React from 'react';
 
 import './common.css';
+
+import { Route } from 'react-router-dom';
+
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ItemList from './Item/ItemList';
 import ItemUpload from './Item/ItemUpload';
-import { Route } from 'react-router-dom';
 import Main from './Main';
 import Login from './member/Login';
 import ItemDetail from './Item/ItemDetail';
 import Join from './member/Join';
 import ItemsubList from './Item/ItemsubList';
 import MyPage from './mypage/MyPage';
+import MyPageForOthers from './mypage/MyPageForOthers';
 import Idfind from './member/Idfind';
 import Idfind_Result from './member/Idfind_Result';
 import Pwfind from './member/Pwfind';
@@ -20,11 +23,7 @@ import MyReviewList from './review/MyReviewList';
 import YourReviewList from './review/YourReviewList';
 import MyReviewDetail from './review/MyReviewDetail';
 import YourReviewDetail from './review/YourReviewDetail';
-import MyBooking from './mypage/MyBooking';
 import ReviewUpload from './review/ReviewUpload';
-import Payment from './Item/Payment';
-import BookingUpload from './Item/BookingUpload';
-import MyPageItemDetail from './mypage/MyPageItemDetail';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 
@@ -74,11 +73,10 @@ function App() {
 
 
         {/* mypage */}
-        <Route path="/mypage" component={MyPage} exact={true} />
-        <Route path="/mypage/mypageitemdetail" component={MyPageItemDetail} exact={true} />
-
-
-
+        <Route path="/mypage/mypageitem" component={MyPage} exact={true} />
+        <Route path="/mypage/userstoreinfo" component={MyPageForOthers} exact={true} />
+        
+        
 
       </div>
       <Footer />
