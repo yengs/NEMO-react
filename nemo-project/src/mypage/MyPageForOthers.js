@@ -5,7 +5,7 @@ import './mypage.css';
 
 function MyPage() {
     return(
-        <div className="myPageWrap">
+        <div className="myPageWrap forOthers">
             <MyMenuForOthers />
             <MyUserStore />
         </div>
