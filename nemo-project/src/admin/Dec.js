@@ -29,9 +29,10 @@ function Dec() {
                         <td className='Dec' rowSpan={3}>선희곤듀</td>
                         <td className='Dec' rowSpan={3}>비방 및 언어폭력</td>
                             <td className='Dec' rowSpan={3}>예린</td>
-                            <td className='Dec' rowSpan={3}><Link >상세보기</Link></td>
+                            <td className='Dec' rowSpan={3}><Link>상세보기</Link></td>
                             <td className='Dec' rowSpan={3}><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button className="RedBtn btnBok">접수</button></td><td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
+                                <button className="RedBtn btnBok">접수</button></td>
+                                <td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
                         </tr>
                     </tbody>
                     <tbody>
@@ -42,7 +43,8 @@ function Dec() {
                             <td className='Dec' rowSpan={3}>임수진</td>
                             <td className='Dec' rowSpan={3}><Link>상세보기</Link></td>
                             <td className='Dec' rowSpan={3}><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button className="RedBtn btnBok">접수</button></td><td><button className="grayBtn btnBok">취소</button></td></tr></td>                        
+                                <button className="RedBtn btnBok">접수</button></td>
+                                <td><button className="grayBtn btnBok">취소</button></td></tr></td>                        
                         </tr>
                     </tbody>
                     <tbody>
@@ -51,9 +53,10 @@ function Dec() {
                         <td className='Dec' rowSpan={3}>최나연</td>
                         <td className='Dec' rowSpan={3}>거래 금지 품목</td>
                             <td className='Dec' rowSpan={3}>최은우</td>
-                            <td className='Dec' rowSpan={3}><Link >상세보기</Link></td>
+                            <td className='Dec' rowSpan={3}><Link>상세보기</Link></td>
                             <td className='Dec' rowSpan={3}><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button className="RedBtn btnBok">접수</button></td><td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
+                                <button className="RedBtn btnBok">접수</button></td>
+                                <td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
                         </tr>
                     </tbody>
                     <tbody>
@@ -64,7 +67,8 @@ function Dec() {
                             <td className='Dec' rowSpan={3}>이아름</td>
                             <td className='Dec' rowSpan={3}><Link >상세보기</Link></td>
                             <td className='Dec' rowSpan={3}><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button className="RedBtn btnBok">접수</button></td><td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
+                                <button className="RedBtn btnBok">접수</button></td>
+                                <td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
                         </tr>
                     </tbody>
                     <tbody>
@@ -75,7 +79,8 @@ function Dec() {
                             <td className='Dec' rowSpan={3}>이해은</td>
                             <td className='Dec' rowSpan={3}><Link >상세보기</Link></td>
                             <td className='Dec' rowSpan={3}><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button className="RedBtn btnBok">접수</button></td><td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
+                                <button className="RedBtn btnBok">접수</button></td>
+                                <td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
                         </tr>
                     </tbody>
                     <tbody>
@@ -86,7 +91,8 @@ function Dec() {
                             <td className='Dec' rowSpan={3}>유주혜</td>
                             <td className='Dec' rowSpan={3}><Link >상세보기</Link></td>
                             <td className='Dec' rowSpan={3}><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button className="RedBtn btnBok">접수</button></td><td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
+                                <button className="RedBtn btnBok">접수</button></td>
+                                <td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
                         </tr>
                     </tbody>
                     <tbody>
@@ -97,7 +103,8 @@ function Dec() {
                             <td className='Dec' rowSpan={3}>송영미</td>
                             <td className='Dec' rowSpan={3}><Link >상세보기</Link></td>
                             <td className='Dec' rowSpan={3}><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button className="RedBtn btnBok">접수</button></td><td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
+                                <button className="RedBtn btnBok">접수</button></td>
+                                <td><button className="grayBtn btnBok">취소</button></td></tr></td>                   
                         </tr>
                     </tbody>
                 </table>

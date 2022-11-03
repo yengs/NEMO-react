@@ -22,6 +22,8 @@ import ReviewUploadPage from './review/ReviewUploadPage';
 import MyReviewDetail from './review/MyReviewDetail';
 import YourReviewDetail from './review/YourReviewDetail';
 import MyBooking from './mypage/MyBooking';
+import DecDetail from './admin/DecDetail';
+
 
 
 function App() {
@@ -50,10 +52,10 @@ function App() {
         <Route path="/review/yourReview" component={YourReviewList} />
         <Route path="/review/yourReview/:reviewNum" component={YourReviewDetail} />
         <Route path="/mypage" component={MyPage} />
+        <Route path="/dec/detail" component={DecDetail} />
       </div>
       <Footer />
     </div>
   );
 }
-
 export default App;
