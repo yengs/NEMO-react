@@ -525,35 +525,26 @@ footer {
   background-color: #eee;
 }
 
-.itemWrap, .storeWrap {
+.storeWrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.itemWrap2 {
+.itemWrap {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
 }
 
-/* .itemInfoWrap {
+.itemInfoWrap {
   width: 22%;
-  height: 360px;
+  height: 380px;
   background-color: #eee;
   border-radius: 10px;
   padding: 1.5%;
-} */
-
-.itemInfoWrap {
-  width: 100%;
-  height: auto;
-  background-color: #eee;
-  border-radius: 10px;
-}
-
-.itemInfoWrap .itemInfo {
+  margin: 1.5%;
 }
 
 .recWeeklyWrap .itemInfoWrap {
@@ -570,7 +561,7 @@ footer {
   background-size: cover;
 }
 
-/* .itemInfoWrap .itemInfo p {
+.itemInfoWrap .itemInfo p {
   margin: 5px 0;
 }
 
@@ -611,7 +602,7 @@ footer {
 
 .itemInfoWrap .itemInfo .period {
   font-size: 16px;
-} */
+}
 
 .storeInfoWrap {
   /* background-color: #ddd; */

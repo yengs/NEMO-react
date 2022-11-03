@@ -96,7 +96,7 @@ export default function WeatherRecItemList({ match }) {
                         </div>
                     </div>
                 </div>
-                {/* <div className="itemWrap">
+                <div className="itemWrap2">
                     {
                         datas && datas.map(item => (
                             <div className="itemInfoWrap" key={item.itemNum}>
@@ -117,30 +117,7 @@ export default function WeatherRecItemList({ match }) {
                             </tr>
                         )
                     }
-                </div> */}
-                {datas && datas.map(item => (
-                    <Link to={`/item/detail/${item.itemNum}`}>
-                        <table className="itemInfoWrap" border={1}>
-                            <tbody className="itemInfo">
-                                <tr key={item.itemNum}>
-                                    <td className="itemImg">
-                                        <div style={{ backgroundImage: `url(${Shirt})` }}></div>
-                                    </td>
-                                    <td class="itemPrice">
-                                        <span className="price">{item.itemPrice}</span>원
-                                    </td>
-                                    <td class="itemName">{item.itemName}</td>
-                                    <td class="itemDeposit">
-                                        <span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원
-                                    </td>
-                                    <td class="itemPeriod">
-                                        대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </Link>
-                ))}
+                </div>
             </div>
         </Container>
     );
@@ -233,19 +210,18 @@ const Container = styled.div`
         font-weight: 600
     }
 
-    .itemWrap {
-        justify-content: space-between;
-        margin-top: 50px;
-        flex-wrap: wrap;
-    }
+    // .itemWrap {
+    //     justify-content: space-between;
+    //     margin-top: 50px;
+    //     flex-wrap: wrap;
+    // }
 
-    .itemWrap .itemInfoWrap {
-        // margin-right: 23px;
-        margin-bottom: 23px;
-        background-color: #eee;
-        min-width: 24%;
-        flex-direction: row;
-    }
+    // .itemWrap .itemInfoWrap {
+    //     // margin-right: 23px;
+    //     margin-bottom: 23px;
+    //     background-color: #eee;
+    //     min-width: 24%;
+    //     flex-direction: row;
+    // }
 
 `;
-
