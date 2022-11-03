@@ -59,45 +59,45 @@
 } 
 
 .grayBtn {
-  border: #999 !important;
-  background-color: #999;
-  color: #fff;
+  border: 2px solid #999 !important;
+  background-color: #999 !important;
+  color: #fff !important;
 }
 
 .grayLineBtn {
   border: 2px solid #ccc !important;
-  background-color: transparent;
-  color: #777;
+  background-color: transparent !important;
+  color: #777 !important;
 }
 
 .greenBtn {
-  border: 2px solid rgb(100, 165, 127);
-  background-color: rgb(100, 165, 127);
-  color: #fff;
+  border: 2px solid rgb(100, 165, 127) !important;
+  background-color: rgb(100, 165, 127) !important;
+  color: #fff !important;
 }
 
 .redBtn {
-  border: rgb(196, 98, 98);
-  background-color: rgb(196, 98, 98);
-  color: #fff;
+  border: rgb(196, 98, 98) !important;
+  background-color: rgb(196, 98, 98) !important;
+  color: #fff !important;
 }
 
 .greenLineBtn {
   border: 2px solid rgb(100, 165, 127) !important;
-  background-color: transparent;
-  color: rgb(88, 145, 112);
+  background-color: transparent !important;
+  color: rgb(88, 145, 112) !important;
 }
 
 .beigeBtn {
   border: 2px solid rgb(252, 233, 173) !important;
-  background-color: rgb(252, 233, 173);
-  color: rgb(153, 129, 49);
+  background-color: rgb(252, 233, 173) !important;
+  color: rgb(153, 129, 49) !important;
 }
 
 .beigeLineBtn {
   border: 2px solid rgb(243, 222, 155) !important;
-  background-color: transparent;
-  color: rgb(153, 129, 49);
+  background-color: transparent !important;
+  color: rgb(153, 129, 49) !important;
 }
 
 .plusBtn {
@@ -105,6 +105,10 @@
   background-color: transparent;
   font-size: 13px;
   color: #666;
+}
+
+input[type="submit"], input[type="button"], button {
+  cursor: pointer;
 }
 
 /* ---------------------------------------------------------- */
@@ -206,7 +210,7 @@ header .navIcons {
 }
 
 header .navBar .location,
-header .navBar .weather {
+header .navBar .weather a {
   font-size: 1rem;
   font-weight: 600;
   display: flex;
@@ -215,8 +219,18 @@ header .navBar .weather {
 }
 
 header .navBar .weather {
+  display: flex;
+  align-items: center;
   justify-content: end;
 }
+
+header .navBar .weather a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  width: auto;
+}
+
 
 
 /* ----------------dropdown-------------- */
@@ -285,7 +299,7 @@ footer {
 
 /* 로그인, 회원가입 페이지 */
 .memberPage {
-  width: 900px;
+  max-width: 900px;
   margin: 100px auto;
 }
 
@@ -524,12 +538,26 @@ footer {
   flex-wrap: wrap;
 }
 
-.itemInfoWrap {
+/* .itemInfoWrap {
   width: 22%;
   height: 360px;
-  background-color: rgb(250, 250, 250);
+  background-color: #eee;
   border-radius: 10px;
-  padding: 1%;
+  padding: 1.5%;
+} */
+
+.itemInfoWrap {
+  width: 100%;
+  height: auto;
+  background-color: #eee;
+  border-radius: 10px;
+}
+
+.itemInfoWrap .itemInfo {
+}
+
+.recWeeklyWrap .itemInfoWrap {
+  background-color: rgb(250, 250, 250);
 }
 
 .itemInfoWrap > .itemImg {
@@ -542,7 +570,7 @@ footer {
   background-size: cover;
 }
 
-.itemInfoWrap .itemInfo p {
+/* .itemInfoWrap .itemInfo p {
   margin: 5px 0;
 }
 
@@ -583,7 +611,7 @@ footer {
 
 .itemInfoWrap .itemInfo .period {
   font-size: 16px;
-}
+} */
 
 .storeInfoWrap {
   /* background-color: #ddd; */

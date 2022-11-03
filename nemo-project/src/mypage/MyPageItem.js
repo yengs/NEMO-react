@@ -2,6 +2,7 @@ import Shirt from '../img/shirt.jpg';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+// import './mypageitem.css'
 
 function MyPageItem() {
  

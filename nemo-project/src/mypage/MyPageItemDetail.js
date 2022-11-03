@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Route } from "react-router-dom";
+// import { Route } from "react-router-dom";
 import "./MyPageItemDetail.css";
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from "react-datepicker";
 
-import Shirt from '../img/shirt.jpg';
+// import Shirt from '../img/shirt.jpg';
 
 function MyPageItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
