@@ -79,8 +79,7 @@
 .myStoreReview .reviewTitle {
     margin-left: 5px;
     margin-bottom: -8px;
-    margin-top: 15px;
-    justify-content: flex-end;
+    margin-top: 30px;
 }
 
 .moreReviewDetailPage { 
@@ -88,30 +87,31 @@
     margin-bottom: 6px;
     margin-top: -5px;
     text-decoration: none;
+    font-size: 13px;
 }
 
+.yourReviewListAboutStore {
+    border-spacing: 0;
+}
 
-
-
+.yourReviewListAboutStore {
+    font-size: 15px;
+}
 
 .lineH {
-    height: 1.2px;
+    height: 3.1px !important;
     width: 100%;
+    color: #747474;
 }
 
-.ReviewItemImageOrigin {
-    width: 10%;
-    font-size: 7px;
-}
-
-.ReviewItemImg div {
+.rReviewItemImg div {
     width: 52px;
     height: 52px;
     background-size: cover;
     background-position: center;
 }
 
-.ReviewItemImageOrigin div {
+.rReviewItemImageOrigin div {
     width: 100%;
     height: 100%;
     /* border: 1px solid #000; */
@@ -119,11 +119,87 @@
     background-position: center;
 }
 
-.ReviewItemNameOrigin {
+.rReviewItemNameOrigin {
     width: 15%;
     text-align: center;
 }
 
-.ReviewWriter {
+.rReviewWriter {
     text-align: center;
 }
+
+.yourReviewListAboutStore th {
+    border-bottom: 1px solid #444444;
+    font-size: 15px;
+    height: 10px;
+    width: 300px;
+    padding-top: 0px;
+}
+
+/* .yourReviewListAboutStore td {
+    배경색을 줄까 말까 고민하다가 결국 그냥 안넣기로 함. 나중에 넣을수도 ?
+} */
+
+.tableWrap {
+    border-bottom: 1px solid #444444;
+}
+
+.marging {
+    height: 50px;
+}
+
+table {
+table-layout: fixed;
+}
+
+.reviewMainTitle {
+    padding-bottom: 10px;
+}
+
+/* ------------------------ */
+/* 다른사람이 보는 마이페이지 */
+
+.rReviewItemImageOrigin {
+    width: 10%;
+}
+
+.rReviewItemImageOrigin div {
+    width: 100%;
+    height: 120px;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.rReviewWriter {
+    width: 20%;
+    text-align: center;
+}
+
+.rReviewItemImg, .rReviewContent, .rsatisfing {
+    width: 45%;
+}
+
+.rReviewItemImg div {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewContent {
+    font-size: 14px !important;
+    padding-bottom: 0px !important;
+}
+
+.rsatisfing div {
+    width: 150px;
+    font-size: 12px;
+}
+
+
