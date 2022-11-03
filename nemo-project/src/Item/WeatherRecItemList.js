@@ -96,7 +96,7 @@ export default function WeatherRecItemList({ match }) {
                         </div>
                     </div>
                 </div>
-                <div className="itemWrap">
+                <div className="itemWrap2">
                     {
                         datas && datas.map(item => (
                             <div className="itemInfoWrap" key={item.itemNum}>
@@ -129,6 +129,7 @@ const Container = styled.div`
         margin: 90px auto;
         height: auto;
         max-width: 1200px;
+        padding: 0 2rem;
     }
 
     .weatherRecItemListWrap .pageTitle h3 {
@@ -209,15 +210,18 @@ const Container = styled.div`
         font-weight: 600
     }
 
-    .itemWrap {
-        justify-content: flex-start;
-        margin-top: 50px;
-    }
+    // .itemWrap {
+    //     justify-content: space-between;
+    //     margin-top: 50px;
+    //     flex-wrap: wrap;
+    // }
 
-    .itemWrap .itemInfoWrap {
-        margin-right: 1.5%;
-        background-color: #eee;
-    }
+    // .itemWrap .itemInfoWrap {
+    //     // margin-right: 23px;
+    //     margin-bottom: 23px;
+    //     background-color: #eee;
+    //     min-width: 24%;
+    //     flex-direction: row;
+    // }
 
 `;
-

@@ -24,6 +24,9 @@ import MyBooking from './mypage/MyBooking';
 import ReviewUpload from './review/ReviewUpload';
 import Payment from './Item/Payment';
 import BookingUpload from './Item/BookingUpload';
+import MyPageItemDetail from './mypage/MyPageItemDetail';
+import Dec from './admin/Dec';
+import WeatherRecItemList from './Item/WeatherRecItemList';
 
 
 
@@ -34,29 +37,49 @@ function App() {
     <div className='wholeWrap'>
       <div className='containerWrap'>
         <Header />
-        
-        <Route path="/payment" component={BookingUpload} exact={true} />
-        
-        
+
+
         <Route path="/" component={Main} exact={true} />
-        
-         <Route path="/Id" component={Idfind} exact={true} />
-         <Route path="/Id/find" component={Idfind_Result} exact={true} />
-         <Route path="/Pw" component={Pwfind} exact={true} />
-         <Route path="/Pw/find" component={Pwfind_Result} exact={true} />
-         
+
+        {/* admin */}
+        <Route path="/admin/dec" component={Dec} exact={true} />
+
+
+
+        {/* item */}
         <Route path="/item/cate/:itemMaincategory" component={ItemList} exact={true} />
         <Route path="/item/cate/sub/:itemSubcategory" component={ItemsubList} exact={true} />
-        <Route path="/item/write" component={ItemUpload} />
-        <Route path="/item/detail/:itemNum" component={ItemDetail} />
-        <Route path="/member/join" component={Join} />
-        <Route path="/member/login" component={Login} />
+        <Route path="/item/write" component={ItemUpload} exact={true} />
+        <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
+        <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
+
+
+
+        {/* member */}
+        <Route path="/member/join" component={Join} exact={true} />
+        <Route path="/member/login" component={Login} exact={true} />
+        <Route path="/member/id" component={Idfind} exact={true} />
+        <Route path="/member/id/find" component={Idfind_Result} exact={true} />
+        <Route path="/member/pw" component={Pwfind} exact={true} />
+        <Route path="/member/pw/find" component={Pwfind_Result} exact={true} />
+
+
+
+        {/* review */}
         <Route path="/reivew/reviewWrite" component={ReviewUpload} />
+        <Route path="/review/yourreview/:reviewNum" component={YourReviewDetail} exact={true} />
         <Route path="/review/myReview" component={MyReviewList} exact={true} />
-        <Route path="/review/myReview/:reviewNum" component={MyReviewDetail} />
-        <Route path="/review/yourReview" component={YourReviewList} />
-        <Route path="/review/yourReview/:reviewNum" component={YourReviewDetail} />
-        <Route path="/mypage" component={MyPage} />
+        <Route path="/review/yourReview" component={YourReviewList} exact={true} />
+        <Route path="/review/myreview/:reviewNum" component={MyReviewDetail} exact={true} />
+
+
+        {/* mypage */}
+        <Route path="/mypage" component={MyPage} exact={true} />
+        <Route path="/mypage/mypageitemdetail" component={MyPageItemDetail} exact={true} />
+
+
+
+
       </div>
       <Footer />
     </div>

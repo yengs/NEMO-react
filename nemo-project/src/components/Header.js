@@ -54,7 +54,7 @@ function Header() {
                         </IconContext.Provider>
                         <p>로그인</p>
                     </Link>
-                    <Link to="/mypage/mystore">
+                    <Link to="/mypage">
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaUserAlt />
                         </IconContext.Provider>
@@ -122,7 +122,8 @@ function Header() {
                         <IconContext.Provider value={{ className: "navIcons" }}>
                             <FaTemperatureHigh />
                         </IconContext.Provider>
-                        <span>내일의 날씨는?</span>
+                        <Link to="/item/weatherrecitemlist">내일의 날씨는?</Link>
+                        {/* <span>내일의 날씨는?</span> */}
                     </div>
                 </div>
             </div>

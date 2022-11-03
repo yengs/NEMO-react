@@ -13,9 +13,9 @@ function MyMenu() {
                 <ul>
                     {/* <li>나의 계정 설정</li> */}
                     <li><Link to="/mypage/userstore">내 스토어</Link></li>
-                    <li><Route>등록상품 조회</Route></li>
+                    <li>등록상품 조회</li>
                     <li><Link to="/mypage/review">후기 조회</Link></li>
-                    <li><Route>회원정보 수정</Route></li>
+                    <li>회원정보 수정</li>
                 </ul>
                 <button className="warnBtn">신고하기</button>
             </div>
