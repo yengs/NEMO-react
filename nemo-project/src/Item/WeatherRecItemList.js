@@ -15,6 +15,7 @@ export default function WeatherRecItemList({ match }) {
     const [datas, setDatas] = useState([]);
 
     useEffect(() => {
+        // 임시로 get주소 넣어둠. 나중에 수정필요
         axios.get(`http://localhost:8080/api/item/testlist`)
             .then(response => setDatas(response.data))
             .catch(error => console.log(error));
