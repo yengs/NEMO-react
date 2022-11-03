@@ -35,6 +35,7 @@ p {
 
 a.goList{
     font-weight: bold;
+    cursor: pointer;
 }
 
 p.cate{
@@ -187,6 +188,10 @@ td.reviewImg, .reviewCtns, .reviewClean{
 a.ItemReviewList{
     padding-left: 95%;
     text-decoration: none;
+}
+
+.tablePlusForm {
+    border-top: 1px solid #ddd;
 }
 
 .tablePlusForm .memberImg {

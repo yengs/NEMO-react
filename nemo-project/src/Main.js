@@ -116,7 +116,7 @@ function Main() {
             <div className="recBestStore">
                 <div className="titleNplusBtn">
                     <h3>베스트 클린 스토어</h3>
-                    <button className="plusBtn">+ 더보기</button>
+                    {/* <button className="plusBtn">+ 더보기</button> */}
                 </div>
                 <div className="storeWrap">
                     <div className="storeInfoWrap">

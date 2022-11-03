@@ -22,7 +22,7 @@ function ItemList({match}) {
                     <h3>{itemMaincategory}</h3>
                     <Link className="btn" to="/item/write">상품등록</Link>
                 </div>
-                <div className="itemWrap2">
+                <div className="itemWrap">
                     {
                         datas && datas.map(item => (
                          <div className="itemInfoWrap" key={item.itemNum}>
