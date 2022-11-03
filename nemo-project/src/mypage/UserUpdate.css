@@ -1,0 +1,142 @@
+/* ----------------------------- */
+/* 마이페이지 내의 페이지 */
+.mypageInnerPage {
+    width: calc(100% - 230px);
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.mypageInnerPage .pageTitle {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+/* ---------------------------------------------------------- */
+
+.updatePage .pageTitle {
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+h2{
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-align: left;
+}
+
+.updatePage .inputTable {
+  border-top: 1px solid #999;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.updatePage .inputTable table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.updatePage .inputTable table tr>td {
+  padding-top: 15px;
+  padding-bottom: 5px;
+  border-top: 1px solid #ddd;
+}
+
+.updatePage .inputTable table tr:first-child>td {
+  border: none;
+}
+
+.updatePage .inputTable table tr>td:first-child {
+  width: 25%;
+  padding-left: 70px;
+  font-size: 14px;
+  color: #333;
+}
+
+.updatePage .inputTable table tr>td:nth-child(2) {
+  width: 45%
+}
+
+.updatePage .inputTable table tr>td>input {
+  border: 1px solid #ddd;
+  width: 95%;
+  padding: 8px 6px;
+  border-radius: 3px;
+}
+
+.updatePage .inputTable table tr>.updateTableBtn>button {
+  padding: 6px 15px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.updatePage .inputTable table .updateAddress select {
+  border: 1px solid #ddd;
+  padding: 8px 6px;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+.updatePage .accept ul {
+  padding: 0;
+}
+
+.updatePage .accept .wholeCheck {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.updatePage .accept .wholeCheck .wholeCheckInfo {
+  font-size: 13px;
+  color: #999;
+  display: block;
+  font-weight: 300;
+  line-height: 18px;
+  margin-top: 5px;
+}
+
+.updatePage .accept li {
+  width: 100%;
+  padding: 12px;
+  margin: 3px 0;
+  background-color: #eee;
+  font-size: 15px;
+  color: #555;
+}
+
+.updatePage .accept li:first-child {
+  background-color: transparent;
+}
+
+.updatePage .btnWrap {
+  width: 100%;
+  text-align: center;
+}
+
+.userUpdate{
+  width: 1500px;
+  position: relative;
+  left: 60px;
+  bottom: 100px;
+  margin: 100px auto;
+}
+
+.resignMembership{
+  margin-left: 80px;
+}
+.greenBtn{
+  border: 2px solid rgb(100, 165, 127);
+  background-color: rgb(100, 165, 127);
+  color: #fff;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr{
+  border-style : hidden;
+ }

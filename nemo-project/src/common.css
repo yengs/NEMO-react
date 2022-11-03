@@ -58,7 +58,7 @@
 } 
 
 .grayBtn {
-  border: 2px solid #999 !important;
+  border: #999 !important;
   background-color: #999;
   color: #fff;
 }
