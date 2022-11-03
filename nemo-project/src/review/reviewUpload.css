@@ -1,4 +1,4 @@
-.decPopup {
+.reviewUpload {
     width: 550px;
     height: auto;
     border: 1px solid #ddd;
@@ -13,21 +13,28 @@
     z-index: 1;
 }
 
-.decPopup .pageTitle {
+.reviewUpload .pageTitle {
     margin-bottom: 30px;
     font-size: 23px;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
 }
 
-.decPopup h4 {
+.reviewUpload .pageTitle h3 {
+    margin: 0;
+}
+
+.reviewUpload h4 {
     margin: 9px 0;
     font-size: 17px;
 }
 
 .decImage {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background-size: cover;
     background-position: center;
+    cursor: pointer;
 }
 
 .decSelect, .decContent {
@@ -43,8 +50,33 @@
 
 .decContent textarea {
     width: 100%;
-    height: 250px;
+    height: 220px;
     resize: none;
     overflow: auto;
     border-radius: 5px;
+    padding: 7px;
 }
+
+.satisfyingReview {
+    margin-top: 10px;
+}
+
+.satisfyingReview span {
+    font-size: 15px;
+    color: #666;
+}
+
+.satisfyingReview input[type="number"] {
+    border: 1px solid #ddd;
+    padding: 5px 6px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+.reviewUpload .btnWrap {
+    margin-top: 30px;
+    text-align: center;
+}
+
