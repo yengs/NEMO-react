@@ -10,7 +10,7 @@ function Pwfind_Result() {
         <div className="joinWrap memberPagelog container">
             
             <div className="pageTitle">
-                <h2>비밀번호찾기 결과</h2>
+                <h2>비밀번호 찾기 결과</h2>
                 <hr />
                 <br></br>
                 <h3>본인인증으로 가입된 비밀번호가 있습니다.</h3>

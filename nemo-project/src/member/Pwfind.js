@@ -49,9 +49,9 @@ function Idfind() {
                 </div>
                 <br/>
                 <br/>
-                <li>비밀번호를 찾지 못하셨다면 고객센터(1111-1111)로 문의주세요</li>
+                <li>비밀번호를 찾지 못하셨다면 고객센터(1111-1111)로 문의주세요.</li>
                 <li>아직 내모 회원이 아니시라면 회원가입을 해주세요. &nbsp; 
-                    <Link to="/member/join"> 바로가기</Link>
+                    <Link to="/member/join">바로가기</Link>
 
                </li>
             </form>
