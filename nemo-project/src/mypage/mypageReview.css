@@ -99,8 +99,9 @@
 }
 
 .lineH {
-    height: 1.2px;
+    height: 3.1px !important;
     width: 100%;
+    color: #747474;
 }
 
 .rReviewItemImg div {
