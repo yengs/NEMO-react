@@ -135,21 +135,24 @@
     padding-top: 0px;
 }
 
+/* .yourReviewListAboutStore td {
+    배경색을 줄까 말까 고민하다가 결국 그냥 안넣기로 함. 나중에 넣을수도 ?
+} */
+
 .tableWrap {
     border-bottom: 1px solid #444444;
 }
 
 .marging {
-    height: 60px;
+    height: 50px;
 }
 
 table {
 table-layout: fixed;
 }
 
-/* 왜 이건 적용 안되는거야 */
 .reviewMainTitle {
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 /* ------------------------ */
