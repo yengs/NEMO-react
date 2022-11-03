@@ -2,32 +2,20 @@ import './DecDetail.css';
 
 const styles = {
     adminInnerPage: {  
-        "borderRadius": 20, 
-        "width": 1000, 
-        "border": "2px solid #bbb",
-        "padding": "10px 10px 70px 10px", 
-        "margin": "70px auto",
-        "background-color": "rgb(248, 248, 248)"
-        }, 
+        borderRadius: 20, 
+        width: 1000, 
+        padding: "10px 10px 70px 10px", 
+        margin: "70px auto",
+        backgroundColor: "rgb(248, 248, 248)",
+        border: "2px solid #bbb"
+    }, 
     form: {
-        "position": "relative"
+        position: "relative"
     }, 
     table: {
-        "minWidth": 1000,
-        "borderSpacing": 0, 
-        "borderCollapse": "collapse", 
-    },
-    greenBtn:{
-        "font-size": "12px",
-        "border-radius": "3px",
-        "width": "70px",
-        "padding": "5px 10px",
-        "position": "absolute",
-        "right": "0px",
-        "margin-top": "20px",
-        "border": "2px solid rgb(49, 150, 54)",
-        "background-color": "rgb(49, 150, 54)",
-        "color": "rgb(255, 255, 255)"
+        minWidth: 980,
+        borderSpacing: 0, 
+        borderCollapse: "collapse", 
     }
 };
 
@@ -84,11 +72,9 @@ function DecDetail({history}){
                     </tr>
                     </tbody>
                 </table>
-
-                <input type="button" id="declist" style={styles.greenBtn} value="목록으로" onClick={decList} />
+                <input type="button" id="declist" className="decDetailGrayBtn" value="목록으로" onClick={decList} />
             </form>                
-        </div>
-            
+        </div>   
     )
 }
 
