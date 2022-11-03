@@ -10,7 +10,7 @@ function Idfind_Result() {
         <div className="joinWrap memberPagelog container">
             
             <div className="pageTitle">
-                <h2>아이디찾기 결과</h2>
+                <h2>아이디 찾기 결과</h2>
                 <hr />
                 <br></br>
                 <h3>본인인증으로 가입된 아이디가 있습니다.</h3>

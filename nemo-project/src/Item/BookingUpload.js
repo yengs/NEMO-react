@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate, Route } from "react-router-dom";
+import "./BookingUpload.css";
 import Modal from './Modal';
 
+import moment from 'moment';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'; // css import
 
-function Payment() {
-  // useState를 사용하여 open상태를 변경한다. (open일때 true로 만들어 열리는 방식)
-  const [modalOpen, setModalOpen] = useState(false);
+
+function BookingUpload({ }) {
+
+    const [value, onChange] = useState(new Date());
+
+    //---------결제모달---------------
+    const [modalOpen, setModalOpen] = useState(false);
   const [payment, setPayment] = useState('1');
 
   const selectcard = (e) => setPayment('1');
@@ -20,10 +30,72 @@ console.log(payment)
   const closeModal = () => {
     setModalOpen(false);
   };
+  //----------결제모달 end--------------
 
-  return (
-    <React.Fragment>
-      <button onClick={openModal}>모달팝업</button>
+    return (
+        <>
+            <div className="BookingContainer">
+                 <h3>대여하기</h3>
+    
+                <div className="top">
+                <div className="left">
+                 <div className="tablePlusForm2"> 
+                   <tr><td> 
+                        <div className="imageDiv2"> 
+                           <p className="memberImg2"></p> 
+                        {/* <td>{data.itemImage}</td> */}
+                         </div> 
+                      </td> 
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;언더아머 트레이닝복</td> 
+                    </tr>  
+                     </div> 
+                        </div>
+                <div className="right">
+                    <div className="tableform2">
+                        <div className="a">
+                            <tr>
+                                <th>대여료</th>
+                                <td></td>
+                                <td>100000원</td>                  
+                            </tr>
+                            <tr>
+                                <th >보증금</th>
+                                <td><div className="plus">+</div></td>
+                                <td>200000원</td>                  
+                            </tr>
+                            </div>
+                           <tr >
+                           <th scope="2"></th>
+                           </tr>
+                            <tr>
+                                <th>결제금액</th>
+                                <td></td>
+                                <td>300000원</td>                  
+                            </tr>
+                    </div>
+                </div>
+
+                </div>
+                <h3>결제수단</h3>
+                
+
+               
+                
+
+
+
+
+
+
+{/* --------------결제모달-------------- */}
+<div className="middle">
+<React.Fragment>
+<div className="custom-search" >
+                <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요"/>
+                <button onClick={openModal} className="custom-search-botton" type="submit">등록</button>  
+                </div>
+                
+      
       {/* header 부분에 텍스트를 입력한다. */}
       <Modal open={modalOpen} close={closeModal} header="결제수단">
         {/* Modal.js <main> {props.children} </main>에 내용이 입력된다.  */}
@@ -118,7 +190,64 @@ console.log(payment)
 
       </Modal>
     </React.Fragment>
-  );
+    <br/><br/>
+    </div>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <h3>대여기간</h3>
+                <div className="bottom">
+                        
+                <div> <div className="inputdate">
+      <Calendar onChange={onChange} value={value} />
+        
+            <br/>
+              선택한 날짜 : {moment(value).format("YYYY년 MM월 DD일")} 
+         </div>
+         <br/><br/>
+         <label className="agree">
+                                <input type="checkbox" />
+                                &nbsp;&nbsp;개인정보 제 3자 제공동의와 결제대행 서비스 이용약관에 동의합니다. (필수)
+                            </label>
+          </div> 
+         <div className="btnGroup">
+              <button className="greenBtn btnbk">신청</button>&nbsp;&nbsp;
+              <button className ="grayBtn btnbk">취소</button>
+        </div>
+                </div>
+
+
+            </div> 
+            <br/>
+
+
+
+
+
+
+
+
+            </>
+
+    );
 }
 
-export default Payment;
+export default BookingUpload;

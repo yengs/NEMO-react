@@ -28,10 +28,10 @@ function ItemsubList({match}) {
                          <div className="itemInfoWrap" key={item.itemNum}>
                             <div className="itemImg" style={{backgroundImage: `url(${Shirt})`}}></div>
                             <div className="itemInfo">
-                            <p class="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
-                            <p class="itemName"><Link to={`/item/detail/${item.itemNum}`}>{item.itemName}</Link></p>
-                            <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
-                            <p class="itemPeriod">대여기간<br/><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
+                            <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
+                            <p className="itemName"><Link to={`/item/detail/${item.itemNum}`}>{item.itemName}</Link></p>
+                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                            <p className="itemPeriod">대여기간<br/><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                             </div>
                          </div>
                         ))
