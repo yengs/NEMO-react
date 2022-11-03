@@ -60,12 +60,16 @@ h4 {
     border-radius: 3px;
 }
 
-.grayBtn, .greenBtn, .redBtn{
+.ItemgreenBtn{
     padding: 10px 10px;
     margin : 0px 3px 0;
     text-align: center;
     font-size: 15px;
     border-radius: 3px;
+
+    border: rgb(100, 165, 127);
+    background-color: rgb(100, 165, 127);
+    color: #fff;
 }
 
 .buttonDiv {
