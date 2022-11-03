@@ -1,16 +1,25 @@
+import './mypage.css';
+import './mypageReview.css';
+
 import MyMenu from "./MyMenu";
 import MyUserStore from "./MyUserStore";
-
-import './singo.css';
 import { Route } from "react-router-dom";
-import Singo from "./Singo";
+import MypageReview from "./MypageReview";
+import MyPageItemDetail from "./MyPageItemDetail";
+
+import MyPageItem from "./MyPageItem";
 
 function MyPage() {
     return(
         <div className="myPageWrap">
             <MyMenu />
-            <Singo/>
+            <Route path="/mypage/userstore" component={MyUserStore} exact={true} />
+
+            <Route path="/mypage/review" component={MypageReview} exact={true} />
             {/* <Route path="/mypage/userstore" component={MyUserStore} exact={true} /> */}
+            {/* <MyPageItemDetail/> */}
+
+            <Route path="/mypage/myitemdetail" component={MyPageItemDetail} exact={true} />
         </div>
     );
 }

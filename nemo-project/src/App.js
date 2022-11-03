@@ -18,9 +18,13 @@ import Pwfind from './member/Pwfind';
 import Pwfind_Result from './member/Pwfind_Result';
 import MyReviewList from './review/MyReviewList';
 import YourReviewList from './review/YourReviewList';
-import ReviewUploadPage from './review/ReviewUploadPage';
 import MyReviewDetail from './review/MyReviewDetail';
 import YourReviewDetail from './review/YourReviewDetail';
+import MyBooking from './mypage/MyBooking';
+import ReviewUpload from './review/ReviewUpload';
+import Payment from './Item/Payment';
+import BookingUpload from './Item/BookingUpload';
+
 
 
 function App() {
@@ -30,6 +34,10 @@ function App() {
     <div className='wholeWrap'>
       <div className='containerWrap'>
         <Header />
+        
+        <Route path="/payment" component={BookingUpload} exact={true} />
+        
+        
         <Route path="/" component={Main} exact={true} />
         
          <Route path="/Id" component={Idfind} exact={true} />
@@ -43,7 +51,7 @@ function App() {
         <Route path="/item/detail/:itemNum" component={ItemDetail} />
         <Route path="/member/join" component={Join} />
         <Route path="/member/login" component={Login} />
-        <Route path="/reivew/reviewWrite" component={ReviewUploadPage} />
+        <Route path="/reivew/reviewWrite" component={ReviewUpload} />
         <Route path="/review/myReview" component={MyReviewList} exact={true} />
         <Route path="/review/myReview/:reviewNum" component={MyReviewDetail} />
         <Route path="/review/yourReview" component={YourReviewList} />

@@ -41,6 +41,7 @@ function MyReviewDetail({ match, location, history }) {
             })
             .catch(error => console.log(error));
     };
+
     const handlerReviewDelete = () => {
         axios.delete(`http://localhost:8080/api/review/myReview/${reviewNum}`)
             .then(response => {
@@ -55,6 +56,7 @@ function MyReviewDetail({ match, location, history }) {
             })
             .catch(error => console.log(error));
     };
+    
     return (
         <>
             <div className="container">
