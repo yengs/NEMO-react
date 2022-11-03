@@ -10,7 +10,7 @@ function Idfind() {
         <div className="joinWrap memberPagelog container">
             
             <div className="pageTitle">
-                <h2>아이디찾기</h2>
+                <h2>아이디 찾기</h2>
                 <hr />
                 <br></br>
                 <p>회원 가입시 등록하신 정보로 아이디를 찾을수 있습니다</p>
@@ -51,9 +51,9 @@ function Idfind() {
                 </div>
                 <br/>
                 <br/>
-                <li>아이디를 찾지 못하셨다면 고객센터(1111-1111)로 문의주세요</li>
+                <li>아이디를 찾지 못하셨다면 고객센터(1111-1111)로 문의주세요.</li>
                 <li>아직 내모 회원이 아니시라면 회원가입을 해주세요. &nbsp; 
-                    <Link to="/member/join"> 바로가기</Link>
+                    <Link to="/member/join">바로가기</Link>
 
                </li>
             </form>
