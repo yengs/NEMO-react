@@ -18,6 +18,8 @@ function MyPage() {
             <Route path="/mypage/review" component={MypageReview} exact={true} />
             {/* <Route path="/mypage/userstore" component={MyUserStore} exact={true} /> */}
             {/* <MyPageItemDetail/> */}
+
+            <Route path="/mypage/myitemdetail" component={MyPageItemDetail} exact={true} />
         </div>
     );
 }
