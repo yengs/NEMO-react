@@ -54,7 +54,7 @@ function Header() {
                         </IconContext.Provider>
                         <p>로그인</p>
                     </Link>
-                    <Link to="/mypage/mypageitem">
+                    <Link to="/mypage/mybooking">
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaUserAlt />
                         </IconContext.Provider>

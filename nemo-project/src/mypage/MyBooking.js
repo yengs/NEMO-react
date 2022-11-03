@@ -4,6 +4,11 @@ import { GrFormNext } from "react-icons/gr";
 import "./mybooking.css";
 
 function MyBooking() {
+
+    const goReviewWrite = () => {
+        window.location.href = "/reivew/reviewWrite";
+    }
+
     return (
         <div className="mypageInnerPage">
            
@@ -122,7 +127,7 @@ function MyBooking() {
                             <td className='ReviewItemNameOrigin' rowSpan={3}>메종키츠네 셔츠</td>
                             <td className='ReviewWriter' rowSpan={3}>20000</td>
                             <td className='ReviewWriter' rowSpan={3}>선희곤듀</td>
-                            <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok">후기작성</button></td></td>
+                            <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td>
                             <td className='ReviewWriter' rowSpan={3}>반환완료</td>
                             <td className='ReviewWriter' rowSpan={3}><button className="greenBtn btnBok">취소</button></td>                        
                         </tr>

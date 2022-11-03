@@ -73,7 +73,7 @@ function App() {
 
 
         {/* mypage */}
-        <Route path="/mypage/mypageitem" component={MyPage} exact={true} />
+        <Route path="/mypage" component={MyPage} />
         <Route path="/mypage/userstoreinfo" component={MyPageForOthers} exact={true} />
         
         
