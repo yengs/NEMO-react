@@ -1,16 +1,8 @@
 .reviewUpload {
-    width: 550px;
+    width: 900px;
     height: auto;
-    border: 1px solid #ddd;
     border-radius: 10px;
-    padding: 30px;
-    box-sizing: border-box;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    z-index: 1;
+    margin: 50px auto;
 }
 
 .reviewUpload .pageTitle {
@@ -29,7 +21,7 @@
     font-size: 17px;
 }
 
-.decImage {
+.reviewImage {
     width: 70px;
     height: 70px;
     background-size: cover;
@@ -37,24 +29,19 @@
     cursor: pointer;
 }
 
-.decSelect, .decContent {
+.reviewContent {
     margin-top: 45px;
 }
 
-.decSelect select {
-    width: 100%;
-    border: 1px solid #ddd;
-    padding: 10px 3px;
-    border-radius: 5px;
-}
 
-.decContent textarea {
+.reviewContent textarea {
     width: 100%;
-    height: 220px;
+    height: 350px;
     resize: none;
     overflow: auto;
     border-radius: 5px;
-    padding: 7px;
+    padding: 10px;
+    font-size: 16px;
 }
 
 .satisfyingReview {
