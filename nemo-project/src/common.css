@@ -5,6 +5,7 @@
 
 * {
   font-family: 'Pretendard-Regular' !important;
+  box-sizing: border-box;
 }
 
 .wholeWrap {
@@ -69,7 +70,7 @@
 }
 
 .greenBtn {
-  border: rgb(100, 165, 127);
+  border: 2px solid rgb(100, 165, 127);
   background-color: rgb(100, 165, 127);
   color: #fff;
 }

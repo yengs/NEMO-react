@@ -1,0 +1,82 @@
+.reviewUpload {
+    width: 550px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 30px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    z-index: 1;
+}
+
+.reviewUpload .pageTitle {
+    margin-bottom: 30px;
+    font-size: 23px;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.reviewUpload .pageTitle h3 {
+    margin: 0;
+}
+
+.reviewUpload h4 {
+    margin: 9px 0;
+    font-size: 17px;
+}
+
+.decImage {
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+}
+
+.decSelect, .decContent {
+    margin-top: 45px;
+}
+
+.decSelect select {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px 3px;
+    border-radius: 5px;
+}
+
+.decContent textarea {
+    width: 100%;
+    height: 220px;
+    resize: none;
+    overflow: auto;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.satisfyingReview {
+    margin-top: 10px;
+}
+
+.satisfyingReview span {
+    font-size: 15px;
+    color: #666;
+}
+
+.satisfyingReview input[type="number"] {
+    border: 1px solid #ddd;
+    padding: 5px 6px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+.reviewUpload .btnWrap {
+    margin-top: 30px;
+    text-align: center;
+}
+
