@@ -22,6 +22,8 @@ import MyReviewDetail from './review/MyReviewDetail';
 import YourReviewDetail from './review/YourReviewDetail';
 import MyBooking from './mypage/MyBooking';
 import ReviewUpload from './review/ReviewUpload';
+import Payment from './Item/Payment';
+
 
 
 function App() {
@@ -31,6 +33,10 @@ function App() {
     <div className='wholeWrap'>
       <div className='containerWrap'>
         <Header />
+        
+        <Route path="/payment" component={Payment} exact={true} />
+        
+        
         <Route path="/" component={Main} exact={true} />
         
          <Route path="/Id" component={Idfind} exact={true} />
