@@ -396,7 +396,7 @@ const MyPageItemContainer = styled.div`
   }
   
   .itemInfoWrap .itemInfo .period {
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .storeInfoWrap {

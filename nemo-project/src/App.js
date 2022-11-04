@@ -30,6 +30,8 @@ import BookingUpload from './Item/BookingUpload';
 
 
 
+
+
 function App() {
 
   return (
@@ -76,7 +78,7 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-        <Route path="/mypage/userstoreinfo" component={MyPageForOthers} exact={true} />
+        <Route path="/userstoreinfo" component={MyPageForOthers} />
         
         
 

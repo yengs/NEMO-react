@@ -254,6 +254,10 @@ const ContainerUserUpate = styled.div`
     padding: 7px 20px;
     border-radius: 5px;
   }
+
+  table td {
+    border: none !important;
+  }
   
 `
 

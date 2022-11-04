@@ -64,6 +64,10 @@ function ItemDetail({ match, location, history }) {
         window.location.href = "/item/bookingupload";
     }
     
+    const goUserStore = () => {
+        window.location.href = "/userstoreinfo";
+    }
+    
 
     return (
         <>
@@ -137,7 +141,7 @@ function ItemDetail({ match, location, history }) {
                     </div>
                 </div>
                 
-                <div className="middleDiv">
+                <div className="middleDiv" onClick={goUserStore}>
                     {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
                         + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
                     <div className="writerDiv">
@@ -161,7 +165,7 @@ function ItemDetail({ match, location, history }) {
                     <h2>후기</h2>
                     {/* 하단 Link의 url은 대여자에게 빌려간 사람들의 후기 페이지가 나와야하지만
                         잘 되는지 보기 위해 myReview로 넣어둔 상태. 추후 수정하겠음!! */}
-                    <Link to="/review/myReview" className="ItemReviewList">더보기{'>'}</Link>
+                    {/* <Link to="/review/myReview" className="ItemReviewList">더보기{'>'}</Link> */}
                     <br/><br/>
                     <div>
                         <table className="reviewTable">

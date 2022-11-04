@@ -70,7 +70,7 @@ function MyStore() {
              */}
              <div className="myStoreReview">
                 <div className='reviewTitle'>
-                    <h3 className="reviewTitle">내 작성 후기</h3>
+                    <h3 className="reviewTitle">상점 후기</h3>
                     <span><a href={`/review/myReview`} className='moreReviewDetailPage'>더보기 </a></span>
                 </div>
             </div>
