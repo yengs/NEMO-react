@@ -26,6 +26,9 @@ import YourReviewDetail from './review/YourReviewDetail';
 import ReviewUpload from './review/ReviewUpload';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
+import BookingUpload from './Item/BookingUpload';
+
+
 
 
 
@@ -51,6 +54,7 @@ function App() {
         <Route path="/item/write" component={ItemUpload} exact={true} />
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
+        <Route path="/item/bookingupload" component={BookingUpload} exact={true} />
 
 
 
@@ -74,7 +78,7 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-        <Route path="/mypage/userstoreinfo" component={MyPageForOthers} exact={true} />
+        <Route path="/userstoreinfo" component={MyPageForOthers} />
         
         
 

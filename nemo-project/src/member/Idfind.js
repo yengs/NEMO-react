@@ -42,7 +42,7 @@ function Idfind() {
                         </tbody>
                         <br/>
                         <div className="btnWrap">
-                        <Link to ="/Id/find"><input type="submit" className="greenBtn btnlog"  value="확인"  /></Link>
+                        <Link to ="/member/id/find"><input type="submit" className="greenBtn btnlog"  value="확인"  /></Link>
                     {/* <input type="button" value="취소" className="grayBtn btn" /> */}
                     <Link to="/member/pw"><button  className="grayBtn btnlog">비밀번호 찾기</button></Link>
 

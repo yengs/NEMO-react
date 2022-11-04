@@ -26,14 +26,16 @@ function MyPageItem() {
                 <div className="itemWrap3">
                     {
                         datas && datas.map(item => (
-                            <div className="itemInfoWrap" key={item.itemNum}>
+                            <div className="itemInfoWrap" key={item.itemNum} style={{'backgroundColor':"rgb(235,235,235)"}}>
+                              <Link to={`/mypage/mypageitemdetail/${item.itemNum}`} style={{'textDecoration':'none'}}>
                                 <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                 <div className="itemInfo">
                                     <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
-                                    <p className="itemName"><Link to={`/item/detail/${item.itemNum}`}>{item.itemName}</Link></p>
+                                    <p className="itemName">{item.itemName}</p>
                                     <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
                                     <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                 </div>
+                              </Link>
                             </div>
                         ))
                     }
@@ -396,7 +398,7 @@ const MyPageItemContainer = styled.div`
   }
   
   .itemInfoWrap .itemInfo .period {
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .storeInfoWrap {
