@@ -11,6 +11,10 @@ import Store3 from "./img/store3.jpg";
 
 function Main() {
 
+    const goWeatherItemList = () => {
+        window.location.href = "/item/weatherrecitemlist";
+    }
+
     return (
         <div>
             {/* <div>
@@ -26,7 +30,7 @@ function Main() {
                 </div>
                 <div className="titleNplusBtn">
                     <h3>내일 이런 옷 어때요?</h3>
-                    <button className="plusBtn">+ 더보기</button>
+                    <button className="plusBtn" onClick={goWeatherItemList}>+ 더보기</button>
                 </div>
                 <div className="itemWrap">
                     <div className="itemInfoWrap">
