@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 // 주소 api사용 (팝업방식)
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import './UserUpdate.css';
+// import './UserUpdate.css';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 

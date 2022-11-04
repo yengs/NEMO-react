@@ -1,5 +1,5 @@
 .BookingContainer{
-    max-width: 700px;
+    max-width: 900px;
     height: auto;
     margin: 0 auto;
     margin-top: 40px;
@@ -146,8 +146,8 @@ div.left {
 
 .tablePlusForm2 .memberImg2 {
     background-color: rgb(219, 219, 219);
-    width: 100px;
-    height: 100px;
+    width: 180px;
+    height: 225px;
 }
 
 /* 플러스 */
@@ -188,7 +188,7 @@ button .modalbutton{
 /* 결제수단 */
 .custom-search {
     position: relative;
-    width: 300px;
+    width: 460px;
   }
   .custom-search-input {
     width: 100%;

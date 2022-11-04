@@ -26,6 +26,7 @@ import YourReviewDetail from './review/YourReviewDetail';
 import ReviewUpload from './review/ReviewUpload';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
+import BookingUpload from './Item/BookingUpload';
 
 
 
@@ -51,16 +52,17 @@ function App() {
         <Route path="/item/write" component={ItemUpload} exact={true} />
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
+        <Route path="/item/bookingupload" component={BookingUpload} exact={true} />
 
 
 
         {/* member */}
         <Route path="/member/join" component={Join} exact={true} />
         <Route path="/member/login" component={Login} exact={true} />
-        <Route path="/member/id" component={Idfind} exact={true} />
-        <Route path="/member/id/find" component={Idfind_Result} exact={true} />
-        <Route path="/member/pw" component={Pwfind} exact={true} />
-        <Route path="/member/pw/find" component={Pwfind_Result} exact={true} />
+        <Route path="/member/Id" component={Idfind} exact={true} />
+        <Route path="/Id/find" component={Idfind_Result} exact={true} />
+        <Route path="/member/Pw" component={Pwfind} exact={true} />
+        <Route path="/Pw/find" component={Pwfind_Result} exact={true} />
 
 
 
