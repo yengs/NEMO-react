@@ -38,7 +38,7 @@ console.log(payment)
                  <h3>대여하기</h3>
     
                 <div className="top">
-                <div class="left">
+                <div className="left">
                  <div className="tablePlusForm2"> 
                    <tr><td> 
                         <div className="imageDiv2"> 
@@ -50,7 +50,7 @@ console.log(payment)
                     </tr>  
                      </div> 
                         </div>
-                <div class="right">
+                <div className="right">
                     <div className="tableform2">
                         <div className="a">
                             <tr>
@@ -90,9 +90,9 @@ console.log(payment)
 {/* --------------결제모달-------------- */}
 <div className="middle">
 <React.Fragment>
-<div class="custom-search" >
-                <input type="text" class="custom-search-input" placeholder="결제수단을 등록해주세요"/>
-                <button onClick={openModal} class="custom-search-botton" type="submit">등록</button>  
+<div className="custom-search" >
+                <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요"/>
+                <button onClick={openModal} className="custom-search-botton" type="submit">등록</button>  
                 </div>
                 
       
