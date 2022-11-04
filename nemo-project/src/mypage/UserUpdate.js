@@ -163,11 +163,12 @@ function UserUpdate() {
                             </table>
                         </div>
                         <div className="resignMembership">
-                            <Link to={`member/resignMembership`}>회원탈퇴하기</Link>
+                            {/* <Link to={`member/resignMembership`}>회원탈퇴하기</Link> */}
+                            <Link>회원탈퇴하기</Link>
                         </div>
                         <div className="btnWrap">
                             <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} />
-                            <input type="button" value="취소" className="grayBtn btn" />
+                            {/* <input type="button" value="취소" className="grayBtn btn"/> */}
                         </div>
                     </form>
                 </div>
