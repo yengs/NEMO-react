@@ -64,9 +64,6 @@ console.log(payment)
                                 <td>200000원</td>                  
                             </tr>
                             </div>
-                           <tr >
-                           <th scope="2"></th>
-                           </tr>
                             <tr>
                                 <th>결제금액</th>
                                 <td></td>
