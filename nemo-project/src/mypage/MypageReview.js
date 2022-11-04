@@ -1,8 +1,9 @@
 // import { useState, useEffect } from 'react';
 // import axios from 'axios';
 import jeans from '../img/jeans.jpg';
-import mypageReview from "./mypageReview.css";
+// import mypageReview from "./mypageReview.css";
 
+import styled from "styled-components";
 
 function MypageReview() {
 
@@ -32,6 +33,7 @@ function MypageReview() {
 
 
     return (
+        <MypageReviewContainer style={{width:'100%'}}>
         <div className="mypageInnerPage">
             <h2 className='reviewMainTitle'>후기 조회</h2>
             <div className="myStoreReview">
@@ -116,7 +118,152 @@ function MypageReview() {
                 </table>
             </div>
             </div>
+            </MypageReviewContainer>
     );
 }
+
+const MypageReviewContainer = styled.div`
+    
+/* ----------------------------- */
+/* 마이페이지 내의 페이지 */
+.mypageInnerPage  {
+    width: 100%;
+    padding: 0 0 0 50px;
+}
+
+.reviewMainTitle {
+    margin: 0 0 20px 0;
+}
+
+
+.myStoreReview .reviewTitle {
+    margin-left: 0;
+    margin-bottom: -8px;
+    margin-top: 0;
+}
+
+.moreReviewDetailPage { 
+    float: right;
+    margin-bottom: 6px;
+    margin-top: -5px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.yourReviewListAboutStore {
+    border-spacing: 0;
+}
+
+.yourReviewListAboutStore {
+    font-size: 15px;
+}
+
+.lineH {
+    height: 3.1px !important;
+    width: 100%;
+    color: #747474;
+}
+
+.rReviewItemImg div {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemImageOrigin div {
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.rReviewWriter {
+    text-align: center;
+}
+
+.yourReviewListAboutStore th {
+    border-bottom: 1px solid #444444;
+    font-size: 15px;
+    height: 10px;
+    width: 300px;
+    padding-top: 0px;
+}
+
+/* .yourReviewListAboutStore td {
+    배경색을 줄까 말까 고민하다가 결국 그냥 안넣기로 함. 나중에 넣을수도 ?
+} */
+
+.tableWrap {
+    border-bottom: 1px solid #444444;
+}
+
+.marging {
+    height: 50px;
+}
+
+table {
+table-layout: fixed;
+}
+
+.reviewMainTitle {
+    padding-bottom: 10px;
+}
+
+/* ------------------------ */
+/* 다른사람이 보는 마이페이지 */
+
+.rReviewItemImageOrigin {
+    width: 10%;
+}
+
+.rReviewItemImageOrigin div {
+    width: 100%;
+    height: 120px;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.rReviewWriter {
+    width: 20%;
+    text-align: center;
+}
+
+.rReviewItemImg, .rReviewContent, .rsatisfing {
+    width: 45%;
+}
+
+.rReviewItemImg div {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewContent {
+    font-size: 14px !important;
+    padding-bottom: 0px !important;
+}
+
+.rsatisfing div {
+    width: 150px;
+    font-size: 12px;
+}
+
+
+
+`
 
 export default MypageReview;

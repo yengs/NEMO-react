@@ -200,7 +200,7 @@ const SingoContainer = styled.div`
     height: 100%;
     padding: 20px;
     box-sizing: border-box;
-    background-color: rgb(245, 245, 245);
+    // background-color: rgb(245, 245, 245);
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }

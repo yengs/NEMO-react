@@ -1,85 +1,11 @@
-.myPageWrap {
-    width: 100%;
-    height: calc(100vh - 250px);
-    max-width: 1200px;
-    margin: 55px auto;
-    display: flex;
-}
-
-.myMenuWrap {
-    width: 230px;
-    background-color: rgba(88, 145, 112, 0.253);
-    padding: 50px 35px;
-    box-sizing: border-box;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-.myMenuWrap .memberImg, .myMenuWrap .cleanG, .myMenuWrap .myMenuWrap {
-    margin: auto;
-}
-
-.myMenuWrap .cleanG {
-    width: 100%;
-    margin-top: 20px;
-    font-size: 14px;
-}
-
-.myMenuWrap .memberImg {
-    background-color: rgb(255, 255, 255);
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-}
-
-.myMenuWrap .menu {
-    height: calc(100% - 160px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.myMenuWrap .menu ul {
-    margin: 50px 0 0 0;
-    padding: 0;
-    width: 100%;
-}
-
-.myMenuWrap .menu li {
-    list-style: none;
-    padding: 10px 0;
-    font-size: 15px;
-    color: #333;
-    cursor: pointer;
-}
-
-.warnBtn {
-    border: none;
-    background-color: transparent;
-    text-align: center;
-    font-size: 13px;
-    color: #666;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
 
 /* ----------------------------- */
 /* 마이페이지 내의 페이지 */
-.mypageInnerPage {
-    width: calc(100% - 230px);
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: rgb(245, 245, 245);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
 
 .myStoreReview .reviewTitle {
     margin-left: 5px;
     margin-bottom: -8px;
-    margin-top: 15px;
+    margin-top: 55px;
 }
 
 .moreReviewDetailPage { 

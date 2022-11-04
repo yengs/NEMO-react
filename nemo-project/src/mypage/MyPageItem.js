@@ -58,12 +58,9 @@ const MyPageItemContainer = styled.div`
 .mypageInnerPage2 {
     width: 100%;
     height: 100%;
-    padding: 20px;
     box-sizing: border-box;
-    background-color: rgb(245, 245, 245);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
     overflow: auto;
+    padding: 0 20px;
 }
 
 /* 스크롤바 숨김 */
@@ -173,46 +170,6 @@ const MyPageItemContainer = styled.div`
     width: 150px;
     font-size: 12px;
 }
-
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-  }
-  
-  * {
-    font-family: 'Pretendard-Regular' !important;
-  }
-  
-  .wholeWrap {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .containerWrap {
-    flex: 1;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .requiredInfo {
-    text-align: end;
-  }
-  
-  .requiredMark::before {
-    content: "*";
-    color: rgb(202, 43, 43);
-  }
-  
-  .requiredMark>span {
-    font-size: 13px;
-    font-weight: 100;
-    color: #777;
-  }
   
   .btn {
     cursor: pointer;
@@ -295,8 +252,7 @@ const MyPageItemContainer = styled.div`
   }
   
   .titleNplusBtn>h3 {
-    margin: 10px 0;
-    font-size: 23px;
+    margin: 0;
   }
   
   .tomorrowWeather {
@@ -341,11 +297,11 @@ const MyPageItemContainer = styled.div`
   }
   
   .itemInfoWrap {
-    width: 22%;
+    width: 30%;
     height: 360px;
     background-color: rgb(250, 250, 250);
     border-radius: 10px;
-    padding: 1%;
+    padding: 1.7%;
   }
   
   .itemInfoWrap > .itemImg {

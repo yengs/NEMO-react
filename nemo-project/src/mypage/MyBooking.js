@@ -11,7 +11,7 @@ function MyBooking() {
     }
 
     return (
-        <MyBookingContainer>
+        <MyBookingContainer style={{width: '100%'}}>
             <div className="mypageInnerPage">
 
                 <div className="userReviewListAboutStoreWrapBooking">

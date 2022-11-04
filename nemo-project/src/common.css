@@ -482,7 +482,9 @@ footer {
   display: inline-block;
 }
 
-
+::-webkit-scrollbar {
+  display: none;
+}
 
 
 
