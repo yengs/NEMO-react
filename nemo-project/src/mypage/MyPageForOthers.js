@@ -9,8 +9,9 @@ function MyPage() {
     return(
         <div className="myPageWrap forOthers">
             <MyMenuForOthers />
-            <MyUserStore />
-            <Route path="/mypage/warn" component={Singo} exact={true} />
+            {/* <MyUserStore /> */}
+            <Route path="/userstoreinfo/warn" component={Singo} exact={true}/>
+            <Route path="/userstoreinfo" component={MyUserStore} exact={true} />
         </div>
     );
 }

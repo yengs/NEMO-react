@@ -9,7 +9,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 
 
-function BookingUpload({ }) {
+function BookingUpload({ history }) {
 
     const [value, onChange] = useState(new Date());
 
@@ -30,6 +30,12 @@ console.log(payment)
   const closeModal = () => {
     setModalOpen(false);
   };
+
+
+  const goItemDetail = () => {
+    history.goBack();
+  }
+
   //----------결제모달 end--------------
 
     return (
@@ -227,7 +233,7 @@ console.log(payment)
           </div> 
          <div className="btnGroup">
               <button className="greenBtn btnbk">신청</button>&nbsp;&nbsp;
-              <button className ="grayBtn btnbk">취소</button>
+              <button className ="grayBtn btnbk" onClick={goItemDetail}>취소</button>
         </div>
                 </div>
 
