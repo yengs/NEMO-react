@@ -4,10 +4,6 @@
     margin: auto;
 }
 
-/* ----------------------------- */
-
-/* 마이페이지 내의 페이지 */
-
 .myStoreReview .reviewTitle {
     margin-left: 5px;
     margin-bottom: -8px;
@@ -16,19 +12,13 @@
 
 .myreview {
     border-spacing: 0;
-}
-
-.myreview {
     font-size: 15px;
 }
 
-.lineH {
-    height: 3.1px !important;
-    width: 100%;
-    color: #747474;
+.yourreview {
+    border-spacing: 0;
+    font-size: 15px;
 }
-
-/* ------ */
 
 .myreview th {
     border-bottom: 1px solid #444444;
@@ -40,4 +30,24 @@
 
 .myreview td {
     text-align: center;
+}
+
+.yourreview th {
+    border-bottom: 1px solid #444444;
+    font-size: 15px;
+    height: 10px;
+    width: 300px;
+    padding-top: 0px;
+}
+
+.yourreview td {
+    text-align: center;
+}
+
+
+
+.lineH {
+    height: 3.1px !important;
+    width: 100%;
+    color: #747474;
 }

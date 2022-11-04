@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./reviewDetail.css" ;
+import "./reviewDetail.css";
 
 function MyReviewList() {
 
@@ -15,6 +15,16 @@ function MyReviewList() {
             })
             .catch(error => console.log(error));
     }, []);
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/review/myReview')
+            .then(response => {
+                console.log(response);
+                setDatas(response.data)
+            })
+            .catch(error => console.log(error));
+    }, []);
+
 
     return (
         <>
@@ -58,7 +68,6 @@ function MyReviewList() {
                         }
                     </tbody>
                 </table>
-                <Link className="reviewUploadBtn" to="/reivew/reviewWrite">후기 작성</Link>
             </div>
         </>
     );
