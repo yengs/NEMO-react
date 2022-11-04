@@ -83,7 +83,7 @@ export default function ReviewUpload({ history }) {
         return confirmAction;
     };
 
-    const deleteWorld = () => { window.location.href = "/item" };
+    const deleteWorld = () => history.goBack();
     const abort = () => console.log("Aborted")
     const confirmDelete = useConfirm("작성을 취소하시겠습니까?", deleteWorld, abort);
 
