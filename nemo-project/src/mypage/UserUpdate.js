@@ -88,13 +88,14 @@ function UserUpdate(){
     };
 
         return (
-            <div className="updatePage container userUpdate">
+            
+            <div className="userUpdateContainer">
                 <div className="pageTitle">
                     <h2>회원정보 수정</h2>
                 </div>
                 <form>
-                    <div className="inputTable">
-                        <table border="0" cellpadding="0" cellspacing="0">
+                    <div className="userUpdateinputTable">
+                        <table border="0" cellPadding="0" cellSpacing="0">
                             <tbody>
                                 <tr>
                                     <td>이름</td>
@@ -156,15 +157,13 @@ function UserUpdate(){
                                         <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
                                     </td>
                                 </tr>
+                                <Link to={`member/resignMembership`} className="resignMembership">회원탈퇴하기</Link>
                             </tbody>
+                                <div className="userUpdateBtnWrap">
+                                    <input type="submit" value="완료" className="userUpdategreenBtn" onClick={UpdateProfile} />
+                                    <input type="button" value="취소" className="userUpdategrayBtn"/>
+                                </div>
                         </table>
-                    </div>
-                    <div className="resignMembership">
-                    <Link to={`member/resignMembership`}>회원탈퇴하기</Link>
-                    </div>
-                    <div className="btnWrap">
-                        <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} />
-                        <input type="button" value="취소" className="grayBtn btn" />
                     </div>
                 </form>
             </div>
