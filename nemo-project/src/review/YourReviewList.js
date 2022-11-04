@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import "./reviewDetail.css";
+import Shirt from '../img/shirt.jpg';
 
 function YourReviewList() {
 
@@ -15,10 +16,12 @@ function YourReviewList() {
             })
             .catch(error => console.log(error));
     }, []);
+
     return (
         <>
-            <div className="container">
+            <div className="rcontainer">
                 <h1>내 상점 리뷰</h1>
+                <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
                         <col width="15%" />
@@ -30,6 +33,7 @@ function YourReviewList() {
                     <thead>
                         <tr>
                             <th scope='col'>번호</th>
+
                             <th scope='col'>작성자</th>
                             <th scope='col'>이미지</th>
                             <th scope='col'>내용</th>
@@ -42,7 +46,10 @@ function YourReviewList() {
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
                                     <td>{review.reviewId}</td>
-                                    <td>{review.reviewImage}</td>
+                                    {/* <td>{review.reviewImage}</td> */}
+                                    <td>
+                                        <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                    </td>
                                     <td>
                                         <Link to={`/review/yourReview/${review.reviewNum}`}>{review.reviewContents}</Link>
                                     </td>
