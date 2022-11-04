@@ -61,10 +61,10 @@ function App() {
         {/* member */}
         <Route path="/member/join" component={Join} exact={true} />
         <Route path="/member/login" component={Login} exact={true} />
-        <Route path="/member/Id" component={Idfind} exact={true} />
-        <Route path="/Id/find" component={Idfind_Result} exact={true} />
-        <Route path="/member/Pw" component={Pwfind} exact={true} />
-        <Route path="/Pw/find" component={Pwfind_Result} exact={true} />
+        <Route path="/member/id" component={Idfind} exact={true} />
+        <Route path="/member/id/find" component={Idfind_Result} exact={true} />
+        <Route path="/member/pw" component={Pwfind} exact={true} />
+        <Route path="/member/pw/find" component={Pwfind_Result} exact={true} />
 
 
 
