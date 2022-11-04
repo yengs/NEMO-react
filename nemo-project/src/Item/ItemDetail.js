@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, Navigate, Route } from "react-router-dom";
 import "./ItemDetail.css";
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 function ItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
@@ -67,6 +68,14 @@ function ItemDetail({ match, location, history }) {
     const goUserStore = () => {
         window.location.href = "/userstoreinfo";
     }
+
+    const handlerMaincate = () => {
+        window.location.href = `/item/cate/${data.itemMaincategory}`;
+    }
+
+    const handlerSubcate = () => {
+        window.location.href = `/item/cate/${data.itemSubcategory}`;
+    }
     
 
     return (
@@ -75,7 +84,16 @@ function ItemDetail({ match, location, history }) {
                  <h2>상품 상세</h2>
                  <div className="clickList">
                     <a className="goList" onClick={handlerClickList}>목록으로</a>
-                    <p className="cate">{data.itemMaincategory}{' > '}{data.itemSubcategory}</p>
+                    {/* <p className="cate">{data.itemMaincategory}{' > '}{data.itemSubcategory}</p> */}
+                   
+                   <div className="Breadcrumb">
+                    <Breadcrumb tag='nav' listTag='div'>
+                        <BreadcrumbItem tag='a' onClick={handlerMaincate}>{data.itemMaincategory}</BreadcrumbItem>
+                        {' > '}
+                        <BreadcrumbItem tag='a' onClick={handlerSubcate}>{data.itemSubcategory}</BreadcrumbItem>
+                    </Breadcrumb>
+                    </div>
+                   
                     <p>👀 {data.itemReadcount} 📅 {data.itemDate}</p>
                 </div>
                 <br></br>
