@@ -40,7 +40,7 @@ function Idfind_Result() {
                         <div className="btnWrap">
                         <Link to ="/member/login" ><input type="submit" className="greenBtn btnlog"  value="로그인하러가기"  /></Link>
                     {/* <input type="button" value="취소" className="grayBtn btn" /> */}
-                    <Link to="/pw"><button  className="grayBtn btnlog">비밀번호 찾기</button></Link>
+                    <Link to="/member/pw"><button  className="grayBtn btnlog">비밀번호 찾기</button></Link>
 
                 </div>
                     </table>

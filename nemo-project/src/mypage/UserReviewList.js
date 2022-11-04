@@ -33,14 +33,8 @@ function MypageReview() {
 
     return (
         <div className="mypageInnerPage">
-            <h2 className='reviewMainTitle'>후기 조회</h2>
-            <div className="myStoreReview">
-                <div className='reviewTitle'>
-                    <h3 className="reviewTitle">내 상점 후기</h3>
-                    <span><a href={`/review/yourReview`} className='moreReviewDetailPage'>더보기 </a></span>
-                </div>
-            </div>
-            <hr className='lineH' />
+            <h2 className='reviewMainTitle'>상점 후기</h2>
+            
             <div className='tableWrap'>
                 <table className="yourReviewListAboutStore">
                     <thead>

@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Route } from "react-router-dom";
+// import { Route } from "react-router-dom";
 import "./MyPageItemDetail.css";
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from "react-datepicker";
 
-import Shirt from '../img/shirt.jpg';
+// import Shirt from '../img/shirt.jpg';
 
 function MyPageItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
@@ -67,7 +67,7 @@ function MyPageItemDetail({ match, location, history }) {
             console.log(response);
             if (response.status === 200) {
                 alert("정상적으로 삭제되었습니다.");
-                history.push("/mypage");
+                history.push("/mypage/mypageitem");
             } else {
                 alert("삭제에 실패했습니다.");
                 return;
@@ -86,9 +86,8 @@ function MyPageItemDetail({ match, location, history }) {
         })
             .then(response => {
                 if (response.status === 200) {
-                    alert("정상적으로 수정되었습니다.", {
-                        onClose: () => history.push("/mypage")
-                    });
+                    alert("정상적으로 수정되었습니다.");
+                    history.push("/mypage/mypageitem")
                     
                 } else {
                     alert("수정에 실패했습니다.");
