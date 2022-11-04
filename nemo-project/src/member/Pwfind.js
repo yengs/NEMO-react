@@ -42,8 +42,8 @@ function Idfind() {
                         </tbody>
                         <br/>
                         <div className="btnWrap">
-                        <Link to ="/Pw/find"><input type="submit" className="greenBtn btnlog"  value="확인"/></Link>
-                            <Link to="/member/id"><button  className="grayBtn btnlog">아이디 찾기</button></Link>
+                        <Link to ="/member/pw/find"><input type="submit" className="greenBtn btnlog"  value="확인"/></Link>
+                            <Link to="/member/id/find"><button  className="grayBtn btnlog">아이디 찾기</button></Link>
                 </div>
                     </table>
                 </div>

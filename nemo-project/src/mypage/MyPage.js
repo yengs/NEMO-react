@@ -18,7 +18,7 @@ function MyPage() {
             <Route path="/mypage/mybooking" component={MyBooking} exact={true} />
             <Route path="/mypage/mypageitem" component={MyPageItem} exact={true} />
             <Route path="/mypage/review" component={MypageReview} exact={true} />
-            <Route path="/mypage/mypageitemdetail" component={MyPageItemDetail} exact={true} />
+            <Route path="/mypage/mypageitemdetail/:itemNum" component={MyPageItemDetail} exact={true} />
             <Route path="/mypage/userupdate" component={UserUpdate} exact={true} />
             {/* <MyBooking /> */}
         </div>

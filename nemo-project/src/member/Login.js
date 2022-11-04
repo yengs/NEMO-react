@@ -61,8 +61,8 @@ function Login() {
                                 </td>
                                 <td className="findMemberInfo">
                                     <div>
-                                    <Link to="/member/id">아이디 찾기</Link>
-                                    <Link to="/member/pw">비밀번호 찾기</Link>
+                                    <Link to="Id">아이디 찾기</Link>
+                                    <Link to="Pw">비밀번호 찾기</Link>
                                     </div>
                                 </td>
                             </tr>

@@ -9,7 +9,11 @@ import ItemSlider from "./ItemSlider.js";
 import addImage from "../img/review-add-img.png";
 import styled from "styled-components";
 
-function Singo() {
+function Singo({ history }) {
+
+    const goBack = () => {
+        history.push("/userstoreinfo");
+    }
 
 
     return (
@@ -73,7 +77,7 @@ function Singo() {
                                             <td>
                                                 <div className="btnWrap">
                                                     <input type="submit" className="redBtn2 btn" value="신고하기" />
-                                                    <input type="submit" className="grayBtn2 btn" value="취소" />
+                                                    <input type="submit" className="grayBtn2 btn" value="취소" onClick={goBack}/>
                                                 </div>
                                             </td>
                                         </tr>
