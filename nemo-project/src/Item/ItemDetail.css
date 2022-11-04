@@ -38,6 +38,13 @@ a.goList {
     cursor: pointer;
 }
 
+.Breadcrumb {
+    margin-right: 80%;
+    font-size: medium;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 p.cate {
     margin-right: 80%;
     font-size: medium;
