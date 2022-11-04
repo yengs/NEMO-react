@@ -29,15 +29,16 @@
     margin: 10px;
 }
 
-p {
+.DetailContainer p {
     font-size: 15px;
 }
 
-a.goList{
+a.goList {
     font-weight: bold;
+    cursor: pointer;
 }
 
-p.cate{
+p.cate {
     margin-right: 80%;
     font-size: medium;
 }
@@ -52,7 +53,7 @@ h4 {
     text-align: left;
 }
 
-.middleDiv .input{
+.middleDiv .input {
     font-weight: 100;
     margin: 20px 15px 0;
     font-size: 15px;
@@ -60,9 +61,9 @@ h4 {
     border-radius: 3px;
 }
 
-.ItemgreenBtn{
+.ItemgreenBtn {
     padding: 10px 10px;
-    margin : 0px 3px 0;
+    margin: 0px 3px 0;
     text-align: center;
     font-size: 15px;
     border-radius: 3px;
@@ -77,7 +78,7 @@ h4 {
     margin-bottom: 100px;
 }
 
-.writeDate{
+.writeDate {
     flex-direction: row-reverse;
 }
 
@@ -87,12 +88,12 @@ h4 {
     align-content: center;
 }
 
-.DetailContainer th{
+.DetailContainer th {
     text-align: left;
     vertical-align: middle;
 }
 
-.DetailContainer .reviewCate{
+.DetailContainer .reviewCate {
     text-align: center;
     height: 30px;
     border-bottom: 1px solid rgb(219, 219, 219);
@@ -107,14 +108,16 @@ h4 {
     padding-top: 5px;
 } */
 
-.reviewDiv table{
+.reviewDiv table {
     width: 100%;
     height: max-content;
     border-top: 1px solid rgb(219, 219, 219);
     border-collapse: collapse;
 }
 
-.reviewDiv tr, th, td{
+.reviewDiv tr,
+th,
+td {
     align-content: center;
     width: auto;
     /* text-align: center; */
@@ -122,15 +125,18 @@ h4 {
     vertical-align: middle;
 }
 
-td.reviewImg, .reviewCtns, .reviewClean{
+td.reviewImg,
+.reviewCtns,
+.reviewClean {
     text-align: left;
 }
 
-.reviewDiv .reviewClean, .leftside{
+.reviewDiv .reviewClean,
+.leftside {
     border-bottom: 1px solid rgb(219, 219, 219);
 }
 
-.reviewDiv .leftside{
+.reviewDiv .leftside {
     text-align: center;
 }
 
@@ -139,32 +145,33 @@ td.reviewImg, .reviewCtns, .reviewClean{
     width: 95%;
     padding: 8px 6px;
     border-radius: 3px;
-  }
+}
 
-.clickList, .p {
+.clickList,
+.p {
     position: relative;
     /* top: 10px; */
     right: 30px;
     text-align: right;
 }
 
-.DetailContainer{
+.DetailContainer {
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.DetailContainer h2{
+.DetailContainer h2 {
     position: relative;
     left: 30px;
     text-align: left;
 }
 
-.table_form{
+.table_form {
     align-items: center;
     float: right;
 }
 
-.tableform{
+.tableform {
     padding-right: 10%;
 }
 
@@ -173,7 +180,7 @@ td.reviewImg, .reviewCtns, .reviewClean{
     padding-left: 15%;
 }
 
-.DetailContainer form{
+.DetailContainer form {
     width: 500px;
     margin: auto;
     text-align: -webkit-center;
@@ -184,7 +191,7 @@ td.reviewImg, .reviewCtns, .reviewClean{
     padding-bottom: 50px;
 }
 
-a.ItemReviewList{
+a.ItemReviewList {
     padding-left: 95%;
     text-decoration: none;
 }

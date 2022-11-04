@@ -12,12 +12,11 @@ function MyMenu() {
             <div className="menu">
                 <ul>
                     {/* <li>나의 계정 설정</li> */}
-                    <li><Link to="/mypage/userstore">내 스토어</Link></li>
-                    <li><Route>등록상품 조회</Route></li>
+                    <li><Link to="/mypage/mybooking">내 대여이력</Link></li>
+                    <li><Link to="/mypage/mypageitem">등록상품 조회</Link></li>
                     <li><Link to="/mypage/review">후기 조회</Link></li>
-                    <li><Route>회원정보 수정</Route></li>
+                    <li><Link to="/mypage/userupdate">회원정보 수정</Link></li>
                 </ul>
-                <button className="warnBtn">신고하기</button>
             </div>
         </div>
     );
