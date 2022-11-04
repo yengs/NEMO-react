@@ -18,8 +18,9 @@ function MyReviewList() {
 
     return (
         <>
-            <div className="container">
+            <div className="rcontainer">
                 <h2 className="reviewListTitle">내가 작성한 리뷰</h2>
+                <hr className="lineH"></hr>
                 <table className="yourreview">
                     <colgroup>
                         <col width="15%" />
