@@ -1,37 +1,34 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./reviewDetail.css";
 import Shirt from '../img/shirt.jpg';
 
 function MyReviewList() {
 
     const [datas, setDatas] = useState([]);
-    const [reviewContents, setRebiewContents] = useState([]);
-
-    useEffect(() => {
-        axios.get('http://localhost:8080/api/review/myReview')
-            .then(response => {
-                console.log(response);
-                setDatas(response.data)
-            })
-            .catch(error => console.log(error));
-    }, []);
-
-    useEffect(() => {
-        axios.get('http://localhost:8080/api/review/myReview')
-            .then(response => {
-                console.log(response);
-                setDatas(response.data)
-            })
-            .catch(error => console.log(error));
-    }, []);
-
-    const handlerMoreReviewContents = () => {
-        if (reviewContents.length > 20) {
-
-        }
+    const [folding, setFolding] = useState(true);
+    const foldMessage = () => {
+        setFolding((show) => !show);
     }
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/review/myReview')
+            .then(response => {
+                console.log(response);
+                setDatas(response.data)
+            })
+            .catch(error => console.log(error));
+    }, []);
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/review/myReview')
+            .then(response => {
+                console.log(response);
+                setDatas(response.data)
+            })
+            .catch(error => console.log(error));
+    }, []);
+
 
     return (
         <>
@@ -64,8 +61,8 @@ function MyReviewList() {
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                     </td>
-                                    <td className="hiddenReview">{review.reviewContents < 21 ? review.reviewContents : review.reviewContents.slice(0, 15) + '...'}
-                                        <div> + 더보기 </div>
+                                    <td>{review.reviewContents < 21 ? review.reviewContents : review.reviewContents.slice(0, 15) + '...'}
+                                        <button className="moreReviewBtn" onClick={foldMessage} > {review.reviewContents ? "+ 더보기" : "접기"} </button>
                                     </td>
                                     <td>{review.reviewSatisfaction}</td>
                                 </tr>
