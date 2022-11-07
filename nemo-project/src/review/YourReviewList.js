@@ -1,10 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./reviewDetail.css";
 import Shirt from '../img/shirt.jpg';
 
 function YourReviewList() {
+
+    const [isMoreView, setIsMoreView] = useState<Boolean>(false);
+    const textLimit = useRef<Number>(20);
+
+    const commenter = useMemo(() => {
+        const shortReview: string =
+        comment.slice(0,textLimit.current);
+
+        if (comment.length > textLimit.current) {
+            if(isMoreView) {
+                return comment ; }
+                return shortReview;
+            }
+            return comment;
+        } 
+    [isMoreView]);
+
 
     const [datas, setDatas] = useState([]);
 
@@ -53,7 +70,7 @@ function YourReviewList() {
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                     </td>
-                                    <td>
+                                    <td className="reviewContents">
                                         <Link to={`/review/yourReview/${review.reviewNum}`}>{review.reviewContents}</Link>
                                     </td>
                                     <td>{review.reviewSatisfaction}</td>

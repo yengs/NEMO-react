@@ -58,7 +58,7 @@ function MyReviewList() {
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                     </td>
-                                    <td>
+                                    <td className="reviewContents">
                                         <Link to={`/review/myReview/${review.reviewNum}`}>{review.reviewContents}</Link>
                                     </td>
                                     <td>{review.reviewSatisfaction}</td>

@@ -73,3 +73,9 @@
     display:inline-flex;
     margin: 4px;
 }
+
+.reviewContents {
+    width:400px;
+    padding:10px;
+    font: 400 1rem/1.5rem 'NotoSansKR';
+}
