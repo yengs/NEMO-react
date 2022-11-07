@@ -19,6 +19,7 @@ function ItemUpload({ history }) {
     const [itemBottomsize, setitemBottomsize] = useState('');
     const [itemEtcsize, setitemEtcsize] = useState('');
     const [files, setFiles] = useState('');
+    const [imageSrc, setImageSrc] = useState('');
     // const [itemRentalperiod, setitemRentalperiod] = useState('');
 
     
@@ -32,9 +33,24 @@ function ItemUpload({ history }) {
     const handlerChangeitemTopsize=(e) => setitemTopsize(e.target.value);
     const handlerChangeitemBottomsize=(e) => setitemBottomsize(e.target.value);
     const handlerChangeitemEtcsize=(e) => setitemEtcsize(e.target.value);
-    const handlerChangefiles =(e) => setFiles(e.target.files[0]);
+    const handlerChangefiles =(e) => {
+        setFiles(e.target.files[0]);
+        encodeFileToBase64(e.target.files[0]);
+    }
+    
     // const handlerChangeitemRentalperiod=(e) => setitemRentalperiod(e.target.value);
 
+
+    const encodeFileToBase64 = (fileBlob) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+          reader.onload = () => {
+            setImageSrc(reader.result);
+            resolve();
+          };
+        });
+      };
 
 
     const [startDate, setStartDate] = useState(new Date("2022/10/28"));
@@ -214,6 +230,8 @@ function ItemUpload({ history }) {
                         
                         <tr>
                             <td>이미지</td>
+                            <div className="preview">
+                            {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
                             <td> <input className="form-control-image" type = "file" name="file" multiple onChange={handlerChangefiles}/></td>
                         </tr>
                        
