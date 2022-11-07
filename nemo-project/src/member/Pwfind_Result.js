@@ -39,7 +39,7 @@ function Pwfind_Result() {
                         <br/>
                         <div className="btnWrap">
                         <Link to ="/member/login" ><input type="submit" className="greenBtn btnlog"  value="로그인하러가기"  /></Link>
-                        <Link to="/id"><button  className="grayBtn btnlog">아이디 찾기</button></Link>
+                        <Link to="/member/id"><button  className="grayBtn btnlog">아이디 찾기</button></Link>
 
                 </div>
                     </table>

@@ -1,25 +1,26 @@
-import './mypage.css';
-import './mypageReview.css';
-
+import { Route } from "react-router-dom";
 import MyMenu from "./MyMenu";
 import MyUserStore from "./MyUserStore";
-import { Route } from "react-router-dom";
-import MypageReview from "./MypageReview";
-import MyPageItemDetail from "./MyPageItemDetail";
 
+import './mypage.css';
+import MypageReview from "./MypageReview";
+import UserUpdate from "./UserUpdate";
 import MyPageItem from "./MyPageItem";
+import MyPageItemDetail from './MyPageItemDetail';
+import MyBooking from "./MyBooking";
+
+
 
 function MyPage() {
     return(
         <div className="myPageWrap">
             <MyMenu />
-            <Route path="/mypage/userstore" component={MyUserStore} exact={true} />
-
+            <Route path="/mypage/mybooking" component={MyBooking} exact={true} />
+            <Route path="/mypage/mypageitem" component={MyPageItem} exact={true} />
             <Route path="/mypage/review" component={MypageReview} exact={true} />
-            {/* <Route path="/mypage/userstore" component={MyUserStore} exact={true} /> */}
-            {/* <MyPageItemDetail/> */}
-
-            <Route path="/mypage/myitemdetail" component={MyPageItemDetail} exact={true} />
+            <Route path="/mypage/mypageitemdetail/:itemNum" component={MyPageItemDetail} exact={true} />
+            <Route path="/mypage/userupdate" component={UserUpdate} exact={true} />
+            {/* <MyBooking /> */}
         </div>
     );
 }

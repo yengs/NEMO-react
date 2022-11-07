@@ -2,6 +2,10 @@ import { Link, Route } from 'react-router-dom';
 
 function MyMenu() {
 
+    const goSingo = () => {
+        window.location.href="/userstoreinfo/warn";
+    }
+
     return (
         <div className="myMenuWrap">
             <div className="memberImg"></div>
@@ -11,7 +15,7 @@ function MyMenu() {
             </div>
             <div className="menu">
                 <div></div>
-                <button className="warnBtn">신고하기</button>
+                <button className="warnBtn" onClick={goSingo}>신고하기</button>
             </div>
         </div>
     );
