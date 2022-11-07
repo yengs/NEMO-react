@@ -295,7 +295,7 @@ const MyPageItemContainer = styled.div`
   }
   
   .titleNplusBtn>h3 {
-    margin: 10px 0;
+    margin-top: 0;
     font-size: 23px;
   }
   
