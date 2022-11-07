@@ -84,8 +84,7 @@ function ItemDetail({ match, location, history }) {
                     {/* imgeDiv는 뺄 부분(사진모양 직관적으로 보려고 넣어둠)
                         사진을 대여자가 직접 넣은 게 뜨게끔 만들어야 함 */}
                     <div className="imageDiv">
-                        <p className="memberImg"></p>
-                        {/* <td>{data.itemImage}</td> */}
+                        <img className="memberImg" src={`../../files/${data.files}`}/>
                     </div>
 
                     <div className="tableform">
