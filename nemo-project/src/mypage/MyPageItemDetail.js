@@ -101,10 +101,9 @@ function MyPageItemDetail({ match, location, history }) {
     
 
     return (
-        <MyPageItemDetailContainer style={{width:'100%', height:'100%'}}>
+        <MyPageItemDetailContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
             <div className="mypageInnerPage myDetailPage">
                 <h3>내 상품 상세조회</h3>
-
 
                 <div className="myDetailImage">
                     {/* 이미지 부분 확인하려고 넣음! 나중에 아래 div처럼 다시 이미지 넣어야함
@@ -186,8 +185,9 @@ function MyPageItemDetail({ match, location, history }) {
                 </div>
             
                 <div className="btnDivMPID">
+                    <input type="button" id="list"   className="greyBtnMPID" value="목록으로" onClick={handlerClickList} />
                     <input type="button" id="edit"   className="greenBtnMPID" value="수정하기" onClick={handlerClickUpdate} />
-                    <input type="button" id="delete" className="redBtnMPID" value="삭제하기" onClick={handlerClickDelete} /> 
+                    <input type="button" id="delete" className="redBtnMPID" value="삭제하기" onClick={handlerClickDelete} />
                 </div>
 
             </div>    
