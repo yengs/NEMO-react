@@ -166,14 +166,14 @@ const MyBookingContainer = styled.div`
     }
 
     /* 마이페이지 내의 페이지 */
-.mypageInnerPage {
-    width: calc(100% - 230px);
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: rgb(245, 245, 245);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
+// .mypageInnerPage {
+//     width: calc(100% - 230px);
+//     padding: 20px;
+//     box-sizing: border-box;
+//     background-color: rgb(245, 245, 245);
+//     border-top-right-radius: 20px;
+//     border-bottom-right-radius: 20px;
+// }
 
 .mypageInnerPage .pageTitle {
     padding: 0;
