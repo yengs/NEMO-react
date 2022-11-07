@@ -18,6 +18,7 @@ function ItemUpload({ history }) {
     const [itemTopsize, setitemTopsize] = useState('');
     const [itemBottomsize, setitemBottomsize] = useState('');
     const [itemEtcsize, setitemEtcsize] = useState('');
+    const [files, setFiles] = useState('');
     // const [itemRentalperiod, setitemRentalperiod] = useState('');
 
     
@@ -31,6 +32,7 @@ function ItemUpload({ history }) {
     const handlerChangeitemTopsize=(e) => setitemTopsize(e.target.value);
     const handlerChangeitemBottomsize=(e) => setitemBottomsize(e.target.value);
     const handlerChangeitemEtcsize=(e) => setitemEtcsize(e.target.value);
+    const handlerChangefiles =(e) => setFiles(e.target.files[0]);
     // const handlerChangeitemRentalperiod=(e) => setitemRentalperiod(e.target.value);
 
 
@@ -43,9 +45,24 @@ function ItemUpload({ history }) {
     const handlerClickSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8080/api/item', { "itemName": itemName, "itemPrice": itemPrice,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
-                                                        "itemDetail":itemDetail,"itemWeather":itemWeather,"itemTopsize":itemTopsize,"itemBottomsize":itemBottomsize,
-                                                        "itemEtcsize":itemEtcsize,"itemRentalstart" :startDate,"itemRentalend":endDate})
+        const formData = new FormData();
+        formData.append('data', new Blob([JSON.stringify({"itemName": itemName, "itemPrice": itemPrice,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
+        "itemDetail":itemDetail,"itemWeather":itemWeather,"itemTopsize":itemTopsize,"itemBottomsize":itemBottomsize,
+        "itemEtcsize":itemEtcsize,"itemRentalstart" :startDate,"itemRentalend":endDate})], {
+            type: "application/json"
+        }));
+        // formData.append("files", new Blob(files, { type: "image/*" }));
+        formData.append("files", files);
+
+
+
+
+        axios.post('http://localhost:8080/api/item', 
+            formData, 
+            { headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            })
         .then(response => {
             if (response.status === 200) {
                 alert("정상적으로 등록되었습니다.");
@@ -197,7 +214,7 @@ function ItemUpload({ history }) {
                         
                         <tr>
                             <td>이미지</td>
-                            <td> <input className="form-control-image" type = "file" name="file" required/></td>
+                            <td> <input className="form-control-image" type = "file" name="file" multiple onChange={handlerChangefiles}/></td>
                         </tr>
                        
                                         
