@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./reviewDetail.css";
@@ -33,14 +33,13 @@ function YourReviewList() {
                     <thead>
                         <tr>
                             <th scope='col'>번호</th>
-
                             <th scope='col'>작성자</th>
                             <th scope='col'>이미지</th>
                             <th scope='col'>내용</th>
                             <th scope='col'>만족도</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="reviewBody">
                         {
                             datas && datas.map(review => (
                                 <tr key={review.reviewNum}>
@@ -48,7 +47,11 @@ function YourReviewList() {
                                     <td>{review.reviewId}</td>
                                     {/* <td>{review.reviewImage}</td> */}
                                     <td>
-                                        <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                        <div>
+                                            
+                                        </div>
+                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                     </td>
                                     <td>
                                         <Link to={`/review/yourReview/${review.reviewNum}`}>{review.reviewContents}</Link>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./reviewDetail.css";
+import Shirt from '../img/shirt.jpg';
 
 function MyReviewList() {
 
@@ -51,7 +52,12 @@ function MyReviewList() {
                             datas && datas.map(review => (
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
-                                    <td>{review.reviewImage}</td>
+                                    {/* <td>{review.reviewImage}</td> */}
+                                    <td>
+                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                    </td>
                                     <td>
                                         <Link to={`/review/myReview/${review.reviewNum}`}>{review.reviewContents}</Link>
                                     </td>
