@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./reviewDetail.css";
+import Shirt from '../img/shirt.jpg';
 
 function MyReviewList() {
 
@@ -15,10 +17,21 @@ function MyReviewList() {
             .catch(error => console.log(error));
     }, []);
 
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/review/myReview')
+            .then(response => {
+                console.log(response);
+                setDatas(response.data)
+            })
+            .catch(error => console.log(error));
+    }, []);
+
+
     return (
         <>
-            <div className="container">
-                <h1>내가 작성한 리뷰</h1>
+            <div className="rcontainer">
+                <h2 className="reviewListTitle">내가 작성한 리뷰</h2>
+                <hr className="lineH"></hr>
                 <table className="yourreview">
                     <colgroup>
                         <col width="15%" />
@@ -39,7 +52,12 @@ function MyReviewList() {
                             datas && datas.map(review => (
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
-                                    <td>{review.reviewImage}</td>
+                                    {/* <td>{review.reviewImage}</td> */}
+                                    <td>
+                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                    </td>
                                     <td>
                                         <Link to={`/review/myReview/${review.reviewNum}`}>{review.reviewContents}</Link>
                                     </td>
@@ -56,7 +74,6 @@ function MyReviewList() {
                         }
                     </tbody>
                 </table>
-                <Link className="reviewUploadBtn" to="/reivew/reviewWrite">후기 작성</Link>
             </div>
         </>
     );

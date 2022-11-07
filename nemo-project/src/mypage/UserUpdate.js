@@ -89,8 +89,8 @@ function UserUpdate() {
     };
 
     return (
+            <ContainerUserUpate style={{width:'100%', height:'100%'}}>
         <div className="mypageInnerPage UserUpate">
-            <ContainerUserUpate>
                 <div className="UserUpate">
                     <div className="pageTitle">
                         <h2>회원정보 수정</h2>
@@ -163,20 +163,26 @@ function UserUpdate() {
                             </table>
                         </div>
                         <div className="resignMembership">
-                            <Link to={`member/resignMembership`}>회원탈퇴하기</Link>
+                            {/* <Link to={`member/resignMembership`}>회원탈퇴하기</Link> */}
+                            <Link>회원탈퇴하기</Link>
                         </div>
                         <div className="btnWrap">
                             <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} />
-                            <input type="button" value="취소" className="grayBtn btn" />
+                            {/* <input type="button" value="취소" className="grayBtn btn"/> */}
                         </div>
                     </form>
                 </div>
-            </ContainerUserUpate>
         </div>
+            </ContainerUserUpate>
     )
 }
 
 const ContainerUserUpate = styled.div`
+.mypageInnerPage {
+    width: 100%;
+    height: 100%;
+}
+
   .UserUpate .pageTitle h2 {
     font-size: 2rem;
     font-weight: 300;
@@ -242,7 +248,7 @@ const ContainerUserUpate = styled.div`
 
   .resignMembership {
     margin-left: 108px;
-    margin-top: 30px;
+    margin-top: 25px;
   }
 
   .resignMembership a {

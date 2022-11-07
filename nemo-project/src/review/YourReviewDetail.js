@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+
 function YourReviewDetail({ match, location, history }) {
 
     const { reviewNum } = match.params;
