@@ -76,6 +76,10 @@
     border-bottom-right-radius: 20px;
 }
 
+.mypageInnerPage .titleNplusBtn h3 {
+    font-size: 1.17em;
+}
+
 .myStoreReview .reviewTitle {
     margin-left: 5px;
     margin-bottom: -8px;
@@ -129,20 +133,24 @@
 }
 
 .yourReviewListAboutStore th {
-    border-bottom: 1px solid #444444;
-    font-size: 15px;
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    font-size: 16px;
     height: 10px;
     width: 300px;
-    padding-top: 0px;
+}
+
+.yourReviewListAboutStore tr td {
+    border-bottom: 1px solid #bbb;
 }
 
 /* .yourReviewListAboutStore td {
     배경색을 줄까 말까 고민하다가 결국 그냥 안넣기로 함. 나중에 넣을수도 ?
 } */
 
-.tableWrap {
+/* .tableWrap {
     border-bottom: 1px solid #444444;
-}
+} */
 
 .marging {
     height: 50px;
@@ -185,7 +193,7 @@ table-layout: fixed;
     width: 45%;
 }
 
-.rReviewItemImg div {
+.rReviewItemImg {
     width: 52px;
     height: 52px;
     background-size: cover;
@@ -193,12 +201,14 @@ table-layout: fixed;
 }
 
 .rReviewContent {
-    font-size: 14px !important;
+    font-size: 13px !important;
     padding-bottom: 0px !important;
+    margin: 10px 0;
+    width: 100%;;
 }
 
-.rsatisfing div {
-    width: 150px;
+.rsatisfing {
+    width: 140px;
     font-size: 12px;
 }
 
