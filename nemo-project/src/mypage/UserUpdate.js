@@ -196,8 +196,8 @@ const ContainerUserUpate = styled.div`
   }
   
   .UserUpate .inputTable table tr>td {
-    padding-top: 11px;
-    padding-bottom: 11px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     border-top: 1px solid #ddd;
   }
   
@@ -242,9 +242,13 @@ const ContainerUserUpate = styled.div`
     text-align: center;
   }
 
+  .UserUpate .btnWrap .btn {
+    margin: 0;
+  }
+
   .resignMembership {
     margin-left: 108px;
-    margin-top: 30px;
+    margin-top: 8px;
   }
 
   .resignMembership a {
