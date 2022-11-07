@@ -79,3 +79,8 @@
     padding:10px;
     font: 400 1rem/1.5rem 'NotoSansKR';
 }
+
+.hiddenReview {
+    max-height: 54px;
+    overflow: hidden;
+}

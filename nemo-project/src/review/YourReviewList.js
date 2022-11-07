@@ -6,22 +6,9 @@ import Shirt from '../img/shirt.jpg';
 
 function YourReviewList() {
 
-    const [isMoreView, setIsMoreView] = useState<Boolean>(false);
-    const textLimit = useRef<Number>(20);
+    const handlerMoreReviewContents = () => {
 
-    const commenter = useMemo(() => {
-        const shortReview: string =
-        comment.slice(0,textLimit.current);
-
-        if (comment.length > textLimit.current) {
-            if(isMoreView) {
-                return comment ; }
-                return shortReview;
-            }
-            return comment;
-        } 
-    [isMoreView]);
-
+    }
 
     const [datas, setDatas] = useState([]);
 
@@ -64,15 +51,11 @@ function YourReviewList() {
                                     <td>{review.reviewId}</td>
                                     {/* <td>{review.reviewImage}</td> */}
                                     <td>
-                                        <div>
-                                            
-                                        </div>
+                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                     </td>
-                                    <td className="reviewContents">
-                                        <Link to={`/review/yourReview/${review.reviewNum}`}>{review.reviewContents}</Link>
-                                    </td>
+                                    <td>{review.reviewContents < 21 ? review.reviewContents : review.reviewContents.slice(0, 20) + '...'}</td>
                                     <td>{review.reviewSatisfaction}</td>
                                 </tr>
                             ))

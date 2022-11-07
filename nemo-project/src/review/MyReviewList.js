@@ -7,6 +7,7 @@ import Shirt from '../img/shirt.jpg';
 function MyReviewList() {
 
     const [datas, setDatas] = useState([]);
+    const [reviewContents, setRebiewContents] = useState([]);
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/review/myReview')
@@ -26,6 +27,11 @@ function MyReviewList() {
             .catch(error => console.log(error));
     }, []);
 
+    const handlerMoreReviewContents = () => {
+        if (reviewContents.length > 20) {
+
+        }
+    }
 
     return (
         <>
@@ -58,8 +64,8 @@ function MyReviewList() {
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                     </td>
-                                    <td className="reviewContents">
-                                        <Link to={`/review/myReview/${review.reviewNum}`}>{review.reviewContents}</Link>
+                                    <td className="hiddenReview">{review.reviewContents < 21 ? review.reviewContents : review.reviewContents.slice(0, 15) + '...'}
+                                        <div> + 더보기 </div>
                                     </td>
                                     <td>{review.reviewSatisfaction}</td>
                                 </tr>
