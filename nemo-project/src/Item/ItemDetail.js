@@ -159,15 +159,15 @@ function ItemDetail({ match, location, history }) {
                     </div>
                 </div>
                 
-                <div className="middleDiv" onClick={goUserStore}>
+                <div className="middleDiv">
                     {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
                         + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
                     <div className="writerDiv">
                         <h3>대여자</h3>
-                        <p className="memberImg"></p>
+                        <p className="memberImg" onClick={goUserStore}></p>
                     </div>
                     <div className="cleanDiv">
-                        <h4>{data.itemWriter}</h4>
+                        <h4 onClick={goUserStore}>{data.itemWriter}</h4>
                         클린지수 <span>65</span>%
                         <div style={{"width":"100%", "height":"13px", "backgroundColor":"rgb(53, 77, 119)", "borderRadius":"20px"}}></div>
                     </div>
