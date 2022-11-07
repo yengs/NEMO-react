@@ -101,7 +101,7 @@ function MyPageItemDetail({ match, location, history }) {
     
 
     return (
-        <MyPageItemDetailContainer style={{width:'100%', height:'100%'}}>
+        <MyPageItemDetailContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
             <div className="mypageInnerPage myDetailPage">
                 <h3>내 상품 상세조회</h3>
 
