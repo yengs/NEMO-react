@@ -81,33 +81,33 @@ function Header() {
                             <li className="dropdown">
                                 <a onClick={handlerGoTop}>상의</a>
                                 <div className="dropdown-content">
-                                    <a>반팔</a>
-                                    <a>긴팔</a>
-                                    <a>니트</a>
+                                    <Link to="/item/cate/반팔">반팔</Link>
+                                    <Link to="/item/cate/긴팔">긴팔</Link>
+                                    <Link to="/item/cate/니트">니트</Link>
                                 </div>
                             </li>
                             <li className="dropdown">
                                 <a onClick={handlerGoBottom}>하의</a>
                                 <div className="dropdown-content">
-                                    <a>바지</a>
-                                    <a>치마</a>
-                                    <a>반바지</a>
+                                    <Link to="/item/cate/바지">바지</Link>
+                                    <Link to="/item/cate/치마">치마</Link>
+                                    <Link to="/item/cate/반바지">반바지</Link>
                                 </div>
                             </li>
                             <li className="dropdown">
                                 <a onClick={handlerGoOuter}>아우터</a>
                                 <div className="dropdown-content">
-                                    <a>패딩</a>
-                                    <a>코트</a>
-                                    <a>바람막이</a>
+                                    <Link to="/item/cate/패딩">패딩</Link>
+                                    <Link to="/item/cate/코트">코트</Link>
+                                    <Link to="/item/cate/바람막이">바람막이</Link>
                                 </div>
                             </li>
                             <li className="dropdown">
                                 <a onClick={handlerGoDress}>원피스</a>
                                 <div className="dropdown-content">
-                                    <a>롱</a>
-                                    <a>미디</a>
-                                    <a>미니</a>
+                                    <Link to="/item/cate/롱">롱</Link>
+                                    <Link to="/item/cate/미디">미디</Link>
+                                    <Link to="/item/cate/미니">미니</Link>
                                 </div>
                             </li>
 
