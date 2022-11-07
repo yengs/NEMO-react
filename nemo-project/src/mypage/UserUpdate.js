@@ -89,8 +89,8 @@ function UserUpdate() {
     };
 
     return (
+            <ContainerUserUpate style={{width:'100%', height:'100%'}}>
         <div className="mypageInnerPage UserUpate">
-            <ContainerUserUpate>
                 <div className="UserUpate">
                     <div className="pageTitle">
                         <h2>회원정보 수정</h2>
@@ -172,12 +172,17 @@ function UserUpdate() {
                         </div>
                     </form>
                 </div>
-            </ContainerUserUpate>
         </div>
+            </ContainerUserUpate>
     )
 }
 
 const ContainerUserUpate = styled.div`
+.mypageInnerPage {
+    width: 100%;
+    height: 100%;
+}
+
   .UserUpate .pageTitle h2 {
     font-size: 2rem;
     font-weight: 300;
@@ -195,8 +200,8 @@ const ContainerUserUpate = styled.div`
   }
   
   .UserUpate .inputTable table tr>td {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 11px;
+    padding-bottom: 11px;
     border-top: 1px solid #ddd;
   }
   
@@ -241,13 +246,9 @@ const ContainerUserUpate = styled.div`
     text-align: center;
   }
 
-  .UserUpate .btnWrap .btn {
-    margin: 0;
-  }
-
   .resignMembership {
     margin-left: 108px;
-    margin-top: 8px;
+    margin-top: 25px;
   }
 
   .resignMembership a {
