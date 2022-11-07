@@ -8,9 +8,13 @@ import { FaLock } from "react-icons/fa";
 import { BsChatDotsFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 
 function Header() {
+
+    const [ itemsub, setItemsub ] = useState('');
+   
 
     const handlerLogin = () => {
         window.location.href = "/member/login";
@@ -18,6 +22,10 @@ function Header() {
 
     const handlerGoMain = () => {
         window.location.href = "/";
+    }
+
+    const handlerGoSub = (e) => {
+        setItemsub(e.target.value);
     }
 
     // 헤더 상품 카테고리 구분
@@ -37,7 +45,7 @@ function Header() {
     const handlerGoDress = () => {
         window.location.href = "/item/cate/원피스";
     }
-
+console.log(itemsub)
     return (
         <header>
             <div className="topHeader">
@@ -80,34 +88,44 @@ function Header() {
                         <ul className="nav">
                             <li className="dropdown">
                                 <a onClick={handlerGoTop}>상의</a>
-                                <div className="dropdown-content">
-                                    <Link to="/item/cate/반팔">반팔</Link>
-                                    <Link to="/item/cate/긴팔">긴팔</Link>
-                                    <Link to="/item/cate/니트">니트</Link>
+                                <div className="dropdown-content" key={itemsub}>
+                                <Link to={`/item/cate/sub/${itemsub}`}>
+                                    <option name = "itemsub" value = "반팔" onClick={handlerGoSub}>반팔</option>
+                                    <option name = "itemsub" value = "긴팔" onClick={handlerGoSub}>긴팔</option>
+                                    <option name = "itemsub" value = "니트" onClick={handlerGoSub}>니트</option>
+                                    <option name = "itemsub" value = "블라우스" onClick={handlerGoSub}>블라우스</option>
+                                </Link>
                                 </div>
                             </li>
                             <li className="dropdown">
                                 <a onClick={handlerGoBottom}>하의</a>
                                 <div className="dropdown-content">
-                                    <Link to="/item/cate/바지">바지</Link>
-                                    <Link to="/item/cate/치마">치마</Link>
-                                    <Link to="/item/cate/반바지">반바지</Link>
+                                <Link to={`/item/cate/sub/${itemsub}`}>
+                                    <option name = "itemsub" value = "바지" onClick={handlerGoSub}>바지</option>
+                                    <option name = "itemsub" value = "치마" onClick={handlerGoSub}>치마</option>
+                                    <option name = "itemsub" value = "반바지" onClick={handlerGoSub}>반바지</option>
+                                    <option name = "itemsub" value = "레깅스" onClick={handlerGoSub}>레깅스</option>    
+                                </Link>
                                 </div>
                             </li>
                             <li className="dropdown">
                                 <a onClick={handlerGoOuter}>아우터</a>
                                 <div className="dropdown-content">
-                                    <Link to="/item/cate/패딩">패딩</Link>
-                                    <Link to="/item/cate/코트">코트</Link>
-                                    <Link to="/item/cate/바람막이">바람막이</Link>
+                                <Link to={`/item/cate/sub/${itemsub}`}>
+                                    <option name = "itemsub" value = "패딩" onClick={handlerGoSub}>패딩</option>
+                                    <option name = "itemsub" value = "코트" onClick={handlerGoSub}>코트</option>
+                                    <option name = "itemsub" value = "바람막이" onClick={handlerGoSub}>바람막이</option>  
+                                </Link>
                                 </div>
                             </li>
                             <li className="dropdown">
                                 <a onClick={handlerGoDress}>원피스</a>
                                 <div className="dropdown-content">
-                                    <Link to="/item/cate/롱">롱</Link>
-                                    <Link to="/item/cate/미디">미디</Link>
-                                    <Link to="/item/cate/미니">미니</Link>
+                                <Link to={`/item/cate/sub/${itemsub}`}>
+                                    <option name = "itemsub" value = "롱" onClick={handlerGoSub}>롱</option>
+                                    <option name = "itemsub" value = "미디" onClick={handlerGoSub}>미디</option>
+                                    <option name = "itemsub" value = "미니" onClick={handlerGoSub}>미니</option>  
+                                </Link>
                                 </div>
                             </li>
 
