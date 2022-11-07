@@ -341,7 +341,7 @@ const MyPageItemContainer = styled.div`
   }
   
   .itemInfoWrap {
-    width: 22%;
+    width: 30%;
     height: 360px;
     background-color: rgb(250, 250, 250);
     border-radius: 10px;
