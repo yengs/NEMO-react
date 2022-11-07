@@ -16,7 +16,7 @@ function MyPageItem() {
             .catch(error => console.log(error));
     }, []);
     return (
-        <MyPageItemContainer style={{width:'100%', height:'100%'}}>
+        <MyPageItemContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
             <div className="mypageInnerPage2">
 
                 <div className="titleNplusBtn">

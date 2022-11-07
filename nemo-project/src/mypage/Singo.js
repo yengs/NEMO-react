@@ -17,7 +17,7 @@ function Singo({ history }) {
 
 
     return (
-        <SingoContainer style={{width:'100%', height:'100%'}}>
+        <SingoContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
             <div className="mypageInnerPage">
                 <div className="regiUserItemList">
                     <h3 className="pageTitle">신고하기</h3>
