@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, Navigate, Route } from "react-router-dom";
 import "./ItemDetail.css";
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 function ItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
@@ -67,6 +68,14 @@ function ItemDetail({ match, location, history }) {
     const goUserStore = () => {
         window.location.href = "/userstoreinfo";
     }
+
+    const handlerMaincate = () => {
+        window.location.href = `/item/cate/${data.itemMaincategory}`;
+    }
+
+    const handlerSubcate = () => {
+        window.location.href = `/item/cate/${data.itemSubcategory}`;
+    }
     
 
     return (
@@ -75,7 +84,16 @@ function ItemDetail({ match, location, history }) {
                  <h2>상품 상세</h2>
                  <div className="clickList">
                     <a className="goList" onClick={handlerClickList}>목록으로</a>
-                    <p className="cate">{data.itemMaincategory}{' > '}{data.itemSubcategory}</p>
+                    {/* <p className="cate">{data.itemMaincategory}{' > '}{data.itemSubcategory}</p> */}
+                   
+                   <div className="Breadcrumb">
+                    <Breadcrumb tag='nav' listTag='div'>
+                        <BreadcrumbItem tag='a' onClick={handlerMaincate}>{data.itemMaincategory}</BreadcrumbItem>
+                        {' > '}
+                        <BreadcrumbItem tag='a' onClick={handlerSubcate}>{data.itemSubcategory}</BreadcrumbItem>
+                    </Breadcrumb>
+                    </div>
+                   
                     <p>👀 {data.itemReadcount} 📅 {data.itemDate}</p>
                 </div>
                 <br></br>
@@ -140,15 +158,15 @@ function ItemDetail({ match, location, history }) {
                     </div>
                 </div>
                 
-                <div className="middleDiv" onClick={goUserStore}>
+                <div className="middleDiv">
                     {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
                         + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
                     <div className="writerDiv">
                         <h3>대여자</h3>
-                        <p className="memberImg"></p>
+                        <p className="memberImg" onClick={goUserStore}></p>
                     </div>
                     <div className="cleanDiv">
-                        <h4>{data.itemWriter}</h4>
+                        <h4 onClick={goUserStore}>{data.itemWriter}</h4>
                         클린지수 <span>65</span>%
                         <div style={{"width":"100%", "height":"13px", "backgroundColor":"rgb(53, 77, 119)", "borderRadius":"20px"}}></div>
                     </div>

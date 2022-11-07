@@ -1,0 +1,75 @@
+.rcontainer {
+    width: 900px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.myStoreReview .reviewTitle {
+    margin-left: 5px;
+    margin-bottom: -8px;
+    margin-top: 30px;
+}
+
+.YourReviewList table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+
+.myreview {
+    border-spacing: 0;
+    font-size: 15px;
+}
+
+.yourreview {
+    border-spacing: 0;
+    font-size: 15px;
+}
+
+.myreview th {
+    border-bottom: 1px solid #444444;
+    font-size: 15px;
+    height: 10px;
+    width: 300px;
+    padding-top: 0px;
+}
+
+.myreview td {
+    border-bottom: 1px solid #444444;
+    font-size: 15px;
+    height: 10px;
+    width: 300px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.yourreview th {
+    border-bottom: 1px solid #444444;
+    font-size: 15px;
+    height: 10px;
+    width: 300px;
+    padding-top: 0px;
+}
+
+.yourreview td {
+    border-bottom: 1px solid #444444;
+    font-size: 15px;
+    height: 10px;
+    width: 300px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.lineH {
+    height: 3.1px !important;
+    width: 100%;
+    color: #747474;
+}
+
+.reviewListItemImg {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+    display:inline-flex;
+    margin: 4px;
+}
