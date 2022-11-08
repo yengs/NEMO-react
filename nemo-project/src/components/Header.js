@@ -5,20 +5,17 @@ import { IconContext } from "react-icons";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaTemperatureHigh } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
+import { FaLockOpen } from "react-icons/fa";
 import { BsChatDotsFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 
+
 function Header() {
 
     const [ itemsub, setItemsub ] = useState('');
-   
-
-    const handlerLogin = () => {
-        window.location.href = "/member/login";
-    }
 
     const handlerGoMain = () => {
         window.location.href = "/";
@@ -45,6 +42,14 @@ function Header() {
     const handlerGoDress = () => {
         window.location.href = "/item/cate/원피스";
     }
+
+
+    const sessionCheck = () => {
+        console.log("토큰확인::::"+sessionStorage.getItem('jwtToken'));
+        console.log("멤버아이디::::"+sessionStorage.getItem('memberName'));
+    }
+
+
 console.log(itemsub)
     return (
         <header>
@@ -56,6 +61,12 @@ console.log(itemsub)
                     <h2>내일 모입지?</h2>
                 </div>
                 <div className="member">
+                    <button onClick={sessionCheck}>
+                        <IconContext.Provider value={{ className: "headerIcons" }}>
+                            <FaLock />
+                        </IconContext.Provider>
+                        <p>세션확인</p>
+                    </button>
                     <Link to="/member/login">
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaLock />
@@ -74,6 +85,16 @@ console.log(itemsub)
                         </IconContext.Provider>
                         <p>내모톡</p>
                     </Link>
+
+                    {
+
+                        <Link to="/admin/dec">
+                            <IconContext.Provider value={{ className: "headerIcons" }}>
+                                <FaLockOpen />
+                            </IconContext.Provider>
+                            <p>신고관리</p>
+                        </Link>
+                    }
                 </div>
             </div>
             <div className='underHeader'>

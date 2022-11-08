@@ -90,8 +90,8 @@ function UserUpdate() {
 
 
     return (
-            <ContainerUserUpate style={{width:'calc(100% - 230px)', height:'100%'}}>
-        <div className="mypageInnerPage UserUpate">
+        <ContainerUserUpate style={{ width: 'calc(100% - 230px)', height: '100%' }}>
+            <div className="mypageInnerPage UserUpate">
                 <div className="UserUpate">
                     <div className="pageTitle">
                         <h2>회원정보 수정</h2>
@@ -103,42 +103,42 @@ function UserUpdate() {
                                     <tr>
                                         <td>이름</td>
                                         <td>
-                                            <input type="text" name="mName" value={data.mName} readOnly />
+                                            <input type="text" name="mName" value={sessionStorage.getItem('memberName')} readOnly disabled />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td className="requiredMark">닉네임</td>
                                         <td>
-                                            <input type="text" name="mNickname" value={mNickname} onChange={handlerChangeNickname} required />
+                                            <input type="text" name="mNickname" value={sessionStorage.getItem('memberNickname')} onChange={handlerChangeNickname} required />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td>아이디</td>
                                         <td>
-                                            <input type="text" name="mId" value={data.mId} readOnly />
+                                            <input type="text" name="mId" value={sessionStorage.getItem('memberId')} readOnly disabled />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td className="requiredMark">패스워드</td>
                                         <td>
-                                            <input type="password" name="mPw" value={mPw} onChange={handlerChangePw} required />
+                                            <input type="password" name="mPw" value="" onChange={handlerChangePw} required />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td className="requiredMark">패스워드확인</td>
                                         <td>
-                                            <input type="password" name="mIdCheck" value={mPwCheck} onChange={handlerChangePwCheck} required />
+                                            <input type="password" name="mIdCheck" value="" onChange={handlerChangePwCheck} required />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td className="requiredMark">이메일</td>
                                         <td>
-                                            <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} required />
+                                            <input type="text" name="mEmail" value={sessionStorage.getItem('memberEmail')} onChange={handlerChangeEmail} required />
                                         </td>
                                         <td className="updateTableBtn">
                                             <button className="beigeBtn btn">인증하기</button>
@@ -147,14 +147,14 @@ function UserUpdate() {
                                     <tr>
                                         <td>핸드폰 번호</td>
                                         <td>
-                                            <input type="text" name="mPhone" value={mPhone} onChange={handlerChangePhone} />
+                                            <input type="text" name="mPhone" value={sessionStorage.getItem('memberPhone')} onChange={handlerChangePhone} />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr className="updateAddress">
                                         <td className="requiredMark">주소</td>
                                         <td>
-                                            <input type="text" name="mAddress" value={mAddress} required />
+                                            <input type="text" name="mAddress" value={sessionStorage.getItem('memberAddress')} required />
                                         </td>
                                         <td className="updateTableBtn">
                                             <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
@@ -173,8 +173,8 @@ function UserUpdate() {
                         </div>
                     </form>
                 </div>
-        </div>
-            </ContainerUserUpate>
+            </div>
+        </ContainerUserUpate>
     )
 }
 
