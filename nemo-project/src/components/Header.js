@@ -88,6 +88,7 @@ console.log(itemsub)
                         <ul className="nav">
                             <li className="dropdown">
                                 <a onClick={handlerGoTop}>상의</a>
+
                                 <div className="dropdown-content" key={itemsub}>
                                 <Link to={`/item/cate/sub/${itemsub}`}>
                                     <option name = "itemsub" value = "반팔" onClick={handlerGoSub}>반팔</option>
