@@ -28,10 +28,6 @@ import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 
-
-
-
-
 function App() {
 
   return (
@@ -78,14 +74,12 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
+        <Route path="/dec/detail" component={DecDetail} />
         <Route path="/userstoreinfo" component={MyPageForOthers} />
         
-        
-
       </div>
       <Footer />
     </div>
   );
 }
-
 export default App;

@@ -3,19 +3,32 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./reviewDetail.css";
 import Shirt from '../img/shirt.jpg';
+import Paging from "../pagination/Paging";
 
 function YourReviewList() {
 
+    const ITEM_COUNT_PER_PAGE = 10;
+
     const [datas, setDatas] = useState([]);
+    const [count, setCount] = useState(0);
+    const [page, setPage] = useState(1);
+    const [items, setItems] = useState([])
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/review/yourReview')
             .then(response => {
                 console.log(response);
                 setDatas(response.data);
+                setCount(response.data.length);
+                setItems(response.data.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
             })
             .catch(error => console.log(error));
     }, []);
+
+    const changePage = page => {
+        setPage(page);
+        setItems(datas.slice((page-1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+    };
 
     return (
         <>
@@ -41,7 +54,7 @@ function YourReviewList() {
                     </thead>
                     <tbody className="reviewBody">
                         {
-                            datas && datas.map(review => (
+                            items && items.map(review => (
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
                                     <td>{review.reviewId}</td>
@@ -69,6 +82,9 @@ function YourReviewList() {
                         }
                     </tbody>
                 </table>
+                <div>
+                    <Paging page={page} count={count} setPage={changePage} />
+                </div>
             </div>
         </>
     );

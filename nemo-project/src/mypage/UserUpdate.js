@@ -88,6 +88,7 @@ function UserUpdate() {
             });
     };
 
+
     return (
             <ContainerUserUpate style={{width:'calc(100% - 230px)', height:'100%'}}>
         <div className="mypageInnerPage UserUpate">
