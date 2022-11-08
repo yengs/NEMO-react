@@ -14,7 +14,7 @@
     width: 100%;
     border-top: 1px solid #444444;
     border-collapse: collapse;
-  }
+}
 
 .myreview {
     border-spacing: 0;
@@ -54,8 +54,8 @@
 .yourreview td {
     border-bottom: 1px solid #444444;
     font-size: 15px;
-    height: 10px;
-    width: 300px;
+    height: 5px;
+    width: 150px;
     padding-top: 10px;
     text-align: center;
 }
@@ -70,6 +70,37 @@
     width: 50px;
     height: 50px;
     margin: auto;
-    display:inline-flex;
+    display: inline-flex;
     margin: 4px;
+}
+
+/* 리뷰 내용 더보기 관련 css */
+.moreBtn {
+        padding: 0;
+        color: cadetblue;
+        font-size: 13px;
+        display: block;
+        margin-top: -10px;
+        border: none;
+        background-color: #ffffff;
+}
+
+.reviewContents p {
+    white-space: normal;
+    display: block;
+    max-height: 100%;
+    width: 405px;
+    font-size: 13px;
+    color: rgb(85, 85, 85);
+    text-align: left;
+}
+
+.reviewContents p.close {
+    display: -webkit-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-align: left;
 }
