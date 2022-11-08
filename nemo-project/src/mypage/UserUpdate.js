@@ -34,12 +34,12 @@ function UserUpdate() {
     };
 
     const [data, setDatas] = useState([]);
-    const [mNickname, setMnickname] = useState('');
+    const [mNickname, setMnickname] = useState(sessionStorage.getItem('memberNickname'));
     const [mPw, setMpw] = useState('');
     const [mPwCheck, setMpwCheck] = useState('');
-    const [mEmail, setMemail] = useState('');
-    const [mPhone, setMphone] = useState('');
-    const [mAddress, setMaddress] = useState('');
+    const [mEmail, setMemail] = useState(sessionStorage.getItem('memberEmail'));
+    const [mPhone, setMphone] = useState(sessionStorage.getItem('memberPhone'));
+    const [mAddress, setMaddress] = useState(sessionStorage.getItem('memberAddress'));
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/mypage/userupdate')
@@ -73,7 +73,7 @@ function UserUpdate() {
             "memberAddress": mAddress
         }
 
-        axios.put('http://localhost:8080/api/mypage/userupdate', memberInfo)
+        axios.put('http://localhost:8080/api/member/update', memberInfo)
             .then(response => {
                 if (response.status === 200) {
                     alert("수정완료");
@@ -110,7 +110,7 @@ function UserUpdate() {
                                     <tr>
                                         <td className="requiredMark">닉네임</td>
                                         <td>
-                                            <input type="text" name="mNickname" value={sessionStorage.getItem('memberNickname')} onChange={handlerChangeNickname} required />
+                                            <input type="text" name="mNickname" value={mNickname} onChange={handlerChangeNickname} required />
                                         </td>
                                         <td></td>
                                     </tr>
@@ -124,21 +124,21 @@ function UserUpdate() {
                                     <tr>
                                         <td className="requiredMark">패스워드</td>
                                         <td>
-                                            <input type="password" name="mPw" value="" onChange={handlerChangePw} required />
+                                            <input type="password" name="mPw" value={mPw} onChange={handlerChangePw} required />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr>
                                         <td className="requiredMark">패스워드확인</td>
                                         <td>
-                                            <input type="password" name="mIdCheck" value="" onChange={handlerChangePwCheck} required />
+                                            <input type="password" name="mIdCheck" value={mPwCheck} onChange={handlerChangePwCheck} required />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td className="requiredMark">이메일</td>
+                                        <td>이메일</td>
                                         <td>
-                                            <input type="text" name="mEmail" value={sessionStorage.getItem('memberEmail')} onChange={handlerChangeEmail} required />
+                                            <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} disabled />
                                         </td>
                                         <td className="updateTableBtn">
                                             <button className="beigeBtn btn">인증하기</button>
@@ -147,14 +147,14 @@ function UserUpdate() {
                                     <tr>
                                         <td>핸드폰 번호</td>
                                         <td>
-                                            <input type="text" name="mPhone" value={sessionStorage.getItem('memberPhone')} onChange={handlerChangePhone} />
+                                            <input type="text" name="mPhone" value={mPhone} onChange={handlerChangePhone} />
                                         </td>
                                         <td></td>
                                     </tr>
                                     <tr className="updateAddress">
                                         <td className="requiredMark">주소</td>
                                         <td>
-                                            <input type="text" name="mAddress" value={sessionStorage.getItem('memberAddress')} required />
+                                            <input type="text" name="mAddress" value={mAddress} required />
                                         </td>
                                         <td className="updateTableBtn">
                                             <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
