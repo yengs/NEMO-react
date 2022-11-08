@@ -25,29 +25,6 @@ function Dec() {
                     </thead>
                     <tbody>
                         <tr>
-                        <td className='Dec'>1</td>
-                        <td className='Dec'>선희곤듀</td>
-                        <td className='Dec'>비방 및 언어폭력</td>
-                            <td className='Dec'>예린</td>
-                            <td className='Dec'><Link >상세보기</Link></td>
-                            <td className='Dec'><tr><td>
-                                <button className="RedBtn btnBok">접수</button></td>
-                                <td><button className="grayBtn btnBok">취소</button></td></tr></td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                        <td className='Dec'>2</td>
-                        <td className='Dec'>이초롱</td>
-                        <td className='Dec'>광고(상점 및 타사이트 홍보)</td>
-                            <td className='Dec'>임수진</td>
-                            <td className='Dec'><Link>상세보기</Link></td>
-                            <td className='Dec'><tr><td>
-                                <button className="RedBtn btnBok">접수</button></td><td><button className="grayBtn btnBok">취소</button></td></tr></td>                        
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
                         <td className='Dec'  >3</td>
                         <td className='Dec'  >최나연</td>
                         <td className='Dec'  >거래 금지 품목</td>
