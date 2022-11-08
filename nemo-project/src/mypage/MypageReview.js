@@ -42,7 +42,7 @@ function MypageReview() {
 
 
     return (
-        <MypageReviewContainer style={{width:'100%', height:'100%'}}>
+        <MypageReviewContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
         <div className="mypageInnerPage">
             {/* <h2 className='reviewMainTitle'>후기 조회</h2> */}
             <div className="myStoreReview">

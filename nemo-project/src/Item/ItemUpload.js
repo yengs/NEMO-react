@@ -82,7 +82,7 @@ function ItemUpload({ history }) {
         .then(response => {
             if (response.status === 200) {
                 alert("정상적으로 등록되었습니다.");
-                history.push("/");
+                window.location.href = `/item/cate/${itemMaincategory}`;
             } else {
                 alert("등록에 실패했습니다.");
                 return;
