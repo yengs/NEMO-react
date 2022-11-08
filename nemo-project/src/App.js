@@ -74,7 +74,7 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-        <Route path="/dec/detail" component={DecDetail} />
+        {/* <Route path="/dec/detail" component={DecDetail} /> */}
         <Route path="/userstoreinfo" component={MyPageForOthers} />
         
       </div>

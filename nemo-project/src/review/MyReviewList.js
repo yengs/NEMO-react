@@ -7,21 +7,21 @@ import Paging from "../pagination/Paging";
 
 function MyReviewList() {
 
-    const ITEM_COUNT_PER_PAGE = 10; 
+    const ITEM_COUNT_PER_PAGE = 10;
 
-    const [ datas, setDatas ] = useState([]);       // 리뷰 전체 데이터
-    const [ count, setCount ] = useState(0);        // 전체 개수
-    const [ page, setPage ] = useState(1);          // 보여지는 페이지
-    const [ items, setItems ] = useState([]);       // 페이징을 통해서 보여줄 데이터
+    const [datas, setDatas] = useState([]);       // 리뷰 전체 데이터
+    const [count, setCount] = useState(0);        // 전체 개수
+    const [page, setPage] = useState(1);          // 보여지는 페이지
+    const [items, setItems] = useState([]);       // 페이징을 통해서 보여줄 데이터
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/review/myReview')
             .then(response => {
-                console.log(response);
-                setDatas(response.data);    // 리뷰 전체 데이터 설정
-                setCount(response.data.length);
-                setItems(response.data.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
-                
+                const list = response.data.map(data => ({ ...data, closed: true }));
+                console.log(list);
+                setDatas(list);    // 리뷰 전체 데이터 설정
+                setCount(list.length);
+                setItems(list.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
             })
             .catch(error => console.log(error));
     }, []);
@@ -31,13 +31,11 @@ function MyReviewList() {
         setItems(datas.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
     };
 
-    const [closed, setClosed] = useState(false);
-
-    const handelrMoreBtn = () => {
-        // if (review.reviewNum === )
-        setClosed(!closed);
-    }
-
+    const handelrMoreBtn = (reviewNum) => {
+        setItems(items.map(item =>
+            item.reviewNum === reviewNum ? ({ ...item, closed: !item.closed }) : item
+        ));
+    };
 
     return (
         <>
@@ -72,9 +70,9 @@ function MyReviewList() {
                                     </td>
                                     <td>
                                         <div className="reviewContents">
-                                            <p className={closed ? " " : "close"}>{review.reviewContents}</p>
+                                            <p className={review.closed ? "close" : ""}>{review.reviewContents}</p>
                                         </div>
-                                        <button className="moreBtn" onClick={handelrMoreBtn}>{closed ? " [ 닫기 ] " : " [ + 더보기 ] "}</button>
+                                        <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                     </td>
                                     <td>{review.reviewSatisfaction}</td>
                                 </tr>
@@ -83,7 +81,7 @@ function MyReviewList() {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="4">데이터가 없습니다</td>
+                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }

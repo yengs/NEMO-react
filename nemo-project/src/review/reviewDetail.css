@@ -92,6 +92,7 @@
     width: 405px;
     font-size: 13px;
     color: rgb(85, 85, 85);
+    text-align: left;
 }
 
 .reviewContents p.close {
@@ -101,4 +102,5 @@
     text-overflow: ellipsis;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    text-align: left;
 }
