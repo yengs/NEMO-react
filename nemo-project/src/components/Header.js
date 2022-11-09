@@ -46,7 +46,7 @@ function Header() {
                 <div className="logo" onClick={handlerGoMain}>
                     <img src={logo} alt="로고"></img>
                 </div>
-                <div className="mainTitle">
+                <div className="mainTitle" onClick={handlerGoMain}>
                     <h2>내일 모입지?</h2>
                 </div>
                 <div>{sessionStorage.getItem("jwtToken") != null ?
