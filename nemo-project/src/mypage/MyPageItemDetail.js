@@ -274,9 +274,21 @@ const MyPageItemDetailContainer = styled.div`
     background-color: rgb(100, 165, 127);
     color: #fff;
     font-weight: 100;
-    margin: 20px 15px 0;
+    margin: 20px 5px 0;
     font-size: 15px;
-    padding: 10px 50px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: 100;
+  }
+
+  .greyBtnMPID {
+    border: #999;
+    background-color: #999;
+    color: #fff;
+    font-weight: 100;
+    margin: 20px 5px 0;
+    font-size: 15px;
+    padding: 10px 20px;
     border-radius: 3px;
     font-weight: 100;
   }
@@ -286,9 +298,9 @@ const MyPageItemDetailContainer = styled.div`
     background-color: rgb(196, 98, 98);
     color: #fff;
     font-weight: 100;
-    margin: 20px 15px 0;
+    margin: 20px 5px 0;
     font-size: 15px;
-    padding: 10px 50px;
+    padding: 10px 20px;
     border-radius: 3px;
     font-weight: 100;
   }
