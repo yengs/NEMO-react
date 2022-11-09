@@ -13,24 +13,13 @@ import { useState } from 'react';
 
 function Header() {
 
-    const [ itemsub, setItemsub ] = useState('');
-   
-    
     const handlerLogout = () => {
         sessionStorage.clear();
         window.location.href = "/";
     }
 
-    // const handlerLogout = () => {
-    //     console.log(sessionStorage.getItem("jwtToken"));
-    // }
-
     const handlerGoMain = () => {
         window.location.href = "/";
-    }
-
-    const handlerGoSub = (e) => {
-        setItemsub(e.target.value);
     }
 
     // 헤더 상품 카테고리 구분
@@ -50,7 +39,7 @@ function Header() {
     const handlerGoDress = () => {
         window.location.href = "/item/cate/원피스";
     }
-console.log(itemsub)
+
     return (
         <header>
             <div className="topHeader">
@@ -109,57 +98,39 @@ console.log(itemsub)
                     <div className='navWrap'>
                         <ul className="nav">
                             <li className="dropdown">
-                                <a onClick={handlerGoTop}>상의</a>
-
-                                <div className="dropdown-content" key={itemsub}>
-                                <Link to={`/item/cate/sub/${itemsub}`}>
-                                    <option name = "itemsub" value = "반팔" onClick={handlerGoSub}>반팔</option>
-                                    <option name = "itemsub" value = "긴팔" onClick={handlerGoSub}>긴팔</option>
-                                    <option name = "itemsub" value = "니트" onClick={handlerGoSub}>니트</option>
-                                    <option name = "itemsub" value = "블라우스" onClick={handlerGoSub}>블라우스</option>
-                                </Link>
+                            <a onClick={handlerGoTop}>상의</a>
+                                <div class="dropdown-content">
+                                    <a href='/item/cate/sub/반팔'>반팔</a>
+                                    <a href='/item/cate/sub/긴팔'>긴팔</a>
+                                    <a href='/item/cate/sub/니트'>니트</a>
+                                    <a href='/item/cate/sub/블라우스'>블라우스</a>
                                 </div>
                             </li>
-                            <li className="dropdown">
+                            <li class="dropdown">
                                 <a onClick={handlerGoBottom}>하의</a>
-                                <div className="dropdown-content">
-                                <Link to={`/item/cate/sub/${itemsub}`}>
-                                    <option name = "itemsub" value = "바지" onClick={handlerGoSub}>바지</option>
-                                    <option name = "itemsub" value = "치마" onClick={handlerGoSub}>치마</option>
-                                    <option name = "itemsub" value = "반바지" onClick={handlerGoSub}>반바지</option>
-                                    <option name = "itemsub" value = "레깅스" onClick={handlerGoSub}>레깅스</option>    
-                                </Link>
-
+                                <div class="dropdown-content">
+                                    <a href='/item/cate/sub/바지'>바지</a>
+                                    <a href='/item/cate/sub/치마'>치마</a>
+                                    <a href='/item/cate/sub/반바지'>반바지</a>
+                                    <a href='/item/cate/sub/레깅스'>레깅스</a>
                                 </div>
                             </li>
-                            <li className="dropdown">
+                            <li class="dropdown">
                                 <a onClick={handlerGoOuter}>아우터</a>
-                                <div className="dropdown-content">
-                                <Link to={`/item/cate/sub/${itemsub}`}>
-                                    <option name = "itemsub" value = "패딩" onClick={handlerGoSub}>패딩</option>
-                                    <option name = "itemsub" value = "코트" onClick={handlerGoSub}>코트</option>
-                                    <option name = "itemsub" value = "바람막이" onClick={handlerGoSub}>바람막이</option>  
-                                </Link>
-
+                                <div class="dropdown-content">
+                                    <a href='/item/cate/sub/패딩'>패딩</a>
+                                    <a href='/item/cate/sub/코트'>코트</a>
+                                    <a href='/item/cate/sub/바람막이'>바람막이</a>
                                 </div>
                             </li>
-                            <li className="dropdown">
+                            <li class="dropdown">
                                 <a onClick={handlerGoDress}>원피스</a>
-                                <div className="dropdown-content">
-                                <Link to={`/item/cate/sub/${itemsub}`}>
-                                    <option name = "itemsub" value = "롱" onClick={handlerGoSub}>롱</option>
-                                    <option name = "itemsub" value = "미디" onClick={handlerGoSub}>미디</option>
-                                    <option name = "itemsub" value = "미니" onClick={handlerGoSub}>미니</option>  
-                                </Link>
-
+                                <div class="dropdown-content">
+                                    <a href='/item/cate/sub/롱'>롱</a>
+                                    <a href='/item/cate/sub/미디'>미디</a>
+                                    <a href='/item/cate/sub/미니'>미니</a>
                                 </div>
                             </li>
-
-                            {/* <li onClick={handlerGoTop}>상의</li>
-                            <li onClick={handlerGoBottom}>하의</li>
-                            <li onClick={handlerGoOuter}>아우터</li>
-                            <li onClick={handlerGoDress}>원피스</li> */}
-
                         </ul>
                     </div>
                     <div className="weather">
