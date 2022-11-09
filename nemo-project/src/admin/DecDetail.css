@@ -1,0 +1,45 @@
+
+.decDetailcontainer h3 {
+    position: fixed;
+
+}
+
+.decDetailContainer form {
+    display: inline;
+    justify-content: center;
+    align-content: center;
+}
+
+.decDetailContainer .decDetail{
+    width: 150%;
+    height: 100%;
+    border-spacing: 0;
+}
+
+.decDetail{
+    border-collapse: collapse;
+    text-indent: initial;
+  }
+
+.decDetailContainer tr,th,td {
+    border: 1px solid #444444;
+    width: auto;
+    vertical-align: middle;
+    align-content: center;
+    text-align: center;
+  }
+
+.decDetailGrayBtn{
+    border: 2px solid rgb(128, 128, 128);
+    background-color: rgb(128, 128, 128);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    border-radius: 3px;
+    width: 70px;
+    padding: 5px 10px;
+    position: absolute;
+    right: 0px;
+    margin-top: 20px;
+}
+
+

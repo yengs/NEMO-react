@@ -15,10 +15,15 @@ function Header() {
 
     const [ itemsub, setItemsub ] = useState('');
    
-
-    const handlerLogin = () => {
-        window.location.href = "/member/login";
+    
+    const handlerLogout = () => {
+        sessionStorage.clear();
+        window.location.href = "/";
     }
+
+    // const handlerLogout = () => {
+    //     console.log(sessionStorage.getItem("jwtToken"));
+    // }
 
     const handlerGoMain = () => {
         window.location.href = "/";
@@ -55,12 +60,13 @@ console.log(itemsub)
                 <div className="mainTitle">
                     <h2>내일 모입지?</h2>
                 </div>
+                <div>{sessionStorage.getItem("jwtToken") != null ?
                 <div className="member">
-                    <Link to="/member/login">
+                    <Link to="/member/login" onClick={handlerLogout}>
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaLock />
                         </IconContext.Provider>
-                        <p>로그인</p>
+                        <p>로그아웃</p>
                     </Link>
                     <Link to="/mypage/mybooking">
                         <IconContext.Provider value={{ className: "headerIcons" }}>
@@ -74,7 +80,23 @@ console.log(itemsub)
                         </IconContext.Provider>
                         <p>내모톡</p>
                     </Link>
-                </div>
+                </div> 
+                :
+                <div className="member">
+                <Link to="/member/login">
+                    <IconContext.Provider value={{ className: "headerIcons" }}>
+                        <FaLock />
+                    </IconContext.Provider>
+                    <p>로그인</p>
+                </Link>
+                <Link to="/chat">
+                    <IconContext.Provider value={{ className: "headerIcons" }}>
+                        <BsChatDotsFill />
+                    </IconContext.Provider>
+                    <p>내모톡</p>
+                </Link>
+            </div>
+                }</div>
             </div>
             <div className='underHeader'>
                 <div className="navBar">
@@ -88,6 +110,7 @@ console.log(itemsub)
                         <ul className="nav">
                             <li className="dropdown">
                                 <a onClick={handlerGoTop}>상의</a>
+
                                 <div className="dropdown-content" key={itemsub}>
                                 <Link to={`/item/cate/sub/${itemsub}`}>
                                     <option name = "itemsub" value = "반팔" onClick={handlerGoSub}>반팔</option>
@@ -106,6 +129,7 @@ console.log(itemsub)
                                     <option name = "itemsub" value = "반바지" onClick={handlerGoSub}>반바지</option>
                                     <option name = "itemsub" value = "레깅스" onClick={handlerGoSub}>레깅스</option>    
                                 </Link>
+
                                 </div>
                             </li>
                             <li className="dropdown">
@@ -116,6 +140,7 @@ console.log(itemsub)
                                     <option name = "itemsub" value = "코트" onClick={handlerGoSub}>코트</option>
                                     <option name = "itemsub" value = "바람막이" onClick={handlerGoSub}>바람막이</option>  
                                 </Link>
+
                                 </div>
                             </li>
                             <li className="dropdown">
@@ -126,6 +151,7 @@ console.log(itemsub)
                                     <option name = "itemsub" value = "미디" onClick={handlerGoSub}>미디</option>
                                     <option name = "itemsub" value = "미니" onClick={handlerGoSub}>미니</option>  
                                 </Link>
+
                                 </div>
                             </li>
 
