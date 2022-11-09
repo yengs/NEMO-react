@@ -48,10 +48,6 @@ function UserUpdate({history}) {
     const [memberPhone, setMemberPhone] = useState('');
     const [memberAddress, setMemberAddress] = useState('');
 
-    const memberDate = datas.memberDate;
-    const memberUser = datas.memberUser;
-    const memberMailkey = datas.memberMailkey;
-
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
@@ -133,7 +129,7 @@ function UserUpdate({history}) {
                                     <tr>
                                         <td>아이디</td>
                                         <td>
-                                            <input type="text" name="mId" value={memberId} readOnly disabled />
+                                            <input type="text" name="mId" value={datas.memberId} readOnly disabled />
                                         </td>
                                         <td></td>
                                     </tr>
@@ -154,7 +150,7 @@ function UserUpdate({history}) {
                                     <tr>
                                         <td>이메일</td>
                                         <td>
-                                            <input type="text" name="mEmail" value={memberEmail} disabled />
+                                            <input type="text" name="mEmail" value={datas.memberEmail} disabled />
                                         </td>
                                         <td className="updateTableBtn">
                                             <button className="beigeBtn btn">인증하기</button>
