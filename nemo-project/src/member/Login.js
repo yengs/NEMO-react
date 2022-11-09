@@ -30,8 +30,10 @@ function Login({ history }) {
                     sessionStorage.setItem("memberPhone", response.data.memberPhone);
                     sessionStorage.setItem("memberWarning", response.data.memberWarning);
                     sessionStorage.setItem("memberId", id);
-                    alert("로그인완료");
 
+                    
+                    alert("로그인완료");
+                    
                     history.push("/");
                 } else {
                     sessionStorage.clear();
@@ -44,7 +46,14 @@ function Login({ history }) {
                 console.log(error);
                 alert("에러");
             });
-    };
+        };
+        
+        // const rememberId = () => {
+        // localStorage.setItem("memberIdLocal", id);
+        // const remId = localStorage.getItem("memberIdLocal");
+        // setId(remId);
+    }
+
     return (
         <div className="joinWrap memberPage container loginForm">
             <div className="pageTitle">
