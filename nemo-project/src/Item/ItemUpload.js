@@ -8,6 +8,8 @@ import "./ItemUpload.css";
 
 function ItemUpload({ history }) {
 
+    const itemWriter = sessionStorage.getItem('memberId');
+
     const [itemName, setitemName] = useState('');
     const [itemPrice, setitemPrice] = useState('');
     const [itemMaincategory, setitemMaincategory] = useState('');
@@ -62,7 +64,7 @@ function ItemUpload({ history }) {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('data', new Blob([JSON.stringify({"itemName": itemName, "itemPrice": itemPrice,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
+        formData.append('data', new Blob([JSON.stringify({"itemName": itemName, "itemPrice": itemPrice,"itemWriter":itemWriter,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
         "itemDetail":itemDetail,"itemWeather":itemWeather,"itemTopsize":itemTopsize,"itemBottomsize":itemBottomsize,
         "itemEtcsize":itemEtcsize,"itemRentalstart" :startDate,"itemRentalend":endDate})], {
             type: "application/json"
@@ -102,8 +104,6 @@ function ItemUpload({ history }) {
                     <table className="board_detail">
                         <tr>
                             <td>상품명</td>
-                        
-
                             <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} /></td>
                         </tr>
                         
@@ -118,7 +118,6 @@ function ItemUpload({ history }) {
                                 </select>
                             </td>
                     
-
                         </tr>
                         <tr>
                             <td>상품 소분류</td>
@@ -249,6 +248,8 @@ function ItemUpload({ history }) {
                             <td>상품설명</td>
                             <td><input type="textarea" id="itemDetail" name="itemDetail" value={itemDetail} onChange={handlerChangeitemDetail} /></td>
                         </tr>
+
+                        
                         
                     </table>      
                 </form>    

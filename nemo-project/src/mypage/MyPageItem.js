@@ -5,13 +5,14 @@ import axios from "axios";
 // import './mypageitem.css'
 import styled from 'styled-components';
 
-function MyPageItem() {
+function MyPageItem({ match }) {
+  const { itemWriter } = match.params;
 
 
     const [datas, setDatas] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/mypage`)
+        axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
             .then(response => setDatas(response.data))
             .catch(error => console.log(error));
     }, []);
@@ -28,13 +29,13 @@ function MyPageItem() {
                         datas && datas.map(item => (
                             <div className="itemInfoWrap" key={item.itemNum} style={{'backgroundColor':"rgb(235,235,235)"}}>
                               <Link to={`/mypage/mypageitemdetail/${item.itemNum}`} style={{'textDecoration':'none'}}>
-                                <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
-                                <div className="itemInfo">
-                                    <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
-                                    <p className="itemName">{item.itemName}</p>
-                                    <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
-                                    <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
-                                </div>
+                                    <img className="itemImg" src={`../../files/${item.files}`}></img>
+                                    <div className="itemInfo">
+                                        <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
+                                        <p className="itemName">{item.itemName}</p>
+                                        <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                        <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
+                                    </div>
                               </Link>
                             </div>
                         ))
