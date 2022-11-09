@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // 회원정보수정
-function UserUpdate({match}) {
+function UserUpdate({history}) {
 
     const handleComplete = (data) => {
         let fullAddress = data.address;
@@ -81,23 +81,17 @@ function UserUpdate({match}) {
         e.preventDefault();
 
         const memberInfo = {
-            // "memberNum": memberNum,
-            "memberName": memberName,
             "memberNickname": memberNickname,
-            "memberId": memberId,
             "memberPw": memberPw,
-            "memberEmail": memberEmail,
             "memberPhone": memberPhone,
-            "memberAddress": memberAddress,
-            "memberDate" : memberDate,
-            "memberUser" : memberUser,
-            "memberMailkey" : memberMailkey
+            "memberAddress": memberAddress
         }
 
         axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
             .then(response => {
                 if (response.status === 200) {
                     alert("수정완료");
+                    history.push('/mypage/mybooking');
                 } else {
                     alert("수정실패");
                     return;

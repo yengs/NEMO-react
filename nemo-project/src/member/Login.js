@@ -20,26 +20,19 @@ function Login({ history }) {
                     let jwtToken = response.headers.get("jwtToken");
                     console.log(response.data);
                     console.log("토큰!!!!!!!!!!!!!!!!! : " + jwtToken);
-                    
+
                     sessionStorage.setItem("jwtToken", jwtToken);
                     sessionStorage.setItem("memberNum", response.data.memberNum);
-                    sessionStorage.setItem("memberName", response.data.memberName);
-                    sessionStorage.setItem("memberNickname", response.data.memberNickname);
-                    sessionStorage.setItem("memberEmail", response.data.memberEmail);
-                    sessionStorage.setItem("memberAddress", response.data.memberAddress);
-                    sessionStorage.setItem("memberClean", response.data.memberClean);
-                    sessionStorage.setItem("memberPhone", response.data.memberPhone);
-                    sessionStorage.setItem("memberWarning", response.data.memberWarning);
                     sessionStorage.setItem("memberId", id);
 
-        localStorage.setItem("memberIdLocal", id);
+                    localStorage.setItem("memberIdLocal", id);
 
 
-                    
+
                     alert("로그인완료");
                     window.location.reload();
                     window.location.href = "/";
-                    
+
                 } else {
                     sessionStorage.clear();
                     alert("로그인 실패");
@@ -51,11 +44,11 @@ function Login({ history }) {
                 console.log(error);
                 alert("에러");
             });
-        };
-        
-        // const rememberId = () => {
-        // localStorage.setItem("memberIdLocal", id);
-        // const remId = localStorage.getItem("memberIdLocal");
+    };
+
+    // const rememberId = () => {
+    // localStorage.setItem("memberIdLocal", id);
+    // const remId = localStorage.getItem("memberIdLocal");
     //     setId(remId);
     // }
 
