@@ -45,8 +45,8 @@ function MyPageItemDetail({ match, location, history }) {
         .catch(error => { console.log(error); });
     }, []);
 
-    const [startDate, setStartDate] = useState(new Date("2022/11/01"));
-    const [endDate, setEndDate] = useState(new Date("2022/11/31"));
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
     const handlerChangeName = (e) => setItemName(e.target.value);
     const handlerChangePrice = (e) => setItemPrice(e.target.value);
@@ -250,9 +250,9 @@ function MyPageItemDetail({ match, location, history }) {
                             <tr>
                                 <th scope="row">대여기간</th>
                                     <div className="rentalDiv">
-                                        <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()}/>
+                                        <DatePicker dateFormat="yyyy-MM-dd" className="startDate" value={itemRentalstart} selected={startDate} onChange={(date) => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()}/>
                                     {' ~ '}
-                                    <DatePicker dateFormat="yyyy-MM-dd" className="endDate" selected={endDate} onChange={date => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate}locale={ko} minDate={startDate}/>
+                                    <DatePicker dateFormat="yyyy-MM-dd" className="endDate" value={itemRentalend} selected={endDate} onChange={(date) => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate}locale={ko} minDate={startDate}/>
                                     </div>
                             </tr>
                         </tbody>
