@@ -53,8 +53,8 @@ function ItemUpload({ history }) {
       };
 
 
-    const [startDate, setStartDate] = useState(new Date("2022/10/28"));
-    const [endDate, setEndDate] = useState(new Date("2022/10/30"));
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
     const handlerClickGoback = () => history.goBack();
 
