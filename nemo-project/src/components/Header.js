@@ -51,7 +51,7 @@ function Header() {
                 </div>
                 <div>{sessionStorage.getItem("jwtToken") != null ?
                 <div className="member">
-                    <Link to="/member/login" onClick={handlerLogout}>
+                    <Link to="/" onClick={handlerLogout}>
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaLock />
                         </IconContext.Provider>
