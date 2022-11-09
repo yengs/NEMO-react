@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import GoogleLogin from "../img/btn_google_signin_dark_normal_web@2x.png";
 
-function Login() {
+function Login({ history }) {
 
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
@@ -14,15 +14,27 @@ function Login() {
     const handlerSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:8080/api/member/login', { "memberId": id, "memberPw": pw })
-            .then(response => {
-                if (response.status === 200) {
+        .then(response => {
+            if (response.status === 200 && response.data != "") {
+                    console.log(response.headers);
+                    let jwtToken = response.headers.get("jwtToken");
+                    console.log(response.data);
+                    console.log("토큰!!!!!!!!!!!!!!!!! : " + jwtToken);
+
+                    sessionStorage.setItem("jwtToken",jwtToken);
                     alert("로그인완료");
+                    window.location.reload();
+                    window.location.href = "/";
+                    
                 } else {
-                    alert("회원가입 실패");
+                    sessionStorage.clear();
+                    alert("로그인 실패");
                     return;
                 }
             })
             .catch(error => {
+                sessionStorage.clear();
+                console.log(error);
                 alert("에러");
             });
     };
@@ -61,8 +73,8 @@ function Login() {
                                 </td>
                                 <td className="findMemberInfo">
                                     <div>
-                                    <Link to="/id">아이디 찾기</Link>
-                                    <Link to="/pw">비밀번호 찾기</Link>
+                                    <Link to="Id">아이디 찾기</Link>
+                                    <Link to="Pw">비밀번호 찾기</Link>
                                     </div>
                                 </td>
                             </tr>

@@ -10,7 +10,7 @@ function Pwfind_Result() {
         <div className="joinWrap memberPagelog container">
             
             <div className="pageTitle">
-                <h2>비밀번호찾기 결과</h2>
+                <h2>비밀번호 찾기 결과</h2>
                 <hr />
                 <br></br>
                 <h3>본인인증으로 가입된 비밀번호가 있습니다.</h3>
@@ -39,7 +39,7 @@ function Pwfind_Result() {
                         <br/>
                         <div className="btnWrap">
                         <Link to ="/member/login" ><input type="submit" className="greenBtn btnlog"  value="로그인하러가기"  /></Link>
-                        <Link to="/id"><button  className="grayBtn btnlog">아이디 찾기</button></Link>
+                        <Link to="/member/id"><button  className="grayBtn btnlog">아이디 찾기</button></Link>
 
                 </div>
                     </table>

@@ -18,6 +18,8 @@ function ItemUpload({ history }) {
     const [itemTopsize, setitemTopsize] = useState('');
     const [itemBottomsize, setitemBottomsize] = useState('');
     const [itemEtcsize, setitemEtcsize] = useState('');
+    const [files, setFiles] = useState('');
+    const [imageSrc, setImageSrc] = useState('');
     // const [itemRentalperiod, setitemRentalperiod] = useState('');
 
     
@@ -31,25 +33,56 @@ function ItemUpload({ history }) {
     const handlerChangeitemTopsize=(e) => setitemTopsize(e.target.value);
     const handlerChangeitemBottomsize=(e) => setitemBottomsize(e.target.value);
     const handlerChangeitemEtcsize=(e) => setitemEtcsize(e.target.value);
+    const handlerChangefiles =(e) => {
+        setFiles(e.target.files[0]);
+        encodeFileToBase64(e.target.files[0]);
+    }
+    
     // const handlerChangeitemRentalperiod=(e) => setitemRentalperiod(e.target.value);
 
 
+    const encodeFileToBase64 = (fileBlob) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+          reader.onload = () => {
+            setImageSrc(reader.result);
+            resolve();
+          };
+        });
+      };
 
-    const [startDate, setStartDate] = useState(new Date("2022/10/28"));
-    const [endDate, setEndDate] = useState(new Date("2022/10/30"));
+
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
     const handlerClickGoback = () => history.goBack();
 
     const handlerClickSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8080/api/item', { "itemName": itemName, "itemPrice": itemPrice,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
-                                                        "itemDetail":itemDetail,"itemWeather":itemWeather,"itemTopsize":itemTopsize,"itemBottomsize":itemBottomsize,
-                                                        "itemEtcsize":itemEtcsize,"itemRentalstart" :startDate,"itemRentalend":endDate})
+        const formData = new FormData();
+        formData.append('data', new Blob([JSON.stringify({"itemName": itemName, "itemPrice": itemPrice,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
+        "itemDetail":itemDetail,"itemWeather":itemWeather,"itemTopsize":itemTopsize,"itemBottomsize":itemBottomsize,
+        "itemEtcsize":itemEtcsize,"itemRentalstart" :startDate,"itemRentalend":endDate})], {
+            type: "application/json"
+        }));
+        // formData.append("files", new Blob(files, { type: "image/*" }));
+        formData.append("files", files);
+
+
+
+
+        axios.post('http://localhost:8080/api/item', 
+            formData, 
+            { headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            })
         .then(response => {
             if (response.status === 200) {
                 alert("정상적으로 등록되었습니다.");
-                history.push("/");
+                window.location.href = `/item/cate/${itemMaincategory}`;
             } else {
                 alert("등록에 실패했습니다.");
                 return;
@@ -73,16 +106,11 @@ function ItemUpload({ history }) {
 
                             <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} /></td>
                         </tr>
-                        <tr>
-                            <td>가격</td>
-                            <td><input type="text" id="itemPrice" name="itemPrice" value={itemPrice} onChange={handlerChangeitemPrice} /></td>
-
-                        </tr>
-
+                        
                         <tr>
                             <td>상품 대분류</td>
                             <td> <select type="text" id="itemMaincategory" name="itemMaincategory" value={itemMaincategory} onChange={handlerChangeitemMaincategory} required>
-                                <option value="">선택</option>
+                                <option value="">------------------선택------------------</option>
                                 <option value="상의">상의</option>
                                 <option value="하의">하의</option>
                                 <option value="아우터">아우터</option>
@@ -99,7 +127,7 @@ function ItemUpload({ history }) {
                                 (function() {
                                     if( itemMaincategory ==="상의"){
                                    return <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory} required>
-                                    <option value="">선택</option>
+                                    <option value="">------------------선택------------------</option>
                                     <option value="반팔">반팔</option>
                                    <option value="긴팔">긴팔</option>
                                    <option value="니트">니트</option>
@@ -109,7 +137,7 @@ function ItemUpload({ history }) {
                                    }
                                    else if(itemMaincategory ==="하의"){
                                    return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory} required>
-                                   <option value="">선택</option>
+                                   <option value="">------------------선택------------------</option>
                                    <option value="바지">바지</option>
                                   <option value="치마">치마</option>
                                   <option value="반바지">반바지</option> 
@@ -119,14 +147,14 @@ function ItemUpload({ history }) {
 
                                    else if(itemMaincategory ==="아우터"){
                                     return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
-                                    <option value="">선택</option>
+                                    <option value="">------------------선택------------------</option>
                                      <option value="패딩">패딩</option>
                                      <option value="코트">코트</option>
                                      <option value="바람막이">바람막이</option> 
                               
                                    </select>;}
                                   else {return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
-                                     <option value="">선택</option>
+                                     <option value="">------------------선택------------------</option>
                                      <option value="패딩">롱</option>
                                      <option value="코트">미디</option>
                                      <option value="바람막이">미니</option> 
@@ -140,7 +168,7 @@ function ItemUpload({ history }) {
                             {/* <td><input type="text" id="itemWeather" name="itemWeather" value={itemWeather} onChange={handlerChangeitemWeather} /></td> */}
                              <td>  
                              <select type="text" required id="itemWeather" name="itemWeather"  value={itemWeather} onChange={handlerChangeitemWeather}>
-                             <option value="">선택</option>
+                             <option value="">------------------선택------------------</option>
                                      <option value="봄">봄</option>
                                     <option value="여름">여름</option>
                                     <option value="가을">가을</option> 
@@ -156,7 +184,7 @@ function ItemUpload({ history }) {
                                 (function() {
                                     if( itemMaincategory ==="상의"){
                                    return <select type="text" required id="itemTopsize" name="itemTopsize"  value={itemTopsize} onChange={handlerChangeitemTopsize}>
-                                   <option value="">선택</option>
+                                   <option value="">------------------선택------------------</option>
                                     <option value="44이하">44이하</option>
                                    <option value="55">55</option>
                                    <option value="66">66</option>
@@ -167,7 +195,7 @@ function ItemUpload({ history }) {
                                    }
                                    else if(itemMaincategory ==="하의"){
                                    return  <select type="text" required id="itemBottomsize" name="itemBottomsize"  value={itemBottomsize} onChange={handlerChangeitemBottomsize}>
-                                  <option value="">선택</option>
+                                  <option value="">------------------선택------------------</option>
                                    <option value="25이하">25이하</option>
                                   <option value="26">26</option>
                                   <option value="27">27</option> 
@@ -179,7 +207,7 @@ function ItemUpload({ history }) {
                                   <option value="33이상">33이상</option> 
                                   </select>;}
                                   else {return <select type="text" required id="itemEtcsize" name="itemEtcsize"  value={itemEtcsize} onChange={handlerChangeitemEtcsize}>
-                                    <option value="">선택</option>
+                                    <option value="">------------------선택------------------</option>
                                      <option value="S">S</option>
                                      <option value="M">M</option>
                                      <option value="L">L</option> 
@@ -202,7 +230,9 @@ function ItemUpload({ history }) {
                         
                         <tr>
                             <td>이미지</td>
-                            <td> <input className="form-control-image" type = "file" name="file" required/></td>
+                            <div className="preview">
+                            {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
+                            <td> <input className="form-control-image" type = "file" name="file" multiple onChange={handlerChangefiles}/></td>
                         </tr>
                        
                                         

@@ -11,6 +11,10 @@ import Store3 from "./img/store3.jpg";
 
 function Main() {
 
+    const goWeatherItemList = () => {
+        window.location.href = "/item/weatherrecitemlist";
+    }
+
     return (
         <div>
             {/* <div>
@@ -19,50 +23,50 @@ function Main() {
             </div> */}
             <div className="recWeather">
                 <div className="tomorrowWeather">
-                    <div class="weatherIcon">
+                    <div className="weatherIcon">
                         <BsCloudy />
                     </div>
                     <h4>내일은 <span className="temp">9</span>℃ <span className="weather">흐림</span></h4>
                 </div>
                 <div className="titleNplusBtn">
                     <h3>내일 이런 옷 어때요?</h3>
-                    <button className="plusBtn">+ 더보기</button>
+                    <button className="plusBtn" onClick={goWeatherItemList}>+ 더보기</button>
                 </div>
                 <div className="itemWrap">
                     <div className="itemInfoWrap">
                         <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                         <div className="itemInfo">
-                            <p class="itemPrice"><span className="price">19,000</span>원</p>
-                            <p class="itemName">알렉산더왕 셔츠</p>
-                            <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                            <p class="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
+                            <p className="itemPrice"><span className="price">19,000</span>원</p>
+                            <p className="itemName">알렉산더왕 셔츠</p>
+                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
+                            <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
                         </div>
                     </div>
                     <div className="itemInfoWrap">
                         <div className="itemImg" style={{ backgroundImage: `url(${Dress})` }}></div>
                         <div className="itemInfo">
-                            <p class="itemPrice"><span className="price">19,000</span>원</p>
-                            <p class="itemName">알렉산더왕 셔츠</p>
-                            <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                            <p class="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
+                            <p className="itemPrice"><span className="price">19,000</span>원</p>
+                            <p className="itemName">알렉산더왕 셔츠</p>
+                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
+                            <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
                         </div>
                     </div>
                     <div className="itemInfoWrap">
                         <div className="itemImg" style={{ backgroundImage: `url(${Sweater})` }}></div>
                         <div className="itemInfo">
-                            <p class="itemPrice"><span className="price">19,000</span>원</p>
-                            <p class="itemName">알렉산더왕 셔츠</p>
-                            <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                            <p class="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
+                            <p className="itemPrice"><span className="price">19,000</span>원</p>
+                            <p className="itemName">알렉산더왕 셔츠</p>
+                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
+                            <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
                         </div>
                     </div>
                     <div className="itemInfoWrap">
                         <div className="itemImg" style={{ backgroundImage: `url(${Jeans})` }}></div>
                         <div className="itemInfo">
-                            <p class="itemPrice"><span className="price">19,000</span>원</p>
-                            <p class="itemName">알렉산더왕 셔츠</p>
-                            <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                            <p class="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
+                            <p className="itemPrice"><span className="price">19,000</span>원</p>
+                            <p className="itemName">알렉산더왕 셔츠</p>
+                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
+                            <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
                         </div>
                     </div>
                 </div>
@@ -77,37 +81,37 @@ function Main() {
                         <div className="itemInfoWrap">
                             <div className="itemImg" style={{ backgroundImage: `url(${Dress})` }}></div>
                             <div className="itemInfo">
-                                <p class="itemPrice"><span className="price">19,000</span>원</p>
-                                <p class="itemName">알렉산더왕 셔츠</p>
-                                <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                                <p class="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
+                                <p className="itemPrice"><span className="price">19,000</span>원</p>
+                                <p className="itemName">알렉산더왕 셔츠</p>
+                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
+                                <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
                             </div>
                         </div>
                         <div className="itemInfoWrap">
                             <div className="itemImg" style={{ backgroundImage: `url(${Jeans})` }}></div>
                             <div className="itemInfo">
-                                <p class="itemPrice"><span className="price">19,000</span>원</p>
-                                <p class="itemName">알렉산더왕 셔츠</p>
-                                <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                                <p class="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
+                                <p className="itemPrice"><span className="price">19,000</span>원</p>
+                                <p className="itemName">알렉산더왕 셔츠</p>
+                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
+                                <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
                             </div>
                         </div>
                         <div className="itemInfoWrap">
                             <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                             <div className="itemInfo">
-                                <p class="itemPrice"><span className="price">19,000</span>원</p>
-                                <p class="itemName">알렉산더왕 셔츠</p>
-                                <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                                <p class="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
+                                <p className="itemPrice"><span className="price">19,000</span>원</p>
+                                <p className="itemName">알렉산더왕 셔츠</p>
+                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
+                                <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
                             </div>
                         </div>
                         <div className="itemInfoWrap">
                             <div className="itemImg" style={{ backgroundImage: `url(${Sweater})` }}></div>
                             <div className="itemInfo">
-                                <p class="itemPrice"><span className="price">19,000</span>원</p>
-                                <p class="itemName">알렉산더왕 셔츠</p>
-                                <p class="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                                <p class="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
+                                <p className="itemPrice"><span className="price">19,000</span>원</p>
+                                <p className="itemName">알렉산더왕 셔츠</p>
+                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
+                                <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
                             </div>
                         </div>
                     </div>
@@ -116,37 +120,37 @@ function Main() {
             <div className="recBestStore">
                 <div className="titleNplusBtn">
                     <h3>베스트 클린 스토어</h3>
-                    <button className="plusBtn">+ 더보기</button>
+                    {/* <button className="plusBtn">+ 더보기</button> */}
                 </div>
                 <div className="storeWrap">
                     <div className="storeInfoWrap">
                         <div className="storeImg" style={{ backgroundImage: `url(${Store1})` }}></div>
                         <div className="storeInfo">
-                            <p class="storeName">매니쉬 스토어</p>
+                            <p className="storeName">매니쉬 스토어</p>
                         </div>
                     </div>
                     <div className="storeInfoWrap">
                         <div className="storeImg" style={{ backgroundImage: `url(${Store3})` }}></div>
                         <div className="storeInfo">
-                            <p class="storeName">페미닌 스토어</p>
+                            <p className="storeName">페미닌 스토어</p>
                         </div>
                     </div>
                     <div className="storeInfoWrap">
                         <div className="storeImg" style={{ backgroundImage: `url(${Store2})` }}></div>
                         <div className="storeInfo">
-                            <p class="storeName">빈티지 스토어</p>
+                            <p className="storeName">빈티지 스토어</p>
                         </div>
                     </div>
                     <div className="storeInfoWrap">
                         <div className="storeImg" style={{ backgroundImage: `url(${Store1})` }}></div>
                         <div className="storeInfo">
-                            <p class="storeName">하이틴 스토어</p>
+                            <p className="storeName">하이틴 스토어</p>
                         </div>
                     </div>
                     <div className="storeInfoWrap">
                         <div className="storeImg" style={{ backgroundImage: `url(${Store2})` }}></div>
                         <div className="storeInfo">
-                            <p class="storeName">러블리 스토어</p>
+                            <p className="storeName">러블리 스토어</p>
                         </div>
                     </div>
                 </div>

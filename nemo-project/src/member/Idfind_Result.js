@@ -10,7 +10,7 @@ function Idfind_Result() {
         <div className="joinWrap memberPagelog container">
             
             <div className="pageTitle">
-                <h2>아이디찾기 결과</h2>
+                <h2>아이디 찾기 결과</h2>
                 <hr />
                 <br></br>
                 <h3>본인인증으로 가입된 아이디가 있습니다.</h3>
@@ -40,7 +40,7 @@ function Idfind_Result() {
                         <div className="btnWrap">
                         <Link to ="/member/login" ><input type="submit" className="greenBtn btnlog"  value="로그인하러가기"  /></Link>
                     {/* <input type="button" value="취소" className="grayBtn btn" /> */}
-                    <Link to="/pw"><button  className="grayBtn btnlog">비밀번호 찾기</button></Link>
+                    <Link to="/member/pw"><button  className="grayBtn btnlog">비밀번호 찾기</button></Link>
 
                 </div>
                     </table>

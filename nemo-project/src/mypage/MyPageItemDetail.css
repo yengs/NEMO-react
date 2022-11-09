@@ -1,0 +1,141 @@
+.myDetailPage {
+    width: calc(100% - 230px);
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.myDetailPage h3{
+    padding-left: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #bbb;
+}
+
+.myDetailTable {
+    display: flex;
+    justify-content: center;
+    padding: 0 100px 0 0;
+}
+
+.myDetailTable th {
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: none;
+    padding: 10px;
+}
+
+.myDetailTable form tr>td {
+    width: 300px;
+    border-radius: 3px;
+    display: flex;
+    padding: 10px;
+  }
+
+.myDetailTable form tr>td>input {
+    border: 1px solid #ddd;
+    width: 100%;
+    padding: 8px 6px;
+    border-radius: 3px;
+  }
+
+  .myDetailTable .rentalInput {
+    border: 1px solid #ddd;
+    width: 44%;
+    padding: 8px 6px;
+    border-radius: 3px;
+    border-style: none;
+  }
+
+  .myDetailPage input.endDate, .myDetailPage input.startDate{
+    border-style: none;
+    width: 80px;
+}
+
+.btnDivMPID{
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    text-align: -webkit-center;
+    display: flex;
+    float: inline-end;
+    padding-top: 30px;
+}
+
+.greenBtnMPID {
+    border: rgb(100, 165, 127);
+    background-color: rgb(100, 165, 127);
+    color: #fff;
+    font-weight: 100;
+    margin: 20px 5px 0;
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: 100;
+  }
+  
+  .redBtnMPID {
+    border: rgb(196, 98, 98);
+    background-color: rgb(196, 98, 98);
+    color: #fff;
+    font-weight: 100;
+    margin: 20px 5px 0;
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: 100;
+  }
+
+  .greyBtnMPID {
+    border: #999;
+    background-color: #999;
+    color: #fff;
+    font-weight: 100;
+    margin: 20px 5px 0;
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: 100;
+  }
+
+/* 대충 이미지 보여주기 */
+
+.myDetailImage {
+    float: left;
+    padding-left: 100px;
+}
+
+.myDetailImage .memberImg {
+    background-color: rgb(219, 219, 219);
+    width: 200px;
+    height: 250px;
+}
+
+.rentalDiv .react-datepicker__input-container{
+    border: 1px solid #ddd;
+    padding: 8px 6px;
+    border-radius: 3px;
+    border-style: none;
+    /* display: flex; */
+}
+
+.rentalDiv .react-datepicker-wrapper {
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    width: 100px;
+    flex: 50%;
+    text-align: -webkit-center;
+}
+
+.rentalDiv {
+    display: flex;
+    align-items: center;
+    text-align-last: center;
+    height: 55px;
+}
+
+.myDetailTable tr {
+    height: 55px;
+}

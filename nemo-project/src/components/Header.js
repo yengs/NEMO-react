@@ -8,16 +8,29 @@ import { FaLock } from "react-icons/fa";
 import { BsChatDotsFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 
 function Header() {
 
-    const handlerLogin = () => {
-        window.location.href = "/member/login";
+    const [ itemsub, setItemsub ] = useState('');
+   
+    
+    const handlerLogout = () => {
+        sessionStorage.clear();
+        window.location.href = "/";
     }
+
+    // const handlerLogout = () => {
+    //     console.log(sessionStorage.getItem("jwtToken"));
+    // }
 
     const handlerGoMain = () => {
         window.location.href = "/";
+    }
+
+    const handlerGoSub = (e) => {
+        setItemsub(e.target.value);
     }
 
     // 헤더 상품 카테고리 구분
@@ -37,7 +50,7 @@ function Header() {
     const handlerGoDress = () => {
         window.location.href = "/item/cate/원피스";
     }
-
+console.log(itemsub)
     return (
         <header>
             <div className="topHeader">
@@ -47,14 +60,15 @@ function Header() {
                 <div className="mainTitle">
                     <h2>내일 모입지?</h2>
                 </div>
+                <div>{sessionStorage.getItem("jwtToken") != null ?
                 <div className="member">
-                    <Link to="/member/login">
+                    <Link to="/member/login" onClick={handlerLogout}>
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaLock />
                         </IconContext.Provider>
-                        <p>로그인</p>
+                        <p>로그아웃</p>
                     </Link>
-                    <Link to="/mypage/mystore">
+                    <Link to="/mypage/mybooking">
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaUserAlt />
                         </IconContext.Provider>
@@ -66,7 +80,23 @@ function Header() {
                         </IconContext.Provider>
                         <p>내모톡</p>
                     </Link>
-                </div>
+                </div> 
+                :
+                <div className="member">
+                <Link to="/member/login">
+                    <IconContext.Provider value={{ className: "headerIcons" }}>
+                        <FaLock />
+                    </IconContext.Provider>
+                    <p>로그인</p>
+                </Link>
+                <Link to="/chat">
+                    <IconContext.Provider value={{ className: "headerIcons" }}>
+                        <BsChatDotsFill />
+                    </IconContext.Provider>
+                    <p>내모톡</p>
+                </Link>
+            </div>
+                }</div>
             </div>
             <div className='underHeader'>
                 <div className="navBar">
@@ -78,36 +108,50 @@ function Header() {
                     </div>
                     <div className='navWrap'>
                         <ul className="nav">
-                            <li class="dropdown">
+                            <li className="dropdown">
                                 <a onClick={handlerGoTop}>상의</a>
-                                <div class="dropdown-content">
-                                    <a>반팔</a>
-                                    <a>긴팔</a>
-                                    <a>니트</a>
+
+                                <div className="dropdown-content" key={itemsub}>
+                                <Link to={`/item/cate/sub/${itemsub}`}>
+                                    <option name = "itemsub" value = "반팔" onClick={handlerGoSub}>반팔</option>
+                                    <option name = "itemsub" value = "긴팔" onClick={handlerGoSub}>긴팔</option>
+                                    <option name = "itemsub" value = "니트" onClick={handlerGoSub}>니트</option>
+                                    <option name = "itemsub" value = "블라우스" onClick={handlerGoSub}>블라우스</option>
+                                </Link>
                                 </div>
                             </li>
-                            <li class="dropdown">
+                            <li className="dropdown">
                                 <a onClick={handlerGoBottom}>하의</a>
-                                <div class="dropdown-content">
-                                    <a>바지</a>
-                                    <a>치마</a>
-                                    <a>반바지</a>
+                                <div className="dropdown-content">
+                                <Link to={`/item/cate/sub/${itemsub}`}>
+                                    <option name = "itemsub" value = "바지" onClick={handlerGoSub}>바지</option>
+                                    <option name = "itemsub" value = "치마" onClick={handlerGoSub}>치마</option>
+                                    <option name = "itemsub" value = "반바지" onClick={handlerGoSub}>반바지</option>
+                                    <option name = "itemsub" value = "레깅스" onClick={handlerGoSub}>레깅스</option>    
+                                </Link>
+
                                 </div>
                             </li>
-                            <li class="dropdown">
+                            <li className="dropdown">
                                 <a onClick={handlerGoOuter}>아우터</a>
-                                <div class="dropdown-content">
-                                    <a>패딩</a>
-                                    <a>코트</a>
-                                    <a>바람막이</a>
+                                <div className="dropdown-content">
+                                <Link to={`/item/cate/sub/${itemsub}`}>
+                                    <option name = "itemsub" value = "패딩" onClick={handlerGoSub}>패딩</option>
+                                    <option name = "itemsub" value = "코트" onClick={handlerGoSub}>코트</option>
+                                    <option name = "itemsub" value = "바람막이" onClick={handlerGoSub}>바람막이</option>  
+                                </Link>
+
                                 </div>
                             </li>
-                            <li class="dropdown">
+                            <li className="dropdown">
                                 <a onClick={handlerGoDress}>원피스</a>
-                                <div class="dropdown-content">
-                                    <a>롱</a>
-                                    <a>미디</a>
-                                    <a>미니</a>
+                                <div className="dropdown-content">
+                                <Link to={`/item/cate/sub/${itemsub}`}>
+                                    <option name = "itemsub" value = "롱" onClick={handlerGoSub}>롱</option>
+                                    <option name = "itemsub" value = "미디" onClick={handlerGoSub}>미디</option>
+                                    <option name = "itemsub" value = "미니" onClick={handlerGoSub}>미니</option>  
+                                </Link>
+
                                 </div>
                             </li>
 
@@ -122,7 +166,8 @@ function Header() {
                         <IconContext.Provider value={{ className: "navIcons" }}>
                             <FaTemperatureHigh />
                         </IconContext.Provider>
-                        <span>내일의 날씨는?</span>
+                        <Link to="/item/weatherrecitemlist">내일의 날씨는?</Link>
+                        {/* <span>내일의 날씨는?</span> */}
                     </div>
                 </div>
             </div>
