@@ -60,7 +60,6 @@ function Join() {
             "memberPhone": mPhone,
             "memberAddress": mAddress
         }
-
         axios.post('http://localhost:8080/api/member/join', memberInfo)
             .then(response => {
                 if (response.status === 200) {
@@ -76,6 +75,20 @@ function Join() {
             });
     };
 
+    const checkId = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/api/member/join/checkId', `memberId=${mId}`)
+        .then(result => 
+            {
+            if (result !== "fail"){
+                alert("중복된 아이디입니다.");
+
+            } else {
+                alert("사용가능한 아이디입니다.");
+            }
+        })
+}
     return (
         <div className="joinWrap memberPage container">
             <div className="pageTitle">
@@ -106,7 +119,7 @@ function Join() {
                                     <input type="text" name="mId" value={mId} onChange={handlerChangeId} required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn btn">중복확인</button>
+                                    <button className="beigeBtn btn" value={mId} onClick={checkId}>중복확인</button>
                                 </td>
                             </tr>
                             <tr>
