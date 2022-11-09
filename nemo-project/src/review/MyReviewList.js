@@ -72,7 +72,12 @@ function MyReviewList() {
                                         <div className="reviewContents">
                                             <p className={review.closed ? "close" : ""}>{review.reviewContents}</p>
                                         </div>
-                                        <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
+                                        <div id="btnView">
+                                            { review.reviewContents.length > 36 ?
+                                                <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
+                                                : null
+                                            }
+                                        </div>
                                     </td>
                                     <td>{review.reviewSatisfaction}</td>
                                 </tr>
