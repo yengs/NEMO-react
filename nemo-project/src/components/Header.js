@@ -47,6 +47,8 @@ function Header() {
     const sessionCheck = () => {
         console.log("토큰확인::::"+sessionStorage.getItem('jwtToken'));
         console.log("멤버이름::::"+sessionStorage.getItem('memberName'));
+        console.log("멤버넘버 세션::::"+sessionStorage.getItem('memberNum'));
+        console.log("멤버아이디 세션::::"+sessionStorage.getItem('memberId'));
         console.log("멤버아이디 로컬:::::" + localStorage.getItem('memberIdLocal'));
     }
 

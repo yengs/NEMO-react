@@ -22,6 +22,7 @@ function Login({ history }) {
                     console.log("토큰!!!!!!!!!!!!!!!!! : " + jwtToken);
                     
                     sessionStorage.setItem("jwtToken", jwtToken);
+                    sessionStorage.setItem("memberNum", response.data.memberNum);
                     sessionStorage.setItem("memberName", response.data.memberName);
                     sessionStorage.setItem("memberNickname", response.data.memberNickname);
                     sessionStorage.setItem("memberEmail", response.data.memberEmail);
@@ -30,6 +31,9 @@ function Login({ history }) {
                     sessionStorage.setItem("memberPhone", response.data.memberPhone);
                     sessionStorage.setItem("memberWarning", response.data.memberWarning);
                     sessionStorage.setItem("memberId", id);
+
+        localStorage.setItem("memberIdLocal", id);
+
 
                     
                     alert("로그인완료");
@@ -51,8 +55,8 @@ function Login({ history }) {
         // const rememberId = () => {
         // localStorage.setItem("memberIdLocal", id);
         // const remId = localStorage.getItem("memberIdLocal");
-        // setId(remId);
-    }
+    //     setId(remId);
+    // }
 
     return (
         <div className="joinWrap memberPage container loginForm">
