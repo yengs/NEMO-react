@@ -9,9 +9,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 
 
-function BookingUpload({ history, match }) {
-
-  const [value, onChange] = useState(new Date());
+function BookingUpload({ history,match }) {
 
   //---------결제모달---------------
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,48 +29,43 @@ function BookingUpload({ history, match }) {
     setModalOpen(false);
   };
 
-
   const goItemDetail = () => {
     history.goBack();
   }
 
   //----------결제모달 end--------------
 
-
-
-  //---------대여하기--------------
-  const bookingMember = sessionStorage.getItem('memberId');
-  const { itemNum } = match.params;
-
+  const {itemNum} = match.params;
   const bookingItemnum = itemNum
-
-  const [bookingDate, setbookingDate] = useState(new Date());
-
-
+  const bookingMember = sessionStorage.getItem('memberId');
+  const [value, setbookingDate] = useState(new Date());
+  
   const handlerClickSubmit = (e) => {
     e.preventDefault();
-
-    axios.post('http://localhost:8080/api/item', {
-      "bookingItemnum": bookingItemnum, "bookingMember": bookingMember , "bookingDate": bookingDate
-    })
-      .then(response => {
-        if (response.status === 200) {
-          alert("정상적으로 대여되었습니다.");
-          window.location.href = '/';
-        } else {
-          alert("대여 실패");
-          return;
-        }
+    axios.post(`http://localhost:8080/api/booking/bookingWrite`,
+        {
+            "bookingMember": bookingMember,
+            "bookingDate" :value,
+            "bookingItemnum": bookingItemnum
+        })
+        .then(response => {
+          if (response.status === 200) {
+              alert("정상적으로 등록되었습니다.");
+          } else {
+              alert("등록에 실패했습니다.");
+              return;
+          }
       })
       .catch(error => console.log(error));
   };
 
-  //----------대여하기 end--------------
+
 
   return (
     <>
       <div className="BookingContainer">
         <h3>대여하기</h3>
+
         <div className="top">
           <div className="left">
             <div className="tablePlusForm2">
@@ -235,26 +228,11 @@ function BookingUpload({ history, match }) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <h3>대여기간</h3>
         <div className="bottom">
 
           <div> <div className="inputdate">
-            <Calendar onChange={onChange} value={value} />
+            <Calendar onChange={date => setbookingDate(date)} value={value} />
 
             <br />
             선택한 날짜 : {moment(value).format("YYYY년 MM월 DD일")}
@@ -274,13 +252,6 @@ function BookingUpload({ history, match }) {
 
       </div>
       <br />
-
-
-
-
-
-
-
 
     </>
 

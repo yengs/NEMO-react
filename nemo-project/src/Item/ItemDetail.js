@@ -179,7 +179,7 @@ function ItemDetail({ match, location, history }) {
                         <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기"/>
                         <Link to={`/item/bookingupload/${itemNum}`}>
                         <input type="button" id="retals" className="ItemgreenBtn" value="대여하기"/>
-                        </Link>   
+                        </Link>
                 </div>
 
                 <div className="reviewDiv">
