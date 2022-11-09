@@ -3,6 +3,7 @@ import axios from "axios";
 import "./reviewDetail.css";
 import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
+import ImgIcon from "./ImgIcon";
 
 
 function MyReviewList() {
@@ -80,7 +81,9 @@ function MyReviewList() {
                                             }
                                         </div>
                                     </td>
-                                    <td>{review.reviewSatisfaction}</td>
+                                    <td> 
+                                        {review.reviewSatisfaction}<ImgIcon/>
+                                    </td>
                                 </tr>
                             ))
                         }
