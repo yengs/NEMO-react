@@ -23,7 +23,9 @@ function Login({ history }) {
 
                     sessionStorage.setItem("jwtToken",jwtToken);
                     alert("로그인완료");
-                    // history.goBack();
+                    window.location.reload();
+                    window.location.href = "/";
+                    
                 } else {
                     sessionStorage.clear();
                     alert("로그인 실패");
