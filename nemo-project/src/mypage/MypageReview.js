@@ -1,7 +1,9 @@
 // import { useState, useEffect } from 'react';
 // import axios from 'axios';
 import jeans from '../img/jeans.jpg';
-import mypageReview from "./mypageReview.css";
+// import mypageReview from "./mypageReview.css";
+
+import styled from "styled-components";
 
 
 function MypageReview() {
@@ -30,17 +32,30 @@ function MypageReview() {
     //         .catch(error => console.log(error));
     // }, []);
 
+    const goYourReview = () => {
+        window.location.href = "/review/yourReview";
+    }
+
+    const goMyReview = () => {
+        window.location.href = "/review/myReview";
+    }
+
 
     return (
+        <MypageReviewContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
         <div className="mypageInnerPage">
-            <h2 className='reviewMainTitle'>후기 조회</h2>
+            {/* <h2 className='reviewMainTitle'>후기 조회</h2> */}
             <div className="myStoreReview">
-                <div className='reviewTitle'>
-                    <h3 className="reviewTitle">내 상점 후기</h3>
+                {/* <div className='reviewTitle'>
+                    <h3 className="reviewTitle"></h3>
                     <span><a href={`/review/yourReview`} className='moreReviewDetailPage'>더보기 </a></span>
+                </div> */}
+                <div className="titleNplusBtn">
+                    <h3 style={{marginTop:'0'}}>내 상점 후기</h3>
+                    <button className="plusBtn" onClick={goYourReview}>+ 더보기</button>
                 </div>
             </div>
-            <hr className='lineH' />
+            {/* <hr className='lineH' /> */}
             <div className='tableWrap'>
                 <table className="yourReviewListAboutStore">
                     <thead>
@@ -48,7 +63,7 @@ function MypageReview() {
                         <th>작성자</th>
                         <th colSpan={2}>내용</th>
                     </thead>
-                    <tbody>
+                    {/* <tbody>
                         <tr>
                             <td rowSpan={3} className="rReviewItemImageOrigin">
                                 <div style={{ "backgroundImage": `url(${jeans})` }}></div>
@@ -70,6 +85,34 @@ function MypageReview() {
                                 </div>
                             </td>
                         </tr>
+                    </tbody> */}
+                    <tbody>
+                        <tr>
+                            <td rowSpan={3} className="rReviewItemImageOrigin">
+                                <div style={{ "backgroundImage": `url(${jeans})` }}></div>
+                            </td>
+                            <td className='rReviewItemNameOrigin' rowSpan={3} >메종키츠네 셔츠</td>
+                            <td className='rReviewWriter' rowSpan={3}>선희곤듀</td>
+                            <td>
+                                <div className='rReviewItemImg' style={{ "backgroundImage": `url(${jeans})` }}></div>
+                                <p className='rReviewContent'>친절하시구 옷 상태도 너무 좋았어요!<br />다음에도 또 거래하고 싶어요</p>
+                                <div className='rsatisfing'>
+                                    만족도 <span>65</span>%
+                                    <div style={{ "width": "100%", "height": "13px", "backgroundColor": "rgb(150,150,150)", "borderRadius": "20px" }}></div>
+                                </div>
+                            </td>
+                        </tr>
+                        {/* <tr>
+                            <td className='rReviewContent' style={{ "padding-top": "0px" }}>친절하시구 옷 상태도 너무 좋았어요!<br />다음에도 또 거래하고 싶어요</td>
+                        </tr> */}
+                        {/* <tr>
+                            <td className='rsatisfing'>
+                                <div>
+                                    만족도 <span>65</span>%
+                                    <div style={{ "width": "100%", "height": "13px", "backgroundColor": "rgb(150,150,150)", "borderRadius": "20px" }}></div>
+                                </div>
+                            </td>
+                        </tr> */}
                     </tbody>
                 </table>
             </div>
@@ -77,12 +120,16 @@ function MypageReview() {
             <div className='marging'></div>
 
             <div className="myStoreReview">
-                <div className='reviewTitle'>
+                {/* <div className='reviewTitle'>
                     <h3 className="reviewTitle">내 작성 후기</h3>
                     <span><a href={`/review/myReview`} className='moreReviewDetailPage'>더보기 </a></span>
+                </div> */}
+                <div className="titleNplusBtn">
+                    <h3>내 작성 후기</h3>
+                    <button className="plusBtn" onClick={goMyReview}>+ 더보기</button>
                 </div>
             </div>
-            <hr className='lineH' />
+            {/* <hr className='lineH' /> */}
             <div className='tableWrap'>
                 <table className="yourReviewListAboutStore">
                     <thead>
@@ -96,17 +143,28 @@ function MypageReview() {
                                 <div style={{ "backgroundImage": `url(${jeans})` }}></div>
                             </td>
                             <td className='rReviewItemNameOrigin' rowSpan={3} >메종키츠네 셔츠</td>
-                            <td className='rReviewWriter' rowSpan={3}>70,000</td>
-                            <td className='rReviewItemImg'>
-                                <div style={{ "backgroundImage": `url(${jeans})` }}></div>
+                            <td className='rReviewWriter' rowSpan={3}>선희곤듀</td>
+                            <td>
+                                <div className='rReviewItemImg' style={{ "backgroundImage": `url(${jeans})` }}></div>
+                                <p className='rReviewContent'>친절하시구 옷 상태도 너무 좋았어요!<br />다음에도 또 거래하고 싶어요</p>
+                                <div className='rsatisfing'>
+                                    만족도 <span>65</span>%
+                                    <div style={{ "width": "100%", "height": "13px", "backgroundColor": "rgb(150,150,150)", "borderRadius": "20px" }}></div>
+                                </div>
                             </td>
                         </tr>
+                    </tbody>
+                    <tbody>
                         <tr>
-                            <td className='rReviewContent' style={{ "padding-top": "0px" }}>친절하시구 옷 상태도 너무 좋았어요!<br />다음에도 또 거래하고 싶어요</td>
-                        </tr>
-                        <tr>
-                            <td className='rsatisfing'>
-                                <div>
+                            <td rowSpan={3} className="rReviewItemImageOrigin">
+                                <div style={{ "backgroundImage": `url(${jeans})` }}></div>
+                            </td>
+                            <td className='rReviewItemNameOrigin' rowSpan={3} >메종키츠네 셔츠</td>
+                            <td className='rReviewWriter' rowSpan={3}>선희곤듀</td>
+                            <td>
+                                <div className='rReviewItemImg' style={{ "backgroundImage": `url(${jeans})` }}></div>
+                                <p className='rReviewContent'>친절하시구 옷 상태도 너무 좋았어요!<br />다음에도 또 거래하고 싶어요</p>
+                                <div className='rsatisfing'>
                                     만족도 <span>65</span>%
                                     <div style={{ "width": "100%", "height": "13px", "backgroundColor": "rgb(150,150,150)", "borderRadius": "20px" }}></div>
                                 </div>
@@ -116,7 +174,234 @@ function MypageReview() {
                 </table>
             </div>
             </div>
+            </MypageReviewContainer>
     );
 }
+
+const MypageReviewContainer = styled.div`
+.myPageWrap {
+    width: 100%;
+    height: calc(100vh - 250px);
+    max-width: 1200px;
+    margin: 55px auto;
+    display: flex;
+}
+
+.myMenuWrap {
+    width: 230px;
+    background-color: rgba(88, 145, 112, 0.253);
+    padding: 50px 35px;
+    box-sizing: border-box;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.myMenuWrap .memberImg, .myMenuWrap .cleanG, .myMenuWrap .myMenuWrap {
+    margin: auto;
+}
+
+.myMenuWrap .cleanG {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.myMenuWrap .memberImg {
+    background-color: rgb(255, 255, 255);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.myMenuWrap .menu {
+    height: calc(100% - 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.myMenuWrap .menu ul {
+    margin: 50px 0 0 0;
+    padding: 0;
+    width: 100%;
+}
+
+.myMenuWrap .menu li {
+    list-style: none;
+    padding: 10px 0;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+}
+
+.warnBtn {
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+/* ----------------------------- */
+/* 마이페이지 내의 페이지 */
+.mypageInnerPage {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.mypageInnerPage .titleNplusBtn h3 {
+    font-size: 1.17em;
+}
+
+.myStoreReview .reviewTitle {
+    margin-left: 5px;
+    margin-bottom: -8px;
+    margin-top: 15px;
+}
+
+.moreReviewDetailPage { 
+    float: right;
+    margin-bottom: 6px;
+    margin-top: -5px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.yourReviewListAboutStore {
+    border-spacing: 0;
+    border-top: 1px solid #bbb;
+    border-bottom: 2px solid #ccc;
+}
+
+.yourReviewListAboutStore {
+    font-size: 15px;
+}
+
+.yourReviewListAboutStore th {
+    // border-top: 1px solid #bbb;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    height: 10px;
+    width: 300px;
+}
+
+.yourReviewListAboutStore tr td {
+    border-bottom: 1px solid #ddd;
+}
+
+.yourReviewListAboutStore tbody:last-child td  {
+    border-bottom: none;
+}
+
+/* .yourReviewListAboutStore td {
+    배경색을 줄까 말까 고민하다가 결국 그냥 안넣기로 함. 나중에 넣을수도 ?
+} */
+
+.lineH {
+    height: 3.1px !important;
+    width: 100%;
+    color: #747474;
+}
+
+.rReviewItemImg div {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemImageOrigin div {
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.rReviewWriter {
+    text-align: center;
+}
+
+/* .tableWrap {
+    border-bottom: 1px solid #444444;
+} */
+
+.marging {
+    height: 50px;
+}
+
+table {
+table-layout: fixed;
+}
+
+.reviewMainTitle {
+    padding-bottom: 10px;
+}
+
+/* ------------------------ */
+/* 다른사람이 보는 마이페이지 */
+
+.rReviewItemImageOrigin {
+    width: 10%;
+}
+
+.rReviewItemImageOrigin div {
+    width: 100%;
+    height: 120px;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.rReviewWriter {
+    width: 20%;
+    text-align: center;
+}
+
+.rReviewItemImg, .rReviewContent, .rsatisfing {
+    width: 45%;
+}
+
+.rReviewItemImg {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewContent {
+    font-size: 13px !important;
+    padding-bottom: 0px !important;
+    margin: 10px 0;
+    width: 100%;;
+}
+
+.rsatisfing {
+    width: 140px;
+    font-size: 12px;
+}
+
+
+
+`
 
 export default MypageReview;

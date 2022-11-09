@@ -1,7 +1,7 @@
 // import { useState, useEffect } from 'react';
 // import axios from 'axios';
 import jeans from '../img/jeans.jpg';
-import mypageReview from "./mypageReview.css";
+// import mypageReview from "./mypageReview.css";
 
 
 function MypageReview() {

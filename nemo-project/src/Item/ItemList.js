@@ -9,8 +9,11 @@ function ItemList({ match }) {
 
     const [datas, setDatas] = useState([]);
 
+    const filePath = 'a8783ff2-3e4a-4199-88e9-74b6c59c8d01_business-g6ae7b390d_640.jpg';
+
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/cate/${itemMaincategory}`)
+       
+        axios.get(`http://localhost:8080/api/item/cate/${itemMaincategory}`, { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => setDatas(response.data))
             .catch(error => console.log(error));
     }, []);
@@ -27,7 +30,7 @@ function ItemList({ match }) {
                         datas && datas.map(item => (
                             <div className="itemInfoWrap" key={item.itemNum}>
                                 <Link to={`/item/detail/${item.itemNum}`}>
-                                    <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                    <img className="itemImg" src={`../../files/${item.files}`}></img>
                                     <div className="itemInfo">
                                         <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
                                         <p className="itemName">{item.itemName}</p>

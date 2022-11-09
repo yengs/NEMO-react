@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 // import { Route } from "react-router-dom";
-import "./MyPageItemDetail.css";
+// import "./MyPageItemDetail.css";
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from "react-datepicker";
+
+import styled from 'styled-components';
 
 // import Shirt from '../img/shirt.jpg';
 
@@ -99,10 +101,9 @@ function MyPageItemDetail({ match, location, history }) {
     
 
     return (
-        <>
-            <div className="myDetailPage">
+        <MyPageItemDetailContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
+            <div className="mypageInnerPage myDetailPage">
                 <h3>내 상품 상세조회</h3>
-
 
                 <div className="myDetailImage">
                     {/* 이미지 부분 확인하려고 넣음! 나중에 아래 div처럼 다시 이미지 넣어야함
@@ -184,14 +185,154 @@ function MyPageItemDetail({ match, location, history }) {
                 </div>
             
                 <div className="btnDivMPID">
+                    <input type="button" id="list"   className="greyBtnMPID" value="목록으로" onClick={handlerClickList} />
                     <input type="button" id="edit"   className="greenBtnMPID" value="수정하기" onClick={handlerClickUpdate} />
-                    <input type="button" id="delete" className="redBtnMPID" value="삭제하기" onClick={handlerClickDelete} /> 
+                    <input type="button" id="delete" className="redBtnMPID" value="삭제하기" onClick={handlerClickDelete} />
                 </div>
 
             </div>    
-        </>
+        </MyPageItemDetailContainer>
 
     );
 }
+
+const MyPageItemDetailContainer = styled.div`
+.mypageInnerPage {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+// .myDetailPage {
+//     width: calc(100% - 230px);
+//     padding: 20px;
+//     box-sizing: border-box;
+//     background-color: rgb(245, 245, 245);
+//     border-top-right-radius: 20px;
+//     border-bottom-right-radius: 20px;
+// }
+
+.myDetailPage h3{
+    // padding-left: 20px;
+    padding-bottom: 20px;
+    // border-bottom: 1px solid #bbb;
+    margin-top: 0;
+    font-size: 23px;
+}
+
+.myDetailTable {
+    display: flex;
+    justify-content: center;
+    padding: 0 100px 0 0;
+}
+
+.myDetailTable th {
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: none;
+    padding: 10px;
+}
+
+.myDetailTable form tr>td {
+    width: 300px;
+    border-radius: 3px;
+    display: flex;
+    padding: 10px;
+  }
+
+.myDetailTable form tr>td>input {
+    border: 1px solid #ddd;
+    width: 100%;
+    padding: 8px 6px;
+    border-radius: 3px;
+  }
+
+  .myDetailTable .rentalInput {
+    border: 1px solid #ddd;
+    width: 44%;
+    padding: 8px 6px;
+    border-radius: 3px;
+    border-style: none;
+  }
+
+  .myDetailPage input.endDate, .myDetailPage input.startDate{
+    border-style: none;
+    width: 80px;
+}
+
+.btnDivMPID{
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    text-align: -webkit-center;
+    display: flex;
+    float: inline-end;
+    padding-top: 30px;
+}
+
+.greenBtnMPID {
+    border: rgb(100, 165, 127);
+    background-color: rgb(100, 165, 127);
+    color: #fff;
+    font-weight: 100;
+    margin: 20px 15px 0;
+    font-size: 15px;
+    padding: 10px 50px;
+    border-radius: 3px;
+    font-weight: 100;
+  }
+  
+  .redBtnMPID {
+    border: rgb(196, 98, 98);
+    background-color: rgb(196, 98, 98);
+    color: #fff;
+    font-weight: 100;
+    margin: 20px 15px 0;
+    font-size: 15px;
+    padding: 10px 50px;
+    border-radius: 3px;
+    font-weight: 100;
+  }
+
+/* 대충 이미지 보여주기 */
+
+.myDetailImage {
+    float: left;
+    padding-left: 100px;
+}
+
+.myDetailImage .memberImg {
+    background-color: rgb(219, 219, 219);
+    width: 200px;
+    height: 250px;
+}
+
+.rentalDiv .react-datepicker__input-container{
+    border: 1px solid #ddd;
+    padding: 8px 6px;
+    border-radius: 3px;
+    border-style: none;
+    /* display: flex; */
+}
+
+.rentalDiv .react-datepicker-wrapper {
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    width: 100px;
+    flex: 50%;
+    text-align: -webkit-center;
+}
+
+.rentalDiv {
+    display: flex;
+    align-items: center;
+    text-align-last: center;
+    height: 55px;
+}
+
+.myDetailTable tr {
+    height: 55px;
+}
+`
 
 export default MyPageItemDetail;

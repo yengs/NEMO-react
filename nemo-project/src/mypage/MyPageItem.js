@@ -16,7 +16,7 @@ function MyPageItem() {
             .catch(error => console.log(error));
     }, []);
     return (
-        <MyPageItemContainer style={{width:'100%', height:'100%'}}>
+        <MyPageItemContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
             <div className="mypageInnerPage2">
 
                 <div className="titleNplusBtn">
@@ -295,7 +295,7 @@ const MyPageItemContainer = styled.div`
   }
   
   .titleNplusBtn>h3 {
-    margin: 10px 0;
+    margin-top: 0;
     font-size: 23px;
   }
   
@@ -341,7 +341,7 @@ const MyPageItemContainer = styled.div`
   }
   
   .itemInfoWrap {
-    width: 22%;
+    width: 30%;
     height: 360px;
     background-color: rgb(250, 250, 250);
     border-radius: 10px;
