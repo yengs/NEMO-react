@@ -18,7 +18,7 @@ function Header() {
     
     const handlerLogout = () => {
         sessionStorage.clear();
-        window.location.reload();
+        window.location.href = "/";
     }
 
     // const handlerLogout = () => {
@@ -81,7 +81,7 @@ console.log(itemsub)
                         <p>내모톡</p>
                     </Link>
                 </div> 
-                : 
+                :
                 <div className="member">
                 <Link to="/member/login">
                     <IconContext.Provider value={{ className: "headerIcons" }}>
