@@ -4,8 +4,10 @@ import { Link, Navigate, Route } from "react-router-dom";
 import "./ItemDetail.css";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
+
 function ItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
+
 
     const [ data, setData ] = useState({});
     const [ itemName, setItemName ] = useState('');
@@ -175,7 +177,9 @@ function ItemDetail({ match, location, history }) {
                 {/* 채팅하기/대여하기 버튼 누르면 채팅/대여창으로 이동하게끔 수정 */}
                 <div className="buttonDiv">
                         <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기"/>
-                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={goBooking}/>
+                        <Link to={`/item/bookingupload/${itemNum}`}>
+                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기"/>
+                        </Link>   
                 </div>
 
                 <div className="reviewDiv">
