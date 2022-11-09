@@ -1,10 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 // import { Route } from "react-router-dom";
 // import "./MyPageItemDetail.css";
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from "react-datepicker";
-
 import styled from 'styled-components';
 
 // import Shirt from '../img/shirt.jpg';
@@ -62,6 +61,25 @@ function MyPageItemDetail({ match, location, history }) {
     const handlerChangeItemRentalstart = (e) => setItemRentalstart(e.target.value);
     const handlerChangeItemRentalend = (e) => setItemRentalend(e.target.value);
     
+    const [files, setFiles] = useState('');
+    const [imageSrc, setImageSrc] = useState('');
+    
+    const handlerChangefiles =(e) => {
+        setFiles(e.target.files[0]);
+        encodeFileToBase64(e.target.files[0]);
+    }
+
+    const encodeFileToBase64 = (fileBlob) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+          reader.onload = () => {
+            setImageSrc(reader.result);
+            resolve();
+          };
+        });
+      };
+
     const handlerClickList = () => history.goBack();
     const handlerClickDelete = () => {
         axios.delete(`http://localhost:8080/api/item/${itemNum}`)
@@ -98,24 +116,20 @@ function MyPageItemDetail({ match, location, history }) {
             })
             .catch(error => console.log(error));
     };
-    
 
     return (
         <MyPageItemDetailContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
             <div className="mypageInnerPage myDetailPage">
                 <h3>내 상품 상세조회</h3>
 
+            <div className="ChoiseFile">
                 <div className="myDetailImage">
-                    {/* 이미지 부분 확인하려고 넣음! 나중에 아래 div처럼 다시 이미지 넣어야함
-                    <div className="myDetailImg"> */}
-                        <p className="memberImg"></p>
-                        <td>{data.itemImage}</td>
-                    </div>
-
-                    {/* <div className="myDetailImage">
-                        <div className="myDImage" style={{ "backgroundImage": `url(${Shirt})` }}></div>
-                    </div> */}
-
+                        <img className="memberImg" src={`../../files/${data.files}`}/>
+                </div>
+                <div className="imageChoose">
+                    <input className="form-control-image" type = "file" name="file" multiple onChange={handlerChangefiles}/>
+                </div>
+            </div>
 
                 <div className="myDetailTable">
                     <form method="post" id="frm" name="frm">
@@ -130,15 +144,60 @@ function MyPageItemDetail({ match, location, history }) {
                             </tr>
                             <tr>
                                 <th scope="row">어울리는 계절</th>
-                                <td><input type="text" value={itemWeather} onChange={handlerChangeItemWeather} /></td>               
+                                <td><select type="text" value={itemWeather} onChange={handlerChangeItemWeather}>
+                                    <option value="봄">봄</option>
+                                    <option value="여름">여름</option>
+                                    <option value="가을">가을</option> 
+                                    <option value="겨울">겨울</option>
+                                    </select></td>               
                             </tr>
                             <tr>
                                 <th scope="row">대분류</th>
-                                <td><input type="text" value={itemMaincategory} onChange={handlerChangeItemMaincategory} /></td>                  
+                                <td><select type="text" value={itemMaincategory} onChange={handlerChangeItemMaincategory}>
+                                    <option value="상의">상의</option>
+                                    <option value="하의">하의</option>
+                                    <option value="아우터">아우터</option>
+                                    <option value="원피스">원피스</option>
+                                    </select></td>                  
                             </tr>
                             <tr>
                                 <th scope="row">소분류</th>
-                                <td><input type="text" value={itemSubcategory} onChange={handlerChangeItemSubcategory} /></td>                  
+                                <td>
+                                {
+                                (function() {
+                                    if( itemMaincategory ==="상의"){
+                                   return <select type="text" value={itemSubcategory} onChange={handlerChangeItemSubcategory}>
+                                    <option value="반팔">반팔</option>
+                                   <option value="긴팔">긴팔</option>
+                                   <option value="니트">니트</option>
+                                   <option value="블라우스">블라우스</option>
+                                        
+                                   </select>;
+                                   }
+                                   else if(itemMaincategory ==="하의"){
+                                   return  <select type="text" value={itemSubcategory} onChange={handlerChangeItemSubcategory}>
+                                   <option value="바지">바지</option>
+                                  <option value="치마">치마</option>
+                                  <option value="반바지">반바지</option> 
+                                  <option value="레깅스">레깅스</option>
+                             
+                                  </select>;}
+
+                                   else if(itemMaincategory ==="아우터"){
+                                    return  <select type="text" value={itemSubcategory} onChange={handlerChangeItemSubcategory}>
+                                     <option value="패딩">패딩</option>
+                                     <option value="코트">코트</option>
+                                     <option value="바람막이">바람막이</option> 
+                              
+                                   </select>;}
+                                  else {return  <select type="text" value={itemSubcategory} onChange={handlerChangeItemSubcategory}>
+                                     <option value="패딩">롱</option>
+                                     <option value="코트">미디</option>
+                                     <option value="바람막이">미니</option> 
+                                 </select>;}
+                                })()
+                            }
+                            </td>
                             </tr>
                             <tr>
                                 <th scope="row">가격</th>
@@ -150,30 +209,46 @@ function MyPageItemDetail({ match, location, history }) {
                             </tr>
                             <tr>
                                 <th scope="row">사이즈</th>
-                                {/* 드롭박스 형식으로 바꿔야함! */}
+                                <td>
                                 {
                                 (function() {
-                                    if( data.itemMaincategory ==="상의"){
-                                   return  <td><input type="text" value={itemTopsize} onChange={handlerChangeItemTopsize} /></td>
+                                    if( itemMaincategory ==="상의"){
+                                   return <select type="text" value={itemTopsize} onChange={handlerChangeItemTopsize}>
+                                    <option value="44이하">44이하</option>
+                                   <option value="55">55</option>
+                                   <option value="66">66</option>
+                                   <option value="77">77</option>
+                                   <option value="88이상">88이상</option> 
+
+                                   </select>;
                                    }
-                                   else if( data.itemMaincategory ==="하의"){
-                                   return  <td><input type="text" value={itemBottomsize} onChange={handlerChangeItemBottomsize} /></td>  
-                                   }
-                                  else {return  <td><input type="text" value={itemEtcsize} onChange={handlerChangeItemEtcsize} /></td>  }
+                                   else if(itemMaincategory ==="하의"){
+                                   return  <select type="text" value={itemBottomsize} onChange={handlerChangeItemBottomsize}>
+                                   <option value="25이하">25이하</option>
+                                  <option value="26">26</option>
+                                  <option value="27">27</option> 
+                                  <option value="28">28</option>
+                                  <option value="29">29</option> 
+                                  <option value="30">30</option> 
+                                  <option value="31">31</option> 
+                                  <option value="32">32</option> 
+                                  <option value="33이상">33이상</option> 
+                                  </select>;}
+                                  else {return <select type="text" value={itemEtcsize} onChange={handlerChangeItemEtcsize}>
+                                     <option value="S">S</option>
+                                     <option value="M">M</option>
+                                     <option value="L">L</option> 
+                                 </select>;}
                                 })()
-                            }                      
+                            }</td>              
                             </tr>
-                            {/* 내용 안에 내용 길이에 따라 줄바뀜+늘어남 조절되게 바꿔야함 */}
                             <tr>
                                 <th scope="row">내용</th>
-                                <td><input type="text" value={itemDetail} onChange={handlerChangeDetail} /></td>
+                                <td><input type="textarea" className="DetailTextarea" value={itemDetail} onChange={handlerChangeDetail} /></td>
                             </tr>
                             
                             <tr>
                                 <th scope="row">대여기간</th>
-                                {/* <td><input className="rentalInput" type="text" value={itemRentalstart} onChange={handlerChangeItemRentalstart} />{' ~ '}
-                                    <input className="rentalInput" type="text" value={itemRentalend} onChange={handlerChangeItemRentalend} /></td>                   */}
-                                    {/* <td className="rentalInput"> */}
                                     <div className="rentalDiv">
                                         <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()}/>
                                     {' ~ '}
@@ -197,6 +272,7 @@ function MyPageItemDetail({ match, location, history }) {
 }
 
 const MyPageItemDetailContainer = styled.div`
+
 .mypageInnerPage {
     width: 100% !important;
     height: 100% !important;
@@ -220,9 +296,9 @@ const MyPageItemDetailContainer = styled.div`
 }
 
 .myDetailTable {
-    display: flex;
+    display: grid;
+    -webkit-box-pack: center;
     justify-content: center;
-    padding: 0 100px 0 0;
 }
 
 .myDetailTable th {
@@ -237,6 +313,7 @@ const MyPageItemDetailContainer = styled.div`
     border-radius: 3px;
     display: flex;
     padding: 10px;
+    height: 54px;
   }
 
 .myDetailTable form tr>td>input {
@@ -246,12 +323,30 @@ const MyPageItemDetailContainer = styled.div`
     border-radius: 3px;
   }
 
+.myDetailTable form select {
+    border: 1px solid #ddd;
+    width: 100%;
+    padding: 8px 6px;
+    border-radius: 3px;
+  }
+
+.DetailTextarea{
+    border: 1px solid #ddd;
+    width: 100%;
+    height: fit-content;
+    padding: 8px 6px;
+    border-radius: 3px;
+    white-space: pre-line;
+    word-break: break-word;
+}
+
   .myDetailTable .rentalInput {
     border: 1px solid #ddd;
     width: 44%;
     padding: 8px 6px;
     border-radius: 3px;
     border-style: none;
+    text-overflow: clip;
   }
 
   .myDetailPage input.endDate, .myDetailPage input.startDate{
@@ -309,7 +404,9 @@ const MyPageItemDetailContainer = styled.div`
 
 .myDetailImage {
     float: left;
-    padding-left: 100px;
+    width: fit-content;
+    height: fit-content;
+    // padding-left: 100px;
 }
 
 .myDetailImage .memberImg {
@@ -344,6 +441,16 @@ const MyPageItemDetailContainer = styled.div`
 
 .myDetailTable tr {
     height: 55px;
+}
+
+.ChoiseFile{
+    -webkit-box-align: center;
+    align-items: center;
+    display: grid;
+    width: fit-content;
+    height: fit-content;
+    float: left;
+    // padding-left: 100px;
 }
 `
 
