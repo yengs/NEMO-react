@@ -13,7 +13,9 @@ function ItemList({ match }) {
 
     useEffect(() => {
        
-        axios.get(`http://localhost:8080/api/item/cate/${itemMaincategory}`, { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
+        axios.get(`http://localhost:8080/api/item/cate/${itemMaincategory}`
+        // , { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }}
+        )
             .then(response => setDatas(response.data))
             .catch(error => console.log(error));
     }, []);

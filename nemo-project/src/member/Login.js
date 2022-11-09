@@ -14,14 +14,28 @@ function Login({ history }) {
     const handlerSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:8080/api/member/login', { "memberId": id, "memberPw": pw })
-        .then(response => {
-            if (response.status === 200 && response.data != "") {
+            .then(response => {
+                if (response.status === 200 && response.data !== "") {
                     console.log(response.headers);
                     let jwtToken = response.headers.get("jwtToken");
                     console.log(response.data);
                     console.log("토큰!!!!!!!!!!!!!!!!! : " + jwtToken);
+                    
+                    sessionStorage.setItem("jwtToken", jwtToken);
+                    sessionStorage.setItem("memberNum", response.data.memberNum);
+                    sessionStorage.setItem("memberName", response.data.memberName);
+                    sessionStorage.setItem("memberNickname", response.data.memberNickname);
+                    sessionStorage.setItem("memberEmail", response.data.memberEmail);
+                    sessionStorage.setItem("memberAddress", response.data.memberAddress);
+                    sessionStorage.setItem("memberClean", response.data.memberClean);
+                    sessionStorage.setItem("memberPhone", response.data.memberPhone);
+                    sessionStorage.setItem("memberWarning", response.data.memberWarning);
+                    sessionStorage.setItem("memberId", id);
 
-                    sessionStorage.setItem("jwtToken",jwtToken);
+        localStorage.setItem("memberIdLocal", id);
+
+
+                    
                     alert("로그인완료");
                     window.location.reload();
                     window.location.href = "/";
@@ -37,7 +51,14 @@ function Login({ history }) {
                 console.log(error);
                 alert("에러");
             });
-    };
+        };
+        
+        // const rememberId = () => {
+        // localStorage.setItem("memberIdLocal", id);
+        // const remId = localStorage.getItem("memberIdLocal");
+    //     setId(remId);
+    // }
+
     return (
         <div className="joinWrap memberPage container loginForm">
             <div className="pageTitle">
@@ -61,7 +82,7 @@ function Login({ history }) {
                             <tr>
                                 <td style={{ borderTop: 'none' }}>패스워드</td>
                                 <td style={{ borderTop: 'none' }}>
-                                    <input type="pw" value={pw} onChange={changePw} required />
+                                    <input type="password" value={pw} onChange={changePw} required />
                                 </td>
                             </tr>
                             <tr>
@@ -73,8 +94,8 @@ function Login({ history }) {
                                 </td>
                                 <td className="findMemberInfo">
                                     <div>
-                                    <Link to="Id">아이디 찾기</Link>
-                                    <Link to="Pw">비밀번호 찾기</Link>
+                                        <Link to="Id">아이디 찾기</Link>
+                                        <Link to="Pw">비밀번호 찾기</Link>
                                     </div>
                                 </td>
                             </tr>
@@ -85,7 +106,7 @@ function Login({ history }) {
                 <div className="btnWrap">
                     <Link to="/member/join" className="btn grayBtn joinBtn">회원가입</Link>
                     <Link to="/" className="btn googleLoginBtnLink">
-                        <div style={{backgroundImage: `url(${GoogleLogin})`}} className="googleLoginBtn"></div>
+                        <div style={{ backgroundImage: `url(${GoogleLogin})` }} className="googleLoginBtn"></div>
                     </Link>
                 </div>
                 {/* <div className="socialLogin">
