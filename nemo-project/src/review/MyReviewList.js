@@ -9,10 +9,10 @@ function MyReviewList() {
 
     const ITEM_COUNT_PER_PAGE = 10;
 
-    const [datas, setDatas] = useState([]);       // 리뷰 전체 데이터
-    const [count, setCount] = useState(0);        // 전체 개수
-    const [page, setPage] = useState(1);          // 보여지는 페이지
-    const [items, setItems] = useState([]);       // 페이징을 통해서 보여줄 데이터
+    const [datas, setDatas] = useState([]);                      // 리뷰 전체 데이터
+    const [count, setCount] = useState(0);                       // 전체 개수
+    const [page, setPage] = useState(1);                         // 보여지는 페이지
+    const [items, setItems] = useState([]);                      // 페이징을 통해서 보여줄 데이터
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/review/myReview')
