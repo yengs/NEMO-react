@@ -17,9 +17,10 @@ function MyReviewList() {
     useEffect(() => {
         axios.get('http://localhost:8080/api/review/myReview')
             .then(response => {
+                console.log(response);
                 const list = response.data.map(data => ({ ...data, closed: true }));
                 console.log(list);
-                setDatas(list);    // 리뷰 전체 데이터 설정
+                setDatas(list);                                 // 리뷰 전체 데이터 설정
                 setCount(list.length);
                 setItems(list.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
             })
@@ -73,7 +74,7 @@ function MyReviewList() {
                                             <p className={review.closed ? "close" : ""}>{review.reviewContents}</p>
                                         </div>
                                         <div id="btnView">
-                                            { review.reviewContents.length > 36 ?
+                                            {review.reviewContents.length > 36 ?
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             }

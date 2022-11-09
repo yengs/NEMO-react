@@ -8,11 +8,21 @@ function MypageReview() {
 
     const [myReviewData, setmyReviewData] = useState('');           // 내가 작성한 후기
     const [yourReviewData, setYourReviewData] = useState('');       // 내가 등록한 상품에 대한 다른 회원의 후기
-    const [reviewIcon, setReviewIcon] = useState('');               // 만족도 아이콘
+    const [reviewIcon, setReviewIcon] = useState('');               // 만족도 
 
-    // 내가 작성한 후기 데이터
     useEffect(() => {
-        axios.get('http://localhost:8080/api/review/myReview')
+
+        // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
+        axios.get('http://localhost:8080/api/review/myReview1')
+            .then(response => {
+                console.log(response);
+                setYourReviewData(response.data);
+                setReviewIcon(response.data);
+            })
+            .catch(error => console.log(error));
+            
+        // 내가 작성한 후기 데이터
+        axios.get('http://localhost:8080/api/review/myReview2')
             .then(response => {
                 console.log(response);
                 setmyReviewData(response.data);
@@ -20,16 +30,6 @@ function MypageReview() {
             })
             .catch(error => console.log(error));
     }, []);
-
-    // // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
-    // useEffect(() => {
-    //     axios.get('http://localhost:8080/api/review/yourReview')
-    //         .then(response => {
-    //             console.log(response);
-    //             setYourReviewData(response.data)
-    //         })
-    //         .catch(error => console.log(error));
-    // }, []);
 
     const goYourReview = () => {
         window.location.href = "/review/yourReview";
@@ -60,7 +60,7 @@ function MypageReview() {
                                 <td rowSpan={3} className="rReviewItemImageOrigin">
                                     <div style={{ "backgroundImage": `url(${jeans})` }}></div>
                                 </td>
-                                <td className='rReviewItemNameOrigin' rowSpan={3} >메종키츠네 셔츠</td>
+                                <td className='rReviewItemNameOrigin' rowSpan={3}>메종키츠네 셔츠</td>
                                 <td className='rReviewWriter' rowSpan={3}>선희곤듀</td>
                                 <td>
                                     <div className='rReviewItemImg' style={{ "backgroundImage": `url(${jeans})` }}></div>
