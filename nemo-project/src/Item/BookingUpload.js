@@ -9,7 +9,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 
 
-function BookingUpload({ history }) {
+function BookingUpload({ history, match }) {
 
   const [value, onChange] = useState(new Date());
 
@@ -38,11 +38,41 @@ function BookingUpload({ history }) {
 
   //----------결제모달 end--------------
 
+
+
+  //---------대여하기--------------
+  const bookingMember = sessionStorage.getItem('memberId');
+  const { itemNum } = match.params;
+
+  const bookingItemnum = itemNum
+
+  const [bookingDate, setbookingDate] = useState(new Date());
+
+
+  const handlerClickSubmit = (e) => {
+    e.preventDefault();
+
+    axios.post('http://localhost:8080/api/item', {
+      "bookingItemnum": bookingItemnum, "bookingMember": bookingMember , "bookingDate": bookingDate
+    })
+      .then(response => {
+        if (response.status === 200) {
+          alert("정상적으로 대여되었습니다.");
+          window.location.href = '/';
+        } else {
+          alert("대여 실패");
+          return;
+        }
+      })
+      .catch(error => console.log(error));
+  };
+
+  //----------대여하기 end--------------
+
   return (
     <>
       <div className="BookingContainer">
         <h3>대여하기</h3>
-
         <div className="top">
           <div className="left">
             <div className="tablePlusForm2">
@@ -236,7 +266,7 @@ function BookingUpload({ history }) {
             </label>
           </div>
           <div className="btnGroup">
-            <button className="greenBtn btnbk">신청</button>&nbsp;&nbsp;
+            <button className="greenBtn btnbk" onClick={handlerClickSubmit}>신청</button>&nbsp;&nbsp;
             <button className="grayBtn btnbk" onClick={goItemDetail}>취소</button>
           </div>
         </div>
