@@ -15,10 +15,15 @@ function Header() {
 
     const [ itemsub, setItemsub ] = useState('');
    
-
-    const handlerLogin = () => {
-        window.location.href = "/member/login";
+    
+    const handlerLogout = () => {
+        sessionStorage.clear();
+        window.location.reload();
     }
+
+    // const handlerLogout = () => {
+    //     console.log(sessionStorage.getItem("jwtToken"));
+    // }
 
     const handlerGoMain = () => {
         window.location.href = "/";
@@ -55,12 +60,13 @@ console.log(itemsub)
                 <div className="mainTitle">
                     <h2>내일 모입지?</h2>
                 </div>
+                <div>{sessionStorage.getItem("jwtToken") != null ?
                 <div className="member">
-                    <Link to="/member/login">
+                    <Link to="/member/login" onClick={handlerLogout}>
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <FaLock />
                         </IconContext.Provider>
-                        <p>로그인</p>
+                        <p>로그아웃</p>
                     </Link>
                     <Link to="/mypage/mybooking">
                         <IconContext.Provider value={{ className: "headerIcons" }}>
@@ -74,7 +80,23 @@ console.log(itemsub)
                         </IconContext.Provider>
                         <p>내모톡</p>
                     </Link>
-                </div>
+                </div> 
+                : 
+                <div className="member">
+                <Link to="/member/login">
+                    <IconContext.Provider value={{ className: "headerIcons" }}>
+                        <FaLock />
+                    </IconContext.Provider>
+                    <p>로그인</p>
+                </Link>
+                <Link to="/chat">
+                    <IconContext.Provider value={{ className: "headerIcons" }}>
+                        <BsChatDotsFill />
+                    </IconContext.Provider>
+                    <p>내모톡</p>
+                </Link>
+            </div>
+                }</div>
             </div>
             <div className='underHeader'>
                 <div className="navBar">
