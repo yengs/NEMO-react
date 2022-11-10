@@ -37,8 +37,8 @@ function BookingUpload({ history,match }) {
   //--------------대여하기 ------------------
 
   const {itemNum} = match.params;
-  const {itemName} =match.params;
-  const {itemDeposit} =match.params;
+  const {itemName} = match.params;
+  const {itemDeposit} = match.params;
   const {itemPrice} = match.params;
   const {itemWriter} = match.params;
   const {files} = match.params;
