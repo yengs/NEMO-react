@@ -482,7 +482,10 @@ footer {
   display: inline-block;
 }
 
-
+.PwCheck{
+  padding-top: 5px;
+  font-size: 14px;
+}
 
 
 
