@@ -4,8 +4,10 @@ import { Link, Navigate, Route } from "react-router-dom";
 import "./ItemDetail.css";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
+
 function ItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
+
 
     const [ data, setData ] = useState({});
     const [ itemName, setItemName ] = useState('');
