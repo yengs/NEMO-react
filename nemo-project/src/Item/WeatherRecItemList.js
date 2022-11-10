@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Shirt from '../img/shirt.jpg';
+import Weather from "../components/Weather";
 
 export default function WeatherRecItemList({ match }) {
 
@@ -14,17 +15,17 @@ export default function WeatherRecItemList({ match }) {
 
     const [datas, setDatas] = useState([]);
 
-    useEffect(() => {
-        // 임시로 get주소 넣어둠. 나중에 수정필요
-        axios.get(`http://localhost:8080/api/item/testlist`)
-            .then(response => setDatas(response.data))
-            .catch(error => console.log(error));
-    }, []);
+    // useEffect(() => {
+    //     // 임시로 get주소 넣어둠. 나중에 수정필요
+    //     axios.get(`http://localhost:8080/api/item/testlist`)
+    //         .then(response => setDatas(response.data))
+    //         .catch(error => console.log(error));
+    // }, []);
 
     return (
         <Container>
             <div className="weatherRecItemListWrap">
-                <div>
+                {/* <div>
                     <div className="pageTitle">
                         <h3>내일 날씨는?</h3>
                     </div>
@@ -95,7 +96,8 @@ export default function WeatherRecItemList({ match }) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
+                <Weather />
                 <div className="itemWrap">
                     {
                         datas && datas.map(item => (
