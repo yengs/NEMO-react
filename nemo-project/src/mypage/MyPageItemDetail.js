@@ -82,12 +82,13 @@ function MyPageItemDetail({ match, location, history }) {
 
     const handlerClickList = () => history.goBack();
     const handlerClickDelete = () => {
+        alert("삭제하시겠습니까?");
         axios.delete(`http://localhost:8080/api/item/${itemNum}`)
         .then(response => { 
             console.log(response);
             if (response.status === 200) {
                 alert("정상적으로 삭제되었습니다.");
-                history.push("/mypage/mypageitem");
+                history.goBack();
             } else {
                 alert("삭제에 실패했습니다.");
                 return;
@@ -107,7 +108,7 @@ function MyPageItemDetail({ match, location, history }) {
             .then(response => {
                 if (response.status === 200) {
                     alert("정상적으로 수정되었습니다.");
-                    history.push("/mypage/mypageitem")
+                    history.goBack();
                     
                 } else {
                     alert("수정에 실패했습니다.");
@@ -250,9 +251,9 @@ function MyPageItemDetail({ match, location, history }) {
                             <tr>
                                 <th scope="row">대여기간</th>
                                     <div className="rentalDiv">
-                                        <DatePicker dateFormat="yyyy-MM-dd" className="startDate" value={itemRentalstart} selected={startDate} onChange={(date) => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()}/>
+                                        <DatePicker dateFormat="yyyy-MM-dd" className="startDate" value={startDate} selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()}/>
                                     {' ~ '}
-                                    <DatePicker dateFormat="yyyy-MM-dd" className="endDate" value={itemRentalend} selected={endDate} onChange={(date) => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate}locale={ko} minDate={startDate}/>
+                                    <DatePicker dateFormat="yyyy-MM-dd" className="endDate" value={endDate} selected={endDate} onChange={date => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate}locale={ko} minDate={startDate}/>
                                     </div>
                             </tr>
                         </tbody>
