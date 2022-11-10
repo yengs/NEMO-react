@@ -4,14 +4,18 @@ import { Link, Navigate, Route } from "react-router-dom";
 import "./ItemDetail.css";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
+
 function ItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
+
 
     const [ data, setData ] = useState({});
     const [ itemName, setItemName ] = useState('');
     const [ itemPrice, setItemPrice ] = useState('');
     const [ itemDeposit, setItemDeposit] = useState('');
     const [ itemDetail, setItemDetail ] = useState('');
+    const [ itemWriter , setItemWriter] = useState('');
+    const [ files ,setItemImage] = useState('');
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/item/${itemNum}`)
@@ -21,6 +25,8 @@ function ItemDetail({ match, location, history }) {
             setItemPrice(response.data.itemPrice);
             setItemDeposit(response.data.itemDeposit);
             setItemDetail(response.data.itemDetail);
+            setItemWriter(response.data.itemWriter);
+            setItemImage(response.data.files);
         })
         .catch(error => { console.log(error); });
     }, []);
@@ -175,7 +181,9 @@ function ItemDetail({ match, location, history }) {
                 {/* 채팅하기/대여하기 버튼 누르면 채팅/대여창으로 이동하게끔 수정 */}
                 <div className="buttonDiv">
                         <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기"/>
-                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={goBooking}/>
+                        <Link to={`/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files}`}>
+                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기"/>
+                        </Link>
                 </div>
 
                 <div className="reviewDiv">

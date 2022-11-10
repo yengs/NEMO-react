@@ -1,6 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { useCookies } from "react-cookie";
 
 import GoogleLogin from "../img/btn_google_signin_dark_normal_web@2x.png";
 
@@ -9,8 +11,50 @@ function Login({ history }) {
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
 
-    const changeId = (e) => setId(e.target.value);
+    const changeId = (e) => { setId(e.target.value); console.log(id) };
     const changePw = (e) => setPw(e.target.value);
+
+    /*====== Cookie 관련 선언======*/
+    const [cookies, setCookie, removeCookie] = useCookies(['rememberId']);
+    const [isRemember, setIsRemember] = useState(false);
+
+    useEffect(() => {
+        if (cookies.rememberId !== undefined) {
+            setId(cookies.rememberId);
+            setIsRemember(true);
+        } else if (cookies.rememberId === '' || cookies.rememberId === null || cookies === undefined) {
+            removeCookie('rememberId');
+        }
+    }, []);
+
+
+    const handlerCheck = (e) => {
+        setIsRemember(e.target.checked);
+        console.log(id);
+        if (isRemember === true) {
+            if (id === '' || id === null || id === undefined) {
+                changeId();
+                setCookie('rememberId', id);
+            }
+        } else {
+            removeCookie('rememberId');
+        }
+        // console.log(isRemember);
+    }
+
+    const checkid = () => {
+        console.log("????????" + id);
+
+        if (isRemember === true) {
+            setCookie('rememberId', id);
+        } else {
+            removeCookie('rememberId');
+        }
+        console.log("체크된거 :: " + isRemember);
+
+        console.log("쿠키값 : " + cookies.rememberId);
+    }
+
     const handlerSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:8080/api/member/login', { "memberId": id, "memberPw": pw })
@@ -27,6 +71,11 @@ function Login({ history }) {
 
                     localStorage.setItem("memberIdLocal", id);
 
+                    if (isRemember === true) {
+                        setCookie('rememberId', id);
+                    } else {
+                        removeCookie('rememberId');
+                    }
 
 
                     alert("로그인완료");
@@ -46,11 +95,6 @@ function Login({ history }) {
             });
     };
 
-    // const rememberId = () => {
-    // localStorage.setItem("memberIdLocal", id);
-    // const remId = localStorage.getItem("memberIdLocal");
-    //     setId(remId);
-    // }
 
     return (
         <div className="joinWrap memberPage container loginForm">
@@ -81,7 +125,7 @@ function Login({ history }) {
                             <tr>
                                 <td colSpan={2} className="rememberId">
                                     <label className="rememberIdLabel">
-                                        <input type="checkbox" id="rememberIdCheckbox" />
+                                        <input type="checkbox" id="rememberIdCheckbox" onChange={handlerCheck} checked={isRemember} />
                                         <p>아이디 기억하기</p>
                                     </label>
                                 </td>
