@@ -6,11 +6,11 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 function Join() {
 
-    
+
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
-        
+
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -20,7 +20,7 @@ function Join() {
             }
             fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
         }
-        
+
         setMaddress(fullAddress);
         console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
@@ -60,7 +60,6 @@ function Join() {
             "memberPhone": mPhone,
             "memberAddress": mAddress
         }
-
         axios.post('http://localhost:8080/api/member/join', memberInfo)
             .then(response => {
                 if (response.status === 200) {
@@ -75,6 +74,41 @@ function Join() {
                 console.log(memberInfo);
             });
     };
+
+    // 아이디 중복 체크
+    const checkId = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/api/member/join/checkid', `memberId=${mId}`)
+            .then(result => {
+                console.log(result);
+                if (result.data === "success" && mId !== "") {
+                    alert("사용 가능한 아이디입니다.");
+                } else if (result.data === "fail" && mId !== "") {
+                    alert("이미 사용중인 아이디입니다.")
+                } else{
+                    alert("아이디를 입력해주세요");
+                }
+            });
+    }
+
+    // 이메일 중복 체크
+    const checkEmail = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/api/member/join/checkemail', `memberEmail=${mEmail}`)
+            .then(email => {
+                console.log(email);
+                if (email.data === "success" && mEmail !== "") {
+                    alert("사용 가능한 이메일입니다.");
+                } else if(email.data === "fail" && mEmail !== ""){
+                    alert("중복된 이메일입니다.");
+                }else{
+                    alert("이메일을 입력해주세요.")
+                }
+            });
+    }
+
 
     return (
         <div className="joinWrap memberPage container">
@@ -106,7 +140,7 @@ function Join() {
                                     <input type="text" name="mId" value={mId} onChange={handlerChangeId} required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn btn">중복확인</button>
+                                    <button className="beigeBtn btn" onClick={checkId}>중복확인</button>
                                 </td>
                             </tr>
                             <tr>
@@ -129,7 +163,7 @@ function Join() {
                                     <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn btn">중복확인</button>
+                                    <button className="beigeBtn btn" onClick={checkEmail}>중복확인</button>
                                 </td>
                             </tr>
                             <tr>
