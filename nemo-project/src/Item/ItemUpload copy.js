@@ -4,14 +4,12 @@ import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from 'date-fns/esm/locale';
-import "./ItemUpload.css";
+
 
 function ItemUpload({ history }) {
 
-    const itemWriter = sessionStorage.getItem('memberId');
-
-    const [itemName, setitemName] = useState('');
-    const [itemPrice, setitemPrice] = useState('');
+    const [iName, setiName] = useState('');
+    const [iPrice, setiPrice] = useState('');
     const [itemMaincategory, setitemMaincategory] = useState('');
     const [itemSubcategory, setitemSubcategory] = useState('');
     const [itemDeposit, setitemDeposit] = useState('');
@@ -20,13 +18,11 @@ function ItemUpload({ history }) {
     const [itemTopsize, setitemTopsize] = useState('');
     const [itemBottomsize, setitemBottomsize] = useState('');
     const [itemEtcsize, setitemEtcsize] = useState('');
-    const [files, setFiles] = useState('');
-    const [imageSrc, setImageSrc] = useState('');
     // const [itemRentalperiod, setitemRentalperiod] = useState('');
 
     
-    const handlerChangeitemName = (e) => setitemName(e.target.value);
-    const handlerChangeitemPrice = (e) => setitemPrice(e.target.value);
+    const handlerChangeiName = (e) => setiName(e.target.value);
+    const handlerChangeiPrice = (e) => setiPrice(e.target.value);
     const handlerChangeitemMaincategory =(e) => setitemMaincategory(e.target.value);
     const handlerChangeitemSubcategory =(e) => setitemSubcategory(e.target.value);
     const handlerChangeitemDeposit=(e) => setitemDeposit (e.target.value);
@@ -35,56 +31,25 @@ function ItemUpload({ history }) {
     const handlerChangeitemTopsize=(e) => setitemTopsize(e.target.value);
     const handlerChangeitemBottomsize=(e) => setitemBottomsize(e.target.value);
     const handlerChangeitemEtcsize=(e) => setitemEtcsize(e.target.value);
-    const handlerChangefiles =(e) => {
-        setFiles(e.target.files[0]);
-        encodeFileToBase64(e.target.files[0]);
-    }
-    
     // const handlerChangeitemRentalperiod=(e) => setitemRentalperiod(e.target.value);
 
 
-    const encodeFileToBase64 = (fileBlob) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(fileBlob);
-        return new Promise((resolve) => {
-          reader.onload = () => {
-            setImageSrc(reader.result);
-            resolve();
-          };
-        });
-      };
+
+    const [startDate, setStartDate] = useState(new Date("2022/10/28"));
+    const [endDate, setEndDate] = useState(new Date("2022/10/30"));
 
 
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
-
-    const handlerClickGoback = () => history.goBack();
 
     const handlerClickSubmit = (e) => {
         e.preventDefault();
 
-        const formData = new FormData();
-        formData.append('data', new Blob([JSON.stringify({"itemName": itemName, "itemPrice": itemPrice,"itemWriter":itemWriter,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
-        "itemDetail":itemDetail,"itemWeather":itemWeather,"itemTopsize":itemTopsize,"itemBottomsize":itemBottomsize,
-        "itemEtcsize":itemEtcsize,"itemRentalstart" :startDate,"itemRentalend":endDate})], {
-            type: "application/json"
-        }));
-        // formData.append("files", new Blob(files, { type: "image/*" }));
-        formData.append("files", files);
-
-
-
-
-        axios.post('http://localhost:8080/api/item', 
-            formData, 
-            { headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            })
+        axios.post('http://localhost:8080/api/item', { "itemName": iName, "itemPrice": iPrice, "iName": iName, "iPrice": iPrice,"itemMaincategory":itemMaincategory,"itemSubcategory":itemSubcategory,"itemDeposit":itemDeposit,
+                                                        "itemDetail":itemDetail,"itemWeather":itemWeather,"itemTopsize":itemTopsize,"itemBottomsize":itemBottomsize,
+                                                        "itemEtcsize":itemEtcsize,"itemRentalstart" :startDate,"itemRentalend":endDate})
         .then(response => {
             if (response.status === 200) {
                 alert("정상적으로 등록되었습니다.");
-                window.location.href = `/item/cate/${itemMaincategory}`;
+                history.push("/item");
             } else {
                 alert("등록에 실패했습니다.");
                 return;
@@ -97,20 +62,24 @@ function ItemUpload({ history }) {
   
     return (
         <>
-            <div className="itemcontainer">
-            <h2>상품 등록</h2>
-            <hr/>
+            <div className="container">
+                <h2>상품 등록</h2>
                 <form id="frm" name="frm">
                     <table className="board_detail">
                         <tr>
                             <td>상품명</td>
-                            <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} /></td>
-                        </tr>
                         
+                            <td><input type="text" id="iName" name="iName" value={iName} onChange={handlerChangeiName} /></td>
+                        </tr>
+                        <tr>
+                            <td>가격</td>
+                            <td><input type="text" id="iPrice" name="iPrice" value={iPrice} onChange={handlerChangeiPrice} /></td>
+                        </tr>
+
                         <tr>
                             <td>상품 대분류</td>
-                            <td> <select type="text" id="itemMaincategory" name="itemMaincategory" value={itemMaincategory} onChange={handlerChangeitemMaincategory} required>
-                                <option value="">------------------선택------------------</option>
+                            <td> <select type="text" id="itemMaincategory" name="itemMaincategory" value={itemMaincategory} onChange={handlerChangeitemMaincategory} >
+                                <option value="">선택</option>
                                 <option value="상의">상의</option>
                                 <option value="하의">하의</option>
                                 <option value="아우터">아우터</option>
@@ -118,6 +87,7 @@ function ItemUpload({ history }) {
                                 </select>
                             </td>
                     
+
                         </tr>
                         <tr>
                             <td>상품 소분류</td>
@@ -125,8 +95,8 @@ function ItemUpload({ history }) {
                             <td>     {
                                 (function() {
                                     if( itemMaincategory ==="상의"){
-                                   return <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory} required>
-                                    <option value="">------------------선택------------------</option>
+                                   return <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
+                                    <option value="">선택</option>
                                     <option value="반팔">반팔</option>
                                    <option value="긴팔">긴팔</option>
                                    <option value="니트">니트</option>
@@ -135,25 +105,24 @@ function ItemUpload({ history }) {
                                    </select>;
                                    }
                                    else if(itemMaincategory ==="하의"){
-                                   return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory} required>
-                                   <option value="">------------------선택------------------</option>
+                                   return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
+                                   <option value="">선택</option>
                                    <option value="바지">바지</option>
                                   <option value="치마">치마</option>
                                   <option value="반바지">반바지</option> 
                                   <option value="레깅스">레깅스</option>
                              
                                   </select>;}
-
                                    else if(itemMaincategory ==="아우터"){
                                     return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
-                                    <option value="">------------------선택------------------</option>
+                                    <option value="">선택</option>
                                      <option value="패딩">패딩</option>
                                      <option value="코트">코트</option>
                                      <option value="바람막이">바람막이</option> 
                               
                                    </select>;}
                                   else {return  <select type="text" id="itemSubcategory" name="itemSubcategory"  value={itemSubcategory} onChange={handlerChangeitemSubcategory}>
-                                     <option value="">------------------선택------------------</option>
+                                     <option value="">선택</option>
                                      <option value="패딩">롱</option>
                                      <option value="코트">미디</option>
                                      <option value="바람막이">미니</option> 
@@ -163,27 +132,13 @@ function ItemUpload({ history }) {
                         </tr>
 
                         <tr>
-                            <td>어울리는 계절</td>
-                            {/* <td><input type="text" id="itemWeather" name="itemWeather" value={itemWeather} onChange={handlerChangeitemWeather} /></td> */}
-                             <td>  
-                             <select type="text" required id="itemWeather" name="itemWeather"  value={itemWeather} onChange={handlerChangeitemWeather}>
-                             <option value="">------------------선택------------------</option>
-                                     <option value="봄">봄</option>
-                                    <option value="여름">여름</option>
-                                    <option value="가을">가을</option> 
-                                    <option value="겨울">겨울</option> 
-                                    </select>
-                            </td>
-                        </tr>
-
-                        <tr>
                             <td>사이즈</td>   
                             <td>
                             {
                                 (function() {
                                     if( itemMaincategory ==="상의"){
-                                   return <select type="text" required id="itemTopsize" name="itemTopsize"  value={itemTopsize} onChange={handlerChangeitemTopsize}>
-                                   <option value="">------------------선택------------------</option>
+                                   return <select type="text" id="itemTopsize" name="itemTopsize"  value={itemTopsize} onChange={handlerChangeitemTopsize}>
+                                   <option value="">선택</option>
                                     <option value="44이하">44이하</option>
                                    <option value="55">55</option>
                                    <option value="66">66</option>
@@ -193,8 +148,8 @@ function ItemUpload({ history }) {
                                    </select>;
                                    }
                                    else if(itemMaincategory ==="하의"){
-                                   return  <select type="text" required id="itemBottomsize" name="itemBottomsize"  value={itemBottomsize} onChange={handlerChangeitemBottomsize}>
-                                  <option value="">------------------선택------------------</option>
+                                   return  <select type="text" id="itemBottomsize" name="itemBottomsize"  value={itemBottomsize} onChange={handlerChangeitemBottomsize}>
+                                  <option value="">선택</option>
                                    <option value="25이하">25이하</option>
                                   <option value="26">26</option>
                                   <option value="27">27</option> 
@@ -205,8 +160,8 @@ function ItemUpload({ history }) {
                                   <option value="32">32</option> 
                                   <option value="33이상">33이상</option> 
                                   </select>;}
-                                  else {return <select type="text" required id="itemEtcsize" name="itemEtcsize"  value={itemEtcsize} onChange={handlerChangeitemEtcsize}>
-                                    <option value="">------------------선택------------------</option>
+                                  else {return <select type="text" id="itemEtcsize" name="itemEtcsize"  value={itemEtcsize} onChange={handlerChangeitemEtcsize}>
+                                    <option value="">선택</option>
                                      <option value="S">S</option>
                                      <option value="M">M</option>
                                      <option value="L">L</option> 
@@ -217,48 +172,50 @@ function ItemUpload({ history }) {
 
                             </td>
                        </tr>
-
-                        <tr>
-                            <td>가격</td>
-                            <td><input type="text" id="itemPrice" name="itemPrice" value={itemPrice} onChange={handlerChangeitemPrice} required/></td>
-                        </tr>
+                       
                         <tr>
                             <td>보증금</td>
-                            <td><input type="text" required id="itemDeposit" name="itemDeposit" value={itemDeposit} onChange={handlerChangeitemDeposit} /></td>
+                            <td><input type="text" id="itemDeposit" name="itemDeposit" value={itemDeposit} onChange={handlerChangeitemDeposit} /></td>
                         </tr>
-                        
+
+                        <tr>
+                            <td>상품설명</td>
+                            <td><input type="text" id="itemDetail" name="itemDetail" value={itemDetail} onChange={handlerChangeitemDetail} /></td>
+                        </tr>  <tr>
+                            <td>계절</td>
+                            {/* <td><input type="text" id="itemWeather" name="itemWeather" value={itemWeather} onChange={handlerChangeitemWeather} /></td> */}
+                             <td>  
+                             <select type="text" id="itemWeather" name="itemWeather"  value={itemWeather} onChange={handlerChangeitemWeather}>
+                             <option value="">선택</option>
+                                     <option value="봄">봄</option>
+                                    <option value="여름">여름</option>
+                                    <option value="가을">가을</option> 
+                                    <option value="겨울">겨울</option> 
+                                    </select>
+                            </td>
+                    
+                        </tr>
                         <tr>
                             <td>이미지</td>
-                            <div className="preview">
-                            {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
-                            <td> <input className="form-control-image" type = "file" name="file" multiple onChange={handlerChangefiles}/></td>
+                            <td> <input className="form-control" type = "file" name="file"/></td>
                         </tr>
                        
                                         
                         <tr>
                             <td>대여시작일</td>
-                            <td><DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()} required /> </td>
+                            <td><DatePicker dateFormat="yyyy-MM-dd" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()}/> </td>
                        </tr>
                        <tr>
                             <td>대여마감일</td>
-                            <td><DatePicker dateFormat="yyyy-MM-dd" className="endDate" selected={endDate} onChange={date => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate}locale={ko} minDate={startDate} required /> </td>
+                            <td><DatePicker dateFormat="yyyy-MM-dd" selected={endDate} onChange={date => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate}locale={ko} minDate={startDate}/> </td>
                        </tr>
+                    
 
-                       <tr>
-                            <td>상품설명</td>
-                            <td><input type="textarea" id="itemDetail" name="itemDetail" value={itemDetail} onChange={handlerChangeitemDetail} /></td>
-                        </tr>
-
-                        
                         
                     </table>      
-                </form>    
-        </div>
-            <div className="btnWrapItem">
-                <input type="submit" id="submit" value="등록" className="greenBtn btn" onClick={handlerClickSubmit}/>
-                <input type="button" id="cancle" value="취소" className="grayBtn btn" onClick={handlerClickGoback}/>
-            </div>  
-            
+                    <input type="submit" id="submit" value="저장" className="btn" onClick={handlerClickSubmit}/>
+                </form>      
+            </div>
         </>
     );
 }
