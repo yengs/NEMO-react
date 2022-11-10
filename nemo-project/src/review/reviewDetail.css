@@ -36,7 +36,7 @@
 
 .myreview td {
     border-bottom: 1px solid #444444;
-    font-size: 15px;
+    font-size: 14px;
     height: 10px;
     width: 300px;
     padding-top: 10px;
@@ -53,7 +53,7 @@
 
 .yourreview td {
     border-bottom: 1px solid #444444;
-    font-size: 15px;
+    font-size: 14px;
     height: 5px;
     width: 150px;
     padding-top: 10px;
@@ -75,7 +75,6 @@
 }
 
 /* 리뷰 내용 더보기 관련 */
-
 .moreBtn {
         padding: 0;
         color: cadetblue;

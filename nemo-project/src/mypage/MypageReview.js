@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 function MypageReview() {
 
-    const [data, setDatas] = useState([]);                          // 리뷰 전체 데이터
+    const [datas, setDatas] = useState([]);                         // 리뷰 전체 데이터
     const [items, setItems] = useState('');                         // 상품 전체 데이터
     const [myReviewData, setmyReviewData] = useState('');           // 내가 작성한 후기
     const [yourReviewData, setYourReviewData] = useState('');       // 내가 등록한 상품에 대한 다른 회원의 후기
@@ -19,6 +19,7 @@ function MypageReview() {
         axios.get('http://localhost:8080/api/review/myReview1')
             .then(response => {
                 console.log(response);
+                setDatas(response.data);
                 setYourReviewData(response.data);
                 setReviewIcon(response.data);
             })
@@ -32,7 +33,16 @@ function MypageReview() {
                 setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
-            
+
+        // 상품 목록 데이터
+        axios.get('http://localhost:8080/api/review/myReview2')
+            .then(response => {
+                console.log(response);
+                setmyReviewData(response.data);
+                setReviewIcon(response.data);
+            })
+            .catch(error => console.log(error));
+
     }, []);
 
     const goYourReview = () => {
@@ -60,38 +70,36 @@ function MypageReview() {
                             <th colSpan={2}>내용</th>
                         </thead>
                         <tbody>
-                            {/* <tr>
-                                <td rowSpan={3} className="rReviewItemImageOrigin">
-                                    <div style={{ "backgroundImage": `url(${jeans})` }}></div>
-                                </td>
-                                <td className='rReviewItemNameOrigin' rowSpan={3}>메종키츠네 셔츠</td>
-                                <td className='rReviewWriter' rowSpan={3}>선희곤듀</td>
-                                <td>
-                                    <div className='rReviewItemImg' style={{ "backgroundImage": `url(${jeans})` }}></div>
-                                    <p className='rReviewContent'>친절하시구 옷 상태도 너무 좋았어요!<br />다음에도 또 거래하고 싶어요</p>
-                                    <div className='rsatisfing'>
-                                        만족도 <span>65</span>%
-                                        <div style={{ "width": "100%", "height": "13px", "backgroundColor": "rgb(150,150,150)", "borderRadius": "20px" }}></div>
-                                    </div>
-                                </td>
-                            </tr> */}
                             {
-                                data && data.map(review => (
+                                yourReviewData && yourReviewData.map(review => (
                                     <tr key={review.reviewNum}>
                                         <td rowSpan={3} className="rReviewItemImageOrigin">
-                                            <div style={{ "backgroundImage": `url(${jeans})` }}></div>
+                                            {/* 내가 등록한 상품사진 */}
+                                            {/*  */}
                                         </td>
                                         <td className='rReviewItemNameOrigin' rowSpan={3}>
+                                            {/* 내가 등록한 상품이름 */}
                                             {items && items.map(item => item.itemName)}
                                         </td>
-                                        <td className='rReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
+                                        <td className='rReviewWriter' rowSpan={3}>
+                                            {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
+                                            {review.reviewWriter}</td>
                                         <td>
+                                            {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                             <div className='rReviewItemImg'>
-                                                {imageSrc && <img src={imageSrc} alt="review-img" />}</div>
+                                                {imageSrc && <img src={imageSrc} alt="review-img" />}
+                                            </div>
                                         </td>
 
                                     </tr>
                                 ))
+                            }
+                            {
+                                datas.length === 0 && (
+                                    <tr>
+                                        <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                    </tr>
+                                )
                             }
                         </tbody>
                     </table>
@@ -112,40 +120,68 @@ function MypageReview() {
                             <th>대여료</th>
                             <th colSpan={2}>내용</th>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td rowSpan={3} className="rReviewItemImageOrigin">
-                                    <div style={{ "backgroundImage": `url(${jeans})` }}></div>
-                                </td>
-                                <td className='rReviewItemNameOrigin' rowSpan={3} >메종키츠네 셔츠</td>
-                                <td className='rReviewWriter' rowSpan={3}>선희곤듀</td>
-                                <td>
-                                    <div className='rReviewItemImg' style={{ "backgroundImage": `url(${jeans})` }}></div>
-                                    <p className='rReviewContent'>친절하시구 옷 상태도 너무 좋았어요!<br />다음에도 또 거래하고 싶어요</p>
-                                    <div className='rsatisfing'>
-                                        만족도 <span>65</span>%
-                                        <div style={{ "width": "100%", "height": "13px", "backgroundColor": "rgb(150,150,150)", "borderRadius": "20px" }}></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td rowSpan={3} className="rReviewItemImageOrigin">
-                                    <div style={{ "backgroundImage": `url(${jeans})` }}></div>
-                                </td>
-                                <td className='rReviewItemNameOrigin' rowSpan={3} >메종키츠네 셔츠</td>
-                                <td className='rReviewWriter' rowSpan={3}>선희곤듀</td>
-                                <td>
-                                    <div className='rReviewItemImg' style={{ "backgroundImage": `url(${jeans})` }}></div>
-                                    <p className='rReviewContent'>친절하시구 옷 상태도 너무 좋았어요!<br />다음에도 또 거래하고 싶어요</p>
-                                    <div className='rsatisfing'>
-                                        만족도 <span>65</span>%
-                                        <div style={{ "width": "100%", "height": "13px", "backgroundColor": "rgb(150,150,150)", "borderRadius": "20px" }}></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        {
+                            myReviewData && myReviewData.map(review => (
+                                <tr key={review.reviewNum}>
+                                    <td rowSpan={3} className="rReviewItemImageOrigin">
+                                        {/* 내가 등록한 상품사진 */}
+                                        {/*  */}
+                                    </td>
+                                    <td className='rReviewItemNameOrigin' rowSpan={3}>
+                                        {/* 내가 등록한 상품이름 */}
+                                        {items && items.map(item => item.itemName)}
+                                    </td>
+                                    <td className='rReviewWriter' rowSpan={3}>
+                                        {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
+                                        {review.reviewWriter}</td>
+                                    <td>
+                                        {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
+                                        <div className='rReviewItemImg'>
+                                            {imageSrc && <img src={imageSrc} alt="review-img" />}
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            ))
+                        }
+                        {
+                            datas.length === 0 && (
+                                <tr>
+                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                </tr>
+                            )
+                        }
+                        {
+                            myReviewData && myReviewData.map(review => (
+                                <tr key={review.reviewNum}>
+                                    <td rowSpan={3} className="rReviewItemImageOrigin">
+                                        {/* 내가 등록한 상품사진 */}
+                                        {/*  */}
+                                    </td>
+                                    <td className='rReviewItemNameOrigin' rowSpan={3}>
+                                        {/* 내가 등록한 상품이름 */}
+                                        {items && items.map(item => item.itemName)}
+                                    </td>
+                                    <td className='rReviewWriter' rowSpan={3}>
+                                        {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
+                                        {review.reviewWriter}</td>
+                                    <td>
+                                        {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
+                                        <div className='rReviewItemImg'>
+                                            {imageSrc && <img src={imageSrc} alt="review-img" />}
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            ))
+                        }
+                        {
+                            datas.length === 0 && (
+                                <tr>
+                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                </tr>
+                            )
+                        }
                     </table>
                 </div>
             </div>

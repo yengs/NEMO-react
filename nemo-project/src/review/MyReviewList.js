@@ -64,6 +64,7 @@ function MyReviewList() {
                                     <td>{review.reviewNum}</td>
                                     {/* <td>{review.reviewImage}</td> */}
                                     <td>
+                                        {/* 이미지 업로드 부분 */}
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
@@ -86,17 +87,22 @@ function MyReviewList() {
                                                 (function () {
                                                     if (review.reviewSatisfaction === 0) {
                                                         return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
-                                                    }
-                                                    else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
-                                                        return <img className="reviewSatisImg" src="/clean/twenty.png" alt="1~20"></img>
+                                                    } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                        return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
                                                     } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
-                                                        return <img className="reviewSatisImg" src="/clean/forty.png" alt="21~40" />
-                                                    } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 60) {
-                                                        return <img className="reviewSatisImg" src="/clean/sixty.png" alt="41~60" />
-                                                    } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 80) {
-                                                        return <img className="reviewSatisImg" src="/clean/eighty.png" alt="61~80" />
+                                                        return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
+                                                        return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
+                                                        return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
+                                                        return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
+                                                        return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
+                                                        return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
                                                     } else {
-                                                        return <img className="reviewSatisImg" src="/clean/oneHundred.png" alt="81~100" />
+                                                        return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
                                                     }
                                                 })()
                                             }
