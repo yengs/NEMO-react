@@ -9,9 +9,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 
 
-function BookingUpload({ history }) {
-
-  const [value, onChange] = useState(new Date());
+function BookingUpload({ history,match }) {
 
   //---------결제모달---------------
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,12 +29,37 @@ function BookingUpload({ history }) {
     setModalOpen(false);
   };
 
-
   const goItemDetail = () => {
     history.goBack();
   }
 
   //----------결제모달 end--------------
+
+  const {itemNum} = match.params;
+  const bookingItemnum = itemNum
+  const bookingMember = sessionStorage.getItem('memberId');
+  const [value, setbookingDate] = useState(new Date());
+  
+  const handlerClickSubmit = (e) => {
+    e.preventDefault();
+    axios.post(`http://localhost:8080/api/booking/bookingWrite`,
+        {
+            "bookingMember": bookingMember,
+            "bookingDate" :value,
+            "bookingItemnum": bookingItemnum
+        })
+        .then(response => {
+          if (response.status === 200) {
+              alert("정상적으로 등록되었습니다.");
+          } else {
+              alert("등록에 실패했습니다.");
+              return;
+          }
+      })
+      .catch(error => console.log(error));
+  };
+
+
 
   return (
     <>
@@ -205,26 +228,11 @@ function BookingUpload({ history }) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <h3>대여기간</h3>
         <div className="bottom">
 
           <div> <div className="inputdate">
-            <Calendar onChange={onChange} value={value} />
+            <Calendar onChange={date => setbookingDate(date)} value={value} />
 
             <br />
             선택한 날짜 : {moment(value).format("YYYY년 MM월 DD일")}
@@ -236,7 +244,7 @@ function BookingUpload({ history }) {
             </label>
           </div>
           <div className="btnGroup">
-            <button className="greenBtn btnbk">신청</button>&nbsp;&nbsp;
+            <button className="greenBtn btnbk" onClick={handlerClickSubmit}>신청</button>&nbsp;&nbsp;
             <button className="grayBtn btnbk" onClick={goItemDetail}>취소</button>
           </div>
         </div>
@@ -244,13 +252,6 @@ function BookingUpload({ history }) {
 
       </div>
       <br />
-
-
-
-
-
-
-
 
     </>
 
