@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Shirt from '../img/shirt.jpg';
-import ItemSlider from "./ItemSlider.js";
 
 // import './singo.css'
 
@@ -11,91 +9,139 @@ import styled from "styled-components";
 
 function Singo({ history }) {
 
-    const goBack = () => {
-        history.push("/userstoreinfo");
-    }
+  const goBack = () => {
+    history.push("/userstoreinfo");
+  }
+
+  const [singoReason, setSingoReason] = useState('');
+  const [singoContent, setSingoContent] = useState('');
+  const singoWriter = sessionStorage.getItem('memberId');
+  const singoDate = new Date();
+
+  const handlerChangeReason = (e) => setSingoReason(e.target.value);
+  const handlerChangeContent = (e) => setSingoContent(e.target.value);
+
+  const takeDec = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:8080/api/singo/take', {"singoReason":singoReason, "singoContent":singoContent, "singoWriter": singoWriter, "singoDate": singoDate})
+      .then(response => {
+        console.log(response);
+        if (response.status === 200) {
+          alert("정상적으로 접수되었습니다.");
+          // history.push("/userstoreinfo");
+        } else {
+          alert("접수 실패했습니다.");
+          return;
+        }
+      })
+      .catch(error => console.log(error));
+  }
 
 
-    return (
-        <SingoContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
-            <div className="mypageInnerPage">
-                <div className="regiUserItemList">
-                    <h3 className="pageTitle">신고하기</h3>
+  const check = () => {
+    console.log(singoReason);
+    console.log(singoContent);
+    console.log(singoWriter);
+    console.log(singoDate);
+  }
 
-                    <div className="memberPage2 container loginForm2">
 
-                        <form>
-                            <div className="inputTable">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>사진첨부</td>
+  return (
+    <SingoContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
+      <div className="mypageInnerPage">
+        <div className="regiUserItemList">
+          <h3 className="pageTitle">신고하기</h3>
+          <button onClick={check}>체크</button>
 
-                                        </tr>
-                                        <tr>
-                                            <td>
+          <div className="memberPage2 container loginForm2">
 
-                                                {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTPJg6Tgw-P2brcvdMAxNcnUqT9udTDuSUw&usqp=CAU" /> */}
+            <form>
+              <div className="inputTable">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>사진첨부</td>
+
+                    </tr>
+                    <tr>
+                      <td>
+
+                        {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTPJg6Tgw-P2brcvdMAxNcnUqT9udTDuSUw&usqp=CAU" /> */}
+                        {/* <img src={addImage} />
                                                 <img src={addImage} />
                                                 <img src={addImage} />
-                                                <img src={addImage} />
-                                                <img src={addImage} />
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            <br /><br />
-                                                신고이유
-                                            <br />
-                                            </td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <td>
-                                                <select >
-                                                    <option>선택</option>
-                                                    <option>미반환</option>
-                                                    <option>사기 행위</option>
-                                                    <option>물품 훼손</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                        <td>
-                                            <br /><br />
-                                                신고내용
-                                            <br />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="text" className="singobox" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div className="btnWrap">
-                                                    <input type="submit" className="redBtn2 btn" value="신고하기" />
-                                                    <input type="submit" className="grayBtn2 btn" value="취소" onClick={goBack}/>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
+                                                <img src={addImage} /> */}
+                        <AppStyle>
+                          <label htmlFor="item_review_input">
+                            <div className="btnStart">
+                              <img src={addImage} alt="ReviewAddImg" />
                             </div>
+                          </label>
+                          <input
+                            type="file"
+                            id="item_review_input"
+                            className="image_inputType_file"
+                            accept=".jpg, .png"
+                          // onChange={handlerChangesetReviewImage}
+                          />
+                        </AppStyle>
+
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <br /><br />
+                        신고이유
+                        <br />
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <select onChange={handlerChangeReason}>
+                          <option>선택</option>
+                          <option>미반환</option>
+                          <option>사기 행위</option>
+                          <option>물품 훼손</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <br /><br />
+                        신고내용
+                        <br />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {/* <input type="text" className="singobox" onChange={handlerChangeContent} /> */}
+                        <textarea className="singobox" onChange={handlerChangeContent}></textarea>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div className="btnWrap">
+                          <input type="submit" className="redBtn2 btn" value="신고하기" onClick={takeDec} />
+                          <input type="submit" className="grayBtn2 btn" value="취소" onClick={goBack} />
+                        </div>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
 
 
 
-                        </form>
-                    </div>
+            </form>
+          </div>
 
 
-                </div>
-            </div>
-        </SingoContainer>
-    );
+        </div>
+      </div>
+    </SingoContainer>
+  );
 }
 
 const SingoContainer = styled.div`
@@ -508,7 +554,7 @@ const SingoContainer = styled.div`
   }
 
   select {
-    width: 855px; 
+    width: 826px; 
     padding: .8em .5em; 
     border: 1px solid #ddd;
     /* font-family: inherit;   */
@@ -517,6 +563,10 @@ const SingoContainer = styled.div`
 
    .singobox{
     height: 200px;
+    width: 826px;
+    resize: none;
+    border: 1px solid #ddd;
+    padding: 8px;
    }
     
     
@@ -524,5 +574,26 @@ const SingoContainer = styled.div`
 
 
 `
+
+const AppStyle = styled.div`
+
+  label {
+    display: inline-block;
+    font-size: inherit;
+    line-height: normal;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+`;
 
 export default Singo;
