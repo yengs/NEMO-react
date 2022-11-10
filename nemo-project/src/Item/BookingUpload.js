@@ -42,6 +42,8 @@ function BookingUpload({ history,match }) {
   const {itemPrice} = match.params;
   const {itemWriter} = match.params;
   const {files} = match.params;
+  const {itemRentalstart} = match.params;
+  const {itemRentalend} = match.params;
 
   const bookingItemnum = itemNum;
   const bookingItemname = itemName;
@@ -49,6 +51,9 @@ function BookingUpload({ history,match }) {
   const bookingItemprice = itemPrice;
   const bookingItemwriter = itemWriter;
   const bookingItemfiles =files;
+  const Rentalstart = itemRentalstart;
+  const Rentalend = itemRentalend;
+
 
   const sum = (parseInt(bookingItemprice)+parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
@@ -251,7 +256,7 @@ function BookingUpload({ history,match }) {
         <div className="bottom">
 
           <div> <div className="inputdate">
-            <Calendar onChange={date => setbookingDate(date)} value={value} />
+            <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)} />
 
             <br />
             선택한 날짜 : {moment(value).format("YYYY년 MM월 DD일")}
