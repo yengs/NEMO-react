@@ -7,7 +7,8 @@ import axios from "axios";
 // import "./mybooking.css";
 
 function MyBooking() {
-
+   
+    const [bookingNum , setBookingNum] = useState('');
     const [datas, setDatas] = useState([]);
     const [datas2, setDatas2] = useState([]);
 
@@ -18,6 +19,35 @@ function MyBooking() {
     const goReviewWrite = () => {
         window.location.href = "/reivew/reviewWrite";
     }
+
+    //예약취소
+    const handlercancel = (e) => {
+        
+        setBookingNum(e.target.value);
+        
+        if (window.confirm("정말 예약을 취소하시겠습니까?")) {
+
+            axios.delete(`http://localhost:8080/api/mypage/mybooking/${e.target.value}`)
+        .then(response => { 
+            console.log(response);
+            if (response.status === 200) {
+                alert("예약이 취소되었습니다.");
+                window.location.reload();
+            } else {
+                alert("예약취소 실패");
+                return;
+            }
+        })
+        .catch(error => console.log(error));
+      
+          } else {
+      
+            return;
+      
+          }
+      
+        };
+    
 
     //빌려줬어요
     useEffect(() => {
@@ -72,13 +102,8 @@ function MyBooking() {
                                         <td className='ReviewItemNameOrigin' rowSpan={3}>{booking.bookingItemname}</td>
                                         <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
                                         <td className='ReviewWriter' rowSpan={3}>{booking.bookingMember}</td>
-                                        <td className='ReviewWriter' rowSpan={3}>
-                                            <select>
-                                                <option value="">예약중</option>
-                                                <option value="반팔">대여중</option>
-                                                <option value="긴팔">기간만료</option>
-                                                <option value="니트">예약취소</option>
-                                            </select>
+                                        <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}
+                                        <td>{booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}</td>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>
                                             <select>
@@ -137,7 +162,9 @@ function MyBooking() {
                                 <td className='ReviewItemNameOrigin' rowSpan={3}>{booking.bookingItemname}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
-                                <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}</td>
+                                <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}
+                                <td>{booking.bookingBookingstate != "반납완료" ? null : <button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button>}</td>
+                                </td>
                                 {/* <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td> */}
 
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingDepositstate}</td>
