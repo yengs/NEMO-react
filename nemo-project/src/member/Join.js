@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { ErrorMessage } from '@hookform/error-message';
 
@@ -95,6 +95,27 @@ function Join() {
         setMpwCheck(e.target.value);
     };
 
+    // 체크박스 전체선택
+    const [isCheckAll, setIsCheckAll] = useState(false);
+    const [checkAll, setCheckAll] = useState([]);
+
+    const CheckAllHandler = (checked, id) => {
+        if(checked) {
+            setCheckAll([...checkAll, id]);
+            console.log("체크 반영 완료");
+        }else {
+            setCheckAll(checkAll.filter(button => button !== id));
+            console.log("체크 해제 완료");
+        }
+    };
+
+    const isAllChecked = checkAll.length === 2;
+
+    useEffect(() => {
+        console.log(checkAll)
+    }, [checkAll])
+
+
     return (
         <div className="joinWrap memberPage container">
             <div className="pageTitle">
@@ -174,38 +195,74 @@ function Join() {
                     <ul style={{ "listStyle": "none" }}>
                         <li>
                             <label className="wholeCheck">
-                                <input type="checkbox" />
+                                <input type="checkbox"
+                                    id="checkedAll"
+                                    onChange={e => {
+                                        CheckAllHandler(e.currentTarget.checked, 'check');
+                                    }}
+                                    checked={checkAll.includes('check') ? true : false}
+                                />
                                 &nbsp;&nbsp;전체동의
                                 <span className="wholeCheckInfo">전체동의는 필수 및 선택정보에 대한 동의도 포함되어 있으며, 개별적으로도 동의를 선택하실 수 있습니다.<br /> 선택항목에 대한 동의를 거부하는 경우에도 회원가입 서비스는 이용 가능합니다.</span>
                             </label>
                         </li>
                         <li>
                             <label className="req">
-                                <input type="checkbox" />
+                                <input type="checkbox" required
+                                    id="check1"
+                                    onChange={e => {
+                                        CheckAllHandler(e.currentTarget.checked, 'check1');
+                                    }}
+                                    checked={checkAll.includes('check1') ? true : false}
+                                />
                                 &nbsp;&nbsp;만 14세 이상입니다. (필수)
                             </label>
                         </li>
                         <li>
                             <label className="req">
-                                <input type="checkbox" />
+                                <input type="checkbox" required
+                                    id="check2"
+                                    onChange={e => {
+                                        CheckAllHandler(e.currentTarget.checked, 'check2');
+                                    }}
+                                    checked={checkAll.includes('check2') ? true : false}
+                                />
                                 &nbsp;&nbsp;이용약관 동의 (필수)
                             </label>
                         </li>
                         <li>
                             <label className="req">
-                                <input type="checkbox" />
+                                <input type="checkbox" required
+                                    id="check3"
+                                    onChange={e => {
+                                        CheckAllHandler(e.currentTarget.checked, 'check3');
+                                    }}
+                                    checked={checkAll.includes('check3') ? true : false}
+                                />
                                 &nbsp;&nbsp;개인정보 수집 및 이용에 대한 동의 (필수)
                             </label>
                         </li>
                         <li>
                             <label className="req">
-                                <input type="checkbox" />
+                                <input type="checkbox" required
+                                    id="check4"
+                                    onChange={e => {
+                                        CheckAllHandler(e.currentTarget.checked, 'check4');
+                                    }}
+                                    checked={checkAll.includes('check4') ? true : false}
+                                />
                                 &nbsp;&nbsp;개인정보 제3자 제공에 대한 동의 (필수)
                             </label>
                         </li>
                         <li>
                             <label className="selective">
-                                <input type="checkbox" />
+                                <input type="checkbox" required
+                                    id="check5"
+                                    onChange={e => {
+                                        CheckAllHandler(e.currentTarget.checked, 'check5');
+                                    }}
+                                    checked={checkAll.includes('check5') ? true : false}
+                                />
                                 &nbsp;&nbsp;개인정보 제3자 제공에 대한 동의 (선택)
                             </label>
                         </li>
