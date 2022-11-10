@@ -40,12 +40,17 @@ function BookingUpload({ history,match }) {
   const {itemName} =match.params;
   const {itemDeposit} =match.params;
   const {itemPrice} = match.params;
-  const bookingItemnum = itemNum;
-  const Name = itemName;
-  const Deposit = itemDeposit;
-  const Price = itemPrice;
+  const {itemWriter} = match.params;
+  const {files} = match.params;
 
-  const sum = (parseInt(Price)+parseInt(Deposit));
+  const bookingItemnum = itemNum;
+  const bookingItemname = itemName;
+  const Deposit = itemDeposit;
+  const bookingItemprice = itemPrice;
+  const bookingItemwriter = itemWriter;
+  const bookingItemfiles =files;
+
+  const sum = (parseInt(bookingItemprice)+parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
   const [value, setbookingDate] = useState(new Date());
   
@@ -55,7 +60,11 @@ function BookingUpload({ history,match }) {
         {
             "bookingMember": bookingMember,
             "bookingDate" :value,
-            "bookingItemnum": bookingItemnum
+            "bookingItemnum": bookingItemnum,
+            "bookingItemname":bookingItemname,
+            "bookingItemprice" : bookingItemprice,
+            "bookingItemwriter" : bookingItemwriter,
+            "bookingItemfiles" : bookingItemfiles
         })
         .then(response => {
           if (response.status === 200) {
@@ -81,11 +90,11 @@ function BookingUpload({ history,match }) {
             <div className="tablePlusForm2">
               <tr><td>
                 <div className="imageDiv2">
-                  <p className="memberImg2"></p>
-                  {/* <td>{data.itemImage}</td> */}
+                <img className="memberImg2" src={`../../files/${bookingItemfiles}`}/>
+                  
                 </div>
               </td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;{Name}</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{bookingItemname}</td>
               </tr>
             </div>
           </div>
@@ -95,7 +104,7 @@ function BookingUpload({ history,match }) {
                 <tr>
                   <th>대여료</th>
                   <td></td>
-                  <td>{Price}원</td>
+                  <td>{bookingItemprice}원</td>
                 </tr>
                 <tr>
                   <th >보증금</th>

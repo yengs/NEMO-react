@@ -50,7 +50,7 @@ function App() {
         <Route path="/item/write" component={ItemUpload} exact={true} />
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
-        <Route path="/item/bookingupload/:itemNum,:itemName,:itemDeposit,:itemPrice" component={BookingUpload} exact={true} />
+        <Route path="/item/bookingupload/:itemNum,:itemName,:itemDeposit,:itemPrice,:itemWriter,:files" component={BookingUpload} exact={true} />
 
 
 
