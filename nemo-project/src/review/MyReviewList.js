@@ -3,17 +3,15 @@ import axios from "axios";
 import "./reviewDetail.css";
 import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
-import ImgIcon from "./ImgIcon";
-
 
 function MyReviewList() {
 
     const ITEM_COUNT_PER_PAGE = 10;
 
-    const [datas, setDatas] = useState([]);                      // 리뷰 전체 데이터
-    const [count, setCount] = useState(0);                       // 전체 개수
-    const [page, setPage] = useState(1);                         // 보여지는 페이지
-    const [items, setItems] = useState([]);                      // 페이징을 통해서 보여줄 데이터
+    const [datas, setDatas] = useState([]);                             // 리뷰 전체 데이터
+    const [count, setCount] = useState(0);                              // 전체 개수
+    const [page, setPage] = useState(1);                                // 보여지는 페이지
+    const [items, setItems] = useState([]);                             // 페이징을 통해서 보여줄 데이터
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/review/myReview')
@@ -81,8 +79,28 @@ function MyReviewList() {
                                             }
                                         </div>
                                     </td>
-                                    <td> 
-                                        {review.reviewSatisfaction}<ImgIcon/>
+                                    <td>
+                                        {review.reviewSatisfaction}
+                                        <div>
+                                            {
+                                                (function () {
+                                                    if (review.reviewSatisfaction === 0) {
+                                                        return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                    }
+                                                    else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                        return <img className="reviewSatisImg" src="/clean/twenty.png" alt="1~20"></img>
+                                                    } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                        return <img className="reviewSatisImg" src="/clean/forty.png" alt="21~40" />
+                                                    } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 60) {
+                                                        return <img className="reviewSatisImg" src="/clean/sixty.png" alt="41~60" />
+                                                    } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 80) {
+                                                        return <img className="reviewSatisImg" src="/clean/eighty.png" alt="61~80" />
+                                                    } else {
+                                                        return <img className="reviewSatisImg" src="/clean/oneHundred.png" alt="81~100" />
+                                                    }
+                                                })()
+                                            }
+                                        </div>
                                     </td>
                                 </tr>
                             ))

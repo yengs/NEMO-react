@@ -5,7 +5,7 @@ import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
 function YourReviewList() {
-    
+
     const ITEM_COUNT_PER_PAGE = 10;
     const [datas, setDatas] = useState([]);
     const [count, setCount] = useState(0);
@@ -15,7 +15,7 @@ function YourReviewList() {
     useEffect(() => {
         axios.get('http://localhost:8080/api/review/yourReview')
             .then(response => {
-                const list = response.data.map(data => ({ ... data, closed: true}));
+                const list = response.data.map(data => ({ ...data, closed: true }));
                 console.log(response);
                 setDatas(list);
                 setCount(list.length);
@@ -26,7 +26,7 @@ function YourReviewList() {
 
     const changePage = page => {
         setPage(page);
-        setItems(datas.slice((page-1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+        setItems(datas.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
     };
 
     const handelrMoreBtn = (reviewNum) => {
@@ -42,11 +42,11 @@ function YourReviewList() {
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
-                        <col width="15%" />
-                        <col width="15%" />
-                        <col width="15%" />
-                        <col width="*" />
-                        <col width="15%" />
+                        <col wclassNameth="15%" />
+                        <col wclassNameth="15%" />
+                        <col wclassNameth="15%" />
+                        <col wclassNameth="*" />
+                        <col wclassNameth="15%" />
                     </colgroup>
                     <thead>
                         <tr>
@@ -62,9 +62,10 @@ function YourReviewList() {
                             items && items.map(review => (
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
-                                    <td>{review.reviewId}</td>
+                                    <td>{review.reviewclassName}</td>
                                     {/* <td>{review.reviewImage}</td> */}
                                     <td>
+                                        {/* 이미지 업로드 부분 */}
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
                                         <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
@@ -75,7 +76,28 @@ function YourReviewList() {
                                         </div>
                                         <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                     </td>
-                                    <td>{review.reviewSatisfaction}</td>
+                                    <td>
+                                        <div className="reviewSatisImg">
+                                            {
+                                                (function () {
+                                                    if (review.reviewSatisfaction === 0) {
+                                                        return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                    }
+                                                    else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                        return <img className="reviewSatisImg" src="/clean/twenty.png" alt="1~20"></img>
+                                                    } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                        return <img className="reviewSatisImg" src="/clean/forty.png" alt="21~40" />
+                                                    } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 60) {
+                                                        return <img className="reviewSatisImg" src="/clean/sixty.png" alt="41~60" />
+                                                    } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 80) {
+                                                        return <img className="reviewSatisImg" src="/clean/eighty.png" alt="61~80" />
+                                                    } else {
+                                                        return <img className="reviewSatisImg" src="/clean/oneHundred.png" alt="81~100" />
+                                                    }
+                                                })()
+                                            }
+                                        </div>
+                                    </td>
                                 </tr>
                             ))
                         }
