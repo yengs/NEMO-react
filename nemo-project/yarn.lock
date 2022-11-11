@@ -7826,10 +7826,10 @@
   "resolved" "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-3.2.0.tgz"
   "version" "3.2.0"
 
-"react-hook-form@^7.0.0":
-  "integrity" "sha512-rCeCa1+sIcgI9PjgGmev9bVqHCwYwhjkbsXitr+giQ/P0mf/AGwUBtCdKC1lRu7egrxbLwqO9cWNWpXW4FrsHA=="
-  "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.39.2.tgz"
-  "version" "7.39.2"
+"react-hook-form@^7.0.0", "react-hook-form@^7.39.3":
+  "integrity" "sha512-H/vwk1vBf+TiXuyW6+hWz+zCujiDO6NqHlN5sPE/a+NGKKGK95XTM65DZz3NmEgs2M20Wka+g4uv4VD367wDBA=="
+  "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.39.3.tgz"
+  "version" "7.39.3"
 
 "react-icons@^4.6.0":
   "integrity" "sha512-rR/L9m9340yO8yv1QT1QurxWQvWpbNHqVX0fzMln2HEb9TEIrQRGsqiNFQfiv9/JEUbyHmHPlNTB2LWm2Ttz0g=="

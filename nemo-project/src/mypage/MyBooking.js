@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 // import "./mybooking.css";
 
-function MyBooking() {
+function MyBooking({history}) {
    
     const [bookingNum , setBookingNum] = useState('');
     const [datas, setDatas] = useState([]);
@@ -19,6 +19,43 @@ function MyBooking() {
     const goReviewWrite = () => {
         window.location.href = "/reivew/reviewWrite";
     }
+
+
+
+    //물품상태 수정
+    const [itemstate , setItemstate] = useState(''); 
+
+    const handleritemstate = (e) => setItemstate(e.target.value);
+    // console.log(itemstate);
+
+    const statechangebtn = (e) => {
+
+        setBookingNum(e.target.value);
+        console.log(bookingNum);
+        console.log(itemstate);
+        if (window.confirm("물품상태를 수정하시겠습니까?")) {
+
+            axios.put(`http://localhost:8080/api/mypage/mybooking/${e.target.value}`, {'bookingDepositstate' : itemstate})
+        .then(response => { 
+            console.log(response);
+            if (response.status === 200) {
+                alert("성공");
+                window.location.reload();
+            } else {
+                alert("실패");
+                return;
+            }
+        })
+        .catch(error => console.log(error));
+      
+          } else {
+      
+            return;
+      
+          }
+      
+        };
+
 
     //예약취소
     const handlercancel = (e) => {
@@ -106,14 +143,14 @@ function MyBooking() {
                                         <td>{booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}</td>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>
-                                            <select>
+                                            <select  onChange={handleritemstate}>
                                                 <option value="">--</option>
-                                                <option value="반팔">수거완료</option>
-                                                <option value="긴팔">물품훼손</option>
-                                                <option value="니트">미반납</option>
+                                                <option value="반환완료">수거완료</option>
+                                                <option value="미반환(물품훼손)">물품훼손</option>
+                                                <option value="미반환(미반납)">미반납</option>
                                             </select>
                                         </td>
-                                        <td className='ReviewWriter' rowSpan={3}><button className="greenBtn btnBok">확인</button></td>
+                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate != "예약취소" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={statechangebtn}>확인</button>:<button className="grayBtn btnBok">확인</button>}</td>
                                     </tr>
 
                                 
@@ -162,13 +199,14 @@ function MyBooking() {
                                 <td className='ReviewItemNameOrigin' rowSpan={3}>{booking.bookingItemname}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
-                                <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}
-                                <td>{booking.bookingBookingstate != "반납완료" ? null : <button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button>}</td>
+                                <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
+                                <td>{booking.bookingDepositstate != "반환완료" ? null : <button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button>}</td>
                                 </td>
+                                
                                 {/* <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td> */}
 
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingDepositstate}</td>
-                                <td className='ReviewWriter' rowSpan={3}><button className="greenBtn btnBok">취소</button></td>
+                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingDepositstate == "보관중" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>취소</button>:<button className="grayBtn btnBok">취소</button>}</td>
                             </tr>
                        
                 </tbody>
