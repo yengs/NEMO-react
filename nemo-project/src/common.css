@@ -483,9 +483,22 @@ footer {
 }
 
 .PwCheck{
-  padding-top: 5px;
+  padding-top: 7px;
   font-size: 14px;
 }
+
+.caps-lock {
+  padding-top: 7px;
+  font-size: 14px;
+  color: rgb(21, 170, 21);
+}  
+
+.caps-lock-on {
+  padding-top: 7px;
+  font-size: 14px;
+  color: red;
+}
+
 
 
 

@@ -63,7 +63,7 @@ function Join() {
 
         if(mPw !== mPwCheck){
             return setPasswordError(true);
-        }
+        } alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
 
         console.log("비밀번호: " + mPw);
         console.log("비밀번호 확인: " + mPwCheck);
@@ -96,25 +96,92 @@ function Join() {
     };
 
     // 체크박스 전체선택
-    const [isCheckAll, setIsCheckAll] = useState(false);
-    const [checkAll, setCheckAll] = useState([]);
+    const [checkAll, setCheckAll] = useState(false);
+    const [check1, setCheck1] = useState(false);
+    const [check2, setCheck2] = useState(false);
+    const [check3, setCheck3] = useState(false);
+    const [check4, setCheck4] = useState(false);
+    const [check5, setCheck5] = useState(false);
 
-    const CheckAllHandler = (checked, id) => {
-        if(checked) {
-            setCheckAll([...checkAll, id]);
-            console.log("체크 반영 완료");
-        }else {
-            setCheckAll(checkAll.filter(button => button !== id));
-            console.log("체크 해제 완료");
+    const checkAllHandler = () => {
+        if(checkAll === false){
+            setCheckAll(true);
+            setCheck1(true);
+            setCheck2(true);
+            setCheck3(true);
+            setCheck4(true);
+            setCheck5(true);
+        }else{
+            setCheckAll(false);
+            setCheck1(false);
+            setCheck2(false);
+            setCheck3(false);
+            setCheck4(false);
+            setCheck5(false);
         }
     };
 
-    const isAllChecked = checkAll.length === 2;
+    const check1Handler = () => {
+        if(check1 === false){
+            setCheck1(true)
+        }else {
+            setCheck1(false);
+        }
+    };
+
+    const check2Handler = () => {
+        if(check2 === false){
+            setCheck2(true)
+        }else {
+            setCheck2(false);
+        }
+    };
+
+    const check3Handler = () => {
+        if(check3 === false){
+            setCheck3(true)
+        }else {
+            setCheck3(false);
+        }
+    };
+
+    const check4Handler = () => {
+        if(check4 === false){
+            setCheck4(true)
+        }else {
+            setCheck4(false);
+        }
+    };
+
+    const check5Handler = () => {
+        if(check5 === false){
+            setCheck5(true)
+        }else {
+            setCheck5(false);
+        }
+    };
 
     useEffect(() => {
-        console.log(checkAll)
-    }, [checkAll])
+        if(checkAll === true && check1 === true && check2 === true && check3 === true && check4 === true && check5 === true) {
+            setCheckAll(true)
+        }else {
+            setCheckAll(false)
+        }
+    }, [checkAll, check1, check2, check3, check4, check5])
 
+
+    // Caps Lock 감지
+    const [capsLock, setCapsLock] = useState(false);
+
+    const checkCapsLock = (e) => {
+        let capsLock = e.getModifierState("CapsLock");
+        setCapsLock(capsLock);
+    }
+
+
+    // 아이디 한글 입력 불가 처리
+
+    
 
     return (
         <div className="joinWrap memberPage container">
@@ -143,7 +210,9 @@ function Join() {
                             <tr>
                                 <td className="requiredMark">아이디</td>
                                 <td>
-                                    <input type="text" name="mId" value={mId} onChange={handlerChangeId} required />
+                                    <input type="text" name="mId" value={mId} onKeyDown={(e) => checkCapsLock(e)} onChange={handlerChangeId} required />
+                                    {<div className={capsLock ? "caps-lock caps-lock-on" : "caps-lock"}>
+                                    {capsLock ? "Caps Lock On" : "Caps Lock Off"}</div>}
                                 </td>
                                 <td className="memberTableBtn">
                                     <button className="beigeBtn btn">중복확인</button>
@@ -152,7 +221,9 @@ function Join() {
                             <tr>
                                 <td className="requiredMark">비밀번호</td>
                                 <td>
-                                    <input type="password" name="mPw" value={mPw} onChange={handlerChangePw} placeholder="최소 8자 이상의 숫자를 사용하세요." required />
+                                    <input type="password" name="mPw" value={mPw} onKeyDown={(e) => checkCapsLock(e)} onChange={handlerChangePw} placeholder="최소 8자 이상의 숫자를 사용하세요." required />
+                                    {<div className={capsLock ? "caps-lock caps-lock-on" : "caps-lock"}>
+                                    {capsLock ? "Caps Lock On" : "Caps Lock Off"}</div>}
                                 </td>
                                 <td></td>
                             </tr>
@@ -196,11 +267,7 @@ function Join() {
                         <li>
                             <label className="wholeCheck">
                                 <input type="checkbox"
-                                    id="checkedAll"
-                                    onChange={e => {
-                                        CheckAllHandler(e.currentTarget.checked, 'check');
-                                    }}
-                                    checked={checkAll.includes('check') ? true : false}
+                                    id="checkAll" checked={checkAll} onChange={checkAllHandler}
                                 />
                                 &nbsp;&nbsp;전체동의
                                 <span className="wholeCheckInfo">전체동의는 필수 및 선택정보에 대한 동의도 포함되어 있으며, 개별적으로도 동의를 선택하실 수 있습니다.<br /> 선택항목에 대한 동의를 거부하는 경우에도 회원가입 서비스는 이용 가능합니다.</span>
@@ -210,10 +277,7 @@ function Join() {
                             <label className="req">
                                 <input type="checkbox" required
                                     id="check1"
-                                    onChange={e => {
-                                        CheckAllHandler(e.currentTarget.checked, 'check1');
-                                    }}
-                                    checked={checkAll.includes('check1') ? true : false}
+                                    checked={check1} onChange={check1Handler}
                                 />
                                 &nbsp;&nbsp;만 14세 이상입니다. (필수)
                             </label>
@@ -222,10 +286,7 @@ function Join() {
                             <label className="req">
                                 <input type="checkbox" required
                                     id="check2"
-                                    onChange={e => {
-                                        CheckAllHandler(e.currentTarget.checked, 'check2');
-                                    }}
-                                    checked={checkAll.includes('check2') ? true : false}
+                                    checked={check2} onChange={check2Handler}
                                 />
                                 &nbsp;&nbsp;이용약관 동의 (필수)
                             </label>
@@ -234,10 +295,7 @@ function Join() {
                             <label className="req">
                                 <input type="checkbox" required
                                     id="check3"
-                                    onChange={e => {
-                                        CheckAllHandler(e.currentTarget.checked, 'check3');
-                                    }}
-                                    checked={checkAll.includes('check3') ? true : false}
+                                    checked={check3} onChange={check3Handler}
                                 />
                                 &nbsp;&nbsp;개인정보 수집 및 이용에 대한 동의 (필수)
                             </label>
@@ -246,10 +304,7 @@ function Join() {
                             <label className="req">
                                 <input type="checkbox" required
                                     id="check4"
-                                    onChange={e => {
-                                        CheckAllHandler(e.currentTarget.checked, 'check4');
-                                    }}
-                                    checked={checkAll.includes('check4') ? true : false}
+                                    checked={check4} onChange={check4Handler}
                                 />
                                 &nbsp;&nbsp;개인정보 제3자 제공에 대한 동의 (필수)
                             </label>
@@ -258,10 +313,7 @@ function Join() {
                             <label className="selective">
                                 <input type="checkbox" required
                                     id="check5"
-                                    onChange={e => {
-                                        CheckAllHandler(e.currentTarget.checked, 'check5');
-                                    }}
-                                    checked={checkAll.includes('check5') ? true : false}
+                                    checked={check5} onChange={check5Handler}
                                 />
                                 &nbsp;&nbsp;개인정보 제3자 제공에 대한 동의 (선택)
                             </label>
