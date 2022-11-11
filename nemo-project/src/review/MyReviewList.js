@@ -4,7 +4,9 @@ import "./reviewDetail.css";
 import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
-function MyReviewList() {
+function MyReviewList({ history, match }) {
+
+    const { reviewNum } = match.params;
 
     const ITEM_COUNT_PER_PAGE = 10;
 
@@ -13,15 +15,34 @@ function MyReviewList() {
     const [page, setPage] = useState(1);                                // 보여지는 페이지
     const [items, setItems] = useState([]);                             // 페이징을 통해서 보여줄 데이터
 
+    const [reviewImage, setReviewImage] = useState('');
+    const [reviewContents, setReviewContents] = useState('');
+    const [reviewSatisfaction, setReviewSatisfaction] = useState('');
+
     useEffect(() => {
-        axios.get('http://localhost:8080/api/review/myReview')
+        
+        // 리뷰 전체 데이터 + 페이징
+        axios.get(`http://localhost:8080/api/review/myReview`)
             .then(response => {
                 console.log(response);
                 const list = response.data.map(data => ({ ...data, closed: true }));
                 console.log(list);
-                setDatas(list);                                 // 리뷰 전체 데이터 설정
+                setDatas(list);
                 setCount(list.length);
                 setItems(list.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+            })
+            .catch(error => console.log(error));
+        
+            
+        // 후기 수정
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewNum}`)
+            .then(response => {
+                console.log("후기 수정 번호 : " + reviewNum);
+             console.log(response);
+                setDatas(response.data);
+                setReviewImage(response.data.reviewImage);
+                setReviewContents(response.data.setReviewContents);
+                setReviewSatisfaction(response.data.setReviewSatisfaction);
             })
             .catch(error => console.log(error));
     }, []);
@@ -35,6 +56,29 @@ function MyReviewList() {
         setItems(items.map(item =>
             item.reviewNum === reviewNum ? ({ ...item, closed: !item.closed }) : item
         ));
+    };
+
+    // 후기 수정
+    const handlerReviewUpdate = ((reviewNum) => {
+        console.log(reviewNum)
+        history.push("/reivew/reviewWrite/" + reviewNum) ;
+    }) 
+
+
+    // 후기 삭제
+    const handlerReviewDelete = () => {
+        axios.delete(`http://localhost:8080/api/review/myReview/${reviewNum}`)
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    alert("삭제 완료");
+                    history.push("/review/myReview");
+                } else {
+                    alert("삭제 실패");
+                    return;
+                }
+            })
+            .catch(error => console.log(error));
     };
 
     return (
@@ -73,11 +117,15 @@ function MyReviewList() {
                                         <div className="reviewContents">
                                             <p className={review.closed ? "close" : ""}>{review.reviewContents}</p>
                                         </div>
+                                        <div id="reviewBtnDiv">
                                         <div id="btnView">
                                             {review.reviewContents.length > 36 ?
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             }
+                                            <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}>[ 수정 ]</button>
+                                            <button className="moreBtn" onClick={handlerReviewDelete}>[ 삭제 ]</button>
+                                        </div>
                                         </div>
                                     </td>
                                     <td>

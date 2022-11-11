@@ -10,13 +10,15 @@ function MypageReview({ match }) {
     const [items, setItems] = useState('');                         // 상품 전체 데이터
     const [myReviewData, setmyReviewData] = useState('');           // 내가 작성한 후기
     const [yourReviewData, setYourReviewData] = useState('');       // 내가 등록한 상품에 대한 다른 회원의 후기
-    const [imageSrc, setImageSrc] = useState('');                   // 상품 이미지
     const [reviewIcon, setReviewIcon] = useState('');               // 만족도 
+
+    const reviewWriter = sessionStorage.getItem('memberId');
+    const bookingMember = sessionStorage.getItem('memberId');
 
     useEffect(() => {
 
         // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
-        axios.get('http://localhost:8080/api/review/myReview1')
+        axios.get(`http://localhost:8080/api/review/myReview1/${reviewWriter}`)
             .then(response => {
                 console.log(response);
                 setDatas(response.data);
@@ -26,7 +28,7 @@ function MypageReview({ match }) {
             .catch(error => console.log(error));
 
         // 내가 작성한 후기 데이터
-        axios.get('http://localhost:8080/api/review/myReview2')
+        axios.get(`http://localhost:8080/api/review/myReview2/${reviewWriter}`)
             .then(response => {
                 console.log(response);
                 setmyReviewData(response.data);
@@ -78,7 +80,7 @@ function MypageReview({ match }) {
                                         <td>
                                             {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                             <div className='rReviewItemImg'>
-                                                {imageSrc && <img src={imageSrc} alt="review-img" />}
+                                                {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
                                             </div>
                                         </td>
                                     </tr>
@@ -127,7 +129,7 @@ function MypageReview({ match }) {
                                     <td>
                                         {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                         <div className='rReviewItemImg'>
-                                            {imageSrc && <img src={imageSrc} alt="review-img" />}
+                                            {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
                                         </div>
                                     </td>
 
@@ -158,7 +160,7 @@ function MypageReview({ match }) {
                                     <td>
                                         {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                         <div className='rReviewItemImg'>
-                                            {imageSrc && <img src={imageSrc} alt="review-img" />}
+                                            {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
                                         </div>
                                     </td>
 

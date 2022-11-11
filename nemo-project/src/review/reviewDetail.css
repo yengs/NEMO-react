@@ -76,11 +76,18 @@
 
 /* 리뷰 내용 더보기 관련 */
 .moreBtn {
+    padding: 0;
+    color: cadetblue;
+    font-size: 13px;
+    border: none;
+    background-color: #ffffff;
+    float: left;
+}
+
+.reviewUpdateBtn {
         padding: 0;
         color: cadetblue;
         font-size: 13px;
-        display: block;
-        margin-top: -10px;
         border: none;
         background-color: #ffffff;
 }

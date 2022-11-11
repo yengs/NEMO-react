@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
+
 import ReviewAddImg from '../img/review-add-img.png'
 
 // import Form from 'react-bootstrap/Form';
@@ -32,6 +34,8 @@ const AppStyle = styled.div`
 
 export default function ReviewUpload({ history }) {
 
+    let { reviewNum } = useParams();
+
     // const [data, setData] = useState([]);
     const [reviewImage, setReviewImage] = useState('');
     const [reviewContents, setReviewContents] = useState('');
@@ -41,6 +45,22 @@ export default function ReviewUpload({ history }) {
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
     const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
 
+    useEffect(() => {
+        console.log(`http://localhost:8080/api/review/myReview/${reviewNum}`)
+
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewNum}`)
+        .then(response => {
+            // console.log("후기 수정 번호 : " + reviewNum);
+         console.log(response);
+            // setDatas(response.data);
+            setReviewImage(response.data.reviewImage);
+            setReviewContents(response.data.setReviewContents);
+            setReviewSatisfaction(response.data.setReviewSatisfaction);
+        })
+        .catch(error => console.log(error));
+    })
+
+    // 리뷰 등록
     const handlerClickSubmit = (e) => {
         e.preventDefault();
         axios.post(`http://localhost:8080/api/reivew/reviewWrite`,
@@ -66,6 +86,7 @@ export default function ReviewUpload({ history }) {
 
     };
 
+    // 리뷰 작성 취소
     const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
         if (!onConfirm || typeof onConfirm !== "function") {
             return;
@@ -86,6 +107,22 @@ export default function ReviewUpload({ history }) {
     const deleteWorld = () => history.goBack();
     const abort = () => console.log("Aborted")
     const confirmDelete = useConfirm("작성을 취소하시겠습니까?", deleteWorld, abort);
+
+    // 리뷰 이미지 업로드
+    const [reviewImageSrc, setReviewImageSrc] = useState('');
+
+
+    const encodeFileToBase64 = (fileBlob) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+          reader.onload = () => {
+            setReviewImageSrc(reader.result);
+            resolve();
+          };
+        });
+      };
+
 
     return (
         <div className="reviewUpload">
@@ -114,6 +151,7 @@ export default function ReviewUpload({ history }) {
                         id="item_review_input"
                         className="image_inputType_file"
                         accept=".jpg, .png"
+                        multiple
                         onChange={handlerChangesetReviewImage}
                     />
                 </AppStyle>

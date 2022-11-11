@@ -61,7 +61,7 @@ function App() {
 
 
         {/* review */}
-        <Route path="/reivew/reviewWrite" component={ReviewUpload} />
+        <Route path="/reivew/reviewWrite/:reviewNum" component={ReviewUpload} />
         <Route path="/review/myReview" component={MyReviewList} exact={true} />
         <Route path="/review/yourReview" component={YourReviewList} exact={true} />
 
