@@ -32,22 +32,46 @@ const AppStyle = styled.div`
 
 export default function ReviewUpload({ history }) {
 
+    const reviewWriter = sessionStorage.getItem('memberId');
+
     // const [data, setData] = useState([]);
-    const [reviewImage, setReviewImage] = useState('');
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
+    const [reviewFiles, setReviewFiles] = useState('');
+    const [ReviewAddImg, setReviewAddImg] = useState('');
 
-    const handlerChangesetReviewImage = (e) => setReviewImage(e.target.value);
+
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
     const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
+    const handlerChangeReviewFiles = (e) =>{
+        setReviewFiles(e.target.files[0]);
+        encodeFileBase64(e.target.files[0]);
+    }
+
+    const encodeFileBase64 = (fileBlob) => {
+        const read = new FileReader();
+        read.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+            read.onload = () => {
+                setReviewAddImg(read.result);
+                resolve();
+            };
+        });
+    };
 
     const handlerClickSubmit = (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:8080/api/reivew/reviewWrite`,
-            {
-                "reviewImage": reviewImage,
-                "reviewContents": reviewContents,
-                "reviewSatisfaction": reviewSatisfaction
+
+        const formData = new FormData();
+        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewImage": reviewImage, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction })], {
+            type: "application/json"
+        }));
+        formData.append("reviewFiles", files);
+
+        axios.post(`http://localhost:8080/api/reivew/reviewWrite`, formData,
+            { headers: {
+                'Content-Type': 'multipart/form-data'
+             }
             })
             .then(response => {
                 if (response.status === 200) {
@@ -106,15 +130,15 @@ export default function ReviewUpload({ history }) {
                 <AppStyle>
                     <label htmlFor="item_review_input">
                         <div className="btnStart">
-                            <img src={ReviewAddImg} alt="ReviewAddImg" />
-                        </div>
+                            {ReviewAddImg && <img src={ReviewAddImg} alt="ReviewAddImg" />} </div>
                     </label>
                     <input
                         type="file"
                         id="item_review_input"
                         className="image_inputType_file"
                         accept=".jpg, .png"
-                        onChange={handlerChangesetReviewImage}
+                        multiple
+                        onChange={handlerChangeReviewFiles}
                     />
                 </AppStyle>
             </div>

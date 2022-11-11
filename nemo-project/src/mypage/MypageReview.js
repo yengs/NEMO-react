@@ -4,7 +4,7 @@ import jeans from '../img/jeans.jpg';
 import styled from "styled-components";
 
 
-function MypageReview({ match }) {
+function MypageReview() {
 
     const [datas, setDatas] = useState([]);                         // 리뷰 전체 데이터
     const [items, setItems] = useState('');                         // 상품 전체 데이터
@@ -16,7 +16,7 @@ function MypageReview({ match }) {
     useEffect(() => {
 
         // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
-        axios.get('http://localhost:8080/api/review/myReview1')
+        axios.get(`http://localhost:8080/api/mypage/myReview1`)
             .then(response => {
                 console.log(response);
                 setDatas(response.data);
@@ -26,16 +26,15 @@ function MypageReview({ match }) {
             .catch(error => console.log(error));
 
         // 내가 작성한 후기 데이터
-        axios.get('http://localhost:8080/api/review/myReview2')
+        axios.get(`http://localhost:8080/api/mypage/myReview2`)
             .then(response => {
                 console.log(response);
                 setmyReviewData(response.data);
                 setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
-
-    }, []);
-
+    }, [])
+    
     const goYourReview = () => {
         window.location.href = "/review/yourReview";
     }
@@ -70,7 +69,7 @@ function MypageReview({ match }) {
                                         </td>
                                         <td className='rReviewItemNameOrigin' rowSpan={3}>
                                             {/* 내가 등록한 상품이름 */}
-                                            {}
+                                            { }
                                         </td>
                                         <td className='rReviewWriter' rowSpan={3}>
                                             {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
