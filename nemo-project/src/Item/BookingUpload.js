@@ -34,9 +34,23 @@ function BookingUpload({ history,match }) {
   }
 
   //----------결제모달 end--------------
+  //--------------대여하기 ------------------
 
   const {itemNum} = match.params;
-  const bookingItemnum = itemNum
+  const {itemName} = match.params;
+  const {itemDeposit} = match.params;
+  const {itemPrice} = match.params;
+  const {itemWriter} = match.params;
+  const {files} = match.params;
+
+  const bookingItemnum = itemNum;
+  const bookingItemname = itemName;
+  const Deposit = itemDeposit;
+  const bookingItemprice = itemPrice;
+  const bookingItemwriter = itemWriter;
+  const bookingItemfiles =files;
+
+  const sum = (parseInt(bookingItemprice)+parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
   const [value, setbookingDate] = useState(new Date());
   
@@ -46,7 +60,11 @@ function BookingUpload({ history,match }) {
         {
             "bookingMember": bookingMember,
             "bookingDate" :value,
-            "bookingItemnum": bookingItemnum
+            "bookingItemnum": bookingItemnum,
+            "bookingItemname":bookingItemname,
+            "bookingItemprice" : bookingItemprice,
+            "bookingItemwriter" : bookingItemwriter,
+            "bookingItemfiles" : bookingItemfiles
         })
         .then(response => {
           if (response.status === 200) {
@@ -59,6 +77,7 @@ function BookingUpload({ history,match }) {
       .catch(error => console.log(error));
   };
 
+  //-----------대여하기 end--------------------
 
 
   return (
@@ -71,11 +90,11 @@ function BookingUpload({ history,match }) {
             <div className="tablePlusForm2">
               <tr><td>
                 <div className="imageDiv2">
-                  <p className="memberImg2"></p>
-                  {/* <td>{data.itemImage}</td> */}
+                <img className="memberImg2" src={`../../files/${bookingItemfiles}`}/>
+                  
                 </div>
               </td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;언더아머 트레이닝복</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{bookingItemname}</td>
               </tr>
             </div>
           </div>
@@ -85,18 +104,18 @@ function BookingUpload({ history,match }) {
                 <tr>
                   <th>대여료</th>
                   <td></td>
-                  <td>100000원</td>
+                  <td>{bookingItemprice}원</td>
                 </tr>
                 <tr>
                   <th >보증금</th>
                   <td><div className="plus">+</div></td>
-                  <td>200000원</td>
+                  <td>{Deposit}원</td>
                 </tr>
               </div>
               <tr>
                 <th>결제금액</th>
                 <td></td>
-                <td>300000원</td>
+                <td>{sum}원</td>
               </tr>
             </div>
           </div>
