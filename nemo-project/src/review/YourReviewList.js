@@ -4,7 +4,9 @@ import "./reviewDetail.css";
 import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
-function YourReviewList() {
+function YourReviewList({match}) {
+
+    const { reviewId } = match.params;
 
     const ITEM_COUNT_PER_PAGE = 10;
     const [datas, setDatas] = useState([]);
@@ -13,7 +15,7 @@ function YourReviewList() {
     const [items, setItems] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/review/yourReview')
+        axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, {headers :  { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => {
                 const list = response.data.map(data => ({ ...data, closed: true }));
                 console.log(response);
@@ -66,9 +68,7 @@ function YourReviewList() {
                                     {/* <td>{review.reviewImage}</td> */}
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
-                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
-                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                        <div className="reviewListItemImg" src={`../../reviewFiles/${review.reviewFiles}`}></div>
                                     </td>
                                     <td>
                                         <div className="reviewContents">

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState } from 'react';
-import ReviewAddImg from '../img/review-add-img.png'
 
 // import Form from 'react-bootstrap/Form';
 
@@ -63,10 +62,10 @@ export default function ReviewUpload({ history }) {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewImage": reviewImage, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction })], {
+        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction })], {
             type: "application/json"
         }));
-        formData.append("reviewFiles", files);
+        formData.append("reviewFiles", reviewFiles);
 
         axios.post(`http://localhost:8080/api/reivew/reviewWrite`, formData,
             { headers: {
@@ -77,7 +76,7 @@ export default function ReviewUpload({ history }) {
                 if (response.status === 200) {
                     if (reviewContents && reviewSatisfaction != null) {
                         alert("정상적으로 등록되었습니다.");
-                        history.push("/review/myReview");
+                        history.push(`/review/myReview/${reviewWriter}`);
                     } else {
                         alert("내용과 만족도를 입력하세요.")
                     }
@@ -118,29 +117,20 @@ export default function ReviewUpload({ history }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                {/* <div className='reviewImage' style={{ "backgroundImage": `url(${ReviewAddImg})` }}></div>
-                <div className="add-img-box">
-                    <input type="file"
-                        id="item_review_input"
-                        className="image_inputType_file"
-                        accept=" .jpg, .png"
-                        multiple
-                        onChange={handlerChangesetReviewImage} />
-                </div> */}
-                <AppStyle>
-                    <label htmlFor="item_review_input">
-                        <div className="btnStart">
+                 {/* <AppStyle>  */}
+                        <div className="reviewImage">
                             {ReviewAddImg && <img src={ReviewAddImg} alt="ReviewAddImg" />} </div>
-                    </label>
-                    <input
+                    <div className="add-img-box">
+                   <input
                         type="file"
-                        id="item_review_input"
+                        // id="item_review_input"
                         className="image_inputType_file"
-                        accept=".jpg, .png"
+                        // accept=".jpg, .png"
                         multiple
                         onChange={handlerChangeReviewFiles}
                     />
-                </AppStyle>
+                    </div>
+                 {/* </AppStyle>  */}
             </div>
             <div className='reviewContent'>
                 <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>

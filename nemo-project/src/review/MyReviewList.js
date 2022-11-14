@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
-import Shirt from '../img/shirt.jpg';
+// import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
-function MyReviewList() {
+function MyReviewList({match}) {
+
+    const { reviewWriter } = match.params;
 
     const ITEM_COUNT_PER_PAGE = 10;
 
@@ -14,7 +16,7 @@ function MyReviewList() {
     const [items, setItems] = useState([]);                             // 페이징을 통해서 보여줄 데이터
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/review/myReview')
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`, { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => {
                 console.log(response);
                 const list = response.data.map(data => ({ ...data, closed: true }));
@@ -62,12 +64,11 @@ function MyReviewList() {
                             items && items.map(review => (
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
-                                    {/* <td>{review.reviewImage}</td> */}
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
-                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
-                                        <div className="reviewListItemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                        <div className="reviewListItemImg">
+                                        <img src={`../../reviewFiles/${review.reviewFiles}`}></img>
+                                        </div>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
