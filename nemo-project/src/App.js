@@ -21,8 +21,6 @@ import Pwfind from './member/Pwfind';
 import Pwfind_Result from './member/Pwfind_Result';
 import MyReviewList from './review/MyReviewList';
 import YourReviewList from './review/YourReviewList';
-import MyReviewDetail from './review/MyReviewDetail';
-import YourReviewDetail from './review/YourReviewDetail';
 import ReviewUpload from './review/ReviewUpload';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
@@ -39,9 +37,9 @@ function App() {
 
         <Route path="/" component={Main} exact={true} />
 
+
         {/* admin */}
         <Route path="/admin/dec" component={Dec} exact={true} />
-
 
 
         {/* item */}
@@ -53,7 +51,6 @@ function App() {
         <Route path="/item/bookingupload/:itemNum,:itemName,:itemDeposit,:itemPrice,:itemWriter,:files" component={BookingUpload} exact={true} />
 
 
-
         {/* member */}
         <Route path="/member/join" component={Join} exact={true} />
         <Route path="/member/login" component={Login} exact={true} />
@@ -63,19 +60,17 @@ function App() {
         <Route path="/member/pw/find" component={Pwfind_Result} exact={true} />
 
 
-
         {/* review */}
         <Route path="/reivew/reviewWrite" component={ReviewUpload} />
-        <Route path="/review/yourreview/:reviewNum" component={YourReviewDetail} exact={true} />
         <Route path="/review/myReview" component={MyReviewList} exact={true} />
         <Route path="/review/yourReview" component={YourReviewList} exact={true} />
-        <Route path="/review/myreview/:reviewNum" component={MyReviewDetail} exact={true} />
 
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
         {/* <Route path="/dec/detail" component={DecDetail} /> */}
         <Route path="/userstoreinfo" component={MyPageForOthers} />
+        
         
       </div>
       <Footer />
