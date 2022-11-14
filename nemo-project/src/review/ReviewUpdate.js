@@ -1,13 +1,7 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 import ReviewAddImg from '../img/review-add-img.png'
-
-// import Form from 'react-bootstrap/Form';
-
 import styled from "styled-components";
-import './reviewUpload.css'
 
 const AppStyle = styled.div`
   img {
@@ -32,13 +26,11 @@ const AppStyle = styled.div`
   }
 `;
 
-export default function ReviewUpload({ history }) {
+function ReviewUpdate({ history }) {
 
-    let { reviewNum } = useParams();
+    const reviewNum = sessionStorage.getItem('reviewNum');
 
-    const reviewWriter = sessionStorage.getItem("memberId");
-
-    // const [data, setData] = useState([]);
+    const [datas, setDatas] = useState({});
     const [reviewImage, setReviewImage] = useState('');
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
@@ -47,49 +39,49 @@ export default function ReviewUpload({ history }) {
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
     const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
 
+
     useEffect(() => {
-        // console.log(`http://localhost:8080/api/review/reviewWrite/${reviewNum}`)
-        // 리뷰 수정 
         axios.get(`http://localhost:8080/api/review/reviewWrite/${reviewNum}`)
-            .then(response => {
-                // console.log("후기 수정 번호 : " + reviewNum);
-                console.log(response);
-                // setDatas(response.data);
-                setReviewImage(response.data.reviewImage);
-                setReviewContents(response.data.setReviewContents);
-                setReviewSatisfaction(response.data.setReviewSatisfaction);
+            .then(res => {
+                console.log(res);
+                setDatas(res.data);
+                setReviewImage(res.data);
+                setReviewContents(res.data);
+                setReviewSatisfaction(res.data);
+                sessionStorage.setItem('reviewNum',res.data.reviewNum)
             })
             .catch(error => console.log(error));
-    })
+    }, []);
 
-    // 리뷰 등록
-    const handlerClickSubmit = (e) => {
+    // 후기 수정 
+    const UpdateReview = (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:8080/api/reivew/reviewWrite`,
-            {
-                "reviewImage": reviewImage,
-                "reviewContents": reviewContents,
-                "reviewSatisfaction": reviewSatisfaction
-            })
-            .then(response => {
-                if (response.status === 200) {
-                    if (reviewContents && reviewSatisfaction != null) {
-                        alert("정상적으로 등록되었습니다.");
-                        history.push("/review/myReview");
-                    } else {
-                        alert("내용과 만족도를 입력하세요.")
-                    }
+
+        const reviewDetail = {
+            "reviewNum" : reviewNum,
+            "reviewImage": reviewImage,
+            "reviewContents": reviewContents,
+            "reviewSatisfaction": reviewSatisfaction
+        }
+
+        axios.post(`http://localhost:8080/api/reivew/reviewWrite/${reviewNum}`, reviewDetail)
+            .then(res => {
+                if (res.status === 200) {
+                    alert("수정완료");
+                    history.push('/review/myReview');
                 } else {
-                    alert("등록에 실패했습니다.");
+                    alert("수정실패");
                     return;
                 }
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(reviewDetail);
+                console.log(error)
+            });
+    }
 
-    };
-
-    // 리뷰 작성 취소
-    const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
+    // 후기 수정 취소
+    const confirmDelete = (message = "후기 작성을 취소하시겠습니까 ?", onConfirm, onCancel) => {
         if (!onConfirm || typeof onConfirm !== "function") {
             return;
         }
@@ -106,10 +98,6 @@ export default function ReviewUpload({ history }) {
         return confirmAction;
     };
 
-    const deleteWorld = () => history.goBack();
-    const abort = () => console.log("Aborted")
-    const confirmDelete = useConfirm("작성을 취소하시겠습니까?", deleteWorld, abort);
-
     return (
         <div className="reviewUpload">
             <div className='pageTitle'>
@@ -120,7 +108,7 @@ export default function ReviewUpload({ history }) {
                 <AppStyle>
                     <label htmlFor="item_review_input">
                         <div className="btnStart">
-                            <img src={ReviewAddImg} alt="ReviewAddImg" />
+                            <img src={ReviewAddImg} alt="ReviewAddImg" value={datas.reviewImage} />
                         </div>
                     </label>
                     <input
@@ -130,21 +118,24 @@ export default function ReviewUpload({ history }) {
                         accept=".jpg, .png"
                         multiple
                         onChange={handlerChangesetReviewImage}
-                        value={reviewImage}
+                        value={datas.reviewImage}
                     />
                 </AppStyle>
             </div>
             <div className='reviewContent'>
-                <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>
+                <textarea value={datas.reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>
             </div>
             <div className='satisfyingReview'>
                 <span>상품의 만족도는 어떠셨나요?</span>
-                <input type="number" max={100} min={0} step={1} value={reviewSatisfaction} onChange={handlerChangeReviewSatisfaction} required />
+                <input type="number" max={100} min={0} step={1} value={datas.reviewSatisfaction} onChange={handlerChangeReviewSatisfaction} required />
             </div>
             <div className='btnWrap'>
-                <input type="submit" className='greenBtn btn' value="등록" onClick={handlerClickSubmit} />
+                <input type="submit" className='greenBtn btn' value="수정" onClick={UpdateReview} />
                 <input type="button" className='grayBtn btn' value="취소" onClick={confirmDelete} />
             </div>
         </div>
     );
+
 }
+
+export default ReviewUpdate;
