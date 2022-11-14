@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-import ReviewAddImg from '../img/review-add-img.png'
-
 // import Form from 'react-bootstrap/Form';
 
 import styled from "styled-components";
@@ -31,33 +29,54 @@ const AppStyle = styled.div`
   }
 `;
 
-export default function ReviewUpload({ history, match }) {
+export default function ReviewUpload({ history }) {
 
-    const { reviewWriter } = match.params;
+    const reviewWriter = sessionStorage.getItem('memberId');
 
     // const [data, setData] = useState([]);
-    const [reviewImage, setReviewImage] = useState('');
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
+    const [reviewFiles, setReviewFiles] = useState('');
+    const [ReviewAddImg, setReviewAddImg] = useState('');
 
-    const handlerChangesetReviewImage = (e) => setReviewImage(e.target.value);
+
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
     const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
+    const handlerChangeReviewFiles = (e) =>{
+        setReviewFiles(e.target.files[0]);
+        encodeFileBase64(e.target.files[0]);
+    }
 
-    // 리뷰 등록
+    const encodeFileBase64 = (fileBlob) => {
+        const read = new FileReader();
+        read.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+            read.onload = () => {
+                setReviewAddImg(read.result);
+                resolve();
+            };
+        });
+    };
+
     const handlerClickSubmit = (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:8080/api/reivew/myReview`,
-            {
-                "reviewImage": reviewImage,
-                "reviewContents": reviewContents,
-                "reviewSatisfaction": reviewSatisfaction
+
+        const formData = new FormData();
+        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction })], {
+            type: "application/json"
+        }));
+        formData.append("reviewFiles", reviewFiles);
+
+        axios.post(`http://localhost:8080/api/reivew/reviewWrite`, formData,
+            { headers: {
+                'Content-Type': 'multipart/form-data'
+             }
             })
             .then(response => {
                 if (response.status === 200) {
                     if (reviewContents && reviewSatisfaction != null) {
                         alert("정상적으로 등록되었습니다.");
-                        history.push("/review/myReview");
+                        history.push(`/review/myReview/${reviewWriter}`);
                     } else {
                         alert("내용과 만족도를 입력하세요.")
                     }
@@ -70,7 +89,6 @@ export default function ReviewUpload({ history, match }) {
 
     };
 
-    // 리뷰 작성 취소
     const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
         if (!onConfirm || typeof onConfirm !== "function") {
             return;
@@ -99,22 +117,20 @@ export default function ReviewUpload({ history, match }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                <AppStyle>
-                    <label htmlFor="item_review_input">
-                        <div className="btnStart">
-                            <img src={ReviewAddImg} alt="ReviewAddImg" />
-                        </div>
-                    </label>
-                    <input
+                 {/* <AppStyle>  */}
+                        <div className="reviewImage">
+                            {ReviewAddImg && <img src={ReviewAddImg} alt="ReviewAddImg" />} </div>
+                    <div className="add-img-box">
+                   <input
                         type="file"
-                        id="item_review_input"
+                        // id="item_review_input"
                         className="image_inputType_file"
-                        accept=".jpg, .png"
+                        // accept=".jpg, .png"
                         multiple
-                        onChange={handlerChangesetReviewImage}
-                        value={reviewImage}
+                        onChange={handlerChangeReviewFiles}
                     />
-                </AppStyle>
+                    </div>
+                 {/* </AppStyle>  */}
             </div>
             <div className='reviewContent'>
                 <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>

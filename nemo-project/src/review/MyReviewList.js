@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
-// import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
-function MyReviewList({match}) {
+function MyReviewList({ history, match }) {
 
-    const { reviewWriter } = match.params;
+    const { reviewWriter, reviewNum } = match.params;
 
     const ITEM_COUNT_PER_PAGE = 10;
 
@@ -40,6 +39,21 @@ function MyReviewList({match}) {
         ));
     };
 
+    const handlerReviewDelete = () => {
+        axios.delete(`http://localhost:8080/api/review/myReview/${reviewNum}`)
+        .then(response => { 
+            console.log(response);
+            if (response.status === 200) {
+                alert("정상적으로 삭제되었습니다.");
+                history.push("/member");
+            } else {
+                alert("삭제에 실패했습니다.");
+                return;
+            }
+        })
+        .catch(error => console.log(error));
+    };
+
     return (
         <>
             <div className="rcontainer">
@@ -67,7 +81,7 @@ function MyReviewList({match}) {
                                     <td>{review.reviewNum}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <img className="reviewListItemImg" src={`../../reviewFiles/${review.reviewFiles}`}></img>
+                                        <img className="reviewListItemImg" src={`../../files/${review.reviewFiles}`}></img>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
@@ -78,6 +92,8 @@ function MyReviewList({match}) {
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             }
+                                            <button className="moreBtn"> [ 수정 ] </button>
+                                            <button className="moreBtn" onClick={handlerReviewDelete}> [ 삭제 ] </button>
                                         </div>
                                     </td>
                                     <td>
