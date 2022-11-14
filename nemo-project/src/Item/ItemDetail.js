@@ -91,11 +91,11 @@ function ItemDetail({ match, location, history }) {
     let now = new Date();
 
     const dateWhat = () =>{
-        if(new Date(itemRentalend)<now){
+        if(new Date(itemRentalend) > now){
+            window.location.href = `/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`;
+        }else{
             alert("대여기간이 지난 상품입니다")
             window.location.href = `/item/cate/sub/${data.itemSubcategory}`;
-        }else{
-            window.location.href = `/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`;
         }
     }
 
