@@ -42,6 +42,8 @@ function BookingUpload({ history,match }) {
   const {itemPrice} = match.params;
   const {itemWriter} = match.params;
   const {files} = match.params;
+  const {itemRentalstart} = match.params;
+  const {itemRentalend} = match.params;
 
   const bookingItemnum = itemNum;
   const bookingItemname = itemName;
@@ -49,6 +51,9 @@ function BookingUpload({ history,match }) {
   const bookingItemprice = itemPrice;
   const bookingItemwriter = itemWriter;
   const bookingItemfiles =files;
+  const Rentalstart = itemRentalstart;
+  const Rentalend = itemRentalend;
+
 
   const sum = (parseInt(bookingItemprice)+parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
@@ -84,19 +89,19 @@ function BookingUpload({ history,match }) {
   const [value, setbookingDate] = useState(new Date());
   const [dates, setDates] = useState([]);
 
-console.log(dates);
 
+  const list = dates.map((date)=>{
+    return(new Date(date))
+  })
 
-const disableDates = new Date(dates);
-const date1=disableDates.getDate(disableDates);
-
+  const disableDates = list;
 
 useEffect(() => {
   axios.get(`http://localhost:8080/api/allbooking/${bookingItemnumber}`)
     .then(response => {
       setDatas(response.data);
 
-      const dateList = response.data.map((datalist, i) => datalist.bookingDate);
+      const dateList = response.data.map((datalist, i) => datalist.bookingDate );
       setDates(dateList);
 
     })
@@ -110,17 +115,6 @@ useEffect(() => {
 
   return (
     <>
-
-{
-                                datas && datas.map(booking => (
-                                <tr key={booking.bookingNum}>
-                                  <td>{booking.bookingDate}</td>
-
-
-
-                                </tr>
-
-                                ))}
 
       <div className="BookingContainer">
         <h3>대여하기</h3>
@@ -162,14 +156,6 @@ useEffect(() => {
 
         </div>
         <h3>결제수단</h3>
-
-
-
-
-
-
-
-
 
 
         {/* --------------결제모달-------------- */}
@@ -289,11 +275,17 @@ useEffect(() => {
 
         <h3>대여기간</h3>
         <div className="bottom">
-
+        
           <div> <div className="inputdate">
-            {/* <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)} tileDisabled={({date}) => date.getDate()===date1}/> */}
-            <Calendar onChange={date => setbookingDate(date)} value={value} tileDisabled={({date}) => date.getDate()===date1}/>
-
+         
+            <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)}
+                      tileDisabled={({date, view}) =>
+                         (view === 'month') && // Block day tiles only
+                          disableDates.some(disabledDate =>
+                          date.getFullYear() === disabledDate.getFullYear() &&
+                          date.getMonth() === disabledDate.getMonth() &&
+                          date.getDate() === disabledDate.getDate()
+            )} />
             <br />
             선택한 날짜 : {moment(value).format("YYYY년 MM월 DD일")}
           </div>
