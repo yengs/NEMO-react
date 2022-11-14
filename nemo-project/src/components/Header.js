@@ -44,6 +44,7 @@ function Header() {
     const memberNum = sessionStorage.getItem('memberNum');
     const [memberRegion, setMemberRegion] = useState('');
     useEffect(() => {
+        if(sessionStorage.getItem('memberNum') !== null)
         axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
         .then(response => {
             setMemberRegion(response.data.memberSigungu);
