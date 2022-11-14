@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 function MyPageItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
-    
+   
     const [ data, setData ] = useState({});
     const [ itemName, setItemName ] = useState('');
     const [ itemPrice, setItemPrice ] = useState('');
@@ -63,7 +63,7 @@ function MyPageItemDetail({ match, location, history }) {
     
     const [files, setFiles] = useState('');
     const [imageSrc, setImageSrc] = useState('');
-    
+    console.log(imageSrc);
     const handlerChangefiles =(e) => {
         setFiles(e.target.files[0]);
         encodeFileToBase64(e.target.files[0]);
@@ -96,14 +96,26 @@ function MyPageItemDetail({ match, location, history }) {
         .catch(error => console.log(error));
     };
     const handlerClickUpdate = () => {
-        axios.put(`http://localhost:8080/api/item/${itemNum}`, { 
-            'itemName': itemName, 'itemPrice': itemPrice, 'itemDetail': itemDetail
-            ,'itemMaincategory' : itemMaincategory, 'itemSubcategory': itemSubcategory,
-            'itemDeposit' : itemDeposit, 'itemWeather' : itemWeather,
-            'itemTopsize' : itemTopsize, 'itemBottomsize' : itemBottomsize,
-            'itemEtcsize' : itemEtcsize, 'itemRentalstart' : startDate,
-            'itemRentalend' : endDate
-        })
+
+        const formData = new FormData();
+        formData.append('data', new Blob([JSON.stringify({'itemName': itemName, 'itemPrice': itemPrice, 'itemDetail': itemDetail
+        ,'itemMaincategory' : itemMaincategory, 'itemSubcategory': itemSubcategory,
+        'itemDeposit' : itemDeposit, 'itemWeather' : itemWeather,
+        'itemTopsize' : itemTopsize, 'itemBottomsize' : itemBottomsize,
+        'itemEtcsize' : itemEtcsize, 'itemRentalstart' : startDate,
+        'itemRentalend' : endDate})], {
+            type: "application/json"
+        }));
+        // formData.append("files", new Blob(files, { type: "image/*" }));
+        formData.append("files", files);
+
+
+        axios.put(`http://localhost:8080/api/item/${itemNum}`, 
+            formData,
+            { headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            })
             .then(response => {
                 if (response.status === 200) {
                     console.log(itemRentalstart);
@@ -126,13 +138,18 @@ function MyPageItemDetail({ match, location, history }) {
         <MyPageItemDetailContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
             <div className="mypageInnerPage myDetailPage">
                 <h3>내 상품 상세조회</h3>
-
+                
             <div className="ChoiseFile">
                 <div className="myDetailImage">
+                    {imageSrc == '' ?
                         <img className="memberImg" src={`../../files/${data.files}`}/>
+                        : <div className="myDetailImage">
+                        {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
+                    }
                 </div>
+                
                 <div className="imageChoose">
-                    <input className="form-control-image" type = "file" name="file" multiple onChange={handlerChangefiles}/>
+                    <input className="form-control-image" type = "file" name="file" multiple onChange={handlerChangefiles}></input>
                 </div>
             </div>
 
