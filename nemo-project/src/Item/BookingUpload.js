@@ -57,7 +57,6 @@ function BookingUpload({ history,match }) {
 
   const sum = (parseInt(bookingItemprice)+parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
-  const [value, setbookingDate] = useState(new Date());
   
   const handlerClickSubmit = (e) => {
     e.preventDefault();
@@ -84,9 +83,50 @@ function BookingUpload({ history,match }) {
 
   //-----------대여하기 end--------------------
 
+  //==========================대여날짜 --------------------------
+  const [datas, setDatas] = useState([]);
+  const bookingItemnumber = bookingItemnum;
+  const [value, setbookingDate] = useState(new Date());
+  const [dates, setDates] = useState([]);
+
+console.log(dates);
+
+
+const disableDates = new Date(dates);
+const date1=disableDates.getDate(disableDates);
+
+
+useEffect(() => {
+  axios.get(`http://localhost:8080/api/allbooking/${bookingItemnumber}`)
+    .then(response => {
+      setDatas(response.data);
+
+      const dateList = response.data.map((datalist, i) => datalist.bookingDate);
+      setDates(dateList);
+
+    })
+    .catch(error => console.log(error));
+}, []);
+
+
+
+//------------------------------End------------------------------
+
 
   return (
     <>
+
+{
+                                datas && datas.map(booking => (
+                                <tr key={booking.bookingNum}>
+                                  <td>{booking.bookingDate}</td>
+
+
+
+                                </tr>
+
+                                ))}
+
       <div className="BookingContainer">
         <h3>대여하기</h3>
 
@@ -256,7 +296,8 @@ function BookingUpload({ history,match }) {
         <div className="bottom">
 
           <div> <div className="inputdate">
-            <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)} />
+            {/* <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)} tileDisabled={({date}) => date.getDate()===date1}/> */}
+            <Calendar onChange={date => setbookingDate(date)} value={value} tileDisabled={({date}) => date.getDate()===date1}/>
 
             <br />
             선택한 날짜 : {moment(value).format("YYYY년 MM월 DD일")}
