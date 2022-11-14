@@ -11,7 +11,7 @@ function Login({ history }) {
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
 
-    const changeId = (e) => { setId(e.target.value); console.log(id) };
+    const changeId = (e) => { setId(e.target.value); };
     const changePw = (e) => setPw(e.target.value);
 
     /*====== Cookie 관련 선언======*/
