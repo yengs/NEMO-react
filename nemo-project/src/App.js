@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './common.css';
 
@@ -25,8 +25,29 @@ import ReviewUpload from './review/ReviewUpload';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
+import axios from 'axios';
 
 function App() {
+
+  useEffect(() => {
+    if(sessionStorage.getItem('memberId') !== null) {
+
+      axios.get(`http://localhost:8080/api/member/info/${sessionStorage.getItem('memberNum')}`)
+      .then(response => {
+        
+        axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${response.data.memberZipCode},KR&appid=42c3249b2406895e257db260bf90bc97`)
+        .then(response =>{
+          
+          sessionStorage.setItem("lat",response.data.lat);
+          sessionStorage.setItem("lon",response.data.lon);
+          
+        })
+        .catch(error => console.log(error));
+
+      }).catch(error=>console.log(error));
+      
+      }
+  })
 
   return (
 
