@@ -7,6 +7,30 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 function Join() {
 
     
+    
+    const [mName, setMname] = useState('');
+    const [mNickname, setMnickname] = useState('');
+    const [mId, setMid] = useState('');
+    const [mPw, setMpw] = useState('');
+    const [mPwCheck, setMpwCheck] = useState('');
+    const [mEmail, setMemail] = useState('');
+    const [mPhone, setMphone] = useState('');
+    const [mAddress, setMaddress] = useState('');
+    const [mZipCode, setMzipCode] = useState('');
+    const [mLat, setMlat] = useState('');
+    const [mLon, setMlon] = useState('');
+
+    const [mSigungu, setMsigungu] = useState('');
+    
+    const handlerChangeName = (e) => setMname(e.target.value);
+    const handlerChangeNickname = (e) => setMnickname(e.target.value);
+    const handlerChangeId = (e) => setMid(e.target.value);
+    const handlerChangePw = (e) => setMpw(e.target.value);
+    const handlerChangePwCheck = (e) => setMpwCheck(e.target.value);
+    const handlerChangeEmail = (e) => setMemail(e.target.value);
+    const handlerChangePhone = (e) => setMphone(e.target.value);
+    
+
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
@@ -22,7 +46,14 @@ function Join() {
         }
         
         setMaddress(fullAddress);
-        console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+        setMzipCode(data.zonecode);
+        setMsigungu(data.sigungu);
+        sessionStorage.setItem("zip", "우편번호저장");
+
+        
+        // setMaddressEng(data.sidoEnglish);
+        // console.log(mAddressEng);
+        //console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
     // 주소검색창 팝업열기
@@ -31,26 +62,34 @@ function Join() {
         open({ onComplete: handleComplete });
     };
 
-    const [mName, setMname] = useState('');
-    const [mNickname, setMnickname] = useState('');
-    const [mId, setMid] = useState('');
-    const [mPw, setMpw] = useState('');
-    const [mPwCheck, setMpwCheck] = useState('');
-    const [mEmail, setMemail] = useState('');
-    const [mPhone, setMphone] = useState('');
-    const [mAddress, setMaddress] = useState('');
 
-    const handlerChangeName = (e) => setMname(e.target.value);
-    const handlerChangeNickname = (e) => setMnickname(e.target.value);
-    const handlerChangeId = (e) => setMid(e.target.value);
-    const handlerChangePw = (e) => setMpw(e.target.value);
-    const handlerChangePwCheck = (e) => setMpwCheck(e.target.value);
-    const handlerChangeEmail = (e) => setMemail(e.target.value);
-    const handlerChangePhone = (e) => setMphone(e.target.value);
+    const handlerChangeAddress = (e) => {
+        e.preventDefault();
+        axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${mZipCode},KR&appid=42c3249b2406895e257db260bf90bc97`)
+        .then(response =>{ 
+                
+                console.log("주소 입력될 때 우편번호 세팅::::::"+mZipCode);
+                
+                const responseDataStr = JSON.stringify(response.data);
+                
+                
+                console.log("responseDataStr::::::"+responseDataStr);
+                
+                setMlat(response.data.lat);
+                setMlon(response.data.lon);
+                
+                console.log(mLat);
+                console.log(mLon);
+              
+            })
+            .catch(error => console.log(error));
+    }
+
+
 
     const memberDataInsert = (e) => {
         e.preventDefault();
-
+        
         const memberInfo = {
             "memberName": mName,
             "memberNickname": mNickname,
@@ -58,13 +97,18 @@ function Join() {
             "memberPw": mPw,
             "memberEmail": mEmail,
             "memberPhone": mPhone,
-            "memberAddress": mAddress
+            "memberAddress": mAddress,
+            "memberZipCode" : mZipCode,
+            "memberLat" : mLat,
+            "memberLon" : mLon,
+            "memberSigungu" : mSigungu
         }
-
+        
         axios.post('http://localhost:8080/api/member/join', memberInfo)
-            .then(response => {
-                if (response.status === 200) {
+        .then(response => {
+            if (response.status === 200) {
                     alert("회원가입완료");
+                    // window.location.href="/member/login";
                 } else {
                     alert("회원가입 실패");
                     return;
@@ -142,7 +186,7 @@ function Join() {
                             <tr className="memberAddress">
                                 <td className="requiredMark">주소</td>
                                 <td>
-                                    <input type="text" name="mAddress" value={mAddress} required />
+                                    <input type="text" name="mAddress" value={mAddress} onChange={handlerChangeAddress} required />
                                 </td>
                                 <td className="memberTableBtn">
                                     <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>

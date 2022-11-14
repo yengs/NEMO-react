@@ -7,13 +7,35 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Shirt from '../img/shirt.jpg';
-import Weather from "../components/Weather";
 
 export default function WeatherRecItemList({ match }) {
 
     const { itemMaincategory } = match.params;
 
     const [datas, setDatas] = useState([]);
+
+    
+    const mLat = sessionStorage.getItem("lat");
+    const mLon = sessionStorage.getItem("lon");
+
+
+    const [weatherArray, setWeatherArray] = useState([]);
+    useEffect(() => {
+        if ((mLat !== null || mLat !== undefined || mLat !== '') && (mLon !== null || mLon !== undefined || mLon !== '')) {
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${mLat}&lon=${mLon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+                .then(response => {
+                    console.log(response.data);
+                    setWeatherArray(response.data.list);
+                    console.log(weatherArray);
+                })
+                .catch(error => {
+                    console.log(error);
+                    console.log(mLat);
+                    console.log(mLon);
+                });
+        }
+    }, []);
+
 
     // useEffect(() => {
     //     // 임시로 get주소 넣어둠. 나중에 수정필요
@@ -25,79 +47,7 @@ export default function WeatherRecItemList({ match }) {
     return (
         <Container>
             <div className="weatherRecItemListWrap">
-                {/* <div>
-                    <div className="pageTitle">
-                        <h3>내일 날씨는?</h3>
-                    </div>
-                    <div className="tomorrowInfo">
-                        <div className="tomDate">03일<span>(목)</span></div>
-                        <div className="tomWeatherWrap">
-                            <span className="tomWeatherIcon"><BsCloudy /></span>
-                            <span className="tomWeather">흐림</span>
-                            <span className="tomTempMin">최저기온 <span className="minTemp">4</span>℃</span>
-                            <span className="tomTempMax">최고기온 <span className="maxTemp">15</span>℃</span>
-                        </div>
-                        <div className="tomWetherDetailWrap">
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">6</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">6</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">9</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">10</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">12</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">12</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudLightningRain /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">15</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">15</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudLightningRain /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">18</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">13</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudLightningRain /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">21</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">9</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">24</span>시</div>
-                                    <div className="timeTemp"><span>5</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">2</span>시</div>
-                                    <div className="timeTemp"><span>5</span>℃</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-                <Weather />
+               
                 <div className="itemWrap">
                     {
                         datas && datas.map(item => (

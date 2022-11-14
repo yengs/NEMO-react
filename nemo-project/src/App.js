@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './common.css';
 
@@ -27,8 +27,44 @@ import ReviewUpload from './review/ReviewUpload';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
+import axios from 'axios';
 
 function App() {
+
+  const [mLat, setMlat] = useState('');
+    const [mLon, setMlon] = useState('');
+
+    useEffect(() => {
+        if (sessionStorage.getItem("memberId") !== null) {
+            const memberNum = sessionStorage.getItem('memberNum');
+            axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
+                .then(response => {
+                    if (response.data.memberZipCode !== null) {
+                        axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${response.data.memberZipCode},KR&appid=42c3249b2406895e257db260bf90bc97`)
+                            .then(response => {
+
+
+                                const responseDataStr = JSON.stringify(response.data);
+
+
+                                console.log("responseDataStr::::::" + responseDataStr);
+
+                                setMlat(response.data.lat);
+                                setMlon(response.data.lon);
+
+                                sessionStorage.setItem("lat", response.data.lat);
+                                sessionStorage.setItem("lon", response.data.lon);
+
+                                console.log(mLat);
+                                console.log(mLon);
+
+                            })
+                            .catch(error => console.log(error));
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+    }, [])
 
   return (
 
@@ -49,7 +85,7 @@ function App() {
         <Route path="/item/cate/sub/:itemSubcategory" component={ItemsubList} exact={true} />
         <Route path="/item/write" component={ItemUpload} exact={true} />
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
-        <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
+        <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} mLat="mLat" mLon="mLon"/>
         <Route path="/item/bookingupload" component={BookingUpload} exact={true} />
 
 
