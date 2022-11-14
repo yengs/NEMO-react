@@ -4,6 +4,7 @@ import { GrFormPrevious } from "react-icons/gr";
 import { GrFormNext } from "react-icons/gr";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 // import "./mybooking.css";
 
 function MyBooking({history}) {
@@ -157,7 +158,9 @@ function MyBooking({history}) {
                                         <td rowSpan={2} className="ReviewItemImageOrigin">
                                             <img className="bookingitemImg" src={`../../files/${booking.bookingItemfiles}`}></img>
                                         </td>
-                                        <td className='ReviewItemNameOrigin' rowSpan={3}>{booking.bookingItemname}</td>
+                                        <td className='ReviewItemNameOrigin' rowSpan={3} > 
+                                             <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
+                                        </td>
                                         <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
                                         <td className='ReviewWriter' rowSpan={3}>{booking.bookingMember}</td>
                                         <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}
@@ -220,7 +223,9 @@ function MyBooking({history}) {
                                 
                                     <img className="bookingitemImg" src={`../../files/${booking.bookingItemfiles}`}/>
                                 </td>
-                                <td className='ReviewItemNameOrigin' rowSpan={3}>{booking.bookingItemname}</td>
+                                <td className='ReviewItemNameOrigin' rowSpan={3} > 
+                                             <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
+                                        </td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
                                 <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
