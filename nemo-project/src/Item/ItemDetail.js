@@ -88,6 +88,16 @@ function ItemDetail({ match, location, history }) {
         window.location.href = `/item/cate/sub/${data.itemSubcategory}`;
     }
     
+    let now = new Date();
+
+    const dateWhat = () =>{
+        if(new Date(itemRentalend)<now){
+            alert("대여기간이 지난 상품입니다")
+            window.location.href = `/item/cate/sub/${data.itemSubcategory}`;
+        }else{
+            window.location.href = `/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`;
+        }
+    }
 
     return (
         <>
@@ -183,9 +193,7 @@ function ItemDetail({ match, location, history }) {
 
                 <div className="buttonDiv">
                         <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기"/>
-                        <Link to={`/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`}>
-                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기"/>
-                        </Link>
+                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat}/>
                 </div>
 
                 <div className="reviewDiv">
