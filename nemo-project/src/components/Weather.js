@@ -7,7 +7,7 @@ import { json } from "react-router-dom";
 
 import styled from "styled-components";
 
-export default function Weather() {
+export default function Weather(props) {
 
     const [weatherDatas, setWeatherDatas] = useState({});
     const [regionDatas, setRegionDatas] = useState({});
@@ -22,84 +22,79 @@ export default function Weather() {
     //     .catch(error => console.log(error));
     // });
 
-    const [lat, setLat] = useState(0);
-    const [lon, setLon] = useState(0);
-    const [zipCode, setZipCode] = useState(13101);
-
-
+    
+    
     const [maxTemp, setMaxTemp] = useState([]);
     const [minTemp, setMinTemp] = useState([]);
     const [weather, setWeather] = useState("");
     
-
-
-    const regionZipcode = (e) => {
-        e.preventDefault();
-        axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},KR&appid=42c3249b2406895e257db260bf90bc97`)
-        .then(response =>{ 
-
-            const responseDataStr = JSON.stringify(response.data);
-
-            
-            console.log("responseDataStr::::::"+responseDataStr);
-            
-            setZipCode(response.data.zip);
-            setLat(response.data.lat);
-            setLon(response.data.lon);
-
-            console.log(zipCode);
-            console.log(lat);
-            console.log(lon);
-          
-        })
-        .catch(error => console.log(error));
-    }
     
-    const [weatherArray, setWeatherArray] = useState([]);
-    const weatherCheck = (e) => {
-        e.preventDefault();
-        // const weatherUrl = 'api.openweathermap.org/data/2.5/forecast?lat='+`${lat}`+'&lon='+`${lon}`+'&appid=42c3249b2406895e257db260bf90bc97';
-        axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
-        .then(response =>{ 
-            console.log(response.data);
-            // console.log(lat);
-            // console.log(lon);
+    const [lat, setLat] = useState(0);
+    const [lon, setLon] = useState(0);
+    const [zipCode, setZipCode] = useState(13101);
 
-            setWeatherDatas(response.data);
-            // setMaxTemp(response.data.list[0].main.temp_max);
-            // setMinTemp(response.data.list[0].main.temp_min);
-
-            setWeatherArray(response.data.list);
-            weatherArray.map((value, i) => {
-                // setMaxTemp(value.main.temp_max);
-                
-                
-                // setMinTemp(response.data.list[i].main.temp_min);
-                console.log(maxTemp);
-                // console.log(minTemp);
-
-                // console.log("value:::::::"+JSON.stringify(value));
-                // console.log(i);
-
-                // console.log("value[i]:::::::::::::::"+value[i]);
-            })
+    const [mAddressEng, setMaddressEng] = useState('');
 
 
-            // console.log("날씨배열:::::::"+JSON.stringify(weatherArray,['main.temp_max','main.temp_min']));
-            // console.log(JSON.parse(response.data.list.main));
-            // console.log(response.data.list.main);
+    // const regionZipcode = (e) => {
+    //     e.preventDefault();
+    //     axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${zipCode},KR&appid=42c3249b2406895e257db260bf90bc97`)
+    //     .then(response =>{ 
 
-            // setMaxTemp(weatherArray.main);
-            // setMinTemp();
+    //         const responseDataStr = JSON.stringify(response.data);
 
-            // console.log(maxTemp);
-            // console.log(minTemp);
-        })
-        .catch(error => {console.log(error);
-            console.log(lat);
-            console.log(lon);
-        });
-    };
+            
+    //         console.log("responseDataStr::::::"+responseDataStr);
+            
+    //         setZipCode(response.data.zip);
+    //         setLat(response.data.lat);
+    //         setLon(response.data.lon);
+
+    //         console.log(zipCode);
+    //         console.log(lat);
+    //         console.log(lon);
+          
+    //     })
+    //     .catch(error => console.log(error));
+    // }
+    
+    // const [weatherArray, setWeatherArray] = useState([]);
+    // const weatherCheck = (e) => {
+    //     e.preventDefault();
+    //     // const weatherUrl = 'api.openweathermap.org/data/2.5/forecast?lat='+`${lat}`+'&lon='+`${lon}`+'&appid=42c3249b2406895e257db260bf90bc97';
+    //     axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+    //     // axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${mAddressEng},kr&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+    //     .then(response =>{ 
+    //         console.log(response.data);
+
+    //         // setWeatherDatas(response.data);
+
+    //         setWeatherArray(response.data.list);
+    //     })
+    //     .catch(error => {console.log(error);
+    //         console.log(lat);
+    //         console.log(lon);
+    //     });
+    // };
+    
+    // const [weatherArray, setWeatherArray] = useState([]);
+    // useEffect(() => {
+    //     console.log(props.mLat);
+    //     if (props.mLat !== null && props.mLon !== null) {
+    //         axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${props.mLat}&lon=${props.mLon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+    //             .then(response => {
+    //                 console.log(response.data);
+    //                 setWeatherArray(response.data.list);
+    //                 console.log(weatherArray);
+    //             })
+    //             .catch(error => {
+    //                 console.log(error);
+    //                 console.log(props.mLat);
+    //                 console.log(props.mLon);
+    //             });
+    //     }
+    // }, []);
+
 
 
     return (
@@ -110,10 +105,20 @@ export default function Weather() {
                 </div>
                 <div className="tomorrowInfo">
                     <div className="tomDate">03일<span>(목)</span></div>
-                    <button onClick={weatherCheck}>날씨체크</button>
+                    {/* <button onClick={weatherCheck}>날씨체크</button> */}
                     {/* <button onClick={region}>지역체크</button> */}
-                    <button onClick={regionZipcode}>우편번호별지역체크</button>
-                    <p style={{border:"1px solid #000", height:"30px"}}>{}</p>
+                    {/* <button onClick={regionZipcode}>우편번호별지역체크</button> */}
+                    {/* <p style={{border:"1px solid #000", height:"30px"}}>{
+                        weatherArray && weatherArray.map(() => {
+                            <div className="tomWetherDetail">
+                                <div className="tomWeatherIconMini"></div>
+                                <div className="timeNtemp">
+                                    <div className="weatherTime"><span className="tempTime">{props.weatherArray.dt_txt}</span>시</div>
+                                    <div className="timeTemp"><span className="timeTemp">{props.weatherArray.list.temp_max}</span>℃</div>
+                                </div>
+                            </div>
+                        })
+                    }</p> */}
                     {/* <div className="tomWeatherWrap">
                         <span className="tomWeatherIcon"><BsCloudy /></span>
                         <span className="tomWeather">흐림</span>

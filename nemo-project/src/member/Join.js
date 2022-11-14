@@ -7,6 +7,28 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 function Join() {
 
+    
+    const [mName, setMname] = useState('');
+    const [mNickname, setMnickname] = useState('');
+    const [mId, setMid] = useState('');
+    const [mPw, setMpw] = useState('');
+    const [mPwCheck, setMpwCheck] = useState('');
+    const [mEmail, setMemail] = useState('');
+    const [mPhone, setMphone] = useState('');
+    const [mAddress, setMaddress] = useState('');
+    const [mZipCode, setMzipCode] = useState('');
+
+    const [mSigungu, setMsigungu] = useState('');
+    
+    const handlerChangeName = (e) => setMname(e.target.value);
+    const handlerChangeNickname = (e) => setMnickname(e.target.value);
+    const handlerChangeId = (e) => setMid(e.target.value);
+    const handlerChangePw = (e) => setMpw(e.target.value);
+    const handlerChangePwCheck = (e) => setMpwCheck(e.target.value);
+    const handlerChangeEmail = (e) => setMemail(e.target.value);
+    const handlerChangePhone = (e) => setMphone(e.target.value);
+    
+
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
@@ -22,7 +44,10 @@ function Join() {
         }
 
         setMaddress(fullAddress);
-        console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+        setMzipCode(data.zonecode);
+        setMsigungu(data.sigungu);
+
+        //console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
     // 주소검색창 팝업열기
@@ -31,26 +56,10 @@ function Join() {
         open({ onComplete: handleComplete });
     };
 
-    const [mName, setMname] = useState('');
-    const [mNickname, setMnickname] = useState('');
-    const [mId, setMid] = useState('');
-    const [mPw, setMpw] = useState('');
-    const [mPwCheck, setMpwCheck] = useState('');
-    const [mEmail, setMemail] = useState('');
-    const [mPhone, setMphone] = useState('');
-    const [mAddress, setMaddress] = useState('');
-
-    const handlerChangeName = (e) => setMname(e.target.value);
-    const handlerChangeNickname = (e) => setMnickname(e.target.value);
-    const handlerChangeId = (e) => setMid(e.target.value);
-    const handlerChangePw = (e) => setMpw(e.target.value);
-    const handlerChangePwCheck = (e) => setMpwCheck(e.target.value);
-    const handlerChangeEmail = (e) => setMemail(e.target.value);
-    const handlerChangePhone = (e) => setMphone(e.target.value);
 
     const memberDataInsert = (e) => {
         e.preventDefault();
-
+        
         const memberInfo = {
             "memberName": mName,
             "memberNickname": mNickname,
@@ -58,9 +67,10 @@ function Join() {
             "memberPw": mPw,
             "memberEmail": mEmail,
             "memberPhone": mPhone,
-            "memberAddress": mAddress
+            "memberAddress": mAddress,
+            "memberZipCode" : mZipCode,
+            "memberSigungu" : mSigungu
         }
-
 
         if(mPw !== mPwCheck){
             return setPasswordError(true);
