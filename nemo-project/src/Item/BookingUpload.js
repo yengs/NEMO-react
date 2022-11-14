@@ -279,6 +279,7 @@ useEffect(() => {
           <div> <div className="inputdate">
          
             <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)}
+                      formatDay={(locale, date) => moment(date).format("DD")}
                       tileDisabled={({date, view}) =>
                          (view === 'month') && // Block day tiles only
                           disableDates.some(disabledDate =>
