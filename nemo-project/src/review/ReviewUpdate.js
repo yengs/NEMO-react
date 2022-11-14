@@ -26,9 +26,9 @@ const AppStyle = styled.div`
   }
 `;
 
-function ReviewUpdate({ history }) {
+function ReviewUpdate({ history, match }) {
 
-    const reviewNum = sessionStorage.getItem('reviewNum');
+    const { reviewWriter, reviewNum } = match.params;
 
     const [datas, setDatas] = useState({});
     const [reviewImage, setReviewImage] = useState('');
@@ -41,7 +41,7 @@ function ReviewUpdate({ history }) {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/review/reviewWrite/${reviewNum}`)
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`)
             .then(res => {
                 console.log(res);
                 setDatas(res.data);
@@ -58,13 +58,12 @@ function ReviewUpdate({ history }) {
         e.preventDefault();
 
         const reviewDetail = {
-            "reviewNum" : reviewNum,
             "reviewImage": reviewImage,
             "reviewContents": reviewContents,
             "reviewSatisfaction": reviewSatisfaction
         }
 
-        axios.post(`http://localhost:8080/api/reivew/reviewWrite/${reviewNum}`, reviewDetail)
+        axios.post(`http://localhost:8080/api/review/myReview/${reviewNum}`, reviewDetail)
             .then(res => {
                 if (res.status === 200) {
                     alert("수정완료");

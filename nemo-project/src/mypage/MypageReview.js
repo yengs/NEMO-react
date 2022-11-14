@@ -13,12 +13,12 @@ function MypageReview({ match }) {
     const [reviewIcon, setReviewIcon] = useState('');               // 만족도 
 
     const reviewWriter = sessionStorage.getItem('memberId');
-    const bookingMember = sessionStorage.getItem('memberId');
+    const reviewId = sessionStorage.getItem('memberId');
 
     useEffect(() => {
 
         // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
-        axios.get(`http://localhost:8080/api/review/myReview1/${reviewWriter}`)
+        axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`)
             .then(response => {
                 console.log(response);
                 setDatas(response.data);
@@ -28,14 +28,14 @@ function MypageReview({ match }) {
             .catch(error => console.log(error));
 
         // 내가 작성한 후기 데이터
-        axios.get(`http://localhost:8080/api/review/myReview2/${reviewWriter}`)
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
+        { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => {
                 console.log(response);
                 setmyReviewData(response.data);
                 setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
-
     }, []);
 
     const goYourReview = () => {

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useState } from 'react';
 
 import ReviewAddImg from '../img/review-add-img.png'
 
@@ -32,11 +31,9 @@ const AppStyle = styled.div`
   }
 `;
 
-export default function ReviewUpload({ history }) {
+export default function ReviewUpload({ history, match }) {
 
-    let { reviewNum } = useParams();
-
-    const reviewWriter = sessionStorage.getItem("memberId");
+    const { reviewWriter } = match.params;
 
     // const [data, setData] = useState([]);
     const [reviewImage, setReviewImage] = useState('');
@@ -47,25 +44,10 @@ export default function ReviewUpload({ history }) {
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
     const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
 
-    useEffect(() => {
-        // console.log(`http://localhost:8080/api/review/reviewWrite/${reviewNum}`)
-        // 리뷰 수정 
-        axios.get(`http://localhost:8080/api/review/reviewWrite/${reviewNum}`)
-            .then(response => {
-                // console.log("후기 수정 번호 : " + reviewNum);
-                console.log(response);
-                // setDatas(response.data);
-                setReviewImage(response.data.reviewImage);
-                setReviewContents(response.data.setReviewContents);
-                setReviewSatisfaction(response.data.setReviewSatisfaction);
-            })
-            .catch(error => console.log(error));
-    })
-
     // 리뷰 등록
     const handlerClickSubmit = (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:8080/api/reivew/reviewWrite`,
+        axios.post(`http://localhost:8080/api/reivew/myReview`,
             {
                 "reviewImage": reviewImage,
                 "reviewContents": reviewContents,
