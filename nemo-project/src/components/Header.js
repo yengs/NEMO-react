@@ -125,6 +125,7 @@ function Header() {
                             </li>
                             <li class="dropdown">
                                 <a onClick={handlerGoBottom}>하의</a>
+
                                 <div class="dropdown-content">
                                     <a href='/item/cate/sub/바지'>바지</a>
                                     <a href='/item/cate/sub/치마'>치마</a>

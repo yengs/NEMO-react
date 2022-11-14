@@ -4,14 +4,20 @@ import { Link, Navigate, Route } from "react-router-dom";
 import "./ItemDetail.css";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
+
 function ItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
+
 
     const [ data, setData ] = useState({});
     const [ itemName, setItemName ] = useState('');
     const [ itemPrice, setItemPrice ] = useState('');
     const [ itemDeposit, setItemDeposit] = useState('');
     const [ itemDetail, setItemDetail ] = useState('');
+    const [ itemWriter , setItemWriter] = useState('');
+    const [ files ,setItemImage] = useState('');
+    const [ itemRentalstart ,setItemRentalstart] = useState('');
+    const [ itemRentalend ,setItemRentalend] = useState('');
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/item/${itemNum}`)
@@ -21,6 +27,11 @@ function ItemDetail({ match, location, history }) {
             setItemPrice(response.data.itemPrice);
             setItemDeposit(response.data.itemDeposit);
             setItemDetail(response.data.itemDetail);
+            setItemWriter(response.data.itemWriter);
+            setItemImage(response.data.files);
+            setItemRentalstart(response.data.itemRentalstart);
+            setItemRentalend(response.data.itemRentalend);
+            
         })
         .catch(error => { console.log(error); });
     }, []);
@@ -74,7 +85,7 @@ function ItemDetail({ match, location, history }) {
     }
 
     const handlerSubcate = () => {
-        window.location.href = `/item/cate/${data.itemSubcategory}`;
+        window.location.href = `/item/cate/sub/${data.itemSubcategory}`;
     }
     
 
@@ -99,8 +110,6 @@ function ItemDetail({ match, location, history }) {
                 <br></br>
 
                 <div className="tablePlusForm">
-                    {/* imgeDiv는 뺄 부분(사진모양 직관적으로 보려고 넣어둠)
-                        사진을 대여자가 직접 넣은 게 뜨게끔 만들어야 함 */}
                     <div className="imageDiv">
                         <img className="memberImg" src={`../../files/${data.files}`}/>
                     </div>
@@ -172,17 +181,15 @@ function ItemDetail({ match, location, history }) {
                     </div>
                 </div>
 
-                {/* 채팅하기/대여하기 버튼 누르면 채팅/대여창으로 이동하게끔 수정 */}
                 <div className="buttonDiv">
                         <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기"/>
-                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={goBooking}/>
+                        <Link to={`/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`}>
+                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기"/>
+                        </Link>
                 </div>
 
                 <div className="reviewDiv">
                     <h2>후기</h2>
-                    {/* 하단 Link의 url은 대여자에게 빌려간 사람들의 후기 페이지가 나와야하지만
-                        잘 되는지 보기 위해 myReview로 넣어둔 상태. 추후 수정하겠음!! */}
-                    {/* <Link to="/review/myReview" className="ItemReviewList">더보기{'>'}</Link> */}
                     <br/><br/>
                     <div>
                         <table className="reviewTable">

@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
+import { ErrorMessage } from '@hookform/error-message';
 
 // 주소 api사용 (팝업방식)
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 function Join() {
 
-    
     
     const [mName, setMname] = useState('');
     const [mNickname, setMnickname] = useState('');
@@ -32,7 +32,7 @@ function Join() {
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
-        
+
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -42,15 +42,11 @@ function Join() {
             }
             fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
         }
-        
+
         setMaddress(fullAddress);
         setMzipCode(data.zonecode);
         setMsigungu(data.sigungu);
-        // sessionStorage.setItem("zip", "우편번호저장");
 
-        
-        // setMaddressEng(data.sidoEnglish);
-        // console.log(mAddressEng);
         //console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
@@ -75,23 +71,75 @@ function Join() {
             "memberZipCode" : mZipCode,
             "memberSigungu" : mSigungu
         }
-        
+
+        if(mPw !== mPwCheck){
+            return setPasswordError(true);
+        }
+
+        console.log("비밀번호: " + mPw);
+        console.log("비밀번호 확인: " + mPwCheck);
+
         axios.post('http://localhost:8080/api/member/join', memberInfo)
-        .then(response => {
-            if (response.status === 200) {
-                    alert("회원가입완료");
-                    console.log(mSigungu);
-                    window.location.href="/member/login";
+            .then(response => {
+                if (response.status === 200) {
+                    alert("반갑습니다! " + mName + " 회원님.");
+                    window.location.href = "/member/login";
                 } else {
-                    alert("회원가입 실패");
+                    alert("회원가입이 실패하였습니다.");
                     return;
                 }
             })
             .catch(error => {
-                alert("에러");
+                alert("Error");
                 console.log(memberInfo);
             });
     };
+    
+    // 비밀번호 일치 확인
+    // const [mPw, setMpw] = useState('');
+    // const [mPwCheck, setMpwCheck] = useState('');
+    const [mPwConfirm, setMpwConfirm] = useState('');
+    const [passwordError, setPasswordError] = useState(false);
+
+    const onChangePasswordChk = (e) => {
+        setPasswordError(e.target.value !== mPw);
+        setMpwCheck(e.target.value);
+    };
+
+    // 아이디 중복 체크
+    const checkId = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/api/member/join/checkid', `memberId=${mId}`)
+            .then(result => {
+                console.log(result);
+                if (result.data === "success" && mId !== "") {
+                    alert("사용 가능한 아이디입니다.");
+                } else if (result.data === "fail" && mId !== "") {
+                    alert("이미 사용중인 아이디입니다.")
+                } else{
+                    alert("아이디를 입력해주세요");
+                }
+            });
+    }
+
+    // 이메일 중복 체크
+    const checkEmail = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/api/member/join/checkemail', `memberEmail=${mEmail}`)
+            .then(email => {
+                console.log(email);
+                if (email.data === "success" && mEmail !== "") {
+                    alert("사용 가능한 이메일입니다.");
+                } else if(email.data === "fail" && mEmail !== ""){
+                    alert("중복된 이메일입니다.");
+                }else{
+                    alert("이메일을 입력해주세요.")
+                }
+            });
+    }
+
 
     return (
         <div className="joinWrap memberPage container">
@@ -123,30 +171,30 @@ function Join() {
                                     <input type="text" name="mId" value={mId} onChange={handlerChangeId} required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn btn">중복확인</button>
+                                    <button className="beigeBtn btn" onClick={checkId}>중복확인</button>
                                 </td>
                             </tr>
                             <tr>
-                                <td className="requiredMark">패스워드</td>
+                                <td className="requiredMark">비밀번호</td>
                                 <td>
-                                    <input type="password" name="mPw" value={mPw} onChange={handlerChangePw} required />
+                                    <input type="password" name="mPw" value={mPw} onChange={handlerChangePw} placeholder="최소 8자 이상의 숫자를 사용하세요." required />
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
-                                <td className="requiredMark">패스워드확인</td>
+                                <td className="requiredMark">비밀번호 확인</td>
                                 <td>
-                                    <input type="password" name="mIdCheck" value={mPwCheck} onChange={handlerChangePwCheck} required />
-                                </td>
-                                <td></td>
+                                    <input type="password" name="mPwCheck" value={mPwCheck} onChange={onChangePasswordChk} required />
+                                    {passwordError && <div className="PwCheck" style={{color : 'red'}}>비밀번호가 일치하지 않습니다.</div>} 
+                                </td><td></td>
                             </tr>
                             <tr>
                                 <td className="requiredMark">이메일</td>
                                 <td>
-                                    <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} required />
+                                    <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} placeholder="nemo@nemo.com 형식에 맞게 입력하세요." required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn btn">중복확인</button>
+                                    <button className="beigeBtn btn" onClick={checkEmail}>중복확인</button>
                                 </td>
                             </tr>
                             <tr>
