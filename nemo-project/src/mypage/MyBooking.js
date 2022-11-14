@@ -19,6 +19,27 @@ function MyBooking({history}) {
     const goReviewWrite = () => {
         window.location.href = "/reivew/reviewWrite";
     }
+    
+
+    //예약중 -> 대여중
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/bookingState`)
+            .then(response => {
+                 console.log(response);
+        })
+            .catch(error => console.log(error));
+    }, []);
+
+
+
+      //대여중 -> 기간만료
+      useEffect(() => {
+        axios.get(`http://localhost:8080/api/bookingState2`)
+            .then(response => {
+                 console.log(response);
+        })
+            .catch(error => console.log(error));
+    }, []);
 
 
 
@@ -143,12 +164,15 @@ function MyBooking({history}) {
                                         <td>{booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}</td>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>
+                                        {booking.bookingBookingstate === "기간만료" ?
                                             <select  onChange={handleritemstate}>
                                                 <option value="">--</option>
                                                 <option value="반환완료">수거완료</option>
                                                 <option value="미반환(물품훼손)">물품훼손</option>
                                                 <option value="미반환(미반납)">미반납</option>
                                             </select>
+                                              :<td className='ReviewWriter' rowSpan={3}>--</td>
+                                            }
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate != "예약취소" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={statechangebtn}>확인</button>:<button className="grayBtn btnBok">확인</button>}</td>
                                     </tr>
@@ -206,7 +230,7 @@ function MyBooking({history}) {
                                 {/* <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td> */}
 
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingDepositstate}</td>
-                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingDepositstate == "보관중" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>취소</button>:<button className="grayBtn btnBok">취소</button>}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate == "예약중" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>취소</button>:<button className="grayBtn btnBok">취소</button>}</td>
                             </tr>
                        
                 </tbody>
