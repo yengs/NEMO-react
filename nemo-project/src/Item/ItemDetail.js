@@ -16,6 +16,8 @@ function ItemDetail({ match, location, history }) {
     const [ itemDetail, setItemDetail ] = useState('');
     const [ itemWriter , setItemWriter] = useState('');
     const [ files ,setItemImage] = useState('');
+    const [ itemRentalstart ,setItemRentalstart] = useState('');
+    const [ itemRentalend ,setItemRentalend] = useState('');
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/item/${itemNum}`)
@@ -27,6 +29,9 @@ function ItemDetail({ match, location, history }) {
             setItemDetail(response.data.itemDetail);
             setItemWriter(response.data.itemWriter);
             setItemImage(response.data.files);
+            setItemRentalstart(response.data.itemRentalstart);
+            setItemRentalend(response.data.itemRentalend);
+            
         })
         .catch(error => { console.log(error); });
     }, []);
@@ -83,6 +88,16 @@ function ItemDetail({ match, location, history }) {
         window.location.href = `/item/cate/sub/${data.itemSubcategory}`;
     }
     
+    let now = new Date();
+
+    const dateWhat = () =>{
+        if(new Date(itemRentalend) > now){
+            window.location.href = `/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`;
+        }else{
+            alert("대여기간이 지난 상품입니다")
+            window.location.href = `/item/cate/sub/${data.itemSubcategory}`;
+        }
+    }
 
     return (
         <>
@@ -178,9 +193,7 @@ function ItemDetail({ match, location, history }) {
 
                 <div className="buttonDiv">
                         <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기"/>
-                        <Link to={`/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files}`}>
-                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기"/>
-                        </Link>
+                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat}/>
                 </div>
 
                 <div className="reviewDiv">
