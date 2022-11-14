@@ -17,8 +17,6 @@ function Join() {
     const [mPhone, setMphone] = useState('');
     const [mAddress, setMaddress] = useState('');
     const [mZipCode, setMzipCode] = useState('');
-    const [mLat, setMlat] = useState('');
-    const [mLon, setMlon] = useState('');
 
     const [mSigungu, setMsigungu] = useState('');
     
@@ -48,7 +46,7 @@ function Join() {
         setMaddress(fullAddress);
         setMzipCode(data.zonecode);
         setMsigungu(data.sigungu);
-        sessionStorage.setItem("zip", "우편번호저장");
+        // sessionStorage.setItem("zip", "우편번호저장");
 
         
         // setMaddressEng(data.sidoEnglish);
@@ -63,30 +61,6 @@ function Join() {
     };
 
 
-    const handlerChangeAddress = (e) => {
-        e.preventDefault();
-        axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${mZipCode},KR&appid=42c3249b2406895e257db260bf90bc97`)
-        .then(response =>{ 
-                
-                console.log("주소 입력될 때 우편번호 세팅::::::"+mZipCode);
-                
-                const responseDataStr = JSON.stringify(response.data);
-                
-                
-                console.log("responseDataStr::::::"+responseDataStr);
-                
-                setMlat(response.data.lat);
-                setMlon(response.data.lon);
-                
-                console.log(mLat);
-                console.log(mLon);
-              
-            })
-            .catch(error => console.log(error));
-    }
-
-
-
     const memberDataInsert = (e) => {
         e.preventDefault();
         
@@ -99,8 +73,6 @@ function Join() {
             "memberPhone": mPhone,
             "memberAddress": mAddress,
             "memberZipCode" : mZipCode,
-            "memberLat" : mLat,
-            "memberLon" : mLon,
             "memberSigungu" : mSigungu
         }
         
@@ -108,7 +80,8 @@ function Join() {
         .then(response => {
             if (response.status === 200) {
                     alert("회원가입완료");
-                    // window.location.href="/member/login";
+                    console.log(mSigungu);
+                    window.location.href="/member/login";
                 } else {
                     alert("회원가입 실패");
                     return;
@@ -186,7 +159,7 @@ function Join() {
                             <tr className="memberAddress">
                                 <td className="requiredMark">주소</td>
                                 <td>
-                                    <input type="text" name="mAddress" value={mAddress} onChange={handlerChangeAddress} required />
+                                    <input type="text" name="mAddress" value={mAddress} required />
                                 </td>
                                 <td className="memberTableBtn">
                                     <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
