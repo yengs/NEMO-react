@@ -8,7 +8,8 @@ import { FaLock } from "react-icons/fa";
 import { BsChatDotsFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 function Header() {
@@ -40,6 +41,17 @@ function Header() {
         window.location.href = "/item/cate/원피스";
     }
 
+    const memberNum = sessionStorage.getItem('memberNum');
+    const [memberRegion, setMemberRegion] = useState('');
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
+        .then(response => {
+            setMemberRegion(response.data.memberSigungu);
+        })
+        .catch(error=>console.log(error))
+    });
+
+    console.log("sigungu::::"+memberRegion);
     return (
         <header>
             <div className="topHeader">
@@ -93,7 +105,11 @@ function Header() {
                         <IconContext.Provider value={{ className: "navIcons" }}>
                             <FaMapMarkerAlt />
                         </IconContext.Provider>
-                        <span>종로 2가</span>
+                        <span>
+                            {
+                                sessionStorage.getItem('memberId') ? memberRegion : "로그인을 해주세요"
+                            }
+                        </span>
                     </div>
                     <div className='navWrap'>
                         <ul className="nav">
@@ -108,6 +124,7 @@ function Header() {
                             </li>
                             <li class="dropdown">
                                 <a onClick={handlerGoBottom}>하의</a>
+
                                 <div class="dropdown-content">
                                     <a href='/item/cate/sub/바지'>바지</a>
                                     <a href='/item/cate/sub/치마'>치마</a>
