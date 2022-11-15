@@ -37,8 +37,8 @@ export default function WeatherRecItemList({ match }) {
     //     }
     // })
 
-    const [tomorrowTempArray, setTomorrowTempArray] = useState([]);
-    const [avgTemp, setAvgTemp] = useState();
+    const tempWeatherArray = ["겨울", "봄", "가을", "여름"];
+    // const tempWeather = '';
 
     useEffect(() => {
         if ((mLat !== null || mLat !== undefined || mLat !== '') && (mLon !== null || mLon !== undefined || mLon !== '')) {
@@ -46,56 +46,38 @@ export default function WeatherRecItemList({ match }) {
                 .then(response => {
                     setWeatherArray(response.data.list);
 
-                    // console.log(response.data.list);
+                    // const filterWeather = response.data.list
+                    //     .filter(data => data.dt_txt.includes(tomorrowDate))
+                    //     .map((value) => {
+                    //         return Number(value.main.temp_max);
+                    //     });
 
-                    // const tomorrowTempArrayMap = response.data.list.map((value, i) => {
-                    //     // console.log(response.data.list[i].dt_txt);
-                    //     if (response.data.list[i].dt_txt.includes(tomorrowDate)) {
-                    //         const tomorrowTemp = response.data.list[i].main.temp_max;
-                    //         // console.log(tomorrowTemp);
-                    //         setTomorrowTempArray(tomorrowTemp)
-                    //         // return tomorrowTemp;
-                    //     }
-                    // });
-                    // // setTomorrowTempArray(tomorrowTempArrayMap);
-                    // console.log(tomorrowTempArray);
+                    // console.log(filterWeather);
+                    // const sum = filterWeather.reduce(
+                    //     (accumulator, currentValue) => 
+                    //         accumulator+currentValue, 0,
+                    // );
 
-                    // const tomorrowTempArrayMap = response.data.list.forEach((element, i, array) => {
-                    //     if(response.data.list[i].dt_txt.includes(tomorrowDate)) {
+                    // const avg = sum / 8;
 
-                    //         const startZ = 0;
-                    //         startZ += console.log(response.data.list[i].main.temp_max);
+                    const tempSum = response.data.list
+                        .filter(data => data.dt_txt.includes(tomorrowDate))
+                        .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
 
-                    //         return startZ;
-                    //     }
-                    // });
-
-                    // console.log(tomorrowTempArrayMap);
-
-                    // setTomorrowTempArray(tomorrowTempArrayMap);
+                    // const tempAvg = tempSum / 8;
+                    const tempAvg = 7;
+                    console.log(tempAvg);
 
                     
-
-                        const sum = response.data.list.reduce(
-                            
-                            (accumulator, currentValue, i) => {
-                                if(response.data.list[i].dt_txt.includes(tomorrowDate)){
-                                    console.log(response.data.list[i].main.temp_max);
-                                    if (!accumulator) 
-                                    accumulator = 0;
-                                    console.log(accumulator +','+ currentValue);
-                                    return Number(accumulator) + Number(response.data.list[i].main.temp_max);                             
-                                }
-                            }
-                            );
-                        console.log(sum);
-
-
+                    
+                    
+                    console.log(tempWeatherArray);
+                    
                 })
                 .catch(error => {
                     console.log(error);
                 });
-
+                    
             }
 
         // axios.get(`/item/cate/${itemWeather}`)
