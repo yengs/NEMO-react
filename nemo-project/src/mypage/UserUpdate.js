@@ -24,7 +24,9 @@ function UserUpdate({history}) {
         }
 
         setMemberAddress(fullAddress);
-        console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+        setMzipCode(data.zonecode);
+        setMsigungu(data.sigungu);
+        // console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
     // 주소검색창 팝업열기
@@ -47,6 +49,8 @@ function UserUpdate({history}) {
     const [memberEmail, setMemberEmail] = useState('');
     const [memberPhone, setMemberPhone] = useState('');
     const [memberAddress, setMemberAddress] = useState('');
+    const [mZipCode, setMzipCode] = useState('');
+    const [mSigungu, setMsigungu] = useState('');
 
 
     useEffect(() => {
@@ -123,7 +127,9 @@ function UserUpdate({history}) {
             "memberNickname": memberNickname,
             "memberPw": memberPw,
             "memberPhone": memberPhone,
-            "memberAddress": memberAddress
+            "memberAddress": memberAddress,
+            "memberZipCode" : mZipCode,
+            "memberSigungu" : mSigungu
         }
 
         axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
