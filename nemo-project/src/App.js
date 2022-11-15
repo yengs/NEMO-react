@@ -26,6 +26,7 @@ import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
+import Chat from './Chat';
 
 function App() {
 
@@ -70,6 +71,8 @@ function App() {
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
         <Route path="/item/bookingupload/:itemNum,:itemName,:itemDeposit,:itemPrice,:itemWriter,:files,:itemRentalstart,:itemRentalend" component={BookingUpload} exact={true} />
+        <Route path="/chatting/:itemWriter" component={Chat} exact={true} />
+
 
 
         {/* member */}
