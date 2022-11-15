@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { BsCloudy } from "react-icons/bs";
-import { BsCloudLightningRain } from "react-icons/bs";
+import { BsCloudy, BsFillCloudSunFill, BsFillCloudLightningRainFill, BsSnow } from "react-icons/bs";
+import { BsFillCloudRainFill } from "react-icons/bs";
+import { BsFillCloudLightningFill } from "react-icons/bs";
+import { BsSun } from "react-icons/bs";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -8,92 +10,86 @@ import axios from "axios";
 
 import Shirt from '../img/shirt.jpg';
 
+import moment from 'moment';
+import 'moment/locale/ko';
+
 export default function WeatherRecItemList({ match }) {
 
     const { itemMaincategory } = match.params;
 
     const [datas, setDatas] = useState([]);
 
+
+    const mLat = sessionStorage.getItem("lat");
+    const mLon = sessionStorage.getItem("lon");
+
+    const tomorrowD = moment().add(1, 'days').format('DD일');
+    const tomorrowd = moment().add(1, 'days').format('dd요일');
+    const tomorrowDate = moment().add(1, 'days').format('-DD');
+
+
+    const [weatherArray, setWeatherArray] = useState([]);
     useEffect(() => {
-        // 임시로 get주소 넣어둠. 나중에 수정필요
-        axios.get(`http://localhost:8080/api/item/testlist`)
-            .then(response => setDatas(response.data))
-            .catch(error => console.log(error));
+        if ((mLat !== null || mLat !== undefined || mLat !== '') && (mLon !== null || mLon !== undefined || mLon !== '')) {
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${mLat}&lon=${mLon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+                .then(response => {
+                    setWeatherArray(response.data.list);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
     }, []);
+
+
+    // useEffect(() => {
+    //     // 임시로 get주소 넣어둠. 나중에 수정필요
+    //     axios.get(`http://localhost:8080/api/item/testlist`)
+    //         .then(response => setDatas(response.data))
+    //         .catch(error => console.log(error));
+    // }, []);
 
     return (
         <Container>
             <div className="weatherRecItemListWrap">
-                <div>
-                    <div className="pageTitle">
-                        <h3>내일 날씨는?</h3>
-                    </div>
-                    <div className="tomorrowInfo">
-                        <div className="tomDate">03일<span>(목)</span></div>
-                        <div className="tomWeatherWrap">
-                            <span className="tomWeatherIcon"><BsCloudy /></span>
-                            <span className="tomWeather">흐림</span>
-                            <span className="tomTempMin">최저기온 <span className="minTemp">4</span>℃</span>
-                            <span className="tomTempMax">최고기온 <span className="maxTemp">15</span>℃</span>
-                        </div>
-                        <div className="tomWetherDetailWrap">
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">6</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">6</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">9</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">10</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">12</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">12</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudLightningRain /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">15</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">15</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudLightningRain /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">18</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">13</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudLightningRain /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">21</span>시</div>
-                                    <div className="timeTemp"><span className="timeTemp">9</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">24</span>시</div>
-                                    <div className="timeTemp"><span>5</span>℃</div>
-                                </div>
-                            </div>
-                            <div className="tomWetherDetail">
-                                <div className="tomWeatherIconMini"><BsCloudy /></div>
-                                <div className="timeNtemp">
-                                    <div className="weatherTime"><span className="tempTime">2</span>시</div>
-                                    <div className="timeTemp"><span>5</span>℃</div>
-                                </div>
-                            </div>
-                        </div>
+                <h2>내일 모입지?</h2>
+                <div className="tomWetherWrap">
+                    <div className="tomDate">내일은 <span>{tomorrowD}</span>{tomorrowd}</div>
+                    <div className="tomWetherDetailWrap">
+                        {
+                            weatherArray && weatherArray.map(function (data) {
+
+                                if (data.dt_txt.includes(tomorrowDate)) {
+                                    return (
+
+                                        <div className="tomWetherDetail" key={data.dt_txt}>
+
+                                            <div className="weatherTime">
+                                                {
+                                                    JSON.stringify(data.dt_txt).replace(/\"/gi, "").split(" ")[1].split(":", 1)
+                                                }시
+                                            </div>
+                                            <div className="weatherIcon">
+                                                {data.weather[0].description.includes("흐림") && <BsFillCloudSunFill />}
+                                                {data.weather[0].description.includes("맑음") && <BsSun />}
+                                                {data.weather[0].description.includes("구름") && <BsCloudy />}
+                                                {data.weather[0].description.includes("비") && <BsFillCloudRainFill />}
+                                                {data.weather[0].description.includes("눈") && <BsSnow />}
+                                                {data.weather[0].description.includes("번개") && <BsFillCloudLightningFill />}
+                                                {data.weather[0].description.includes("번개" + "비") && <BsFillCloudLightningRainFill />}
+
+
+                                                {/* {data.weather[0].description} */}
+                                            </div>
+                                            <div className="feelsLikeTemp timeTemp">체감온도<span className="feelTemp temp">{data.main.feels_like}</span>℃</div>
+                                            <div className="timeTemp">최고<span className="temp">{data.main.temp_max}</span>℃</div>
+                                            <div className="timeTemp">최저<span className="temp">{data.main.temp_min}</span>℃</div>
+                                        </div>
+                                    );
+                                }
+
+                            })
+                        }
                     </div>
                 </div>
                 <div className="itemWrap">
@@ -127,103 +123,79 @@ export default function WeatherRecItemList({ match }) {
 
 const Container = styled.div`
     
-    .weatherRecItemListWrap {
-        margin: 90px auto;
-        height: auto;
-        max-width: 1200px;
-        // padding: 0 2rem;
-    }
+.weatherRecItemListWrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 0;
+}
 
-    .weatherRecItemListWrap .pageTitle h3 {
-        margin: 0 0 10px;
-        font-size: 23px;
-    }
+.tomWetherWrap {
+    background-color: #eee;
+    border-radius: 10px;
+    padding: 28px;
+}
 
-    .tomorrowInfo {
-        background-color: #ddd;
-        padding: 37px;
-        border-radius: 10px;
-    }
+.tomWetherWrap {
+    display: flex;
+    flex-direction: column;
+}
 
-    .tomorrowInfo .tomDate {
-        font-size: 18px;
-        margin-bottom: 0px;
-        font-weight: 600;
-    }
+.tomWetherWrap .tomDate {
+    font-size: 16px;
+    margin-bottom: 30px;
+    background-color: rgb(88, 145, 112);
+    border-radius: 50px;
+    padding: 7px 0;
+    color: #fff;
+    width: 165px;
+    text-align: center;
+}
 
-    .tomorrowInfo .tomDate span {
-        font-size: 16px;
-        margin-left: 4px;
-    }
+.tomWetherWrap .tomDate span {
+    font-weight: 600;
+    font-size: 18px;
+    margin-right: 3px;
+    margin-left: 2px;
+}
 
-    .tomWeatherWrap {
-        display: flex;
-        align-items : center;
-    }
+.tomWetherDetailWrap {
+    display: flex;
+    justify-content: space-between;
+}
 
-    .tomWeatherWrap .tomWeatherIcon {
-        font-size: 60px;
-    }
+.tomWetherDetailWrap .tomWetherDetail .weatherTime {
+    font-size: 17px;
+    font-weight: 600;
+}
 
-    .tomWeather {
-        margin: 0 30px 0 8px;
-        font-weight: 600;
-        font-size: 22px;
-    }
+.tomWetherDetailWrap .tomWetherDetail .weatherIcon {
+    font-size: 29px;
+    display: flex;
+    align-items: center;
+    margin: 7px 0;
+}
 
-    .tomTempMin, .tomTempMax {
-        font-size: 16px;
-        margin-right: 10px;
-    }
+.tomWetherDetailWrap .tomWetherDetail .timeTemp {
+    margin-top: 3px;    
+    display: flex;
+    align-items: center;
+}
 
-    .minTemp, .maxTemp {
-        font-size: 19px;
-        font-weight: 600
-    }
+.tomWetherDetailWrap .tomWetherDetail .temp {
+    margin-left: 3px;
+}
 
-    .tomWetherDetailWrap {
-        display: flex;
-        justify-content: space-between;
-    }
+.tomWetherDetailWrap .tomWetherDetail .feelsLikeTemp {
+    margin-bottom: 6px;
+}
 
-    .tomWetherDetail {
-        display: flex;
-        align-items: flex-end;
-        margin-top: 25px;
-    }
+.tomWetherDetailWrap .tomWetherDetail .feelsLikeTemp .temp {
+    font-size: 18px;
+    font-weight: 600;
+}
 
-    .tomWetherDetail .tomWeatherIconMini {
-        font-size: 35px;
-        line-height: 35px;
-        margin-right: 7px;
-        display: flex;
-        align-items: flex-end;
-    }
-
-    .tomWetherDetail .timeNtemp .weatherTime {
-        font-size: 14.5px;
-    }
-
-    .tomWetherDetail .timeNtemp .timeTemp {
-        font-size: 17px;
-    }
-    
-    .tomWetherDetail .timeNtemp .timeTemp > span {
-        font-weight: 600
-    }
-
-    // .itemWrap {
-    //     justify-content: space-between;
-    //     margin-top: 50px;
-    //     flex-wrap: wrap;
-    // }
-
-    // .itemWrap .itemInfoWrap {
-    //     // margin-right: 23px;
-    //     margin-bottom: 23px;
-    //     background-color: #eee;
-    //     min-width: 24%;
-    //     flex-direction: row;
-    // }
+.tomWetherDetailWrap .tomWetherDetail .timeTemp {
+    font-size: 15px;
+}
 
 `;
