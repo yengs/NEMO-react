@@ -26,7 +26,8 @@ import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
-import Chat from './Chat';
+import Chat from './chatting/Chat';
+
 
 function App() {
 
