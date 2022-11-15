@@ -4,7 +4,7 @@ import jeans from '../img/jeans.jpg';
 import styled from "styled-components";
 
 
-function MypageReview({ match }) {
+function MypageReview() {
 
     const [datas, setDatas] = useState([]);                         // 리뷰 전체 데이터
     const [items, setItems] = useState('');                         // 상품 전체 데이터
@@ -72,7 +72,7 @@ function MypageReview({ match }) {
                                         </td>
                                         <td className='rReviewItemNameOrigin' rowSpan={3}>
                                             {/* 내가 등록한 상품이름 */}
-                                            {}
+                                            { }
                                         </td>
                                         <td className='rReviewWriter' rowSpan={3}>
                                             {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
