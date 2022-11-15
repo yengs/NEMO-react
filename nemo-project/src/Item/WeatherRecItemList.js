@@ -37,62 +37,44 @@ export default function WeatherRecItemList({ match }) {
     //     }
     // })
 
-    const tempWeatherArray = ["겨울", "봄", "가을", "여름"];
-    // const tempWeather = '';
 
     useEffect(() => {
-        if ((mLat !== null || mLat !== undefined || mLat !== '') && (mLon !== null || mLon !== undefined || mLon !== '')) {
+        if (mLat && mLon) {
             axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${mLat}&lon=${mLon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
                 .then(response => {
                     setWeatherArray(response.data.list);
 
-                    // const filterWeather = response.data.list
-                    //     .filter(data => data.dt_txt.includes(tomorrowDate))
-                    //     .map((value) => {
-                    //         return Number(value.main.temp_max);
-                    //     });
-
-                    // console.log(filterWeather);
-                    // const sum = filterWeather.reduce(
-                    //     (accumulator, currentValue) => 
-                    //         accumulator+currentValue, 0,
-                    // );
-
-                    // const avg = sum / 8;
-
-                    const tempSum = response.data.list
-                        .filter(data => data.dt_txt.includes(tomorrowDate))
-                        .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
-
-                    // const tempAvg = tempSum / 8;
-                    const tempAvg = 7;
-                    console.log(tempAvg);
-
+                    if(sessionStorage.getItem("weather")) {
+                        axios.get(`http://localhost:8080/api/item/weather/${sessionStorage.getItem("weather")}`)
+                        .then(response => {
+                            setDatas(response.data);
+                            console.log("날씨는 "+sessionStorage.getItem("weather")+"이고, ");
+                            console.log("날씨추천리스트 성공했나요?");
+                        })
+                        .catch(error => console.log(error));
+                    }
                     
-                    
-                    
-                    console.log(tempWeatherArray);
                     
                 })
                 .catch(error => {
                     console.log(error);
                 });
-                    
-            }
+                
 
-        // axios.get(`/item/cate/${itemWeather}`)
-        //     .then(response => {
-
-        //     })
+        }
 
     }, []);
 
 
     // useEffect(() => {
-    //     // 임시로 get주소 넣어둠. 나중에 수정필요
-    //     axios.get(`http://localhost:8080/api/item/testlist`)
-    //         .then(response => setDatas(response.data))
+    //     if(itemWeather != '') {
+    //         axios.get(`http://localhost:8080/api/item/cate/sub/${itemWeather}`)
+    //         .then(response => {
+    //             setDatas(response.data);
+    //             console.log(response.data);
+    //         })
     //         .catch(error => console.log(error));
+    //     }
     // }, []);
 
 
@@ -144,7 +126,7 @@ export default function WeatherRecItemList({ match }) {
                         datas && datas.map(item => (
                             <div className="itemInfoWrap" key={item.itemNum}>
                                 <Link to={`/item/detail/${item.itemNum}`}>
-                                    <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                    <img className="itemImg" src={`../../files/${item.files}`}></img>
                                     <div className="itemInfo">
                                         <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
                                         <p className="itemName">{item.itemName}</p>
@@ -155,6 +137,7 @@ export default function WeatherRecItemList({ match }) {
                             </div>
                         ))
                     }
+                    {console.log(datas)}
                     {
                         datas.length === 0 && (
                             <tr>
