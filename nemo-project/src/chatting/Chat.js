@@ -1,11 +1,11 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
-import {createGlobalStyle} from 'styled-components';
 import styled from 'styled-components';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import axios from "axios";
 // import reset from 'styled-reset';
 
 
 const Chat = ({match}) => {
+
     const [msg, setMsg] = useState("");
     const [name, setName] = useState("");
     const [chatt, setChatt] = useState([]);
@@ -13,8 +13,6 @@ const Chat = ({match}) => {
     const [socketData, setSocketData] = useState();
     
     const [datas, setDatas] = useState({});
-    const [memberId, setMemberId] = useState('');
-
     const {itemWriter} = match.params;
 
     const ws = useRef(null);    //webSocket을 담는 변수, 
@@ -36,11 +34,11 @@ const Chat = ({match}) => {
                 console.log("업데이트페이지 멤버넘버::::" + memberNum);
                 console.log(response);
                 setDatas(response.data);
-                setMemberId(response.data.memberId);
+                setName(response.data.memberId);
+                webSocketLogin();
             })
             .catch(error => console.log(error));
     }, []);
-
 
 
     useEffect(() => {
@@ -52,9 +50,6 @@ const Chat = ({match}) => {
     }, [socketData]);
 
 
-    // const GlobalStyle = createGlobalStyle`  //css 초기화가 된 component
-    //     ${reset}
-    // `;
 
 
     //webSocket
@@ -77,16 +72,10 @@ const Chat = ({match}) => {
             setSocketData(dataSet);
         }
     });
-
+   
 
     const send = useCallback(() => {
         if(!chkLog) {
-            if(name === "") {
-                alert("이름을 입력하세요.");
-                document.getElementById("name").focus();
-                return;
-            }
-            webSocketLogin();
             setChkLog(true);
         }
 
@@ -128,18 +117,18 @@ const Chat = ({match}) => {
             <MyWebsocket>
             <div id="chat-wrap">
                 <div id='chatt'>
-                    <h1 id="title">WebSocket Chatting</h1>
+                    <h1 id="title">네모 채팅방</h1>
                     <br/>
                     <div id='talk'>
                         <div className='talk-shadow'></div>
                         {msgBox}
                     </div>
                     <input disabled={chkLog}
-                        placeholder='이름을 입력하세요.' 
                         type='text' 
                         id='name' 
-                        value={name} 
-                        onChange={(event => setName(event.target.value))}/>
+                        value={datas.memberId} 
+                        readOnly     
+                        />
                     <div id='sendZone'>
                         <textarea id='msg' value={msg} onChange={onText}
                             onKeyDown={(ev) => {if(ev.keyCode === 13){send();}}}></textarea>
