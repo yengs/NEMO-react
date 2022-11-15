@@ -27,6 +27,7 @@ import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
 import Chat from './chatting/Chat';
+import ReviewUpdate from './review/ReviewUpdate';
 
 
 function App() {
@@ -89,7 +90,7 @@ function App() {
         <Route path="/review/reviewWrite" component={ReviewUpload} />
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
-
+        <Route path="/review/reviewUpdate" component={ReviewUpdate} exact={true} />
         
 
         {/* mypage */}

@@ -28,7 +28,7 @@ const AppStyle = styled.div`
 
 function ReviewUpdate({ history, match }) {
 
-    const { reviewWriter, reviewNum } = match.params;
+    const { reviewWriter } = match.params;
 
     const [datas, setDatas] = useState({});
     const [reviewImage, setReviewImage] = useState('');
@@ -39,7 +39,7 @@ function ReviewUpdate({ history, match }) {
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
     const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
 
-
+    // 후기 데이터 가져오기
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
             .then(res => {
@@ -62,11 +62,11 @@ function ReviewUpdate({ history, match }) {
             "reviewSatisfaction": reviewSatisfaction
         }
 
-        axios.post(`http://localhost:8080/api/review/myReview/${reviewNum}`, reviewDetail)
+        axios.post(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`, reviewDetail)
             .then(res => {
                 if (res.status === 200) {
                     alert("수정완료");
-                    history.push('/review/myReview');
+                    history.push(`/review/myReview/${reviewWriter}`);
                 } else {
                     alert("수정실패");
                     return;
@@ -79,7 +79,7 @@ function ReviewUpdate({ history, match }) {
     }
 
     // 후기 수정 취소
-    const confirmDelete = (message = "후기 작성을 취소하시겠습니까 ?", onConfirm, onCancel) => {
+    const confirmDelete = (message = "후기 수정을 취소하시겠습니까 ?", onConfirm, onCancel) => {
         if (!onConfirm || typeof onConfirm !== "function") {
             return;
         }
