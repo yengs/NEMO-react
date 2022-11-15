@@ -7,10 +7,32 @@ import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 function Join() {
 
+    
+    const [mName, setMname] = useState('');
+    const [mNickname, setMnickname] = useState('');
+    const [mId, setMid] = useState('');
+    const [mPw, setMpw] = useState('');
+    const [mPwCheck, setMpwCheck] = useState('');
+    const [mEmail, setMemail] = useState('');
+    const [mPhone, setMphone] = useState('');
+    const [mAddress, setMaddress] = useState('');
+    const [mZipCode, setMzipCode] = useState('');
+
+    const [mSigungu, setMsigungu] = useState('');
+    
+    const handlerChangeName = (e) => setMname(e.target.value);
+    const handlerChangeNickname = (e) => setMnickname(e.target.value);
+    const handlerChangeId = (e) => setMid(e.target.value);
+    const handlerChangePw = (e) => setMpw(e.target.value);
+    const handlerChangePwCheck = (e) => setMpwCheck(e.target.value);
+    const handlerChangeEmail = (e) => setMemail(e.target.value);
+    const handlerChangePhone = (e) => setMphone(e.target.value);
+    
+
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
-        
+
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -20,9 +42,12 @@ function Join() {
             }
             fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
         }
-        
+
         setMaddress(fullAddress);
-        console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+        setMzipCode(data.zonecode);
+        setMsigungu(data.sigungu);
+
+        //console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
     // 주소검색창 팝업열기
@@ -31,26 +56,10 @@ function Join() {
         open({ onComplete: handleComplete });
     };
 
-    const [mName, setMname] = useState('');
-    const [mNickname, setMnickname] = useState('');
-    const [mId, setMid] = useState('');
-    const [mPw, setMpw] = useState('');
-    const [mPwCheck, setMpwCheck] = useState('');
-    const [mEmail, setMemail] = useState('');
-    const [mPhone, setMphone] = useState('');
-    const [mAddress, setMaddress] = useState('');
-
-    const handlerChangeName = (e) => setMname(e.target.value);
-    const handlerChangeNickname = (e) => setMnickname(e.target.value);
-    const handlerChangeId = (e) => setMid(e.target.value);
-    const handlerChangePw = (e) => setMpw(e.target.value);
-    const handlerChangePwCheck = (e) => setMpwCheck(e.target.value);
-    const handlerChangeEmail = (e) => setMemail(e.target.value);
-    const handlerChangePhone = (e) => setMphone(e.target.value);
 
     const memberDataInsert = (e) => {
         e.preventDefault();
-
+        
         const memberInfo = {
             "memberName": mName,
             "memberNickname": mNickname,
@@ -58,7 +67,9 @@ function Join() {
             "memberPw": mPw,
             "memberEmail": mEmail,
             "memberPhone": mPhone,
-            "memberAddress": mAddress
+            "memberAddress": mAddress,
+            "memberZipCode" : mZipCode,
+            "memberSigungu" : mSigungu
         }
 
         if(mPw !== mPwCheck){
@@ -181,7 +192,40 @@ function Join() {
 
     // 아이디 한글 입력 불가 처리
 
-    
+
+    // 아이디 중복 체크
+    const checkId = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/api/member/join/checkid', `memberId=${mId}`)
+            .then(result => {
+                console.log(result);
+                if (result.data === "success" && mId !== "") {
+                    alert("사용 가능한 아이디입니다.");
+                } else if (result.data === "fail" && mId !== "") {
+                    alert("이미 사용중인 아이디입니다.")
+                } else{
+                    alert("아이디를 입력해주세요");
+                }
+            });
+    }
+
+    // 이메일 중복 체크
+    const checkEmail = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/api/member/join/checkemail', `memberEmail=${mEmail}`)
+            .then(email => {
+                console.log(email);
+                if (email.data === "success" && mEmail !== "") {
+                    alert("사용 가능한 이메일입니다.");
+                } else if(email.data === "fail" && mEmail !== ""){
+                    alert("중복된 이메일입니다.");
+                }else{
+                    alert("이메일을 입력해주세요.")
+                }
+            });
+    }
 
     return (
         <div className="joinWrap memberPage container">
@@ -215,7 +259,7 @@ function Join() {
                                     {capsLock ? "Caps Lock On" : "Caps Lock Off"}</div>}
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn btn">중복확인</button>
+                                    <button className="beigeBtn btn" onClick={checkId}>중복확인</button>
                                 </td>
                             </tr>
                             <tr>
@@ -240,7 +284,7 @@ function Join() {
                                     <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} placeholder="nemo@nemo.com 형식에 맞게 입력하세요." required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn btn">중복확인</button>
+                                    <button className="beigeBtn btn" onClick={checkEmail}>중복확인</button>
                                 </td>
                             </tr>
                             <tr>

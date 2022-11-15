@@ -34,11 +34,29 @@ function BookingUpload({ history,match }) {
   }
 
   //----------결제모달 end--------------
+  //--------------대여하기 ------------------
 
   const {itemNum} = match.params;
-  const bookingItemnum = itemNum
+  const {itemName} = match.params;
+  const {itemDeposit} = match.params;
+  const {itemPrice} = match.params;
+  const {itemWriter} = match.params;
+  const {files} = match.params;
+  const {itemRentalstart} = match.params;
+  const {itemRentalend} = match.params;
+
+  const bookingItemnum = itemNum;
+  const bookingItemname = itemName;
+  const Deposit = itemDeposit;
+  const bookingItemprice = itemPrice;
+  const bookingItemwriter = itemWriter;
+  const bookingItemfiles =files;
+  const Rentalstart = itemRentalstart;
+  const Rentalend = itemRentalend;
+
+
+  const sum = (parseInt(bookingItemprice)+parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
-  const [value, setbookingDate] = useState(new Date());
   
   const handlerClickSubmit = (e) => {
     e.preventDefault();
@@ -46,7 +64,11 @@ function BookingUpload({ history,match }) {
         {
             "bookingMember": bookingMember,
             "bookingDate" :value,
-            "bookingItemnum": bookingItemnum
+            "bookingItemnum": bookingItemnum,
+            "bookingItemname":bookingItemname,
+            "bookingItemprice" : bookingItemprice,
+            "bookingItemwriter" : bookingItemwriter,
+            "bookingItemfiles" : bookingItemfiles
         })
         .then(response => {
           if (response.status === 200) {
@@ -59,10 +81,41 @@ function BookingUpload({ history,match }) {
       .catch(error => console.log(error));
   };
 
+  //-----------대여하기 end--------------------
+
+  //==========================대여날짜 --------------------------
+  const [datas, setDatas] = useState([]);
+  const bookingItemnumber = bookingItemnum;
+  const [value, setbookingDate] = useState(new Date());
+  const [dates, setDates] = useState([]);
+
+
+  const list = dates.map((date)=>{
+    return(new Date(date))
+  })
+
+  const disableDates = list;
+
+useEffect(() => {
+  axios.get(`http://localhost:8080/api/allbooking/${bookingItemnumber}`)
+    .then(response => {
+      setDatas(response.data);
+
+      const dateList = response.data.map((datalist, i) => datalist.bookingDate );
+      setDates(dateList);
+
+    })
+    .catch(error => console.log(error));
+}, []);
+
+
+
+//------------------------------End------------------------------
 
 
   return (
     <>
+
       <div className="BookingContainer">
         <h3>대여하기</h3>
 
@@ -71,11 +124,11 @@ function BookingUpload({ history,match }) {
             <div className="tablePlusForm2">
               <tr><td>
                 <div className="imageDiv2">
-                  <p className="memberImg2"></p>
-                  {/* <td>{data.itemImage}</td> */}
+                <img className="memberImg2" src={`../../files/${bookingItemfiles}`}/>
+                  
                 </div>
               </td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;언더아머 트레이닝복</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;{bookingItemname}</td>
               </tr>
             </div>
           </div>
@@ -85,32 +138,24 @@ function BookingUpload({ history,match }) {
                 <tr>
                   <th>대여료</th>
                   <td></td>
-                  <td>100000원</td>
+                  <td>{bookingItemprice}원</td>
                 </tr>
                 <tr>
                   <th >보증금</th>
                   <td><div className="plus">+</div></td>
-                  <td>200000원</td>
+                  <td>{Deposit}원</td>
                 </tr>
               </div>
               <tr>
                 <th>결제금액</th>
                 <td></td>
-                <td>300000원</td>
+                <td>{sum}원</td>
               </tr>
             </div>
           </div>
 
         </div>
         <h3>결제수단</h3>
-
-
-
-
-
-
-
-
 
 
         {/* --------------결제모달-------------- */}
@@ -230,10 +275,18 @@ function BookingUpload({ history,match }) {
 
         <h3>대여기간</h3>
         <div className="bottom">
-
+        
           <div> <div className="inputdate">
-            <Calendar onChange={date => setbookingDate(date)} value={value} />
-
+         
+            <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)}
+                      formatDay={(locale, date) => moment(date).format("DD")}
+                      tileDisabled={({date, view}) =>
+                         (view === 'month') && // Block day tiles only
+                          disableDates.some(disabledDate =>
+                          date.getFullYear() === disabledDate.getFullYear() &&
+                          date.getMonth() === disabledDate.getMonth() &&
+                          date.getDate() === disabledDate.getDate()
+            )} />
             <br />
             선택한 날짜 : {moment(value).format("YYYY년 MM월 DD일")}
           </div>

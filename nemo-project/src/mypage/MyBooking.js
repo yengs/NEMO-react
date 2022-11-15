@@ -2,16 +2,135 @@ import styled from "styled-components";
 import Shirt from '../img/shirt.jpg';
 import { GrFormPrevious } from "react-icons/gr";
 import { GrFormNext } from "react-icons/gr";
+import { useEffect, useState } from "react";
+import axios from "axios";
 // import "./mybooking.css";
 
-function MyBooking() {
+function MyBooking({history}) {
+   
+    const [bookingNum , setBookingNum] = useState('');
+    const [datas, setDatas] = useState([]);
+    const [datas2, setDatas2] = useState([]);
+
+    const bookingItemwriter = sessionStorage.getItem('memberId');
+    const bookingMember = sessionStorage.getItem('memberId');
+    
 
     const goReviewWrite = () => {
         window.location.href = "/reivew/reviewWrite";
     }
+    
+
+    //예약중 -> 대여중
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/bookingState`)
+            .then(response => {
+                 console.log(response);
+        })
+            .catch(error => console.log(error));
+    }, []);
+
+
+
+      //대여중 -> 기간만료
+      useEffect(() => {
+        axios.get(`http://localhost:8080/api/bookingState2`)
+            .then(response => {
+                 console.log(response);
+        })
+            .catch(error => console.log(error));
+    }, []);
+
+
+
+    //물품상태 수정
+    const [itemstate , setItemstate] = useState(''); 
+
+    const handleritemstate = (e) => setItemstate(e.target.value);
+    // console.log(itemstate);
+
+    const statechangebtn = (e) => {
+
+        setBookingNum(e.target.value);
+        console.log(bookingNum);
+        console.log(itemstate);
+        if (window.confirm("물품상태를 수정하시겠습니까?")) {
+
+            axios.put(`http://localhost:8080/api/mypage/mybooking/${e.target.value}`, {'bookingDepositstate' : itemstate})
+        .then(response => { 
+            console.log(response);
+            if (response.status === 200) {
+                alert("성공");
+                window.location.reload();
+            } else {
+                alert("실패");
+                return;
+            }
+        })
+        .catch(error => console.log(error));
+      
+          } else {
+      
+            return;
+      
+          }
+      
+        };
+
+
+    //예약취소
+    const handlercancel = (e) => {
+        
+        setBookingNum(e.target.value);
+        
+        if (window.confirm("정말 예약을 취소하시겠습니까?")) {
+
+            axios.delete(`http://localhost:8080/api/mypage/mybooking/${e.target.value}`)
+        .then(response => { 
+            console.log(response);
+            if (response.status === 200) {
+                alert("예약이 취소되었습니다.");
+                window.location.reload();
+            } else {
+                alert("예약취소 실패");
+                return;
+            }
+        })
+        .catch(error => console.log(error));
+      
+          } else {
+      
+            return;
+      
+          }
+      
+        };
+    
+
+    //빌려줬어요
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/mypage/mybooking/${bookingItemwriter}`)
+            .then(response => {
+                 console.log(response);
+                setDatas(response.data);
+        })
+            .catch(error => console.log(error));
+    }, []);
+
+
+    
+    //빌려왔어요
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/mypagebookingmember/${bookingMember}`)
+        .then(response => {
+                console.log(response);
+                setDatas2(response.data);
+            })
+            .catch(error => console.log(error));
+    }, []);
 
     return (
-        <MyBookingContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
+        <MyBookingContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage">
 
                 <div className="userReviewListAboutStoreWrapBooking">
@@ -19,7 +138,6 @@ function MyBooking() {
                     <table className="userReviewListAboutStore2">
                         <thead>
                             <tr>
-
                                 <th>대여기간</th>
                                 <th colSpan={2}>상품 정보</th>
                                 <th>대여료</th>
@@ -27,79 +145,50 @@ function MyBooking() {
                                 <th>대여상태</th>
                                 <th>물품상태</th>
                                 <th>상태수정</th>
-
                             </tr>
                         </thead>
+                        {
+                                datas && datas.map(booking => (
                         <tbody>
-                            <tr>
-                                <td className='ReviewWriter' rowSpan={3}>9/27~10/5</td>
-                                <td rowSpan={2} className="ReviewItemImageOrigin">
-                                    <div style={{ "backgroundImage": `url(${Shirt})` }}></div>
-                                </td>
-                                <td className='ReviewItemNameOrigin' rowSpan={3}>메종키츠네 셔츠</td>
-                                <td className='ReviewWriter' rowSpan={3}>20000</td>
-                                <td className='ReviewWriter' rowSpan={3}>선희곤듀</td>
-                                <td className='ReviewWriter' rowSpan={3}>
-                                    <select>
-                                        <option value="">예약중</option>
-                                        <option value="반팔">대여중</option>
-                                        <option value="긴팔">기간만료</option>
-                                        <option value="니트">예약취소</option>
-                                    </select>
-                                </td>
-                                <td className='ReviewWriter' rowSpan={3}>
-                                    <select>
-                                        <option value="">--</option>
-                                        <option value="반팔">수거완료</option>
-                                        <option value="긴팔">물품훼손</option>
-                                        <option value="니트">미반납</option>
-                                    </select>
-                                </td>
-                                <td className='ReviewWriter' rowSpan={3}><button className="greenBtn btnBok">확인</button></td>
-                            </tr>
+                           
+                                    <tr key={booking.bookingNum}>
+
+                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingDate}</td>
+                                        <td rowSpan={2} className="ReviewItemImageOrigin">
+                                            <img className="bookingitemImg" src={`../../files/${booking.bookingItemfiles}`}></img>
+                                        </td>
+                                        <td className='ReviewItemNameOrigin' rowSpan={3}>{booking.bookingItemname}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingMember}</td>
+                                        <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}
+                                        <td>{booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}</td>
+                                        </td>
+                                        <td className='ReviewWriter' rowSpan={3}>
+                                        {booking.bookingBookingstate === "기간만료" ?
+                                            <select  onChange={handleritemstate}>
+                                                <option value="">--</option>
+                                                <option value="반환완료">수거완료</option>
+                                                <option value="미반환(물품훼손)">물품훼손</option>
+                                                <option value="미반환(미반납)">미반납</option>
+                                            </select>
+                                              :<td className='ReviewWriter' rowSpan={3}>--</td>
+                                            }
+                                        </td>
+                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate != "예약취소" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={statechangebtn}>확인</button>:<button className="grayBtn btnBok">확인</button>}</td>
+                                    </tr>
+
+                                
                         </tbody>
-                        <tbody>
+                        ))
+                    }
+                    {
+                        datas.length === 0 && (
                             <tr>
-                                <td className='ReviewWriter' rowSpan={3}>10/17~10/25</td>
-                                <td rowSpan={2} className="ReviewItemImageOrigin">
-                                    <div style={{ "backgroundImage": `url(${Shirt})` }}></div>
-                                </td>
-                                <td className='ReviewItemNameOrigin' rowSpan={3}>메종키츠네 셔츠</td>
-                                <td className='ReviewWriter' rowSpan={3}>20000</td>
-                                <td className='ReviewWriter' rowSpan={3}>홍길동</td>
-                                <td className='ReviewWriter' rowSpan={3}>
-                                    <select>
-                                        <option value="">예약중</option>
-                                        <option value="반팔">대여중</option>
-                                        <option value="긴팔">기간만료</option>
-                                        <option value="니트">예약취소</option>
-                                    </select>
-                                </td>
-                                <td className='ReviewWriter' rowSpan={3}>
-                                    <select>
-                                        <option value="">--</option>
-                                        <option value="반팔">수거완료</option>
-                                        <option value="긴팔">물품훼손</option>
-                                        <option value="니트">미반납</option>
-                                    </select>
-                                </td>
-                                <td className='ReviewWriter' rowSpan={3}><button className="greenBtn btnBok">확인</button></td>
+                                <td colSpan="4">일치하는 데이터가 없습니다!.</td>
                             </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td className='ReviewWriter' rowSpan={3}>10/20~10/23</td>
-                                <td rowSpan={2} className="ReviewItemImageOrigin">
-                                    <div style={{ "backgroundImage": `url(${Shirt})` }}></div>
-                                </td>
-                                <td className='ReviewItemNameOrigin' rowSpan={3}>메종키츠네 셔츠</td>
-                                <td className='ReviewWriter' rowSpan={3}>15000</td>
-                                <td className='ReviewWriter' rowSpan={3}>백예린</td>
-                                <td className='ReviewWriter' rowSpan={3}> 예약취소</td>
-                                <td className='ReviewWriter' rowSpan={3}> 예약취소</td>
-                                <td className='ReviewWriter' rowSpan={3}><button className="greenBtn btnBok">확인</button></td>
-                            </tr>
-                        </tbody>
+                        )
+                    }
+
                     </table>
                 </div>
 
@@ -120,34 +209,41 @@ function MyBooking() {
 
                             </tr>
                         </thead>
+                        {
+                        datas2 && datas2.map(booking => (
                         <tbody>
-                            <tr>
-                                <td className='ReviewWriter' rowSpan={3}>9/27~10/5</td>
+                   
+                            <tr key={booking.bookingNum}>
+                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingDate}</td>
                                 <td rowSpan={2} className="ReviewItemImageOrigin">
-                                    <div style={{ "backgroundImage": `url(${Shirt})` }}></div>
+                                    {/* <Link to={`/booking/detail/${booking.bookingIdx}`}>{booking.title}</Link> */}
+                                
+                                    <img className="bookingitemImg" src={`../../files/${booking.bookingItemfiles}`}/>
                                 </td>
-                                <td className='ReviewItemNameOrigin' rowSpan={3}>메종키츠네 셔츠</td>
-                                <td className='ReviewWriter' rowSpan={3}>20000</td>
-                                <td className='ReviewWriter' rowSpan={3}>선희곤듀</td>
-                                <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td>
-                                <td className='ReviewWriter' rowSpan={3}>반환완료</td>
-                                <td className='ReviewWriter' rowSpan={3}><button className="greenBtn btnBok">취소</button></td>
-                            </tr>
-                        </tbody>
-                        <tbody>
-                            <tr>
-                                <td className='ReviewWriter' rowSpan={3}>9/27~10/5</td>
-                                <td rowSpan={2} className="ReviewItemImageOrigin">
-                                    <div style={{ "backgroundImage": `url(${Shirt})` }}></div>
+                                <td className='ReviewItemNameOrigin' rowSpan={3}>{booking.bookingItemname}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
+                                <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
+                                <td>{booking.bookingDepositstate != "반환완료" ? null : <button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button>}</td>
                                 </td>
-                                <td className='ReviewItemNameOrigin' rowSpan={3}>메종키츠네 셔츠</td>
-                                <td className='ReviewWriter' rowSpan={3}>20000</td>
-                                <td className='ReviewWriter' rowSpan={3}>선희곤듀</td>
-                                <td className='ReviewWriter' rowSpan={3}> 예약중</td>
-                                <td className='ReviewWriter' rowSpan={3}>결제완료</td>
-                                <td className='ReviewWriter' rowSpan={3}><button className="greenBtn btnBok">취소</button></td>
+                                
+                                {/* <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td> */}
+
+                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingDepositstate}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate == "예약중" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>취소</button>:<button className="grayBtn btnBok">취소</button>}</td>
                             </tr>
-                        </tbody>
+                       
+                </tbody>
+
+))
+}
+{
+    datas2.length === 0 && (
+        <tr>
+            <td colSpan="4">일치하는 데이터가 없습니다.</td>
+        </tr>
+    )
+}
                     </table>
                 </div>
             </div>
@@ -156,6 +252,12 @@ function MyBooking() {
 }
 
 const MyBookingContainer = styled.div`
+
+    .bookingitemImg{
+        width: 100%;
+        height : 82px;
+    }
+
     .mypageInnerPage {
         width: 100%;
         height: 100%;
