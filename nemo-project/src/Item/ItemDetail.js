@@ -98,6 +98,10 @@ function ItemDetail({ match, location, history }) {
             window.location.href = `/item/cate/sub/${data.itemSubcategory}`;
         }
     }
+    
+    const chatting = () => {
+        window.location.href = `/chatting/${itemWriter}`;
+    }
 
     return (
         <>
@@ -192,7 +196,7 @@ function ItemDetail({ match, location, history }) {
                 </div>
 
                 <div className="buttonDiv">
-                        <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기"/>
+                        <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting}/>
                         <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat}/>
                 </div>
 
