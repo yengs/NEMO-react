@@ -60,6 +60,11 @@ hr{
 
 }
 
+.nmNid {
+  font-size: 18px;
+  color: #333;
+}
+
 .memberPagelog .inputTable table {
   width: 100%;
   border-spacing: 0;

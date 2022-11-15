@@ -14,7 +14,9 @@ function BookingUpload({ history,match }) {
   //---------결제모달---------------
   const [modalOpen, setModalOpen] = useState(false);
   const [payment, setPayment] = useState('1');
+  const [paypay, setPaypay] = useState('')
 
+  const handlerpaypay = (e) => setPaypay(e.target.value)
   const selectcard = (e) => setPayment('1');
   const selectkakao = (e) => setPayment('2');
   const selecttoss = (e) => setPayment('3');
@@ -73,6 +75,7 @@ function BookingUpload({ history,match }) {
         .then(response => {
           if (response.status === 200) {
               alert("정상적으로 등록되었습니다.");
+              window.location.href = "/mypage/mybooking"
           } else {
               alert("등록에 실패했습니다.");
               return;
@@ -162,7 +165,7 @@ useEffect(() => {
         <div className="middle">
           <React.Fragment>
             <div className="custom-search" >
-              <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요" />
+              <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요" value={paypay}/>
               <button onClick={openModal} className="custom-search-botton" type="submit">등록</button>
             </div>
 
@@ -176,15 +179,15 @@ useEffect(() => {
               <div className='payselect' name="payment" onClick={selecttransfer}>간편계좌결제</div>
               <div className='payselect' name="payment" onClick={selectcell}>휴대폰 결제</div>
 
-              <div className='paytext'>
+              <div className='paytext' onChange={handlerpaypay}>
                 {(function () {
                   if (payment == "1") {
                     return <div><select className='payment2'>
                       <option disabled selected>카드선택</option>
-                      <option>신한카드</option>
-                      <option>롯데카드</option>
-                      <option>삼성카드</option>
-                      <option>우리카드</option>
+                      <option value='신한카드'>신한카드</option>
+                      <option value='롯데카드'>롯데카드</option>
+                      <option value='삼성카드'>삼성카드</option>
+                      <option value='우리카드'>우리카드</option>
                     </select>
                       <div className='paynotice'>
                         결제 수단에 대한 내용 어쩌구 사용안내<br />
@@ -199,7 +202,7 @@ useEffect(() => {
                   else if (payment == "2") {
                     return <div><select className='payment2'>
                       <option disabled selected>선택</option>
-                      <option>카카오페이</option>
+                      <option value='카카오페이'>카카오페이</option>
 
                     </select>
                       <div className='paynotice'>
@@ -214,7 +217,7 @@ useEffect(() => {
                   else if (payment == "3") {
                     return <div><select className='payment2'>
                       <option disabled selected>선택</option>
-                      <option>토스</option>
+                      <option value='토스'>토스</option>
 
                     </select>
                       <div className='paynotice'>
@@ -231,7 +234,7 @@ useEffect(() => {
                   else if (payment == "4") {
                     return <div><select className='payment2'>
                       <option disabled selected>선택</option>
-                      <option>계좌</option>
+                      <option value='계좌'>계좌</option>
 
                     </select>
                       <div className='paynotice'>
@@ -245,7 +248,7 @@ useEffect(() => {
                   else {
                     return <div><select className='payment2'>
                       <option disabled selected>선택</option>
-                      <option>핸드폰</option>
+                      <option value='핸드폰'>핸드폰</option>
 
                     </select>
                       <div className='paynotice'>

@@ -26,6 +26,8 @@ import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
+import Chat from './chatting/Chat';
+
 
 import moment from 'moment';
 import 'moment/locale/ko';
@@ -55,6 +57,7 @@ function App() {
                     .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
 
                 const tempAvg = tempSum / 8;
+                sessionStorage.setItem("tempAvg", tempAvg);
 
                 if (tempAvg < 11) {
                     return sessionStorage.setItem("weather","겨울");
@@ -105,6 +108,8 @@ function App() {
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
         <Route path="/item/bookingupload/:itemNum,:itemName,:itemDeposit,:itemPrice,:itemWriter,:files,:itemRentalstart,:itemRentalend" component={BookingUpload} exact={true} />
+        <Route path="/chatting/:itemWriter" component={Chat} exact={true} />
+
 
 
         {/* member */}
@@ -117,10 +122,11 @@ function App() {
 
 
         {/* review */}
-        <Route path="/reivew/reviewWrite" component={ReviewUpload} />
-        <Route path="/review/myReview" component={MyReviewList} exact={true} />
-        <Route path="/review/yourReview" component={YourReviewList} exact={true} />
+        <Route path="/review/reviewWrite" component={ReviewUpload} />
+        <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
+        <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
 
+        
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
