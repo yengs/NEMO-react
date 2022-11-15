@@ -41,14 +41,13 @@ function ReviewUpdate({ history, match }) {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`)
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
             .then(res => {
                 console.log(res);
                 setDatas(res.data);
                 setReviewImage(res.data);
                 setReviewContents(res.data);
                 setReviewSatisfaction(res.data);
-                sessionStorage.setItem('reviewNum',res.data.reviewNum)
             })
             .catch(error => console.log(error));
     }, []);
@@ -129,7 +128,7 @@ function ReviewUpdate({ history, match }) {
                 <input type="number" max={100} min={0} step={1} value={datas.reviewSatisfaction} onChange={handlerChangeReviewSatisfaction} required />
             </div>
             <div className='btnWrap'>
-                <input type="submit" className='greenBtn btn' value="수정" onClick={UpdateReview} />
+                <input type="submit" className='greenBtn btn' value="수정" onClick={() => UpdateReview()} />
                 <input type="button" className='grayBtn btn' value="취소" onClick={confirmDelete} />
             </div>
         </div>

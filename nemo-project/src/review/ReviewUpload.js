@@ -33,12 +33,10 @@ export default function ReviewUpload({ history }) {
 
     const reviewWriter = sessionStorage.getItem('memberId');
 
-    // const [data, setData] = useState([]);
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
     const [reviewFiles, setReviewFiles] = useState('');
     const [ReviewAddImg, setReviewAddImg] = useState('');
-
 
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
     const handlerChangeReviewSatisfaction = (e) => {
@@ -80,11 +78,11 @@ export default function ReviewUpload({ history }) {
             })
             .then(response => {
                 if (response.status === 200) {
-                    if (reviewContents && reviewSatisfaction != null) {
+                    if (reviewContents.length > 36 && reviewSatisfaction != null) {
                         alert("정상적으로 등록되었습니다.");
                         history.push(`/review/myReview/${reviewWriter}`);
                     } else {
-                        alert("내용과 만족도를 입력하세요.")
+                        alert("양식에 맞춰 작성해주세요.")
                     }
                 } else {
                     alert("등록에 실패했습니다.");
@@ -139,7 +137,7 @@ export default function ReviewUpload({ history }) {
                 {/* </AppStyle>  */}
             </div>
             <div className='reviewContent'>
-                <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>
+                <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="최소 30자 이상 내용을 입력해주세요."></textarea>
             </div>
             <div className='satisfyingReview'>
                 <span>상품의 만족도는 어떠셨나요?</span>
