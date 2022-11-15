@@ -76,7 +76,7 @@ function Header() {
                         </IconContext.Provider>
                         <p>MY</p>
                     </Link>
-                    <Link to="/chat">
+                    <Link to="/chatting/:itemWriter">
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <BsChatDotsFill />
                         </IconContext.Provider>
