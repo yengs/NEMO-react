@@ -57,6 +57,7 @@ function App() {
                     .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
 
                 const tempAvg = tempSum / 8;
+                sessionStorage.setItem("tempAvg", tempAvg);
 
                 if (tempAvg < 11) {
                     return sessionStorage.setItem("weather","겨울");

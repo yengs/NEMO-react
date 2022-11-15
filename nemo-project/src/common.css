@@ -519,7 +519,7 @@ footer {
 .tomorrowWeather {
   display: flex;
   align-items: center;
-  margin-bottom: -18px;
+  margin-bottom: -25px;
 }
 
 .tomorrowWeather .weatherIcon {
