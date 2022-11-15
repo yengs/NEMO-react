@@ -85,31 +85,30 @@
 }
 
 .reviewUpdateBtn {
-        padding: 0;
-        color: cadetblue;
-        font-size: 13px;
-        border: none;
-        background-color: #ffffff;
+    padding: 0;
+    color: cadetblue;
+    font-size: 13px;
+    border: none;
+    background-color: #ffffff;
 }
 
 .reviewContents p {
-    white-space: normal;
-    display: block;
     display: -webkit-box;
-    width: 405px;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
     font-size: 13px;
     color: rgb(85, 85, 85);
     text-align: left;
-    -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
 }
 
 .reviewContents p.close {
     display: -webkit-box;
-    white-space: nowrap;
+    white-space: pre-wrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     text-align: left;
 }

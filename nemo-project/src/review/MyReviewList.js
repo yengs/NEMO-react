@@ -5,7 +5,7 @@ import Paging from "../pagination/Paging";
 
 function MyReviewList({ history, match }) {
 
-    const { reviewWriter, reviewNum } = match.params;
+    const { reviewWriter } = match.params;
 
     const ITEM_COUNT_PER_PAGE = 10;
 
@@ -14,9 +14,10 @@ function MyReviewList({ history, match }) {
     const [page, setPage] = useState(1);                                // 보여지는 페이지
     const [items, setItems] = useState([]);                             // 페이징을 통해서 보여줄 데이터
 
+    // 후기 데이터 가져오기
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`, 
-        { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
+            { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
             .then(response => {
                 console.log(response);
                 const list = response.data.map(data => ({ ...data, closed: true }));
@@ -39,20 +40,41 @@ function MyReviewList({ history, match }) {
         ));
     };
 
-    const handlerReviewDelete = () => {
-        axios.delete(`http://localhost:8080/api/review/myReview/${reviewNum}`)
-        .then(response => { 
-            console.log(response);
-            if (response.status === 200) {
-                alert("정상적으로 삭제되었습니다.");
-                history.push("/member");
-            } else {
-                alert("삭제에 실패했습니다.");
-                return;
-            }
-        })
-        .catch(error => console.log(error));
-    };
+    // 후기 수정 
+    const handlerReviewUpdate = (reviewNum) => {
+        axios.post(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    alert("수정되었습니다.");
+                    history.push(`/review/myReview/${reviewWriter}`);
+                    window.location.reload();
+                } else {
+                    alert("삭제에 실패했습니다.");
+                    return;
+                }
+            })
+            .catch(error => console.log(error));
+    }
+
+    // 후기 삭제
+    const handlerReviewDelete = (reviewNum) => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+            axios.delete(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
+                .then(response => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        alert("정상적으로 삭제되었습니다.");
+                        history.push(`/review/myReview/${reviewWriter}`);
+                        window.location.reload();
+                    } else {
+                        alert("삭제에 실패했습니다.");
+                        return;
+                    }
+                })
+                .catch(error => console.log(error));
+        };
+    }
 
     return (
         <>
@@ -88,12 +110,12 @@ function MyReviewList({ history, match }) {
                                             <p className={review.closed ? "close" : ""}>{review.reviewContents}</p>
                                         </div>
                                         <div id="btnView">
-                                            {review.reviewContents.length > 36 ?
+                                            {review.reviewContents.length > 10 ?
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             }
-                                            <button className="moreBtn"> [ 수정 ] </button>
-                                            <button className="moreBtn" onClick={handlerReviewDelete}> [ 삭제 ] </button>
+                                            <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}> [ 수정 ] </button>
+                                            <button className="moreBtn" onClick={() => handlerReviewDelete(review.reviewNum)}> [ 삭제 ] </button>
                                         </div>
                                     </td>
                                     <td>

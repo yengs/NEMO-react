@@ -41,8 +41,13 @@ export default function ReviewUpload({ history }) {
 
 
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
-    const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
-    const handlerChangeReviewFiles = (e) =>{
+    const handlerChangeReviewSatisfaction = (e) => {
+        if (e.target.value < 0 || e.target.value > 100) {
+            return;
+        }
+        setReviewSatisfaction(e.target.value);
+    }
+    const handlerChangeReviewFiles = (e) => {
         setReviewFiles(e.target.files[0]);
         encodeFileBase64(e.target.files[0]);
     }
@@ -68,9 +73,10 @@ export default function ReviewUpload({ history }) {
         formData.append("reviewFiles", reviewFiles);
 
         axios.post(`http://localhost:8080/api/reivew/reviewWrite`, formData,
-            { headers: {
-                'Content-Type': 'multipart/form-data'
-             }
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             })
             .then(response => {
                 if (response.status === 200) {
@@ -117,11 +123,11 @@ export default function ReviewUpload({ history }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                 {/* <AppStyle>  */}
-                        <div className="reviewImage">
-                            {ReviewAddImg && <img src={ReviewAddImg} alt="ReviewAddImg" />} </div>
-                    <div className="add-img-box">
-                   <input
+                {/* <AppStyle>  */}
+                <div className="reviewImage">
+                    {ReviewAddImg && <img src={ReviewAddImg} alt="ReviewAddImg" />} </div>
+                <div className="add-img-box">
+                    <input
                         type="file"
                         // id="item_review_input"
                         className="image_inputType_file"
@@ -129,8 +135,8 @@ export default function ReviewUpload({ history }) {
                         multiple
                         onChange={handlerChangeReviewFiles}
                     />
-                    </div>
-                 {/* </AppStyle>  */}
+                </div>
+                {/* </AppStyle>  */}
             </div>
             <div className='reviewContent'>
                 <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>

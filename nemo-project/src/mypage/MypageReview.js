@@ -39,11 +39,11 @@ function MypageReview({ match }) {
     }, []);
 
     const goYourReview = () => {
-        window.location.href = "/review/yourReview";
+        window.location.href = `/review/yourReview/${reviewId}`;
     }
 
     const goMyReview = () => {
-        window.location.href = "/review/myReview";
+        window.location.href = `/review/myReview/${reviewWriter}`;
     }
 
     return (
