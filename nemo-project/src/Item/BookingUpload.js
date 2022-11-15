@@ -14,7 +14,9 @@ function BookingUpload({ history,match }) {
   //---------결제모달---------------
   const [modalOpen, setModalOpen] = useState(false);
   const [payment, setPayment] = useState('1');
+  const [paypay, setPaypay] = useState('')
 
+  const handlerpaypay = (e) => setPaypay(e.target.value)
   const selectcard = (e) => setPayment('1');
   const selectkakao = (e) => setPayment('2');
   const selecttoss = (e) => setPayment('3');
@@ -42,6 +44,8 @@ function BookingUpload({ history,match }) {
   const {itemPrice} = match.params;
   const {itemWriter} = match.params;
   const {files} = match.params;
+  const {itemRentalstart} = match.params;
+  const {itemRentalend} = match.params;
 
   const bookingItemnum = itemNum;
   const bookingItemname = itemName;
@@ -49,10 +53,12 @@ function BookingUpload({ history,match }) {
   const bookingItemprice = itemPrice;
   const bookingItemwriter = itemWriter;
   const bookingItemfiles =files;
+  const Rentalstart = itemRentalstart;
+  const Rentalend = itemRentalend;
+
 
   const sum = (parseInt(bookingItemprice)+parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
-  const [value, setbookingDate] = useState(new Date());
   
   const handlerClickSubmit = (e) => {
     e.preventDefault();
@@ -69,6 +75,7 @@ function BookingUpload({ history,match }) {
         .then(response => {
           if (response.status === 200) {
               alert("정상적으로 등록되었습니다.");
+              window.location.href = "/mypage/mybooking"
           } else {
               alert("등록에 실패했습니다.");
               return;
@@ -79,9 +86,39 @@ function BookingUpload({ history,match }) {
 
   //-----------대여하기 end--------------------
 
+  //==========================대여날짜 --------------------------
+  const [datas, setDatas] = useState([]);
+  const bookingItemnumber = bookingItemnum;
+  const [value, setbookingDate] = useState(new Date());
+  const [dates, setDates] = useState([]);
+
+
+  const list = dates.map((date)=>{
+    return(new Date(date))
+  })
+
+  const disableDates = list;
+
+useEffect(() => {
+  axios.get(`http://localhost:8080/api/allbooking/${bookingItemnumber}`)
+    .then(response => {
+      setDatas(response.data);
+
+      const dateList = response.data.map((datalist, i) => datalist.bookingDate );
+      setDates(dateList);
+
+    })
+    .catch(error => console.log(error));
+}, []);
+
+
+
+//------------------------------End------------------------------
+
 
   return (
     <>
+
       <div className="BookingContainer">
         <h3>대여하기</h3>
 
@@ -124,19 +161,11 @@ function BookingUpload({ history,match }) {
         <h3>결제수단</h3>
 
 
-
-
-
-
-
-
-
-
         {/* --------------결제모달-------------- */}
         <div className="middle">
           <React.Fragment>
             <div className="custom-search" >
-              <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요" />
+              <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요" value={paypay}/>
               <button onClick={openModal} className="custom-search-botton" type="submit">등록</button>
             </div>
 
@@ -150,15 +179,15 @@ function BookingUpload({ history,match }) {
               <div className='payselect' name="payment" onClick={selecttransfer}>간편계좌결제</div>
               <div className='payselect' name="payment" onClick={selectcell}>휴대폰 결제</div>
 
-              <div className='paytext'>
+              <div className='paytext' onChange={handlerpaypay}>
                 {(function () {
                   if (payment == "1") {
                     return <div><select className='payment2'>
                       <option disabled selected>카드선택</option>
-                      <option>신한카드</option>
-                      <option>롯데카드</option>
-                      <option>삼성카드</option>
-                      <option>우리카드</option>
+                      <option value='신한카드'>신한카드</option>
+                      <option value='롯데카드'>롯데카드</option>
+                      <option value='삼성카드'>삼성카드</option>
+                      <option value='우리카드'>우리카드</option>
                     </select>
                       <div className='paynotice'>
                         결제 수단에 대한 내용 어쩌구 사용안내<br />
@@ -173,7 +202,7 @@ function BookingUpload({ history,match }) {
                   else if (payment == "2") {
                     return <div><select className='payment2'>
                       <option disabled selected>선택</option>
-                      <option>카카오페이</option>
+                      <option value='카카오페이'>카카오페이</option>
 
                     </select>
                       <div className='paynotice'>
@@ -188,7 +217,7 @@ function BookingUpload({ history,match }) {
                   else if (payment == "3") {
                     return <div><select className='payment2'>
                       <option disabled selected>선택</option>
-                      <option>토스</option>
+                      <option value='토스'>토스</option>
 
                     </select>
                       <div className='paynotice'>
@@ -205,7 +234,7 @@ function BookingUpload({ history,match }) {
                   else if (payment == "4") {
                     return <div><select className='payment2'>
                       <option disabled selected>선택</option>
-                      <option>계좌</option>
+                      <option value='계좌'>계좌</option>
 
                     </select>
                       <div className='paynotice'>
@@ -219,7 +248,7 @@ function BookingUpload({ history,match }) {
                   else {
                     return <div><select className='payment2'>
                       <option disabled selected>선택</option>
-                      <option>핸드폰</option>
+                      <option value='핸드폰'>핸드폰</option>
 
                     </select>
                       <div className='paynotice'>
@@ -249,10 +278,18 @@ function BookingUpload({ history,match }) {
 
         <h3>대여기간</h3>
         <div className="bottom">
-
+        
           <div> <div className="inputdate">
-            <Calendar onChange={date => setbookingDate(date)} value={value} />
-
+         
+            <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)}
+                      formatDay={(locale, date) => moment(date).format("DD")}
+                      tileDisabled={({date, view}) =>
+                         (view === 'month') && // Block day tiles only
+                          disableDates.some(disabledDate =>
+                          date.getFullYear() === disabledDate.getFullYear() &&
+                          date.getMonth() === disabledDate.getMonth() &&
+                          date.getDate() === disabledDate.getDate()
+            )} />
             <br />
             선택한 날짜 : {moment(value).format("YYYY년 MM월 DD일")}
           </div>
