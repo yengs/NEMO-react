@@ -10,13 +10,15 @@ function MypageReview() {
     const [items, setItems] = useState('');                         // 상품 전체 데이터
     const [myReviewData, setmyReviewData] = useState('');           // 내가 작성한 후기
     const [yourReviewData, setYourReviewData] = useState('');       // 내가 등록한 상품에 대한 다른 회원의 후기
-    const [imageSrc, setImageSrc] = useState('');                   // 상품 이미지
     const [reviewIcon, setReviewIcon] = useState('');               // 만족도 
+
+    const reviewWriter = sessionStorage.getItem('memberId');
+    const reviewId = sessionStorage.getItem('memberId');
 
     useEffect(() => {
 
         // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
-        axios.get(`http://localhost:8080/api/mypage/myReview1`)
+        axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`)
             .then(response => {
                 console.log(response);
                 setDatas(response.data);
@@ -26,21 +28,22 @@ function MypageReview() {
             .catch(error => console.log(error));
 
         // 내가 작성한 후기 데이터
-        axios.get(`http://localhost:8080/api/mypage/myReview2`)
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
+        { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => {
                 console.log(response);
                 setmyReviewData(response.data);
                 setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
-    }, [])
-    
+    }, []);
+
     const goYourReview = () => {
-        window.location.href = "/review/yourReview";
+        window.location.href = `/review/yourReview/${reviewId}`;
     }
 
     const goMyReview = () => {
-        window.location.href = "/review/myReview";
+        window.location.href = `/review/myReview/${reviewWriter}`;
     }
 
     return (
@@ -77,7 +80,7 @@ function MypageReview() {
                                         <td>
                                             {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                             <div className='rReviewItemImg'>
-                                                {imageSrc && <img src={imageSrc} alt="review-img" />}
+                                                {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
                                             </div>
                                         </td>
                                     </tr>
@@ -126,7 +129,7 @@ function MypageReview() {
                                     <td>
                                         {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                         <div className='rReviewItemImg'>
-                                            {imageSrc && <img src={imageSrc} alt="review-img" />}
+                                            {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
                                         </div>
                                     </td>
 
@@ -157,7 +160,7 @@ function MypageReview() {
                                     <td>
                                         {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                         <div className='rReviewItemImg'>
-                                            {imageSrc && <img src={imageSrc} alt="review-img" />}
+                                            {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
                                         </div>
                                     </td>
 

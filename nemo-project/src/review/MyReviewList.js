@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
-// import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
-function MyReviewList({match}) {
+function MyReviewList({ history, match }) {
 
     const { reviewWriter } = match.params;
 
@@ -15,8 +14,10 @@ function MyReviewList({match}) {
     const [page, setPage] = useState(1);                                // 보여지는 페이지
     const [items, setItems] = useState([]);                             // 페이징을 통해서 보여줄 데이터
 
+    // 후기 데이터 가져오기
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`, { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
+            { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
             .then(response => {
                 console.log(response);
                 const list = response.data.map(data => ({ ...data, closed: true }));
@@ -38,6 +39,42 @@ function MyReviewList({match}) {
             item.reviewNum === reviewNum ? ({ ...item, closed: !item.closed }) : item
         ));
     };
+
+    // 후기 수정 
+    const handlerReviewUpdate = (reviewNum) => {
+        axios.post(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    alert("수정되었습니다.");
+                    history.push(`/review/myReview/${reviewWriter}`);
+                    window.location.reload();
+                } else {
+                    alert("삭제에 실패했습니다.");
+                    return;
+                }
+            })
+            .catch(error => console.log(error));
+    }
+
+    // 후기 삭제
+    const handlerReviewDelete = (reviewNum) => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+            axios.delete(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
+                .then(response => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        alert("정상적으로 삭제되었습니다.");
+                        history.push(`/review/myReview/${reviewWriter}`);
+                        window.location.reload();
+                    } else {
+                        alert("삭제에 실패했습니다.");
+                        return;
+                    }
+                })
+                .catch(error => console.log(error));
+        };
+    }
 
     return (
         <>
@@ -66,19 +103,19 @@ function MyReviewList({match}) {
                                     <td>{review.reviewNum}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <div className="reviewListItemImg">
-                                        <img src={`../../reviewFiles/${review.reviewFiles}`}></img>
-                                        </div>
+                                        <img className="reviewListItemImg" src={`../../files/${review.reviewFiles}`}></img>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
                                             <p className={review.closed ? "close" : ""}>{review.reviewContents}</p>
                                         </div>
                                         <div id="btnView">
-                                            {review.reviewContents.length > 36 ?
+                                            {review.reviewContents.length > 10 ?
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             }
+                                            <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}> [ 수정 ] </button>
+                                            <button className="moreBtn" onClick={() => handlerReviewDelete(review.reviewNum)}> [ 삭제 ] </button>
                                         </div>
                                     </td>
                                     <td>

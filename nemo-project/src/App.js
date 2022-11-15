@@ -26,6 +26,8 @@ import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
+import Chat from './chatting/Chat';
+
 
 function App() {
 
@@ -70,6 +72,8 @@ function App() {
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
         <Route path="/item/bookingupload/:itemNum,:itemName,:itemDeposit,:itemPrice,:itemWriter,:files,:itemRentalstart,:itemRentalend" component={BookingUpload} exact={true} />
+        <Route path="/chatting/:itemWriter" component={Chat} exact={true} />
+
 
 
         {/* member */}
@@ -82,10 +86,11 @@ function App() {
 
 
         {/* review */}
-        <Route path="/reivew/reviewWrite" component={ReviewUpload} />
+        <Route path="/review/reviewWrite" component={ReviewUpload} />
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
 
+        
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />

@@ -29,16 +29,80 @@ export default function WeatherRecItemList({ match }) {
 
 
     const [weatherArray, setWeatherArray] = useState([]);
+    const [itemWeather, setItemWeather] = useState('');
+
+    // useEffect(() => {
+    //     if(sessionStorage !== null) {
+    //         if()
+    //     }
+    // })
+
+    const [tomorrowTempArray, setTomorrowTempArray] = useState([]);
+    const [avgTemp, setAvgTemp] = useState();
+
     useEffect(() => {
         if ((mLat !== null || mLat !== undefined || mLat !== '') && (mLon !== null || mLon !== undefined || mLon !== '')) {
             axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${mLat}&lon=${mLon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
                 .then(response => {
                     setWeatherArray(response.data.list);
+
+                    // console.log(response.data.list);
+
+                    // const tomorrowTempArrayMap = response.data.list.map((value, i) => {
+                    //     // console.log(response.data.list[i].dt_txt);
+                    //     if (response.data.list[i].dt_txt.includes(tomorrowDate)) {
+                    //         const tomorrowTemp = response.data.list[i].main.temp_max;
+                    //         // console.log(tomorrowTemp);
+                    //         setTomorrowTempArray(tomorrowTemp)
+                    //         // return tomorrowTemp;
+                    //     }
+                    // });
+                    // // setTomorrowTempArray(tomorrowTempArrayMap);
+                    // console.log(tomorrowTempArray);
+
+                    // const tomorrowTempArrayMap = response.data.list.forEach((element, i, array) => {
+                    //     if(response.data.list[i].dt_txt.includes(tomorrowDate)) {
+
+                    //         const startZ = 0;
+                    //         startZ += console.log(response.data.list[i].main.temp_max);
+
+                    //         return startZ;
+                    //     }
+                    // });
+
+                    // console.log(tomorrowTempArrayMap);
+
+                    // setTomorrowTempArray(tomorrowTempArrayMap);
+
+                    
+
+                        const sum = response.data.list.reduce(
+                            
+                            (accumulator, currentValue, i) => {
+                                if(response.data.list[i].dt_txt.includes(tomorrowDate)){
+                                    console.log(response.data.list[i].main.temp_max);
+                                    if (!accumulator) 
+                                    accumulator = 0;
+                                    console.log(accumulator +','+ currentValue);
+                                    return Number(accumulator) + Number(response.data.list[i].main.temp_max);                             
+                                }
+                            }
+                            );
+                        console.log(sum);
+
+
                 })
                 .catch(error => {
                     console.log(error);
                 });
-        }
+
+            }
+
+        // axios.get(`/item/cate/${itemWeather}`)
+        //     .then(response => {
+
+        //     })
+
     }, []);
 
 
@@ -48,6 +112,7 @@ export default function WeatherRecItemList({ match }) {
     //         .then(response => setDatas(response.data))
     //         .catch(error => console.log(error));
     // }, []);
+
 
     return (
         <Container>
@@ -82,8 +147,8 @@ export default function WeatherRecItemList({ match }) {
                                                 {/* {data.weather[0].description} */}
                                             </div>
                                             <div className="feelsLikeTemp timeTemp">체감온도<span className="feelTemp temp">{data.main.feels_like}</span>℃</div>
-                                            <div className="timeTemp">최고<span className="temp">{data.main.temp_max}</span>℃</div>
-                                            <div className="timeTemp">최저<span className="temp">{data.main.temp_min}</span>℃</div>
+                                            <div className="timeTemp">기온<span className="temp">{data.main.temp_max}</span>℃</div>
+                                            {/* <div className="timeTemp">최저<span className="temp">{data.main.temp_min}</span>℃</div> */}
                                         </div>
                                     );
                                 }
@@ -161,6 +226,15 @@ const Container = styled.div`
 .tomWetherDetailWrap {
     display: flex;
     justify-content: space-between;
+}
+
+.tomWetherDetailWrap .tomWetherDetail {
+    width: 11.2%;
+    // border: 1px solid red;
+}
+
+.tomWetherDetailWrap .tomWetherDetail:first-child {
+    margin-left: 15px;
 }
 
 .tomWetherDetailWrap .tomWetherDetail .weatherTime {
