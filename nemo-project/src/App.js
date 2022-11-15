@@ -30,7 +30,12 @@ import Chat from './chatting/Chat';
 import ReviewUpdate from './review/ReviewUpdate';
 
 
+import moment from 'moment';
+import 'moment/locale/ko';
+
 function App() {
+
+  const tomorrowDate = moment().add(1, 'days').format('-DD');
 
   useEffect(() => {
     if(sessionStorage.getItem('memberId') !== null) {
@@ -43,6 +48,35 @@ function App() {
           
           sessionStorage.setItem("lat",response.data.lat);
           sessionStorage.setItem("lon",response.data.lon);
+
+          if (sessionStorage.getItem("lat") && sessionStorage.getItem("lon")) {
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${sessionStorage.getItem("lat")}&lon=${sessionStorage.getItem("lon")}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+            .then(response => {
+
+                const tempSum = response.data.list
+                    .filter(data => data.dt_txt.includes(tomorrowDate))
+                    .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
+
+                const tempAvg = tempSum / 8;
+
+                if (tempAvg < 11) {
+                    return sessionStorage.setItem("weather","겨울");
+                } else if (11 <= tempAvg && tempAvg < 17) {
+                    return sessionStorage.setItem("weather","봄");
+                } else if (17 <= tempAvg && tempAvg < 23) {
+                    return sessionStorage.setItem("weather","가을");
+                } else {
+                    return sessionStorage.setItem("weather","여름");
+                }
+
+                
+                
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    
+        }
           
         })
         .catch(error => console.log(error));
@@ -50,6 +84,7 @@ function App() {
       }).catch(error=>console.log(error));
       
       }
+
   })
 
   return (

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import axios from "axios";
-// import reset from 'styled-reset';
 
 
 const Chat = ({match}) => {
@@ -44,12 +43,17 @@ const Chat = ({match}) => {
     useEffect(() => {
         if(socketData !== undefined) {
             const tempData = chatt.concat(socketData);
-            console.log(tempData);
+            console.log(">>>", tempData);
             setChatt(tempData);
+            sessionStorage.setItem("chatLog", JSON.stringify(tempData));
         }
     }, [socketData]);
 
-
+    useEffect(() => {
+        const tempData = sessionStorage.getItem("chatLog");
+        if (tempData) 
+            setChatt(JSON.parse(tempData));
+    }, []);
 
 
     //webSocket
@@ -73,7 +77,6 @@ const Chat = ({match}) => {
         }
     });
    
-
     const send = useCallback(() => {
         if(!chkLog) {
             setChkLog(true);
@@ -150,8 +153,7 @@ const MyWebsocket = styled.div`
     margin: 50px auto;
     padding:20px 10px;
     border-radius: 20px;
-    box-shadow:  41px 41px 82px #c9c9c9,
-      -41px -41px 82px #ffffff;
+
   }
   /* input 기본 스타일 초기화 */
   input {
@@ -160,10 +162,10 @@ const MyWebsocket = styled.div`
             appearance: none;
   }
   
-  /* IE10 이상에서 input box 에 추가된 지우기 버튼 제거 */
+ 
   input::-ms-clear { display: none; }
   
-  /* input type number 에서 화살표 제거 */
+
   input[type='number']::-webkit-inner-spin-button,
   input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -208,6 +210,7 @@ const MyWebsocket = styled.div`
         }
   
         &.other{
+            background-color : #fff;
           margin : 20px 0px 2px 0;	
         }
       }

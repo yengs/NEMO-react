@@ -8,12 +8,51 @@ import Jeans from './img/jeans.jpg';
 import Store1 from "./img/store1.jpg";
 import Store2 from "./img/store2.jpg";
 import Store3 from "./img/store3.jpg";
+import { useEffect } from "react";
+
+import moment from 'moment';
+import 'moment/locale/ko';
+import axios from "axios";
+
 
 function Main() {
+
+    const tomorrowDate = moment().add(1, 'days').format('-DD');
 
     const goWeatherItemList = () => {
         window.location.href = "/item/weatherrecitemlist";
     }
+
+    // useEffect(() => {
+    //     if (sessionStorage.getItem("lat") && sessionStorage.getItem("lon")) {
+    //         axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${sessionStorage.getItem("lat")}&lon=${sessionStorage.getItem("lon")}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+    //             .then(response => {
+    
+    //                 const tempSum = response.data.list
+    //                     .filter(data => data.dt_txt.includes(tomorrowDate))
+    //                     .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
+    
+    //                 const tempAvg = tempSum / 8;
+    
+    //                 if (tempAvg < 11) {
+    //                     return sessionStorage.setItem("weather","겨울");
+    //                 } else if (11 <= tempAvg && tempAvg < 17) {
+    //                     return sessionStorage.setItem("weather","봄");
+    //                 } else if (17 <= tempAvg && tempAvg < 23) {
+    //                     return sessionStorage.setItem("weather","가을");
+    //                 } else {
+    //                     return sessionStorage.setItem("weather","여름");
+    //                 }
+    
+                    
+                    
+    //             })
+    //             .catch(error => {
+    //                 console.log(error);
+    //             });
+    
+    //     }
+    // });
 
     return (
         <div>
