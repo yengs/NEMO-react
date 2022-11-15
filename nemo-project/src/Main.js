@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { BsCloudy, BsFillCloudSunFill, BsFillCloudLightningRainFill, BsSnow, BsFillCloudRainFill, BsFillCloudLightningFill, BsSun } from "react-icons/bs";
-
+// import { BsCloudy, BsFillCloudSunFill, BsFillCloudLightningRainFill, BsSnow, BsFillCloudRainFill, BsFillCloudLightningFill, BsSun } from "react-icons/bs";
 
 import Shirt from './img/shirt.jpg';
 import Dress from './img/dress.jpg';
@@ -47,10 +46,10 @@ function Main() {
             </div> */}
             <div className="recWeather">
                 <div className="tomorrowWeather">
-                    <div className="weatherIcon">
+                    {/* <div className="weatherIcon">
                         <BsCloudy />
-                    </div>
-                    <h4 style={{marginBottom:'22px'}}>내일은 <span className="temp">{Math.round(sessionStorage.getItem("tempAvg"))}</span>℃</h4>
+                    </div> */}
+                    <h4 style={{marginBottom:'22px', backgroundColor: "rgb(88, 145, 112)", color: "#fff", padding: '4px 14px', borderRadius:'50px'}}>내일은 <span className="temp">{Math.round(sessionStorage.getItem("tempAvg"))}</span>℃</h4>
                 </div>
                 <div className="titleNplusBtn">
                     <h3>이런 옷 어때요?</h3>
