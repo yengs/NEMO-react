@@ -28,7 +28,7 @@ const AppStyle = styled.div`
 
 function ReviewUpdate({ history, match }) {
 
-    const { reviewWriter } = match.params;
+    const { reviewWriter,reviewNum } = match.params;
 
     const [datas, setDatas] = useState({});
     const [reviewImage, setReviewImage] = useState('');

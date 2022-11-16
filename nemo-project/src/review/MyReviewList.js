@@ -42,8 +42,9 @@ function MyReviewList({ history, match }) {
     };
 
     // 후기 수정 
-    const handlerReviewUpdate = () => {
-        window.location.href = `/review/reviewUpdate`
+    const handlerReviewUpdate = (reviewNum) => {
+        window.location.href = `/review/myReview/update/${reviewWriter}/${reviewNum}`
+        console.log(reviewNum);
     }
 
     // 후기 삭제
@@ -103,7 +104,7 @@ function MyReviewList({ history, match }) {
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             }
-                                            <button className="moreBtn" onClick={handlerReviewUpdate}> [ 수정 ] </button>
+                                            <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}> [ 수정 ] </button>
                                             <button className="moreBtn" onClick={() => handlerReviewDelete(review.reviewNum)}> [ 삭제 ] </button>
                                         </div>
                                     </td>
