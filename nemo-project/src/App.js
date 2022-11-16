@@ -109,7 +109,6 @@ function App() {
         <Route path="/chatting/:itemWriter" component={Chat} exact={true} />
 
 
-
         {/* member */}
         <Route path="/member/join" component={Join} exact={true} />
         <Route path="/member/login" component={Login} exact={true} />
