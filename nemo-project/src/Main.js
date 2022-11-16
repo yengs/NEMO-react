@@ -49,9 +49,9 @@ function Main() {
                 .catch(error => console.log(error));
         }
 
-        axios.get('http://localhost:8080/api/item/best')
-        .then(response => setBestItemDatas(response.data))
-        .catch(error => console.log(error));
+        // axios.get('http://localhost:8080/api/item/best')
+        // .then(response => setBestItemDatas(response.data))
+        // .catch(error => console.log(error));
     }, []);
 
 
