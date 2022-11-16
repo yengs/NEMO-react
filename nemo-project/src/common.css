@@ -567,7 +567,15 @@ footer {
   background-color: #eee;
   border-radius: 10px;
   padding: 1.5%;
-  margin: 1.5%;
+  margin: 2%;
+}
+
+.itemInfoWrap:nth-child(4n) {
+  margin-right: 0;
+}
+
+.itemInfoWrap:nth-child(4n+1) {
+  margin-left: 0;
 }
 
 .recWeeklyWrap .itemInfoWrap {

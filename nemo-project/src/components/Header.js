@@ -108,7 +108,7 @@ function Header() {
                         </IconContext.Provider>
                         <span>
                             {
-                                sessionStorage.getItem('memberId') ? memberRegion : "로그인을 해주세요"
+                                sessionStorage.getItem('memberId') ? memberRegion : "로그인이 필요합니다"
                             }
                         </span>
                     </div>
@@ -155,8 +155,12 @@ function Header() {
                         <IconContext.Provider value={{ className: "navIcons" }}>
                             <FaTemperatureHigh />
                         </IconContext.Provider>
-                        <Link to="/item/weatherrecitemlist">내일의 날씨는?</Link>
-                        {/* <span>내일의 날씨는?</span> */}
+                        {
+                            sessionStorage.getItem("memberId") ?
+                            <Link to="/item/weatherrecitemlist">내일의 날씨는?</Link>
+                            :
+                            <Link to="/member/login">내일의 날씨는?</Link>
+                        }
                     </div>
                 </div>
             </div>
