@@ -28,9 +28,21 @@ const AppStyle = styled.div`
     border: 0;
   }
 `;
-export default function ReviewUpload({ history }) {
+
+
+
+
+export default function ReviewUpload({ history , match }) {
 
     const reviewWriter = sessionStorage.getItem('memberId');
+
+    const {bookingItemnum} = match.params;
+    const {bookingItemwriter} = match.params;
+
+    const  reviewProductIdx = bookingItemnum;
+    const  reviewId = bookingItemwriter;
+
+    // const [data, setData] = useState([]);
 
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
@@ -65,7 +77,7 @@ export default function ReviewUpload({ history }) {
 
         // 이미지 등록 
         const formData = new FormData();
-        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction })], {
+        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction, "reviewProductIdx":reviewProductIdx , "reviewId":reviewId })], {
             type: "application/json"
         }));
         formData.append("reviewFiles", reviewFiles);
