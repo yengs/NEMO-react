@@ -246,7 +246,7 @@ function ItemUpload({ history }) {
 
                        <tr>
                             <td>상품설명</td>
-                            <td><input type="textarea" id="itemDetail" name="itemDetail" value={itemDetail} onChange={handlerChangeitemDetail} /></td>
+                            <td><textarea type="textarea" id="itemDetail" name="itemDetail" value={itemDetail} onChange={handlerChangeitemDetail} style={{resize:"none", width:"100%", height:"200px", border:"1px solid #ddd", padding: "10px", borderRadius: "3px"}} /></td>
                         </tr>
 
                         

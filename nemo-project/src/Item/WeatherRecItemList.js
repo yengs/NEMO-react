@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import { BsCloudy, BsFillCloudSunFill, BsFillCloudLightningRainFill, BsSnow } from "react-icons/bs";
-import { BsFillCloudRainFill } from "react-icons/bs";
-import { BsFillCloudLightningFill } from "react-icons/bs";
-import { BsSun } from "react-icons/bs";
+import { BsCloudy, BsFillCloudSunFill, BsFillCloudLightningRainFill, BsSnow, BsFillCloudRainFill, BsFillCloudLightningFill, BsSun } from "react-icons/bs";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -31,16 +28,10 @@ export default function WeatherRecItemList({ match }) {
     const [weatherArray, setWeatherArray] = useState([]);
     const [itemWeather, setItemWeather] = useState('');
 
-    // useEffect(() => {
-    //     if(sessionStorage !== null) {
-    //         if()
-    //     }
-    // })
-
 
     useEffect(() => {
         if (mLat && mLon) {
-            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${mLat}&lon=${mLon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${mLat}&lon=${mLon}&units=metric&lang=kr&appid=8444067fea4eff0a4da0bf54dd76b665`)
                 .then(response => {
                     setWeatherArray(response.data.list);
 
@@ -48,8 +39,6 @@ export default function WeatherRecItemList({ match }) {
                         axios.get(`http://localhost:8080/api/item/weather/${sessionStorage.getItem("weather")}`)
                         .then(response => {
                             setDatas(response.data);
-                            console.log("날씨는 "+sessionStorage.getItem("weather")+"이고, ");
-                            console.log("날씨추천리스트 성공했나요?");
                         })
                         .catch(error => console.log(error));
                     }
@@ -137,7 +126,6 @@ export default function WeatherRecItemList({ match }) {
                             </div>
                         ))
                     }
-                    {console.log(datas)}
                     {
                         datas.length === 0 && (
                             <tr>

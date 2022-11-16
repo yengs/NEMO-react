@@ -6,10 +6,14 @@ import styled from "styled-components";
 
 function MypageReview() {
 
+    const YOURREVIEW_COUNT_PER_PAGE = 1;
+    const MYREVIEW_COUNT_PER_PAGE = 2;
+  
+    const [data, setData] = useState([]);
     const [datas, setDatas] = useState([]);                         // 리뷰 전체 데이터
     const [items, setItems] = useState('');                         // 상품 전체 데이터
-    const [myReviewData, setmyReviewData] = useState('');           // 내가 작성한 후기
-    const [yourReviewData, setYourReviewData] = useState('');       // 내가 등록한 상품에 대한 다른 회원의 후기
+    // const [myReviewData, setmyReviewData] = useState('');           // 내가 작성한 후기
+    // const [yourReviewData, setYourReviewData] = useState('');       // 내가 등록한 상품에 대한 다른 회원의 후기
     const [reviewIcon, setReviewIcon] = useState('');               // 만족도 
 
     const reviewWriter = sessionStorage.getItem('memberId');
@@ -21,22 +25,27 @@ function MypageReview() {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`)
             .then(response => {
                 console.log(response);
-                setDatas(response.data);
-                setYourReviewData(response.data);
-                setReviewIcon(response.data);
+                setData(response.data);
+                // setDatas(response.data);
+                // setYourReviewData(response.data.slice((datas - 1) * YOURREVIEW_COUNT_PER_PAGE));
+                // setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
+        }, []);
 
+     useEffect(() => {
         // 내가 작성한 후기 데이터
-        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
-        { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`)
+        // { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }}
+        
             .then(response => {
                 console.log(response);
-                setmyReviewData(response.data);
+                setDatas(response.data);
                 setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
     }, []);
+
 
     const goYourReview = () => {
         window.location.href = `/review/yourReview/${reviewId}`;
@@ -57,43 +66,36 @@ function MypageReview() {
                 </div>
                 <div className='tableWrap'>
                     <table className="yourReviewListAboutStore">
-                        <thead>
-                            <th colSpan={2}>상품 정보</th>
-                            <th>작성자</th>
-                            <th colSpan={2}>내용</th>
+                    <thead>
+                            <tr>
+                                <th colSpan={2}>상품 정보</th>
+                                <th>작성자</th>
+                                <th >내용</th>
+                                <th >만족도</th>
+                            </tr>
                         </thead>
+                        {
+                            data && data.map(review => (
                         <tbody>
-                            {
-                                yourReviewData && yourReviewData.map(review => (
-                                    <tr key={review.reviewNum}>
-                                        <td rowSpan={3} className="rReviewItemImageOrigin">
-                                            {/* 내가 등록한 상품사진 */}
-                                            {/*  */}
-                                        </td>
-                                        <td className='rReviewItemNameOrigin' rowSpan={3}>
-                                            {/* 내가 등록한 상품이름 */}
-                                            { }
-                                        </td>
-                                        <td className='rReviewWriter' rowSpan={3}>
-                                            {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
-                                            {review.reviewWriter}</td>
-                                        <td>
-                                            {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
-                                            <div className='rReviewItemImg'>
-                                                {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
-                            {
-                                datas.length === 0 && (
-                                    <tr>
-                                        <td colSpan="4"> 작성된 글이 없습니다. </td>
-                                    </tr>
-                                )
-                            }
-                        </tbody>
+                                <tr key={review.reviewNum}>
+                                <td rowSpan={2} className="rReviewItemImageOrigin">
+                                    <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`}/>
+                                </td>
+                                <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
+                                <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}</td>
+                            </tr>
+                            </tbody>
+                            ))
+                        }
+                        {
+                            datas.length === 0 && (
+                                <tr>
+                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                </tr>
+                            )
+                        }
                     </table>
                 </div>
 
@@ -107,33 +109,27 @@ function MypageReview() {
                 </div>
                 <div className='tableWrap'>
                     <table className="yourReviewListAboutStore">
-                        <thead>
-                            <th colSpan={2}>상품 정보</th>
-                            <th>대여료</th>
-                            <th colSpan={2}>내용</th>
+                    <thead>
+                            <tr>
+                                <th colSpan={2}>상품 정보</th>
+                                <th>대여료</th>
+                                <th >내용</th>
+                                <th >만족도</th>
+                            </tr>
                         </thead>
                         {
-                            myReviewData && myReviewData.map(review => (
+                            datas && datas.map(review => (
+                        <tbody>
                                 <tr key={review.reviewNum}>
-                                    <td rowSpan={3} className="rReviewItemImageOrigin">
-                                        {/* 내가 등록한 상품사진 */}
-                                        {/*  */}
-                                    </td>
-                                    <td className='rReviewItemNameOrigin' rowSpan={3}>
-                                        {/* 내가 등록한 상품이름 */}
-                                        {items && items.map(item => item.itemName)}
-                                    </td>
-                                    <td className='rReviewWriter' rowSpan={3}>
-                                        {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
-                                        {review.reviewWriter}</td>
-                                    <td>
-                                        {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
-                                        <div className='rReviewItemImg'>
-                                            {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
-                                        </div>
-                                    </td>
-
-                                </tr>
+                                <td rowSpan={2} className="rReviewItemImageOrigin">
+                                    <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`}/>
+                                </td>
+                                <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice}</td>
+                                <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}</td>
+                            </tr>
+                            </tbody>
                             ))
                         }
                         {
@@ -143,37 +139,8 @@ function MypageReview() {
                                 </tr>
                             )
                         }
-                        {
-                            myReviewData && myReviewData.map(review => (
-                                <tr key={review.reviewNum}>
-                                    <td rowSpan={3} className="rReviewItemImageOrigin">
-                                        {/* 내가 등록한 상품사진 */}
-                                        {/*  */}
-                                    </td>
-                                    <td className='rReviewItemNameOrigin' rowSpan={3}>
-                                        {/* 내가 등록한 상품이름 */}
-                                        {items && items.map(item => item.itemName)}
-                                    </td>
-                                    <td className='rReviewWriter' rowSpan={3}>
-                                        {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
-                                        {review.reviewWriter}</td>
-                                    <td>
-                                        {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
-                                        <div className='rReviewItemImg'>
-                                            {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
-                                        </div>
-                                    </td>
-
-                                </tr>
-                            ))
-                        }
-                        {
-                            datas.length === 0 && (
-                                <tr>
-                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
-                                </tr>
-                            )
-                        }
+                       
+                        
                     </table>
                 </div>
             </div>
@@ -182,6 +149,11 @@ function MypageReview() {
 }
 
 const MypageReviewContainer = styled.div`
+
+.bookingitemImg{
+    width: 100%;
+    height : 82px;
+}
 .myPageWrap {
     width: 100%;
     height: calc(100vh - 250px);
@@ -359,7 +331,7 @@ table-layout: fixed;
 /* 다른사람이 보는 마이페이지 */
 
 .rReviewItemImageOrigin {
-    width: 10%;
+    width: 20%;
 }
 
 .rReviewItemImageOrigin div {
