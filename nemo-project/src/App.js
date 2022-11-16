@@ -121,7 +121,7 @@ function App() {
 
 
         {/* review */}
-        <Route path="/review/reviewWrite" component={ReviewUpload} />
+        <Route path="/review/reviewWrite/:bookingItemnum,:bookingItemwriter" component={ReviewUpload} />
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
 
