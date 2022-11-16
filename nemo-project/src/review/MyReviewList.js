@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
+import { Link, Route } from "react-router-dom";
 
 function MyReviewList({ history, match }) {
 
@@ -42,19 +43,8 @@ function MyReviewList({ history, match }) {
 
     // 후기 수정 
     const handlerReviewUpdate = (reviewNum) => {
-        axios.post(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
-            .then(response => {
-                console.log(response);
-                if (response.status === 200) {
-                    alert("수정되었습니다.");
-                    history.push(`/review/myReview/${reviewWriter}`);
-                    window.location.reload();
-                } else {
-                    alert("삭제에 실패했습니다.");
-                    return;
-                }
-            })
-            .catch(error => console.log(error));
+        window.location.href = `/review/myReview/update/${reviewWriter}/${reviewNum}`
+        console.log(reviewNum);
     }
 
     // 후기 삭제
@@ -110,7 +100,7 @@ function MyReviewList({ history, match }) {
                                             <p className={review.closed ? "close" : ""}>{review.reviewContents}</p>
                                         </div>
                                         <div id="btnView">
-                                            {review.reviewContents.length > 10 ?
+                                            {review.reviewContents.length > 18 ?
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             }

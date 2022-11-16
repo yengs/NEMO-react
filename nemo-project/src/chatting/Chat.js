@@ -55,6 +55,8 @@ const Chat = ({match}) => {
             setChatt(JSON.parse(tempData));
     }, []);
 
+    console.log(sessionStorage.getItem("chatLog"))
+   
 
     //webSocket
     //webSocket
