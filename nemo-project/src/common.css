@@ -509,6 +509,7 @@ footer {
 .titleNplusBtn {
   display: flex;
   justify-content: space-between;
+  width: 100%
 }
 
 .titleNplusBtn>h3 {
@@ -518,7 +519,8 @@ footer {
 
 .tomorrowWeather {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: -25px;
 }
 
@@ -563,11 +565,19 @@ footer {
 
 .itemInfoWrap {
   width: 22%;
-  height: 380px;
+  height: 430px;
   background-color: #eee;
   border-radius: 10px;
   padding: 1.5%;
-  margin: 1.5%;
+  margin: 2%;
+}
+
+.itemInfoWrap:nth-child(4n) {
+  margin-right: 0;
+}
+
+.itemInfoWrap:nth-child(4n+1) {
+  margin-left: 0;
 }
 
 .recWeeklyWrap .itemInfoWrap {
@@ -576,8 +586,8 @@ footer {
 
 .itemInfoWrap .itemImg {
   width: 100% !important;
-  height: 65%;
-  /* border: 1px solid #000; */
+  height: 68%;
+  border: 1px solid #ddd;
   border-radius: 5px;
   background-position: center;
   background-repeat: no-repeat;
