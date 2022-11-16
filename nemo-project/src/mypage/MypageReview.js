@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import jeans from '../img/jeans.jpg';
@@ -24,22 +25,33 @@ function MypageReview() {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`)
             .then(response => {
                 console.log(response);
-                setDatas(response.data);
-                setYourReviewData(response.data.slice((datas - 1) * YOURREVIEW_COUNT_PER_PAGE));
-                setReviewIcon(response.data);
+                const list = response.data.map(data => ({ ...data, closed: true }));
+                console.log(list);
+                setDatas(list);
+                setmyReviewData(list.slice(0, YOURREVIEW_COUNT_PER_PAGE));
+                setReviewIcon(list);
             })
             .catch(error => console.log(error));
 
         // 내가 작성한 후기 데이터
         axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
-        { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
+            { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
             .then(response => {
                 console.log(response);
-                setmyReviewData(response.data.slice((datas - 1) * MYREVIEW_COUNT_PER_PAGE));
-                setReviewIcon(response.data);
+                const list = response.data.map(data => ({ ...data, closed: true }));
+                console.log(list);
+                setDatas(list);
+                setmyReviewData(list.slice(0, MYREVIEW_COUNT_PER_PAGE));
+                setReviewIcon(list);
             })
             .catch(error => console.log(error));
     }, []);
+
+    const handelrMoreBtn = (reviewNum) => {
+        setmyReviewData(myReviewData.map(data =>
+            data.reviewNum === reviewNum ? ({ ...data, closed: !data.closed }) : data
+        ));
+    };
 
     const goYourReview = () => {
         window.location.href = `/review/yourReview/${reviewId}`;
@@ -79,11 +91,43 @@ function MypageReview() {
                                         </td>
                                         <td className='rReviewWriter' rowSpan={3}>
                                             {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
-                                            {review.reviewWriter}</td>
+                                            {/* {review.reviewWriter} */}
+                                        </td>
                                         <td>
                                             {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                             <div className='rReviewItemImg'>
-                                                {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
+                                                <img className="reviewListItemImg" src={`../../files/${review.reviewFiles}`}></img>
+                                            </div>
+                                            <div>
+                                                {review.reviewContents}
+                                            </div>
+                                            <div>
+                                                {review.reviewSatisfaction}
+                                                <div>
+                                                    {
+                                                        (function () {
+                                                            if (review.reviewSatisfaction === 0) {
+                                                                return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                            } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                                return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
+                                                            } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                                return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
+                                                                return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
+                                                                return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
+                                                                return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
+                                                                return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
+                                                                return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
+                                                            } else {
+                                                                return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
+                                                            }
+                                                        })()
+                                                    }
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -128,45 +172,51 @@ function MypageReview() {
                                     </td>
                                     <td className='rReviewWriter' rowSpan={3}>
                                         {/* 대여료 */}
-                                        {review.reviewWriter}</td>
+                                        { }
+                                    </td>
                                     <td>
                                         {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                         <div className='rReviewItemImg'>
-                                        <img className="reviewListItemImg" src={`../../files/${review.reviewFiles}`}></img>
+                                            <img className="reviewListItemImg" src={`../../files/${review.reviewFiles}`}></img>
+                                        </div>
+                                        <div className="reviewContents">
+                                            <p className={review.closed ? "close" : ""}>{review.reviewContents}</p>
+                                        </div>
+                                        <div id="btnView">
+                                            {review.reviewContents.length > 10 ?
+                                                <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
+                                                : null
+                                            }
+                                        </div>
+                                        <div>
+                                            {review.reviewSatisfaction}
+                                            <div>
+                                                {
+                                                    (function () {
+                                                        if (review.reviewSatisfaction === 0) {
+                                                            return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                        } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                            return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
+                                                        } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                            return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
+                                                            return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
+                                                            return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
+                                                            return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
+                                                            return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
+                                                            return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
+                                                        } else {
+                                                            return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
+                                                        }
+                                                    })()
+                                                }
+                                            </div>
                                         </div>
                                     </td>
-
-                                </tr>
-                            ))
-                        }
-                        {
-                            datas.length === 0 && (
-                                <tr>
-                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
-                                </tr>
-                            )
-                        }
-                        {
-                            myReviewData && myReviewData.map(review => (
-                                <tr key={review.reviewNum}>
-                                    <td rowSpan={3} className="rReviewItemImageOrigin">
-                                        {/* 내가 등록한 상품사진 */}
-                                        {/*  */}
-                                    </td>
-                                    <td className='rReviewItemNameOrigin' rowSpan={3}>
-                                        {/* 내가 등록한 상품이름 */}
-                                        {items && items.map(item => item.itemName)}
-                                    </td>
-                                    <td className='rReviewWriter' rowSpan={3}>
-                                        {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
-                                        {review.reviewWriter}</td>
-                                    <td>
-                                        {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
-                                        <div className='rReviewItemImg'>
-                                            {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
-                                        </div>
-                                    </td>
-
                                 </tr>
                             ))
                         }
