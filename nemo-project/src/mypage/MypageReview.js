@@ -6,6 +6,9 @@ import styled from "styled-components";
 
 function MypageReview() {
 
+    const YOURREVIEW_COUNT_PER_PAGE = 1;
+    const MYREVIEW_COUNT_PER_PAGE = 2;
+  
     const [datas, setDatas] = useState([]);                         // 리뷰 전체 데이터
     const [items, setItems] = useState('');                         // 상품 전체 데이터
     const [myReviewData, setmyReviewData] = useState('');           // 내가 작성한 후기
@@ -18,20 +21,21 @@ function MypageReview() {
     useEffect(() => {
 
         // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
-        axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`)
+        axios.get(`http://localhost:8080/api/mypage/review1/${reviewId}`)
             .then(response => {
                 console.log(response);
                 setDatas(response.data);
-                setYourReviewData(response.data);
+                setYourReviewData(response.data.slice((datas - 1) * YOURREVIEW_COUNT_PER_PAGE));
                 setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
 
         // 내가 작성한 후기 데이터
-        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
+        axios.get(`http://localhost:8080/api/mypage/review2/${reviewWriter}`,
         { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => {
                 console.log(response);
+                setDatas(response.data);
                 setmyReviewData(response.data);
                 setReviewIcon(response.data);
             })
@@ -121,15 +125,15 @@ function MypageReview() {
                                     </td>
                                     <td className='rReviewItemNameOrigin' rowSpan={3}>
                                         {/* 내가 등록한 상품이름 */}
-                                        {items && items.map(item => item.itemName)}
+                                        {/* {items && items.map(item => item.itemName)} */}
                                     </td>
                                     <td className='rReviewWriter' rowSpan={3}>
-                                        {/* 내 상품에 대해 후기를 남긴 유저의 닉네임 */}
+                                        {/* 대여료 */}
                                         {review.reviewWriter}</td>
                                     <td>
                                         {/* 다른 유저가 내 상품에 남긴 후기 이미지 */}
                                         <div className='rReviewItemImg'>
-                                            {/* {imageSrc && <img src={imageSrc} alt="review-img" />} */}
+                                        <img className="reviewListItemImg" src={`../../files/${review.reviewFiles}`}></img>
                                         </div>
                                     </td>
 
