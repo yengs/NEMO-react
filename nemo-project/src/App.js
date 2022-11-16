@@ -33,6 +33,7 @@ import ReviewUpdate from './review/ReviewUpdate';
 import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
+import BestItemList from './Item/BestItemList';
 
 function App() {
 
@@ -106,6 +107,7 @@ function App() {
         {/* item */}
         <Route path="/item/cate/:itemMaincategory" component={ItemList} exact={true} />
         <Route path="/item/cate/sub/:itemSubcategory" component={ItemsubList} exact={true} />
+        <Route path="/item/bestItem" component={BestItemList} exact={true} />
         <Route path="/item/write" component={ItemUpload} exact={true} />
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
