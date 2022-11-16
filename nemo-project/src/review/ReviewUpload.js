@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState } from 'react';
-import ReviewAddImg from '../img/review-add-img.png'
 
 // import Form from 'react-bootstrap/Form';
 
@@ -30,32 +29,68 @@ const AppStyle = styled.div`
   }
 `;
 
-export default function ReviewUpload({ history }) {
+
+
+
+export default function ReviewUpload({ history , match }) {
+
+    const reviewWriter = sessionStorage.getItem('memberId');
+
+    const {bookingItemnum} = match.params;
+    const {bookingItemwriter} = match.params;
+
+    const  reviewProductIdx = bookingItemnum;
+    const  reviewId = bookingItemwriter;
 
     // const [data, setData] = useState([]);
-    const [reviewImage, setReviewImage] = useState('');
+
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
+    const [reviewFiles, setReviewFiles] = useState('');
+    const [ReviewAddImg, setReviewAddImg] = useState('');
 
-    const handlerChangesetReviewImage = (e) => setReviewImage(e.target.value);
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
-    const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
+    const handlerChangeReviewSatisfaction = (e) => {
+        if (e.target.value < 0 || e.target.value > 100) {
+            return;
+        }
+        setReviewSatisfaction(e.target.value);
+    }
+    const handlerChangeReviewFiles = (e) => {
+        setReviewFiles(e.target.files[0]);
+        encodeFileBase64(e.target.files[0]);
+    }
+
+    const encodeFileBase64 = (fileBlob) => {
+        const read = new FileReader();
+        read.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+            read.onload = () => {
+                setReviewAddImg(read.result);
+                resolve();
+            };
+        });
+    };
 
     const handlerClickSubmit = (e) => {
         e.preventDefault();
-        axios.post(`http://localhost:8080/api/reivew/reviewWrite`,
-            {
-                "reviewImage": reviewImage,
-                "reviewContents": reviewContents,
-                "reviewSatisfaction": reviewSatisfaction
-            })
+
+        // 이미지 등록 
+        const formData = new FormData();
+        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction, "reviewProductIdx":reviewProductIdx , "reviewId":reviewId })], {
+            type: "application/json"
+        }));
+        formData.append("reviewFiles", reviewFiles);
+
+        axios.post(`http://localhost:8080/api/review/reviewWrite`, formData,
+            { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(response => {
                 if (response.status === 200) {
-                    if (reviewContents && reviewSatisfaction != null) {
+                    if (reviewContents.length > 30 && reviewSatisfaction != null) {
                         alert("정상적으로 등록되었습니다.");
-                        history.push("/review/myReview");
+                        history.push(`/review/myReview/${reviewWriter}`);
                     } else {
-                        alert("내용과 만족도를 입력하세요.")
+                        alert("양식에 맞춰 작성해주세요.")
                     }
                 } else {
                     alert("등록에 실패했습니다.");
@@ -63,7 +98,6 @@ export default function ReviewUpload({ history }) {
                 }
             })
             .catch(error => console.log(error));
-
     };
 
     const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
@@ -94,32 +128,23 @@ export default function ReviewUpload({ history }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                {/* <div className='reviewImage' style={{ "backgroundImage": `url(${ReviewAddImg})` }}></div>
+                {/* <AppStyle>  */}
+                <div className="reviewImage">
+                    {ReviewAddImg && <img src={ReviewAddImg} alt="ReviewAddImg" />} </div>
                 <div className="add-img-box">
-                    <input type="file"
-                        id="item_review_input"
-                        className="image_inputType_file"
-                        accept=" .jpg, .png"
-                        multiple
-                        onChange={handlerChangesetReviewImage} />
-                </div> */}
-                <AppStyle>
-                    <label htmlFor="item_review_input">
-                        <div className="btnStart">
-                            <img src={ReviewAddImg} alt="ReviewAddImg" />
-                        </div>
-                    </label>
                     <input
                         type="file"
-                        id="item_review_input"
+                        // id="item_review_input"
                         className="image_inputType_file"
-                        accept=".jpg, .png"
-                        onChange={handlerChangesetReviewImage}
+                        // accept=".jpg, .png"
+                        multiple
+                        onChange={handlerChangeReviewFiles}
                     />
-                </AppStyle>
+                </div>
+                {/* </AppStyle>  */}
             </div>
             <div className='reviewContent'>
-                <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>
+                <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="최소 30자 이상 내용을 입력해주세요."></textarea>
             </div>
             <div className='satisfyingReview'>
                 <span>상품의 만족도는 어떠셨나요?</span>

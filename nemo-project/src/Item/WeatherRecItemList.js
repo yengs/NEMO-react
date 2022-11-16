@@ -29,25 +29,54 @@ export default function WeatherRecItemList({ match }) {
 
 
     const [weatherArray, setWeatherArray] = useState([]);
+    const [itemWeather, setItemWeather] = useState('');
+
+    // useEffect(() => {
+    //     if(sessionStorage !== null) {
+    //         if()
+    //     }
+    // })
+
+
     useEffect(() => {
-        if ((mLat !== null || mLat !== undefined || mLat !== '') && (mLon !== null || mLon !== undefined || mLon !== '')) {
+        if (mLat && mLon) {
             axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${mLat}&lon=${mLon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
                 .then(response => {
                     setWeatherArray(response.data.list);
+
+                    if(sessionStorage.getItem("weather")) {
+                        axios.get(`http://localhost:8080/api/item/weather/${sessionStorage.getItem("weather")}`)
+                        .then(response => {
+                            setDatas(response.data);
+                            console.log("날씨는 "+sessionStorage.getItem("weather")+"이고, ");
+                            console.log("날씨추천리스트 성공했나요?");
+                        })
+                        .catch(error => console.log(error));
+                    }
+                    
+                    
                 })
                 .catch(error => {
                     console.log(error);
                 });
+                
+
         }
+
     }, []);
 
 
     // useEffect(() => {
-    //     // 임시로 get주소 넣어둠. 나중에 수정필요
-    //     axios.get(`http://localhost:8080/api/item/testlist`)
-    //         .then(response => setDatas(response.data))
+    //     if(itemWeather != '') {
+    //         axios.get(`http://localhost:8080/api/item/cate/sub/${itemWeather}`)
+    //         .then(response => {
+    //             setDatas(response.data);
+    //             console.log(response.data);
+    //         })
     //         .catch(error => console.log(error));
+    //     }
     // }, []);
+
 
     return (
         <Container>
@@ -82,8 +111,8 @@ export default function WeatherRecItemList({ match }) {
                                                 {/* {data.weather[0].description} */}
                                             </div>
                                             <div className="feelsLikeTemp timeTemp">체감온도<span className="feelTemp temp">{data.main.feels_like}</span>℃</div>
-                                            <div className="timeTemp">최고<span className="temp">{data.main.temp_max}</span>℃</div>
-                                            <div className="timeTemp">최저<span className="temp">{data.main.temp_min}</span>℃</div>
+                                            <div className="timeTemp">기온<span className="temp">{data.main.temp_max}</span>℃</div>
+                                            {/* <div className="timeTemp">최저<span className="temp">{data.main.temp_min}</span>℃</div> */}
                                         </div>
                                     );
                                 }
@@ -97,7 +126,7 @@ export default function WeatherRecItemList({ match }) {
                         datas && datas.map(item => (
                             <div className="itemInfoWrap" key={item.itemNum}>
                                 <Link to={`/item/detail/${item.itemNum}`}>
-                                    <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
+                                    <img className="itemImg" src={`../../files/${item.files}`}></img>
                                     <div className="itemInfo">
                                         <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
                                         <p className="itemName">{item.itemName}</p>
@@ -108,6 +137,7 @@ export default function WeatherRecItemList({ match }) {
                             </div>
                         ))
                     }
+                    {console.log(datas)}
                     {
                         datas.length === 0 && (
                             <tr>
@@ -161,6 +191,15 @@ const Container = styled.div`
 .tomWetherDetailWrap {
     display: flex;
     justify-content: space-between;
+}
+
+.tomWetherDetailWrap .tomWetherDetail {
+    width: 11.2%;
+    // border: 1px solid red;
+}
+
+.tomWetherDetailWrap .tomWetherDetail:first-child {
+    margin-left: 15px;
 }
 
 .tomWetherDetailWrap .tomWetherDetail .weatherTime {

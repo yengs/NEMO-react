@@ -26,8 +26,16 @@ import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
+import Chat from './chatting/Chat';
+import ReviewUpdate from './review/ReviewUpdate';
+
+
+import moment from 'moment';
+import 'moment/locale/ko';
 
 function App() {
+
+  const tomorrowDate = moment().add(1, 'days').format('-DD');
 
   useEffect(() => {
     if(sessionStorage.getItem('memberId') !== null) {
@@ -40,6 +48,35 @@ function App() {
           
           sessionStorage.setItem("lat",response.data.lat);
           sessionStorage.setItem("lon",response.data.lon);
+
+          if (sessionStorage.getItem("lat") && sessionStorage.getItem("lon")) {
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${sessionStorage.getItem("lat")}&lon=${sessionStorage.getItem("lon")}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+            .then(response => {
+
+                const tempSum = response.data.list
+                    .filter(data => data.dt_txt.includes(tomorrowDate))
+                    .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
+
+                const tempAvg = tempSum / 8;
+
+                if (tempAvg < 11) {
+                    return sessionStorage.setItem("weather","겨울");
+                } else if (11 <= tempAvg && tempAvg < 17) {
+                    return sessionStorage.setItem("weather","봄");
+                } else if (17 <= tempAvg && tempAvg < 23) {
+                    return sessionStorage.setItem("weather","가을");
+                } else {
+                    return sessionStorage.setItem("weather","여름");
+                }
+
+                
+                
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    
+        }
           
         })
         .catch(error => console.log(error));
@@ -47,6 +84,7 @@ function App() {
       }).catch(error=>console.log(error));
       
       }
+
   })
 
   return (
@@ -70,6 +108,8 @@ function App() {
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
         <Route path="/item/bookingupload/:itemNum,:itemName,:itemDeposit,:itemPrice,:itemWriter,:files,:itemRentalstart,:itemRentalend" component={BookingUpload} exact={true} />
+        <Route path="/chatting/:itemWriter" component={Chat} exact={true} />
+
 
 
         {/* member */}
@@ -82,10 +122,11 @@ function App() {
 
 
         {/* review */}
-        <Route path="/reivew/reviewWrite" component={ReviewUpload} />
-        <Route path="/review/myReview" component={MyReviewList} exact={true} />
-        <Route path="/review/yourReview" component={YourReviewList} exact={true} />
-
+        <Route path="/review/reviewWrite/:bookingItemnum,:bookingItemwriter" component={ReviewUpload} />
+        <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
+        <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
+        <Route path="/review/myReview/update/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
+        
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
