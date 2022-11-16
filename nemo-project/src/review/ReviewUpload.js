@@ -70,7 +70,7 @@ export default function ReviewUpload({ history }) {
         }));
         formData.append("reviewFiles", reviewFiles);
 
-        axios.post(`http://localhost:8080/api/reivew/reviewWrite`, formData,
+        axios.post(`http://localhost:8080/api/review/reviewWrite`, formData,
             { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(response => {
                 if (response.status === 200) {
