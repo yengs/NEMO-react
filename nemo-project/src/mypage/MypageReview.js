@@ -35,12 +35,8 @@ function MypageReview() {
         { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => {
                 console.log(response);
-<<<<<<< HEAD
-                setmyReviewData(response.data.slice((datas - 1) * MYREVIEW_COUNT_PER_PAGE));
-=======
                 setDatas(response.data);
                 setmyReviewData(response.data);
->>>>>>> origin/minju
                 setReviewIcon(response.data);
             })
             .catch(error => console.log(error));

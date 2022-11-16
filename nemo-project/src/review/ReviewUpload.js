@@ -28,7 +28,7 @@ const AppStyle = styled.div`
     border: 0;
   }
 `;
-<<<<<<< HEAD
+
 
 
 
@@ -43,12 +43,7 @@ export default function ReviewUpload({ history , match }) {
     const  reviewId = bookingItemwriter;
 
     // const [data, setData] = useState([]);
-=======
-export default function ReviewUpload({ history }) {
 
-    const reviewWriter = sessionStorage.getItem('memberId');
-
->>>>>>> origin/minju
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
     const [reviewFiles, setReviewFiles] = useState('');
@@ -87,7 +82,7 @@ export default function ReviewUpload({ history }) {
         }));
         formData.append("reviewFiles", reviewFiles);
 
-        axios.post(`http://localhost:8080/api/reivew/reviewWrite`, formData,
+        axios.post(`http://localhost:8080/api/review/reviewWrite`, formData,
             { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(response => {
                 if (response.status === 200) {
