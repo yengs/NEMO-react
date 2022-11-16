@@ -49,9 +49,9 @@ function Main() {
                 .catch(error => console.log(error));
         }
 
-        // axios.get('http://localhost:8080/api/item/best')
-        // .then(response => setBestItemDatas(response.data))
-        // .catch(error => console.log(error));
+        axios.get('http://localhost:8080/api/item/best')
+        .then(response => {setBestItemDatas(response.data); console.log(response.data)})
+        .catch(error => console.log(error));
     }, []);
 
 
@@ -131,7 +131,25 @@ function Main() {
                         <button className="plusBtn">+ 더보기</button>
                     </div>
                     <div className="itemWrap">
-                        <div className="itemInfoWrap">
+                        {console.log("bestItemDatas>>>>>>>")}
+                        {console.log(bestItemDatas)}
+                        {
+                            bestItemDatas && bestItemDatas.map(item => (
+
+                                <div className="itemInfoWrap" key={item.itemNum}>
+                                    <Link to={`/item/detail/${item.itemNum}`}>
+                                        <img className="itemImg" src={`../../files/${item.files}`}></img>
+                                        <div className="itemInfo">
+                                            <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
+                                            <p className="itemName">{item.itemName}</p>
+                                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                            <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            )).slice(0, 4)
+                        }
+                        {/* <div className="itemInfoWrap">
                             <div className="itemImg" style={{ backgroundImage: `url(${Dress})` }}></div>
                             <div className="itemInfo">
                                 <p className="itemPrice"><span className="price">19,000</span>원</p>
@@ -166,7 +184,7 @@ function Main() {
                                 <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
                                 <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
