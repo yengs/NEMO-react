@@ -80,6 +80,7 @@ function MypageReview() {
                                 <tr key={review.reviewNum}>
                                 <td rowSpan={2} className="rReviewItemImageOrigin">
                                     <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`}/>
+                                    <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`}/>
                                 </td>
                                 <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
