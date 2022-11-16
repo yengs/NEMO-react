@@ -22,6 +22,10 @@ function Main() {
         window.location.href = "/item/weatherrecitemlist";
     }
 
+    const goBestItemList = () => {
+        window.location.href = "/item/bestItem";
+    }
+
     const [weatherDatas, setWeatherDatas] = useState([]);
     const [randomDatas, setRandomDatas] = useState([]);
 
@@ -128,7 +132,7 @@ function Main() {
                 <div className="recWeeklyWrap">
                     <div className="titleNplusBtn" style={{ marginBottom: "-15px" }}>
                         <h3>주간 베스트</h3>
-                        <button className="plusBtn">+ 더보기</button>
+                        <button className="plusBtn" onClick={goBestItemList}>+ 더보기</button>
                     </div>
                     <div className="itemWrap">
                         {console.log("bestItemDatas>>>>>>>")}
