@@ -18,7 +18,7 @@ function MypageReview() {
     useEffect(() => {
 
         // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
-        axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`)
+        axios.get(`http://localhost:8080/api/mypage/review1/${reviewId}`)
             .then(response => {
                 console.log(response);
                 setDatas(response.data);
@@ -28,10 +28,11 @@ function MypageReview() {
             .catch(error => console.log(error));
 
         // 내가 작성한 후기 데이터
-        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
+        axios.get(`http://localhost:8080/api/mypage/review2/${reviewWriter}`,
         { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => {
                 console.log(response);
+                setDatas(response.data);
                 setmyReviewData(response.data);
                 setReviewIcon(response.data);
             })
