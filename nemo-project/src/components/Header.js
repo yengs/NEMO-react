@@ -52,7 +52,6 @@ function Header() {
         .catch(error=>console.log(error))
     });
 
-    console.log("sigungu::::"+memberRegion);
     return (
         <header>
             <div className="topHeader">

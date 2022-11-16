@@ -31,7 +31,7 @@ export default function WeatherRecItemList({ match }) {
 
     useEffect(() => {
         if (mLat && mLon) {
-            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${mLat}&lon=${mLon}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${mLat}&lon=${mLon}&units=metric&lang=kr&appid=8444067fea4eff0a4da0bf54dd76b665`)
                 .then(response => {
                     setWeatherArray(response.data.list);
 

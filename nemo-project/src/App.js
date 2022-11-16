@@ -31,27 +31,29 @@ import Chat from './chatting/Chat';
 
 import moment from 'moment';
 import 'moment/locale/ko';
+import { useState } from 'react';
 
 function App() {
 
   const tomorrowDate = moment().add(1, 'days').format('-DD');
 
-  useEffect(() => {
-    if(sessionStorage.getItem('memberId') !== null) {
 
+  const [ loaded, setLoaded ] = useState(false);
+  
+
+  useEffect(() => {
+
+    if(sessionStorage.getItem('memberId') !== null) {
+      setLoaded(false);
       axios.get(`http://localhost:8080/api/member/info/${sessionStorage.getItem('memberNum')}`)
       .then(response => {
-        
-        axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${response.data.memberZipCode},KR&appid=42c3249b2406895e257db260bf90bc97`)
+        axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${response.data.memberZipCode},KR&appid=8444067fea4eff0a4da0bf54dd76b665`)
         .then(response =>{
-          
           sessionStorage.setItem("lat",response.data.lat);
           sessionStorage.setItem("lon",response.data.lon);
-
           if (sessionStorage.getItem("lat") && sessionStorage.getItem("lon")) {
-            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${sessionStorage.getItem("lat")}&lon=${sessionStorage.getItem("lon")}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
+            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${sessionStorage.getItem("lat")}&lon=${sessionStorage.getItem("lon")}&units=metric&lang=kr&appid=8444067fea4eff0a4da0bf54dd76b665`)
             .then(response => {
-
                 const tempSum = response.data.list
                     .filter(data => data.dt_txt.includes(tomorrowDate))
                     .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
@@ -68,12 +70,11 @@ function App() {
                 } else {
                     return sessionStorage.setItem("weather","여름");
                 }
-
-                
             })
             .catch(error => {
                 console.log(error);
-            });
+            })
+            .finally(() => setLoaded(true));
     
         }
           
@@ -82,16 +83,17 @@ function App() {
 
       }).catch(error=>console.log(error));
       
+      } else {
+        setLoaded(true);
       }
 
-  })
+  }, []);
 
   return (
-
+    loaded &&     
     <div className='wholeWrap'>
       <div className='containerWrap'>
         <Header />
-
 
         <Route path="/" component={Main} exact={true} />
 

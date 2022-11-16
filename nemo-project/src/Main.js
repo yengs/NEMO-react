@@ -25,35 +25,33 @@ function Main() {
     const [weatherDatas, setWeatherDatas] = useState([]);
     const [randomDatas, setRandomDatas] = useState([]);
 
+    const [bestItemDatas, setBestItemDatas] = useState([]);
+
+    const [tomorrowTemp, setTomorrowTemp] = useState(0);
+
 
     useEffect(() => {
-
-        if (!sessionStorage.getItem("weather")) {
-            axios.get(`http://localhost:8080/api/item/random`)
+        if (sessionStorage.getItem("weather") !== null) {
+            axios.get(`http://localhost:8080/api/item/weather/${sessionStorage.getItem("weather")}`)
+                .then(response => {
+                    setWeatherDatas(response.data);
+                    if (sessionStorage.getItem("tempAvg")) {
+                        setTomorrowTemp(Math.round(sessionStorage.getItem("tempAvg")));
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+        else {
+            axios.get('http://localhost:8080/api/item/random')
                 .then(response => {
                     setRandomDatas(response.data);
                 })
                 .catch(error => console.log(error));
-        } else {
-
-            axios.get(`http://localhost:8080/api/item/weather/${sessionStorage.getItem("weather")}`)
-                .then(response => {
-                    setWeatherDatas(response.data);
-                    console.log("111111111")
-
-
-                    if (!document.URL.includes("##")) {
-                        console.log("1112222222222222222222221")
-                        window.location = window.location + '##';
-                        window.location.reload();
-                    }
-
-
-                })
-                .catch(error => console.log(error));
         }
 
-
+        axios.get('http://localhost:8080/api/item/best')
+        .then(response => setBestItemDatas(response.data))
+        .catch(error => console.log(error));
     }, []);
 
 
@@ -66,9 +64,9 @@ function Main() {
                     </div> */}
                 {
                     sessionStorage.getItem("memberId") ?
-                        <div className="tomorrowWeather">
-                            <h4 style={{ marginBottom: '22px', backgroundColor: "rgb(88, 145, 112)", color: "#fff", padding: '4px 14px', borderRadius: '50px' }}>내일은 <span className="temp">
-                                {Math.round(sessionStorage.getItem("tempAvg"))}
+                        <div className="tomorrowWeather" style={{ marginBottom: "-15px" }}>
+                            <h4 style={{ marginBottom: '0px', backgroundColor: "rgb(88, 145, 112)", color: "#fff", padding: '4px 14px', borderRadius: '50px' }}>내일은 <span className="temp">
+                                {tomorrowTemp}
                             </span>℃</h4>
                             <div className="titleNplusBtn">
                                 <h3>이런 옷 어때요?</h3>
@@ -76,7 +74,7 @@ function Main() {
                             </div>
                         </div>
                         :
-                        <div className="tomorrowWeather">
+                        <div className="tomorrowWeather" style={{ marginBottom: "-35px" }}>
                             <div className="titleNplusBtn">
                                 <h3 style={{ marginBottom: "35px" }}>로그인하고 추천아이템을 확인해보세요!</h3>
                             </div>
@@ -128,7 +126,7 @@ function Main() {
             </div>
             <div className="recWeekly">
                 <div className="recWeeklyWrap">
-                    <div className="titleNplusBtn">
+                    <div className="titleNplusBtn" style={{ marginBottom: "-15px" }}>
                         <h3>주간 베스트</h3>
                         <button className="plusBtn">+ 더보기</button>
                     </div>
