@@ -230,7 +230,7 @@ function MyBooking({history}) {
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
                                 <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
-                                <td>{booking.bookingDepositstate != "반환완료" ? null : <button className="greenBtn btnBok" ><Link to = {`/review/reviewWrite/${booking.bookingItemnum},${booking.bookingItemwriter}`}>후기작성</Link></button>}</td>
+                                <td>{booking.bookingDepositstate != "반환완료" ? null : <button className="greenBtn btnBok" ><Link to = {`/review/reviewWrite/${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}</td>
                                 </td>
                                 
                                 {/* <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td> */}

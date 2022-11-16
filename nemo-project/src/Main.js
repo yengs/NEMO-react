@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BsCloudy } from "react-icons/bs";
+// import { BsCloudy, BsFillCloudSunFill, BsFillCloudLightningRainFill, BsSnow, BsFillCloudRainFill, BsFillCloudLightningFill, BsSun } from "react-icons/bs";
 
 import Shirt from './img/shirt.jpg';
 import Dress from './img/dress.jpg';
@@ -13,106 +13,120 @@ import { useEffect } from "react";
 import moment from 'moment';
 import 'moment/locale/ko';
 import axios from "axios";
+import { useState } from "react";
 
 
 function Main() {
-
-    const tomorrowDate = moment().add(1, 'days').format('-DD');
 
     const goWeatherItemList = () => {
         window.location.href = "/item/weatherrecitemlist";
     }
 
-    // useEffect(() => {
-    //     if (sessionStorage.getItem("lat") && sessionStorage.getItem("lon")) {
-    //         axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${sessionStorage.getItem("lat")}&lon=${sessionStorage.getItem("lon")}&units=metric&lang=kr&appid=42c3249b2406895e257db260bf90bc97`)
-    //             .then(response => {
-    
-    //                 const tempSum = response.data.list
-    //                     .filter(data => data.dt_txt.includes(tomorrowDate))
-    //                     .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
-    
-    //                 const tempAvg = tempSum / 8;
-    
-    //                 if (tempAvg < 11) {
-    //                     return sessionStorage.setItem("weather","겨울");
-    //                 } else if (11 <= tempAvg && tempAvg < 17) {
-    //                     return sessionStorage.setItem("weather","봄");
-    //                 } else if (17 <= tempAvg && tempAvg < 23) {
-    //                     return sessionStorage.setItem("weather","가을");
-    //                 } else {
-    //                     return sessionStorage.setItem("weather","여름");
-    //                 }
-    
-                    
-                    
-    //             })
-    //             .catch(error => {
-    //                 console.log(error);
-    //             });
-    
-    //     }
-    // });
+    const [weatherDatas, setWeatherDatas] = useState([]);
+    const [randomDatas, setRandomDatas] = useState([]);
+
+    const [bestItemDatas, setBestItemDatas] = useState([]);
+
+    const [tomorrowTemp, setTomorrowTemp] = useState(0);
+
+
+    useEffect(() => {
+        if (sessionStorage.getItem("weather") !== null) {
+            axios.get(`http://localhost:8080/api/item/weather/${sessionStorage.getItem("weather")}`)
+                .then(response => {
+                    setWeatherDatas(response.data);
+                    if (sessionStorage.getItem("tempAvg")) {
+                        setTomorrowTemp(Math.round(sessionStorage.getItem("tempAvg")));
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+        else {
+            axios.get('http://localhost:8080/api/item/random')
+                .then(response => {
+                    setRandomDatas(response.data);
+                })
+                .catch(error => console.log(error));
+        }
+
+        axios.get('http://localhost:8080/api/item/best')
+        .then(response => setBestItemDatas(response.data))
+        .catch(error => console.log(error));
+    }, []);
+
+
 
     return (
         <div>
-            {/* <div>
-                <div><Link to="/item">상품리스트</Link></div>
-                <div><Link to="/member/join">회원가입</Link></div>
-            </div> */}
             <div className="recWeather">
-                <div className="tomorrowWeather">
-                    <div className="weatherIcon">
+                {/* <div className="weatherIcon">
                         <BsCloudy />
-                    </div>
-                    <h4>내일은 <span className="temp">9</span>℃ <span className="weather">흐림</span></h4>
-                </div>
-                <div className="titleNplusBtn">
-                    <h3>내일 이런 옷 어때요?</h3>
-                    <button className="plusBtn" onClick={goWeatherItemList}>+ 더보기</button>
-                </div>
+                    </div> */}
+                {
+                    sessionStorage.getItem("memberId") ?
+                        <div className="tomorrowWeather" style={{ marginBottom: "-15px" }}>
+                            <h4 style={{ marginBottom: '0px', backgroundColor: "rgb(88, 145, 112)", color: "#fff", padding: '4px 14px', borderRadius: '50px' }}>내일은 <span className="temp">
+                                {tomorrowTemp}
+                            </span>℃</h4>
+                            <div className="titleNplusBtn">
+                                <h3>이런 옷 어때요?</h3>
+                                <button className="plusBtn" onClick={goWeatherItemList}>+ 더보기</button>
+                            </div>
+                        </div>
+                        :
+                        <div className="tomorrowWeather" style={{ marginBottom: "-35px" }}>
+                            <div className="titleNplusBtn">
+                                <h3 style={{ marginBottom: "35px" }}>로그인하고 추천아이템을 확인해보세요!</h3>
+                            </div>
+                        </div>
+
+                }
+
                 <div className="itemWrap">
-                    <div className="itemInfoWrap">
-                        <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
-                        <div className="itemInfo">
-                            <p className="itemPrice"><span className="price">19,000</span>원</p>
-                            <p className="itemName">알렉산더왕 셔츠</p>
-                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                            <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
-                        </div>
-                    </div>
-                    <div className="itemInfoWrap">
-                        <div className="itemImg" style={{ backgroundImage: `url(${Dress})` }}></div>
-                        <div className="itemInfo">
-                            <p className="itemPrice"><span className="price">19,000</span>원</p>
-                            <p className="itemName">알렉산더왕 셔츠</p>
-                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                            <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
-                        </div>
-                    </div>
-                    <div className="itemInfoWrap">
-                        <div className="itemImg" style={{ backgroundImage: `url(${Sweater})` }}></div>
-                        <div className="itemInfo">
-                            <p className="itemPrice"><span className="price">19,000</span>원</p>
-                            <p className="itemName">알렉산더왕 셔츠</p>
-                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                            <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
-                        </div>
-                    </div>
-                    <div className="itemInfoWrap">
-                        <div className="itemImg" style={{ backgroundImage: `url(${Jeans})` }}></div>
-                        <div className="itemInfo">
-                            <p className="itemPrice"><span className="price">19,000</span>원</p>
-                            <p className="itemName">알렉산더왕 셔츠</p>
-                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                            <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
-                        </div>
-                    </div>
+                    {
+                        sessionStorage.getItem("memberId") ?
+                            weatherDatas && weatherDatas.map(item => (
+
+                                <div className="itemInfoWrap" key={item.itemNum}>
+                                    <Link to={`/item/detail/${item.itemNum}`}>
+                                        <img className="itemImg" src={`../../files/${item.files}`}></img>
+                                        <div className="itemInfo">
+                                            <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
+                                            <p className="itemName">{item.itemName}</p>
+                                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                            <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            )).slice(0, 4)
+                            :
+                            randomDatas && randomDatas.map(item => (
+                                <div className="itemInfoWrap" key={item.itemNum}>
+                                    <Link to={`/item/detail/${item.itemNum}`}>
+                                        <img className="itemImg" src={`../../files/${item.files}`}></img>
+                                        <div className="itemInfo">
+                                            <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
+                                            <p className="itemName">{item.itemName}</p>
+                                            <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                            <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            )).slice(0, 4)
+                    }
+                    {/* {
+                        weatherDatas.length === 0 && randomDatas.length === 0 && (
+                            <tr>
+                                <td colSpan="4">일치하는 데이터가 없습니다!.</td>
+                            </tr>
+                        )
+                    } */}
                 </div>
+
             </div>
             <div className="recWeekly">
                 <div className="recWeeklyWrap">
-                    <div className="titleNplusBtn">
+                    <div className="titleNplusBtn" style={{ marginBottom: "-15px" }}>
                         <h3>주간 베스트</h3>
                         <button className="plusBtn">+ 더보기</button>
                     </div>
@@ -159,7 +173,6 @@ function Main() {
             <div className="recBestStore">
                 <div className="titleNplusBtn">
                     <h3>베스트 클린 스토어</h3>
-                    {/* <button className="plusBtn">+ 더보기</button> */}
                 </div>
                 <div className="storeWrap">
                     <div className="storeInfoWrap">

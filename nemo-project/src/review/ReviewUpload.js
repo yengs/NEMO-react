@@ -38,9 +38,15 @@ export default function ReviewUpload({ history , match }) {
 
     const {bookingItemnum} = match.params;
     const {bookingItemwriter} = match.params;
+    const {bookingItemfiles} = match.params;
+    const {bookingItemname} = match.params;
+    const {bookingItemprice} = match.params;
 
     const  reviewProductIdx = bookingItemnum;
     const  reviewId = bookingItemwriter;
+    const reviewItemfiles = bookingItemfiles;
+    const reviewItemname = bookingItemname;
+    const reviewItemprice = bookingItemprice;
 
     // const [data, setData] = useState([]);
 
@@ -77,7 +83,7 @@ export default function ReviewUpload({ history , match }) {
 
         // 이미지 등록 
         const formData = new FormData();
-        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction, "reviewProductIdx":reviewProductIdx , "reviewId":reviewId })], {
+        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction, "reviewProductIdx":reviewProductIdx ,"reviewId":reviewId ,"reviewItemfiles":reviewItemfiles,"reviewItemname":reviewItemname,"reviewItemprice":reviewItemprice})], {
             type: "application/json"
         }));
         formData.append("reviewFiles", reviewFiles);
