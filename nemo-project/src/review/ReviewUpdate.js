@@ -30,56 +30,86 @@ function ReviewUpdate({ history, match }) {
 
     const { reviewWriter,reviewNum } = match.params;
 
+    const {bookingItemnum} = match.params;
+    const {bookingItemwriter} = match.params;
+    const {bookingItemfiles} = match.params;
+    const {bookingItemname} = match.params;
+    const {bookingItemprice} = match.params;
+
+    const reviewProductIdx = bookingItemnum;
+    const reviewId = bookingItemwriter;
+    const reviewItemfiles = bookingItemfiles;
+    const reviewItemname = bookingItemname;
+    const reviewItemprice = bookingItemprice;
+
+
     const [datas, setDatas] = useState({});
-    const [reviewImage, setReviewImage] = useState('');
+    const [reviewFiles, setReviewFiles] = useState('');
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
 
-    const handlerChangesetReviewImage = (e) => setReviewImage(e.target.value);
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
-    const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
+    const handlerChangeReviewSatisfaction = (e) => {
+        if (e.target.value < 0 || e.target.value > 100) {
+            return;
+        }
+        setReviewSatisfaction(e.target.value);
+    }
+    const handlerChangeReviewFiles = (e) => {
+        setReviewFiles(e.target.files[0]);
+        encodeFileBase64(e.target.files[0]);
+    }
+
+    const encodeFileBase64 = (fileBlob) => {
+        const read = new FileReader();
+        read.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+            read.onload = () => {
+                setReviewFiles(read.result);
+                resolve();
+            };
+        });
+    };
 
     // 후기 데이터 가져오기
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewNum}`)
             .then(res => {
                 console.log(res);
                 setDatas(res.data);
-                setReviewImage(res.data);
-                setReviewContents(res.data);
-                setReviewSatisfaction(res.data);
             })
             .catch(error => console.log(error));
     }, []);
 
     // 후기 수정 
-    const UpdateReview = (e) => {
-        e.preventDefault();
+    const UpdateReview = () => {
 
-        const reviewDetail = {
-            "reviewImage": reviewImage,
-            "reviewContents": reviewContents,
-            "reviewSatisfaction": reviewSatisfaction
-        }
+        // 이미지 등록 
+        const formData = new FormData();
+        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction, "reviewProductIdx":reviewProductIdx ,"reviewId":reviewId, "reviewItemfiles":reviewItemfiles, "reviewItemname":reviewItemname, "reviewItemprice":reviewItemprice })], {
+            type: "application/json"
+        }));
+        formData.append("reviewFiles", reviewFiles);
 
-        axios.post(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`, reviewDetail)
-            .then(res => {
-                if (res.status === 200) {
-                    alert("수정완료");
-                    history.push(`/review/myReview/${reviewWriter}`);
+        axios.put(`/review/reviewWrite/${reviewWriter}/${reviewNum}`, formData,
+            { headers: { 'Content-Type': 'multipart/form-data' } })
+            .then(response => {
+                if (response.status === 200) {
+                    if (reviewContents.length > 30 && reviewSatisfaction != null) {
+                        alert("정상적으로 등록되었습니다.");
+                        history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);
+                    } else {
+                        alert("양식에 맞춰 작성해주세요.")
+                    }
                 } else {
-                    alert("수정실패");
+                    alert("등록에 실패했습니다.");
                     return;
                 }
             })
-            .catch(error => {
-                console.log(reviewDetail);
-                console.log(error)
-            });
-    }
+            .catch(error => console.log(error));
+    };
 
-    // 후기 수정 취소
-    const confirmDelete = (message = "후기 수정을 취소하시겠습니까 ?", onConfirm, onCancel) => {
+    const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
         if (!onConfirm || typeof onConfirm !== "function") {
             return;
         }
@@ -95,6 +125,10 @@ function ReviewUpdate({ history, match }) {
         }
         return confirmAction;
     };
+
+    const deleteWorld = () => history.goBack();
+    const abort = () => console.log("Aborted")
+    const confirmDelete = useConfirm("작성을 취소하시겠습니까?", deleteWorld, abort);
 
     return (
         <div className="reviewUpload">
@@ -115,7 +149,7 @@ function ReviewUpdate({ history, match }) {
                         className="image_inputType_file"
                         accept=".jpg, .png"
                         multiple
-                        onChange={handlerChangesetReviewImage}
+                        onChange={handlerChangeReviewFiles}
                         value={datas.reviewImage}
                     />
                 </AppStyle>
