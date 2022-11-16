@@ -27,7 +27,8 @@ import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
 import Chat from './chatting/Chat';
-
+import DecDetail from './admin/DecDetail';
+import MyMenu from './mypage/MyMenuForOthers';
 
 function App() {
 
@@ -94,10 +95,9 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-        {/* <Route path="/dec/detail" component={DecDetail} /> */}
-        <Route path="/userstoreinfo" component={MyPageForOthers} />
-        
-        
+        <Route path="/dec/detail" component={DecDetail} />
+        <Route path="/dec/dec" component={Dec} />
+        <Route path="/userstoreinfo/:itemWriter" component={MyMenu} />
       </div>
       <Footer />
     </div>
