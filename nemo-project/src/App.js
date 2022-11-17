@@ -22,7 +22,7 @@ import Pwfind_Result from './member/Pwfind_Result';
 import MyReviewList from './review/MyReviewList';
 import YourReviewList from './review/YourReviewList';
 import ReviewUpload from './review/ReviewUpload';
-import ReviewUpdate from './review/ReviewUpload';
+import ReviewUpdate from './review/ReviewUpdate';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
@@ -36,7 +36,6 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
 import BestItemList from './Item/BestItemList';
-import ReviewUpdate from './review/ReviewUpdate';
 
 function App() {
 

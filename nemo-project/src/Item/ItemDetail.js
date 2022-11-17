@@ -223,7 +223,7 @@ function ItemDetail({ match, history }) {
                         <table className="reviewTable">
                         <thead>
                             <tr>
-                                 <th>작성자</th>
+                                <th>작성자</th>
                                 <th>리뷰사진</th>
                                 <th >내용</th>
                                 <th >만족도</th>
