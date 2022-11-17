@@ -22,6 +22,7 @@ import Pwfind_Result from './member/Pwfind_Result';
 import MyReviewList from './review/MyReviewList';
 import YourReviewList from './review/YourReviewList';
 import ReviewUpload from './review/ReviewUpload';
+import ReviewUpdate from './review/ReviewUpload';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
