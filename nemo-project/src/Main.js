@@ -60,63 +60,18 @@ function Main() {
         .catch(error => console.log(error));
     }, []);
 
-    const [isShow, setIsShow] = useState('false');
-
-    const handlerHideNshow = () => {
-        if(!isShow) {
-            setIsShow(true); 
-        } else {
-            setIsShow(false);
-        }
-    }
+   
 
 
     return (
         <div>
-            <DirectMenu style={{position: "absolute", right: "70px", bottom: "60px"}}>
-                <div className="directMenu">
-                    <div className={"hideNshow" + ' ' + (!isShow ? "show" : "hide")}>
-                        <div className="directBtn">
-                            {
-                                !sessionStorage.getItem("memberId") ?
-                                <Link to="/member/login">
-                                    <div><BsHouse/></div>
-                                    <span>내 상점</span>
-                                </Link>
-                                :
-                                <Link to="/mypage/mybooking">
-                                    <div><BsHouse/></div>
-                                    <span>내 상점</span>
-                                </Link>
-                            }
-                        </div>
-                        <div className="directBtn">
-                            {
-                                !sessionStorage.getItem("memberId") ?
-                                <Link to="/member/login">
-                                    <div><BsPencilSquare/></div>
-                                    <span>상품등록</span>
-                                </Link>
-                                :
-                                <Link to="/item/write">
-                                    <div><BsPencilSquare/></div>
-                                    <span>상품등록</span>
-                                </Link>
-                            }
-                        </div>
-                    </div>
-                    <div className="plusBtn" onClick={handlerHideNshow}>
-                        <BsFillPlusCircleFill/>
-                    </div>
-                </div>
-            </DirectMenu>
             <div className="content">
                 <div className="recWeather">
                     {/* <div className="weatherIcon">
                             <BsCloudy />
                         </div> */}
                     {
-                        sessionStorage.getItem("memberId") ?
+                        sessionStorage.getItem("jwtToken") ?
                         <div className="tomorrowWeather" style={{ marginBottom: "-15px" }}>
                                 <h4 style={{ marginBottom: '0px', backgroundColor: "rgb(88, 145, 112)", color: "#fff", padding: '4px 14px', borderRadius: '50px' }}>내일은 <span className="temp">
                                     {tomorrowTemp}
@@ -137,7 +92,7 @@ function Main() {
 
                     <div className="itemWrap">
                         {
-                            sessionStorage.getItem("memberId") ?
+                            sessionStorage.getItem("jwtToken") ?
                             weatherDatas && weatherDatas.map(item => (
                                 
                                 <div className="itemInfoWrap" key={item.itemNum}>

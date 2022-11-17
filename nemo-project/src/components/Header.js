@@ -107,7 +107,7 @@ function Header() {
                         </IconContext.Provider>
                         <span>
                             {
-                                sessionStorage.getItem('memberId') ? memberRegion : "로그인이 필요합니다"
+                                sessionStorage.getItem('jwtToken') ? memberRegion : "로그인이 필요합니다"
                             }
                         </span>
                     </div>
@@ -155,7 +155,7 @@ function Header() {
                             <FaTemperatureHigh />
                         </IconContext.Provider>
                         {
-                            sessionStorage.getItem("memberId") ?
+                            sessionStorage.getItem("jwtToken") ?
                             <Link to="/item/weatherrecitemlist">내일의 날씨는?</Link>
                             :
                             <Link to="/member/login">내일의 날씨는?</Link>
