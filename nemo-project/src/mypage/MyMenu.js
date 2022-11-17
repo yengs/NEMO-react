@@ -1,4 +1,5 @@
 import { Link, Route } from 'react-router-dom';
+import CleanG from '../member/CleanG';
 
 function MyMenu() {
 
@@ -10,6 +11,7 @@ function MyMenu() {
             <div className="cleanG">
                 클린지수 <span>65</span>%
                 <div style={{"width":"100%", "height":"13px", "backgroundColor":"rgb(53, 77, 119)", "borderRadius":"20px"}}></div>
+                <div><CleanG/></div>
             </div>
             <div className="menu">
                 <ul>
