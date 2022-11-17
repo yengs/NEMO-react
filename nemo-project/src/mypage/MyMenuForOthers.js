@@ -7,6 +7,8 @@ function MyMenu() {
 
     const history = useHistory();
     const params = useParams();
+
+    console.log(params);
        
     const [singo, setSingo] = useState(false);
     const [myStore, setMyStore] = useState(false);
@@ -17,7 +19,7 @@ function MyMenu() {
     return (
         <div className='myPageWrap'>
         <div className="myMenuWrap">
-            <div className="memberImg"></div>
+        <img className="memberImg" src={`../../memberImg/${params.memberImg}`}></img>
             <div>{params.itemWriter}</div>
             <div className="cleanG">
                 클린지수 <span>65</span>%

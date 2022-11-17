@@ -36,6 +36,7 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
 import BestItemList from './Item/BestItemList';
+import DirectBtn from './components/DirectBtn';
 
 function App() {
 
@@ -89,11 +90,15 @@ function App() {
     }
   }, []);
 
+  
+
   return (
     loaded &&
     <div className='wholeWrap'>
       <div className='containerWrap'>
         <Header />
+
+        <DirectBtn />
 
         <Route path="/" component={Main} exact={true} />
 
@@ -134,7 +139,7 @@ function App() {
         <Route path="/mypage" component={MyPage} />
         <Route path="/dec/detail" component={DecDetail} />
         <Route path="/dec/dec" component={Dec} />
-        <Route path="/userstoreinfo/:itemWriter" component={MyMenu} />
+        <Route path="/userstoreinfo/:itemWriter,:memberImg" component={MyMenu} />
 
       </div>
       <Footer />
