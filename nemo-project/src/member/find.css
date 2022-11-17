@@ -173,11 +173,16 @@ a:-webkit-any-link {
   
 }
 
-/* ------------ */
+/* ------ clean ------ */
 
 .mypage-clean-img { 
   margin: auto;
   margin-top: 3px;
   width: 150px;
   height: auto;
+}
+
+.myMenuUserName {
+  margin-top: 20px;
+  text-align: center;
 }

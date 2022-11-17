@@ -37,7 +37,6 @@ function ReviewUpdate({ history, match }) {
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
 
-
     // 후기 데이터 가져오기
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)

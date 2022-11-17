@@ -1,18 +1,33 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Link, Route } from 'react-router-dom';
 import CleanG from '../member/CleanG';
 
 function MyMenu() {
 
     const itemWriter = sessionStorage.getItem('memberId');
+    const reviewId = sessionStorage.getItem('memberId');
+
+    const [reviewSatisfaction, setReviewSatisfaction] = useState(50);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/clean/${reviewId}`)
+            .then(response => {
+                console.log(response);
+                setReviewSatisfaction(response.data);
+            })
+            .catch(error => console.log(error));
+    }, []);
 
     return (
         <div className="myMenuWrap">
             <div className="memberImg"></div>
-            <div>{itemWriter}</div>
+            <div className='myMenuUserName'>{itemWriter}</div>
             <div className="cleanG">
-                클린지수 <span>65</span>%
+                 <span>클린지수 {reviewSatisfaction}%</span></div>
+            <div>
                 {/* <div style={{"width":"100%", "height":"13px", "backgroundColor":"rgb(53, 77, 119)", "borderRadius":"20px"}}></div> */}
-                <div><CleanG/></div>
+                <div><CleanG /></div>
             </div>
             <div className="menu">
                 <ul>
