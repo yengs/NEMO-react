@@ -27,13 +27,9 @@ import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
 import Chat from './chatting/Chat';
-<<<<<<< HEAD
 import DecDetail from './admin/DecDetail';
 import MyMenu from './mypage/MyMenuForOthers';
-=======
-import ReviewUpdate from './review/ReviewUpdate';
 
->>>>>>> origin/develop
 
 import moment from 'moment';
 import 'moment/locale/ko';
