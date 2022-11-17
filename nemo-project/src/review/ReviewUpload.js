@@ -37,13 +37,13 @@ export default function ReviewUpload({ history , match }) {
     const reviewWriter = sessionStorage.getItem('memberId');
 
     const {bookingItemnum} = match.params;
-    const {bookingItemwriter} = match.params;
+    const {bookingMember} = match.params;
     const {bookingItemfiles} = match.params;
     const {bookingItemname} = match.params;
     const {bookingItemprice} = match.params;
 
-    const  reviewProductIdx = bookingItemnum;
-    const  reviewId = bookingItemwriter;
+    const reviewProductIdx = bookingItemnum;
+    const reviewId = bookingMember;
     const reviewItemfiles = bookingItemfiles;
     const reviewItemname = bookingItemname;
     const reviewItemprice = bookingItemprice;
