@@ -77,16 +77,20 @@ function MyReviewList({ history, match }) {
                 <hr className="lineH"></hr>
                 <table className="yourreview">
                     <colgroup>
+                        <col width="5%" />
                         <col width="15%" />
-                        <col width="25%" />
-                        <col width="45%" />
+                        <col width="15%" />
+                        <col width="15%" />
+                        <col width="20%" />
+                        <col width="15%" />
                         <col width="15%" />
                     </colgroup>
                     <thead>
                         <tr>
                             <th scope='col'>번호</th>
-                            <th scope='col'>이미지</th>
-                            <th scope='col'>내용</th>
+                            <th colSpan={2}>상품 정보</th>
+                            <th scope='col'>대여료</th>
+                            <th colSpan={2}>내용</th>
                             <th scope='col'>만족도</th>
                         </tr>
                     </thead>
@@ -95,6 +99,11 @@ function MyReviewList({ history, match }) {
                             items && items.map(review => (
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
+                                    <td className="rReviewItemImageOrigin">
+                                            <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
+                                        </td>
+                                        <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                        <td className='ReviewWriter'>{review.reviewItemprice}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
                                         <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></img>
