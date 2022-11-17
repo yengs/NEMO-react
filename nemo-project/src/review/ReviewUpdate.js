@@ -36,18 +36,17 @@ function ReviewUpdate({ history, match }) {
     const [imageSrc, setImageSrc] = useState('');
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
-
+    
 
     // 후기 데이터 가져오기
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/review/rupdate/${reviewNum}`)
+         axios.get(`http://localhost:8080/api/review/rupdate/${reviewNum}`)
             .then(res => {
                 console.log(res);
                 setData(res.data);
                 setReviewFiles(res.data.reviewFiles);
                 setReviewContents(res.data.reviewContents);
                 setReviewSatisfaction(res.data.reviewSatisfaction);
-                console.log("리뷰내용확인",reviewContents);
             })
             .catch(error => console.log(error));
     }, []);
@@ -71,7 +70,7 @@ function ReviewUpdate({ history, match }) {
           };
         });
       };
-
+     
     // 후기 수정 
     const handlerClickUpdate = () => {
 
@@ -124,6 +123,7 @@ function ReviewUpdate({ history, match }) {
 
     return (
         <div className="reviewUpload">
+
             <div className='pageTitle'>
                 <h3>후기 작성</h3>
             </div>
