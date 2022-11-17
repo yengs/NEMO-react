@@ -1,12 +1,24 @@
 import Shirt from '../img/shirt.jpg';
-import { GrFormPrevious } from "react-icons/gr";
-import { GrFormNext } from "react-icons/gr";
-
 import ItemSlider from "./ItemSlider.js";
-
 import styled from "styled-components";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
-function MyStore() {
+function MyStore({ itemWriter }) {
+
+    const history = useHistory();
+    const [piName, setPiName] = useState('');
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/userstoreinfo/${itemWriter}`)
+        .then(response => { 
+            console.log(response);
+            setPiName(itemWriter);
+        })
+        .catch(error => { console.log(error); });
+    }, []);
+
     return (
         <MyUserStoreContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage myUserStoreInnerPage">

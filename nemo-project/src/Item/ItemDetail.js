@@ -1,13 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, Navigate, Route } from "react-router-dom";
 import "./ItemDetail.css";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 
-function ItemDetail({ match, location, history }) {
+function ItemDetail({ match, history }) {
     const { itemNum } = match.params;
-
 
     const [ data, setData ] = useState({});
     const [ itemName, setItemName ] = useState('');
@@ -91,34 +89,34 @@ function ItemDetail({ match, location, history }) {
     };
 
     const goBooking = () => {
-        window.location.href = "/item/bookingupload";
+        history.push(`/item/bookingupload`);
     }
     
     const goUserStore = () => {
-        window.location.href = "/userstoreinfo";
+        history.push(`/userstoreinfo/${data.itemWriter}`);
     }
 
     const handlerMaincate = () => {
-        window.location.href = `/item/cate/${data.itemMaincategory}`;
+        history.push(`/item/cate/${data.itemMaincategory}`);
     }
 
     const handlerSubcate = () => {
-        window.location.href = `/item/cate/sub/${data.itemSubcategory}`;
+        history.push(`/item/cate/sub/${data.itemSubcategory}`);
     }
     
     let now = new Date();
 
     const dateWhat = () =>{
         if(new Date(itemRentalend) > now){
-            window.location.href = `/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`;
+            history.push(`/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`);
         }else{
             alert("대여기간이 지난 상품입니다")
-            window.location.href = `/item/cate/sub/${data.itemSubcategory}`;
+            history.push(`/item/cate/sub/${data.itemSubcategory}`);
         }
     }
     
     const chatting = () => {
-        window.location.href = `/chatting/${itemWriter}`;
+        history.push(`/chatting/${itemWriter}`);
     }
 
     return (
