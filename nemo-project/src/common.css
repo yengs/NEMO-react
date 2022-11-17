@@ -196,8 +196,12 @@ header .navBar .nav li {
   float: left;
   font-weight: 100;
   font-size: 1.1rem;
-  padding: 0 1.5rem;
+  /* padding: 0 1.5rem; */
   line-height: 40px;
+}
+
+header .navBar .nav li a {
+  padding: 0.5rem 1.5rem;
 }
 
 header .headerIcons {
@@ -509,6 +513,7 @@ footer {
 .titleNplusBtn {
   display: flex;
   justify-content: space-between;
+  width: 100%
 }
 
 .titleNplusBtn>h3 {
@@ -518,8 +523,9 @@ footer {
 
 .tomorrowWeather {
   display: flex;
-  align-items: center;
-  margin-bottom: -18px;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: -25px;
 }
 
 .tomorrowWeather .weatherIcon {
@@ -563,11 +569,19 @@ footer {
 
 .itemInfoWrap {
   width: 22%;
-  height: 380px;
+  height: 430px;
   background-color: #eee;
   border-radius: 10px;
   padding: 1.5%;
-  margin: 1.5%;
+  margin: 2%;
+}
+
+.itemInfoWrap:nth-child(4n) {
+  margin-right: 0;
+}
+
+.itemInfoWrap:nth-child(4n+1) {
+  margin-left: 0;
 }
 
 .recWeeklyWrap .itemInfoWrap {
@@ -576,8 +590,8 @@ footer {
 
 .itemInfoWrap .itemImg {
   width: 100% !important;
-  height: 65%;
-  /* border: 1px solid #000; */
+  height: 68%;
+  border: 1px solid #ddd;
   border-radius: 5px;
   background-position: center;
   background-repeat: no-repeat;

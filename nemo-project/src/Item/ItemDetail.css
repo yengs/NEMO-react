@@ -28,6 +28,23 @@
     border-radius: 50%;
     margin: 10px;
 }
+.ReviewItemImage2 .bookingitemImg{
+    width: 100px;
+    height: 100px;
+}
+
+.reviewDiv .reviewTable th{
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #bbb;
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.reviewDiv .reviewTable tr{
+    border-bottom: 1px solid #ccc;
+    padding: 10px 5px;
+    text-align: center;
+}
 
 .DetailContainer p {
     font-size: 15px;
