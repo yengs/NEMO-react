@@ -267,11 +267,11 @@ function ItemUpload({ history }) {
 
                         <tr>
                             <td>가격</td>
-                            <td><input type="text" id="itemPrice" name="itemPrice" value={itemPrice} onChange={handlerChangeitemPrice} required /></td>
+                            <td><input type="number" id="itemPrice" name="itemPrice" value={itemPrice} onChange={handlerChangeitemPrice} required /></td>
                         </tr>
                         <tr>
                             <td>보증금</td>
-                            <td><input type="text" required id="itemDeposit" name="itemDeposit" value={itemDeposit} onChange={handlerChangeitemDeposit} /></td>
+                            <td><input type="number" required id="itemDeposit" name="itemDeposit" value={itemDeposit} onChange={handlerChangeitemDeposit} /></td>
                         </tr>
 
                         {/* <tr>

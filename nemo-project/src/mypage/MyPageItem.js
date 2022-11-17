@@ -356,20 +356,26 @@ const MyPageItemContainer = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    flex-wrap: wrap;    
+    flex-wrap: wrap;  
+    margin-top: 35px;  
   }
   
   .itemInfoWrap {
     width: 30%;
-    height: 360px;
+    height: 460px;
     background-color: rgb(250, 250, 250);
     border-radius: 10px;
     padding: 1%;
+    margin-right: 3%;
+  }
+
+  .itemInfoWrap:nth-child(3n) {
+    margin-right: 0;
   }
   
-  .itemInfoWrap > .itemImg {
+  .itemInfoWrap .itemImg {
     width: 100% !important;
-    height: 65%;
+    height: 70%;
     
     border-radius: 5px;
     background-position: center;
