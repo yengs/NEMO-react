@@ -278,27 +278,27 @@ function ItemDetail({ match, history }) {
                                             <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
                                             <td className='ReviewWriter' rowSpan={3}>
                                                 {
-                                        (function () {
-                                            if (reviewSatisfaction === 0) {
-                                                return <img className="item-detail-Img" src="/clean/zero.png" alt="0percentlass" />
-                                            } else if (reviewSatisfaction > 0 && reviewSatisfaction <= 20) {
-                                                return <img className="item-detail-Img" src="/clean/tenp.png" alt="10"></img>
-                                            } else if (reviewSatisfaction > 20 && reviewSatisfaction <= 40) {
-                                                return <img className="item-detail-Img" src="/clean/thirtyp.png" alt="40" />
-                                            } else if (reviewSatisfaction > 40 && reviewSatisfaction <= 50) {
-                                                return <img className="item-detail-Img" src="/clean/fourtyp.png" alt="50" />
-                                            } else if (reviewSatisfaction > 50 && reviewSatisfaction <= 60) {
-                                                return <img className="item-detail-Img" src="/clean/sixtyp.png" alt="60" />
-                                            } else if (reviewSatisfaction > 60 && reviewSatisfaction <= 70) {
-                                                return <img className="item-detail-Img" src="/clean/seventyp.png" alt="70" />
-                                            } else if (reviewSatisfaction > 70 && reviewSatisfaction <= 80) {
-                                                return <img className="item-detail-Img" src="/clean/eightyp.png" alt="80" />
-                                            } else if (reviewSatisfaction > 80 && reviewSatisfaction <= 99) {
-                                                return <img className="item-detail-Img" src="/clean/ninetyp.png" alt="99" />
-                                            } else {
-                                                return <img className="item-detail-Img" src="/clean/onehundredp.png" alt="100" />
-                                            }
-                                        })()
+                                                    (function () {
+                                                        if (reviewSatisfaction === 0) {
+                                                            return <img className="item-detail-Img" src="/clean/zero.png" alt="0percentlass" />
+                                                        } else if (reviewSatisfaction > 0 && reviewSatisfaction <= 20) {
+                                                            return <img className="item-detail-Img" src="/clean/tenp.png" alt="10"></img>
+                                                        } else if (reviewSatisfaction > 20 && reviewSatisfaction <= 40) {
+                                                            return <img className="item-detail-Img" src="/clean/thirtyp.png" alt="40" />
+                                                        } else if (reviewSatisfaction > 40 && reviewSatisfaction <= 50) {
+                                                            return <img className="item-detail-Img" src="/clean/fourtyp.png" alt="50" />
+                                                        } else if (reviewSatisfaction > 50 && reviewSatisfaction <= 60) {
+                                                            return <img className="item-detail-Img" src="/clean/sixtyp.png" alt="60" />
+                                                        } else if (reviewSatisfaction > 60 && reviewSatisfaction <= 70) {
+                                                            return <img className="item-detail-Img" src="/clean/seventyp.png" alt="70" />
+                                                        } else if (reviewSatisfaction > 70 && reviewSatisfaction <= 80) {
+                                                            return <img className="item-detail-Img" src="/clean/eightyp.png" alt="80" />
+                                                        } else if (reviewSatisfaction > 80 && reviewSatisfaction <= 99) {
+                                                            return <img className="item-detail-Img" src="/clean/ninetyp.png" alt="99" />
+                                                        } else {
+                                                            return <img className="item-detail-Img" src="/clean/onehundredp.png" alt="100" />
+                                                        }
+                                                    })()
                                                 }
                                             </td>
                                         </tr>
