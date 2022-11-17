@@ -47,7 +47,7 @@ function App() {
 
   useEffect(() => {
 
-    if (sessionStorage.getItem('memberId') !== null) {
+    if (sessionStorage.getItem('jwtToken') !== null) {
       setLoaded(false);
       axios.get(`http://localhost:8080/api/member/info/${sessionStorage.getItem('memberNum')}`)
         .then(response => {
