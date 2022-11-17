@@ -16,11 +16,13 @@ function ItemDetail({ match, history }) {
     const [ files ,setItemImage] = useState('');
     const [ itemRentalstart ,setItemRentalstart] = useState('');
     const [ itemRentalend ,setItemRentalend] = useState('');
+    const [ memberImg ,setMemberImg] = useState('');
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/${itemNum}`)
+        axios.get(`http://localhost:8080/api/item/detail/${itemNum}`)
         .then(response => { 
             setData(response.data);
+            console.log(response.data);
             setItemName(response.data.itemName);
             setItemPrice(response.data.itemPrice);
             setItemDeposit(response.data.itemDeposit);
@@ -29,6 +31,8 @@ function ItemDetail({ match, history }) {
             setItemImage(response.data.files);
             setItemRentalstart(response.data.itemRentalstart);
             setItemRentalend(response.data.itemRentalend);
+            setMemberImg(response.data.memberImg);
+            
             
         })
         .catch(error => { console.log(error); });
@@ -93,7 +97,7 @@ function ItemDetail({ match, history }) {
     }
     
     const goUserStore = () => {
-        history.push(`/userstoreinfo/${data.itemWriter}`);
+        history.push(`/userstoreinfo/${data.itemWriter},${data.memberImg}`);
     }
 
     const handlerMaincate = () => {
@@ -202,7 +206,7 @@ function ItemDetail({ match, history }) {
                         + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
                     <div className="writerDiv">
                         <h3>대여자</h3>
-                        <p className="memberImg" onClick={goUserStore}></p>
+                        <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
                     </div>
                     <div className="cleanDiv">
                         <h4 onClick={goUserStore}>{data.itemWriter}</h4>
