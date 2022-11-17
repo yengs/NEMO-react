@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewAddImg from '../img/review-add-img.png'
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
 
 const AppStyle = styled.div`
   img {
@@ -30,58 +29,7 @@ const AppStyle = styled.div`
 
 function ReviewUpdate({ history, match }) {
 
-    //     const { reviewWriter } = match.params;
-    //     const { reviewNum } = useParams();
-
-    //     const {bookingItemnum} = match.params;
-    //     const {bookingItemwriter} = match.params;
-    //     const {bookingItemfiles} = match.params;
-    //     const {bookingItemname} = match.params;
-    //     const {bookingItemprice} = match.params;
-
-    //     const reviewProductIdx = bookingItemnum;
-    //     const reviewId = bookingItemwriter;
-    //     const reviewItemfiles = bookingItemfiles;
-    //     const reviewItemname = bookingItemname;
-    //     const reviewItemprice = bookingItemprice;
-
-
-    //     const [datas, setDatas] = useState({});
-    //     const [reviewFiles, setReviewFiles] = useState('');
-    //     const [reviewContents, setReviewContents] = useState('');
-    //     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
-
-    //     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
-    //     const handlerChangeReviewSatisfaction = (e) => {
-    //         if (e.target.value < 0 || e.target.value > 100) {
-    //             return;
-    //         }
-    //         setReviewSatisfaction(e.target.value);
-    //     }
-    //     const handlerChangeReviewFiles = (e) => {
-    //         setReviewFiles(e.target.files[0]);
-    //         encodeFileBase64(e.target.files[0]);
-    //     }
-
-    //     const encodeFileBase64 = (fileBlob) => {
-    //         const read = new FileReader();
-    //         read.readAsDataURL(fileBlob);
-    //         return new Promise((resolve) => {
-    //             read.onload = () => {
-    //                 setReviewFiles(read.result);
-    //                 resolve();
-    //             };
-    //         });
-    //     };
-
-    //     // 후기 데이터 가져오기
-    //     useEffect(() => {
-    //         axios.get(`http://localhost:8080/api/review/myReview/${reviewNum}`)
-    //             .then(res => {
-    //                 console.log(res);
-    //                 setDatas(res.data);
-
-    const { reviewNum } = match.params;
+    const { reviewWriter, reviewNum } = match.params;
 
     const [data, setData] = useState({});
     const [reviewFiles, setReviewFiles] = useState('');
@@ -92,7 +40,7 @@ function ReviewUpdate({ history, match }) {
 
     // 후기 데이터 가져오기
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/review/rupdate/${reviewNum}`)
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
             .then(res => {
                 console.log(res);
                 setData(res.data);
@@ -105,7 +53,12 @@ function ReviewUpdate({ history, match }) {
 
 
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
-    const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
+    const handlerChangeReviewSatisfaction = (e) => {
+        if (e.target.value < 0 || e.target.value > 100) {
+            return;
+        }
+        setReviewSatisfaction(e.target.value);
+    }
 
     const handlerChangefiles = (e) => {
         setReviewFiles(e.target.files[0]);
@@ -123,30 +76,6 @@ function ReviewUpdate({ history, match }) {
         });
     };
 
-    //     // 후기 수정 
-
-    //     const UpdateReview = () => {
-
-    //         // 이미지 등록 
-    //         const formData = new FormData();
-    //         formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction, "reviewProductIdx":reviewProductIdx ,"reviewId":reviewId, "reviewItemfiles":reviewItemfiles, "reviewItemname":reviewItemname, "reviewItemprice":reviewItemprice })], {
-    //             type: "application/json"
-    //         }));
-    //         formData.append("reviewFiles", reviewFiles);
-
-    //         axios.put(`/review/myReview/${reviewWriter}/${reviewNum}`, formData,
-    //             { headers: { 'Content-Type': 'multipart/form-data' } })
-    //             .then(response => {
-    //                 if (response.status === 200) {
-    //                     if (reviewContents.length > 30 && reviewSatisfaction != null) {
-    //                         alert("정상적으로 등록되었습니다.");
-    //                         history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);
-    //                     } else {
-    //                         alert("양식에 맞춰 작성해주세요.")
-    //                     }
-    //                 } else {
-    //                     alert("등록에 실패했습니다.");
-
     const handlerClickUpdate = () => {
 
         const formData = new FormData();
@@ -156,8 +85,7 @@ function ReviewUpdate({ history, match }) {
         // formData.append("files", new Blob(files, { type: "image/*" }));
         formData.append("reviewFiles", reviewFiles);
 
-
-        axios.put(`http://localhost:8080/api/review/rupdate/${reviewNum}`,
+        axios.put(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`,
             formData,
             {
                 headers: {
@@ -166,12 +94,15 @@ function ReviewUpdate({ history, match }) {
             })
             .then(response => {
                 if (response.status === 200) {
-                    alert("정상적으로 수정되었습니다.");
-                    history.goBack();
-
+                    if (reviewContents.length > 30 && reviewSatisfaction != null) {
+                        alert("정상적으로 등록되었습니다.");
+                        history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);
+                        window.location.href = `/review/myReview/${reviewWriter}`
+                    } else {
+                        alert("내용 30자 이상, 상품의 만족도를 입력했는지 확인해주세요.")
+                    }
                 } else {
-                    alert("수정에 실패했습니다.");
-                    return;
+                    alert("등록에 실패했습니다.");
                 }
             })
             .catch(error => console.log(error));
@@ -233,7 +164,6 @@ function ReviewUpdate({ history, match }) {
                                 {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
                         }
                     </div>
-
                     <div className="imageChoose">
                         <input className="form-control-image" type="file" name="file" multiple onChange={handlerChangefiles}></input>
                     </div>
@@ -241,7 +171,6 @@ function ReviewUpdate({ history, match }) {
 
             </div>
             <div className='reviewContent'>
-                {/* <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea> */}
                 <textarea value={reviewContents} type="text" onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>
             </div>
             <div className='satisfyingReview'>

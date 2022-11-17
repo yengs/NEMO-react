@@ -173,3 +173,11 @@ a:-webkit-any-link {
   
 }
 
+/* ------------ */
+
+.mypage-clean-img { 
+  margin: auto;
+  margin-top: 3px;
+  width: 150px;
+  height: auto;
+}

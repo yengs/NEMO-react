@@ -43,10 +43,11 @@ function MyReviewList({ history, match }) {
 
     // 후기 수정 
     const handlerReviewUpdate = (reviewNum) => {
-        // window.location.href = `/review/myReview/${reviewWriter}/${reviewNum}`;
-        // console.log(`/review/myReview/${reviewWriter}/${reviewNum}`);
+        window.location.href = `/review/myReview/${reviewWriter}/${reviewNum}`;
+        history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);    
+        
         // window.location.href = `/review/rupdate/${reviewNum}`
-        history.push(`/review/rupdate/${reviewNum}`);
+        // history.push(`/review/rupdate/${reviewNum}`);
         console.log(reviewNum);
     }
 
