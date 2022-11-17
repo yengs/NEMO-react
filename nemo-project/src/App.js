@@ -22,7 +22,7 @@ import Pwfind_Result from './member/Pwfind_Result';
 import MyReviewList from './review/MyReviewList';
 import YourReviewList from './review/YourReviewList';
 import ReviewUpload from './review/ReviewUpload';
-import ReviewUpdate from './review/ReviewUpload';
+import ReviewUpdate from './review/ReviewUpdate';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
@@ -127,8 +127,8 @@ function App() {
         <Route path="/review/reviewWrite/:bookingItemnum,:bookingItemwriter,:bookingItemfiles,:bookingItemname,:bookingItemprice" component={ReviewUpload} />
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
-        <Route path="/review/myReview/update/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
-
+        <Route path="/review/rupdate/:reviewNum" component={ReviewUpdate} exact={true} />
+        
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />

@@ -43,7 +43,8 @@ function MyReviewList({ history, match }) {
 
     // 후기 수정 
     const handlerReviewUpdate = (reviewNum) => {
-        window.location.href = `/review/myReview/update/${reviewWriter}/${reviewNum}`
+        // window.location.href = `/review/rupdate/${reviewNum}`
+        history.push(`/review/rupdate/${reviewNum}`);
         console.log(reviewNum);
     }
 
@@ -93,7 +94,7 @@ function MyReviewList({ history, match }) {
                                     <td>{review.reviewNum}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <img className="reviewListItemImg" src={`../../files/${review.reviewFiles}`}></img>
+                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></img>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
