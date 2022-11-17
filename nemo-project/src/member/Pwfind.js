@@ -3,17 +3,18 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./find.css";
 
-function Pwfind() {
+function Pwfind({history}) {
 
     const [memberId, setMemberId] = useState('');
-    const [memberEmail, setMemberEmail] = useState('');
+    const [mEmail, setMemail] = useState('');
 
     const inputId = (e) => setMemberId(e.target.value);
-    const inputEmail = (e) => setMemberEmail(e.target.value);
+    const handlerChangeEmail = (e) => setMemail(e.target.value);
+    // const inputEmail = (e) => setMemberEmail(e.target.value);
 
     const memberInfo = {
         "memberId" : memberId,
-        "memberEmail" : memberEmail
+        "memberEmail" : mEmail
     }
 
     const findPw = (e) => {
@@ -22,19 +23,53 @@ function Pwfind() {
         axios.post(`http://localhost:8080/api/member/pw`, memberInfo)
             .then(response => {
                 if (response.status === 200 && response.status !== ""){
+                    alert("귀하의 이메일로 코드가 발송되었습니다");
                     sessionStorage.setItem("memberId", response.data.memberId);
                     sessionStorage.setItem("memberEmail", response.data.memberEmail);
-                    window.location.href = "/member/pw/find";
+                    
+                    axios.get(`http://localhost:8080/api/mail`, {
+                        params: {
+                            memberEmail: mEmail
+                        }
+                    }) .then(response2 => {
+                        console.log(response2);
+                        alert(response2.data);
+                        setCode(response2.data);
+                    })
+                    .catch(function () {
+                        console.log('실패함')
+                    })
                 } else {
-                    alert("비밀번호를 확인할 수 없습니다.");
+                    alert("내ㄴ다");
                     return;
                 }
             })
             .catch(error => {
-                alert("Error!!!");
+                alert("아이디와 이메일을 다시확인해주세요");
                 console.log(memberInfo);
             });
     }
+
+
+    // 이메일 관련 --------------------------------
+
+    const [code, setCode] = useState(0);
+    const [userInputCode, setUserInputCode] = useState();
+    const handlerChangeUserInputCode = (e) => setUserInputCode(Number(e.target.value));
+
+
+     //이메일 코드 일치확인
+     const clickCode = () => {
+        if (String(userInputCode).length !== 5) {
+            alert('5자리의 숫자코드를 입력해주세요.');
+        } else if (code !== userInputCode) {
+           alert('이메일 코드가 일치하지 않습니다.');
+        } else if (code === userInputCode) {
+            alert('본인인증이 완료되었습니다.')
+             history.push("/member/pw/find");
+        }
+    }
+
 
    
     return (
@@ -63,13 +98,24 @@ function Pwfind() {
                             </tr>
                             <tr>
                                 <td>
-                                    <input className="findByEmail" type ="text" value={memberEmail} onChange={inputEmail} placeholder="이메일을 입력하세요" required/>
-                                </td>
+                                  <div className="email-search" >
+                                       <input className="email-input"value={mEmail} onChange={handlerChangeEmail} placeholder="이메일을 입력하세요" required/>
+                                       <button  onClick={findPw} className="email-botton" type="submit">인증하기</button>
+                                 </div>
+                               </td>
                             </tr>
+                            <tr>
+                                 <td>
+                                     <input type="number" name="Code" value={userInputCode}  placeholder="발송된 코드를 입력하세요" onChange={handlerChangeUserInputCode} required/>
+
+                                 </td>
+                                       
+                            </tr>
+                            <tr></tr>
                         </tbody>
                         <br/>
                         <div className="btnWrap">
-                            <Link to ="/member/pw/find"><input type="submit" className="greenBtn btnlog" onClick={findPw} value="확인"/></Link>
+                             <input type="submit" className="greenBtn btnlog"  onClick={clickCode} value="확인"/>
                             <Link to="/member/id"><button className="grayBtn btnlog">아이디 찾기</button></Link>
                         </div>
                     </table>
