@@ -30,8 +30,6 @@ const AppStyle = styled.div`
 `;
 
 
-
-
 export default function ReviewUpload({ history , match }) {
 
     const reviewWriter = sessionStorage.getItem('memberId');

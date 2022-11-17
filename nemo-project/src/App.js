@@ -110,7 +110,7 @@ function App() {
         {/* item */}
         <Route path="/item/cate/:itemMaincategory" component={ItemList} exact={true} />
         <Route path="/item/cate/sub/:itemSubcategory" component={ItemsubList} exact={true} />
-        <Route path="/item/bestItem" component={BestItemList} exact={true} />
+        <Route path="/item/bestItem" compoYourReviewListnent={BestItemList} exact={true} />
         <Route path="/item/write" component={ItemUpload} exact={true} />
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
@@ -128,7 +128,7 @@ function App() {
 
 
         {/* review */}
-        <Route path="/review/reviewWrite/:bookingItemnum,:bookingItemwriter,:bookingItemfiles,:bookingItemname,:bookingItemprice" component={ReviewUpload} />
+        <Route path="/review/reviewWrite" component={ReviewUpload} />
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
         <Route path="/review/myReview/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />

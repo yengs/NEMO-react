@@ -23,7 +23,7 @@ function ItemDetail({ match, history }) {
     const reviewProductIdx = itemNum;
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/${itemNum}`)
+        axios.get(`http://localhost:8080/api/item/detail/${itemNum}`)
             .then(response => {
                 setData(response.data);
                 setItemName(response.data.itemName);
@@ -138,15 +138,13 @@ function ItemDetail({ match, history }) {
                         </Breadcrumb>
                     </div>
 
-                    <p>👀 {data.itemReadcount} 📅 {data.itemDate}</p>
+                                        <p>👀 {data.itemReadcount} 📅 {data.itemDate}</p>
                 </div>
                 <br></br>
-
                 <div className="tablePlusForm">
                     <div className="imageDiv">
                         <img className="memberImg" src={`../../files/${data.files}`} />
                     </div>
-
                     <div className="tableform">
                         <form method="post" id="frm" name="frm">
                             <table>
@@ -173,7 +171,6 @@ function ItemDetail({ match, history }) {
                                     </tr>
                                     <tr>
                                         <th scope="row">사이즈</th>
-
                                         {
                                             (function () {
                                                 if (data.itemMaincategory === "상의") {
@@ -211,7 +208,7 @@ function ItemDetail({ match, history }) {
                         <h4 onClick={goUserStore}>{itemWriter}</h4>
                         <div>
 
-                            {reviewSatisfaction === 0 ?
+                            {reviewSatisfaction == 0 ?
                                 <div>
                                     <div className='item-detail-clean'> 클린지수 50 % </div>
                                     <img className="myMenu-img" src="/clean/fourtyp.png" alt="50" />

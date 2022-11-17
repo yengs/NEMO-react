@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CleanG from '../member/CleanG';
 
-function MyMenu({history}) {
+function MyMenu({ history }) {
 
     const itemWriter = sessionStorage.getItem('memberId');
     const reviewId = sessionStorage.getItem('memberId');
