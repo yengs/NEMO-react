@@ -338,31 +338,31 @@ const AppStyle = styled.div`
         height: 100%;
         position: relative;
     }
-
-
-  .uploadImg {
-      width: 100%;
-      height: 100%;
-  }
-
-  .previewImg {
-    width: 100%;
-    height: 100%;
-  }
-
-  .commentBox {
-    width: 270px;
-    height: 270px;
-    background-color: rgba(30,30,30,0.4);
-    position: absolute;
-    bottom: 0;
-    z-index:1;
-    visibility: hidden;
-    color: #fff;
-    text-align: center;
-    font-size: 18px;
-    padding-top: 110px;
-    line-height: 25px;
+    
+    
+    .uploadImg {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .previewImg {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .commentBox {
+        width: 270px;
+        height: 270px;
+        background-color: rgba(30,30,30,0.4);
+        position: absolute;
+        bottom: 0;
+        z-index:1;
+        visibility: hidden;
+        color: #fff;
+        text-align: center;
+        font-size: 18px;
+        padding-top: 110px;
+        line-height: 25px;
   }
 
   .showCom {
