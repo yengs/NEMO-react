@@ -1,34 +1,57 @@
 import axios from "axios";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
-// import './singo.css'
-
+import { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 import addImage from "../img/review-add-img.png";
 import styled from "styled-components";
 
-function Singo({ history }) {
+function Singo({ itemWriter, setSingo }) {
 
-  const goBack = () => {
-    history.push("/userstoreinfo");
-  }
+  const history = useHistory();
 
   const [singoReason, setSingoReason] = useState('');
   const [singoContent, setSingoContent] = useState('');
   const singoWriter = sessionStorage.getItem('memberId');
   const singoDate = new Date();
 
+  const Pisingoja = itemWriter;
+
+  console.log("네이놈",Pisingoja);
+
   const handlerChangeReason = (e) => setSingoReason(e.target.value);
   const handlerChangeContent = (e) => setSingoContent(e.target.value);
 
+  // useEffect(() => {
+  //   axios.get(`http://localhost:8080/api/userstoreinfo/warn/${itemWriter}`)
+  //     .then(response => {
+  //       console.log(response);
+  //       if (response.status === 200){
+  //         console.log("회원 정보 불러오기 성공");
+  //       }else {
+  //         alert("회원 정보를 불러올 수 없습니다.");
+  //         return;
+  //       }
+  //     })
+  //     .catch(error => console.log(error));
+  // }, []);
+
+  const singoInfo = {
+    "singoPisingoja" : Pisingoja,
+    "singoReason" : singoReason,
+    "singoContent" : singoContent,
+    "singoWriter" : singoWriter,
+    "singoDate": singoDate
+  }
+
+  // pisingoja에 itemwriter(memberId)가 들어가야 하고... 그걸 서버로 넘겨줘야함..
+
   const takeDec = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8080/api/singo/take', {"singoReason":singoReason, "singoContent":singoContent, "singoWriter": singoWriter, "singoDate": singoDate})
+    axios.post('http://localhost:8080/api/singo/take', singoInfo)
       .then(response => {
         console.log(response);
         if (response.status === 200) {
           alert("정상적으로 접수되었습니다.");
-          // history.push("/userstoreinfo");
+          setSingo(false);
         } else {
           alert("접수 실패했습니다.");
           return;
@@ -37,40 +60,31 @@ function Singo({ history }) {
       .catch(error => console.log(error));
   }
 
-
-  const check = () => {
-    console.log(singoReason);
-    console.log(singoContent);
-    console.log(singoWriter);
-    console.log(singoDate);
+  const goBack = (e) => {
+    console.log(`/userstoreinfo/${itemWriter}`)
+    e.preventDefault();
+    setSingo(false);
   }
-
 
   return (
     <SingoContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
       <div className="mypageInnerPage">
         <div className="regiUserItemList">
           <h3 className="pageTitle">신고하기</h3>
-          <button onClick={check}>체크</button>
-
           <div className="memberPage2 container loginForm2">
 
             <form>
               <div className="inputTable">
                 <table>
                   <tbody>
+                    {/* <tr>
+                      신고 대상자 아이디 {"["} {itemWriter} {"]"}
+                    </tr> */}
                     <tr>
                       <td>사진첨부</td>
-
                     </tr>
                     <tr>
                       <td>
-
-                        {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlTPJg6Tgw-P2brcvdMAxNcnUqT9udTDuSUw&usqp=CAU" /> */}
-                        {/* <img src={addImage} />
-                                                <img src={addImage} />
-                                                <img src={addImage} />
-                                                <img src={addImage} /> */}
                         <AppStyle>
                           <label htmlFor="item_review_input">
                             <div className="btnStart">
@@ -82,7 +96,6 @@ function Singo({ history }) {
                             id="item_review_input"
                             className="image_inputType_file"
                             accept=".jpg, .png"
-                          // onChange={handlerChangesetReviewImage}
                           />
                         </AppStyle>
 
@@ -115,7 +128,6 @@ function Singo({ history }) {
                     </tr>
                     <tr>
                       <td>
-                        {/* <input type="text" className="singobox" onChange={handlerChangeContent} /> */}
                         <textarea className="singobox" onChange={handlerChangeContent}></textarea>
                       </td>
                     </tr>
@@ -384,7 +396,6 @@ const SingoContainer = styled.div`
   .memberPage2 .inputTable table tr>td img {
     width: 90px;
     height: 90px;
-    margin-right: 10px;
   }
 
   .memberPage2 .inputTable table tr:first-child>td {
@@ -545,6 +556,8 @@ const SingoContainer = styled.div`
     border: rgb(206, 60, 34);
     background-color: rgb(206, 60, 34);
     color: #fff;
+    width: 125.95px;
+    padding-left: 36px;
   }
 
   .grayBtn2 {
