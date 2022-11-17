@@ -2,8 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./ItemDetail.css";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import CleanG from "../member/CleanG";
-
 
 function ItemDetail({ match, history }) {
 
@@ -19,6 +17,7 @@ function ItemDetail({ match, history }) {
     const [files, setItemImage] = useState('');
     const [itemRentalstart, setItemRentalstart] = useState('');
     const [itemRentalend, setItemRentalend] = useState('');
+    const [memberImg, setMemberImg] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
     const reviewProductIdx = itemNum;
@@ -35,6 +34,7 @@ function ItemDetail({ match, history }) {
                 setItemImage(response.data.files);
                 setItemRentalstart(response.data.itemRentalstart);
                 setItemRentalend(response.data.itemRentalend);
+                setMemberImg(response.data.memberImg);
 
                 // 리뷰어의 클린지수 조회
                 axios.get(`http://localhost:8080/api/clean/${response.data.itemWriter}`)
@@ -96,7 +96,7 @@ function ItemDetail({ match, history }) {
     }
 
     const goUserStore = () => {
-        history.push(`/userstoreinfo/${data.itemWriter}`);
+        history.push(`/userstoreinfo/${data.itemWriter},${data.memberImg}`);
     }
 
     const handlerMaincate = () => {
@@ -205,7 +205,7 @@ function ItemDetail({ match, history }) {
                         + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
                     <div className="writerDiv">
                         <h3>대여자</h3>
-                        <p className="memberImg" onClick={goUserStore}></p>
+                        <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
                     </div>
                     <div className="cleanDiv">
                         <h4 onClick={goUserStore}>{itemWriter}</h4>

@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { Link, Route } from 'react-router-dom';
 import CleanG from '../member/CleanG';
 
-function MyMenu() {
+function MyMenu({history}) {
 
     const itemWriter = sessionStorage.getItem('memberId');
     const reviewId = sessionStorage.getItem('memberId');
+    const memberImg = sessionStorage.getItem('memberImg');
 
     const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
@@ -21,7 +22,7 @@ function MyMenu() {
 
     return (
         <div className="myMenuWrap">
-            <div className="memberImg"></div>
+            <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
             <div className='myMenuUserName'>{itemWriter}</div>
 
             <div className='cleanG'>
