@@ -22,7 +22,7 @@ import Pwfind_Result from './member/Pwfind_Result';
 import MyReviewList from './review/MyReviewList';
 import YourReviewList from './review/YourReviewList';
 import ReviewUpload from './review/ReviewUpload';
-import ReviewUpdate from './review/ReviewUpload';
+import ReviewUpdate from './review/ReviewUpdate';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
@@ -36,6 +36,7 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
 import BestItemList from './Item/BestItemList';
+import DirectBtn from './components/DirectBtn';
 
 function App() {
 
@@ -47,7 +48,7 @@ function App() {
 
   useEffect(() => {
 
-    if (sessionStorage.getItem('memberId') !== null) {
+    if (sessionStorage.getItem('jwtToken') !== null) {
       setLoaded(false);
       axios.get(`http://localhost:8080/api/member/info/${sessionStorage.getItem('memberNum')}`)
         .then(response => {
@@ -89,11 +90,15 @@ function App() {
     }
   }, []);
 
+  
+
   return (
     loaded &&
     <div className='wholeWrap'>
       <div className='containerWrap'>
         <Header />
+
+        <DirectBtn />
 
         <Route path="/" component={Main} exact={true} />
 
@@ -127,8 +132,8 @@ function App() {
         <Route path="/review/reviewWrite/:bookingItemnum,:bookingItemwriter,:bookingItemfiles,:bookingItemname,:bookingItemprice" component={ReviewUpload} />
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
-        <Route path="/review/myReview/update/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
-
+        <Route path="/review/rupdate/:reviewNum" component={ReviewUpdate} exact={true} />
+        
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
