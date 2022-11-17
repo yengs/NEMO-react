@@ -36,6 +36,24 @@ function ItemDetail({ match, location, history }) {
         .catch(error => { console.log(error); });
     }, []);
 
+    const reviewProductIdx = itemNum;
+    const [ datas, setDatas ] = useState([]);
+
+    //후기조회
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/itemreview/${reviewProductIdx}`)
+        .then(response => { 
+            setDatas(response.data);
+            // setReviewWriter(response.data.reviewWriter);
+            // setReviewSatisfaction(response.data.reviewSatisfaction);
+            // setReviewFiles(response.data.reviewFiles);
+            // setReviewContents(response.data.reviewContents);
+ 
+        })
+        .catch(error => { console.log(error); });
+    }, []);
+
+
     const handlerChangeName = (e) => setItemName(e.target.value);
     const handlerChangePrice = (e) => setItemPrice(e.target.value);
     const handlerChangeDeposit = (e) => setItemDeposit(e.target.value);
@@ -205,38 +223,60 @@ function ItemDetail({ match, location, history }) {
                     <br/><br/>
                     <div>
                         <table className="reviewTable">
-                            {/* 작성자 이름/이미지/리뷰내용/만족도 넣은 값으로 되게끔 수정 */}
-                            <th className="reviewCate">작성자</th>
-                            <th className="reviewCate">내용</th>
-                            
+                        <thead>
                             <tr>
-                                <td rowSpan="4" className="leftside">곽모내</td>
+                                 <th>작성자</th>
+                                <th>리뷰사진</th>
+                                <th >내용</th>
+                                <th >만족도</th>
                             </tr>
-                            <tr>
-                                <td className="reviewImg">이미지</td>
+                        </thead>
+                        {
+                            datas && datas.map(review => (
+                        <tbody>
+                                <tr key={review.reviewNum}>
+                                <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
+                                <td rowSpan={2} className="ReviewItemImage2">
+                                    <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`}/>   
+                                </td>
+                                <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
+                                <td className='ReviewWriter' rowSpan={3}>
+                                {
+                                                (function () {
+                                                    if (review.reviewSatisfaction === 0) {
+                                                        return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                    } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                        return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
+                                                    } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                        return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
+                                                        return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
+                                                        return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
+                                                        return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
+                                                        return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
+                                                    } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
+                                                        return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
+                                                    } else {
+                                                        return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
+                                                    }
+                                                })()
+                                            }
+                                </td>
                             </tr>
-                            <tr>
-                                <td className="reviewCtns">리뷰내용</td>
-                            </tr>
-                            <tr>
-                                <td className="reviewClean">만족도 <span>65</span>%
-                                <div style={{"width":"100%", "height":"13px", "backgroundColor":"rgb(53, 77, 119)", "borderRadius":"20px"}}></div></td>
-                            </tr>
-
-                            <tr>
-                                <td rowSpan="4" className="leftside">곽모내</td>
-                            </tr>
-                            <tr>
-                                <td className="reviewImg">이미지</td>
-                            </tr>
-                            <tr>
-                                <td className="reviewCtns">리뷰내용</td>
-                            </tr>
-                            <tr>
-                                <td className="reviewClean">만족도 <span>65</span>%
-                                <div style={{"width":"100%", "height":"13px", "backgroundColor":"rgb(53, 77, 119)", "borderRadius":"20px"}}></div></td>
-                            </tr>
-
+                            </tbody>
+                            ))
+                        }
+                        {
+                            datas.length === 0 && (
+                                <tr>
+                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                </tr>
+                            )
+                        }
+                           
                         </table>
                     </div>
                 </div>
