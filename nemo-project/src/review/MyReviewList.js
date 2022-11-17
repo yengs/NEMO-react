@@ -43,8 +43,11 @@ function MyReviewList({ history, match }) {
 
     // 후기 수정 
     const handlerReviewUpdate = (reviewNum) => {
-        window.location.href = `/review/myReview/${reviewWriter}/${reviewNum}`;
-        console.log(`/review/myReview/${reviewWriter}/${reviewNum}`);
+        // window.location.href = `/review/myReview/${reviewWriter}/${reviewNum}`;
+        // console.log(`/review/myReview/${reviewWriter}/${reviewNum}`);
+        // window.location.href = `/review/rupdate/${reviewNum}`
+        history.push(`/review/rupdate/${reviewNum}`);
+        console.log(reviewNum);
     }
 
     // 후기 삭제
@@ -93,7 +96,7 @@ function MyReviewList({ history, match }) {
                                     <td>{review.reviewNum}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <img className="reviewListItemImg" src={`../../files/${review.reviewFiles}`}></img>
+                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></img>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
