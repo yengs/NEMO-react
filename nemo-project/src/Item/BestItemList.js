@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Paging from "../pagination/Paging";
 
-function ItemList({ match }) {
+function BestItemList({ match }) {
     const { itemMaincategory } = match.params;
 
     const ITEM_COUNT_PER_PAGE = 12;
@@ -14,7 +14,7 @@ function ItemList({ match }) {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/cate/${itemMaincategory}`, { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
+        axios.get('http://localhost:8080/api/item/best', { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => {
                 setDatas(response.data);
                 setCount(response.data.length);
@@ -33,7 +33,7 @@ function ItemList({ match }) {
             <div className="recWeather">
 
                 <div className="titleNplusBtn">
-                    <h3>{itemMaincategory}</h3>
+                    <h3>베스트 아이템</h3>
                     <div>{sessionStorage.getItem("jwtToken") != null ?
                     <Link className="btn" to="/item/write">상품등록</Link>
                     :null
@@ -71,4 +71,4 @@ function ItemList({ match }) {
     );
 }
 
-export default ItemList;
+export default BestItemList;

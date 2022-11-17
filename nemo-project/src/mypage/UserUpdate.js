@@ -24,7 +24,9 @@ function UserUpdate({history}) {
         }
 
         setMemberAddress(fullAddress);
-        console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
+        setMzipCode(data.zonecode);
+        setMsigungu(data.sigungu);
+        // console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
     // 주소검색창 팝업열기
@@ -47,6 +49,8 @@ function UserUpdate({history}) {
     const [memberEmail, setMemberEmail] = useState('');
     const [memberPhone, setMemberPhone] = useState('');
     const [memberAddress, setMemberAddress] = useState('');
+    const [mZipCode, setMzipCode] = useState('');
+    const [mSigungu, setMsigungu] = useState('');
 
 
     useEffect(() => {
@@ -74,48 +78,6 @@ function UserUpdate({history}) {
     const handlerChangeAddress = (e) => setMemberAddress(e.target.value);
 
 
-
-    
-    const [code, setCode] = useState(0);
-    const [userInputCode, setUserInputCode] = useState(0);
-    const handlerChangeUserInputCode = (e) => setUserInputCode(Number(e.target.value));
-
-    //이메일 정보 보내기
-    const clickmail = () => {
-        axios.get(`http://localhost:8080/api/mail`, {
-            params: {
-                memberEmail: memberEmail
-            }
-        }).catch(function () {
-            console.log('실패함')
-        })
-    }
-
-    //코드 받아오기
-    const clickcm = () => {
-        axios.get(`http://localhost:8080/api/code`)
-            .then(response2 => {
-                console.log(response2);
-                alert(response2.data);
-                setCode(response2.data);
-            })
-    }
-
-    //코드 일치확인
-    const clickCode = () => {
-        if (String(userInputCode).length !== 5) {
-            return alert('6자리의 숫자코드를 입력해주세요.');
-        } else if (code !== userInputCode) {
-            return alert('숫자코드가 일치하지 않습니다.');
-        } else if (code === userInputCode) {
-            return alert('숫자코드가 일치합니다');
-        }
-    }
-
-
-
-
-
     const UpdateProfile = (e) => {
         e.preventDefault();
 
@@ -123,7 +85,9 @@ function UserUpdate({history}) {
             "memberNickname": memberNickname,
             "memberPw": memberPw,
             "memberPhone": memberPhone,
-            "memberAddress": memberAddress
+            "memberAddress": memberAddress,
+            "memberZipCode" : mZipCode,
+            "memberSigungu" : mSigungu
         }
 
         axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
@@ -194,19 +158,6 @@ function UserUpdate({history}) {
                                         <td>이메일</td>
                                         <td>
                                             <input type="text" name="mEmail" value={datas.memberEmail} disabled />
-                                        </td>
-                                        <td className="updateTableBtn">
-                                             <button className="beigeBtn btn" onClick={() => { clickmail(); clickcm(); }}>인증하기</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="requiredMark">인증코드</td>
-                                        <td>
-                                            <input type="number" name="Code" value={userInputCode} onChange={handlerChangeUserInputCode} />
-
-                                        </td>
-                                        <td className="updateTableBtn">
-                                            <button className="beigeBtn btn" onClick={clickCode}>확인</button>
                                         </td>
                                     </tr>
                                     <tr>

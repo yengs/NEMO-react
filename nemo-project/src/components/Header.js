@@ -52,7 +52,6 @@ function Header() {
         .catch(error=>console.log(error))
     });
 
-    console.log("sigungu::::"+memberRegion);
     return (
         <header>
             <div className="topHeader">
@@ -76,7 +75,7 @@ function Header() {
                         </IconContext.Provider>
                         <p>MY</p>
                     </Link>
-                    <Link to="/chat">
+                    <Link to="/chatting/:itemWriter">
                         <IconContext.Provider value={{ className: "headerIcons" }}>
                             <BsChatDotsFill />
                         </IconContext.Provider>
@@ -108,7 +107,7 @@ function Header() {
                         </IconContext.Provider>
                         <span>
                             {
-                                sessionStorage.getItem('memberId') ? memberRegion : "로그인을 해주세요"
+                                sessionStorage.getItem('memberId') ? memberRegion : "로그인이 필요합니다"
                             }
                         </span>
                     </div>
@@ -155,8 +154,12 @@ function Header() {
                         <IconContext.Provider value={{ className: "navIcons" }}>
                             <FaTemperatureHigh />
                         </IconContext.Provider>
-                        <Link to="/item/weatherrecitemlist">내일의 날씨는?</Link>
-                        {/* <span>내일의 날씨는?</span> */}
+                        {
+                            sessionStorage.getItem("memberId") ?
+                            <Link to="/item/weatherrecitemlist">내일의 날씨는?</Link>
+                            :
+                            <Link to="/member/login">내일의 날씨는?</Link>
+                        }
                     </div>
                 </div>
             </div>
