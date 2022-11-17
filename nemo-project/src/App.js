@@ -27,7 +27,8 @@ import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
 import Chat from './chatting/Chat';
-import ReviewUpdate from './review/ReviewUpdate';
+import DecDetail from './admin/DecDetail';
+import MyMenu from './mypage/MyMenuForOthers';
 
 
 import moment from 'moment';
@@ -40,59 +41,55 @@ function App() {
   const tomorrowDate = moment().add(1, 'days').format('-DD');
 
 
-  const [ loaded, setLoaded ] = useState(false);
-  
+  const [loaded, setLoaded] = useState(false);
+
 
   useEffect(() => {
 
-    if(sessionStorage.getItem('memberId') !== null) {
+    if (sessionStorage.getItem('memberId') !== null) {
       setLoaded(false);
       axios.get(`http://localhost:8080/api/member/info/${sessionStorage.getItem('memberNum')}`)
-      .then(response => {
-        axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${response.data.memberZipCode},KR&appid=8444067fea4eff0a4da0bf54dd76b665`)
-        .then(response =>{
-          sessionStorage.setItem("lat",response.data.lat);
-          sessionStorage.setItem("lon",response.data.lon);
-          if (sessionStorage.getItem("lat") && sessionStorage.getItem("lon")) {
-            axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${sessionStorage.getItem("lat")}&lon=${sessionStorage.getItem("lon")}&units=metric&lang=kr&appid=8444067fea4eff0a4da0bf54dd76b665`)
+        .then(response => {
+          axios.get(`http://api.openweathermap.org/geo/1.0/zip?zip=${response.data.memberZipCode},KR&appid=8444067fea4eff0a4da0bf54dd76b665`)
             .then(response => {
-                const tempSum = response.data.list
-                    .filter(data => data.dt_txt.includes(tomorrowDate))
-                    .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
+              sessionStorage.setItem("lat", response.data.lat);
+              sessionStorage.setItem("lon", response.data.lon);
+              if (sessionStorage.getItem("lat") && sessionStorage.getItem("lon")) {
+                axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${sessionStorage.getItem("lat")}&lon=${sessionStorage.getItem("lon")}&units=metric&lang=kr&appid=8444067fea4eff0a4da0bf54dd76b665`)
+                  .then(response => {
+                    const tempSum = response.data.list
+                      .filter(data => data.dt_txt.includes(tomorrowDate))
+                      .reduce((accumulator, currentValue) => Number(accumulator) + currentValue.main.temp_max, 0);
 
-                const tempAvg = tempSum / 8;
-                sessionStorage.setItem("tempAvg", tempAvg);
+                    const tempAvg = tempSum / 8;
+                    sessionStorage.setItem("tempAvg", tempAvg);
 
-                if (tempAvg < 11) {
-                    return sessionStorage.setItem("weather","겨울");
-                } else if (11 <= tempAvg && tempAvg < 17) {
-                    return sessionStorage.setItem("weather","봄");
-                } else if (17 <= tempAvg && tempAvg < 23) {
-                    return sessionStorage.setItem("weather","가을");
-                } else {
-                    return sessionStorage.setItem("weather","여름");
-                }
+                    if (tempAvg < 11) {
+                      return sessionStorage.setItem("weather", "겨울");
+                    } else if (11 <= tempAvg && tempAvg < 17) {
+                      return sessionStorage.setItem("weather", "봄");
+                    } else if (17 <= tempAvg && tempAvg < 23) {
+                      return sessionStorage.setItem("weather", "가을");
+                    } else {
+                      return sessionStorage.setItem("weather", "여름");
+                    }
+                  })
+                  .catch(error => {
+                    console.log(error);
+                  })
+                  .finally(() => setLoaded(true));
+              }
             })
-            .catch(error => {
-                console.log(error);
-            })
-            .finally(() => setLoaded(true));
-    
-        }
-          
-        })
-        .catch(error => console.log(error));
+            .catch(error => console.log(error));
 
-      }).catch(error=>console.log(error));
-      
-      } else {
-        setLoaded(true);
-      }
-
+        }).catch(error => console.log(error));
+    } else {
+      setLoaded(true);
+    }
   }, []);
 
   return (
-    loaded &&     
+    loaded &&
     <div className='wholeWrap'>
       <div className='containerWrap'>
         <Header />
@@ -130,14 +127,14 @@ function App() {
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
         <Route path="/review/myReview/update/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
-        
+
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-        {/* <Route path="/dec/detail" component={DecDetail} /> */}
-        <Route path="/userstoreinfo" component={MyPageForOthers} />
-        
-        
+        <Route path="/dec/detail" component={DecDetail} />
+        <Route path="/dec/dec" component={Dec} />
+        <Route path="/userstoreinfo/:itemWriter" component={MyMenu} />
+
       </div>
       <Footer />
     </div>
