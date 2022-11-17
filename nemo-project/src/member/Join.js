@@ -210,15 +210,29 @@ function Join() {
             });
     }
 
-    // 이메일 중복 체크
+
+// 이메일 관련 --------------------------------
+
+    const [code, setCode] = useState(0);
+    const [userInputCode, setUserInputCode] = useState(0);
+    const handlerChangeUserInputCode = (e) => setUserInputCode(Number(e.target.value));
+
+
+    // 이메일 중복 체크 + 이메일 발송
     const checkEmail = (e) => {
-        e.preventDefault();
 
         axios.post('http://localhost:8080/api/member/join/checkemail', `memberEmail=${mEmail}`)
             .then(email => {
                 console.log(email);
                 if (email.data === "success" && mEmail !== "") {
-                    alert("사용 가능한 이메일입니다.");
+                    alert("사용 가능한 이메일입니다. 이메일 코드 발송");
+                    axios.get(`http://localhost:8080/api/mail`, {
+                        params: {
+                            memberEmail: mEmail
+                        }
+                    }).catch(function () {
+                        console.log('실패함')
+                    })
                 } else if(email.data === "fail" && mEmail !== ""){
                     alert("중복된 이메일입니다.");
                 }else{
@@ -226,6 +240,28 @@ function Join() {
                 }
             });
     }
+
+    //코드 받아오기
+    const clickcm = () => {
+        axios.get(`http://localhost:8080/api/code`)
+            .then(response2 => {
+                console.log(response2);
+                alert(response2.data);
+                setCode(response2.data);
+            })
+    }
+
+     //이메일 코드 일치확인
+     const clickCode = () => {
+        if (String(userInputCode).length !== 5) {
+            return alert('5자리의 숫자코드를 입력해주세요.');
+        } else if (code !== userInputCode) {
+            return alert('숫자코드가 일치하지 않습니다.');
+        } else if (code === userInputCode) {
+            return alert('숫자코드가 일치합니다');
+        }
+    }
+
 
     return (
         <div className="joinWrap memberPage container">
@@ -284,8 +320,18 @@ function Join() {
                                     <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} placeholder="nemo@nemo.com 형식에 맞게 입력하세요." required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="beigeBtn btn" onClick={checkEmail}>중복확인</button>
+                                    <button className="greenBtn btn" onClick={() => { checkEmail(); clickcm();}}>인증하기</button>
                                 </td>
+                            </tr>
+                            <tr>
+                                        <td className="requiredMark">인증코드</td>
+                                        <td>
+                                            <input type="number" name="Code" value={userInputCode} onChange={handlerChangeUserInputCode} />
+
+                                        </td>
+                                        <td className="memberTableBtn">
+                                            <button className="beigeBtn btn" onClick={clickCode}>코드확인</button>
+                                        </td>
                             </tr>
                             <tr>
                                 <td>핸드폰 번호</td>

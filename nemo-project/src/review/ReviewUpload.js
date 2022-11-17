@@ -29,16 +29,31 @@ const AppStyle = styled.div`
   }
 `;
 
-export default function ReviewUpload({ history }) {
+
+
+
+export default function ReviewUpload({ history , match }) {
 
     const reviewWriter = sessionStorage.getItem('memberId');
 
+    const {bookingItemnum} = match.params;
+    const {bookingItemwriter} = match.params;
+    const {bookingItemfiles} = match.params;
+    const {bookingItemname} = match.params;
+    const {bookingItemprice} = match.params;
+
+    const  reviewProductIdx = bookingItemnum;
+    const  reviewId = bookingItemwriter;
+    const reviewItemfiles = bookingItemfiles;
+    const reviewItemname = bookingItemname;
+    const reviewItemprice = bookingItemprice;
+
     // const [data, setData] = useState([]);
+
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
     const [reviewFiles, setReviewFiles] = useState('');
     const [ReviewAddImg, setReviewAddImg] = useState('');
-
 
     const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
     const handlerChangeReviewSatisfaction = (e) => {
@@ -66,25 +81,22 @@ export default function ReviewUpload({ history }) {
     const handlerClickSubmit = (e) => {
         e.preventDefault();
 
+        // 이미지 등록 
         const formData = new FormData();
-        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction })], {
+        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction, "reviewProductIdx":reviewProductIdx ,"reviewId":reviewId ,"reviewItemfiles":reviewItemfiles,"reviewItemname":reviewItemname,"reviewItemprice":reviewItemprice})], {
             type: "application/json"
         }));
         formData.append("reviewFiles", reviewFiles);
 
-        axios.post(`http://localhost:8080/api/reivew/reviewWrite`, formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+        axios.post(`http://localhost:8080/api/review/reviewWrite`, formData,
+            { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(response => {
                 if (response.status === 200) {
-                    if (reviewContents && reviewSatisfaction != null) {
+                    if (reviewContents.length > 30 && reviewSatisfaction != null) {
                         alert("정상적으로 등록되었습니다.");
                         history.push(`/review/myReview/${reviewWriter}`);
                     } else {
-                        alert("내용과 만족도를 입력하세요.")
+                        alert("양식에 맞춰 작성해주세요.")
                     }
                 } else {
                     alert("등록에 실패했습니다.");
@@ -92,7 +104,6 @@ export default function ReviewUpload({ history }) {
                 }
             })
             .catch(error => console.log(error));
-
     };
 
     const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
@@ -139,7 +150,7 @@ export default function ReviewUpload({ history }) {
                 {/* </AppStyle>  */}
             </div>
             <div className='reviewContent'>
-                <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>
+                <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="최소 30자 이상 내용을 입력해주세요."></textarea>
             </div>
             <div className='satisfyingReview'>
                 <span>상품의 만족도는 어떠셨나요?</span>
