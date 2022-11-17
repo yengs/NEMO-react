@@ -27,12 +27,14 @@ import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
 import axios from 'axios';
 import Chat from './chatting/Chat';
-import ReviewUpdate from './review/ReviewUpdate';
+import DecDetail from './admin/DecDetail';
+import MyMenu from './mypage/MyMenuForOthers';
 
 
 import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
+import BestItemList from './Item/BestItemList';
 
 function App() {
 
@@ -102,6 +104,7 @@ function App() {
         {/* item */}
         <Route path="/item/cate/:itemMaincategory" component={ItemList} exact={true} />
         <Route path="/item/cate/sub/:itemSubcategory" component={ItemsubList} exact={true} />
+        <Route path="/item/bestItem" component={BestItemList} exact={true} />
         <Route path="/item/write" component={ItemUpload} exact={true} />
         <Route path="/item/detail/:itemNum" component={ItemDetail} exact={true} />
         <Route path="/item/weatherrecitemlist" component={WeatherRecItemList} exact={true} />
@@ -128,9 +131,9 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-        {/* <Route path="/dec/detail" component={DecDetail} /> */}
-        <Route path="/userstoreinfo" component={MyPageForOthers} />
-
+        <Route path="/dec/detail" component={DecDetail} />
+        <Route path="/dec/dec" component={Dec} />
+        <Route path="/userstoreinfo/:itemWriter" component={MyMenu} />
 
       </div>
       <Footer />

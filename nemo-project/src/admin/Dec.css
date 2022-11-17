@@ -1,7 +1,7 @@
 /* 마이페이지 내의 페이지 */
 .adminInnerPage{
     /* width: calc(100% - 230px); */
-    width: 1000px;
+    width: 100%;
     padding: 20px;
     height: 700px;
     box-sizing: border-box;
@@ -10,7 +10,7 @@
     border-bottom-right-radius: 20px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    margin-left: 400px;
+    /* margin-left: 400px; */
     margin-top: 70px;
     border: 2px solid #bbb;
     flex: 1 1;
