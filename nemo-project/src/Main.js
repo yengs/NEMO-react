@@ -75,7 +75,7 @@ function Main() {
         <div>
             <DirectMenu style={{position: "absolute", right: "70px", bottom: "60px"}}>
                 <div className="directMenu">
-                    <div className={"hideNshow" + ' ' + (isShow ? "show" : "hide")}>
+                    <div className={"hideNshow" + ' ' + (!isShow ? "show" : "hide")}>
                         <div className="directBtn">
                             {
                                 !sessionStorage.getItem("memberId") ?
