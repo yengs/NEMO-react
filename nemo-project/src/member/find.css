@@ -182,7 +182,17 @@ a:-webkit-any-link {
   height: auto;
 }
 
+.myMenu-img {
+  margin-top: 7px;
+  width: 150px;
+  height: auto;
+}
+
 .myMenuUserName {
   margin-top: 20px;
   text-align: center;
+}
+
+.cleanDefault {
+  margin-left: 7px;
 }

@@ -5,7 +5,7 @@ export default function CleanG() {
 
     const reviewId = sessionStorage.getItem('memberId');
 
-    const [reviewSatisfaction, setReviewSatisfaction] = useState(50);
+    const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
     // 클린지수 조회
     useEffect(() => {
@@ -23,7 +23,7 @@ export default function CleanG() {
             <div className="mypage-clean-img">
                 {
                     (function () {
-                        if (reviewSatisfaction === 0) {
+                        if (reviewSatisfaction == 0) {
                             return <img className="mypage-clean-img" src="/clean/zero.png" alt="0percentlass" />
                         } else if (reviewSatisfaction > 0 && reviewSatisfaction <= 20) {
                             return <img className="mypage-clean-img" src="/clean/tenp.png" alt="10"></img>

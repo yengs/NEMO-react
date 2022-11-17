@@ -8,7 +8,7 @@ function MyMenu() {
     const itemWriter = sessionStorage.getItem('memberId');
     const reviewId = sessionStorage.getItem('memberId');
 
-    const [reviewSatisfaction, setReviewSatisfaction] = useState(50);
+    const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/clean/${reviewId}`)
@@ -23,12 +23,23 @@ function MyMenu() {
         <div className="myMenuWrap">
             <div className="memberImg"></div>
             <div className='myMenuUserName'>{itemWriter}</div>
-            <div className="cleanG">
-                 <span>클린지수 {reviewSatisfaction}%</span></div>
-            <div>
-                {/* <div style={{"width":"100%", "height":"13px", "backgroundColor":"rgb(53, 77, 119)", "borderRadius":"20px"}}></div> */}
-                <div><CleanG /></div>
+
+            <div className='cleanG'>
+
+                {reviewSatisfaction == 0 ?
+                    <div>
+                        <div> 클린지수 50 % </div>
+                        <img className="myMenu-img" src="/clean/fourtyp.png" alt="50" />
+                    </div>
+                    :
+                    <div>
+                        <div className='cleanDefault'> 클린지수 {reviewSatisfaction}% </div>
+                        <div> <CleanG /> </div>
+                    </div>
+                }
+
             </div>
+
             <div className="menu">
                 <ul>
                     {/* <li>나의 계정 설정</li> */}
