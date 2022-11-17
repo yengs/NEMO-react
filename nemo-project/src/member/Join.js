@@ -212,7 +212,6 @@ function Join() {
 
 
 // 이메일 관련 --------------------------------
-
     const [code, setCode] = useState(0);
     const [userInputCode, setUserInputCode] = useState(0);
     const handlerChangeUserInputCode = (e) => setUserInputCode(Number(e.target.value));
@@ -230,7 +229,12 @@ function Join() {
                         params: {
                             memberEmail: mEmail
                         }
-                    }).catch(function () {
+                    }) .then(response2 => {
+                        console.log(response2);
+                        alert(response2.data);
+                        setCode(response2.data);
+                    })
+                    .catch(function () {
                         console.log('실패함')
                     })
                 } else if(email.data === "fail" && mEmail !== ""){
@@ -239,16 +243,6 @@ function Join() {
                     alert("이메일을 입력해주세요.")
                 }
             });
-    }
-
-    //코드 받아오기
-    const clickcm = () => {
-        axios.get(`http://localhost:8080/api/code`)
-            .then(response2 => {
-                console.log(response2);
-                alert(response2.data);
-                setCode(response2.data);
-            })
     }
 
      //이메일 코드 일치확인
@@ -320,7 +314,7 @@ function Join() {
                                     <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} placeholder="nemo@nemo.com 형식에 맞게 입력하세요." required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="greenBtn btn" onClick={() => { checkEmail(); clickcm();}}>인증하기</button>
+                                    <button className="greenBtn btn" onClick={checkEmail}>인증하기</button>
                                 </td>
                             </tr>
                             <tr>
