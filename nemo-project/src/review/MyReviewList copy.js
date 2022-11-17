@@ -43,8 +43,8 @@ function MyReviewList({ history, match }) {
 
     // 후기 수정 
     const handlerReviewUpdate = (reviewNum) => {
-        window.location.href = `/review/myReview/${reviewWriter}/${reviewNum}`;
-        console.log(`/review/myReview/${reviewWriter}/${reviewNum}`);
+        // window.location.href = `/review/myReview/update/${reviewWriter}/${reviewNum}`
+        console.log(reviewNum);
     }
 
     // 후기 삭제

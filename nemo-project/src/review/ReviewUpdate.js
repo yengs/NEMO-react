@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewAddImg from '../img/review-add-img.png'
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 const AppStyle = styled.div`
   img {
@@ -28,7 +29,8 @@ const AppStyle = styled.div`
 
 function ReviewUpdate({ history, match }) {
 
-    const { reviewWriter,reviewNum } = match.params;
+    const { reviewWriter } = match.params;
+    const { reviewNum } = useParams();
 
     const {bookingItemnum} = match.params;
     const {bookingItemwriter} = match.params;
