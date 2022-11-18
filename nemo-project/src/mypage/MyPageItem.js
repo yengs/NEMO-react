@@ -387,7 +387,11 @@ const MyPageItemContainer = styled.div`
     margin: 5px 0;
   }
   
-  .itemInfoWrap .itemInfo .price {
+  .itemInfoWrap .itemInfo .itemPrice {
+    color: #333;
+  }
+
+  .itemInfoWrap .itemInfo .price span {
     font-size: 20px;
     font-weight: 800;
     margin-right: 2px;
@@ -414,6 +418,7 @@ const MyPageItemContainer = styled.div`
   .itemInfoWrap .itemInfo .itemName {
     font-size: 17px;
     font-weight: 800;
+    color: #333;
   }
   
   .itemInfoWrap .itemInfo .itemPeriod {
@@ -425,7 +430,7 @@ const MyPageItemContainer = styled.div`
   .itemInfoWrap .itemInfo .period {
     font-size: 14px;
   }
-  
+
   .storeInfoWrap {
    
     width: 200px;
