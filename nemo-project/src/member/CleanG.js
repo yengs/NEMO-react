@@ -1,10 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function CleanG() {
 
+    const params = useParams();
     const reviewId = sessionStorage.getItem('memberId');
+    // const reviewId = sessionStorage.getItem('memberId');
 
+    console.log(params)
     const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
     // 클린지수 조회
@@ -19,7 +23,6 @@ export default function CleanG() {
 
     // 값 받아서 맞는 이미지 리턴
     return (
-        <>
             <div className="mypage-clean-img">
                 {
                     (function () {
@@ -45,6 +48,5 @@ export default function CleanG() {
                     })()
                 }
             </div>
-        </>
     );
 }

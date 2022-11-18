@@ -24,9 +24,7 @@ function MyMenu({ history }) {
         <div className="myMenuWrap">
             <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
             <div className='myMenuUserName'>{itemWriter}</div>
-
             <div className='cleanG'>
-
                 {reviewSatisfaction == 0 ?
                     <div>
                         <div> 클린지수 50 % </div>
@@ -38,9 +36,7 @@ function MyMenu({ history }) {
                         <div> <CleanG /> </div>
                     </div>
                 }
-
             </div>
-
             <div className="menu">
                 <ul>
                     {/* <li>나의 계정 설정</li> */}

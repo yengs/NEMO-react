@@ -40,7 +40,7 @@ function YourReviewList({ match }) {
     return (
         <>
             <div className="rcontainer">
-                <h1>내 상점 리뷰</h1>
+                <h1>내 상점 후기</h1>
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
@@ -71,7 +71,7 @@ function YourReviewList({ match }) {
                                     </td>
                                     <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
                                     <td>
-                                       {review.reviewId}
+                                       {review.reviewWriter}
                                     </td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
