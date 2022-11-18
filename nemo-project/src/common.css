@@ -196,8 +196,12 @@ header .navBar .nav li {
   float: left;
   font-weight: 100;
   font-size: 1.1rem;
-  padding: 0 1.5rem;
+  /* padding: 0 1.5rem; */
   line-height: 40px;
+}
+
+header .navBar .nav li a {
+  padding: 0.5rem 1.5rem;
 }
 
 header .headerIcons {
@@ -514,7 +518,7 @@ footer {
 
 .titleNplusBtn>h3 {
   margin: 10px 0;
-  font-size: 23px;
+  /* font-size: 23px; */
 }
 
 .tomorrowWeather {

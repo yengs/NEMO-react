@@ -22,6 +22,7 @@ import Pwfind_Result from './member/Pwfind_Result';
 import MyReviewList from './review/MyReviewList';
 import YourReviewList from './review/YourReviewList';
 import ReviewUpload from './review/ReviewUpload';
+import ReviewUpdate from './review/ReviewUpdate';
 import Dec from './admin/Dec';
 import WeatherRecItemList from './Item/WeatherRecItemList';
 import BookingUpload from './Item/BookingUpload';
@@ -35,7 +36,11 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
 import BestItemList from './Item/BestItemList';
+<<<<<<< HEAD
 import ReviewUpdate from './review/ReviewUpdate';
+=======
+import DirectBtn from './components/DirectBtn';
+>>>>>>> origin/minju
 
 function App() {
 
@@ -89,11 +94,15 @@ function App() {
     }
   }, []);
 
+  
+
   return (
     loaded &&
     <div className='wholeWrap'>
       <div className='containerWrap'>
         <Header />
+
+        <DirectBtn />
 
         <Route path="/" component={Main} exact={true} />
 
@@ -113,7 +122,6 @@ function App() {
         <Route path="/chatting/:itemWriter" component={Chat} exact={true} />
 
 
-
         {/* member */}
         <Route path="/member/join" component={Join} exact={true} />
         <Route path="/member/login" component={Login} exact={true} />
@@ -126,15 +134,21 @@ function App() {
         {/* review */}
         <Route path="/review/reviewWrite/:bookingItemnum,:bookingItemwriter,:bookingItemfiles,:bookingItemname,:bookingItemprice" component={ReviewUpload} />
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
+        <Route path="/review/myReview/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
-        <Route path="/review/myReview/update/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
-
+      
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
+<<<<<<< HEAD
         <Route path="/dec/detail/:singoNum" component={DecDetail} />
         <Route path="/dec/dec/:memberWarning" component={Dec} />
         <Route path="/userstoreinfo/:itemWriter" component={MyMenu} />
+=======
+        <Route path="/dec/detail" component={DecDetail} />
+        <Route path="/dec/dec" component={Dec} />
+        <Route path="/userstoreinfo/:itemWriter,:memberImg" component={MyMenu} />
+>>>>>>> origin/minju
 
       </div>
       <Footer />

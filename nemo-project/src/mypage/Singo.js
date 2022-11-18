@@ -10,15 +10,31 @@ function Singo({ itemWriter, setSingo }) {
 
   const [singoReason, setSingoReason] = useState('');
   const [singoContent, setSingoContent] = useState('');
+  const [singoImage, setSingoImage] = useState('');
+  const [imageSrc, setImageSrc] = useState('');
+
   const singoWriter = sessionStorage.getItem('memberId');
   const singoDate = new Date();
 
   const Pisingoja = itemWriter;
 
-  console.log("신고 대상자 ID :",Pisingoja);
-
   const handlerChangeReason = (e) => setSingoReason(e.target.value);
   const handlerChangeContent = (e) => setSingoContent(e.target.value);
+  const handlerChangefiles =(e) => {
+    setSingoImage(e.target.files[0]);
+    encodeFileToBase64(e.target.files[0]);
+}
+
+const encodeFileToBase64 = (fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        resolve();
+      };
+    });
+  };
 
   const singoInfo = {
     "singoPisingoja" : Pisingoja,
@@ -30,19 +46,39 @@ function Singo({ itemWriter, setSingo }) {
 
   const takeDec = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8080/api/singo/take', singoInfo)
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          alert("정상적으로 접수되었습니다.");
-          setSingo(false);
-        } else {
-          alert("접수 실패했습니다.");
-          return;
-        }
-      })
-      .catch(error => console.log(error));
-  }
+
+    const formData = new FormData();
+        formData.append('data', new Blob([JSON.stringify({
+        "singoPisingoja" : Pisingoja,
+        "singoReason" : singoReason,
+        "singoContent" : singoContent,
+        "singoWriter" : singoWriter,
+        "singoDate": singoDate})], {
+            type: "application/json"
+        }));
+        // formData.append("files", new Blob(files, { type: "image/*" }));
+        formData.append("singoImage", singoImage);
+
+
+
+
+        axios.post('http://localhost:8080/api/singo/take', 
+            formData, 
+            { headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            })
+        .then(response => {
+            if (response.status === 200) {
+                alert("정상적으로 등록되었습니다.");
+                setSingo(false);
+            } else {
+                alert("등록에 실패했습니다.");
+                return;
+            }
+        })
+        .catch(error => console.log(error));
+    }
 
   const goBack = (e) => {
     console.log(`/userstoreinfo/${itemWriter}`)
@@ -72,7 +108,12 @@ function Singo({ itemWriter, setSingo }) {
                         <AppStyle>
                           <label htmlFor="item_review_input">
                             <div className="btnStart">
-                              <img src={addImage} alt="ReviewAddImg" />
+                            {imageSrc == '' ?
+                        <img src={addImage} alt="ReviewAddImg" />
+                        : <div className="myDetailImage"> 
+                        {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
+                    }
+                             
                             </div>
                           </label>
                           <input
@@ -80,6 +121,7 @@ function Singo({ itemWriter, setSingo }) {
                             id="item_review_input"
                             className="image_inputType_file"
                             accept=".jpg, .png"
+                            multiple onChange={handlerChangefiles}
                           />
                         </AppStyle>
 
