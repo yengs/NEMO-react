@@ -44,12 +44,12 @@ function YourReviewList({ match }) {
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
-                        <col width="10%" />
+                    <col width="10%" />
                         <col width="10%" />
                         <col width="15%" />
-                        <col width="15%" />
                         <col width="10%" />
-                        <col width="30%" />
+                        <col width="10%" />
+                        <col width="35%" />
                         <col width="10%" />
                     </colgroup>
                     <thead>

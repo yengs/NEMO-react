@@ -220,7 +220,7 @@ const MypageReviewContainer = styled.div`
     display: flex;
     max-height: 31px;
     overflow: hidden;
-    justify-content: center;
+    justify-content: flex-start;
     white-space: pre-wrap;
 }
 
