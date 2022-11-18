@@ -180,7 +180,10 @@ function ItemDetail({ match, history }) {
                             <p className="itemDetailContent">{data.itemDetail}</p>
                             </div>
 
-                            
+                            <div className="buttonDiv">
+                                <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
+                                <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
+                            </div>
                             {/* <form method="post" id="frm" name="frm">
                                 <table>
                                     <colgroup>
@@ -240,12 +243,12 @@ function ItemDetail({ match, history }) {
                         + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
                     <div className="writerWrap">
 
-                        <div className="writerDiv">
+                        <div className="writerDiv" style={{cursor:"pointer"}} onClick={goUserStore}>
                             <h3>대여자</h3>
                             <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
                         </div>
-                        <div className="cleanDiv">
-                            <h4 onClick={goUserStore}>{itemWriter}</h4>
+                        <div style={{cursor:"pointer"}} onClick={goUserStore} className="cleanDiv">
+                            <h4>{itemWriter}</h4>
                             <div>
 
                                 {reviewSatisfaction == 0 ?
@@ -285,10 +288,7 @@ function ItemDetail({ match, history }) {
                             </div>
                         </div>
                     </div>
-                    <div className="buttonDiv">
-                                <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
-                                <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
-                            </div>
+                    
                 </div>
 
 
@@ -606,17 +606,17 @@ td.reviewImg,
 }
 
 .tableform .itemName {
-    font-size: 27px;
+    font-size: 28px;
     margin: 0;
 }
 
 .tableform .itemPrice {
-    font-size: 21px;
+    font-size: 22px;
     margin: 7px 0 0 0;
 }
 
 .tableform .itemDeposit {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 700;
     color: #666;
 }
@@ -632,7 +632,12 @@ td.reviewImg,
 
 .tableform .itemSize {
     margin-top: 30px;
-    font-size: 17px;
+    font-size: 18px;
+}
+
+.tableform .itemSize span {
+    font-weight: 700;
+    margin-left: 7px;
 }
 
 .tableform .itemRentalPeriod {
@@ -648,6 +653,8 @@ td.reviewImg,
 
 .tableform .itemDetailContent {
     margin-top: 25px;
+    font-size; 17px;
+    line-height: 23px;
 }
 
 .DetailContainer form {
