@@ -83,7 +83,7 @@ function MypageReview() {
                                             {/* <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`}/>         -----> 리뷰등록 사진*/}
                                         </td>
                                         <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
-                                        <td className='ReviewWriter' rowSpan={3}>{review.reviewId}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
                                         <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>
