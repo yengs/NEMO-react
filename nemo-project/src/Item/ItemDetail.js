@@ -23,6 +23,8 @@ function ItemDetail({ match, history }) {
 
     const reviewProductIdx = itemNum;
 
+    const [writerItems, setWriterItems] = useState([]);
+
     useEffect(() => {
         axios.get(`http://localhost:8080/api/item/detail/${itemNum}`)
             .then(response => {
@@ -46,7 +48,17 @@ function ItemDetail({ match, history }) {
                     .catch(error => console.log(error));
             })
             .catch(error => { console.log(error); });
+
     }, []);
+
+    // useEffect(() => {
+    //     axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
+    //         .then(response => {
+    //             setWriterItems(response.data);
+    //         })
+    //         .catch(error => console.log(error));
+    // }, []);
+
 
     //후기조회
     useEffect(() => {
@@ -235,7 +247,25 @@ function ItemDetail({ match, history }) {
                             </div>
                         </div>
                     </div>
-                    
+                    <div>
+                        {
+                            function() {
+                                axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
+                                .then(response => {
+                                    setWriterItems(response.data);
+                                        console.log(response.data)
+                                    })
+                                    .catch(error => console.log(error));
+                                }
+                            }
+                        { writerItems && writerItems.map(items => {
+                            <div style={{width:"100px", height:"100px", backgroundColor:"#ddd", display:"inline-block", marginLeft:"20px"}} key={items.itemNum}>
+                            <img className="itemImg" src={`../../files/${items.files}`} />
+                            </div>
+                        }).slice(0, 5)}
+                        {console.log("writerItems>>>>>>>>>")}
+                        {console.log(writerItems)}
+                        </div>
                 </div>
 
 
@@ -317,9 +347,9 @@ function ItemDetail({ match, history }) {
 
 const ItemDatailContainer = styled.div`
 .middleDiv {
-    justify-content: space-between;
-    align-items: flex-end;
-    display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // display: flex;
     height: auto;
     width: 100%;
     margin-top: 50px;
@@ -328,15 +358,16 @@ const ItemDatailContainer = styled.div`
 }
 
 .writerWrap {
-    display: flex;
+    display: inline-block;
 }
 
 .writerDiv {
+    display: inline-block;
     margin-right: 10px;
 }
 
 .writerDiv h3 {
-    margin: 0 0 7px 13px;
+    margin: 0 0 10px 0;
     text-align: left;
 }
 
@@ -344,8 +375,8 @@ const ItemDatailContainer = styled.div`
     justify-content: right;
     align-self: center;
     text-align: -webkit-center;
-    margin-top: 40px;
-    margin-bottom: 13px;
+    margin: 0 50px 20px 5px;
+    display: inline-block;
     font-size: 15px;
 }
 
@@ -354,7 +385,6 @@ const ItemDatailContainer = styled.div`
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    margin: 10px;
 }
 .ReviewItemImage2 .bookingitemImg{
     width: 100px;
@@ -635,6 +665,7 @@ a.ItemReviewList {
 .item-detail-Img {
     margin-top: 7px;
     width: 140px;
+    margin-bottom: 3px;
 }
 
 /* -------- */
