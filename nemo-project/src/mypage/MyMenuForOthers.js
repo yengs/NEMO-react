@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Singo from './Singo';
 import MyStore from './MyUserStore';
+import CleanG from '../member/CleanG';
+import axios from 'axios';
 
 function MyMenu() {
 
@@ -15,15 +17,34 @@ function MyMenu() {
 
     const goSingo = () => setSingo(true);
     const goMyStore = () => setMyStore(true);
+
+    const reviewId = params.itemWriter;
+
+    const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/clean/${reviewId}`)
+            .then(response => { setReviewSatisfaction(response.data) })
+            .catch(error => console.log(error));
+    }, []);
     
     return (
         <div className='myPageWrap'>
         <div className="myMenuWrap">
         <img className="memberImg" src={`../../memberImg/${params.memberImg}`}></img>
-            <div>{params.itemWriter}</div>
-            <div className="cleanG">
-                클린지수 <span>65</span>%
-                <div style={{"width":"100%", "height":"13px", "backgroundColor":"rgb(53, 77, 119)", "borderRadius":"20px"}}></div>
+            <div className='myMenuUserName'>{params.itemWriter}</div>
+            <div className='cleanG'>
+                {params.itemWriter.reviewSatisfaction == 0 ?
+                    <div>
+                        <div> 클린지수 50 % </div>
+                        <img className="myMenu-img" src="/clean/fourtyp.png" alt="50" />
+                    </div>
+                    :
+                    <div>
+                        <div className='cleanDefault'> 클린지수 {reviewSatisfaction}% </div>
+                        <div> <CleanG /> </div>
+                    </div>
+                }
             </div>
             <div className="menu">
                 <div></div>
