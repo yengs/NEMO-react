@@ -6,9 +6,12 @@ import { useState } from 'react';
 import styled from "styled-components";
 import './reviewUpload.css'
 
+import addImage from "../img/review-add-img.png";
+
 const AppStyle = styled.div`
   img {
-    max-width: 75px;
+    max-width: 170px;
+    max-height: 170px;
   }
   label {
     display: inline-block;
@@ -27,6 +30,31 @@ const AppStyle = styled.div`
     clip: rect(0, 0, 0, 0);
     border: 0;
   }
+
+  .itemImg {
+    width: 170px;
+    height: 170px;
+    position: relative;
+}
+
+  .commentBox {
+    width: 170px;
+    height: 170px;
+    background-color: rgba(30,30,30,0.4);
+    position: absolute;
+    bottom: 0;
+    z-index:1;
+    visibility: hidden;
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+    padding-top: 62px;
+    line-height: 25px;
+}
+
+.showCom {
+visibility: visible;
+}
 `;
 
 
@@ -125,6 +153,16 @@ export default function ReviewUpload({ history , match }) {
     const abort = () => console.log("Aborted")
     const confirmDelete = useConfirm("작성을 취소하시겠습니까?", deleteWorld, abort);
 
+
+    const [showCom, setShowCom] = useState(false);
+    const showComment = () => {
+        setShowCom(true)
+    }
+
+    const hideComment = () => {
+        setShowCom(false)
+    }
+
     return (
         <div className="reviewUpload">
             <div className='pageTitle'>
@@ -132,7 +170,7 @@ export default function ReviewUpload({ history , match }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                {/* <AppStyle>  */}
+                {/* <AppStyle> 
                 <div className="reviewImage">
                     {ReviewAddImg && <img src={ReviewAddImg} alt="ReviewAddImg" />} </div>
                 <div className="add-img-box">
@@ -145,7 +183,33 @@ export default function ReviewUpload({ history , match }) {
                         onChange={handlerChangeReviewFiles}
                     />
                 </div>
-                {/* </AppStyle>  */}
+                </AppStyle>  */}
+                <AppStyle style={{marginTop: "11px"}}>
+                        <label htmlFor="item_review_input" className="item_review_input">
+                            {
+                                ReviewAddImg ?
+                                    <div className="itemImg">
+                                        <img src={ReviewAddImg} alt="preview-img" className="previewImg" onMouseEnter={showComment} />
+                                        <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
+                                            이미지 변경을 하시려면<br/>클릭해주세요.
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className="itemImg">
+                                        <img src={addImage} alt="ReviewAddImg" className="uploadImg" />
+                                    </div>
+                            }
+                        </label>
+                        <input
+                            type="file"
+                            id="item_review_input"
+                            className="image_inputType_file"
+                            name="file"
+                            accept=".jpg, .png"
+                            multiple
+                            onChange={handlerChangeReviewFiles}
+                        />
+                    </AppStyle>
             </div>
             <div className='reviewContent'>
                 <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="최소 30자 이상 내용을 입력해주세요."></textarea>
