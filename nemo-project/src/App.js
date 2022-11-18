@@ -35,6 +35,7 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
 import BestItemList from './Item/BestItemList';
+import ReviewUpdate from './review/ReviewUpdate';
 
 function App() {
 
@@ -46,7 +47,7 @@ function App() {
 
   useEffect(() => {
 
-    if (sessionStorage.getItem('memberId') !== null) {
+    if (sessionStorage.getItem('jwtToken') !== null) {
       setLoaded(false);
       axios.get(`http://localhost:8080/api/member/info/${sessionStorage.getItem('memberNum')}`)
         .then(response => {
@@ -131,8 +132,8 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-        <Route path="/dec/detail" component={DecDetail} />
-        <Route path="/dec/dec" component={Dec} />
+        <Route path="/dec/detail/:singoNum" component={DecDetail} />
+        <Route path="/dec/dec/:memberWarning" component={Dec} />
         <Route path="/userstoreinfo/:itemWriter" component={MyMenu} />
 
       </div>

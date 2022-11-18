@@ -15,24 +15,10 @@ function Singo({ itemWriter, setSingo }) {
 
   const Pisingoja = itemWriter;
 
-  console.log("네이놈",Pisingoja);
+  console.log("신고 대상자 ID :",Pisingoja);
 
   const handlerChangeReason = (e) => setSingoReason(e.target.value);
   const handlerChangeContent = (e) => setSingoContent(e.target.value);
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/api/userstoreinfo/warn/${itemWriter}`)
-  //     .then(response => {
-  //       console.log(response);
-  //       if (response.status === 200){
-  //         console.log("회원 정보 불러오기 성공");
-  //       }else {
-  //         alert("회원 정보를 불러올 수 없습니다.");
-  //         return;
-  //       }
-  //     })
-  //     .catch(error => console.log(error));
-  // }, []);
 
   const singoInfo = {
     "singoPisingoja" : Pisingoja,
@@ -41,8 +27,6 @@ function Singo({ itemWriter, setSingo }) {
     "singoWriter" : singoWriter,
     "singoDate": singoDate
   }
-
-  // pisingoja에 itemwriter(memberId)가 들어가야 하고... 그걸 서버로 넘겨줘야함..
 
   const takeDec = (e) => {
     e.preventDefault();
@@ -115,7 +99,9 @@ function Singo({ itemWriter, setSingo }) {
                           <option>선택</option>
                           <option>미반환</option>
                           <option>사기 행위</option>
-                          <option>물품 훼손</option>
+                          <option>물품 훼손(사진 첨부 필수)</option>
+                          <option>광고 (상점 및 타사이트 홍보, 상품도배)</option>
+                          <option>기타(신고내용에 사유를 기재해주세요.)</option>
                         </select>
                       </td>
                     </tr>
