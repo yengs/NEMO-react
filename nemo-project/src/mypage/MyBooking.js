@@ -7,11 +7,24 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 // import "./mybooking.css";
 
+import '../../src/pagination/Paging.css';
+import Pagination from "react-js-pagination"
+
 function MyBooking({history}) {
    
+    const ITEM_COUNT_PER_PAGE = 2;
+
     const [bookingNum , setBookingNum] = useState('');
     const [datas, setDatas] = useState([]);
     const [datas2, setDatas2] = useState([]);
+
+    const [count1, setCount1] = useState(0);
+    const [page1, setPage1] = useState(1);
+    const [items1, setItems1] = useState([]);
+
+    const [count2, setCount2] = useState(0);
+    const [page2, setPage2] = useState(1);
+    const [items2, setItems2] = useState([]);
 
     const bookingItemwriter = sessionStorage.getItem('memberId');
     const bookingMember = sessionStorage.getItem('memberId');
@@ -21,76 +34,77 @@ function MyBooking({history}) {
     //     alert(bookingItemnum);
     //     window.location.href = `/review/reviewWrite/${bookingItemnum}`;
     // }
-    
 
+    
+    
     //예약중 -> 대여중
     useEffect(() => {
         axios.get(`http://localhost:8080/api/bookingState`)
-            .then(response => {
-                 console.log(response);
+        .then(response => {
+            console.log(response);
         })
-            .catch(error => console.log(error));
+        .catch(error => console.log(error));
     }, []);
-
-
-
-      //대여중 -> 기간만료
-      useEffect(() => {
+    
+    
+    
+    //대여중 -> 기간만료
+    useEffect(() => {
         axios.get(`http://localhost:8080/api/bookingState2`)
-            .then(response => {
-                 console.log(response);
+        .then(response => {
+            console.log(response);
         })
-            .catch(error => console.log(error));
+        .catch(error => console.log(error));
     }, []);
-
-
+    
+    
 
     //물품상태 수정
     const [itemstate , setItemstate] = useState(''); 
-
+    
     const handleritemstate = (e) => setItemstate(e.target.value);
     // console.log(itemstate);
-
+    
     const statechangebtn = (e) => {
-
+        
         setBookingNum(e.target.value);
         console.log(bookingNum);
         console.log(itemstate);
         if (window.confirm("물품상태를 수정하시겠습니까?")) {
-
+            
             axios.put(`http://localhost:8080/api/mypage/mybooking/${e.target.value}`, {'bookingDepositstate' : itemstate})
-        .then(response => { 
-            console.log(response);
-            if (response.status === 200) {
-                alert("성공");
-                window.location.reload();
-            } else {
-                alert("실패");
-                return;
-            }
-        })
-        .catch(error => console.log(error));
-      
-          } else {
-      
+            .then(response => { 
+                console.log(response);
+                if (response.status === 200) {
+                    alert("성공");
+                    window.location.reload();
+                } else {
+                    alert("실패");
+                    return;
+                }
+            })
+            .catch(error => console.log(error));
+            
+        } else {
+            
             return;
-      
-          }
-      
-        };
-
-
+            
+        }
+        
+    };
+    
+    
     //예약취소
     const handlercancel = (e) => {
         
         setBookingNum(e.target.value);
         
         if (window.confirm("정말 예약을 취소하시겠습니까?")) {
-
+            
             axios.delete(`http://localhost:8080/api/mypage/mybooking/${e.target.value}`)
-        .then(response => { 
-            console.log(response);
-            if (response.status === 200) {
+            .then(response => { 
+                console.log(response);
+                if (response.status === 200) {
                 alert("예약이 취소되었습니다.");
                 window.location.reload();
             } else {
@@ -99,37 +113,50 @@ function MyBooking({history}) {
             }
         })
         .catch(error => console.log(error));
-      
-          } else {
-      
-            return;
-      
-          }
-      
-        };
+        
+    } else {
+        
+        return;
+        
+    }
     
+};
 
-    //빌려줬어요
-    useEffect(() => {
-        axios.get(`http://localhost:8080/api/mypage/mybooking/${bookingItemwriter}`)
-            .then(response => {
-                 console.log(response);
-                 setDatas(response.data);
-        })
+
+//빌려줬어요
+useEffect(() => {
+    axios.get(`http://localhost:8080/api/mypage/mybooking/${bookingItemwriter}`)
+    .then(response => {
+        console.log(response);
+        setDatas(response.data);
+        setCount1(response.data.length);
+        setItems1(response.data.slice((page1 - 1) * ITEM_COUNT_PER_PAGE, page1 * ITEM_COUNT_PER_PAGE));
+    })
             .catch(error => console.log(error));
-    }, []);
-
-
-    
-    //빌려왔어요
-    useEffect(() => {
-        axios.get(`http://localhost:8080/api/mypagebookingmember/${bookingMember}`)
+        }, []);
+        
+        const handlerPageChange1 = (page1) => {
+            setPage1(page1);
+            setItems1(datas.slice((page1-1) * ITEM_COUNT_PER_PAGE, page1 * ITEM_COUNT_PER_PAGE));
+        };
+        
+        
+        //빌려왔어요
+        useEffect(() => {
+            axios.get(`http://localhost:8080/api/mypagebookingmember/${bookingMember}`)
         .then(response => {
                 console.log(response);
                 setDatas2(response.data);
+                setCount2(response.data.length);
+                setItems2(response.data.slice((page2 - 1) * ITEM_COUNT_PER_PAGE, page2 * ITEM_COUNT_PER_PAGE));
             })
             .catch(error => console.log(error));
     }, []);
+
+    const handlerPageChange2 = (page2) => {
+        setPage2(page2);
+        setItems2(datas2.slice((page2-1) * ITEM_COUNT_PER_PAGE, page2 * ITEM_COUNT_PER_PAGE));
+    };
 
     return (
         <MyBookingContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
@@ -150,7 +177,7 @@ function MyBooking({history}) {
                             </tr>
                         </thead>
                         {
-                                datas && datas.map(booking => (
+                                items1 && items1.map(booking => (
                         <tbody>
                            
                                     <tr key={booking.bookingNum}>
@@ -194,6 +221,18 @@ function MyBooking({history}) {
                     }
 
                     </table>
+                    <div>
+                    {/* <MyPageItemPaging page={page1} count={count1} setPage={changePage1} /> */}
+                    <Pagination
+        activePage={page1}   // 현재 페이지
+        itemsCountPerPage={2}  // 한 페이지당 보여줄 게시글 개수
+        totalItemsCount={count1}   // 모든 게시글 수
+        pageRangeDisplayed={10}  // paginator안에서 보여줄 페이지의 범위
+        prevPageText={"<"}  // 이전을
+        nextPageText={">"}  // 다음
+        onChange={handlerPageChange1}    // 페이지가 바뀔 때 핸들러 함수 
+        />
+                </div>
                 </div>
 
 
@@ -214,7 +253,7 @@ function MyBooking({history}) {
                             </tr>
                         </thead>
                         {
-                        datas2 && datas2.map(booking => (
+                        items2 && items2.map(booking => (
                         <tbody>
                    
                             <tr key={booking.bookingNum}>
@@ -251,6 +290,15 @@ function MyBooking({history}) {
     )
 }
                     </table>
+                    <Pagination
+        activePage={page2}   // 현재 페이지
+        itemsCountPerPage={2}  // 한 페이지당 보여줄 게시글 개수
+        totalItemsCount={count2}   // 모든 게시글 수
+        pageRangeDisplayed={10}  // paginator안에서 보여줄 페이지의 범위
+        prevPageText={"<"}  // 이전을
+        nextPageText={">"}  // 다음
+        onChange={handlerPageChange2}    // 페이지가 바뀔 때 핸들러 함수 
+        />
                 </div>
             </div>
         </MyBookingContainer>
@@ -358,7 +406,7 @@ const MyBookingContainer = styled.div`
 
 /* 빌려왔어요 */
 .userReviewListAboutStoreWrapBooking2{
-    margin-top: 60px;
+    margin-top: 10px;
 }
 
 .userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 {
