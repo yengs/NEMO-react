@@ -1,24 +1,46 @@
 import axios from 'axios';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import CleanG from '../member/CleanG';
 
-function MyMenu({history}) {
+function MyMenu({ history }) {
 
     const itemWriter = sessionStorage.getItem('memberId');
+    const reviewId = sessionStorage.getItem('memberId');
     const memberImg = sessionStorage.getItem('memberImg');
 
+    const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
-  
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/clean/${reviewId}`)
+            .then(response => {
+                console.log(response);
+                setReviewSatisfaction(response.data);
+            })
+            .catch(error => console.log(error));
+    }, []);
 
     return (
         <div className="myMenuWrap">
             <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
-            
-            <div className="cleanG">
-                클린지수 <span>65</span>%
-                <div style={{"width":"100%", "height":"13px", "backgroundColor":"rgb(53, 77, 119)", "borderRadius":"20px"}}></div>
+            <div className='myMenuUserName'>{itemWriter}</div>
+
+            <div className='cleanG'>
+
+                {reviewSatisfaction == 0 ?
+                    <div>
+                        <div> 클린지수 50 % </div>
+                        <img className="myMenu-img" src="/clean/fourtyp.png" alt="50" />
+                    </div>
+                    :
+                    <div>
+                        <div className='cleanDefault'> 클린지수 {reviewSatisfaction}% </div>
+                        <div> <CleanG /> </div>
+                    </div>
+                }
+
             </div>
+
             <div className="menu">
                 <ul>
                     {/* <li>나의 계정 설정</li> */}
