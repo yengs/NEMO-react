@@ -68,6 +68,7 @@ function Login({ history }) {
                     sessionStorage.setItem("jwtToken", jwtToken);
                     sessionStorage.setItem("memberNum", response.data.memberNum);
                     sessionStorage.setItem("memberId", id);
+                    sessionStorage.setItem("memberImg", response.data.memberImg);
 
                     localStorage.setItem("memberIdLocal", id);
 

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 // 주소 api사용 (팝업방식)
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 // import './UserUpdate.css';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import MemberDelete from "./MemberDelete";
+
 
 // 회원정보수정
 function UserUpdate({history}) {
@@ -108,6 +110,53 @@ function UserUpdate({history}) {
     };
 
 
+    //--------------------------회원탈퇴하기 모달
+    const [modalOpen, setModalOpen] = useState(false);
+
+
+    const openModal = () => {
+        setModalOpen(true);
+      };
+      const closeModal = () => {
+        setModalOpen(false);
+      };
+    
+     
+    const handlerClickDelete = () => {
+        if(memberPw == memberPwCheck &&check4 === false){
+            alert("안내사항에 동의해주세요")
+        } else if(memberPw !== memberPwCheck &&check4 === true){
+            alert("패스워드를 확인해주세요")
+        } else if(memberPw == memberPwCheck &&check4 === true){
+        axios.delete(`http://localhost:8080/api/member/delete/${memberNum}`)
+        .then(response => { 
+            console.log(response);
+            if (response.status === 200) {
+                alert("탈퇴가 완료되었습니다. 더 나은 내모가 되도록 노력하겠습니다^^");
+                sessionStorage.clear();
+                 window.location.href = "/";
+            } else {
+                alert("삭제에 실패했습니다.");
+                return;
+            }
+        })
+        .catch(error => console.log(error));
+    }else {
+        alert("패스워드 확인과 안내사항 동의를 해주세요")
+    }
+};
+
+const [check4, setCheck4] = useState(false);
+
+const check4Handler = () => {
+    if(check4 === false){
+        setCheck4(true)
+    }else {
+        setCheck4(false);
+    }
+};
+
+
     return (
         <ContainerUserUpate style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage UserUpate">
@@ -179,13 +228,53 @@ function UserUpdate({history}) {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="resignMembership">
-                            {/* <Link to={`member/resignMembership`}>회원탈퇴하기</Link> */}
-                            <Link>회원탈퇴하기</Link>
-                        </div>
+                            <React.Fragment>
+                            <div className="resignMembership">
+                            <Link onClick={openModal} type="submit">회원탈퇴하기</Link>
+                           </div>
+                            <MemberDelete open={modalOpen} close={closeModal} header="회원탈퇴페이지">
+                            <div className="txt3"><li>
+                                    패스워드 확인을 통해 본인인증을 해주세요
+                                    </li>
+                                    </div>
+                            <tr>
+                                        <td className="requiredMark">패스워드</td>
+                                        <td>
+                                            <input className="pw" type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td className="requiredMark">패스워드확인</td>
+                                        <td>
+                                            <input className="pw" type="password" name="mIdCheck" value={memberPwCheck} onChange={handlerChangePwCheck} required />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <div className="txt">
+                                    탈퇴 유의사항
+                                    </div>
+                                    <div className="txt2">
+                                        <li>채팅, 회원정보의 데이터는 삭제됩니다.</li>
+                                        <li>게시한 대여상품, 후기 등의 게시글은 삭제되지 않습니다.반드시 탈퇴 전 직접 삭제하셔야 합니다.</li>                      
+                                        <li>회원 탈퇴 즉시 모든 회원 정보가 삭제되며, 재가입시에는 기존 아이디는 사용하실 수 있습니다.</li>
+                                        <li>회원 탈퇴 후 모든 스토어 주문 정보는 5년간 분리 보관됩니다.</li>           
+                                        <li>회원 탈퇴 시 내모의 대여상품을 이용하실수 없습니다.</li>
+
+                                  </div>
+                                  <div className="line"></div>
+                                    <label className="req">
+                                <input type="checkbox" required
+                                    id="check4" checked={check4} onChange={check4Handler}/>
+                                &nbsp;&nbsp;안내사항을 모두 확인하였으며, 이에 동의합니다.
+                                 </label>
+                            <div className="btnWrap">
+                                    <input type="button" id="delete" className="redBtn btn bon"  value="탈퇴하기" onClick={handlerClickDelete} />
+                            </div>
+                            </MemberDelete>
+                                </React.Fragment>
                         <div className="btnWrap">
                             <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} />
-                            {/* <input type="button" value="취소" className="grayBtn btn"/> */}
                         </div>
                     </form>
                 </div>
@@ -195,6 +284,44 @@ function UserUpdate({history}) {
 }
 
 const ContainerUserUpate = styled.div`
+.pw{
+    width: 370px;
+    height:30px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+.txt{
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 40px;
+}
+
+.txt2 {
+    margin-top : 20px;
+}
+.txt2 li{
+    line-height: 2;
+    color: #7a7a7a;
+}
+
+.txt3 {
+    font-size: 17px;
+    font-weight: 40;
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+.bon{
+    margin-left: 400px;
+    margin-top:40px;
+}
+
+.line{
+    margin-top : 20px;
+    margin-bottom: 20px;
+    background-color:#dfdfdf;
+    height:0.5px;
+}
+
 .mypageInnerPage {
     width: 100%;
     height: 100%;

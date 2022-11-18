@@ -43,11 +43,7 @@ function MyReviewList({ history, match }) {
 
     // 후기 수정 
     const handlerReviewUpdate = (reviewNum) => {
-        window.location.href = `/review/myReview/${reviewWriter}/${reviewNum}`;
-        history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);    
-        
-        // window.location.href = `/review/rupdate/${reviewNum}`
-        // history.push(`/review/rupdate/${reviewNum}`);
+        // window.location.href = `/review/myReview/update/${reviewWriter}/${reviewNum}`
         console.log(reviewNum);
     }
 
@@ -77,20 +73,16 @@ function MyReviewList({ history, match }) {
                 <hr className="lineH"></hr>
                 <table className="yourreview">
                     <colgroup>
-                        <col width="10%" />
-                        <col width="10%" />
                         <col width="15%" />
+                        <col width="25%" />
+                        <col width="45%" />
                         <col width="15%" />
-                        <col width="10%" />
-                        <col width="30%" />
-                        <col width="10%" />
                     </colgroup>
                     <thead>
                         <tr>
                             <th scope='col'>번호</th>
-                            <th colSpan={2}>상품 정보</th>
-                            <th scope='col'>대여료</th>
-                            <th colSpan={2}>내용</th>
+                            <th scope='col'>이미지</th>
+                            <th scope='col'>내용</th>
                             <th scope='col'>만족도</th>
                         </tr>
                     </thead>
@@ -99,14 +91,9 @@ function MyReviewList({ history, match }) {
                             items && items.map(review => (
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
-                                    <td className="rReviewItemImageOrigin">
-                                            <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
-                                        </td>
-                                        <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
-                                        <td className='ReviewWriter'>{review.reviewItemprice}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></img>
+                                        <img className="reviewListItemImg" src={`../../files/${review.reviewFiles}`}></img>
                                     </td>
                                     <td>
                                         <div className="reviewContents">

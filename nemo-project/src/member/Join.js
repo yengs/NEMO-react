@@ -73,8 +73,9 @@ function Join() {
         }
 
         if(mPw !== mPwCheck){
+            alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
             return setPasswordError(true);
-        } alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
+        } 
 
         console.log("비밀번호: " + mPw);
         console.log("비밀번호 확인: " + mPwCheck);
@@ -212,8 +213,8 @@ function Join() {
 
 
 // 이메일 관련 --------------------------------
-    const [code, setCode] = useState(0);
-    const [userInputCode, setUserInputCode] = useState(0);
+    const [code, setCode] = useState();
+    const [userInputCode, setUserInputCode] = useState();
     const handlerChangeUserInputCode = (e) => setUserInputCode(Number(e.target.value));
 
 
@@ -320,7 +321,7 @@ function Join() {
                             <tr>
                                         <td className="requiredMark">인증코드</td>
                                         <td>
-                                            <input type="number" name="Code" value={userInputCode} onChange={handlerChangeUserInputCode} />
+                                            <input type="number" name="Code" value={userInputCode} onChange={handlerChangeUserInputCode} placeholder="이메일로 발송된 코드를 입력하세요."/>
 
                                         </td>
                                         <td className="memberTableBtn">
