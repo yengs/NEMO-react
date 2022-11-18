@@ -4,9 +4,9 @@ import "./reviewDetail.css";
 import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
-function YourReviewList({match}) {
+function YourReviewList({ match }) {
 
-    const { reviewId } = match.params;
+    const {reviewId} = match.params;
 
     const ITEM_COUNT_PER_PAGE = 10;
     const [datas, setDatas] = useState([]);
@@ -15,7 +15,7 @@ function YourReviewList({match}) {
     const [items, setItems] = useState([])
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, {headers :  { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
+        axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
             .then(response => {
                 const list = response.data.map(data => ({ ...data, closed: true }));
                 console.log(response);
@@ -40,22 +40,24 @@ function YourReviewList({match}) {
     return (
         <>
             <div className="rcontainer">
-                <h1>내 상점 리뷰</h1>
+                <h1>내 상점 후기</h1>
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
-                        <col wclassNameth="15%" />
-                        <col wclassNameth="15%" />
-                        <col wclassNameth="15%" />
-                        <col wclassNameth="*" />
-                        <col wclassNameth="15%" />
+                        <col width="10%" />
+                        <col width="10%" />
+                        <col width="15%" />
+                        <col width="15%" />
+                        <col width="10%" />
+                        <col width="30%" />
+                        <col width="10%" />
                     </colgroup>
                     <thead>
                         <tr>
                             <th scope='col'>번호</th>
+                            <th colSpan={2}>상품정보</th>
                             <th scope='col'>작성자</th>
-                            <th scope='col'>이미지</th>
-                            <th scope='col'>내용</th>
+                            <th colSpan={2}>내용</th>
                             <th scope='col'>만족도</th>
                         </tr>
                     </thead>
@@ -64,8 +66,13 @@ function YourReviewList({match}) {
                             items && items.map(review => (
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
-                                    <td>{review.reviewclassName}</td>
-                                    {/* <td>{review.reviewImage}</td> */}
+                                    <td className="rReviewItemImageOrigin">
+                                        <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
+                                    </td>
+                                    <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                    <td>
+                                       {review.reviewWriter}
+                                    </td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
                                         <div className="reviewListItemImg" src={`../../reviewFiles/${review.reviewFiles}`}></div>
@@ -78,6 +85,7 @@ function YourReviewList({match}) {
                                     </td>
                                     <td>
                                         <div className="reviewSatisImg">
+                                            {review.reviewSatisfaction}
                                             {
                                                 (function () {
                                                     if (review.reviewSatisfaction === 0) {

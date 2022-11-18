@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewAddImg from '../img/review-add-img.png'
 import styled from "styled-components";
+import ReviewUpload from "./ReviewUpload";
 
 const AppStyle = styled.div`
   img {
@@ -29,18 +30,17 @@ const AppStyle = styled.div`
 
 function ReviewUpdate({ history, match }) {
 
-    const { reviewNum } = match.params;
+    const { reviewWriter, reviewNum } = match.params;
 
     const [data, setData] = useState({});
     const [reviewFiles, setReviewFiles] = useState('');
     const [imageSrc, setImageSrc] = useState('');
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
-    
 
     // 후기 데이터 가져오기
     useEffect(() => {
-         axios.get(`http://localhost:8080/api/review/rupdate/${reviewNum}`)
+        axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`)
             .then(res => {
                 console.log(res);
                 setData(res.data);
@@ -51,11 +51,16 @@ function ReviewUpdate({ history, match }) {
             .catch(error => console.log(error));
     }, []);
 
-    
-    const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
-    const handlerChangeReviewSatisfaction = (e) => setReviewSatisfaction(e.target.value);
 
-    const handlerChangefiles =(e) => {
+    const handlerChangeReviewContents = (e) => setReviewContents(e.target.value);
+    const handlerChangeReviewSatisfaction = (e) => {
+        if (e.target.value < 0 || e.target.value > 100) {
+            return;
+        }
+        setReviewSatisfaction(e.target.value);
+    }
+
+    const handlerChangefiles = (e) => {
         setReviewFiles(e.target.files[0]);
         encodeFileToBase64(e.target.files[0]);
     }
@@ -64,47 +69,46 @@ function ReviewUpdate({ history, match }) {
         const reader = new FileReader();
         reader.readAsDataURL(fileBlob);
         return new Promise((resolve) => {
-          reader.onload = () => {
-            setImageSrc(reader.result);
-            resolve();
-          };
+            reader.onload = () => {
+                setImageSrc(reader.result);
+                resolve();
+            };
         });
-      };
-     
-    // 후기 수정 
+    };
+
     const handlerClickUpdate = () => {
 
         const formData = new FormData();
-        formData.append('data', new Blob([JSON.stringify({'reviewContents' : reviewContents,  'reviewSatisfaction' : reviewSatisfaction})], {
+        formData.append('data', new Blob([JSON.stringify({ 'reviewContents': reviewContents, 'reviewSatisfaction': reviewSatisfaction })], {
             type: "application/json"
         }));
         // formData.append("files", new Blob(files, { type: "image/*" }));
         formData.append("reviewFiles", reviewFiles);
 
-
-        axios.put(`http://localhost:8080/api/review/rupdate/${reviewNum}`, 
+        axios.put(`http://localhost:8080/api/review/myReview/${reviewWriter}/${reviewNum}`,
             formData,
-            { headers: {
-                'Content-Type': 'multipart/form-data'
-              }
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             })
             .then(response => {
                 if (response.status === 200) {
-                    alert("정상적으로 수정되었습니다.");
-                    history.goBack();
-                    
+                    if (reviewContents.length > 30 && reviewSatisfaction != null) {
+                        alert("정상적으로 등록되었습니다.");
+                        history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);
+                        window.location.href = `/review/myReview/${reviewWriter}`
+                    } else {
+                        alert("내용 30자 이상, 상품의 만족도를 입력했는지 확인해주세요.")
+                    }
                 } else {
-                    alert("수정에 실패했습니다.");
-                    return;
+                    alert("등록에 실패했습니다.");
                 }
             })
             .catch(error => console.log(error));
+    };
 
-       
-    }
-
-    // 후기 수정 취소
-    const confirmDelete = (message = "후기 수정을 취소하시겠습니까 ?", onConfirm, onCancel) => {
+    const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
         if (!onConfirm || typeof onConfirm !== "function") {
             return;
         }
@@ -120,6 +124,10 @@ function ReviewUpdate({ history, match }) {
         }
         return confirmAction;
     };
+
+    const deleteWorld = () => history.goBack();
+    const abort = () => console.log("Aborted")
+    const confirmDelete = useConfirm("작성을 취소하시겠습니까?", deleteWorld, abort);
 
     return (
         <div className="reviewUpload">
@@ -141,28 +149,28 @@ function ReviewUpdate({ history, match }) {
                         className="image_inputType_file"
                         accept=".jpg, .png"
                         multiple
+                        onChange={handlerChangeReviewFiles}
+                        value={datas.reviewImage}
                         onChange={handlerChangefiles}
                         value={data.reviewFiles}
                     />
                 </AppStyle> */}
 
                 <div className="ChoiseFile">
-                <div className="myDetailImage">
-                    {imageSrc == '' ?
-                        <img className="memberImg" src={`../../files_review/${data.reviewFiles}`}/>
-                        : <div className="myDetailImage"> 
-                        {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
-                    }
+                    <div className="myDetailImage">
+                        {imageSrc == '' ?
+                            <img className="memberImg" src={`../../files_review/${data.reviewFiles}`} />
+                            : <div className="myDetailImage">
+                                {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
+                        }
+                    </div>
+                    <div className="imageChoose">
+                        <input className="form-control-image" type="file" name="file" multiple onChange={handlerChangefiles}></input>
+                    </div>
                 </div>
-                
-                <div className="imageChoose">
-                    <input className="form-control-image" type = "file" name="file" multiple onChange={handlerChangefiles}></input>
-                </div>
-            </div>
 
             </div>
             <div className='reviewContent'>
-                {/* <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea> */}
                 <textarea value={reviewContents} type="text" onChange={handlerChangeReviewContents} placeholder="내용을 입력해 주세요."></textarea>
             </div>
             <div className='satisfyingReview'>
