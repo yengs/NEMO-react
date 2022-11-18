@@ -21,7 +21,7 @@
     text-indent: initial;
   }
 
-.decDetailContainer tr,th,td {
+.decDetailContainer tr th td {
     /* border: 1px solid #444444; */
     width: auto;
     vertical-align: middle;
