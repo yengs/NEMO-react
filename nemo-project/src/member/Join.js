@@ -46,8 +46,6 @@ function Join() {
         setMaddress(fullAddress);
         setMzipCode(data.zonecode);
         setMsigungu(data.sigungu);
-
-        //console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
     // 주소검색창 팝업열기
@@ -72,33 +70,45 @@ function Join() {
             "memberSigungu" : mSigungu
         }
 
-        if(mPw !== mPwCheck){
+        if( mName==''|| mNickname==''||mId==''|| mPw==''|| mEmail=='' || mAddress==''){
+            alert("필수 입력항목을 입력해주세요")
+        } else if(ckId===false){
+            alert("아이디 중복확인을 해주세요.");
+        }else if(mPw.length < 8) {
+            alert("비밀번호를 8이상 작성해주세요")
+        }else if(mPw !== mPwCheck){
             alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
             return setPasswordError(true);
-        } 
-
-        console.log("비밀번호: " + mPw);
-        console.log("비밀번호 확인: " + mPwCheck);
-
+        } else if(!emailtest.test(mEmail)){
+            alert("이메일은 nemo@nemo.com 형식에 맞게 입력해주세요")
+        }
+        //이메일 인증은 나중에 보여줄때만 하기로 번거로워서 (확인은 했습니다!) --------삭제 금지-----
+        // else if(ckEmail === false){
+        //     alert("이메일 인증을 진행해주세요")
+        // }else if(ckCode===false){
+        //     alert("인증코드를 확인해주세요")
+        // }
+        else if(check1 === false || check2 === false || check3 === false || check4 === false){
+            alert("필수동의를 해주세요")
+        }
+        else{
         axios.post('http://localhost:8080/api/member/join', memberInfo)
             .then(response => {
-                if (response.status === 200) {
+                if (response.status === 200){
                     alert("반갑습니다! " + mName + " 회원님.");
                     window.location.href = "/member/login";
-                } else {
+                }  else {
                     alert("회원가입이 실패하였습니다.");
                     return;
                 }
             })
             .catch(error => {
-                alert("Error");
+                alert("기존에 있는 정보입니다.다시 확인해주세요");
                 console.log(memberInfo);
             });
-    };
+    }};
     
     // 비밀번호 일치 확인
-    // const [mPw, setMpw] = useState('');
-    // const [mPwCheck, setMpwCheck] = useState('');
     const [mPwConfirm, setMpwConfirm] = useState('');
     const [passwordError, setPasswordError] = useState(false);
 
@@ -193,6 +203,7 @@ function Join() {
 
     // 아이디 한글 입력 불가 처리
 
+    const [ckId,setcheckId] = useState(false);
 
     // 아이디 중복 체크
     const checkId = (e) => {
@@ -202,10 +213,13 @@ function Join() {
             .then(result => {
                 console.log(result);
                 if (result.data === "success" && mId !== "") {
+                    setcheckId(true);
                     alert("사용 가능한 아이디입니다.");
                 } else if (result.data === "fail" && mId !== "") {
+                    setcheckId(false);
                     alert("이미 사용중인 아이디입니다.")
                 } else{
+                    setcheckId(false);
                     alert("아이디를 입력해주세요");
                 }
             });
@@ -216,6 +230,9 @@ function Join() {
     const [code, setCode] = useState();
     const [userInputCode, setUserInputCode] = useState();
     const handlerChangeUserInputCode = (e) => setUserInputCode(Number(e.target.value));
+    const [ckEmail, setCkEmail] = useState(false);
+    const [ckCode, setCkCode] = useState(false);
+    const emailtest = /@/;
 
 
     // 이메일 중복 체크 + 이메일 발송
@@ -225,6 +242,7 @@ function Join() {
             .then(email => {
                 console.log(email);
                 if (email.data === "success" && mEmail !== "") {
+                    setCkEmail(true);
                     alert("사용 가능한 이메일입니다. 이메일 코드 발송");
                     axios.get(`http://localhost:8080/api/mail`, {
                         params: {
@@ -232,15 +250,16 @@ function Join() {
                         }
                     }) .then(response2 => {
                         console.log(response2);
-                        alert(response2.data);
                         setCode(response2.data);
                     })
                     .catch(function () {
                         console.log('실패함')
                     })
                 } else if(email.data === "fail" && mEmail !== ""){
+                    setCkEmail(false);
                     alert("중복된 이메일입니다.");
                 }else{
+                    setCkEmail(false);
                     alert("이메일을 입력해주세요.")
                 }
             });
@@ -249,10 +268,13 @@ function Join() {
      //이메일 코드 일치확인
      const clickCode = () => {
         if (String(userInputCode).length !== 5) {
+            setCkCode(false);
             return alert('5자리의 숫자코드를 입력해주세요.');
         } else if (code !== userInputCode) {
+            setCkCode(false);
             return alert('숫자코드가 일치하지 않습니다.');
         } else if (code === userInputCode) {
+            setCkCode(true);
             return alert('숫자코드가 일치합니다');
         }
     }
