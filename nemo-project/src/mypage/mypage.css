@@ -33,7 +33,7 @@
     margin-left: 15%;
 }
 
-.myDetailImage .memberImg {
+.myDetailImage > #imgsrccc {
     background-color: rgb(255, 255, 255);
     width: 130px;
     height: 130px;
@@ -41,6 +41,7 @@
     margin-left: 36%;
     margin-top: 20px;
 }
+
 
 .myMenuWrap .menu {
     height: calc(100% - 160px);
