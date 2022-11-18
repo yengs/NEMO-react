@@ -137,25 +137,6 @@ function ReviewUpdate({ history, match }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                {/* <AppStyle>
-                    <label htmlFor="item_review_input">
-                        <div className="btnStart">
-                            <img src={ReviewAddImg} alt="ReviewAddImg" value={data.reviewFiles} />
-                        </div>
-                    </label>
-                    <input
-                        type="file"
-                        id="item_review_input"
-                        className="image_inputType_file"
-                        accept=".jpg, .png"
-                        multiple
-                        onChange={handlerChangeReviewFiles}
-                        value={datas.reviewImage}
-                        onChange={handlerChangefiles}
-                        value={data.reviewFiles}
-                    />
-                </AppStyle> */}
-
                 <div className="ChoiseFile">
                     <div className="myDetailImage">
                         {imageSrc == '' ?

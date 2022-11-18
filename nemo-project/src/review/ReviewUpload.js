@@ -118,11 +118,12 @@ export default function ReviewUpload({ history , match }) {
             { headers: { 'Content-Type': 'multipart/form-data' } })
             .then(response => {
                 if (response.status === 200) {
-                    if (reviewContents.length > 30 && reviewSatisfaction != null) {
+                    if (reviewContents.length > 30 && reviewSatisfaction !== null) {
                         alert("정상적으로 등록되었습니다.");
                         history.push(`/review/myReview/${reviewWriter}`);
+                        window.location.href = `/review/myReview/${reviewWriter}`
                     } else {
-                        alert("양식에 맞춰 작성해주세요.")
+                        alert("내용 30자 이상, 상품의 만족도를 입력했는지 확인해주세요.")
                     }
                 } else {
                     alert("등록에 실패했습니다.");
@@ -170,20 +171,6 @@ export default function ReviewUpload({ history , match }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                {/* <AppStyle> 
-                <div className="reviewImage">
-                    {ReviewAddImg && <img src={ReviewAddImg} alt="ReviewAddImg" />} </div>
-                <div className="add-img-box">
-                    <input
-                        type="file"
-                        // id="item_review_input"
-                        className="image_inputType_file"
-                        // accept=".jpg, .png"
-                        multiple
-                        onChange={handlerChangeReviewFiles}
-                    />
-                </div>
-                </AppStyle>  */}
                 <AppStyle style={{marginTop: "11px"}}>
                         <label htmlFor="item_review_input" className="item_review_input">
                             {
