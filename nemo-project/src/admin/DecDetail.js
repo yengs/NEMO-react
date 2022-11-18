@@ -26,15 +26,13 @@ function DecDetail({history, match}){
     const [data, setData] = useState([]);
     const [singoNum, setSingoNum] = useState('');
 
-    console.log(">>>>>>>>>>>>>>>", match.params.singoNum);
-
      // 신고 상세보기
      useEffect(() => {
         axios.get(`http://localhost:8080/api/dec/detail/${match.params.singoNum}`)
           .then(response => {
             console.log(response);
             if (response.status === 200){
-                console.log(match.params.singoNum);
+                console.log(match.params.singoNum,"번");
                 setData(response.data);
                 setSingoNum(response.data.singoNum);
             }else {
@@ -79,12 +77,20 @@ function DecDetail({history, match}){
                                 </tr>
                                 <tr>
                                     <th scope='row'>이미지</th>
-                                    <td colSpan={7}>{data.singoImage}</td>
+                                    <td colSpan={7}>
+                                        <div className="imageDiv">
+                                            
+                                        <img className="itemImg" src={`../../public/files/${data.singoImage}`} />
+                                        </div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">상세내용</th>
                                     <td colSpan={7}>{data.singoContent}</td>
                                 </tr>
+                                {/* <div className="imageDiv">
+                                <img className="itemImg" src={`../../files/${data.singoImage}`} />
+                                </div> */}
                             </tbody>
                         ))
                     }

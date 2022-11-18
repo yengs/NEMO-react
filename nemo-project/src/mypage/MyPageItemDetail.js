@@ -26,7 +26,7 @@ function MyPageItemDetail({ match, location, history }) {
     const [ itemRentalend, setItemRentalend ] = useState('');
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/${itemNum}`)
+        axios.get(`http://localhost:8080/api/item/detail/${itemNum}`)
         .then(response => { 
             setData(response.data);
             setItemName(response.data.itemName);
