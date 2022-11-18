@@ -187,7 +187,7 @@ text-align: left;
 }
 
 
-a:-webkit-any-link {
+.inputLogTable a:-webkit-any-link {
   color: -webkit-link;
   cursor: pointer;
   color:#555;
