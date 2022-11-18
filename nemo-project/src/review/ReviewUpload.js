@@ -58,15 +58,15 @@ visibility: visible;
 `;
 
 
-export default function ReviewUpload({ history , match }) {
+export default function ReviewUpload({ history, match }) {
 
     const reviewWriter = sessionStorage.getItem('memberId');
 
-    const {bookingItemnum} = match.params;
-    const {bookingItemwriter} = match.params;
-    const {bookingItemfiles} = match.params;
-    const {bookingItemname} = match.params;
-    const {bookingItemprice} = match.params;
+    const { bookingItemnum } = match.params;
+    const { bookingItemwriter } = match.params;
+    const { bookingItemfiles } = match.params;
+    const { bookingItemname } = match.params;
+    const { bookingItemprice } = match.params;
 
     const reviewProductIdx = bookingItemnum;
     const reviewId = bookingItemwriter;
@@ -109,27 +109,24 @@ export default function ReviewUpload({ history , match }) {
 
         // 이미지 등록 
         const formData = new FormData();
-        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction, "reviewProductIdx":reviewProductIdx ,"reviewId":reviewId, "reviewItemfiles":reviewItemfiles, "reviewItemname":reviewItemname, "reviewItemprice":reviewItemprice })], {
+        formData.append('reviewData', new Blob([JSON.stringify({ "reviewWriter": reviewWriter, "reviewContents": reviewContents, "reviewSatisfaction": reviewSatisfaction, "reviewProductIdx": reviewProductIdx, "reviewId": reviewId, "reviewItemfiles": reviewItemfiles, "reviewItemname": reviewItemname, "reviewItemprice": reviewItemprice })], {
             type: "application/json"
         }));
         formData.append("reviewFiles", reviewFiles);
 
-        axios.post(`http://localhost:8080/api/review/reviewWrite`, formData,
-            { headers: { 'Content-Type': 'multipart/form-data' } })
-            .then(response => {
-                if (response.status === 200) {
-                    if (reviewContents.length > 30 && reviewSatisfaction != null) {
+        if (reviewContents.length > 30 && reviewSatisfaction != null) {
+            axios.post(`http://localhost:8080/api/review/reviewWrite`, formData,
+                { headers: { 'Content-Type': 'multipart/form-data' } })
+                .then(response => {
+                    if (response.status === 200) {
                         alert("정상적으로 등록되었습니다.");
                         history.push(`/review/myReview/${reviewWriter}`);
-                    } else {
-                        alert("양식에 맞춰 작성해주세요.")
                     }
-                } else {
-                    alert("등록에 실패했습니다.");
-                    return;
-                }
-            })
-            .catch(error => console.log(error));
+                }).catch(error => { console.log(error); alert("등록에 실패했습니다."); });
+        } else {
+            alert("내용 30자 이상, 상품의 만족도를 입력했는지 확인해주세요.");
+        }
+
     };
 
     const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
@@ -170,46 +167,32 @@ export default function ReviewUpload({ history , match }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                {/* <AppStyle> 
-                <div className="reviewImage">
-                    {ReviewAddImg && <img src={ReviewAddImg} alt="ReviewAddImg" />} </div>
-                <div className="add-img-box">
+                <AppStyle style={{ marginTop: "11px" }}>
+                    <label htmlFor="item_review_input" className="item_review_input">
+                        {
+                            ReviewAddImg ?
+                                <div className="itemImg">
+                                    <img src={ReviewAddImg} alt="preview-img" className="previewImg" onMouseEnter={showComment} />
+                                    <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
+                                        이미지 변경을 하시려면<br />클릭해주세요.
+                                    </div>
+                                </div>
+                                :
+                                <div className="itemImg">
+                                    <img src={addImage} alt="ReviewAddImg" className="uploadImg" />
+                                </div>
+                        }
+                    </label>
                     <input
                         type="file"
-                        // id="item_review_input"
+                        id="item_review_input"
                         className="image_inputType_file"
-                        // accept=".jpg, .png"
+                        name="file"
+                        accept=".jpg, .png"
                         multiple
                         onChange={handlerChangeReviewFiles}
                     />
-                </div>
-                </AppStyle>  */}
-                <AppStyle style={{marginTop: "11px"}}>
-                        <label htmlFor="item_review_input" className="item_review_input">
-                            {
-                                ReviewAddImg ?
-                                    <div className="itemImg">
-                                        <img src={ReviewAddImg} alt="preview-img" className="previewImg" onMouseEnter={showComment} />
-                                        <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
-                                            이미지 변경을 하시려면<br/>클릭해주세요.
-                                        </div>
-                                    </div>
-                                    :
-                                    <div className="itemImg">
-                                        <img src={addImage} alt="ReviewAddImg" className="uploadImg" />
-                                    </div>
-                            }
-                        </label>
-                        <input
-                            type="file"
-                            id="item_review_input"
-                            className="image_inputType_file"
-                            name="file"
-                            accept=".jpg, .png"
-                            multiple
-                            onChange={handlerChangeReviewFiles}
-                        />
-                    </AppStyle>
+                </AppStyle>
             </div>
             <div className='reviewContent'>
                 <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="최소 30자 이상 내용을 입력해주세요."></textarea>
