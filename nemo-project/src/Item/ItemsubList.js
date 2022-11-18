@@ -14,6 +14,11 @@ function ItemsubList({ match }) {
     const [items, setItems] = useState([]);
 
 
+
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noimage.gif';
+    }
+
     useEffect(() => {
         axios.get(`http://localhost:8080/api/item/cate/sub/${itemSubcategory}`, { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
             .then(response => {
@@ -44,7 +49,7 @@ function ItemsubList({ match }) {
                         datas && datas.map(item => (
                             <div className="itemInfoWrap" key={item.itemNum}>
                                 <Link to={`/item/detail/${item.itemNum}`}>
-                                    <img className="itemImg" src={`../../../files/${item.files}`}></img>
+                                    <img className="itemImg" src={`../../../files/${item.files}`} onError={handleImgError}></img>
                                     <div className="itemInfo">
                                         <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
                                         <p className="itemName">{item.itemName}</p>
