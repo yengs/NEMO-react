@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Paging from "../pagination/Paging";
+import ItemPaging from "../pagination/ItemPaging";
 
 function ItemList({ match }) {
     const { itemMaincategory } = match.params;
@@ -64,7 +64,7 @@ function ItemList({ match }) {
                     }
                 </div>
                 <div>
-                    <Paging page={page} count={count} setPage={changePage} />
+                    <ItemPaging page={page} count={count} setPage={changePage} />
                 </div>
             </div>
         </>

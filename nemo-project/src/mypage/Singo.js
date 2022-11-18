@@ -10,29 +10,31 @@ function Singo({ itemWriter, setSingo }) {
 
   const [singoReason, setSingoReason] = useState('');
   const [singoContent, setSingoContent] = useState('');
+  const [singoImage, setSingoImage] = useState('');
+  const [imageSrc, setImageSrc] = useState('');
+
   const singoWriter = sessionStorage.getItem('memberId');
   const singoDate = new Date();
 
   const Pisingoja = itemWriter;
 
-  console.log("네이놈",Pisingoja);
-
   const handlerChangeReason = (e) => setSingoReason(e.target.value);
   const handlerChangeContent = (e) => setSingoContent(e.target.value);
+  const handlerChangefiles =(e) => {
+    setSingoImage(e.target.files[0]);
+    encodeFileToBase64(e.target.files[0]);
+}
 
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/api/userstoreinfo/warn/${itemWriter}`)
-  //     .then(response => {
-  //       console.log(response);
-  //       if (response.status === 200){
-  //         console.log("회원 정보 불러오기 성공");
-  //       }else {
-  //         alert("회원 정보를 불러올 수 없습니다.");
-  //         return;
-  //       }
-  //     })
-  //     .catch(error => console.log(error));
-  // }, []);
+const encodeFileToBase64 = (fileBlob) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageSrc(reader.result);
+        resolve();
+      };
+    });
+  };
 
   const singoInfo = {
     "singoPisingoja" : Pisingoja,
@@ -42,23 +44,41 @@ function Singo({ itemWriter, setSingo }) {
     "singoDate": singoDate
   }
 
-  // pisingoja에 itemwriter(memberId)가 들어가야 하고... 그걸 서버로 넘겨줘야함..
-
   const takeDec = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:8080/api/singo/take', singoInfo)
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          alert("정상적으로 접수되었습니다.");
-          setSingo(false);
-        } else {
-          alert("접수 실패했습니다.");
-          return;
-        }
-      })
-      .catch(error => console.log(error));
-  }
+
+    const formData = new FormData();
+        formData.append('data', new Blob([JSON.stringify({
+        "singoPisingoja" : Pisingoja,
+        "singoReason" : singoReason,
+        "singoContent" : singoContent,
+        "singoWriter" : singoWriter,
+        "singoDate": singoDate})], {
+            type: "application/json"
+        }));
+        // formData.append("files", new Blob(files, { type: "image/*" }));
+        formData.append("singoImage", singoImage);
+
+
+
+
+        axios.post('http://localhost:8080/api/singo/take', 
+            formData, 
+            { headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            })
+        .then(response => {
+            if (response.status === 200) {
+                alert("정상적으로 등록되었습니다.");
+                setSingo(false);
+            } else {
+                alert("등록에 실패했습니다.");
+                return;
+            }
+        })
+        .catch(error => console.log(error));
+    }
 
   const goBack = (e) => {
     console.log(`/userstoreinfo/${itemWriter}`)
@@ -88,7 +108,12 @@ function Singo({ itemWriter, setSingo }) {
                         <AppStyle>
                           <label htmlFor="item_review_input">
                             <div className="btnStart">
-                              <img src={addImage} alt="ReviewAddImg" />
+                            {imageSrc == '' ?
+                        <img src={addImage} alt="ReviewAddImg" />
+                        : <div className="myDetailImage"> 
+                        {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
+                    }
+                             
                             </div>
                           </label>
                           <input
@@ -96,6 +121,7 @@ function Singo({ itemWriter, setSingo }) {
                             id="item_review_input"
                             className="image_inputType_file"
                             accept=".jpg, .png"
+                            multiple onChange={handlerChangefiles}
                           />
                         </AppStyle>
 
@@ -115,7 +141,9 @@ function Singo({ itemWriter, setSingo }) {
                           <option>선택</option>
                           <option>미반환</option>
                           <option>사기 행위</option>
-                          <option>물품 훼손</option>
+                          <option>물품 훼손(사진 첨부 필수)</option>
+                          <option>광고 (상점 및 타사이트 홍보, 상품도배)</option>
+                          <option>기타(신고내용에 사유를 기재해주세요.)</option>
                         </select>
                       </td>
                     </tr>

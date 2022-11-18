@@ -73,8 +73,9 @@ function Join() {
         }
 
         if(mPw !== mPwCheck){
+            alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
             return setPasswordError(true);
-        } alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
+        } 
 
         console.log("비밀번호: " + mPw);
         console.log("비밀번호 확인: " + mPwCheck);
@@ -212,9 +213,8 @@ function Join() {
 
 
 // 이메일 관련 --------------------------------
-
-    const [code, setCode] = useState(0);
-    const [userInputCode, setUserInputCode] = useState(0);
+    const [code, setCode] = useState();
+    const [userInputCode, setUserInputCode] = useState();
     const handlerChangeUserInputCode = (e) => setUserInputCode(Number(e.target.value));
 
 
@@ -230,7 +230,12 @@ function Join() {
                         params: {
                             memberEmail: mEmail
                         }
-                    }).catch(function () {
+                    }) .then(response2 => {
+                        console.log(response2);
+                        alert(response2.data);
+                        setCode(response2.data);
+                    })
+                    .catch(function () {
                         console.log('실패함')
                     })
                 } else if(email.data === "fail" && mEmail !== ""){
@@ -239,16 +244,6 @@ function Join() {
                     alert("이메일을 입력해주세요.")
                 }
             });
-    }
-
-    //코드 받아오기
-    const clickcm = () => {
-        axios.get(`http://localhost:8080/api/code`)
-            .then(response2 => {
-                console.log(response2);
-                alert(response2.data);
-                setCode(response2.data);
-            })
     }
 
      //이메일 코드 일치확인
@@ -320,13 +315,13 @@ function Join() {
                                     <input type="text" name="mEmail" value={mEmail} onChange={handlerChangeEmail} placeholder="nemo@nemo.com 형식에 맞게 입력하세요." required />
                                 </td>
                                 <td className="memberTableBtn">
-                                    <button className="greenBtn btn" onClick={() => { checkEmail(); clickcm();}}>인증하기</button>
+                                    <button className="greenBtn btn" onClick={checkEmail}>인증하기</button>
                                 </td>
                             </tr>
                             <tr>
                                         <td className="requiredMark">인증코드</td>
                                         <td>
-                                            <input type="number" name="Code" value={userInputCode} onChange={handlerChangeUserInputCode} />
+                                            <input type="number" name="Code" value={userInputCode} onChange={handlerChangeUserInputCode} placeholder="이메일로 발송된 코드를 입력하세요."/>
 
                                         </td>
                                         <td className="memberTableBtn">

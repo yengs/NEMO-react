@@ -8,7 +8,7 @@ function MypageReview() {
 
     const YOURREVIEW_COUNT_PER_PAGE = 1;
     const MYREVIEW_COUNT_PER_PAGE = 2;
-  
+
     const [data, setData] = useState([]);
     const [datas, setDatas] = useState([]);                         // 리뷰 전체 데이터
     const [items, setItems] = useState('');                         // 상품 전체 데이터
@@ -25,22 +25,22 @@ function MypageReview() {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`)
             .then(response => {
                 console.log(response);
-                setData(response.data);
+                setData(response.data.slice(0, YOURREVIEW_COUNT_PER_PAGE));
                 // setDatas(response.data);
                 // setYourReviewData(response.data.slice((datas - 1) * YOURREVIEW_COUNT_PER_PAGE));
-                // setReviewIcon(response.data);
+                setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
-        }, []);
+    }, []);
 
-     useEffect(() => {
+    useEffect(() => {
         // 내가 작성한 후기 데이터
         axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`)
-        // { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }}
-        
+            // { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }}
+
             .then(response => {
                 console.log(response);
-                setDatas(response.data);
+                setDatas(response.data.slice(0, MYREVIEW_COUNT_PER_PAGE));
                 setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
@@ -66,7 +66,7 @@ function MypageReview() {
                 </div>
                 <div className='tableWrap'>
                     <table className="yourReviewListAboutStore">
-                    <thead>
+                        <thead>
                             <tr>
                                 <th colSpan={2}>상품 정보</th>
                                 <th>작성자</th>
@@ -76,18 +76,44 @@ function MypageReview() {
                         </thead>
                         {
                             data && data.map(review => (
-                        <tbody>
-                                <tr key={review.reviewNum}>
-                                <td rowSpan={2} className="rReviewItemImageOrigin">
-                                    <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`}/>
-                                    <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`}/>
-                                </td>
-                                <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
-                                <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
-                                <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
-                                <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}</td>
-                            </tr>
-                            </tbody>
+                                <tbody>
+                                    <tr key={review.reviewNum}>
+                                        <td rowSpan={2} className="rReviewItemImageOrigin">
+                                            <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
+                                            {/* <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`}/>         -----> 리뷰등록 사진*/}
+                                        </td>
+                                        <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
+                                        <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
+                                            <div>
+                                                {
+                                                    (function () {
+                                                        if (review.reviewSatisfaction === 0) {
+                                                            return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                        } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                            return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
+                                                        } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                            return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
+                                                            return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
+                                                            return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
+                                                            return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
+                                                            return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
+                                                            return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
+                                                        } else {
+                                                            return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
+                                                        }
+                                                    })()
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             ))
                         }
                         {
@@ -110,7 +136,7 @@ function MypageReview() {
                 </div>
                 <div className='tableWrap'>
                     <table className="yourReviewListAboutStore">
-                    <thead>
+                        <thead>
                             <tr>
                                 <th colSpan={2}>상품 정보</th>
                                 <th>대여료</th>
@@ -120,17 +146,43 @@ function MypageReview() {
                         </thead>
                         {
                             datas && datas.map(review => (
-                        <tbody>
-                                <tr key={review.reviewNum}>
-                                <td rowSpan={2} className="rReviewItemImageOrigin">
-                                    <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`}/>
-                                </td>
-                                <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
-                                <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice}</td>
-                                <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
-                                <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}</td>
-                            </tr>
-                            </tbody>
+                                <tbody>
+                                    <tr key={review.reviewNum}>
+                                        <td rowSpan={2} className="rReviewItemImageOrigin">
+                                            <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
+                                        </td>
+                                        <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice}</td>
+                                        <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
+                                            <div>
+                                                {
+                                                    (function () {
+                                                        if (review.reviewSatisfaction === 0) {
+                                                            return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                        } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                            return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
+                                                        } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                            return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
+                                                            return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
+                                                            return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
+                                                            return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
+                                                            return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
+                                                        } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
+                                                            return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
+                                                        } else {
+                                                            return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
+                                                        }
+                                                    })()
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             ))
                         }
                         {
@@ -140,8 +192,8 @@ function MypageReview() {
                                 </tr>
                             )
                         }
-                       
-                        
+
+
                     </table>
                 </div>
             </div>
