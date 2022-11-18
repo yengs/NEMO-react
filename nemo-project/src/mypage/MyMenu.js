@@ -108,9 +108,9 @@ function MyMenu({ history , location}) {
                 <div className="ChoiseFile">
                 <div className="myDetailImage">
                     {imageSrc == '' ?
-                        <img className="memberImg" src={`../../memberImg/${data.memberImg}`} />
+                        <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} />
                         : <div className="myDetailImage">
-                        {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg"/>} </div>
+                        {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" />} </div>
                     }
                 </div>
                 
