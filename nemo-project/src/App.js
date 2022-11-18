@@ -140,15 +140,9 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-<<<<<<< HEAD
         <Route path="/dec/detail/:singoNum" component={DecDetail} />
         <Route path="/dec/dec/:memberWarning" component={Dec} />
-        <Route path="/userstoreinfo/:itemWriter" component={MyMenu} />
-=======
-        <Route path="/dec/detail" component={DecDetail} />
-        <Route path="/dec/dec" component={Dec} />
         <Route path="/userstoreinfo/:itemWriter,:memberImg" component={MyMenu} />
->>>>>>> origin/minju
 
       </div>
       <Footer />
