@@ -1,0 +1,159 @@
+import React from 'react';
+import styled from 'styled-components';
+
+const MemberDelete = (props) => {
+    const { open, close, header } = props;
+    
+
+    return (
+        <><Modal>
+ <div className={open ? 'openModal modal' : 'modal'}>
+      {open ? (
+        <section>
+          <header>
+            {header}
+            <button className="close" onClick={close}>
+              &times;
+            </button>
+          </header>
+          <main>{props.children}</main>
+          <footer>
+          </footer>
+        </section>
+      ) : null}
+    </div>
+    </Modal>
+        </>
+    );
+}
+
+const Modal = styled.div`
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.modal button {
+  outline: none;
+  cursor: pointer;
+  border: 0;
+}
+.modal > section {
+  width: 90%;
+  max-width: 700px;
+  height: 650px;
+  margin: 0 auto;
+  border-radius: 0.3rem;
+  background-color: #fff;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal-show 0.3s;
+  overflow: hidden;
+}
+.modal > section > header {
+  position: relative;
+  padding: 16px 64px 16px 16px;
+  background-color: #f1f1f1;
+  font-weight: 700;
+}
+.modal > section > header button {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  width: 30px;
+  font-size: 21px;
+  font-weight: 700;
+  text-align: center;
+  color: #999;
+  background-color: transparent;
+}
+.modal > section > main {
+  padding: 26px;
+  /* border-bottom: 1px solid #dee2e6; */
+  border-top: 1px solid #dee2e6;
+}
+.modal > section > footer {
+  /* padding: 12px 16px; */
+  text-align: right;
+  margin-top: 0.9%;
+  background-color: transparent;
+}
+.modal > section > footer button {
+  /* padding: 6px 12px; */
+  color: #fff;
+  background-color: #12ad46;
+  border-radius: 5px;
+  font-size: 18px;
+  width: 700px;
+  height: 53px;  
+}
+.modal.openModal {
+  display: flex;
+  align-items: center;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal-bg-show 0.3s;
+}
+@keyframes modal-show {
+  from {
+    opacity: 0;
+    margin-top: -50px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+@keyframes modal-bg-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.payselect {
+  border : 1px solid;
+  border-color: rgb(180, 176, 176);
+  width: 300px;
+  font-size: 17px;
+  text-align: center;
+  padding-top: 25px; 
+  padding-bottom: 25px;
+  border-radius: 5px;    
+  float: left;
+  margin-top: 15px;
+  margin-left: 15px;
+  position: static;
+}
+
+.paytext {
+  background-color: rgb(240, 240, 240);
+  position: relative;
+  margin-top: 46%;
+  margin-left: 15px;
+  width: 610px;
+  height: 340px;
+  border-radius: 10px; 
+}
+
+.payment2{
+  margin-top: 35px;
+  margin-left: 45px;
+  height: 40px;
+  width: 520px;
+  font-size: 15px;
+}
+
+.paynotice{
+  margin-top: 70px;
+  margin-left: 40px;
+}
+
+`
+export default MemberDelete;
