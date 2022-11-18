@@ -155,7 +155,7 @@ function MyReviewList({ history, match }) {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }
