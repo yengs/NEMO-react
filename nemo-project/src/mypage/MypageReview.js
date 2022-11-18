@@ -341,6 +341,7 @@ const MypageReviewContainer = styled.div`
     font-size: 16px;
     height: 10px;
     width: 300px;
+    text-align: center;
 }
 
 .yourReviewListAboutStore tr td {
