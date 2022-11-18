@@ -97,7 +97,11 @@ function ItemDetail({ match, history }) {
     }
 
     const goUserStore = () => {
-        history.push(`/userstoreinfo/${data.itemWriter},${data.memberImg}`);
+        if(sessionStorage.getItem("memberId") === data.itemWriter) {
+            history.push(`/mypage/mypageitem/${sessionStorage.getItem("memberId")}`);
+        } else {
+            history.push(`/userstoreinfo/${data.itemWriter},${data.memberImg}`);
+        }
     }
 
     const handlerMaincate = () => {
@@ -130,8 +134,8 @@ function ItemDetail({ match, history }) {
     }
 
     return (
-        <ItemDatailContainer style={{padding: "80px 0"}}>
-            <div className="DetailContainer">
+        <ItemDatailContainer style={{ padding: "80px 0" }}>
+            <div className="DetailContainer" style={{ maxWidth: '1000px' }}>
                 <h2>상품 상세</h2>
                 <div className="clickList">
                     {/* <p className="cate">{data.itemMaincategory}{' > '}{data.itemSubcategory}</p> */}
@@ -149,61 +153,87 @@ function ItemDetail({ match, history }) {
                     </div>
                 </div>
                 <br></br>
-                <div className="tablePlusForm">
-                    <div className="imageDiv">
-                        <img className="itemImg" src={`../../files/${data.files}`} />
-                    </div>
-                    <div className="tableform">
-                        <form method="post" id="frm" name="frm">
-                            <table>
-                                <colgroup>
-                                    <col width="33%" />
-                                    <col width="" />
-                                </colgroup>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">상품명</th>
-                                        <td>{data.itemName}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">어울리는 계절</th>
-                                        <td>{data.itemWeather}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">가격</th>
-                                        <td>{data.itemPrice}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">보증금</th>
-                                        <td>{data.itemDeposit}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">사이즈</th>
-                                        {
-                                            (function () {
-                                                if (data.itemMaincategory === "상의") {
-                                                    return <td>{data.itemTopsize}</td>
-                                                }
-                                                else if (data.itemMaincategory === "하의") {
-                                                    return <td>{data.itemBottomsize}</td>
-                                                }
-                                                else { return <td>{data.itemEtcsize}</td> }
-                                            })()
+                    <div className="tablePlusForm">
+                        <div className="imageDiv">
+                            <img className="itemImg" src={`../../files/${data.files}`} />
+                        </div>
+                        <div className="tableform">
+                            <div>
+                                <h2 className="itemName">{data.itemName}</h2>
+                                <h3 className="itemPrice"><span>{data.itemPrice}</span>원</h3>
+                                <p className="itemDeposit">보증금<span>{data.itemDeposit}</span>원</p>
+                            <div style={{borderBottom: "1px solid #ddd"}}></div>
+                            <p className="itemSize">사이즈
+                                {
+                                    (function () {
+                                        if (data.itemMaincategory === "상의") {
+                                            return <span>{data.itemTopsize}</span>
                                         }
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">대여기간</th>
-                                        <td>{data.itemRentalstart} ~ {data.itemRentalend}</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">내용</th>
-                                        <td className="itemDetailContent">{data.itemDetail}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </form>
+                                        else if (data.itemMaincategory === "하의") {
+                                            return <span>{data.itemBottomsize}</span>
+                                        }
+                                        else { return <span>{data.itemEtcsize}</span> }
+                                    })()
+                                }
+                            </p>
+                            <h4 className="itemRentalPeriod">대여기간<span>{data.itemRentalstart} ~ {data.itemRentalend}</span></h4>
+                            <p className="itemDetailContent">{data.itemDetail}</p>
+                            </div>
+
+                            
+                            {/* <form method="post" id="frm" name="frm">
+                                <table>
+                                    <colgroup>
+                                        <col width="33%" />
+                                        <col width="" />
+                                    </colgroup>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" className="itemName">상품명</th>
+                                            <td>{data.itemName}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">어울리는 계절</th>
+                                            <td>{data.itemWeather}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">가격</th>
+                                            <td>{data.itemPrice} 원</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">보증금</th>
+                                            <td>{data.itemDeposit} 원</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">사이즈</th>
+                                            {
+                                                (function () {
+                                                    if (data.itemMaincategory === "상의") {
+                                                        return <td>{data.itemTopsize}</td>
+                                                    }
+                                                    else if (data.itemMaincategory === "하의") {
+                                                        return <td>{data.itemBottomsize}</td>
+                                                    }
+                                                    else { return <td>{data.itemEtcsize}</td> }
+                                                })()
+                                            }
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">대여기간</th>
+                                            <td>{data.itemRentalstart} ~ {data.itemRentalend}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">내용</th>
+                                            <td className="itemDetailContent">{data.itemDetail}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form> */}
+                        </div>
                     </div>
-                </div>
+                    {/* <div>
+                        <p>{data.itemDetail}</p>
+                    </div> */}
 
                 <div className="middleDiv">
                     {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
@@ -256,9 +286,9 @@ function ItemDetail({ match, history }) {
                         </div>
                     </div>
                     <div className="buttonDiv">
-                        <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
-                        <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
-                    </div>
+                                <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
+                                <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
+                            </div>
                 </div>
 
 
@@ -266,6 +296,12 @@ function ItemDetail({ match, history }) {
                     <h3>대여후기</h3>
                     <div>
                         <table className="reviewTable">
+                            <colgroup>
+                                <col width={"13%"}></col>
+                                <col width={"auto"}></col>
+                                <col width={"54%"}></col>
+                                <col width={"auto"}></col>
+                            </colgroup>
                             <thead>
                                 <tr>
                                     <th>작성자</th>
@@ -424,10 +460,6 @@ p.cate {
     font-size: medium;
 }
 
-th {
-    height: 48px;
-}
-
 h4 {
     margin-bottom: 7px;
     font-size: medium;
@@ -469,24 +501,10 @@ h4 {
     align-content: center;
 }
 
-.DetailContainer th {
-    text-align: right;
-    vertical-align: middle;
-}
-
 .DetailContainer .reviewCate {
     text-align: center;
     height: 30px;
     border-bottom: 1px solid rgb(219, 219, 219);
-}
-
-.DetailContainer td {
-    text-align: left;
-    vertical-align: middle;
-    width: 100%;
-    height: 48px;
-    padding-inline: 20px;
-    padding-top: 5px;
 }
 
 .reviewDiv table {
@@ -521,6 +539,10 @@ td.reviewImg,
     text-align: center;
 }
 
+.reviewDiv .ReviewContent {
+    text-align: left;
+}
+
 .DetailContainer form tr>td>input {
     border: 1px solid #ddd;
     width: 95%;
@@ -537,7 +559,7 @@ td.reviewImg,
 }
 
 .clickList {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #aaa;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -556,16 +578,76 @@ td.reviewImg,
 
 .tablePlusForm{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+}
+
+.tableform {
+    width: 650px;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px;
 }
 
 .tableform table {
     width: 100%;
 }
 
+.tableform table th {
+    text-align: right;
+    padding: 15px 10px 15px 0;
+}
+
 .tableform table td {
-    padding-top: 10px;
+    text-align: left;
+    padding: 15px 0 15px 10px;
+}
+
+.tableform .itemName {
+    font-size: 27px;
+    margin: 0;
+}
+
+.tableform .itemPrice {
+    font-size: 21px;
+    margin: 7px 0 0 0;
+}
+
+.tableform .itemDeposit {
+    font-size: 17px;
+    font-weight: 700;
+    color: #666;
+}
+
+.tableform .itemDeposit span {
+    margin: 0 1px 0 10px;
+}
+
+.tableform .itemPrice span {
+    color: rgb(100,165,127);
+    margin-right: 3px;
+}
+
+.tableform .itemSize {
+    margin-top: 30px;
+    font-size: 17px;
+}
+
+.tableform .itemRentalPeriod {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.tableform .itemRentalPeriod span {
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.tableform .itemDetailContent {
+    margin-top: 25px;
 }
 
 .DetailContainer form {
@@ -586,8 +668,8 @@ a.ItemReviewList {
 
 .tablePlusForm .itemImg {
     background-color: rgb(219, 219, 219);
-    width: 370px;
-    height: 420px;
+    width: 350px;
+    height: 400px;
 }
 
 /* -- clean */
