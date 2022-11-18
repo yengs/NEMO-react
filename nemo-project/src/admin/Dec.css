@@ -96,10 +96,9 @@
 }
 
 .ReviewItemNameOrigin {
-    width: 30%;
+    /* width: 30%; */
     text-align: center;
 }
-
 
 .Dec {
     width: 10%;
