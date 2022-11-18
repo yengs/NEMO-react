@@ -18,16 +18,12 @@ function Singo({ itemWriter, setSingo }) {
 
   const Pisingoja = itemWriter;
 
-
   const handlerChangeReason = (e) => setSingoReason(e.target.value);
   const handlerChangeContent = (e) => setSingoContent(e.target.value);
   const handlerChangefiles =(e) => {
     setSingoImage(e.target.files[0]);
     encodeFileToBase64(e.target.files[0]);
 }
-
-// const handlerChangeitemRentalperiod=(e) => setitemRentalperiod(e.target.value);
-
 
 const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
@@ -40,23 +36,13 @@ const encodeFileToBase64 = (fileBlob) => {
     });
   };
 
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/api/userstoreinfo/warn/${itemWriter}`)
-  //     .then(response => {
-  //       console.log(response);
-  //       if (response.status === 200){
-  //         console.log("회원 정보 불러오기 성공");
-  //       }else {
-  //         alert("회원 정보를 불러올 수 없습니다.");
-  //         return;
-  //       }
-  //     })
-  //     .catch(error => console.log(error));
-  // }, []);
-
-
-  
-  // pisingoja에 itemwriter(memberId)가 들어가야 하고... 그걸 서버로 넘겨줘야함..
+  const singoInfo = {
+    "singoPisingoja" : Pisingoja,
+    "singoReason" : singoReason,
+    "singoContent" : singoContent,
+    "singoWriter" : singoWriter,
+    "singoDate": singoDate
+  }
 
   const takeDec = (e) => {
     e.preventDefault();
@@ -155,7 +141,9 @@ const encodeFileToBase64 = (fileBlob) => {
                           <option>선택</option>
                           <option>미반환</option>
                           <option>사기 행위</option>
-                          <option>물품 훼손</option>
+                          <option>물품 훼손(사진 첨부 필수)</option>
+                          <option>광고 (상점 및 타사이트 홍보, 상품도배)</option>
+                          <option>기타(신고내용에 사유를 기재해주세요.)</option>
                         </select>
                       </td>
                     </tr>

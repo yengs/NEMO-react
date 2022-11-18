@@ -3,12 +3,13 @@ import ItemSlider from "./ItemSlider.js";
 import styled from "styled-components";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 function MyStore({ itemWriter }) {
 
     const history = useHistory();
     const [piName, setPiName] = useState('');
+    const params = useParams();
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/userstoreinfo/${itemWriter}`)
@@ -19,6 +20,12 @@ function MyStore({ itemWriter }) {
         .catch(error => { console.log(error); });
     }, []);
 
+    const reviewId = params.itemWriter;
+
+    const goYourReview = () => {
+        window.location.href = `/review/yourReview/${reviewId}`;
+    }
+
     return (
         <MyUserStoreContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage myUserStoreInnerPage">
@@ -28,8 +35,10 @@ function MyStore({ itemWriter }) {
                 </div>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
-                        <h3>내 작성 후기</h3>
-                        <button className="plusBtn">+ 더보기</button>
+                        {/* 상점 후기 두개까지만 출력되도록 수정 */}
+                        <h3>상점 후기</h3>
+                        <button className="plusBtn" 
+                        onClick={goYourReview}>+ 더보기</button>
                     </div>
                 </div>
                 <div className='tableWrap'>
@@ -87,6 +96,7 @@ const MyUserStoreContainer = styled.div`
     font-size: 16px;
     height: 10px;
     width: 300px;
+    text-align: center;
 }
 
 .yourReviewListAboutStore tr td {

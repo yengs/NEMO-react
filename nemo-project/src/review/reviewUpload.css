@@ -21,9 +21,9 @@
     font-size: 17px;
 }
 
-.reviewImage>img {
-    width: 100%;
-    height: 100%;
+.reviewImage>img, .myDetailImage>img {
+    width: 500px;
+    height: 500px;
     background-size: cover;
     background-position: center;
     cursor: pointer;
