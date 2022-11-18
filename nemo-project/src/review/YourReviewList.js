@@ -71,7 +71,7 @@ function YourReviewList({ match }) {
                                     </td>
                                     <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
                                     <td>
-                                       {review.reviewId}
+                                       {review.reviewWriter}
                                     </td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
