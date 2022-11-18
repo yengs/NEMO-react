@@ -45,7 +45,7 @@ function Pwfind({history}) {
                 }
             })
             .catch(error => {
-                alert("아이디와 이메일을 다시확인해주세요");
+                alert("아이디 또는 이메일을 확인해주세요");
                 console.log(memberInfo);
             });
     }

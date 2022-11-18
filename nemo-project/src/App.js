@@ -36,7 +36,11 @@ import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
 import BestItemList from './Item/BestItemList';
+<<<<<<< HEAD
+import ReviewUpdate from './review/ReviewUpdate';
+=======
 import DirectBtn from './components/DirectBtn';
+>>>>>>> origin/minju
 
 function App() {
 
@@ -136,8 +140,8 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-        <Route path="/dec/detail" component={DecDetail} />
-        <Route path="/dec/dec" component={Dec} />
+        <Route path="/dec/detail/:singoNum" component={DecDetail} />
+        <Route path="/dec/dec/:memberWarning" component={Dec} />
         <Route path="/userstoreinfo/:itemWriter,:memberImg" component={MyMenu} />
 
       </div>

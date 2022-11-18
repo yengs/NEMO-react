@@ -21,9 +21,9 @@
     font-size: 17px;
 }
 
-.reviewImage {
-    width: 70px;
-    height: 70px;
+.reviewImage>img, .myDetailImage>img {
+    width: 500px;
+    height: 500px;
     background-size: cover;
     background-position: center;
     cursor: pointer;
@@ -67,3 +67,5 @@
     text-align: center;
 }
 
+
+  

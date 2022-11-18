@@ -73,17 +73,17 @@ function MyReviewList({ history, match }) {
     return (
         <>
             <div className="rcontainer">
-                <h2 className="reviewListTitle">내가 작성한 리뷰</h2>
+                <h2 className="reviewListTitle">내가 작성한 후기</h2>
                 <hr className="lineH"></hr>
                 <table className="yourreview">
                     <colgroup>
-                        <col width="5%" />
+                        <col width="10%" />
+                        <col width="10%" />
                         <col width="15%" />
                         <col width="15%" />
-                        <col width="15%" />
-                        <col width="20%" />
-                        <col width="15%" />
-                        <col width="15%" />
+                        <col width="10%" />
+                        <col width="30%" />
+                        <col width="10%" />
                     </colgroup>
                     <thead>
                         <tr>
@@ -100,7 +100,7 @@ function MyReviewList({ history, match }) {
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
                                     <td className="rReviewItemImageOrigin">
-                                            <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
+                                            <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
                                         <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
                                         <td className='ReviewWriter'>{review.reviewItemprice}</td>
