@@ -97,7 +97,7 @@ function MyReviewList({ history, match }) {
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
                                     <td className="rReviewItemImageOrigin">
-                                            <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
+                                            <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
                                         <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
                                         <td className='ReviewWriter'>{review.reviewItemprice}</td>
