@@ -40,7 +40,7 @@ function YourReviewList({ match }) {
     return (
         <>
             <div className="rcontainer">
-                <h1>내 상점 후기</h1>
+                <h2>내 상점 후기</h2>
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
@@ -117,7 +117,7 @@ function YourReviewList({ match }) {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="6"> 작성된 글이 없습니다. </td>
+                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }
