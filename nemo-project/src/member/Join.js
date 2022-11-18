@@ -73,8 +73,9 @@ function Join() {
         }
 
         if(mPw !== mPwCheck){
+            alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
             return setPasswordError(true);
-        } alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
+        } 
 
         console.log("비밀번호: " + mPw);
         console.log("비밀번호 확인: " + mPwCheck);
