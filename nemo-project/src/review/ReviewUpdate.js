@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewAddImg from '../img/review-add-img.png'
 import styled from "styled-components";
+import ReviewUpload from "./ReviewUpload";
 
 const AppStyle = styled.div`
   img {
