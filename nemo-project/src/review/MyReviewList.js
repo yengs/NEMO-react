@@ -79,10 +79,10 @@ function MyReviewList({ history, match }) {
                     <colgroup>
                         <col width="10%" />
                         <col width="10%" />
-                        <col width="15%" />
+                        <col width="10%" />
                         <col width="15%" />
                         <col width="10%" />
-                        <col width="30%" />
+                        <col width="35%" />
                         <col width="10%" />
                     </colgroup>
                     <thead>
@@ -155,7 +155,7 @@ function MyReviewList({ history, match }) {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }

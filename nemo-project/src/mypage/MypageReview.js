@@ -117,9 +117,9 @@ function MypageReview() {
                             ))
                         }
                         {
-                            datas.length === 0 && (
+                            data.length === 0 && (
                                 <tr>
-                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                    <td colSpan="5"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }
@@ -188,7 +188,7 @@ function MypageReview() {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                    <td colSpan="5"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }

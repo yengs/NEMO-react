@@ -6,7 +6,7 @@ import Paging from "../pagination/Paging";
 
 function YourReviewList({ match }) {
 
-    const {reviewId} = match.params;
+    const { reviewId } = match.params;
 
     const ITEM_COUNT_PER_PAGE = 10;
     const [datas, setDatas] = useState([]);
@@ -46,10 +46,10 @@ function YourReviewList({ match }) {
                     <colgroup>
                         <col width="10%" />
                         <col width="10%" />
-                        <col width="15%" />
+                        <col width="10%" />
                         <col width="15%" />
                         <col width="10%" />
-                        <col width="30%" />
+                        <col width="35%" />
                         <col width="10%" />
                     </colgroup>
                     <thead>
@@ -70,12 +70,10 @@ function YourReviewList({ match }) {
                                         <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                     </td>
                                     <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
-                                    <td>
-                                       {review.reviewWriter}
-                                    </td>
+                                    <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <div className="reviewListItemImg" src={`../../reviewFiles/${review.reviewFiles}`}></div>
+                                        <div className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></div>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
@@ -117,7 +115,7 @@ function YourReviewList({ match }) {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="6"> 작성된 글이 없습니다. </td>
+                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }
