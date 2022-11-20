@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { GrFormPrevious } from "react-icons/gr";
 import { GrFormNext } from "react-icons/gr";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 
@@ -34,15 +34,16 @@ const imgUrl2 = require('../img/dress.jpg');
 const imgUrl3 = require('../img/jeans.jpg');
 
 
-const items = [
-    { id: 1, url: imgUrl1 },
-    { id: 2, url: imgUrl2 },
-    { id: 3, url: imgUrl3 },
-    { id: 1, url: imgUrl1 },
-    { id: 2, url: imgUrl2 },
-    { id: 3, url: imgUrl3 }
-];
+// const items = [
+//     { id: 1, url: imgUrl1 },
+//     { id: 2, url: imgUrl2 },
+//     { id: 3, url: imgUrl3 },
+//     { id: 1, url: imgUrl1 },
+//     { id: 2, url: imgUrl2 },
+//     { id: 3, url: imgUrl3 }
+// ];
 
+// const reviewId = useParams.itemWriter;
 
 export default class ItemSlider extends Component {
 
@@ -50,21 +51,26 @@ export default class ItemSlider extends Component {
       items: []
     }
 
-    loadedItem = async () => {
-      axios.get(``)
-    }
-
-    // constructor(props) {
-    //   super(props);
-    //   this.state = {
-    //     url: `../public/files/${item.files}`
-    //   }
+    // loadedItem = async ({ itemWriter }) => {
+    //   axios.get(`http://localhost:8080/api/mypage/mypageitem/${reviewId}`)
+    //   .then(({data}) => {
+    //     this.setState({
+    //       items: data.files
+    //     });
+    //   })
+    //   .catch(error => console.log(error));
     // }
 
-    constructor(props) {
+    // componentDidMount() {
+    //   this.loadedItem();
+    // }
+
+
+    constructor(props, sliderData) {
         super(props);
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
+        this.state = sliderData.files;
     }
     next() {
         this.slider.slickNext();
@@ -74,7 +80,12 @@ export default class ItemSlider extends Component {
     }
 
 
-    render() {
+    render(sliderData) {
+        const {items} = this.state;
+        // console.log(items);
+        // console.log(reviewId);
+        // console.log(itemWriter);
+        console.log(sliderData);
         const settings = {
             dots: false,
             infinite: true,
@@ -86,9 +97,9 @@ export default class ItemSlider extends Component {
             cssEase: "linear",
             swipeToSlide: true,
             afterChange: function (index) {
-                console.log(
-                    `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-                );
+                // console.log(
+                //     `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+                // );
             },
             responsive: [
                 {
@@ -126,7 +137,7 @@ export default class ItemSlider extends Component {
                             return (
                                 <div key={item.id}>
                                     <ImageContainer1>
-                                        <Link to="/"><Image1 src={item.url} /></Link>
+                                        <Link to="/"><Image1 src={items} /></Link>
                                     </ImageContainer1>
                                 </div>
                             );

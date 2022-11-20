@@ -43,8 +43,15 @@ function MyStore({ itemWriter }) {
 
 
 
-   
-
+   const [sliderData, setSliderData] = useState([]);
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/mypage/mypageitem/${reviewId}`)
+        .then(response => {
+            setSliderData(response.data);
+            console.log(sliderData);
+            })
+            .catch(error => console.log(error));
+    }, []);
 
 
     const goYourReview = () => {
@@ -56,7 +63,8 @@ function MyStore({ itemWriter }) {
             <div className="mypageInnerPage myUserStoreInnerPage">
                 <div className="regiUserItemList">
                     <h3 className="pageTitle">대여 가능 목록</h3>
-                    <ItemSlider />
+                    <ItemSlider sliderData={sliderData}/>
+                    {console.log(sliderData)}
                 </div>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
