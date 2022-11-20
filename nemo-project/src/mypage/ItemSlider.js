@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { GrFormPrevious } from "react-icons/gr";
 import { GrFormNext } from "react-icons/gr";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 const Container1 = styled.div`
@@ -32,6 +33,7 @@ const imgUrl1 = require('../img/shirt.jpg');
 const imgUrl2 = require('../img/dress.jpg');
 const imgUrl3 = require('../img/jeans.jpg');
 
+
 const items = [
     { id: 1, url: imgUrl1 },
     { id: 2, url: imgUrl2 },
@@ -43,6 +45,22 @@ const items = [
 
 
 export default class ItemSlider extends Component {
+
+    state = {
+      items: []
+    }
+
+    loadedItem = async () => {
+      axios.get(``)
+    }
+
+    // constructor(props) {
+    //   super(props);
+    //   this.state = {
+    //     url: `../public/files/${item.files}`
+    //   }
+    // }
+
     constructor(props) {
         super(props);
         this.next = this.next.bind(this);
