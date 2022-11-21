@@ -21,7 +21,7 @@
     font-size: 17px;
 }
 
-.reviewImage>img, .myDetailImage>img {
+.reviewImage>img, .myDetailImageReview>img {
     width: 500px;
     height: 500px;
     background-size: cover;
