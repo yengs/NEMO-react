@@ -30,17 +30,11 @@ import axios from 'axios';
 import Chat from './chatting/Chat';
 import DecDetail from './admin/DecDetail';
 import MyMenu from './mypage/MyMenuForOthers';
-
-
 import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
 import BestItemList from './Item/BestItemList';
-<<<<<<< HEAD
-import ReviewUpdate from './review/ReviewUpdate';
-=======
 import DirectBtn from './components/DirectBtn';
->>>>>>> origin/minju
 
 function App() {
 

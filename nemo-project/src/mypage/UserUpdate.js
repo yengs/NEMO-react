@@ -9,7 +9,7 @@ import MemberDelete from "./MemberDelete";
 
 
 // 회원정보수정
-function UserUpdate({history}) {
+function UserUpdate({ history }) {
 
     const handleComplete = (data) => {
         let fullAddress = data.address;
@@ -88,8 +88,8 @@ function UserUpdate({history}) {
             "memberPw": memberPw,
             "memberPhone": memberPhone,
             "memberAddress": memberAddress,
-            "memberZipCode" : mZipCode,
-            "memberSigungu" : mSigungu
+            "memberZipCode": mZipCode,
+            "memberSigungu": mSigungu
         }
 
         axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
@@ -116,45 +116,45 @@ function UserUpdate({history}) {
 
     const openModal = () => {
         setModalOpen(true);
-      };
-      const closeModal = () => {
+    };
+    const closeModal = () => {
         setModalOpen(false);
-      };
-    
-     
+    };
+
+
     const handlerClickDelete = () => {
-        if(memberPw == memberPwCheck &&check4 === false){
+        if (memberPw == memberPwCheck && check4 === false) {
             alert("안내사항에 동의해주세요")
-        } else if(memberPw !== memberPwCheck &&check4 === true){
+        } else if (memberPw !== memberPwCheck && check4 === true) {
             alert("패스워드를 확인해주세요")
-        } else if(memberPw == memberPwCheck &&check4 === true){
-        axios.delete(`http://localhost:8080/api/member/delete/${memberNum}`)
-        .then(response => { 
-            console.log(response);
-            if (response.status === 200) {
-                alert("탈퇴가 완료되었습니다. 더 나은 내모가 되도록 노력하겠습니다^^");
-                sessionStorage.clear();
-                 window.location.href = "/";
-            } else {
-                alert("삭제에 실패했습니다.");
-                return;
-            }
-        })
-        .catch(error => console.log(error));
-    }else {
-        alert("패스워드 확인과 안내사항 동의를 해주세요")
-    }
-};
+        } else if (memberPw == memberPwCheck && check4 === true) {
+            axios.delete(`http://localhost:8080/api/member/delete/${memberNum}`)
+                .then(response => {
+                    console.log(response);
+                    if (response.status === 200) {
+                        alert("탈퇴가 완료되었습니다. 더 나은 내모가 되도록 노력하겠습니다^^");
+                        sessionStorage.clear();
+                        window.location.href = "/";
+                    } else {
+                        alert("삭제에 실패했습니다.");
+                        return;
+                    }
+                })
+                .catch(error => console.log(error));
+        } else {
+            alert("패스워드 확인과 안내사항 동의를 해주세요")
+        }
+    };
 
-const [check4, setCheck4] = useState(false);
+    const [check4, setCheck4] = useState(false);
 
-const check4Handler = () => {
-    if(check4 === false){
-        setCheck4(true)
-    }else {
-        setCheck4(false);
-    }
-};
+    const check4Handler = () => {
+        if (check4 === false) {
+            setCheck4(true)
+        } else {
+            setCheck4(false);
+        }
+    };
 
 
     return (
@@ -228,53 +228,51 @@ const check4Handler = () => {
                                 </tbody>
                             </table>
                         </div>
-                            <React.Fragment>
+                        <React.Fragment>
                             <div className="resignMembership">
-                            <Link onClick={openModal} type="submit">회원탈퇴하기</Link>
-                           </div>
-                            <MemberDelete open={modalOpen} close={closeModal} header="회원탈퇴페이지">
-                            <div className="txt3"><li>
-                                    패스워드 확인을 통해 본인인증을 해주세요
-                                    </li>
-                                    </div>
-                            <tr>
-                                        <td className="requiredMark">패스워드</td>
-                                        <td>
-                                            <input className="pw" type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="requiredMark">패스워드확인</td>
-                                        <td>
-                                            <input className="pw" type="password" name="mIdCheck" value={memberPwCheck} onChange={handlerChangePwCheck} required />
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <div className="txt">
-                                    탈퇴 유의사항
-                                    </div>
-                                    <div className="txt2">
-                                        <li>채팅, 회원정보의 데이터는 삭제됩니다.</li>
-                                        <li>게시한 대여상품, 후기 등의 게시글은 삭제되지 않습니다.반드시 탈퇴 전 직접 삭제하셔야 합니다.</li>                      
-                                        <li>회원 탈퇴 즉시 모든 회원 정보가 삭제되며, 재가입시에는 기존 아이디는 사용하실 수 있습니다.</li>
-                                        <li>회원 탈퇴 후 모든 스토어 주문 정보는 5년간 분리 보관됩니다.</li>           
-                                        <li>회원 탈퇴 시 내모의 대여상품을 이용하실수 없습니다.</li>
-
-                                  </div>
-                                  <div className="line"></div>
-                                    <label className="req">
-                                <input type="checkbox" required
-                                    id="check4" checked={check4} onChange={check4Handler}/>
-                                &nbsp;&nbsp;안내사항을 모두 확인하였으며, 이에 동의합니다.
-                                 </label>
-                            <div className="btnWrap">
-                                    <input type="button" id="delete" className="redBtn btn bon"  value="탈퇴하기" onClick={handlerClickDelete} />
+                                <Link onClick={openModal} type="submit">회원탈퇴하기</Link>
                             </div>
+                            <MemberDelete open={modalOpen} close={closeModal} header="회원탈퇴페이지">
+                                <div className="txt3"><li>
+                                    패스워드 확인을 통해 본인인증을 해주세요
+                                </li>
+                                </div>
+                                <tr>
+                                    <td className="requiredMark">패스워드</td>
+                                    <td>
+                                        <input className="pw" type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="requiredMark">패스워드확인</td>
+                                    <td>
+                                        <input className="pw" type="password" name="mIdCheck" value={memberPwCheck} onChange={handlerChangePwCheck} required />
+                                    </td>
+                                </tr>
+                                <div className="txt">
+                                    탈퇴 유의사항
+                                </div>
+                                <div className="txt2">
+                                    <li>채팅, 회원정보의 데이터는 삭제됩니다.</li>
+                                    <li>게시한 대여상품, 후기 등의 게시글은 삭제되지 않습니다.반드시 탈퇴 전 직접 삭제하셔야 합니다.</li>
+                                    <li>회원 탈퇴 즉시 모든 회원 정보가 삭제되며, 재가입시에는 기존 아이디는 사용하실 수 있습니다.</li>
+                                    <li>회원 탈퇴 후 모든 스토어 주문 정보는 5년간 분리 보관됩니다.</li>
+                                    <li>회원 탈퇴 시 내모의 대여상품을 이용하실수 없습니다.</li>
+
+                                </div>
+                                <div className="line"></div>
+                                <label className="req">
+                                    <input type="checkbox" required
+                                        id="check4" checked={check4} onChange={check4Handler} />
+                                    &nbsp;&nbsp;안내사항을 모두 확인하였으며, 이에 동의합니다.
+                                </label>
+                                <div className="btnWrap">
+                                    <input type="button" id="delete" className="redBtn btn bon" value="탈퇴하기" onClick={handlerClickDelete} style={{float:"right"}} />
+                                </div>
                             </MemberDelete>
-                                </React.Fragment>
-                        <div className="btnWrap">
-                            <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} />
+                        </React.Fragment>
+                        <div className="btnWrap" style={{marginTop:'0'}}>
+                            <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} style={{marginTop:'0'}} />
                         </div>
                     </form>
                 </div>
@@ -310,8 +308,18 @@ const ContainerUserUpate = styled.div`
     margin-top: 20px;
     margin-bottom:20px;
 }
+
+.modal td {
+    padding: 10px 0;
+    text-align: left;
+}
+
+.modal td:last-child {
+    padding-left: 10px;
+}
+
 .bon{
-    margin-left: 400px;
+    // margin-left: 400px;
     margin-top:40px;
 }
 
@@ -328,7 +336,7 @@ const ContainerUserUpate = styled.div`
 }
 
   .UserUpate .pageTitle h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 300;
     text-align: center;
   }
@@ -344,9 +352,10 @@ const ContainerUserUpate = styled.div`
   }
   
   .UserUpate .inputTable table tr>td {
-    padding-top: 11px;
-    padding-bottom: 11px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-top: 1px solid #ddd;
+    text-align: left;
   }
   
   .UserUpate .inputTable table tr:first-child>td {
@@ -392,12 +401,13 @@ const ContainerUserUpate = styled.div`
 
   .resignMembership {
     margin-left: 108px;
-    margin-top: 25px;
+    margin-top: 7px;
   }
 
   .resignMembership a {
     text-decoration: none;
     font-size: 14px;
+    color: #666;
   }
 
   .UserUpate .btn.beigeBtn {

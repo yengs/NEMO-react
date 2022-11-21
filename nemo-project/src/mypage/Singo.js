@@ -142,6 +142,7 @@ const encodeFileToBase64 = (fileBlob) => {
                           <option>미반환</option>
                           <option>사기 행위</option>
                           <option>물품 훼손(사진 첨부 필수)</option>
+                          <option>욕설 또는 성희롱(연애 목적 대화 시도)</option>
                           <option>광고 (상점 및 타사이트 홍보, 상품도배)</option>
                           <option>기타(신고내용에 사유를 기재해주세요.)</option>
                         </select>

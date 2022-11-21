@@ -55,6 +55,7 @@ function ItemUpload({ history }) {
             };
         });
     };
+    
 
 
     const [startDate, setStartDate] = useState(new Date());
@@ -63,6 +64,25 @@ function ItemUpload({ history }) {
     const handlerClickGoback = () => history.goBack();
 
     const handlerClickSubmit = (e) => {
+        if(itemName.trim() == ''){
+            alert("상품명을 입력해주세요.")
+        }else if(itemMaincategory.trim() == ''){
+            alert("상품 대분류를 선택해주세요.")
+        }else if(itemSubcategory.trim() == ''){
+            alert("상품 소분류를 선택해주세요.")
+        }else if(itemWeather.trim() == ''){
+            alert("어울리는 계절을 선택해주세요.")
+        }else if(itemTopsize.trim() == '' && itemBottomsize.trim() == '' && itemEtcsize.trim() == '' ){
+            alert("사이즈를 선택해주세요.")
+        }else if(itemPrice.trim() == ''){
+            alert("가격이 제대로 입력되었는지 확인해주세요.")
+        }else if(itemDeposit.trim() == ''){
+            alert("보증금이 제대로 입력되었는지 확인해주세요.")
+        }else if(itemPrice > 2147483647 || itemDeposit > 2147483647){
+            alert("금액이 너무 큽니다.")
+        }else if(itemDetail.trim() == ''){
+            alert("상품설명을 입력해주세요.")
+        }else{
         e.preventDefault();
 
         const formData = new FormData();
@@ -75,7 +95,6 @@ function ItemUpload({ history }) {
         }));
         // formData.append("files", new Blob(files, { type: "image/*" }));
         formData.append("files", files);
-
 
 
 
@@ -96,6 +115,13 @@ function ItemUpload({ history }) {
                 }
             })
             .catch(error => console.log(error));
+            console.log("사진",files)
+            if(files.trim() == ''){
+                alert("사진을 등록해주세요.")
+            }
+
+           
+        }      
     };
 
     const [showCom, setShowCom] = useState(false);
@@ -144,7 +170,7 @@ function ItemUpload({ history }) {
                     <table className="board_detail">
                         <tr>
                             <td>상품명</td>
-                            <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} /></td>
+                            <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} maxlength="49"/></td>
                         </tr>
 
                         <tr>

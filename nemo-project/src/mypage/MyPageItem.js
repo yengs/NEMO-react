@@ -58,7 +58,7 @@ function MyPageItem({ match }) {
                     {
                         datas.length === 0 && (
                             <tr>
-                                <td colSpan="4">일치하는 데이터가 없습니다!.</td>
+                                <td colSpan="4">작성된 글이 없습니다.</td>
                             </tr>
                         )
                     }
@@ -357,12 +357,12 @@ const MyPageItemContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;  
-    margin-top: 35px;  
+    margin-top: 0px;  
   }
   
   .itemInfoWrap {
     width: 30%;
-    height: 460px;
+    height: 440px;
     background-color: rgb(250, 250, 250);
     border-radius: 10px;
     padding: 1%;
@@ -387,7 +387,11 @@ const MyPageItemContainer = styled.div`
     margin: 5px 0;
   }
   
-  .itemInfoWrap .itemInfo .price {
+  .itemInfoWrap .itemInfo .itemPrice {
+    color: #333;
+  }
+
+  .itemInfoWrap .itemInfo .price span {
     font-size: 20px;
     font-weight: 800;
     margin-right: 2px;
@@ -414,6 +418,7 @@ const MyPageItemContainer = styled.div`
   .itemInfoWrap .itemInfo .itemName {
     font-size: 17px;
     font-weight: 800;
+    color: #333;
   }
   
   .itemInfoWrap .itemInfo .itemPeriod {
@@ -425,7 +430,7 @@ const MyPageItemContainer = styled.div`
   .itemInfoWrap .itemInfo .period {
     font-size: 14px;
   }
-  
+
   .storeInfoWrap {
    
     width: 200px;

@@ -4,13 +4,26 @@ import axios from "axios";
 import Paging from "../pagination/Paging";
 import { useEffect, useState } from 'react';
 
-function Dec({history, match}) {
-    
+function Dec({ history, match }) {
+
     const [data, setData] = useState([]);
     const [ memberName, setMemberName ] = useState('');
     const [ memberWarning, setMemberWarning ] = useState('');
     const [ singoReason, setSingoReason ] = useState('');
     const [ singoWriter, setSingoWriter ] = useState('');
+    const [ singoNum, setSingoNum ] = useState('');
+
+    // 페이지네이션
+    const [count, setCount] = useState(0);
+    const [page, setPage] = useState(1);
+    const [items, setItems] = useState([]);
+
+    const ITEM_COUNT_PER_PAGE = 10;
+
+    const changePage = page => {
+        setPage(page);
+        setItems(data.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+    };
 
     // 신고대상자 불러오기
     useEffect(() => {
@@ -31,41 +44,6 @@ function Dec({history, match}) {
           .catch(error => console.log(error));
       }, []);
 
-    // 관리자 신고 접수하기
-    const handlerSingo = (e) => {
-        e.preventDefault();
-
-        const singoInfo = {
-            "memberWarning" : memberWarning
-        }
-
-        axios.put(`http://localhost:8080/api/dec/dec/${memberWarning}`, singoInfo)
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-            console.log(singoInfo);
-            alert("정상적으로 접수되었습니다.");
-            history.goBack();
-        } else {
-            alert("접수 실패했습니다.");
-            return;
-        }
-      })
-      .catch(error => console.log(error));
-    }
-
-    // 페이지네이션
-    const [count, setCount] = useState(0);
-    const [page, setPage] = useState(1);
-    const [items, setItems] = useState([]);
-
-    const ITEM_COUNT_PER_PAGE = 10;
-
-    const changePage = page => {
-        setPage(page);
-        setItems(data.slice((page-1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
-    };
-
     return (
         <div className="adminInnerPage">
             <div className="userReviewListAboutStoreWrapAdmin">
@@ -78,12 +56,11 @@ function Dec({history, match}) {
                             <th style={{width:"30%"}}>신고 사유</th>
                             <th style={{width:"12%"}}>신고 날짜</th>
                             <th style={{width:"12%"}}>작성자 ID</th>
-                            <th></th>
-                            <th>신고 상태</th>
+                            <th style={{width:"10%"}}>신고 상태</th>
                         </tr>
                     </thead>
                         {
-                            data && data.map(data => (
+                            items && items.map(data => (
                                 <tbody>
                                     <tr>
                                         <td className='Dec'>{data.singoNum}</td>
@@ -95,35 +72,23 @@ function Dec({history, match}) {
                                         <td className='Dec'>
                                             <Link to={`/dec/detail/${data.singoNum}`}>상세보기</Link>
                                         </td>
-                                        <td className='Dec'>
-                                            <tr>
-                                                <td>
-                                                    <button className='RedBtn btnBok' onClick={handlerSingo}>접수</button>
-                                                </td>
-                                                <td>
-                                                    <button className='grayBtn btnBok'>취소</button>
-                                                </td>
-                                            </tr>
-                                        </td>
                                     </tr>
                                 </tbody>
                             ))
                         }
                         {
                             data.length === 0 && (
-                                <tr>
-                                    
-                                </tr>
+                                <tr></tr>
                             )
                         }
                 </table>
             </div>
             <div>
-                    <Paging page={page} count={count} setPage={changePage} />
+            <Paging page={page} count={count} setPage={changePage} />
             </div>
             <div>
+            </div>
         </div>
-    </div>
     );
 }
 

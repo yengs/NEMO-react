@@ -1,33 +1,27 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import jeans from '../img/jeans.jpg';
 import styled from "styled-components";
-
 
 function MypageReview() {
 
-    const YOURREVIEW_COUNT_PER_PAGE = 1;
+    const YOURREVIEW_COUNT_PER_PAGE = 2;
     const MYREVIEW_COUNT_PER_PAGE = 2;
 
-    const [data, setData] = useState([]);
-    const [datas, setDatas] = useState([]);                         // 리뷰 전체 데이터
+    const [data, setData] = useState([]);                           // 다른 회원이 쓴 후기
+    const [datas, setDatas] = useState([]);                         // 내가 작성한 후기
+    
     const [items, setItems] = useState('');                         // 상품 전체 데이터
-    // const [myReviewData, setmyReviewData] = useState('');           // 내가 작성한 후기
-    // const [yourReviewData, setYourReviewData] = useState('');       // 내가 등록한 상품에 대한 다른 회원의 후기
     const [reviewIcon, setReviewIcon] = useState('');               // 만족도 
 
     const reviewWriter = sessionStorage.getItem('memberId');
     const reviewId = sessionStorage.getItem('memberId');
 
     useEffect(() => {
-
         // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`)
             .then(response => {
                 console.log(response);
                 setData(response.data.slice(0, YOURREVIEW_COUNT_PER_PAGE));
-                // setDatas(response.data);
-                // setYourReviewData(response.data.slice((datas - 1) * YOURREVIEW_COUNT_PER_PAGE));
                 setReviewIcon(response.data);
             })
             .catch(error => console.log(error));
@@ -36,8 +30,6 @@ function MypageReview() {
     useEffect(() => {
         // 내가 작성한 후기 데이터
         axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`)
-            // { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }}
-
             .then(response => {
                 console.log(response);
                 setDatas(response.data.slice(0, MYREVIEW_COUNT_PER_PAGE));
@@ -45,7 +37,6 @@ function MypageReview() {
             })
             .catch(error => console.log(error));
     }, []);
-
 
     const goYourReview = () => {
         window.location.href = `/review/yourReview/${reviewId}`;
@@ -58,20 +49,28 @@ function MypageReview() {
     return (
         <MypageReviewContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage">
+            <div className='tableWrap'>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
                         <h3 style={{ marginTop: '0' }}>내 상점 후기</h3>
                         <button className="plusBtn" onClick={goYourReview}> + 더보기</button>
                     </div>
                 </div>
-                <div className='tableWrap'>
+               
                     <table className="yourReviewListAboutStore">
+                        <colgroup>
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="20%" />
+                            <col width="10%" />
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th colSpan={2}>상품 정보</th>
                                 <th>작성자</th>
-                                <th >내용</th>
-                                <th >만족도</th>
+                                <th>내용</th>
+                                <th>만족도</th>
                             </tr>
                         </thead>
                         {
@@ -84,7 +83,9 @@ function MypageReview() {
                                         </td>
                                         <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
-                                        <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
+                                        <td className='ReviewContent' rowSpan={3}>
+                                            <div className="myReviewContents">{review.reviewContents}</div>
+                                        </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>
                                                 {
@@ -117,9 +118,9 @@ function MypageReview() {
                             ))
                         }
                         {
-                            datas.length === 0 && (
-                                <tr>
-                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                            data.length === 0 && (
+                                <tr className='nullReview'>
+                                    <td colSpan="5"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }
@@ -127,21 +128,28 @@ function MypageReview() {
                 </div>
 
                 <div className='marging'></div>
-
+                <div className='tableWrap2'>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
                         <h3>내 작성 후기</h3>
                         <button className="plusBtn" onClick={goMyReview}> + 더보기</button>
                     </div>
                 </div>
-                <div className='tableWrap'>
+                
                     <table className="yourReviewListAboutStore">
+                        <colgroup>
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="10%" />
+                            <col width="20%" />
+                            <col width="10%" />
+                        </colgroup>
                         <thead>
                             <tr>
                                 <th colSpan={2}>상품 정보</th>
                                 <th>대여료</th>
-                                <th >내용</th>
-                                <th >만족도</th>
+                                <th>내용</th>
+                                <th>만족도</th>
                             </tr>
                         </thead>
                         {
@@ -153,7 +161,9 @@ function MypageReview() {
                                         </td>
                                         <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice}</td>
-                                        <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
+                                        <td className='ReviewContent' rowSpan={3}>
+                                            <div className="myReviewContents">{review.reviewContents}</div>
+                                        </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>
                                                 {
@@ -187,8 +197,8 @@ function MypageReview() {
                         }
                         {
                             datas.length === 0 && (
-                                <tr>
-                                    <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                <tr className='nullReview'>
+                                    <td colSpan="5"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }
@@ -202,6 +212,23 @@ function MypageReview() {
 }
 
 const MypageReviewContainer = styled.div`
+
+.tableWrap{
+    height : 40%
+}
+
+.tableWrap2 {
+    margin-top: 20px;
+}
+
+.myReviewContents {
+    display: flex;
+    max-height: 32px;
+    overflow: hidden;
+    // justify-content: flex-start;
+    white-space: pre-wrap;
+    font-size: 14px
+}
 
 .bookingitemImg{
     width: 100%;
@@ -320,6 +347,7 @@ const MypageReviewContainer = styled.div`
     font-size: 16px;
     height: 10px;
     width: 300px;
+    text-align: center;
 }
 
 .yourReviewListAboutStore tr td {
@@ -328,11 +356,8 @@ const MypageReviewContainer = styled.div`
 
 .yourReviewListAboutStore tbody:last-child td  {
     border-bottom: none;
+    white-space: pre-wrap;
 }
-
-/* .yourReviewListAboutStore td {
-    배경색을 줄까 말까 고민하다가 결국 그냥 안넣기로 함. 나중에 넣을수도 ?
-} */
 
 .lineH {
     height: 3.1px !important;
@@ -364,10 +389,6 @@ const MypageReviewContainer = styled.div`
     text-align: center;
 }
 
-/* .tableWrap {
-    border-bottom: 1px solid #444444;
-} */
-
 .marging {
     height: 50px;
 }
@@ -383,9 +404,9 @@ table-layout: fixed;
 /* ------------------------ */
 /* 다른사람이 보는 마이페이지 */
 
-.rReviewItemImageOrigin {
-    width: 20%;
-}
+// .rReviewItemImageOrigin {
+//     width: 20%;
+// }
 
 .rReviewItemImageOrigin div {
     width: 100%;
@@ -420,13 +441,15 @@ table-layout: fixed;
     font-size: 13px !important;
     padding-bottom: 0px !important;
     margin: 10px 0;
-    width: 100%;;
+    width: 100%;
+
 }
 
 .rsatisfing {
     width: 140px;
     font-size: 12px;
 }
+
 `
 
 export default MypageReview;

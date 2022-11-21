@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
-import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
 function YourReviewList({ match }) {
 
-    const {reviewId} = match.params;
+    const { reviewId } = match.params;
 
     const ITEM_COUNT_PER_PAGE = 10;
     const [datas, setDatas] = useState([]);
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(1);
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
@@ -40,16 +39,16 @@ function YourReviewList({ match }) {
     return (
         <>
             <div className="rcontainer">
-                <h1>내 상점 후기</h1>
+                <h2>내 상점 후기</h2>
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
+                    <col width="10%" />
                         <col width="10%" />
                         <col width="10%" />
                         <col width="15%" />
-                        <col width="15%" />
                         <col width="10%" />
-                        <col width="30%" />
+                        <col width="35%" />
                         <col width="10%" />
                     </colgroup>
                     <thead>
@@ -67,15 +66,13 @@ function YourReviewList({ match }) {
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
                                     <td className="rReviewItemImageOrigin">
-                                        <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
+                                        <img className="yourBbookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                     </td>
                                     <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                    <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
-                                       {review.reviewWriter}
-                                    </td>
-                                    <td>
-                                        {/* 이미지 업로드 부분 */}
-                                        <div className="reviewListItemImg" src={`../../reviewFiles/${review.reviewFiles}`}></div>
+                                        {/* 이미지 업로드 부분 여기 사진 안뜨는거 수정해야함 */}
+                                        <div className="reviewListItemImg"></div>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
@@ -117,7 +114,7 @@ function YourReviewList({ match }) {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="6"> 작성된 글이 없습니다. </td>
+                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }

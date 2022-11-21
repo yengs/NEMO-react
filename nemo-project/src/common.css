@@ -516,6 +516,11 @@ footer {
   width: 100%
 }
 
+.titleNplusBtn a {
+  color: #666;
+  font-weight: 600;
+}
+
 .titleNplusBtn>h3 {
   margin: 10px 0;
   /* font-size: 23px; */
@@ -565,6 +570,7 @@ footer {
 
 .itemWrap a {
   text-decoration: none;
+  color: #333;
 }
 
 .itemInfoWrap {
@@ -629,6 +635,14 @@ footer {
 .itemInfoWrap .itemInfo .itemName {
   font-size: 17px;
   font-weight: 800;
+}
+
+#overflow {
+  display: block;
+  max-width: calc(100% - 10px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .itemInfoWrap .itemInfo .itemPeriod {
