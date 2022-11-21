@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CleanG from '../member/CleanG';
 import Modal from './ImgModal';
+import styled from "styled-components";
 
 function MyMenu({ history , location}) {
 
@@ -96,11 +97,25 @@ function MyMenu({ history , location}) {
     };
     // ---프사 모달 end---
 
-    return (
+    const [showCom, setShowCom] = useState(false);
+    const showComment = () => {
+        setShowCom(true)
+    }
 
+    const hideComment = () => {
+        setShowCom(false)
+    }
+
+    return (
+      
 
         <div className="myMenuWrap">
-            <img className="memberImg" src={`../../memberImg/${data.memberImg}`} onClick={openModal}></img>
+            <AppStyle >
+            <img className="memberImg" src={`../../memberImg/${data.memberImg}`}  onMouseEnter={showComment}></img>
+            <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment} onClick={openModal}>
+                                            이미지를 변경하시려면<br/>클릭해주세요.
+                                        </div>
+            </AppStyle>
 
             {/* ---프사모달--- */}
             <React.Fragment>
@@ -108,9 +123,9 @@ function MyMenu({ history , location}) {
                 <div className="ChoiseFile">
                 <div className="myDetailImage">
                     {imageSrc == '' ?
-                        <img className="memberImg" src={`../../memberImg/${data.memberImg}`} />
+                        <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} />
                         : <div className="myDetailImage">
-                        {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg"/>} </div>
+                        {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" />} </div>
                     }
                 </div>
                 
@@ -150,7 +165,36 @@ function MyMenu({ history , location}) {
                 </ul>
             </div>
         </div>
+        
     );
 }
 
+
+
+const AppStyle = styled.div`
+.commentBox {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background-color: rgba(30,30,30,0.4);
+    position: absolute;
+    z-index:1;
+    visibility: hidden;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    padding-top: 33px;
+    line-height: 25px;
+    margin-left: 24px;
+    margin-top: -114px;
+}
+
+.showCom {
+visibility: visible;
+}
+
+`
+
+
 export default MyMenu;
+

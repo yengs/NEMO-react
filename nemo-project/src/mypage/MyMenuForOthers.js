@@ -71,7 +71,7 @@ function MyMenu() {
                         </div>
                     }
                 </div>
-                <div className="menu">
+                <div className="menu" style={{height: "calc(100% - 220px)"}}>
                     <div></div>
                     {!singo && <button className="warnBtn" onClick={goSingo}>신고하기</button>}
                 </div>

@@ -145,14 +145,6 @@
     border-bottom: 1px solid #bbb;
 }
 
-/* .yourReviewListAboutStore td {
-    배경색을 줄까 말까 고민하다가 결국 그냥 안넣기로 함. 나중에 넣을수도 ?
-} */
-
-/* .tableWrap {
-    border-bottom: 1px solid #444444;
-} */
-
 .marging {
     height: 50px;
 }
@@ -175,7 +167,6 @@ table-layout: fixed;
 .rReviewItemImageOrigin div {
     width: 100%;
     height: 120px;
-    /* border: 1px solid #000; */
     background-size: cover;
     background-position: center;
 }
