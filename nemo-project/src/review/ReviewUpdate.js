@@ -159,7 +159,7 @@ function ReviewUpdate({ history, match }) {
                 <div className="ChoiseFile">
                     <div className="myDetailImage">
                         {imageSrc == '' ?
-                            <img className="memberImg" src={`../../files_review/${data.reviewFiles}`} />
+                            <img className="memberImg" src={`../../../files_review/${data.reviewFiles}`} />
                             : <div className="myDetailImage">
                                 {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
                         }

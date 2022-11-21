@@ -127,6 +127,7 @@ function ItemDetail({ match, history }) {
     let now = new Date();
 
     const dateWhat = () => {
+        
         if (new Date(itemRentalend) > now) {
             history.push(`/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`);
         } else {
@@ -685,7 +686,12 @@ td.reviewImg,
     margin-top: 25px;
     font-size; 17px;
     line-height: 23px;
+    overflow: scroll;
+    height: 155px;
+    white-space: pre-wrap;
+    
 }
+
 
 .DetailContainer form {
     width: 500px;
