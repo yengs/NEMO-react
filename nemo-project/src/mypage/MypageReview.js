@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 function MypageReview() {
 
-    const YOURREVIEW_COUNT_PER_PAGE = 1;
+    const YOURREVIEW_COUNT_PER_PAGE = 2;
     const MYREVIEW_COUNT_PER_PAGE = 2;
 
     const [data, setData] = useState([]);                           // 다른 회원이 쓴 후기
@@ -53,13 +53,14 @@ function MypageReview() {
     return (
         <MypageReviewContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage">
+            <div className='tableWrap'>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
                         <h3 style={{ marginTop: '0' }}>내 상점 후기</h3>
                         <button className="plusBtn" onClick={goYourReview}> + 더보기</button>
                     </div>
                 </div>
-                <div className='tableWrap'>
+               
                     <table className="yourReviewListAboutStore">
                         <colgroup>
                             <col width="10%" />
@@ -123,7 +124,8 @@ function MypageReview() {
                         {
                             data.length === 0 && (
                                 <tr>
-                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
+                                    <td colSpan="5"> 작성된 글이 없습니다. </td>
+
                                 </tr>
                             )
                         }
@@ -131,14 +133,14 @@ function MypageReview() {
                 </div>
 
                 <div className='marging'></div>
-
+                <div className='tableWrap2'>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
                         <h3>내 작성 후기</h3>
                         <button className="plusBtn" onClick={goMyReview}> + 더보기</button>
                     </div>
                 </div>
-                <div className='tableWrap'>
+                
                     <table className="yourReviewListAboutStore">
                         <colgroup>
                             <col width="10%" />
@@ -201,7 +203,7 @@ function MypageReview() {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
+                                    <td colSpan="5"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }
@@ -216,12 +218,17 @@ function MypageReview() {
 
 const MypageReviewContainer = styled.div`
 
+.tableWrap{
+    height : 40%
+}
+
 .myReviewContents {
     display: flex;
-    max-height: 31px;
+    max-height: 32px;
     overflow: hidden;
-    justify-content: center;
+    // justify-content: flex-start;
     white-space: pre-wrap;
+    font-size: 14px
 }
 
 .bookingitemImg{
@@ -383,10 +390,6 @@ const MypageReviewContainer = styled.div`
     text-align: center;
 }
 
-/* .tableWrap {
-    border-bottom: 1px solid #444444;
-} */
-
 .marging {
     height: 50px;
 }
@@ -402,9 +405,9 @@ table-layout: fixed;
 /* ------------------------ */
 /* 다른사람이 보는 마이페이지 */
 
-.rReviewItemImageOrigin {
-    width: 20%;
-}
+// .rReviewItemImageOrigin {
+//     width: 20%;
+// }
 
 .rReviewItemImageOrigin div {
     width: 100%;

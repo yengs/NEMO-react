@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 // import "./ItemDetail.css";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function ItemDetail({ match, history }) {
 
-    const { itemNum } = match.params;
-
     const [data, setData] = useState({});
     const [datas, setDatas] = useState([]);
+    const [datas2, setDatas2] = useState([]);
+
     const [itemName, setItemName] = useState('');
     const [itemPrice, setItemPrice] = useState('');
     const [itemDeposit, setItemDeposit] = useState('');
@@ -21,12 +22,10 @@ function ItemDetail({ match, history }) {
     const [memberImg, setMemberImg] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
-    const reviewProductIdx = itemNum;
-
-    const [writerItems, setWriterItems] = useState([]);
+    const reviewProductIdx = match.params;
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/detail/${itemNum}`)
+        axios.get(`http://localhost:8080/api/item/detail/${match.params.itemNum}`)
             .then(response => {
                 setData(response.data);
                 setItemName(response.data.itemName);
@@ -46,19 +45,16 @@ function ItemDetail({ match, history }) {
                         setReviewSatisfaction(response.data);
                     })
                     .catch(error => console.log(error));
+
+                axios.get(`http://localhost:8080/api/mypage/mypageitem/${response.data.itemWriter}`)
+                    .then(response => {
+                      setDatas2(response.data);        
+                    })
+                    .catch(error => console.log(error));
             })
             .catch(error => { console.log(error); });
 
-    }, []);
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
-    //         .then(response => {
-    //             setWriterItems(response.data);
-    //         })
-    //         .catch(error => console.log(error));
-    // }, []);
-
+    }, [match.params]);
 
     //후기조회
     useEffect(() => {
@@ -75,7 +71,7 @@ function ItemDetail({ match, history }) {
 
     const handlerClickList = () => history.goBack();
     const handlerClickDelete = () => {
-        axios.delete(`http://localhost:8080/api/item/${itemNum}`)
+        axios.delete(`http://localhost:8080/api/item/${match.params.itemNum}`)
             .then(response => {
                 console.log(response);
                 if (response.status === 200) {
@@ -89,7 +85,7 @@ function ItemDetail({ match, history }) {
             .catch(error => console.log(error));
     };
     const handlerClickUpdate = () => {
-        axios.put(`http://localhost:8080/api/item/${itemNum}`, { 'itemName': itemName, 'itemPrice': itemPrice, 'itemDetail': itemDetail })
+        axios.put(`http://localhost:8080/api/item/${match.params.itemNum}`, { 'itemName': itemName, 'itemPrice': itemPrice, 'itemDetail': itemDetail })
             .then(response => {
                 if (response.status === 200) {
                     alert("정상적으로 수정되었습니다.", {
@@ -127,8 +123,9 @@ function ItemDetail({ match, history }) {
     let now = new Date();
 
     const dateWhat = () => {
+        
         if (new Date(itemRentalend) > now) {
-            history.push(`/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`);
+            history.push(`/item/bookingupload/${match.params.itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`);
         } else {
             alert("대여기간이 지난 상품입니다")
             history.push(`/item/cate/sub/${data.itemSubcategory}`);
@@ -141,16 +138,18 @@ function ItemDetail({ match, history }) {
 
     }
 
+
     const chatting = () => {
         history.push(`/chatting/${itemWriter}`);
     }
 
     return (
+       
         <ItemDatailContainer style={{ padding: "80px 0" }}>
+             <>
             <div className="DetailContainer" style={{ maxWidth: '1000px' }}>
                 <h2>상품 상세</h2>
                 <div className="clickList">
-                    {/* <p className="cate">{data.itemMaincategory}{' > '}{data.itemSubcategory}</p> */}
 
                     <div className="Breadcrumb">
                         <Breadcrumb tag='nav' listTag='div'>
@@ -196,59 +195,8 @@ function ItemDetail({ match, history }) {
                                 <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
                                 <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
                             </div>
-                            {/* <form method="post" id="frm" name="frm">
-                                <table>
-                                    <colgroup>
-                                        <col width="33%" />
-                                        <col width="" />
-                                    </colgroup>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" className="itemName">상품명</th>
-                                            <td>{data.itemName}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">어울리는 계절</th>
-                                            <td>{data.itemWeather}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">가격</th>
-                                            <td>{data.itemPrice} 원</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">보증금</th>
-                                            <td>{data.itemDeposit} 원</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">사이즈</th>
-                                            {
-                                                (function () {
-                                                    if (data.itemMaincategory === "상의") {
-                                                        return <td>{data.itemTopsize}</td>
-                                                    }
-                                                    else if (data.itemMaincategory === "하의") {
-                                                        return <td>{data.itemBottomsize}</td>
-                                                    }
-                                                    else { return <td>{data.itemEtcsize}</td> }
-                                                })()
-                                            }
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">대여기간</th>
-                                            <td>{data.itemRentalstart} ~ {data.itemRentalend}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">내용</th>
-                                            <td className="itemDetailContent">{data.itemDetail}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </form> */}
                         </div>
                     </div>
-                    {/* <div>
-                        <p>{data.itemDetail}</p>
-                    </div> */}
 
                 <div className="middleDiv">
                     {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
@@ -298,27 +246,36 @@ function ItemDetail({ match, history }) {
                                 }
 
                             </div>
+
                         </div>
-                    </div>
-                    <div>
-                        {
-                            function() {
-                                axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
-                                .then(response => {
-                                    setWriterItems(response.data);
-                                        console.log(response.data)
-                                    })
-                                    .catch(error => console.log(error));
-                                }
-                            }
-                        { writerItems && writerItems.map(items => {
-                            <div style={{width:"100px", height:"100px", backgroundColor:"#ddd", display:"inline-block", marginLeft:"20px"}} key={items.itemNum}>
-                            <img className="itemImg" src={`../../files/${items.files}`} />
+                        <div className="myitem1">
+
+                       
+                         <div className="myitem">
+                    
+                        { 
+                        datas2 && datas2.map(items => (
+                            <div key={items.itemNum} >
+                                    <div className="itemInfoWrap"  style={{width:"130px", height:"140px", backgroundColor:"rgb(194 217 204)", marginLeft:"20px"}}  >
+                                    <Link to={`/item/detail/${items.itemNum}`}>
+                                        <img className="itemImggg" src={`../../files/${items.files}` } ></img>
+                                    </Link> 
+                                    </div>
                             </div>
-                        }).slice(0, 5)}
-                        {console.log("writerItems>>>>>>>>>")}
-                        {console.log(writerItems)}
+                        )).slice(0,4)
+                        }
+                           {
+                        datas2.length === 0 && (
+                            <tr>
+                                <td colSpan="4">일치는 데이터가 없습니다!.</td>
+                            </tr>
+                        )
+                    }
                         </div>
+                        </div>
+                        
+                    </div>
+                   
                 </div>
 
 
@@ -392,13 +349,35 @@ function ItemDetail({ match, history }) {
             </div>
 
             <div className="blank"></div>
-
+            </>
         </ItemDatailContainer>
-
+     
     );
 }
 
 const ItemDatailContainer = styled.div`
+
+.itemImggg{
+    width: 100% !important;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.myitem{
+    margin-left:33px;
+    display:flex;
+    box-sizing: border-box;
+    text-align: center;
+}
+.myitem1{
+    display:inline-block;
+    
+}
 .middleDiv {
     // justify-content: center;
     // align-items: center;
@@ -411,7 +390,7 @@ const ItemDatailContainer = styled.div`
 }
 
 .writerWrap {
-    display: inline-block;
+    display:inline-flex;
 }
 
 .writerDiv {
@@ -685,7 +664,12 @@ td.reviewImg,
     margin-top: 25px;
     font-size; 17px;
     line-height: 23px;
+    overflow: scroll;
+    height: 155px;
+    white-space: pre-wrap;
+    
 }
+
 
 .DetailContainer form {
     width: 500px;
