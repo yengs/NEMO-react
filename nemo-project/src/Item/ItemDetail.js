@@ -140,7 +140,16 @@ function ItemDetail({ match, history }) {
 
 
     const chatting = () => {
-        history.push(`/chatting/${itemWriter}`);
+        
+        if (sessionStorage.getItem("memberId") !== data.itemWriter) {
+            history.push(`/chatting/${itemWriter}`);
+        } 
+
+       else if (sessionStorage.getItem("memberId") === data.itemWriter) {
+            alert("본인은 본인에게 채팅을 할수 없습니다.");
+            history.goBack();
+        }
+
     }
 
     return (
