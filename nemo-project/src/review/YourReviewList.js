@@ -71,8 +71,8 @@ function YourReviewList({ match }) {
                                     <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
                                     <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
-                                        {/* 이미지 업로드 부분 여기 사진 안뜨는거 수정해야함 */}
-                                        <div className="reviewListItemImg"></div>
+                                        {/* 이미지 업로드 부분 여기 사진 안뜨는거 수정하긴 함 */}
+                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></img>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
