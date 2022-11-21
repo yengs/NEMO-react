@@ -217,6 +217,10 @@ const MypageReviewContainer = styled.div`
     height : 40%
 }
 
+.tableWrap2 {
+    margin-top: 20px;
+}
+
 .myReviewContents {
     display: flex;
     max-height: 32px;
