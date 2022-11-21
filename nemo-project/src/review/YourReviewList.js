@@ -44,12 +44,12 @@ function YourReviewList({ match }) {
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
-                        <col width="10%" />
+                    <col width="10%" />
                         <col width="10%" />
                         <col width="15%" />
-                        <col width="15%" />
                         <col width="10%" />
-                        <col width="30%" />
+                        <col width="10%" />
+                        <col width="35%" />
                         <col width="10%" />
                     </colgroup>
                     <thead>
@@ -67,7 +67,7 @@ function YourReviewList({ match }) {
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
                                     <td className="rReviewItemImageOrigin">
-                                        <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
+                                        <img className="yourBbookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                     </td>
                                     <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
                                     <td>
@@ -75,7 +75,7 @@ function YourReviewList({ match }) {
                                     </td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <div className="reviewListItemImg" src={`../../reviewFiles/${review.reviewFiles}`}></div>
+                                        <div className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></div>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
