@@ -60,10 +60,7 @@ function Login({ history }) {
         axios.post('http://localhost:8080/api/member/login', { "memberId": id, "memberPw": pw })
             .then(response => {
                 if (response.status === 200 && response.data !== "") {
-                    console.log(response.headers);
                     let jwtToken = response.headers.get("jwtToken");
-                    console.log(response.data);
-                    console.log("토큰!!!!!!!!!!!!!!!!! : " + jwtToken);
 
                     sessionStorage.setItem("jwtToken", jwtToken);
                     sessionStorage.setItem("memberNum", response.data.memberNum);
