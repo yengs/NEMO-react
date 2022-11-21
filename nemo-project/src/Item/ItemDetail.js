@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 // import "./ItemDetail.css";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function ItemDetail({ match, history }) {
 
-    const { itemNum } = match.params;
-
     const [data, setData] = useState({});
     const [datas, setDatas] = useState([]);
+    const [datas2, setDatas2] = useState([]);
+
     const [itemName, setItemName] = useState('');
     const [itemPrice, setItemPrice] = useState('');
     const [itemDeposit, setItemDeposit] = useState('');
@@ -21,12 +22,10 @@ function ItemDetail({ match, history }) {
     const [memberImg, setMemberImg] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
-    const reviewProductIdx = itemNum;
-
-    const [writerItems, setWriterItems] = useState([]);
+    const reviewProductIdx = match.params;
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/detail/${itemNum}`)
+        axios.get(`http://localhost:8080/api/item/detail/${match.params.itemNum}`)
             .then(response => {
                 setData(response.data);
                 setItemName(response.data.itemName);
@@ -46,19 +45,16 @@ function ItemDetail({ match, history }) {
                         setReviewSatisfaction(response.data);
                     })
                     .catch(error => console.log(error));
+
+                axios.get(`http://localhost:8080/api/mypage/mypageitem/${response.data.itemWriter}`)
+                    .then(response => {
+                      setDatas2(response.data);        
+                    })
+                    .catch(error => console.log(error));
             })
             .catch(error => { console.log(error); });
 
-    }, []);
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
-    //         .then(response => {
-    //             setWriterItems(response.data);
-    //         })
-    //         .catch(error => console.log(error));
-    // }, []);
-
+    }, [match.params]);
 
     //후기조회
     useEffect(() => {
@@ -75,7 +71,7 @@ function ItemDetail({ match, history }) {
 
     const handlerClickList = () => history.goBack();
     const handlerClickDelete = () => {
-        axios.delete(`http://localhost:8080/api/item/${itemNum}`)
+        axios.delete(`http://localhost:8080/api/item/${match.params.itemNum}`)
             .then(response => {
                 console.log(response);
                 if (response.status === 200) {
@@ -89,7 +85,7 @@ function ItemDetail({ match, history }) {
             .catch(error => console.log(error));
     };
     const handlerClickUpdate = () => {
-        axios.put(`http://localhost:8080/api/item/${itemNum}`, { 'itemName': itemName, 'itemPrice': itemPrice, 'itemDetail': itemDetail })
+        axios.put(`http://localhost:8080/api/item/${match.params.itemNum}`, { 'itemName': itemName, 'itemPrice': itemPrice, 'itemDetail': itemDetail })
             .then(response => {
                 if (response.status === 200) {
                     alert("정상적으로 수정되었습니다.", {
@@ -109,7 +105,7 @@ function ItemDetail({ match, history }) {
     }
 
     const goUserStore = () => {
-        if(sessionStorage.getItem("memberId") === data.itemWriter) {
+        if (sessionStorage.getItem("memberId") === data.itemWriter) {
             history.push(`/mypage/mypageitem/${sessionStorage.getItem("memberId")}`);
         } else {
             history.push(`/userstoreinfo/${data.itemWriter},${data.memberImg}`);
@@ -127,8 +123,9 @@ function ItemDetail({ match, history }) {
     let now = new Date();
 
     const dateWhat = () => {
+        
         if (new Date(itemRentalend) > now) {
-            history.push(`/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`);
+            history.push(`/item/bookingupload/${match.params.itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`);
         } else {
             alert("대여기간이 지난 상품입니다")
             history.push(`/item/cate/sub/${data.itemSubcategory}`);
@@ -141,16 +138,18 @@ function ItemDetail({ match, history }) {
 
     }
 
+
     const chatting = () => {
         history.push(`/chatting/${itemWriter}`);
     }
 
     return (
+       
         <ItemDatailContainer style={{ padding: "80px 0" }}>
+             <>
             <div className="DetailContainer" style={{ maxWidth: '1000px' }}>
                 <h2>상품 상세</h2>
                 <div className="clickList">
-                    {/* <p className="cate">{data.itemMaincategory}{' > '}{data.itemSubcategory}</p> */}
 
                     <div className="Breadcrumb">
                         <Breadcrumb tag='nav' listTag='div'>
@@ -165,16 +164,16 @@ function ItemDetail({ match, history }) {
                     </div>
                 </div>
                 <br></br>
-                    <div className="tablePlusForm">
-                        <div className="imageDiv">
-                            <img className="itemImg" src={`../../files/${data.files}`} />
-                        </div>
-                        <div className="tableform">
-                            <div>
-                                <h2 className="itemName">{data.itemName}</h2>
-                                <h3 className="itemPrice"><span>{data.itemPrice}</span>원</h3>
-                                <p className="itemDeposit">보증금<span>{data.itemDeposit}</span>원</p>
-                            <div style={{borderBottom: "1px solid #ddd"}}></div>
+                <div className="tablePlusForm">
+                    <div className="imageDiv">
+                        <img className="itemImg" src={`../../files/${data.files}`} />
+                    </div>
+                    <div className="tableform">
+                        <div>
+                            <h2 className="itemName">{data.itemName}</h2>
+                            <h3 className="itemPrice"><span>{data.itemPrice}</span>원</h3>
+                            <p className="itemDeposit">보증금<span>{data.itemDeposit}</span>원</p>
+                            <div style={{ borderBottom: "1px solid #ddd" }}></div>
                             <p className="itemSize">사이즈
                                 {
                                     (function () {
@@ -190,27 +189,28 @@ function ItemDetail({ match, history }) {
                             </p>
                             <h4 className="itemRentalPeriod">대여기간<span>{data.itemRentalstart} ~ {data.itemRentalend}</span></h4>
                             <p className="itemDetailContent">{data.itemDetail}</p>
-                            </div>
+                        </div>
 
-                            <div className="buttonDiv">
-                                <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
-                                <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
-                            </div>
+                        <div className="buttonDiv">
+                            <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
+                            <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
                         </div>
                     </div>
+                </div>
 
                 <div className="middleDiv">
                     {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
                         + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
                     <div className="writerWrap">
 
-                        <div className="writerDiv" style={{cursor:"pointer"}} onClick={goUserStore}>
+                        <div className="writerDiv" style={{ cursor: "pointer" }} onClick={goUserStore}>
                             <h3>대여자</h3>
                             <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
                         </div>
-                        <div style={{cursor:"pointer"}} onClick={goUserStore} className="cleanDiv">
+                        <div style={{ cursor: "pointer" }} onClick={goUserStore} className="cleanDiv">
                             <h4>{itemWriter}</h4>
                             <div>
+
                                 {reviewSatisfaction == 0 ?
                                     <div>
                                         <div className='item-detail-clean'> 클린지수 50 % </div>
@@ -244,28 +244,36 @@ function ItemDetail({ match, history }) {
                                         }</div>
                                     </div>
                                 }
+
                             </div>
+
+                        </div>
+                        <div className="myitem1">
+
+                       
+                         <div className="myitem">
+                    
+                        { 
+                        datas2 && datas2.map(items => (
+                            <div key={items.itemNum} >
+                                    <div className="itemInfoWrap"  style={{width:"130px", height:"140px", backgroundColor:"rgb(194 217 204)", marginLeft:"20px"}}  >
+                                    <Link to={`/item/detail/${items.itemNum}`}>
+                                        <img className="itemImggg" src={`../../files/${items.files}` } ></img>
+                                    </Link> 
+                                    </div>
+                            </div>
+                        )).slice(0,4)
+                        }
+                           {
+                        datas2.length === 0 && (
+                            <tr>
+                                <td colSpan="4">일치는 데이터가 없습니다!.</td>
+                            </tr>
+                        )
+                    }
+                        </div>
                         </div>
                     </div>
-                    <div>
-                        {
-                            function() {
-                                axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
-                                .then(response => {
-                                    setWriterItems(response.data);
-                                        console.log(response.data)
-                                    })
-                                    .catch(error => console.log(error));
-                                }
-                            }
-                        { writerItems && writerItems.map(items => {
-                            <div style={{width:"100px", height:"100px", backgroundColor:"#ddd", display:"inline-block", marginLeft:"20px"}} key={items.itemNum}>
-                            <img className="itemImg" src={`../../files/${items.files}`} />
-                            </div>
-                        }).slice(0, 5)}
-                        {console.log("writerItems>>>>>>>>>")}
-                        {console.log(writerItems)}
-                        </div>
                 </div>
 
 
@@ -297,29 +305,32 @@ function ItemDetail({ match, history }) {
                                             </td>
                                             <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
                                             <td className='ReviewWriter' rowSpan={3}>
-                                                {
-                                                    (function () {
-                                                        if (reviewSatisfaction === 0) {
-                                                            return <img className="item-detail-Img" src="/clean/zero.png" alt="0percentlass" />
-                                                        } else if (reviewSatisfaction > 0 && reviewSatisfaction <= 20) {
-                                                            return <img className="item-detail-Img" src="/clean/tenp.png" alt="10"></img>
-                                                        } else if (reviewSatisfaction > 20 && reviewSatisfaction <= 40) {
-                                                            return <img className="item-detail-Img" src="/clean/thirtyp.png" alt="40" />
-                                                        } else if (reviewSatisfaction > 40 && reviewSatisfaction <= 50) {
-                                                            return <img className="item-detail-Img" src="/clean/fourtyp.png" alt="50" />
-                                                        } else if (reviewSatisfaction > 50 && reviewSatisfaction <= 60) {
-                                                            return <img className="item-detail-Img" src="/clean/sixtyp.png" alt="60" />
-                                                        } else if (reviewSatisfaction > 60 && reviewSatisfaction <= 70) {
-                                                            return <img className="item-detail-Img" src="/clean/seventyp.png" alt="70" />
-                                                        } else if (reviewSatisfaction > 70 && reviewSatisfaction <= 80) {
-                                                            return <img className="item-detail-Img" src="/clean/eightyp.png" alt="80" />
-                                                        } else if (reviewSatisfaction > 80 && reviewSatisfaction <= 99) {
-                                                            return <img className="item-detail-Img" src="/clean/ninetyp.png" alt="99" />
-                                                        } else {
-                                                            return <img className="item-detail-Img" src="/clean/onehundredp.png" alt="100" />
-                                                        }
-                                                    })()
-                                                }
+                                                {review.reviewSatisfaction}
+                                                <div>
+                                                    {
+                                                        (function () {
+                                                            if (review.reviewSatisfaction === 0) {
+                                                                return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                            } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                                return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
+                                                            } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                                return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
+                                                                return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
+                                                                return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
+                                                                return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
+                                                                return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
+                                                                return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
+                                                            } else {
+                                                                return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
+                                                            }
+                                                        })()
+                                                    }
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -339,13 +350,35 @@ function ItemDetail({ match, history }) {
             </div>
 
             <div className="blank"></div>
-
+            </>
         </ItemDatailContainer>
-
+     
     );
 }
 
 const ItemDatailContainer = styled.div`
+
+.itemImggg{
+    width: 100% !important;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.myitem{
+    margin-left:33px;
+    display:flex;
+    box-sizing: border-box;
+    text-align: center;
+}
+.myitem1{
+    display:inline-block;
+    
+}
 .middleDiv {
     // justify-content: center;
     // align-items: center;
@@ -358,7 +391,7 @@ const ItemDatailContainer = styled.div`
 }
 
 .writerWrap {
-    display: inline-block;
+    display:inline-flex;
 }
 
 .writerDiv {
@@ -632,7 +665,12 @@ td.reviewImg,
     margin-top: 25px;
     font-size; 17px;
     line-height: 23px;
+    overflow: scroll;
+    height: 155px;
+    white-space: pre-wrap;
+    
 }
+
 
 .DetailContainer form {
     width: 500px;

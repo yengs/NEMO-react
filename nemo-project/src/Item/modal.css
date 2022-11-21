@@ -1,7 +1,7 @@
 .modal {
     display: none;
     position: fixed;
-    top: 0;
+    top: -10px;
     right: 0;
     bottom: 0;
     left: 0;
@@ -16,7 +16,7 @@
   .modal > section {
     width: 90%;
     max-width: 700px;
-    height: 800px;
+    height: 730px;
     margin: 0 auto;
     border-radius: 0.3rem;
     background-color: #fff;
@@ -99,6 +99,7 @@
     margin-top: 15px;
     margin-left: 15px;
     position: static;
+    cursor: pointer;
   }
 
   .paytext {
@@ -107,7 +108,7 @@
     margin-top: 46%;
     margin-left: 15px;
     width: 610px;
-    height: 340px;
+    height: 269px;
     border-radius: 10px; 
   }
 
@@ -120,6 +121,6 @@
   }
 
   .paynotice{
-    margin-top: 70px;
-    margin-left: 40px;
+    margin-top: 35px;
+    margin-left: 45px;
   }
