@@ -58,7 +58,7 @@ function MyPageItem({ match }) {
                     {
                         datas.length === 0 && (
                             <tr>
-                                <td colSpan="4">일치하는 데이터가 없습니다!.</td>
+                                <td colSpan="4">작성된 글이 없습니다.</td>
                             </tr>
                         )
                     }

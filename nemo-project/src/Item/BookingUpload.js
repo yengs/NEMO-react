@@ -9,7 +9,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 
 
-function BookingUpload({ history,match }) {
+function BookingUpload({ history, match }) {
 
   //---------결제모달---------------
   const [modalOpen, setModalOpen] = useState(false);
@@ -38,50 +38,59 @@ function BookingUpload({ history,match }) {
   //----------결제모달 end--------------
   //--------------대여하기 ------------------
 
-  const {itemNum} = match.params;
-  const {itemName} = match.params;
-  const {itemDeposit} = match.params;
-  const {itemPrice} = match.params;
-  const {itemWriter} = match.params;
-  const {files} = match.params;
-  const {itemRentalstart} = match.params;
-  const {itemRentalend} = match.params;
+  const { itemNum } = match.params;
+  const { itemName } = match.params;
+  const { itemDeposit } = match.params;
+  const { itemPrice } = match.params;
+  const { itemWriter } = match.params;
+  const { files } = match.params;
+  const { itemRentalstart } = match.params;
+  const { itemRentalend } = match.params;
 
   const bookingItemnum = itemNum;
   const bookingItemname = itemName;
   const Deposit = itemDeposit;
   const bookingItemprice = itemPrice;
   const bookingItemwriter = itemWriter;
-  const bookingItemfiles =files;
+  const bookingItemfiles = files;
   const Rentalstart = itemRentalstart;
   const Rentalend = itemRentalend;
 
 
-  const sum = (parseInt(bookingItemprice)+parseInt(Deposit));
+  const sum = (parseInt(bookingItemprice) + parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
-  
+
   const handlerClickSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:8080/api/booking/bookingWrite`,
+    if(checkAgree !== true) {
+      alert("필수약관에 동의해주세요.")
+    } else if(value === '') {
+      alert("대여날짜를 선택해주세요.")
+    }else if(paypay === '') {
+      alert("결제수단을 선택해주세요.")
+    } else if (checkAgree === true && value !== '') {
+
+      axios.post(`http://localhost:8080/api/booking/bookingWrite`,
         {
-            "bookingMember": bookingMember,
-            "bookingDate" :value,
-            "bookingItemnum": bookingItemnum,
-            "bookingItemname":bookingItemname,
-            "bookingItemprice" : bookingItemprice,
-            "bookingItemwriter" : bookingItemwriter,
-            "bookingItemfiles" : bookingItemfiles
+          "bookingMember": bookingMember,
+          "bookingDate": value,
+          "bookingItemnum": bookingItemnum,
+          "bookingItemname": bookingItemname,
+          "bookingItemprice": bookingItemprice,
+          "bookingItemwriter": bookingItemwriter,
+          "bookingItemfiles": bookingItemfiles
         })
         .then(response => {
           if (response.status === 200) {
-              alert("정상적으로 등록되었습니다.");
-              window.location.href = "/mypage/mybooking"
+            alert("정상적으로 등록되었습니다.");
+            window.location.href = "/mypage/mybooking"
           } else {
-              alert("등록에 실패했습니다.");
-              return;
+            alert("등록에 실패했습니다.");
+            return;
           }
-      })
-      .catch(error => console.log(error));
+        })
+        .catch(error => console.log(error));
+    }
   };
 
   //-----------대여하기 end--------------------
@@ -89,31 +98,46 @@ function BookingUpload({ history,match }) {
   //==========================대여날짜 --------------------------
   const [datas, setDatas] = useState([]);
   const bookingItemnumber = bookingItemnum;
-  const [value, setbookingDate] = useState(new Date());
+  const [value, setbookingDate] = useState('');
   const [dates, setDates] = useState([]);
 
 
-  const list = dates.map((date)=>{
-    return(new Date(date))
+  const list = dates.map((date) => {
+    return (new Date(date))
   })
 
   const disableDates = list;
 
-useEffect(() => {
-  axios.get(`http://localhost:8080/api/allbooking/${bookingItemnumber}`)
-    .then(response => {
-      setDatas(response.data);
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/allbooking/${bookingItemnumber}`)
+      .then(response => {
+        setDatas(response.data);
 
-      const dateList = response.data.map((datalist, i) => datalist.bookingDate );
-      setDates(dateList);
+        const dateList = response.data.map((datalist, i) => datalist.bookingDate);
+        setDates(dateList);
 
-    })
-    .catch(error => console.log(error));
-}, []);
+      })
+      .catch(error => console.log(error));
+  }, []);
 
 
 
-//------------------------------End------------------------------
+  // 필수약관체크
+  const [checkAgree, setCheckAgree] = useState(false);
+  const onchangeCheckAgree = () => {
+    if (checkAgree == false) {
+      setCheckAgree(true);
+    } else {
+      setCheckAgree(false);
+    }
+  }
+  console.log(checkAgree)
+
+
+
+
+
+  //------------------------------End------------------------------
 
 
   return (
@@ -127,8 +151,8 @@ useEffect(() => {
             <div className="tablePlusForm2">
               <tr><td>
                 <div className="imageDiv2">
-                <img className="memberImg2" src={`../../files/${bookingItemfiles}`}/>
-                  
+                  <img className="memberImg2" src={`../../files/${bookingItemfiles}`} />
+
                 </div>
               </td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;{bookingItemname}</td>
@@ -165,7 +189,7 @@ useEffect(() => {
         <div className="middle">
           <React.Fragment>
             <div className="custom-search" >
-              <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요" value={paypay}/>
+              <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요" value={paypay} />
               <button onClick={openModal} className="custom-search-botton" type="submit">등록</button>
             </div>
 
@@ -278,24 +302,29 @@ useEffect(() => {
 
         <h3>대여기간</h3>
         <div className="bottom">
-        
+
           <div> <div className="inputdate">
-         
+
             <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)}
-                      formatDay={(locale, date) => moment(date).format("DD")}
-                      tileDisabled={({date, view}) =>
-                         (view === 'month') && // Block day tiles only
-                          disableDates.some(disabledDate =>
-                          date.getFullYear() === disabledDate.getFullYear() &&
-                          date.getMonth() === disabledDate.getMonth() &&
-                          date.getDate() === disabledDate.getDate()
-            )} />
+              formatDay={(locale, date) => moment(date).format("DD")}
+              tileDisabled={({ date, view }) =>
+                (view === 'month') && // Block day tiles only
+                disableDates.some(disabledDate =>
+                  date.getFullYear() === disabledDate.getFullYear() &&
+                  date.getMonth() === disabledDate.getMonth() &&
+                  date.getDate() === disabledDate.getDate()
+                )} />
             <br />
-            선택한 날짜 : {moment(value).format("YYYY년 MM월 DD일")}
+            선택한 날짜 : {
+              value === '' ?
+              "대여날짜를 선택해주세요"
+              :
+              moment(value).format("YYYY년 MM월 DD일")
+              }
           </div>
             <br /><br />
             <label className="agree">
-              <input type="checkbox" />
+              <input type="checkbox" onChange={onchangeCheckAgree} />
               &nbsp;&nbsp;개인정보 제 3자 제공동의와 결제대행 서비스 이용약관에 동의합니다. (필수)
             </label>
           </div>
