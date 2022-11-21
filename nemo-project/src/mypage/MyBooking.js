@@ -320,9 +320,9 @@ const MyBookingContainer = styled.div`
         height: 100%;
     }
 
-    .userReviewListAboutStore2 tr td {
-        border-bottom: 1px solid #ccc
-    }
+    // .userReviewListAboutStore2 tr td {
+    //     border-bottom: 1px solid #ccc
+    // }
 
     /* 마이페이지 내의 페이지 */
 // .mypageInnerPage {
