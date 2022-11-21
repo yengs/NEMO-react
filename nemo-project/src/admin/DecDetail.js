@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './DecDetail.css';
 
 const styles = {
     adminInnerPage: {  
         borderRadius: 20, 
         width: "calc(100% - 230px)",
-        padding: "10px 10px 70px 10px", 
+        padding: "10px 10px 30px 10px", 
         margin: "60px auto auto auto",
         backgroundColor: "rgb(248, 248, 248)",
         border: "2px solid #bbb"
@@ -32,7 +33,6 @@ function DecDetail({history, match}){
           .then(response => {
             console.log(response);
             if (response.status === 200){
-                console.log(match.params.singoNum,"번");
                 setData(response.data);
                 setSingoNum(response.data.singoNum);
             }else {
@@ -43,12 +43,54 @@ function DecDetail({history, match}){
           .catch(error => console.log(error));
       }, []);
 
-
+    // 목록으로
     const decList = () => history.goBack();
+
+    const singoInfo = {
+        "singoNum" : match.params.singoNum
+    }
+
+    // 접수하기
+    const confirmWarn = (e) => {
+        e.preventDefault();
+
+        axios.put(`http://localhost:8080/api/dec/detail/${match.params.singoNum}`, singoInfo)
+      .then(response => {
+        console.log(response);
+        if (response.status === 200) {
+            console.log(singoInfo);
+            alert("정상적으로 접수되었습니다.");
+            history.goBack();
+        } else {
+            alert("접수 실패했습니다.");
+            return;
+        }
+      })
+      .catch(error => console.log(error));
+    }
+
+    // 취소하기
+    const deleteWarn = () => {
+        axios.delete(`http://localhost:8080/api/dec/detail/${match.params.singoNum}`)
+            .then(response => {
+                console.log(response);
+                if(response.status == 200) {
+                    alert("정상적으로 삭제되었습니다.");
+                    console.log(match.params.singoNum);
+                    history.goBack();
+                }else{
+                    alert("삭제에 실패했습니다.");
+                    return;
+                }
+            })
+            .catch(error => console.log(error));
+    }
     
     return(
         <div style={styles.adminInnerPage}>
             <h3>신고 상세</h3>
+            {/* <a className='greyDec' onclick={decList}>목록으로</a> */}
+            {/* <input type="button" id="list" className="greyDec" value="목록으로" onClick={decList} /> */}
             <form style={styles.form} method="post" id="frm" name="frm">
                 <input type="hidden" name="reviewNum" />
                 <table style={styles.table}>
@@ -79,7 +121,6 @@ function DecDetail({history, match}){
                                     <th scope='row'>이미지</th>
                                     <td colSpan={7}>
                                         <div className="imageDiv">
-                                            
                                         <img className="itemImg" src={`../../public/files/${data.singoImage}`} />
                                         </div>
                                     </td>
@@ -100,8 +141,13 @@ function DecDetail({history, match}){
                         )
                     }
                 </table>
-                <input type="button" id="declist" className="decDetailGrayBtn" value="목록으로" onClick={decList} />
-            </form>                
+                
+                <div className="btnDivDec">
+                    <input type="button" id="list" className="greyDec" value="목록으로" onClick={decList} />
+                    <input type="button" id="edit"   className="redBtnDec" value="접수하기" onClick={confirmWarn} />
+                    <input type="button" id="delete" className="grayBtnDec" value="삭제하기" onClick={deleteWarn} />
+                </div>
+            </form>        
         </div>   
     );
 }
