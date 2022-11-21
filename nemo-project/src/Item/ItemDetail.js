@@ -105,7 +105,7 @@ function ItemDetail({ match, history }) {
     }
 
     const goUserStore = () => {
-        if(sessionStorage.getItem("memberId") === data.itemWriter) {
+        if (sessionStorage.getItem("memberId") === data.itemWriter) {
             history.push(`/mypage/mypageitem/${sessionStorage.getItem("memberId")}`);
         } else {
             history.push(`/userstoreinfo/${data.itemWriter},${data.memberImg}`);
@@ -140,7 +140,16 @@ function ItemDetail({ match, history }) {
 
 
     const chatting = () => {
-        history.push(`/chatting/${itemWriter}`);
+        
+        if (sessionStorage.getItem("memberId") !== data.itemWriter) {
+            history.push(`/chatting/${itemWriter}`);
+        } 
+
+       else if (sessionStorage.getItem("memberId") === data.itemWriter) {
+            alert("본인은 본인에게 채팅을 할수 없습니다.");
+            history.goBack();
+        }
+
     }
 
     return (
@@ -164,16 +173,16 @@ function ItemDetail({ match, history }) {
                     </div>
                 </div>
                 <br></br>
-                    <div className="tablePlusForm">
-                        <div className="imageDiv">
-                            <img className="itemImg" src={`../../files/${data.files}`} />
-                        </div>
-                        <div className="tableform">
-                            <div>
-                                <h2 className="itemName">{data.itemName}</h2>
-                                <h3 className="itemPrice"><span>{data.itemPrice}</span>원</h3>
-                                <p className="itemDeposit">보증금<span>{data.itemDeposit}</span>원</p>
-                            <div style={{borderBottom: "1px solid #ddd"}}></div>
+                <div className="tablePlusForm">
+                    <div className="imageDiv">
+                        <img className="itemImg" src={`../../files/${data.files}`} />
+                    </div>
+                    <div className="tableform">
+                        <div>
+                            <h2 className="itemName">{data.itemName}</h2>
+                            <h3 className="itemPrice"><span>{data.itemPrice}</span>원</h3>
+                            <p className="itemDeposit">보증금<span>{data.itemDeposit}</span>원</p>
+                            <div style={{ borderBottom: "1px solid #ddd" }}></div>
                             <p className="itemSize">사이즈
                                 {
                                     (function () {
@@ -189,25 +198,25 @@ function ItemDetail({ match, history }) {
                             </p>
                             <h4 className="itemRentalPeriod">대여기간<span>{data.itemRentalstart} ~ {data.itemRentalend}</span></h4>
                             <p className="itemDetailContent">{data.itemDetail}</p>
-                            </div>
+                        </div>
 
-                            <div className="buttonDiv">
-                                <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
-                                <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
-                            </div>
+                        <div className="buttonDiv">
+                            <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
+                            <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
                         </div>
                     </div>
+                </div>
 
                 <div className="middleDiv">
                     {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
                         + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
                     <div className="writerWrap">
 
-                        <div className="writerDiv" style={{cursor:"pointer"}} onClick={goUserStore}>
+                        <div className="writerDiv" style={{ cursor: "pointer" }} onClick={goUserStore}>
                             <h3>대여자</h3>
                             <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
                         </div>
-                        <div style={{cursor:"pointer"}} onClick={goUserStore} className="cleanDiv">
+                        <div style={{ cursor: "pointer" }} onClick={goUserStore} className="cleanDiv">
                             <h4>{itemWriter}</h4>
                             <div>
 
@@ -273,9 +282,7 @@ function ItemDetail({ match, history }) {
                     }
                         </div>
                         </div>
-                        
                     </div>
-                   
                 </div>
 
 
@@ -307,29 +314,32 @@ function ItemDetail({ match, history }) {
                                             </td>
                                             <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
                                             <td className='ReviewWriter' rowSpan={3}>
-                                                {
-                                                    (function () {
-                                                        if (reviewSatisfaction === 0) {
-                                                            return <img className="item-detail-Img" src="/clean/zero.png" alt="0percentlass" />
-                                                        } else if (reviewSatisfaction > 0 && reviewSatisfaction <= 20) {
-                                                            return <img className="item-detail-Img" src="/clean/tenp.png" alt="10"></img>
-                                                        } else if (reviewSatisfaction > 20 && reviewSatisfaction <= 40) {
-                                                            return <img className="item-detail-Img" src="/clean/thirtyp.png" alt="40" />
-                                                        } else if (reviewSatisfaction > 40 && reviewSatisfaction <= 50) {
-                                                            return <img className="item-detail-Img" src="/clean/fourtyp.png" alt="50" />
-                                                        } else if (reviewSatisfaction > 50 && reviewSatisfaction <= 60) {
-                                                            return <img className="item-detail-Img" src="/clean/sixtyp.png" alt="60" />
-                                                        } else if (reviewSatisfaction > 60 && reviewSatisfaction <= 70) {
-                                                            return <img className="item-detail-Img" src="/clean/seventyp.png" alt="70" />
-                                                        } else if (reviewSatisfaction > 70 && reviewSatisfaction <= 80) {
-                                                            return <img className="item-detail-Img" src="/clean/eightyp.png" alt="80" />
-                                                        } else if (reviewSatisfaction > 80 && reviewSatisfaction <= 99) {
-                                                            return <img className="item-detail-Img" src="/clean/ninetyp.png" alt="99" />
-                                                        } else {
-                                                            return <img className="item-detail-Img" src="/clean/onehundredp.png" alt="100" />
-                                                        }
-                                                    })()
-                                                }
+                                                {review.reviewSatisfaction}
+                                                <div>
+                                                    {
+                                                        (function () {
+                                                            if (review.reviewSatisfaction === 0) {
+                                                                return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                            } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                                return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
+                                                            } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                                return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
+                                                                return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
+                                                                return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
+                                                                return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
+                                                                return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
+                                                            } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
+                                                                return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
+                                                            } else {
+                                                                return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
+                                                            }
+                                                        })()
+                                                    }
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -369,7 +379,7 @@ const ItemDatailContainer = styled.div`
 
 
 .myitem{
-    margin-left:50px;
+    margin-left:33px;
     display:flex;
     box-sizing: border-box;
     text-align: center;

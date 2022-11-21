@@ -4,29 +4,6 @@ import ReviewAddImg from '../img/review-add-img.png'
 import styled from "styled-components";
 import "./reviewUpload.css";
 
-const AppStyle = styled.div`
-  img {
-    max-width: 75px;
-  }
-  label {
-    display: inline-block;
-    font-size: inherit;
-    line-height: normal;
-    vertical-align: middle;
-    cursor: pointer;
-  }
-  input[type="file"] {
-    position: absolute;
-    width: 0;
-    height: 0;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
-
-`;
 
 function ReviewUpdate({ history, match }) {
 
@@ -37,6 +14,16 @@ function ReviewUpdate({ history, match }) {
     const [imageSrc, setImageSrc] = useState('');
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
+
+    const [showCom, setShowCom] = useState(false);
+    const showComment = () => {
+        setShowCom(true)
+    }
+
+    const hideComment = () => {
+        setShowCom(false)
+    }
+
 
     // 후기 데이터 가져오기
     useEffect(() => {
@@ -106,6 +93,9 @@ function ReviewUpdate({ history, match }) {
                 }
             })
             .catch(error => console.log(error));
+            if(reviewFiles.size > 5000000){
+                alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.")
+            }
     };
 
     const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
@@ -137,7 +127,37 @@ function ReviewUpdate({ history, match }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                <div className="ChoiseFile">
+                <AppStyle style={{marginTop: "11px"}}>
+                        <label htmlFor="item_review_input" className="item_review_input">
+                            {
+                                imageSrc ?
+                                    <div className="itemImg">
+                                        <img src={imageSrc} alt="preview-img" className="previewImg" onMouseEnter={showComment} />
+                                        <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
+                                            이미지 변경을 하시려면<br/>클릭해주세요.
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className="itemImg">
+                                        <img className="previewImg" src={`../../../files_review/${data.reviewFiles}`} onMouseEnter={showComment}/>
+                                        <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
+                                            이미지 변경을 하시려면<br/>클릭해주세요.
+                                        </div>
+                                    </div>
+                                    
+                            }
+                        </label>
+                        <input
+                            type="file"
+                            id="item_review_input"
+                            className="image_inputType_file"
+                            name="file"
+                            
+                            multiple
+                            onChange={handlerChangefiles}
+                        />
+                    </AppStyle>
+                {/* <div className="ChoiseFile">
                     <div className="myDetailImageReview">
                         {imageSrc == '' ?
                             <img className="memberImg" src={`../../../files_review/${data.reviewFiles}`} />
@@ -148,7 +168,7 @@ function ReviewUpdate({ history, match }) {
                     <div className="imageChoose">
                         <input className="form-control-image" type="file" name="file" multiple onChange={handlerChangefiles}></input>
                     </div>
-                </div>
+                </div> */}
 
             </div>
             <div className='reviewContent'>
@@ -166,5 +186,71 @@ function ReviewUpdate({ history, match }) {
     );
 
 }
+
+
+
+const AppStyle = styled.div`
+
+    
+    
+    label {
+        width: 270px;
+        height: 270px;
+      display: inline-block;
+      font-size: inherit;
+      line-height: normal;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+    input[type="file"] {
+      position: absolute;
+      width: 0;
+      height: 0;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .itemImg {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    
+    
+    .uploadImg {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .previewImg {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .commentBox {
+        width: 270px;
+        height: 270px;
+        background-color: rgba(30,30,30,0.4);
+        position: absolute;
+        bottom: 0;
+        z-index:1;
+        visibility: hidden;
+        color: #fff;
+        text-align: center;
+        font-size: 18px;
+        padding-top: 110px;
+        line-height: 25px;
+  }
+
+  .showCom {
+    visibility: visible;
+  }
+  
+  `;
+  
+
 
 export default ReviewUpdate;
