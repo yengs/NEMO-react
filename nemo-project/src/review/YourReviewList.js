@@ -71,7 +71,7 @@ function YourReviewList({ match }) {
                                     <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
                                     <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
-                                        {/* 이미지 업로드 부분 */}
+                                        {/* 이미지 업로드 부분 여기 사진 안뜨는거 수정해야함 */}
                                         <div className="reviewListItemImg"></div>
                                     </td>
                                     <td>

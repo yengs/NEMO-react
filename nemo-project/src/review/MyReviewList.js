@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
-import { Link, Route } from "react-router-dom";
 
 function MyReviewList({ history, match }) {
 
@@ -43,11 +42,7 @@ function MyReviewList({ history, match }) {
 
     // 후기 수정 
     const handlerReviewUpdate = (reviewNum) => {
-        // window.location.href = `/review/myReview/${reviewWriter}/${reviewNum}`;
         history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);    
-        
-        // window.location.href = `/review/rupdate/${reviewNum}`
-        // history.push(`/review/rupdate/${reviewNum}`);
         console.log(reviewNum);
     }
 
