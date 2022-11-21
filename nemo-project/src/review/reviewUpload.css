@@ -29,6 +29,16 @@
     cursor: pointer;
 }
 
+.myDetailImage{
+    width: 300px;
+    height: 300px;
+}
+
+.myDetailImage > img{
+    width: 300px;
+    height: 300px;
+}
+
 .reviewContent {
     margin-top: 45px;
 }

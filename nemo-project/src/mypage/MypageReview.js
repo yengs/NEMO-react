@@ -53,13 +53,14 @@ function MypageReview() {
     return (
         <MypageReviewContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage">
+            <div className='tableWrap'>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
                         <h3 style={{ marginTop: '0' }}>내 상점 후기</h3>
                         <button className="plusBtn" onClick={goYourReview}> + 더보기</button>
                     </div>
                 </div>
-                <div className='tableWrap'>
+               
                     <table className="yourReviewListAboutStore">
                         <colgroup>
                             <col width="10%" />
@@ -132,14 +133,14 @@ function MypageReview() {
                 </div>
 
                 <div className='marging'></div>
-
+                <div className='tableWrap2'>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
                         <h3>내 작성 후기</h3>
                         <button className="plusBtn" onClick={goMyReview}> + 더보기</button>
                     </div>
                 </div>
-                <div className='tableWrap'>
+                
                     <table className="yourReviewListAboutStore">
                         <colgroup>
                             <col width="10%" />
@@ -216,6 +217,10 @@ function MypageReview() {
 }
 
 const MypageReviewContainer = styled.div`
+
+.tableWrap{
+    height : 40%
+}
 
 .myReviewContents {
     display: flex;
@@ -384,10 +389,6 @@ const MypageReviewContainer = styled.div`
 .rReviewWriter {
     text-align: center;
 }
-
-/* .tableWrap {
-    border-bottom: 1px solid #444444;
-} */
 
 .marging {
     height: 50px;
