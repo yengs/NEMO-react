@@ -10,6 +10,8 @@ function ItemDetail({ match, history }) {
 
     const [data, setData] = useState({});
     const [datas, setDatas] = useState([]);
+    const [datas2, setDatas2] = useState([]);
+
     const [itemName, setItemName] = useState('');
     const [itemPrice, setItemPrice] = useState('');
     const [itemDeposit, setItemDeposit] = useState('');
@@ -50,6 +52,17 @@ function ItemDetail({ match, history }) {
             .catch(error => { console.log(error); });
 
     }, []);
+
+
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
+            .then(response => {
+              setDatas2(response.data);
+
+            })
+            .catch(error => console.log(error));
+    }, []);
+
 
     // useEffect(() => {
     //     axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
@@ -301,21 +314,22 @@ function ItemDetail({ match, history }) {
                         </div>
                     </div>
                     <div>
-                        {
-                            function() {
-                                axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
-                                .then(response => {
-                                    setWriterItems(response.data);
-                                        console.log(response.data)
-                                    })
-                                    .catch(error => console.log(error));
-                                }
-                            }
-                        { writerItems && writerItems.map(items => {
+                    
+                        { 
+                        datas2 && datas2.map(items => (
                             <div style={{width:"100px", height:"100px", backgroundColor:"#ddd", display:"inline-block", marginLeft:"20px"}} key={items.itemNum}>
-                            <img className="itemImg" src={`../../files/${items.files}`} />
+                              <img className="itemImg" src={`../../files/${items.files}`}></img>
+                              <p className="itemName">{items.itemName}</p>
                             </div>
-                        }).slice(0, 5)}
+                        ))
+                        }
+                           {
+                        datas2.length === 0 && (
+                            <tr>
+                                <td colSpan="4">일치는 데이터가 없습니다!.</td>
+                            </tr>
+                        )
+                    }
                         {console.log("writerItems>>>>>>>>>")}
                         {console.log(writerItems)}
                         </div>
