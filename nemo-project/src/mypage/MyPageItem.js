@@ -357,12 +357,12 @@ const MyPageItemContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;  
-    margin-top: 35px;  
+    margin-top: 0px;  
   }
   
   .itemInfoWrap {
     width: 30%;
-    height: 460px;
+    height: 440px;
     background-color: rgb(250, 250, 250);
     border-radius: 10px;
     padding: 1%;
