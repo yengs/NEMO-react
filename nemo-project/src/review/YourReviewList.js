@@ -40,11 +40,11 @@ function YourReviewList({ match }) {
     return (
         <>
             <div className="rcontainer">
-                <h1>내 상점 리뷰</h1>
+                <h2>내 상점 후기</h2>
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
-                        <col width="10%" />
+                    <col width="10%" />
                         <col width="10%" />
                         <col width="10%" />
                         <col width="15%" />
@@ -67,7 +67,7 @@ function YourReviewList({ match }) {
                                 <tr key={review.reviewNum}>
                                     <td>{review.reviewNum}</td>
                                     <td className="rReviewItemImageOrigin">
-                                        <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
+                                        <img className="yourBbookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                     </td>
                                     <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
                                     <td className='ReviewWriter'>{review.reviewWriter}</td>

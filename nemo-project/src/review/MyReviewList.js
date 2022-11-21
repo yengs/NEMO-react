@@ -43,7 +43,7 @@ function MyReviewList({ history, match }) {
 
     // 후기 수정 
     const handlerReviewUpdate = (reviewNum) => {
-        window.location.href = `/review/myReview/${reviewWriter}/${reviewNum}`;
+        // window.location.href = `/review/myReview/${reviewWriter}/${reviewNum}`;
         history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);    
         
         // window.location.href = `/review/rupdate/${reviewNum}`
@@ -73,7 +73,7 @@ function MyReviewList({ history, match }) {
     return (
         <>
             <div className="rcontainer">
-                <h2 className="reviewListTitle">내가 작성한 리뷰</h2>
+                <h2 className="reviewListTitle">내가 작성한 후기</h2>
                 <hr className="lineH"></hr>
                 <table className="yourreview">
                     <colgroup>
