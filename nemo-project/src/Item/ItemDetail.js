@@ -275,6 +275,10 @@ function ItemDetail({ match, history }) {
                         </div>
                         
                     </div>
+<<<<<<< HEAD
+=======
+                   
+>>>>>>> origin/develop
                 </div>
 
 
