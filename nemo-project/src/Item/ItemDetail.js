@@ -369,7 +369,7 @@ const ItemDatailContainer = styled.div`
 
 
 .myitem{
-    margin-left:50px;
+    margin-left:33px;
     display:flex;
     box-sizing: border-box;
     text-align: center;
