@@ -30,8 +30,6 @@ import axios from 'axios';
 import Chat from './chatting/Chat';
 import DecDetail from './admin/DecDetail';
 import MyMenu from './mypage/MyMenuForOthers';
-
-
 import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
