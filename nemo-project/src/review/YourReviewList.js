@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
-import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
 function YourReviewList({ match }) {
 
-    const {reviewId} = match.params;
+    const { reviewId } = match.params;
 
     const ITEM_COUNT_PER_PAGE = 10;
     const [datas, setDatas] = useState([]);
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(1);
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
@@ -46,8 +45,8 @@ function YourReviewList({ match }) {
                     <colgroup>
                     <col width="10%" />
                         <col width="10%" />
-                        <col width="15%" />
                         <col width="10%" />
+                        <col width="15%" />
                         <col width="10%" />
                         <col width="35%" />
                         <col width="10%" />
@@ -70,12 +69,10 @@ function YourReviewList({ match }) {
                                         <img className="yourBbookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                     </td>
                                     <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                    <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
-                                       {review.reviewWriter}
-                                    </td>
-                                    <td>
-                                        {/* 이미지 업로드 부분 */}
-                                        <div className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></div>
+                                        {/* 이미지 업로드 부분 여기 사진 안뜨는거 수정해야함 */}
+                                        <div className="reviewListItemImg"></div>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
