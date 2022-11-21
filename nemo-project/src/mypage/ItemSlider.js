@@ -9,24 +9,24 @@ export default class ItemSlider extends Component {
   render() {
     const settings = {
       dots: false,
-      infinite: false,
+      infinite: true,
       slidesToShow: 5,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 900,
-      autoplaySpeed: 1800,
+      speed: 500,
+      autoplaySpeed: 2000,
       cssEase: "linear"
     };
 
     return (
       <div style={{ margin: '10px 20px' }}>
-        <Slider {...settings} style={{margin: '10px'}}>
+        <Slider {...settings}>
           {
             this.props.sliderData && this.props.sliderData.map((item, index) => {
               return (
-                <div key={index} style={{width: '226px', height: '300px', margin:'10px'}}>
-                  <Link to={`/item/detail/${item.itemNum}`} style={{height:'100%'}}> 
-                    <img style={{ width: '100%', height: "100%", margin: '0', borderRadius: '4px' }}src={`../../files/${item.files}`} />
+                <div key={index} style={{width: '226px', height: '300px'}}>
+                  <Link to={`/item/detail/${item.itemNum}`} style={{width:'100%',height:'100%'}}> 
+                    <img style={{ width: '100%', height: "200px", borderRadius: '4px', border: '1px solid #e8e8e8' }}src={`../../files/${item.files}`} />
                   </Link>
                 </div>
               );

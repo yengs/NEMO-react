@@ -308,6 +308,14 @@ const MyUserStoreContainer = styled.div`
     width: 140px;
     font-size: 12px;
 }
+
+.slick-slide {
+    padding: 5px;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: #666 !important;
+}
 `
 
 export default MyStore;
