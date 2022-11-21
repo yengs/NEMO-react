@@ -75,7 +75,7 @@ function YourReviewList({ match }) {
                                     </td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <div className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></div>
+                                        <div className="reviewListItemImg" src={datas.reviewItemfiles}></div>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
