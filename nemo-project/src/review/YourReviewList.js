@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
-import Shirt from '../img/shirt.jpg';
 import Paging from "../pagination/Paging";
 
 function YourReviewList({ match }) {
@@ -12,7 +11,7 @@ function YourReviewList({ match }) {
     const [datas, setDatas] = useState([]);
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(1);
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
@@ -73,7 +72,7 @@ function YourReviewList({ match }) {
                                     <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <div className="reviewListItemImg" src={datas.reviewItemfiles}></div>
+                                        <div className="reviewListItemImg"></div>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
