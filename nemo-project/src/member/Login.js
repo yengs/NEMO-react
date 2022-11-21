@@ -83,7 +83,7 @@ function Login({ history }) {
                     window.location.reload();
                     window.location.href = "/";
 
-                } else {
+                } else if(response.data === ''){
                     sessionStorage.clear();
                     alert("로그인 실패");
                     return;

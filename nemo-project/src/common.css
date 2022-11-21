@@ -637,6 +637,14 @@ footer {
   font-weight: 800;
 }
 
+#overflow {
+  display: block;
+  max-width: calc(100% - 10px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 .itemInfoWrap .itemInfo .itemPeriod {
   font-size: 14px;
   color: #666;

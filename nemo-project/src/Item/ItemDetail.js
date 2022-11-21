@@ -127,6 +127,7 @@ function ItemDetail({ match, history }) {
     let now = new Date();
 
     const dateWhat = () => {
+        
         if (new Date(itemRentalend) > now) {
             history.push(`/item/bookingupload/${itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`);
         } else {
@@ -196,59 +197,8 @@ function ItemDetail({ match, history }) {
                                 <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
                                 <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
                             </div>
-                            {/* <form method="post" id="frm" name="frm">
-                                <table>
-                                    <colgroup>
-                                        <col width="33%" />
-                                        <col width="" />
-                                    </colgroup>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" className="itemName">상품명</th>
-                                            <td>{data.itemName}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">어울리는 계절</th>
-                                            <td>{data.itemWeather}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">가격</th>
-                                            <td>{data.itemPrice} 원</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">보증금</th>
-                                            <td>{data.itemDeposit} 원</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">사이즈</th>
-                                            {
-                                                (function () {
-                                                    if (data.itemMaincategory === "상의") {
-                                                        return <td>{data.itemTopsize}</td>
-                                                    }
-                                                    else if (data.itemMaincategory === "하의") {
-                                                        return <td>{data.itemBottomsize}</td>
-                                                    }
-                                                    else { return <td>{data.itemEtcsize}</td> }
-                                                })()
-                                            }
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">대여기간</th>
-                                            <td>{data.itemRentalstart} ~ {data.itemRentalend}</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">내용</th>
-                                            <td className="itemDetailContent">{data.itemDetail}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </form> */}
                         </div>
                     </div>
-                    {/* <div>
-                        <p>{data.itemDetail}</p>
-                    </div> */}
 
                 <div className="middleDiv">
                     {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
@@ -262,7 +212,6 @@ function ItemDetail({ match, history }) {
                         <div style={{cursor:"pointer"}} onClick={goUserStore} className="cleanDiv">
                             <h4>{itemWriter}</h4>
                             <div>
-
                                 {reviewSatisfaction == 0 ?
                                     <div>
                                         <div className='item-detail-clean'> 클린지수 50 % </div>
@@ -296,7 +245,6 @@ function ItemDetail({ match, history }) {
                                         }</div>
                                     </div>
                                 }
-
                             </div>
                         </div>
                     </div>
@@ -685,7 +633,12 @@ td.reviewImg,
     margin-top: 25px;
     font-size; 17px;
     line-height: 23px;
+    overflow: scroll;
+    height: 155px;
+    white-space: pre-wrap;
+    
 }
+
 
 .DetailContainer form {
     width: 500px;
