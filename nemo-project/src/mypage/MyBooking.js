@@ -409,7 +409,7 @@ const MyBookingContainer = styled.div`
 
 /* 빌려왔어요 */
 .userReviewListAboutStoreWrapBooking2{
-    margin-top: 10px;
+    margin-top: 85px;
 }
 
 .userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 {
