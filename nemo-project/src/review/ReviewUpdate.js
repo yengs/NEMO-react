@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ReviewAddImg from '../img/review-add-img.png'
 import styled from "styled-components";
-import ReviewUpload from "./ReviewUpload";
+import "./reviewUpload.css";
 
 const AppStyle = styled.div`
   img {
@@ -138,10 +138,10 @@ function ReviewUpdate({ history, match }) {
             <div>
                 <h4>사진첨부</h4>
                 <div className="ChoiseFile">
-                    <div className="myDetailImage">
+                    <div className="myDetailImageReview">
                         {imageSrc == '' ?
-                            <img className="memberImg" src={`../../../files_review/${data.reviewFiles}`} />
-                            : <div className="myDetailImage">
+                            <img className="reviewImg" src={`../../files_review/${data.reviewFiles}`} />
+                            : <div className="myDetailImageReview">
                                 {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
                         }
                     </div>
