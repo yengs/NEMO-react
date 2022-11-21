@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 function MypageReview() {
 
-    const YOURREVIEW_COUNT_PER_PAGE = 1;
+    const YOURREVIEW_COUNT_PER_PAGE = 2;
     const MYREVIEW_COUNT_PER_PAGE = 2;
 
     const [data, setData] = useState([]);                           // 다른 회원이 쓴 후기
@@ -218,10 +218,11 @@ const MypageReviewContainer = styled.div`
 
 .myReviewContents {
     display: flex;
-    max-height: 31px;
+    max-height: 32px;
     overflow: hidden;
-    justify-content: center;
+    // justify-content: flex-start;
     white-space: pre-wrap;
+    font-size: 14px
 }
 
 .bookingitemImg{
@@ -402,9 +403,9 @@ table-layout: fixed;
 /* ------------------------ */
 /* 다른사람이 보는 마이페이지 */
 
-.rReviewItemImageOrigin {
-    width: 20%;
-}
+// .rReviewItemImageOrigin {
+//     width: 20%;
+// }
 
 .rReviewItemImageOrigin div {
     width: 100%;

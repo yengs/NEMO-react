@@ -269,7 +269,7 @@ useEffect(() => {
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
                                 <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
-                                <td>{booking.bookingDepositstate != "반환완료" ? null : <button className="greenBtn btnBok" ><Link to = {`/review/reviewWrite/${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}</td>
+                                <td>{booking.bookingDepositstate != "반환완료" ? null : <button className="greenBtn btnBok"><Link to = {`/review/reviewWrite/${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}</td>
                                 </td>
                                 
                                 {/* <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td> */}
@@ -461,6 +461,12 @@ const MyBookingContainer = styled.div`
     text-align: center;
 }
 
+.ReviewItemNameOrigin a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
 
 .ReviewWriter {
     width: 10%;
@@ -481,6 +487,11 @@ const MyBookingContainer = styled.div`
   border-radius: 3px;
   width: 80px;
   padding: 5px 10px;
+}
+
+.btnBok a {
+    color: #fff;
+    text-decoration: none;
 }
 
 .ReviewItemImg, .ReviewContent, .satisfing {
