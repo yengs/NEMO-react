@@ -146,7 +146,7 @@ function Dec({history, match}) {
                 prevPageText={"<"}  // 이전을
                 nextPageText={">"}  // 다음
                 onChange={handlerPageChange}    // 페이지가 바뀔 때 핸들러 함수 
-        />
+            />
             </div>
             <div>
         </div>
