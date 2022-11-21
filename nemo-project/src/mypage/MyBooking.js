@@ -161,7 +161,7 @@ useEffect(() => {
     return (
         <MyBookingContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage">
-
+                <div className="tableWrap">
                 <div className="userReviewListAboutStoreWrapBooking">
                     <h3 className="pageTitle">빌려줬어요</h3>
                     <table className="userReviewListAboutStore2">
@@ -215,7 +215,7 @@ useEffect(() => {
                     {
                         datas.length === 0 && (
                             <tr>
-                                <td colSpan="4">일치하는 데이터가 없습니다!.</td>
+                                <td colSpan="4">작성된 글이 없습니다.</td>
                             </tr>
                         )
                     }
@@ -235,7 +235,7 @@ useEffect(() => {
                 </div>
                 </div>
 
-
+                </div>
                 <div className="userReviewListAboutStoreWrapBooking2">
                     <h3 className="pageTitle">빌려왔어요</h3>
                     <table className="userReviewListAboutStore2">
@@ -285,7 +285,7 @@ useEffect(() => {
 {
     datas2.length === 0 && (
         <tr>
-            <td colSpan="4">일치하는 데이터가 없습니다.</td>
+            <td colSpan="4">작성된 글이 없습니다.</td>
         </tr>
     )
 }
@@ -306,6 +306,9 @@ useEffect(() => {
 }
 
 const MyBookingContainer = styled.div`
+    .tableWrap{
+        height : 45%;
+    }
 
     .bookingitemImg{
         width: 100%;
