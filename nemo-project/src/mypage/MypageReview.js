@@ -348,7 +348,7 @@ const MypageReviewContainer = styled.div`
     height: 10px;
     width: 300px;
     text-align: center;
-    padding: 7px 0;
+    padding: 10px;
 }
 
 .yourReviewListAboutStore tr td {

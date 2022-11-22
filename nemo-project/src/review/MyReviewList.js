@@ -14,6 +14,11 @@ function MyReviewList({ history, match }) {
     const [page, setPage] = useState(1);                                // 보여지는 페이지
     const [items, setItems] = useState([]);                             // 페이징을 통해서 보여줄 데이터
 
+
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noreviewimage.png';
+    }
+
     // 후기 데이터 가져오기
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
@@ -101,7 +106,7 @@ function MyReviewList({ history, match }) {
                                         <td className='ReviewWriter'>{review.reviewItemprice}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></img>
+                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
