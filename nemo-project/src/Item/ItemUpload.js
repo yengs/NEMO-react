@@ -57,9 +57,9 @@ function ItemUpload({ history }) {
     };
     
 
-
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    var now = new Date();
+    const [startDate, setStartDate] = useState(now.setDate(now.getDate() + 1));
+    const [endDate, setEndDate] = useState(now.setDate(now.getDate() + 1));
 
     const handlerClickGoback = () => history.goBack();
 
@@ -309,7 +309,7 @@ function ItemUpload({ history }) {
 
                         <tr>
                             <td>대여시작일</td>
-                            <td><DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()} required /> </td>
+                            <td><DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={startDate} required /> </td>
                         </tr>
                         <tr>
                             <td>대여마감일</td>

@@ -70,7 +70,7 @@
 
 .userReviewListAboutStoreWrapAdmin .userReviewListAboutStore2 tbody td {
     border-bottom: 1px solid #ddd;
-    padding: 12px 3px;
+    padding: 17px 3px;
     font-size: 15px;
 }
 
@@ -107,9 +107,11 @@
     width: 10%;
     text-align: center;
 }  
+
 .Dec td{
     border-bottom: none !important; 
 }
+
 .btnBok{
   font-size: 15px;
   border-radius: 3px;
