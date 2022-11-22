@@ -41,6 +41,8 @@ function MyPageItemDetail({ match, location, history }) {
             setItemEtcsize(response.data.itemEtcsize);
             setItemRentalstart(response.data.itemRentalstart);
             setItemRentalend(response.data.itemRentalend);
+            setStartDate(new Date(response.data.itemRentalstart))
+            setEndDate(new Date(response.data.itemRentalend))
         })
         .catch(error => { console.log(error); });
     }, []);
