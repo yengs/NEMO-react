@@ -58,7 +58,7 @@ function ItemDetail({ match, history }) {
 
     //후기조회
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/itemreview/${reviewProductIdx}`)
+        axios.get(`http://localhost:8080/api/itemreview/${reviewProductIdx.itemNum}`)
             .then(response => { setDatas(response.data); })
             .catch(error => { console.log(error); });
     }, []);
