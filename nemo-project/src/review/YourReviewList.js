@@ -13,6 +13,10 @@ function YourReviewList({ match }) {
     const [page, setPage] = useState(1);
     const [items, setItems] = useState([]);
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noreviewimage.png';
+    }
+
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
             .then(response => {
@@ -72,7 +76,7 @@ function YourReviewList({ match }) {
                                     <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 여기 사진 안뜨는거 수정하긴 함 */}
-                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></img>
+                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
