@@ -109,7 +109,8 @@ function MyReviewList({ history, match }) {
                                         </div>
                                         <div id="btnView">
                                             {review.reviewContents.length > 18 ?
-                                                <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
+                                                <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>
+                                                    {review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             }
                                             <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}> [ 수정 ] </button>
