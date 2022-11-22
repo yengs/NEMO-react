@@ -29,10 +29,10 @@
     cursor: pointer;
 }
 
-.myDetailImage{
+/* .myDetailImage{
     width: 300px;
     height: 300px;
-}
+} */
 
 .myDetailImage > img{
     width: 300px;
