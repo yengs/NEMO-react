@@ -77,8 +77,12 @@ function Login({ history }) {
 
 
                     alert("로그인완료");
+                    if(id == "admin"){
+                    window.location.href = "/admin/dec";
+                    }else{
                     window.location.reload();
                     window.location.href = "/";
+                    }
 
                 } else if(response.data === ''){
                     sessionStorage.clear();
