@@ -30,8 +30,6 @@ import axios from 'axios';
 import Chat from './chatting/Chat';
 import DecDetail from './admin/DecDetail';
 import MyMenu from './mypage/MyMenuForOthers';
-
-
 import moment from 'moment';
 import 'moment/locale/ko';
 import { useState } from 'react';
@@ -128,7 +126,7 @@ function App() {
 
 
         {/* review */}
-        <Route path="/review/reviewWrite/:bookingItemnum,:bookingItemwriter,:bookingItemfiles,:bookingItemname,:bookingItemprice" component={ReviewUpload} />
+        <Route path="/review/reviewWrite/:bookingNum,:bookingItemnum,:bookingItemwriter,:bookingItemfiles,:bookingItemname,:bookingItemprice" component={ReviewUpload} />
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
         <Route path="/review/myReview/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />

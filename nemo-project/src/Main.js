@@ -18,7 +18,7 @@ import axios from "axios";
 import { useState } from "react";
 
 
-function Main() {
+function Main({history}) {
 
     const goWeatherItemList = () => {
         window.location.href = "/item/weatherrecitemlist";
@@ -32,7 +32,7 @@ function Main() {
     const [randomDatas, setRandomDatas] = useState([]);
 
     const [bestItemDatas, setBestItemDatas] = useState([]);
-
+    const [bestItemStore, setBestItemStore] = useState([]);
     const [tomorrowTemp, setTomorrowTemp] = useState(0);
 
 
@@ -58,13 +58,28 @@ function Main() {
         axios.get('http://localhost:8080/api/item/best')
         .then(response => {setBestItemDatas(response.data)})
         .catch(error => console.log(error));
-        
+
+        axios.get('http://localhost:8080/api/item/beststore')
+        .then(response => {
+            setBestItemStore(response.data)
+        })
+        .catch(error => console.log(error));
     }, []);
 
-   
+
+    //베스트 스토어 관련
+    const goUserStore = () => {
+        if(sessionStorage.getItem("memberId") === bestItemStore.itemWriter) {
+            history.push(`/mypage/mypageitem/${sessionStorage.getItem("memberId")}`);
+            // window.location.href = `/mypage/mypageitem/${sessionStorage.getItem("memberId")}`
+        } else {
+            history.push(`/userstoreinfo/${bestItemStore.itemWriter},${bestItemStore.memberImg}`);
+        }
+    }
 
 
     return (
+        <DirectMenu>
         <div>
             <div className="content">
                 <div className="recWeather">
@@ -91,6 +106,9 @@ function Main() {
 
     }
 
+<div>
+  
+</div>
                     <div className="itemWrap">
                         {
                             sessionStorage.getItem("jwtToken") ?
@@ -156,42 +174,7 @@ function Main() {
                                     </div>
                                 )).slice(0, 4)
                             }
-                            {/* <div className="itemInfoWrap">
-                                <div className="itemImg" style={{ backgroundImage: `url(${Dress})` }}></div>
-                                <div className="itemInfo">
-                                <p className="itemPrice"><span className="price">19,000</span>원</p>
-                                <p className="itemName">알렉산더왕 셔츠</p>
-                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                                <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
-                                </div>
-                                </div>
-                                <div className="itemInfoWrap">
-                                <div className="itemImg" style={{ backgroundImage: `url(${Jeans})` }}></div>
-                                <div className="itemInfo">
-                                <p className="itemPrice"><span className="price">19,000</span>원</p>
-                                <p className="itemName">알렉산더왕 셔츠</p>
-                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                                <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
-                                </div>
-                            </div>
-                            <div className="itemInfoWrap">
-                            <div className="itemImg" style={{ backgroundImage: `url(${Shirt})` }}></div>
-                            <div className="itemInfo">
-                            <p className="itemPrice"><span className="price">19,000</span>원</p>
-                            <p className="itemName">알렉산더왕 셔츠</p>
-                                    <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                                    <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
-                                </div>
-                                </div>
-                                <div className="itemInfoWrap">
-                                <div className="itemImg" style={{ backgroundImage: `url(${Sweater})` }}></div>
-                                <div className="itemInfo">
-                                <p className="itemPrice"><span className="price">19,000</span>원</p>
-                                <p className="itemName">알렉산더왕 셔츠</p>
-                                    <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">300,000</span>원</p>
-                                    <p className="itemPeriod">대여기간<br /><span className="period">2022-10-31 ~ 2022-11-06</span></p>
-                                    </div>
-                                </div> */}
+                    
                         </div>
                     </div>
                 </div>
@@ -199,47 +182,42 @@ function Main() {
                     <div className="titleNplusBtn">
                         <h3>베스트 클린 스토어</h3>
                     </div>
-                    <div className="storeWrap">
-                        <div className="storeInfoWrap">
-                            <div className="storeImg" style={{ backgroundImage: `url(${Store1})` }}></div>
-                            <div className="storeInfo">
-                                <p className="storeName">매니쉬 스토어</p>
+                  {
+                        bestItemStore&&bestItemStore.map(item =>(
+                            <div className="storeWrap2"  >
+                                <Link to ={`/userstoreinfo/${item.itemWriter},${item.memberImg}`}>
+                            <div className="storeInfoWrap">
+                                
+                                <img className="storeImg" src={`../../memberImg/${item.memberImg}` }   key={item.itemNum} ></img>
+                                <div className="storeInfo">
+                                <p className="storeName">{item.itemWriter} 스토어</p>
+                        
                             </div>
-                        </div>
-                        <div className="storeInfoWrap">
-                            <div className="storeImg" style={{ backgroundImage: `url(${Store3})` }}></div>
-                            <div className="storeInfo">
-                                <p className="storeName">페미닌 스토어</p>
-                            </div>
-                        </div>
-                        <div className="storeInfoWrap">
-                            <div className="storeImg" style={{ backgroundImage: `url(${Store2})` }}></div>
-                            <div className="storeInfo">
-                                <p className="storeName">빈티지 스토어</p>
-                            </div>
-                        </div>
-                        <div className="storeInfoWrap">
-                            <div className="storeImg" style={{ backgroundImage: `url(${Store1})` }}></div>
-                            <div className="storeInfo">
-                                <p className="storeName">하이틴 스토어</p>
-                            </div>
-                        </div>
-                        <div className="storeInfoWrap">
-                            <div className="storeImg" style={{ backgroundImage: `url(${Store2})` }}></div>
-                            <div className="storeInfo">
-                                <p className="storeName">러블리 스토어</p>
-                            </div>
-                        </div>
-                    </div>
+    </div>
+    </Link>
+    </div>
+        ))
+    }
+                 
                 </div>
             </div>
         </div>
+        </DirectMenu>
     );
 }
 
 const DirectMenu = styled.div`
+.storeWrap2 {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+}
  .directMenu {
     position: relative;
+ }
+
+ .storeInfoWrap{
+    margin-right:40px;
  }
 
  .hideNshow {
@@ -291,7 +269,7 @@ const DirectMenu = styled.div`
  .hide {
     visibility: hidden;
  }
- 
+
 `
 
 export default Main;
