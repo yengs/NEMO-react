@@ -359,6 +359,7 @@ const MypageReviewContainer = styled.div`
 
 .yourReviewListAboutStore tr td {
     border-bottom: 1px solid #ddd;
+    padding: 4px 2px;
 }
 
 .yourReviewListAboutStore tbody:last-child td  {

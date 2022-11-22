@@ -187,6 +187,7 @@ const AppStyle = styled.div`
     line-height: 25px;
     margin-left: 24px;
     margin-top: -114px;
+    cursor: pointer;
 }
 
 .showCom {
