@@ -254,6 +254,7 @@ const MyUserStoreContainer = styled.div`
     height: 10px;
     width: 300px;
     text-align: center;
+    padding: 10px;
 }
 
 .yourReviewListAboutStore tr td {
