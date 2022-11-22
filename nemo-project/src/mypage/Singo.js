@@ -110,7 +110,7 @@ const encodeFileToBase64 = (fileBlob) => {
                             <div className="btnStart">
                             {imageSrc == '' ?
                         <img src={addImage} alt="ReviewAddImg" />
-                        : <div className="myDetailImage"> 
+                        : <div className="mySingoImage"> 
                         {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
                     }
                              
@@ -129,7 +129,7 @@ const encodeFileToBase64 = (fileBlob) => {
                     </tr>
                     <tr>
                       <td>
-                        <br /><br />
+                        <br />
                         신고이유
                         <br />
                       </td>
@@ -150,7 +150,7 @@ const encodeFileToBase64 = (fileBlob) => {
                     </tr>
                     <tr>
                       <td>
-                        <br /><br />
+                        <br />
                         신고내용
                         <br />
                       </td>
@@ -198,7 +198,7 @@ const SingoContainer = styled.div`
 
 .memberPage2.container.loginForm2 {
     width: 100%;
-    height: 100%;
+    height: 90%;
 }
 
 .memberPage2 form {
@@ -397,7 +397,7 @@ const SingoContainer = styled.div`
 
 .memberPage2 {
     width: 900px;
-    margin: 100px auto;
+    margin: 0px auto;
   }
   
   .memberPage2 .pageTitle h2 {
@@ -487,7 +487,7 @@ const SingoContainer = styled.div`
     margin: 3px 0;
     background-color: #eee;
     font-size: 15px;
-    color: #555;
+    color: #555;inputTable
   }
   
   .memberPage2 .accept li:first-child {
@@ -497,6 +497,7 @@ const SingoContainer = styled.div`
   .memberPage2 .btnWrap {
     width: 100%;
     text-align: center;
+    padding-bottom: 0px;
   }
   
   .loginForm2 {
@@ -516,8 +517,8 @@ const SingoContainer = styled.div`
   }
   
   .loginForm2 form .inputTable tr:first-child td {
-    padding-bottom: 10px !important;
-    padding-top: 30px !important;
+    padding-bottom: 0px !important;
+    padding-top: 10px !important;
   }
   
   .loginForm2 form .inputTable tr:nth-child(2) td {
