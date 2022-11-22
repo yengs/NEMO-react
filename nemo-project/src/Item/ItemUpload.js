@@ -223,9 +223,9 @@ function ItemUpload({ history }) {
                                     else {
                                         return <select type="text" id="itemSubcategory" name="itemSubcategory" value={itemSubcategory} onChange={handlerChangeitemSubcategory} className="itemInfoSelect">
                                             <option value="">----------------선택----------------</option>
-                                            <option value="패딩">롱</option>
-                                            <option value="코트">미디</option>
-                                            <option value="바람막이">미니</option>
+                                            <option value="롱">롱</option>
+                                            <option value="미디">미디</option>
+                                            <option value="미니">미니</option>
                                         </select>;
                                     }
                                 })()
