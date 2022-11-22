@@ -170,7 +170,7 @@ function ItemUpload({ history }) {
                     <table className="board_detail">
                         <tr>
                             <td>상품명</td>
-                            <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} maxlength="49"/></td>
+                            <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} maxlength="25"/></td>
                         </tr>
 
                         <tr>
