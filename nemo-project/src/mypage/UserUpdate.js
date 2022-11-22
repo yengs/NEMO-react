@@ -271,8 +271,8 @@ function UserUpdate({ history }) {
                                 </div>
                             </MemberDelete>
                         </React.Fragment>
-                        <div className="btnWrap">
-                            <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} />
+                        <div className="btnWrap" style={{marginTop:'0'}}>
+                            <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} style={{marginTop:'0'}} />
                         </div>
                     </form>
                 </div>
@@ -336,7 +336,7 @@ const ContainerUserUpate = styled.div`
 }
 
   .UserUpate .pageTitle h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 300;
     text-align: center;
   }
@@ -352,8 +352,8 @@ const ContainerUserUpate = styled.div`
   }
   
   .UserUpate .inputTable table tr>td {
-    padding-top: 11px;
-    padding-bottom: 11px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-top: 1px solid #ddd;
     text-align: left;
   }
@@ -401,7 +401,7 @@ const ContainerUserUpate = styled.div`
 
   .resignMembership {
     margin-left: 108px;
-    margin-top: 25px;
+    margin-top: 7px;
   }
 
   .resignMembership a {

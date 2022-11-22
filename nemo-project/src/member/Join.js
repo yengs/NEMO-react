@@ -117,6 +117,12 @@ function Join() {
         setMpwCheck(e.target.value);
     };
 
+    const onChangePassword = (e) => {
+        setPasswordError(e.target.value !== mPwCheck);
+        setMpw(e.target.value);
+    }
+
+
     // 체크박스 전체선택
     const [checkAll, setCheckAll] = useState(false);
     const [check1, setCheck1] = useState(false);
@@ -318,7 +324,7 @@ function Join() {
                             <tr>
                                 <td className="requiredMark">비밀번호</td>
                                 <td>
-                                    <input type="password" name="mPw" value={mPw} onKeyDown={(e) => checkCapsLock(e)} onChange={handlerChangePw} placeholder="최소 8자 이상의 숫자를 사용하세요." required />
+                                    <input type="password" name="mPw" value={mPw} onKeyDown={(e) => checkCapsLock(e)} onChange={onChangePassword} placeholder="최소 8자 이상의 숫자를 사용하세요." required />
                                     {<div className={capsLock ? "caps-lock caps-lock-on" : "caps-lock"}>
                                     {capsLock ? "Caps Lock On" : "Caps Lock Off"}</div>}
                                 </td>

@@ -43,8 +43,16 @@ function MyStore({ itemWriter }) {
 
 
 
-   
-
+   const [sliderData, setSliderData] = useState([]);
+    useEffect(() => {
+        console.log(reviewId);
+        axios.get(`http://localhost:8080/api/mypage/mypageitem/${reviewId}`)
+        .then(response => {
+            console.log(reviewId, response.data);
+            setSliderData(response.data);
+        })
+        .catch(error => console.log(error));
+    }, []);
 
 
     const goYourReview = () => {
@@ -56,7 +64,7 @@ function MyStore({ itemWriter }) {
             <div className="mypageInnerPage myUserStoreInnerPage">
                 <div className="regiUserItemList">
                     <h3 className="pageTitle">대여 가능 목록</h3>
-                    <ItemSlider />
+                    <ItemSlider sliderData={sliderData}/>
                 </div>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
@@ -299,6 +307,14 @@ const MyUserStoreContainer = styled.div`
 .rsatisfing {
     width: 140px;
     font-size: 12px;
+}
+
+.slick-slide {
+    padding: 5px;
+}
+
+.slick-prev:before, .slick-next:before {
+    color: #666 !important;
 }
 `
 

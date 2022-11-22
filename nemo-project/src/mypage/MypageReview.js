@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import jeans from '../img/jeans.jpg';
 import styled from "styled-components";
-
 
 function MypageReview() {
 
@@ -19,7 +17,6 @@ function MypageReview() {
     const reviewId = sessionStorage.getItem('memberId');
 
     useEffect(() => {
-
         // 내가 등록한 상품에 대한 다른 회원의 후기 데이터
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`)
             .then(response => {
@@ -40,7 +37,6 @@ function MypageReview() {
             })
             .catch(error => console.log(error));
     }, []);
-
 
     const goYourReview = () => {
         window.location.href = `/review/yourReview/${reviewId}`;
@@ -123,9 +119,8 @@ function MypageReview() {
                         }
                         {
                             data.length === 0 && (
-                                <tr>
+                                <tr className='nullReview'>
                                     <td colSpan="5"> 작성된 글이 없습니다. </td>
-
                                 </tr>
                             )
                         }
@@ -202,7 +197,7 @@ function MypageReview() {
                         }
                         {
                             datas.length === 0 && (
-                                <tr>
+                                <tr className='nullReview'>
                                     <td colSpan="5"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
@@ -220,6 +215,10 @@ const MypageReviewContainer = styled.div`
 
 .tableWrap{
     height : 40%
+}
+
+.tableWrap2 {
+    margin-top: 20px;
 }
 
 .myReviewContents {
