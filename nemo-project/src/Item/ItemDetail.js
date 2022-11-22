@@ -674,9 +674,10 @@ td.reviewImg,
     margin-top: 25px;
     font-size; 17px;
     line-height: 23px;
-    overflow: scroll;
+    overflow-y: scroll;
     height: 155px;
     white-space: pre-wrap;
+    word-break: break-all;
     
 }
 

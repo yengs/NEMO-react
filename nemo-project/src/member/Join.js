@@ -149,6 +149,15 @@ function Join() {
         }
     };
 
+    if(check1&&check2&&check3&&check4&&check5&&checkAll===false){
+        setCheckAll(true);
+        setCheck1(true);
+        setCheck2(true);
+        setCheck3(true);
+        setCheck4(true);
+        setCheck5(true);
+    };
+
     const check1Handler = () => {
         if(check1 === false){
             setCheck1(true)
