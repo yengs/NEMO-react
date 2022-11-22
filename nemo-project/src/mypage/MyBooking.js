@@ -192,7 +192,7 @@ useEffect(() => {
                                         <td className='ReviewItemNameOrigin' rowSpan={3} > 
                                              <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                         </td>
-                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>￦{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                         <td className='ReviewWriter' rowSpan={3}>{booking.bookingMember}</td>
                                         <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}
                                         <td>{booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}</td>
@@ -271,7 +271,7 @@ useEffect(() => {
                                              <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                         </td>
 
-                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
+                                <td className='ReviewWriter' rowSpan={3}>￦{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
                                 <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
                                 <td>{booking.bookingDepositstate != "반환완료" ? null : booking.reviewCount > 0 ? <button className="grayBtn btnBok" onClick={handlerreview}>후기작성</button> :<button className="greenBtn btnBok"><Link to = {`/review/reviewWrite/${booking.bookingNum},${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}</td>
