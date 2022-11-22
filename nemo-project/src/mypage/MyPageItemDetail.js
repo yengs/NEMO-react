@@ -141,6 +141,15 @@ function MyPageItemDetail({ match, location, history }) {
             .catch(error => console.log(error));
     };
 
+    const [showCom, setShowCom] = useState(false);
+    const showComment = () => {
+        setShowCom(true)
+    }
+
+    const hideComment = () => {
+        setShowCom(false)
+    }
+
 
     return (
         <MyPageItemDetailContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
@@ -554,7 +563,7 @@ const MyPageItemDetailContainer = styled.div`
 }
 
 .myDetailImage .myDetailImageImg {
-    max-width: 270px;
+    width: 270px;
     height: auto;
 }
 
