@@ -41,12 +41,17 @@ function MyPageItemDetail({ match, location, history }) {
             setItemEtcsize(response.data.itemEtcsize);
             setItemRentalstart(response.data.itemRentalstart);
             setItemRentalend(response.data.itemRentalend);
+            setStartDate(new Date(response.data.itemRentalstart));
+            setEndDate(new Date(response.data.itemRentalend));
         })
         .catch(error => { console.log(error); });
     }, []);
 
+
+
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+
 
     const handlerChangeName = (e) => setItemName(e.target.value);
     const handlerChangePrice = (e) => setItemPrice(e.target.value);
@@ -133,6 +138,7 @@ function MyPageItemDetail({ match, location, history }) {
             .catch(error => console.log(error));
     };
 
+    
 
     return (
         <MyPageItemDetailContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
