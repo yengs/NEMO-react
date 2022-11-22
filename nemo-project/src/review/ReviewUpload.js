@@ -174,7 +174,7 @@ export default function ReviewUpload({ history, match }) {
                         {
                             ReviewAddImg ?
                                 <div className="itemImg">
-                                    <img src={ReviewAddImg} alt="preview-img" className="previewImg" onMouseEnter={showComment} />
+                                    <img src={ReviewAddImg} alt="preview-img" className="itemImg" onMouseEnter={showComment} />
                                     <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                         이미지 변경을 하시려면<br />클릭해주세요.
                                     </div>
