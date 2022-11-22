@@ -33,6 +33,7 @@
     width: 300px;
     padding-top: 0px;
     text-align: center;
+    padding-bottom: 10px;
 }
 
 .myreview td {
@@ -51,6 +52,7 @@
     width: 300px;
     padding-top: 0px;
     text-align: center;
+    padding-bottom: 10px;
 }
 
 .yourreview td {

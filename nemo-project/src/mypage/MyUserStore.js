@@ -100,9 +100,11 @@ function MyStore({ itemWriter }) {
                                             {/* <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`}/>         -----> 리뷰등록 사진*/}
                                         </td>
                                         <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
-                                        <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
+                                        <td className='ReviewWriter' style={{width:'17%'}} rowSpan={3}>{review.reviewWriter}</td>
                                         <td className='ReviewContent' rowSpan={3}>
-                                            <div className="myReviewContents">{review.reviewContents}</div>
+                                            {/* <div className="myReviewContents"> */}
+                                                {review.reviewContents}
+                                                {/* </div> */}
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>
@@ -254,15 +256,21 @@ const MyUserStoreContainer = styled.div`
     height: 10px;
     width: 300px;
     text-align: center;
+    padding: 10px 0;
 }
 
 .yourReviewListAboutStore tr td {
     border-bottom: 1px solid #ddd;
+    padding: 5px 8px;
 }
 
 .yourReviewListAboutStore tbody:last-child td  {
     border-bottom: none;
 }
+
+// .ReviewContent {
+//     text-align: left;
+// }
 
 .rReviewItemImageOrigin {
     width: 10%;
