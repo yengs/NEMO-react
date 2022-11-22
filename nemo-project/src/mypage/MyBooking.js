@@ -198,7 +198,8 @@ useEffect(() => {
                                         <td>{booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}</td>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>
-                                        {booking.bookingBookingstate === "기간만료" ?
+                                        {booking.bookingDepositstate === "반환완료" || booking.bookingDepositstate === "미반환(물품훼손)" || booking.bookingDepositstate === "미반환(미반납)" ?  <td className='ReviewWriter'>{booking.bookingDepositstate}</td> : 
+                                        booking.bookingBookingstate === "기간만료" ?
                                             <select  onChange={handleritemstate}>
                                                 <option value="">--</option>
                                                 <option value="반환완료">수거완료</option>
@@ -208,7 +209,7 @@ useEffect(() => {
                                               :<td className='ReviewWriter' rowSpan={3}>--</td>
                                             }
                                         </td>
-                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate == "기간만료" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={statechangebtn}>확인</button>:<button className="grayBtn btnBok">확인</button>}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate === "기간만료" && booking.bookingDepositstate === "보관중" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={statechangebtn}>확인</button>:<button className="grayBtn btnBok">확인</button>}</td>
                                     </tr>
 
                                 

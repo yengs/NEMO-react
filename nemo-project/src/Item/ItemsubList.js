@@ -52,7 +52,7 @@ function ItemsubList({ match }) {
                                     <img className="itemImg" src={`../../../files/${item.files}`} onError={handleImgError}></img>
                                     <div className="itemInfo">
                                         <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
-                                        <p className="itemName">{item.itemName}</p>
+                                        <p className="itemName" id="overflow">{item.itemName}</p>
                                         <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
                                         <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                     </div>
