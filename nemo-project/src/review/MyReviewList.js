@@ -103,7 +103,7 @@ function MyReviewList({ history, match }) {
                                             <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
                                         <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
-                                        <td className='ReviewWriter'>{review.reviewItemprice}</td>
+                                        <td className='ReviewWriter'>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
                                         <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img>
