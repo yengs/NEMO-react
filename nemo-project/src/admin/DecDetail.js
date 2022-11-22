@@ -120,9 +120,7 @@ function DecDetail({history, match}){
                                 <tr>
                                     <th scope='row'>이미지</th>
                                     <td colSpan={7}>
-                                        <div className="imageDiv">
-                                        <img className="itemImg" src={`../../public/files/${data.singoImage}`} />
-                                        </div>
+                                    <img className="itemImg" src={`../../files_singo/${data.singoImage}`} />
                                     </td>
                                 </tr>
                                 <tr>
