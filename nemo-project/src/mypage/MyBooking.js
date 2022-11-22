@@ -35,6 +35,9 @@ function MyBooking({history}) {
     //     window.location.href = `/review/reviewWrite/${bookingItemnum}`;
     // }
 
+    //후기작성 했을 시 알림창
+    const handlerreview = (e) => alert("작성하신 후기가 있습니다.")
+
     
     
     //예약중 -> 대여중
@@ -205,7 +208,7 @@ useEffect(() => {
                                               :<td className='ReviewWriter' rowSpan={3}>--</td>
                                             }
                                         </td>
-                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate != "예약취소" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={statechangebtn}>확인</button>:<button className="grayBtn btnBok">확인</button>}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate == "기간만료" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={statechangebtn}>확인</button>:<button className="grayBtn btnBok">확인</button>}</td>
                                     </tr>
 
                                 
@@ -269,7 +272,7 @@ useEffect(() => {
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
                                 <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
-                                <td>{booking.bookingDepositstate != "반환완료" ? null : <button className="greenBtn btnBok"><Link to = {`/review/reviewWrite/${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}</td>
+                                <td>{booking.bookingDepositstate != "반환완료" ? null : booking.reviewCount > 0 ? <button className="grayBtn btnBok" onClick={handlerreview}>후기작성</button> :<button className="greenBtn btnBok"><Link to = {`/review/reviewWrite/${booking.bookingNum},${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}</td>
                                 </td>
                                 
                                 {/* <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td> */}
