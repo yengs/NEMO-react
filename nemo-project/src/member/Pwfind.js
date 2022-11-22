@@ -73,7 +73,7 @@ function Pwfind({history}) {
 
    
     return (
-        <div className="inputLogTable">
+        <div className="inputLogTable2">
         <div className="joinWrap memberPagelog container">
             
             <div className="pageTitle">
