@@ -60,6 +60,10 @@ function BookingUpload({ history, match }) {
   const sum = (parseInt(bookingItemprice) + parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
 
+  const Deposit2 = Deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  const bookingItemprice2 = bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  const sum2 = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
   const handlerClickSubmit = (e) => {
     e.preventDefault();
     if(checkAgree !== true) {
@@ -102,6 +106,9 @@ function BookingUpload({ history, match }) {
   const [dates, setDates] = useState([]);
 
 
+  
+
+
   const list = dates.map((date) => {
     return (new Date(date))
   })
@@ -120,7 +127,8 @@ function BookingUpload({ history, match }) {
       .catch(error => console.log(error));
   }, []);
 
-
+   var now = new Date();
+   var tomorrow = new Date(now.setDate(now.getDate() + 1));
 
   // 필수약관체크
   const [checkAgree, setCheckAgree] = useState(false);
@@ -165,18 +173,18 @@ function BookingUpload({ history, match }) {
                 <tr>
                   <th>대여료</th>
                   <td></td>
-                  <td>{bookingItemprice}원</td>
+                  <td>{bookingItemprice2}원</td>
                 </tr>
                 <tr>
                   <th >보증금</th>
                   <td><div className="plus">+</div></td>
-                  <td>{Deposit}원</td>
+                  <td>{Deposit2}원</td>
                 </tr>
               </div>
               <tr>
                 <th>결제금액</th>
                 <td></td>
-                <td>{sum}원</td>
+                <td>{sum2}원</td>
               </tr>
             </div>
           </div>
@@ -305,7 +313,7 @@ function BookingUpload({ history, match }) {
 
           <div> <div className="inputdate">
 
-            <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)}
+            <Calendar onChange={date => setbookingDate(date)} value={value} minDate={tomorrow} maxDate={new Date(Rentalend)}
               formatDay={(locale, date) => moment(date).format("DD")}
               tileDisabled={({ date, view }) =>
                 (view === 'month') && // Block day tiles only

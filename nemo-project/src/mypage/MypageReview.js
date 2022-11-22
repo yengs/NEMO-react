@@ -348,10 +348,12 @@ const MypageReviewContainer = styled.div`
     height: 10px;
     width: 300px;
     text-align: center;
+    padding: 10px;
 }
 
 .yourReviewListAboutStore tr td {
     border-bottom: 1px solid #ddd;
+    padding: 4px 2px;
 }
 
 .yourReviewListAboutStore tbody:last-child td  {

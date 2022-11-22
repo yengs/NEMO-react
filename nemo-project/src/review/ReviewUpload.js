@@ -62,12 +62,14 @@ export default function ReviewUpload({ history, match }) {
 
     const reviewWriter = sessionStorage.getItem('memberId');
 
+    const { bookingNum } = match.params;
     const { bookingItemnum } = match.params;
     const { bookingItemwriter } = match.params;
     const { bookingItemfiles } = match.params;
     const { bookingItemname } = match.params;
     const { bookingItemprice } = match.params;
 
+    const bookingNumm = bookingNum;
     const reviewProductIdx = bookingItemnum;
     const reviewId = bookingItemwriter;
     const reviewItemfiles = bookingItemfiles;
@@ -115,7 +117,7 @@ export default function ReviewUpload({ history, match }) {
         formData.append("reviewFiles", reviewFiles);
 
         if (reviewContents.length > 30 && reviewSatisfaction != null) {
-            axios.post(`http://localhost:8080/api/review/reviewWrite`, formData,
+            axios.post(`http://localhost:8080/api/review/reviewWrite/${bookingNumm}`, formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } })
                 .then(response => {
                     if (response.status === 200) {
@@ -172,7 +174,7 @@ export default function ReviewUpload({ history, match }) {
                         {
                             ReviewAddImg ?
                                 <div className="itemImg">
-                                    <img src={ReviewAddImg} alt="preview-img" className="previewImg" onMouseEnter={showComment} />
+                                    <img src={ReviewAddImg} alt="preview-img" className="itemImg" onMouseEnter={showComment} />
                                     <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                         이미지 변경을 하시려면<br />클릭해주세요.
                                     </div>
