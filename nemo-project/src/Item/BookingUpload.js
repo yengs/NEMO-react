@@ -60,6 +60,10 @@ function BookingUpload({ history, match }) {
   const sum = (parseInt(bookingItemprice) + parseInt(Deposit));
   const bookingMember = sessionStorage.getItem('memberId');
 
+  const Deposit2 = Deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  const bookingItemprice2 = bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  const sum2 = sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
   const handlerClickSubmit = (e) => {
     e.preventDefault();
     if(checkAgree !== true) {
@@ -169,18 +173,18 @@ function BookingUpload({ history, match }) {
                 <tr>
                   <th>대여료</th>
                   <td></td>
-                  <td>{bookingItemprice}원</td>
+                  <td>{bookingItemprice2}원</td>
                 </tr>
                 <tr>
                   <th >보증금</th>
                   <td><div className="plus">+</div></td>
-                  <td>{Deposit}원</td>
+                  <td>{Deposit2}원</td>
                 </tr>
               </div>
               <tr>
                 <th>결제금액</th>
                 <td></td>
-                <td>{sum}원</td>
+                <td>{sum2}원</td>
               </tr>
             </div>
           </div>
