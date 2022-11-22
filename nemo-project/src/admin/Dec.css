@@ -13,7 +13,7 @@
     border: 2px solid #bbb;
     flex: 1 1;
     margin: 60px auto auto auto;
-    overflow: scroll;
+    overflow: hidden;
 }
 ::-webkit-scrollbar { display: none; }
 
