@@ -22,10 +22,12 @@ function ItemDetail({ match, history }) {
     const [memberImg, setMemberImg] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
-    const reviewProductIdx = match.params;
+    const {itemNum} =match.params;
+    const reviewProductIdx = itemNum;
+
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/detail/${match.params.itemNum}`)
+        axios.get(`http://localhost:8080/api/item/detail/${itemNum}`)
             .then(response => {
                 setData(response.data);
                 setItemName(response.data.itemName);
@@ -54,14 +56,12 @@ function ItemDetail({ match, history }) {
             })
             .catch(error => { console.log(error); });
 
-    }, [match.params]);
-
-    //후기조회
-    useEffect(() => {
-        axios.get(`http://localhost:8080/api/itemreview/${reviewProductIdx}`)
+        //후기조회
+            axios.get(`http://localhost:8080/api/itemreview/${reviewProductIdx}`)
             .then(response => { setDatas(response.data); })
             .catch(error => { console.log(error); });
-    }, []);
+
+    }, [match.params]);
 
 
     const handlerChangeName = (e) => setItemName(e.target.value);
@@ -674,9 +674,10 @@ td.reviewImg,
     margin-top: 25px;
     font-size; 17px;
     line-height: 23px;
-    overflow: scroll;
+    overflow-y: scroll;
     height: 155px;
     white-space: pre-wrap;
+    word-break: break-all;
     
 }
 
