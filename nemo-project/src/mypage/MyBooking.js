@@ -218,7 +218,7 @@ useEffect(() => {
                     {
                         datas.length === 0 && (
                             <tr>
-                                <td colSpan="4">작성된 글이 없습니다.</td>
+                                <td colSpan="4" style={{borderBottom:'none'}}>빌려준 내역이 존재하지 않습니다.</td>
                             </tr>
                         )
                     }
@@ -260,25 +260,27 @@ useEffect(() => {
                         <tbody>
                    
                             <tr key={booking.bookingNum}>
-                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingDate}</td>
-                                <td rowSpan={2} className="ReviewItemImageOrigin">
+                                <td className='ReviewWriter' >{booking.bookingDate}</td>
+                                <td className="ReviewItemImageOrigin">
                                     {/* <Link to={`/booking/detail/${booking.bookingIdx}`}>{booking.title}</Link> */}
                                 
                                     <img className="bookingitemImg" src={`../../files/${booking.bookingItemfiles}`}/>
                                 </td>
-                                <td className='ReviewItemNameOrigin' rowSpan={3} > 
+                                <td className='ReviewItemNameOrigin' style={{width: '15%'}}> 
                                              <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                         </td>
+
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
                                 <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
                                 <td>{booking.bookingDepositstate != "반환완료" ? null : booking.reviewCount > 0 ? <button className="grayBtn btnBok" onClick={handlerreview}>후기작성</button> :<button className="greenBtn btnBok"><Link to = {`/review/reviewWrite/${booking.bookingNum},${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}</td>
+
                                 </td>
                                 
                                 {/* <td className='ReviewWriter' rowSpan={3}> <tr><td>반납완료</td></tr><td><button className="greenBtn btnBok" onClick={goReviewWrite}>후기작성</button></td></td> */}
 
-                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingDepositstate}</td>
-                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingBookingstate == "예약중" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>취소</button>:<button className="grayBtn btnBok">취소</button>}</td>
+                                <td className='ReviewWriter' style={{whiteSpace:"pre-line"}}>{booking.bookingDepositstateN}</td>
+                                <td className='ReviewWriter' >{booking.bookingBookingstate == "예약중" ? <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>취소</button>:<button className="grayBtn btnBok">취소</button>}</td>
                             </tr>
                        
                 </tbody>
@@ -288,7 +290,7 @@ useEffect(() => {
 {
     datas2.length === 0 && (
         <tr>
-            <td colSpan="4">작성된 글이 없습니다.</td>
+            <td colSpan="4">빌린 내역이 존재하지 않습니다.</td>
         </tr>
     )
 }
@@ -323,9 +325,9 @@ const MyBookingContainer = styled.div`
         height: 100%;
     }
 
-    .userReviewListAboutStore2 tr td {
-        border-bottom: 1px solid #ccc
-    }
+    // .userReviewListAboutStore2 tr td {
+    //     border-bottom: 1px solid #ccc
+    // }
 
     /* 마이페이지 내의 페이지 */
 // .mypageInnerPage {
@@ -412,7 +414,7 @@ const MyBookingContainer = styled.div`
 
 /* 빌려왔어요 */
 .userReviewListAboutStoreWrapBooking2{
-    margin-top: 10px;
+    margin-top: 85px;
 }
 
 .userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 {

@@ -124,3 +124,8 @@
     max-width: 50px;
     max-height: 50px;
 }
+
+.nullReview {
+    height: 172px;
+    text-align: center;
+}
