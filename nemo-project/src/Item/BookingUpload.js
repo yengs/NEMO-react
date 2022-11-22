@@ -102,6 +102,9 @@ function BookingUpload({ history, match }) {
   const [dates, setDates] = useState([]);
 
 
+  
+
+
   const list = dates.map((date) => {
     return (new Date(date))
   })
@@ -120,7 +123,8 @@ function BookingUpload({ history, match }) {
       .catch(error => console.log(error));
   }, []);
 
-
+   var now = new Date();
+   var tomorrow = new Date(now.setDate(now.getDate() + 1));
 
   // 필수약관체크
   const [checkAgree, setCheckAgree] = useState(false);
@@ -305,7 +309,7 @@ function BookingUpload({ history, match }) {
 
           <div> <div className="inputdate">
 
-            <Calendar onChange={date => setbookingDate(date)} value={value} minDate={new Date()} maxDate={new Date(Rentalend)}
+            <Calendar onChange={date => setbookingDate(date)} value={value} minDate={tomorrow} maxDate={new Date(Rentalend)}
               formatDay={(locale, date) => moment(date).format("DD")}
               tileDisabled={({ date, view }) =>
                 (view === 'month') && // Block day tiles only
