@@ -81,6 +81,8 @@ function Join() {
             return setPasswordError(true);
         } else if(!emailtest.test(mEmail)){
             alert("이메일은 nemo@nemo.com 형식에 맞게 입력해주세요")
+        }else if(ckNickname===false){
+            alert("닉네임 중복확인을 해주세요.")
         }
         //이메일 인증은 나중에 보여줄때만 하기로 번거로워서 (확인은 했습니다!) --------삭제 금지-----
         // else if(ckEmail === false){
@@ -240,6 +242,29 @@ function Join() {
             });
     }
 
+    // 닉네임 중복 체크
+
+    const [ckNickname,setcheckNickName] = useState(false);
+    
+    const checkNickname = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/api/member/join/checknickname', `memberNickname=${mNickname}`)
+            .then(nickname => {
+                console.log(nickname);
+                if (nickname.data === "success" && mNickname !== "") {
+                    setcheckNickName(true);
+                    alert("사용 가능한 닉네임입니다.");
+                } else if (nickname.data === "fail" && mId !== "") {
+                    setcheckNickName(false);
+                    alert("이미 사용중인 닉네임입니다.")
+                } else{
+                    setcheckNickName(false);
+                    alert("닉네임을 입력해주세요");
+                }
+            });
+    }
+
 
 // 이메일 관련 --------------------------------
     const [code, setCode] = useState();
@@ -316,6 +341,9 @@ function Join() {
                                 <td className="requiredMark">닉네임</td>
                                 <td>
                                     <input type="text" name="mNickname" value={mNickname} onChange={handlerChangeNickname} required />
+                                </td>
+                                <td className="memberTableBtn">
+                                    <button className="beigeBtn btn" onClick={checkNickname}>중복확인</button>
                                 </td>
                                 <td></td>
                             </tr>
