@@ -135,12 +135,14 @@ header .navBar>div {
 
 header .topHeader .logo img {
   width: 33px;
+  cursor: pointer;
 }
 
 header .topHeader .mainTitle h2 {
   font-weight: 600;
   font-size: 23px;
   text-align: center;
+  cursor: pointer;
 }
 
 header .topHeader .member {

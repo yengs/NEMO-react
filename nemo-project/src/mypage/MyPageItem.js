@@ -5,11 +5,12 @@ import axios from "axios";
 // import './mypageitem.css'
 import styled from 'styled-components';
 import MyPageItemPaging from '../pagination/MyPageItemPaging';
+import Pagination from "react-js-pagination"
 
 function MyPageItem({ match }) {
   const { itemWriter } = match.params;
 
-    const ITEM_COUNT_PER_PAGE = 3;
+    const ITEM_COUNT_PER_PAGE = 6;
 
     const [datas, setDatas] = useState([]);
     const [count, setCount] = useState(0);
@@ -31,6 +32,10 @@ function MyPageItem({ match }) {
       setItems(datas.slice((page-1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
   };
 
+  const handleImgError = (e) => {
+    e.target.src = '../../../noimage/noimage.gif';
+}
+
     return (
         <MyPageItemContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
             <div className="mypageInnerPage2">
@@ -44,11 +49,11 @@ function MyPageItem({ match }) {
                         items && items.map(item => (
                             <div className="itemInfoWrap" key={item.itemNum} style={{'backgroundColor':"rgb(235,235,235)"}}>
                               <Link to={`/mypage/mypageitemdetail/${item.itemNum}`} style={{'textDecoration':'none'}}>
-                                    <img className="itemImg" src={`../../files/${item.files}`}></img>
+                                    <img className="itemImg" src={`../../files/${item.files}`} onError={handleImgError}></img>
                                     <div className="itemInfo">
                                         <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                         <p className="itemName" id="overflow">{item.itemName}</p>
-                                        <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                        <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                         <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                     </div>
                               </Link>
@@ -64,7 +69,15 @@ function MyPageItem({ match }) {
                     }
                 </div>
                 <div>
-                    <MyPageItemPaging page={page} count={count} setPage={changePage} />
+                <Pagination
+                                activePage={page}   // 현재 페이지
+                                itemsCountPerPage={6}  // 한 페이지당 보여줄 게시글 개수
+                                totalItemsCount={count}   // 모든 게시글 수
+                                pageRangeDisplayed={10}  // paginator안에서 보여줄 페이지의 범위
+                                prevPageText={"<"}  // 이전을
+                                nextPageText={">"}  // 다음
+                                onChange={changePage}    // 페이지가 바뀔 때 핸들러 함수 
+                            />
                 </div>
             </div>
         </MyPageItemContainer>
@@ -354,10 +367,11 @@ const MyPageItemContainer = styled.div`
   
   .itemWrap3 {
     display: flex;
-    justify-content: flex-start;
+    // justify-content: center;
     align-items: center;
     flex-wrap: wrap;  
-    margin-top: 0px;  
+    margin-top: 0px; 
+    margin-left: 30px; 
   }
   
   .itemInfoWrap {
@@ -367,6 +381,7 @@ const MyPageItemContainer = styled.div`
     border-radius: 10px;
     padding: 1%;
     margin-right: 3%;
+    margin-left: 0;
   }
 
   .itemInfoWrap:nth-child(3n) {
