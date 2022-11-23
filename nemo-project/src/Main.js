@@ -35,7 +35,7 @@ function Main({ history }) {
                 .then(response => {
                     setWeatherDatas(response.data);
                     if (sessionStorage.getItem("tempAvg")) {
-                        setTomorrowTemp(Math.round(sessionStorage.getItem("tempAvg")));
+                        setTomorrowTemp(Math.round(sessionStorage.getItem("tempAvg")*10)/10);
                     }
                 })
                 .catch(error => console.log(error));
@@ -86,7 +86,7 @@ function Main({ history }) {
                             <div className="tomorrowWeather" style={{ marginBottom: "-15px" }}>
                                 <h4 style={{ marginBottom: '0px', backgroundColor: "rgb(88, 145, 112)", color: "#fff", padding: '4px 14px', borderRadius: '50px' }}>내일은 <span className="temp">
                                     {tomorrowTemp}
-                                </span>℃</h4>
+                                </span> ℃</h4>
                                 <div className="titleNplusBtn">
                                     <h3 style={{fontSize:'23px'}}>이런 옷 어때요?</h3>
                                     <button className="plusBtn" onClick={goWeatherItemList}>+ 더보기</button>
@@ -95,7 +95,7 @@ function Main({ history }) {
                             :
                             <div className="tomorrowWeather" style={{ marginBottom: "-35px" }}>
                                 <div className="titleNplusBtn">
-                                    <h3 style={{ marginBottom: "35px" }}>로그인하고 추천아이템을 확인해보세요!</h3>
+                                    <h3 style={{ marginBottom: "35px", fontSize:'23px' }}>로그인하고 추천아이템을 확인해보세요!</h3>
                                 </div>
                             </div>
 

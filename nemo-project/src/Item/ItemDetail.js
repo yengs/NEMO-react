@@ -97,7 +97,7 @@ function ItemDetail({ match, history }) {
     const handlerChangeDeposit = (e) => setItemDeposit(e.target.value);
     const handlerChangeDetail = (e) => setItemDetail(e.target.value);
 
-    const handlerClickList = () => history.goBack();
+    const handlerClickList = () => history.push(`/item/cate/sub/${data.itemSubcategory}`);
     const handlerClickDelete = () => {
         axios.delete(`http://localhost:8080/api/item/${match.params.itemNum}`)
             .then(response => {
@@ -208,8 +208,8 @@ function ItemDetail({ match, history }) {
                         <div className="tableform">
                             <div>
                                 <h2 className="itemName">{data.itemName}</h2>
-                                <h3 className="itemPrice"><span>{data.itemPrice}</span>원</h3>
-                                <p className="itemDeposit">보증금<span>{data.itemDeposit}</span>원</p>
+                                <h3 className="itemPrice"><span>{itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</h3>
+                                <p className="itemDeposit">보증금<span>{itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                 <div style={{ borderBottom: "1px solid #ddd" }}></div>
                                 <p className="itemSize">사이즈
                                     {

@@ -271,10 +271,10 @@ function MyBooking({ history }) {
                                             <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                         </td>
 
-                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice}</td>
+                                <td className='ReviewWriter' rowSpan={3}>￦{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
                                 <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
-                                <td>{booking.bookingDepositstate != "반환완료" ? null : booking.reviewCount > 0 ? <button className="grayBtn btnBok" onClick={handlerreview}>후기작성</button> :<button className="greenBtn btnBok"><Link to = {`/review/reviewWrite/${booking.bookingNum},${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}</td>
+                                {booking.bookingDepositstate != "반환완료" ? null : booking.reviewCount > 0 ? <button className="grayBtn btnBok" onClick={handlerreview}>후기작성</button> :<button className="greenBtn btnBok"><Link to = {`/review/reviewWrite/${booking.bookingNum},${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}
 
                                         </td>
 
@@ -291,7 +291,7 @@ function MyBooking({ history }) {
                         {
                             datas2.length === 0 && (
                                 <tr>
-                                    <td colSpan="4" style={{ height: '172px', textAlign: 'center' }}>빌린 내역이 존재하지 않습니다.</td>
+                                    <td colSpan='8' style={{ height: '172px', textAlign: 'center' }}>빌린 내역이 존재하지 않습니다.</td>
                                 </tr>
                             )
                         }
@@ -415,7 +415,7 @@ const MyBookingContainer = styled.div`
 
 /* 빌려왔어요 */
 .userReviewListAboutStoreWrapBooking2{
-    margin-top: 85px;
+    margin-top: 43px;
 }
 
 .userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 {
@@ -478,7 +478,7 @@ const MyBookingContainer = styled.div`
 
 
 .ReviewWriter {
-    width: 10%;
+    width: 8%;
     text-align: center;
 }
 
