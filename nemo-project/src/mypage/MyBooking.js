@@ -291,7 +291,7 @@ function MyBooking({ history }) {
                         {
                             datas2.length === 0 && (
                                 <tr>
-                                    <td colSpan="4" style={{ height: '172px', textAlign: 'center' }}>빌린 내역이 존재하지 않습니다.</td>
+                                    <td colSpan='8' style={{ height: '172px', textAlign: 'center' }}>빌린 내역이 존재하지 않습니다.</td>
                                 </tr>
                             )
                         }
