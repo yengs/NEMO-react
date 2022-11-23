@@ -97,7 +97,7 @@ function ItemDetail({ match, history }) {
     const handlerChangeDeposit = (e) => setItemDeposit(e.target.value);
     const handlerChangeDetail = (e) => setItemDetail(e.target.value);
 
-    const handlerClickList = () => history.goBack();
+    const handlerClickList = () => history.push(`/item/cate/sub/${data.itemSubcategory}`);
     const handlerClickDelete = () => {
         axios.delete(`http://localhost:8080/api/item/${match.params.itemNum}`)
             .then(response => {
