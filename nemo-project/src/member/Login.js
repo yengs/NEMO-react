@@ -76,7 +76,8 @@ function Login({ history }) {
                     }
 
 
-                    alert("로그인완료");
+                    // alert("로그인완료");
+                    alert("반갑습니다! " + id + " 회원님");
                     if(id == "admin"){
                     window.location.href = "/admin/dec";
                     }else{
