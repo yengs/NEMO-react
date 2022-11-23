@@ -103,8 +103,8 @@ function DecDetail({history, match}){
                     
                         <div className='DecCon'>
                             <h2 className="itemName">{data.itemName}</h2>
-                            <h3 className="itemPrice">신고사유   :    <span>{data.singoReason}</span></h3>
-                            <p className="itemDeposit">피신고자 ID      <span>{data.singoPisingoja}</span>원</p>
+                            <h3 className="itemPrice">신고사유   : <span>{data.singoReason}</span></h3>
+                            <p className="itemDeposit">피신고자 ID :<span>{data.singoPisingoja}</span></p>
                             <div style={{ borderBottom: "1px solid #ddd" }}></div>
                             
                            
