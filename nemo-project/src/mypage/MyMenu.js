@@ -14,6 +14,10 @@ function MyMenu({ history , location}) {
     const [memberImg, setMemberImg] = useState('');
     const [imageSrc, setImageSrc] = useState('');
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/no-profile.PNG';
+    }
+
     //--------------프사 GET--------------
 
     const [data, setData] = useState({});
@@ -111,7 +115,7 @@ function MyMenu({ history , location}) {
 
         <div className="myMenuWrap">
             <AppStyle >
-            <img className="memberImg" src={`../../memberImg/${data.memberImg}`}  onMouseEnter={showComment}></img>
+            <img className="memberImg" src={`../../memberImg/${data.memberImg}`}  onMouseEnter={showComment} onError={handleImgError}></img>
             <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment} onClick={openModal}>
                                             이미지를 변경하시려면<br/>클릭해주세요.
                                         </div>
@@ -123,7 +127,7 @@ function MyMenu({ history , location}) {
                 <div className="ChoiseFile">
                 <div className="myDetailImage">
                     {imageSrc == '' ?
-                        <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} />
+                        <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} onError={handleImgError}/>
                         : <div className="myDetailImage">
                         {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" />} </div>
                     }
