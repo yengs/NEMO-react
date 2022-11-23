@@ -175,7 +175,7 @@ function Main({ history }) {
                 </div>
                 <div className="recBestStore">
                     <div className="titleNplusBtn">
-                        <h3 style={{fontSize:'23px'}}>베스트 클린 스토어</h3>
+                        <h3 style={{fontSize:'23px'}}>베스트 스토어</h3>
                     </div>
                     <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
                         {console.log(storeUrl)}
