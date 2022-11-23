@@ -128,17 +128,23 @@ const Chat = ({match}) => {
                         <div className='talk-shadow'></div>
                         {msgBox}
                     </div>
-                    <input disabled={chkLog}
+                    {/* <input disabled={chkLog}
                         type='text' 
                         id='name' 
                         value={datas.memberId} 
                         readOnly     
-                        />
-                    <div id='sendZone'>
+                        /> */}
+                    {/* <div id='sendZone'>
                         <textarea id='msg' value={msg} onChange={onText}
                             onKeyDown={(ev) => {if(ev.keyCode === 13){send();}}}></textarea>
                         <input type='button' value='전송' id='btnSend' onClick={send}/>
-                    </div>
+                    </div> */}
+
+                     <div className="chat" >
+                                       <input className="chat-input"  id='msg' value={msg} onChange={onText}
+                            onKeyDown={(ev) => {if(ev.keyCode === 13){send();}}}  required/>
+                                       <button   className="chat-botton"   id='btnSend' onClick={send} type="submit">↑</button>
+                                 </div> 
                 </div>
             </div>
             </MyWebsocket>
@@ -149,6 +155,39 @@ const Chat = ({match}) => {
 
 
 const MyWebsocket = styled.div`
+
+.chat {
+    position: relative;
+    width: 460px;
+  }
+
+
+  .chat-input {
+    border: 1px solid rgb(241,241,241);
+    background-color: #ffffff;
+    padding: 10px 258px;
+    padding-left: 8px !important;
+    border-radius: 34px;
+    font-size: 15px;
+    margin-left: 10px;
+}
+  .chat-botton {
+    position: absolute;
+    right: -15px;
+    top: 5px;
+    bottom: 8px;
+    border: 0;
+    background: rgb(100 165 127);
+    color: #fff;
+    outline: none;
+    margin: 0;
+    border-radius: 41px;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+}
+
 & {
     width:500px;
     background-color: #ededed;
@@ -186,17 +225,17 @@ const MyWebsocket = styled.div`
   
     #talk{
       width: 100%;
-      height: 400px;
+      height: 500px;
       overflow-y: auto;
-      border-radius: 18px;
       position: relative;
-  
+
       .talk-shadow{
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        
       }
   
       div{

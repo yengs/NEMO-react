@@ -54,6 +54,24 @@ function Header() {
 
     return (
         <header>
+            {sessionStorage.getItem("memberId") === 'admin' ?
+            <div className="topHeader">
+            <div className="logo">
+            <img src={logo} alt="로고"></img>
+        </div>
+        <div className="mainTitle">
+            <h2>내일 모입지?</h2>
+        </div>
+        <div className="member">
+        <Link to="/" onClick={handlerLogout}>
+                        <IconContext.Provider value={{ className: "headerIcons" }}>
+                            <FaLock />
+                        </IconContext.Provider>
+                        <p>로그아웃</p>
+                    </Link>
+                    </div>
+        </div>
+            :
             <div className="topHeader">
                 <div className="logo" onClick={handlerGoMain}>
                     <img src={logo} alt="로고"></img>
@@ -98,7 +116,10 @@ function Header() {
                 </Link>
             </div>
                 }</div>
-            </div>
+            </div>}
+             {sessionStorage.getItem("memberId") === 'admin' ?
+                    null
+                    : 
             <div className='underHeader'>
                 <div className="navBar">
                     <div className="location">
@@ -111,6 +132,7 @@ function Header() {
                             }
                         </span>
                     </div>
+                    
                     <div className='navWrap'>
                         <ul className="nav">
                             <li className="dropdown">
@@ -163,6 +185,7 @@ function Header() {
                     </div>
                 </div>
             </div>
+            }
         </header>
     )
 }

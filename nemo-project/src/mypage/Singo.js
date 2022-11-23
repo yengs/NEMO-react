@@ -110,7 +110,7 @@ const encodeFileToBase64 = (fileBlob) => {
                             <div className="btnStart">
                             {imageSrc == '' ?
                         <img src={addImage} alt="ReviewAddImg" />
-                        : <div className="myDetailImage"> 
+                        : <div className="mySingoImage"> 
                         {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
                     }
                              
