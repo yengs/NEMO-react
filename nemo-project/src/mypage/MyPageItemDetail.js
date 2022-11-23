@@ -150,6 +150,10 @@ function MyPageItemDetail({ match, location, history }) {
         setShowCom(false)
     }
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noimage.gif';
+    }
+
 
     return (
         <MyPageItemDetailContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
@@ -161,7 +165,7 @@ function MyPageItemDetail({ match, location, history }) {
                             <label htmlFor="item_review_input" className="item_review_input">
                                 {imageSrc == '' ?
                                     <div className="itemImg">
-                                        <img className="previewImg" src={`../../files/${data.files}`} onMouseEnter={showComment} />
+                                        <img className="previewImg" src={`../../files/${data.files}`} onMouseEnter={showComment} onError={handleImgError}/>
                                         <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                             이미지 변경을 하시려면<br />클릭해주세요.
                                         </div>
@@ -259,11 +263,11 @@ function MyPageItemDetail({ match, location, history }) {
                                     </tr>
                                     <tr>
                                         <th scope="row">가격</th>
-                                        <td><input type="text" value={itemPrice} onChange={handlerChangePrice} /></td>
+                                        <td><input type="text" value={itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} onChange={handlerChangePrice} /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">보증금</th>
-                                        <td><input type="text" value={itemDeposit} onChange={handlerChangeItemDeposit} /></td>
+                                        <td><input type="text" value={itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} onChange={handlerChangeItemDeposit} /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">사이즈</th>
