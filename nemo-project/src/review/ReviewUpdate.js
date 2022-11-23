@@ -81,12 +81,12 @@ function ReviewUpdate({ history, match }) {
             })
             .then(response => {
                 if (response.status === 200) {
-                    if (reviewContents.length > 30 && reviewSatisfaction != null) {
+                    if (reviewContents.length > 20 && reviewSatisfaction != null) {
                         alert("정상적으로 등록되었습니다.");
                         history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);
                         window.location.href = `/review/myReview/${reviewWriter}`
                     } else {
-                        alert("내용 30자 이상, 상품의 만족도를 입력했는지 확인해주세요.")
+                        alert("내용 20자 이상, 상품의 만족도를 입력했는지 확인해주세요.")
                     }
                 } else {
                     alert("등록에 실패했습니다.");
