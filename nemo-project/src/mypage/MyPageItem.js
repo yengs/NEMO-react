@@ -9,7 +9,7 @@ import MyPageItemPaging from '../pagination/MyPageItemPaging';
 function MyPageItem({ match }) {
   const { itemWriter } = match.params;
 
-    const ITEM_COUNT_PER_PAGE = 3;
+    const ITEM_COUNT_PER_PAGE =  6;
 
     const [datas, setDatas] = useState([]);
     const [count, setCount] = useState(0);
@@ -48,7 +48,7 @@ function MyPageItem({ match }) {
                                     <div className="itemInfo">
                                         <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                         <p className="itemName" id="overflow">{item.itemName}</p>
-                                        <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                        <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                         <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                     </div>
                               </Link>
@@ -354,7 +354,7 @@ const MyPageItemContainer = styled.div`
   
   .itemWrap3 {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;  
     margin-top: 0px;  
@@ -367,6 +367,7 @@ const MyPageItemContainer = styled.div`
     border-radius: 10px;
     padding: 1%;
     margin-right: 3%;
+    margin-left: 0;
   }
 
   .itemInfoWrap:nth-child(3n) {
