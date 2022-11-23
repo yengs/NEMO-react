@@ -108,12 +108,6 @@ function Header() {
                     </IconContext.Provider>
                     <p>로그인</p>
                 </Link>
-                <Link to="/chat">
-                    <IconContext.Provider value={{ className: "headerIcons" }}>
-                        <BsChatDotsFill />
-                    </IconContext.Provider>
-                    <p>내모톡</p>
-                </Link>
             </div>
                 }</div>
             </div>}
