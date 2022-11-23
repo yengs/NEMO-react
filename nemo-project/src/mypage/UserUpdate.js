@@ -176,9 +176,9 @@ function UserUpdate({ history }) {
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td className="requiredMark">닉네임</td>
+                                        <td>닉네임</td>
                                         <td>
-                                            <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname} required />
+                                            <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname}  />
                                         </td>
                                         <td></td>
                                     </tr>
@@ -190,16 +190,9 @@ function UserUpdate({ history }) {
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td className="requiredMark">패스워드</td>
+                                        <td>패스워드</td>
                                         <td>
-                                            <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="requiredMark">패스워드확인</td>
-                                        <td>
-                                            <input type="password" name="mIdCheck" value={memberPwCheck} onChange={handlerChangePwCheck} required />
+                                            <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw}  />
                                         </td>
                                         <td></td>
                                     </tr>
@@ -217,9 +210,9 @@ function UserUpdate({ history }) {
                                         <td></td>
                                     </tr>
                                     <tr className="updateAddress">
-                                        <td className="requiredMark">주소</td>
+                                        <td>주소</td>
                                         <td>
-                                            <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress} required />
+                                            <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress}/>
                                         </td>
                                         <td className="updateTableBtn">
                                             <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
@@ -271,7 +264,7 @@ function UserUpdate({ history }) {
                                 </div>
                             </MemberDelete>
                         </React.Fragment>
-                        <div className="btnWrap" style={{marginTop:'0'}}>
+                        <div className="btnWrap" >
                             <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} style={{marginTop:'0'}} />
                         </div>
                     </form>
@@ -336,7 +329,7 @@ const ContainerUserUpate = styled.div`
 }
 
   .UserUpate .pageTitle h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 300;
     text-align: center;
   }
@@ -352,8 +345,8 @@ const ContainerUserUpate = styled.div`
   }
   
   .UserUpate .inputTable table tr>td {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 11px;
+    padding-bottom: 11px;
     border-top: 1px solid #ddd;
     text-align: left;
   }
@@ -376,7 +369,7 @@ const ContainerUserUpate = styled.div`
   .UserUpate .inputTable table tr>td>input {
     border: 1px solid #ddd;
     width: 95%;
-    padding: 8px 6px;
+    padding:11px 6px;
     border-radius: 3px;
   }
   
@@ -401,13 +394,13 @@ const ContainerUserUpate = styled.div`
 
   .resignMembership {
     margin-left: 108px;
-    margin-top: 7px;
+    margin-top:  26px;
   }
 
   .resignMembership a {
     text-decoration: none;
     font-size: 14px;
-    color: #666;
+    color: #777;
   }
 
   .UserUpate .btn.beigeBtn {
