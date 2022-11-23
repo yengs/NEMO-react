@@ -4,7 +4,7 @@ import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
 import { Link } from "react-router-dom";
 
-function YourReviewList({ match }) {
+function YourReviewList({ match,history  }) {
 
     const { reviewId } = match.params;
 
@@ -17,6 +17,8 @@ function YourReviewList({ match }) {
     const handleImgError = (e) => {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
+
+    const handlerClickList = () => history.goBack();
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
@@ -131,7 +133,13 @@ function YourReviewList({ match }) {
                     </tbody>
                 </table>
                 <div>
-                    <Paging page={page} count={count} setPage={changePage} />
+                <table className="sun">
+                       <tr >
+                        <td>
+                        <Paging page={page} count={count} setPage={changePage} />
+                        </td><td> <input type="button" id="list" className="greyBtnMPID" value="뒤로가기" onClick={handlerClickList} />
+                        </td> </tr>
+                    </table>
                 </div>
             </div>
         </>
