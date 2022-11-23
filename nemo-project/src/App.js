@@ -35,6 +35,7 @@ import 'moment/locale/ko';
 import { useState } from 'react';
 import BestItemList from './Item/BestItemList';
 import DirectBtn from './components/DirectBtn';
+import ReviewMore from './review/ReviewMore';
 
 function App() {
 
@@ -130,6 +131,7 @@ function App() {
         <Route path="/review/myReview/:reviewWriter" component={MyReviewList} exact={true} />
         <Route path="/review/myReview/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
+        <Route path="/review/yourReview/:reviewWriter/:reviewNum" component={ReviewMore} exact={true} />
       
 
         {/* mypage */}
