@@ -224,6 +224,7 @@ function MyPageItemDetail({ match, location, history }) {
                                                             <option value="반팔">반팔</option>
                                                             <option value="긴팔">긴팔</option>
                                                             <option value="니트">니트</option>
+                                                            <option value="셔츠">셔츠</option>
                                                             <option value="블라우스">블라우스</option>
 
                                                         </select>;
@@ -242,15 +243,17 @@ function MyPageItemDetail({ match, location, history }) {
                                                         return <select type="text" value={itemSubcategory} onChange={handlerChangeItemSubcategory}>
                                                             <option value="패딩">패딩</option>
                                                             <option value="코트">코트</option>
+                                                            <option value="자켓">자켓</option>
+                                                            <option value="후드집업">후드집업</option>
                                                             <option value="바람막이">바람막이</option>
 
                                                         </select>;
                                                     }
                                                     else {
                                                         return <select type="text" value={itemSubcategory} onChange={handlerChangeItemSubcategory}>
-                                                            <option value="패딩">롱</option>
-                                                            <option value="코트">미디</option>
-                                                            <option value="바람막이">미니</option>
+                                                            <option value="롱">롱</option>
+                                                            <option value="미디">미디</option>
+                                                            <option value="미니">미니</option>
                                                         </select>;
                                                     }
                                                 })()

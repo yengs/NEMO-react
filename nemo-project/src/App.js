@@ -82,10 +82,10 @@ function App() {
               }
             })
             .catch(error => console.log(error))
-            .finally(() => setLoaded(true));
+            // .finally(() => setLoaded(true));
         })
         .catch(error => console.log(error))
-        .finally(() => setLoaded(true));
+        // .finally(() => setLoaded(true));
     } else {
       setLoaded(true);
     }
