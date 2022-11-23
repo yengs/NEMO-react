@@ -156,7 +156,24 @@ function UserUpdate({ history }) {
         }
     };
 
+ // 닉네임 중복 체크
 
+    
+ const checkNickname = (e) => {
+     e.preventDefault();
+
+     axios.post('http://localhost:8080/api/member/join/checknickname', `memberNickname=${memberNickname}`)
+         .then(nickname => {
+             console.log(nickname);
+             if (nickname.data === "success" && memberNickname !== "") {
+                 alert("사용 가능한 닉네임입니다.");
+             } else if (nickname.data === "fail" && memberNickname !== "") {
+                 alert("이미 사용중인 닉네임입니다.")
+             } else{
+                 alert("닉네임을 입력해주세요");
+             }
+         });
+ }
     return (
         <ContainerUserUpate style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage UserUpate">
@@ -176,9 +193,12 @@ function UserUpdate({ history }) {
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td className="requiredMark">닉네임</td>
+                                        <td>닉네임</td>
                                         <td>
-                                            <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname} required />
+                                            <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname}  />
+                                        </td>
+                                        <td className="updateTableBtn">
+                                            <button className="beigeBtn btn" onClick={checkNickname}>중복확인</button>
                                         </td>
                                         <td></td>
                                     </tr>
@@ -190,16 +210,9 @@ function UserUpdate({ history }) {
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td className="requiredMark">패스워드</td>
+                                        <td>패스워드</td>
                                         <td>
-                                            <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="requiredMark">패스워드확인</td>
-                                        <td>
-                                            <input type="password" name="mIdCheck" value={memberPwCheck} onChange={handlerChangePwCheck} required />
+                                            <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw}  />
                                         </td>
                                         <td></td>
                                     </tr>
@@ -217,9 +230,9 @@ function UserUpdate({ history }) {
                                         <td></td>
                                     </tr>
                                     <tr className="updateAddress">
-                                        <td className="requiredMark">주소</td>
+                                        <td>주소</td>
                                         <td>
-                                            <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress} required />
+                                            <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress}/>
                                         </td>
                                         <td className="updateTableBtn">
                                             <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
@@ -271,7 +284,7 @@ function UserUpdate({ history }) {
                                 </div>
                             </MemberDelete>
                         </React.Fragment>
-                        <div className="btnWrap" style={{marginTop:'25px'}}>
+                        <div className="btnWrap" >
                             <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} style={{marginTop:'0'}} />
                         </div>
                     </form>
@@ -376,7 +389,7 @@ const ContainerUserUpate = styled.div`
   .UserUpate .inputTable table tr>td>input {
     border: 1px solid #ddd;
     width: 95%;
-    padding: 8px 6px;
+    padding:11px 6px;
     border-radius: 3px;
   }
   
@@ -401,13 +414,13 @@ const ContainerUserUpate = styled.div`
 
   .resignMembership {
     margin-left: 108px;
-    margin-top: 7px;
+    margin-top:  26px;
   }
 
   .resignMembership a {
     text-decoration: none;
     font-size: 14px;
-    color: #666;
+    color: #777;
   }
 
   .UserUpate .btn.beigeBtn {
