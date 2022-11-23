@@ -19,14 +19,20 @@ function BookingUpload({ history, match }) {
   const [paypay, setPaypay] = useState('')
 
   const handlerpaypay = (e) => {
-    if(payment === '1') {
-      
+    if (payment === '1') {
+
     }
     setPaypay(e.target.value)
   }
   const selectcard = (e) => setPayment('1');
-  const selectkakao = (e) => setPayment('2');
-  const selecttoss = (e) => setPayment('3');
+  const selectkakao = (e) => {
+    setPayment('2');
+    setPaypay('카카오페이');
+  };
+  const selecttoss = (e) => {
+    setPayment('3');
+    setPaypay('토스페이');
+  };
   const selecttransfer = (e) => setPayment('4');
   const selectaccount = (e) => setPayment('5');
   const selectcell = (e) => setPayment('6');
@@ -162,34 +168,34 @@ function BookingUpload({ history, match }) {
   return (
     <>
 
-      <div className="BookingContainer" style={{maxWidth:'730px'}}>
+      <div className="BookingContainer" style={{ maxWidth: '730px' }}>
         <h3>대여하기</h3>
 
-        <div className="top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop:'1px solid #ddd', borderBottom:'1px solid #ddd', height: '280px' }}>
+        <div className="top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #ddd', borderBottom: '1px solid #ddd', height: '280px' }}>
           <div className="left" style={{ width: '100%' }}>
-            <div className="tablePlusForm2" style={{display:'flex', justifyContent:'space-between'}}>
+            <div className="tablePlusForm2" style={{ display: 'flex', justifyContent: 'space-between' }}>
               <img className="memberImg2" src={`../../files/${bookingItemfiles}`} style={{
                 width: '240px',
                 height: '260px'
               }} />
-              <div style={{width:"50%"}}>
-                <p style={{ fontSize: '22px', fontWeight: '600', textAlign:'left' }}>{bookingItemname}</p>
-                <table style={{ verticalAlign: 'center', textAlign: 'right', borderSpacing: "0", width: '100%', float:'right' }}>
+              <div style={{ width: "50%" }}>
+                <p style={{ fontSize: '22px', fontWeight: '600', textAlign: 'left' }}>{bookingItemname}</p>
+                <table style={{ verticalAlign: 'center', textAlign: 'right', borderSpacing: "0", width: '100%', float: 'right' }}>
                   <colgroup>
                     <col width='33%' />
                     <col width='' />
                   </colgroup>
                   <tr>
-                    <th style={{fontWeight:'400', padding:'10px 0', textAlign:'left'}}>대여료</th>
-                    <td colSpan={2} style={{padding:'10px 0'}} ><span style={{fontWeight:'700'}}>{bookingItemprice2}</span> 원</td>
+                    <th style={{ fontWeight: '400', padding: '10px 0', textAlign: 'left' }}>대여료</th>
+                    <td colSpan={2} style={{ padding: '10px 0' }} ><span style={{ fontWeight: '700' }}>{bookingItemprice2}</span> 원</td>
                   </tr>
                   <tr>
-                    <th style={{ borderBottom: '1px solid #aaa', fontWeight:'400', padding:'10px 0 13px 0', textAlign:'left' }}>보증금</th>
-                    <td style={{ borderBottom: '1px solid #aaa', padding:'10px 0 13px 0'}}>+ <span style={{fontWeight:'700'}}>{Deposit2}</span> 원</td>
+                    <th style={{ borderBottom: '1px solid #aaa', fontWeight: '400', padding: '10px 0 13px 0', textAlign: 'left' }}>보증금</th>
+                    <td style={{ borderBottom: '1px solid #aaa', padding: '10px 0 13px 0' }}>+ <span style={{ fontWeight: '700' }}>{Deposit2}</span> 원</td>
                   </tr>
                   <tr>
-                    <th style={{fontWeight:'400', padding:'13px 0 0 0', textAlign:'left'}}>결제금액</th>
-                    <td colSpan={2} style={{padding:'13px 0 0 0'}}><span style={{fontWeight:'700', color:'rgb(229 92 27)'}}>{sum2}</span> 원</td>
+                    <th style={{ fontWeight: '400', padding: '13px 0 0 0', textAlign: 'left' }}>결제금액</th>
+                    <td colSpan={2} style={{ padding: '13px 0 0 0' }}><span style={{ fontWeight: '700', color: 'rgb(229 92 27)' }}>{sum2}</span> 원</td>
                   </tr>
                 </table>
               </div>
@@ -201,11 +207,11 @@ function BookingUpload({ history, match }) {
 
 
         {/* --------------결제모달-------------- */}
-        <div className="middle" style={{borderBottom:'1px solid #ddd'}}>
+        <div className="middle" style={{ borderBottom: '1px solid #ddd' }}>
           <React.Fragment>
             <div className="custom-search" >
-              <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요" value={paypay} style={{fontSize:'15px'}}/>
-              <button onClick={openModal} className="custom-search-botton" type="submit" style={{backgroundColor:"rgb(88, 145, 112)"}}>등록</button>
+              <input type="text" className="custom-search-input" placeholder="결제수단을 등록해주세요" value={paypay} style={{ fontSize: '15px' }} />
+              <button onClick={openModal} className="custom-search-botton" type="submit" style={{ backgroundColor: "rgb(88, 145, 112)" }}>등록</button>
             </div>
 
 
@@ -219,37 +225,23 @@ function BookingUpload({ history, match }) {
               <div className='payselect' name="payment" onClick={selectaccount}>무통장입금</div>
               <div className='payselect' name="payment" onClick={selectcell}>휴대폰 결제</div>
 
-              <div className='paytext' onChange={handlerpaypay} style={{height: '180px'}}>
+              <div className='paytext' onChange={handlerpaypay} style={{ height: '180px' }}>
                 {(function () {
                   if (payment == "1") {
-                    return <div><select className='payment2' style={{borderRadius:'3px', border:'1px solid #ccc', padding:'0 5px', outline:'none'}}>
+                    return <div><select className='payment2' style={{ borderRadius: '3px', border: '1px solid #ccc', padding: '0 5px', outline: 'none' }}>
                       <option disabled selected>카드선택</option>
                       <option value='신한카드'>신한카드</option>
                       <option value='롯데카드'>롯데카드</option>
                       <option value='삼성카드'>삼성카드</option>
                       <option value='우리카드'>우리카드</option>
                     </select>
-                        <select style={{borderRadius:'3px', border:'1px solid #ccc', padding:'0 5px', outline:'none', height: '40px', width:'520px', fontSize:'15px', margin:'30px 0 0 45px'}}>
-                          <option disabled selected>할부기간</option>
-                          <option value='일시불'>일시불</option>
-                          <option value='2개월'>2개월</option>
-                          <option value='3개월'>3개월</option>
-                          <option value='4개월'>4개월</option>
-                          <option value='5개월'>5개월</option>
-                          <option value='6개월'>6개월</option>
-                          <option value='7개월'>7개월</option>
-                          <option value='8개월'>8개월</option>
-                          <option value='9개월'>9개월</option>
-                          <option value='10개월'>10개월</option>
-                          <option value='11개월'>11개월</option>
-                          <option value='12개월'>12개월</option>
-                        </select>
+
                       <div className='paynotice'>
                       </div>
                     </div>
                   }
                   else if (payment == "2") {
-                    return <div><select className='payment2' style={{borderRadius:'3px', border:'1px solid #ccc', padding:'0 5px', outline:'none'}}>
+                    return <div><select className='payment2' style={{ borderRadius: '3px', border: '1px solid #ccc', padding: '0 5px', outline: 'none' }}>
                       {/* <option disabled selected>선택</option> */}
                       <option value='카카오페이'>카카오페이</option>
 
@@ -259,13 +251,12 @@ function BookingUpload({ history, match }) {
                     </div>
                   }
                   else if (payment == "3") {
-                    return <div><select className='payment2' style={{borderRadius:'3px', border:'1px solid #ccc', padding:'0 5px', outline:'none'}}>
-                      {/* <option disabled selected>선택</option> */}
-                      <option value='토스'>토스</option>
-
-                    </select>
-                      <div className='paynotice'>
-                      </div>
+                    return <div>
+                      <select className='payment2' style={{ borderRadius: '3px', border: '1px solid #ccc', padding: '0 5px', outline: 'none' }}>
+                        <option value='토스'>토스페이</option>
+                  </select>
+                      {/* <div className='paynotice'>
+                      </div> */}
                     </div>
                   }
                   // else if (payment == "4") {
@@ -279,7 +270,7 @@ function BookingUpload({ history, match }) {
                   //   </div>
                   // }
                   else if (payment == "5") {
-                    return <div><select className='payment2' style={{borderRadius:'3px', border:'1px solid #ccc', padding:'0 5px', outline:'none'}}>
+                    return <div><select className='payment2' style={{ borderRadius: '3px', border: '1px solid #ccc', padding: '0 5px', outline: 'none' }}>
                       {/* <option disabled selected>선택</option> */}
                       <option disabled selected>은행선택</option>
                       <option value='농협은행'>농협은행</option>
@@ -290,12 +281,12 @@ function BookingUpload({ history, match }) {
 
                     </select>
                       <div className='paynotice'>
-                        입금기한&nbsp;&nbsp;<span style={{fontWeight:'700'}}>{moment(Date()).add(1, 'days').format('yy년 MM월 DD일 23시 59분')}</span> 까지
+                        입금기한&nbsp;&nbsp;<span style={{ fontWeight: '700' }}>{moment(Date()).add(1, 'days').format('yy년 MM월 DD일 23시 59분')}</span> 까지
                       </div>
                     </div>
                   }
                   else {
-                    return <div><select className='payment2' style={{borderRadius:'3px', border:'1px solid #ccc', padding:'0 5px', outline:'none'}}>
+                    return <div><select className='payment2' style={{ borderRadius: '3px', border: '1px solid #ccc', padding: '0 5px', outline: 'none' }}>
                       <option disabled selected>통신사 선택</option>
                       <option value='KT'>KT</option>
                       <option value='SKT'>SKT</option>
@@ -336,7 +327,7 @@ function BookingUpload({ history, match }) {
                 )} />
             <p>선택한 날짜 : {
               value === '' ?
-                <span style={{color:'#666'}}>대여날짜를 선택해주세요</span>
+                <span style={{ color: '#666' }}>대여날짜를 선택해주세요</span>
                 :
                 <span style={{ fontWeight: '800' }}>{moment(value).format("YYYY년 MM월 DD일")}</span>
             }
