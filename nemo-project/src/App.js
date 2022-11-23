@@ -81,9 +81,11 @@ function App() {
                   .finally(() => setLoaded(true));
               }
             })
-            .catch(error => console.log(error));
-
-        }).catch(error => console.log(error));
+            .catch(error => console.log(error))
+            // .finally(() => setLoaded(true));
+        })
+        .catch(error => console.log(error))
+        // .finally(() => setLoaded(true));
     } else {
       setLoaded(true);
     }
