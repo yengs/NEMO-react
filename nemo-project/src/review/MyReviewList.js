@@ -103,7 +103,7 @@ function MyReviewList({ history, match }) {
                                             <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
                                         <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
-                                        <td className='ReviewWriter'>{review.reviewItemprice}</td>
+                                        <td className='ReviewWriter'>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
                                         <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img>
@@ -116,7 +116,7 @@ function MyReviewList({ history, match }) {
                                             {review.reviewContents.length > 18 ?
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
-                                            }
+                                            } 
                                             <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}> [ 수정 ] </button>
                                             <button className="moreBtn" onClick={() => handlerReviewDelete(review.reviewNum)}> [ 삭제 ] </button>
                                         </div>
