@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import "./reviewUpload.css";
@@ -26,7 +26,7 @@ function ReviewMore({ history, match }) {
             .catch(error => console.log(error));
     }, []);
 
-    const detailList = () => history.goBack();
+    const detailList = () => history.goBack();    
 
     return (
         <AppStyle>
@@ -39,7 +39,7 @@ function ReviewMore({ history, match }) {
                 <img className="DetailImg" src={`../../../files_review/${data.reviewFiles}`}/>
             </div>
             <div className='moreContent'>
-                <textarea value={reviewContents} type="text" readOnly></textarea>
+                <div className="moreNum">{reviewContents}</div>
             </div>
             <div className='satisfyingReview'>
                 <span>{reviewWriter} 님이 평가한 상품 만족도는?</span>
@@ -100,19 +100,21 @@ const AppStyle = styled.div`
     pointer-events : none;
 }
 
-.moreContent textarea{
+.moreContent {
     width: 100%;
     height: auto;
     resize: none;
-    overflow: auto;
+    overflow: hidden;
+    white-space: pre-line;
+    word-break: break-word;
     border-radius: 5px;
     border : 1px solid #ccc;
     padding: 30px 20px 30px 20px;
     font-size: 16px;
-    pointer-events : none;
     margin-top: 35px;
     margin-bottom: 35px;
     color : #666;
+    outline : none;
 }
 
   
