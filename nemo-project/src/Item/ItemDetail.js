@@ -338,7 +338,9 @@ function ItemDetail({ match, history }) {
                                             <tr key={review.reviewNum}>
                                                 <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
                                                 <td rowSpan={2} className="ReviewItemImage2">
+                                                <Link to={`/review/yourReview/${review.reviewWriter}/${review.reviewNum}`}>
                                                     <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError} />
+                                                </Link>
                                                 </td>
                                                 <td>
                                                     <div className="reviewContents">

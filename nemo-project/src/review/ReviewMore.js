@@ -35,9 +35,11 @@ function ReviewMore({ history, match }) {
             <div className='pageTitle'>
                 <h3>후기 상세보기</h3>
             </div>
-            <div className="itemDetailImg">
-                <img className="DetailImg" src={`../../../files_review/${data.reviewFiles}`}/>
-            </div>
+            <div className="itemDetailImg" >
+                {data.reviewFiles == null ? <img className="DetailImg" src={'../../../noimage/no_image.gif'}/>:
+                <img className="DetailImg"  src={`../../../files_review/${data.reviewFiles}`}/>
+                }
+                </div>
             <div className='moreContent'>
                 <div className="moreNum">{reviewContents}</div>
             </div>
