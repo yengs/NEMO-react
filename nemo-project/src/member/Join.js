@@ -255,7 +255,7 @@ function Join() {
                 if (nickname.data === "success" && mNickname !== "") {
                     setcheckNickName(true);
                     alert("사용 가능한 닉네임입니다.");
-                } else if (nickname.data === "fail" && mId !== "") {
+                } else if (nickname.data === "fail" && mNickname !== "") {
                     setcheckNickName(false);
                     alert("이미 사용중인 닉네임입니다.")
                 } else{
