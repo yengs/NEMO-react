@@ -165,36 +165,34 @@ function BookingUpload({ history, match }) {
       <div className="BookingContainer" style={{maxWidth:'730px'}}>
         <h3>대여하기</h3>
 
-        <div className="top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop:'1px solid #ddd', borderBottom:'1px solid #ddd' }}>
+        <div className="top" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop:'1px solid #ddd', borderBottom:'1px solid #ddd', height: '280px' }}>
           <div className="left" style={{ width: '100%' }}>
             <div className="tablePlusForm2" style={{display:'flex', justifyContent:'space-between'}}>
               <img className="memberImg2" src={`../../files/${bookingItemfiles}`} style={{
                 width: '240px',
-                height: 'fit-content'
+                height: '260px'
               }} />
-              <table style={{ verticalAlign: 'center', textAlign: 'right', borderSpacing: "0" }}>
-                <colgroup>
-                  <col width='50%' />
-                  <col width='' />
-                </colgroup>
-                <tr>
-                  <td colSpan={2} style={{ fontSize: '22px', fontWeight: '600' }}>
-                    {bookingItemname}
-                  </td>
-                </tr>
-                <tr>
-                  <th style={{fontWeight:'400'}}>대여료</th>
-                  <td colSpan={2} ><span style={{fontWeight:'700'}}>{bookingItemprice2}</span> 원</td>
-                </tr>
-                <tr>
-                  <th style={{ borderBottom: '1px solid #aaa', fontWeight:'400' }}>보증금</th>
-                  <td style={{ borderBottom: '1px solid #aaa'}}>+ <span style={{fontWeight:'700'}}>{Deposit2}</span> 원</td>
-                </tr>
-                <tr>
-                  <th style={{fontWeight:'400'}}>결제금액</th>
-                  <td colSpan={2}><span style={{fontWeight:'700', color:'rgb(229 92 27)'}}>{sum2}</span> 원</td>
-                </tr>
-              </table>
+              <div style={{width:"50%"}}>
+                <p style={{ fontSize: '22px', fontWeight: '600', textAlign:'left' }}>{bookingItemname}</p>
+                <table style={{ verticalAlign: 'center', textAlign: 'right', borderSpacing: "0", width: '100%', float:'right' }}>
+                  <colgroup>
+                    <col width='33%' />
+                    <col width='' />
+                  </colgroup>
+                  <tr>
+                    <th style={{fontWeight:'400', padding:'10px 0', textAlign:'left'}}>대여료</th>
+                    <td colSpan={2} style={{padding:'10px 0'}} ><span style={{fontWeight:'700'}}>{bookingItemprice2}</span> 원</td>
+                  </tr>
+                  <tr>
+                    <th style={{ borderBottom: '1px solid #aaa', fontWeight:'400', padding:'10px 0 13px 0', textAlign:'left' }}>보증금</th>
+                    <td style={{ borderBottom: '1px solid #aaa', padding:'10px 0 13px 0'}}>+ <span style={{fontWeight:'700'}}>{Deposit2}</span> 원</td>
+                  </tr>
+                  <tr>
+                    <th style={{fontWeight:'400', padding:'13px 0 0 0', textAlign:'left'}}>결제금액</th>
+                    <td colSpan={2} style={{padding:'13px 0 0 0'}}><span style={{fontWeight:'700', color:'rgb(229 92 27)'}}>{sum2}</span> 원</td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
 
