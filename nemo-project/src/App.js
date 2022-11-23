@@ -103,6 +103,7 @@ function App() {
 
         {/* admin */}
         <Route path="/admin/dec" component={Dec} exact={true} />
+        <Route path="/dec/detail/:singoNum" component={DecDetail} />
 
 
         {/* item */}
@@ -134,7 +135,6 @@ function App() {
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />
-        <Route path="/dec/detail/:singoNum" component={DecDetail} />
         <Route path="/dec/dec/:memberWarning" component={Dec} />
         <Route path="/userstoreinfo/:itemWriter,:memberImg" component={MyMenu} />
 
