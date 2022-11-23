@@ -10,7 +10,6 @@ function ReviewMore({ history, match }) {
 
     const [data, setData] = useState({});
     const [reviewFiles, setReviewFiles] = useState('');
-    const [imageSrc, setImageSrc] = useState('');
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
 
@@ -39,12 +38,12 @@ function ReviewMore({ history, match }) {
             <div className="itemDetailImg">
                 <img className="DetailImg" src={`../../../files_review/${data.reviewFiles}`}/>
             </div>
-            <div className='reviewContent'>
+            <div className='moreContent'>
                 <textarea value={reviewContents} type="text" readOnly></textarea>
             </div>
             <div className='satisfyingReview'>
                 <span>{reviewWriter} 님이 평가한 상품 만족도는?</span>
-                <input type="moreNum" value={reviewSatisfaction} readOnly/>
+                <input type="moreNum" value={`${reviewSatisfaction}%`} readOnly/>
             </div>
             <div className='btnWrap'>
                 <input type="button" className='greenBtn btn' value="목록으로" onClick={detailList}/>
@@ -98,7 +97,24 @@ const AppStyle = styled.div`
     font-size: 16px;
     color: #666;
     width: 98px;
+    pointer-events : none;
 }
+
+.moreContent textarea{
+    width: 100%;
+    height: auto;
+    resize: none;
+    overflow: auto;
+    border-radius: 5px;
+    border : 1px solid #ccc;
+    padding: 30px 20px 30px 20px;
+    font-size: 16px;
+    pointer-events : none;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    color : #666;
+}
+
   
   `;
   
