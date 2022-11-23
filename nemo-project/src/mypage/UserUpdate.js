@@ -94,10 +94,10 @@ function UserUpdate({ history }) {
             "memberSigungu": mSigungu
         }
 
-        if (memberNickname == '' || memberAddress == '' || memberPw == '') {
+        if ( memberAddress == '' || memberPw == '') {
             alert("필수 입력항목을 입력해주세요")
         } else if (ckNickname === false) {
-            alert("닉네임 중복확인을 해주세요.")
+            alert("닉네임 중복확인 해주세요.")
         } else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
             .then(response => {
@@ -206,7 +206,7 @@ function UserUpdate({ history }) {
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td className="requiredMark">닉네임</td>
+                                            <td>닉네임</td>
                                             <td>
                                                 <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname} />
                                             </td>
