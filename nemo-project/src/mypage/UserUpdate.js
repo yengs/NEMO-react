@@ -54,6 +54,7 @@ function UserUpdate({ history }) {
     const [mZipCode, setMzipCode] = useState('');
     const [mSigungu, setMsigungu] = useState('');
 
+    const [ckNickname,setcheckNickName] = useState(false);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
@@ -81,7 +82,6 @@ function UserUpdate({ history }) {
     const handlerChangePhone = (e) => setMemberPhone(e.target.value);
     const handlerChangeAddress = (e) => setMemberAddress(e.target.value);
 
-
     const UpdateProfile = (e) => {
         e.preventDefault();
 
@@ -98,22 +98,48 @@ function UserUpdate({ history }) {
             alert("필수 입력항목을 입력해주세요")
         }else if(ckNickname===false){
             alert("닉네임 중복확인을 해주세요.")
+        }else if(memberPw === '' || memberPw === null || memberPw === undefined){
+            alert("패스워드를 입력해주세요.");
+        }else if(memberPw.length < 8) {
+            alert("패스워드를 8이상 작성해주세요")
+        }else if(memberPwCheck === '' || memberPwCheck === null || memberPwCheck === undefined) {
+            alert("패스워드를 확인해주세요.");
+        }else if(memberPw !== memberPwCheck){
+            alert("패스워드를 올바르게 작성했는지 확인해주세요.");
         }else{axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
-            .then(response => {
-                if (response.status === 200) {
-                    alert("수정완료");
-                    history.push('/mypage/mybooking');
-                } else {
-                    alert("수정실패");
-                    return;
-                }
-            })
-            .catch(error => {
-                alert("에러");
-                console.log(memberInfo);
-                console.log(error)
-            });
-    }};
+        .then(response => {
+            if (response.status === 200) {
+                alert("수정완료");
+                // history.push('/mypage/mybooking');
+            } else {
+                alert("수정실패");
+                return;
+            }
+        })
+        .catch(error => {
+            alert("에러");
+            console.log(memberInfo);
+            console.log(error)
+        });
+}
+console.log(">>>>>>>>>>>",memberPwCheck)
+
+        // axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
+        //     .then(response => {
+        //         if (response.status === 200) {
+        //             alert("수정완료");
+        //             history.push('/mypage/mybooking');
+        //         } else {
+        //             alert("수정실패");
+        //             return;
+        //         }
+        //     })
+        //     .catch(error => {
+        //         alert("에러");
+        //         console.log(memberInfo);
+        //         console.log(error)
+        //     });
+    };
 
 
     //--------------------------회원탈퇴하기 모달
@@ -162,9 +188,8 @@ function UserUpdate({ history }) {
         }
     };
 
- // 닉네임 중복 체크
+     // 닉네임 중복 체크
 
- const [ckNickname,setcheckNickName] = useState(false);
     
  const checkNickname = (e) => {
      e.preventDefault();
@@ -184,6 +209,8 @@ function UserUpdate({ history }) {
              }
          });
  }
+
+
     return (
         <ContainerUserUpate style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage UserUpate">
@@ -205,7 +232,7 @@ function UserUpdate({ history }) {
                                     <tr>
                                         <td>닉네임</td>
                                         <td>
-                                            <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname}  />
+                                            <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname} required />
                                         </td>
                                         <td className="updateTableBtn">
                                             <button className="beigeBtn btn" onClick={checkNickname}>중복확인</button>
@@ -222,7 +249,14 @@ function UserUpdate({ history }) {
                                     <tr>
                                         <td>패스워드</td>
                                         <td>
-                                            <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw}  />
+                                            <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>패스워드확인</td>
+                                        <td>
+                                            <input type="password" name="mIdCheck" value={memberPwCheck} onChange={handlerChangePwCheck} required />
                                         </td>
                                         <td></td>
                                     </tr>
@@ -242,7 +276,7 @@ function UserUpdate({ history }) {
                                     <tr className="updateAddress">
                                         <td>주소</td>
                                         <td>
-                                            <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress}/>
+                                            <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress} required />
                                         </td>
                                         <td className="updateTableBtn">
                                             <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
@@ -263,7 +297,7 @@ function UserUpdate({ history }) {
                                 <tr>
                                     <td className="requiredMark">패스워드</td>
                                     <td>
-                                        <input className="pw" type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
+                                        <input className="pw" type="password" name="mPw" value={memberPw} required />
                                     </td>
                                 </tr>
                                 <tr>
@@ -294,8 +328,8 @@ function UserUpdate({ history }) {
                                 </div>
                             </MemberDelete>
                         </React.Fragment>
-                        <div className="btnWrap" >
-                            <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} style={{marginTop:'0'}} />
+                        <div className="btnWrap">
+                            <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} />
                         </div>
                     </form>
                 </div>
@@ -399,7 +433,7 @@ const ContainerUserUpate = styled.div`
   .UserUpate .inputTable table tr>td>input {
     border: 1px solid #ddd;
     width: 95%;
-    padding:11px 6px;
+    padding: 8px 6px;
     border-radius: 3px;
   }
   
@@ -424,13 +458,13 @@ const ContainerUserUpate = styled.div`
 
   .resignMembership {
     margin-left: 108px;
-    margin-top:  26px;
+    margin-top: 25px;
   }
 
   .resignMembership a {
     text-decoration: none;
     font-size: 14px;
-    color: #777;
+    color: #666;
   }
 
   .UserUpate .btn.beigeBtn {
