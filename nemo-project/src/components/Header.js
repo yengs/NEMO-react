@@ -155,6 +155,7 @@ function Header() {
                                     <a href='/item/cate/sub/패딩'>패딩</a>
                                     <a href='/item/cate/sub/코트'>코트</a>
                                     <a href='/item/cate/sub/자켓'>자켓</a>
+                                    <a href='/item/cate/sub/점퍼'>점퍼</a>
                                     <a href='/item/cate/sub/후드집업'>후드집업</a>
                                     <a href='/item/cate/sub/바람막이'>바람막이</a>
                                 </div>
