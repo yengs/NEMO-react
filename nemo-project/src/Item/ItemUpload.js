@@ -218,6 +218,7 @@ function ItemUpload({ history }) {
                                             <option value="패딩">패딩</option>
                                             <option value="코트">코트</option>
                                             <option value="자켓">자켓</option>
+                                            <option value="점퍼">점퍼</option>
                                             <option value="후드집업">후드집업</option>
                                             <option value="바람막이">바람막이</option>
 
