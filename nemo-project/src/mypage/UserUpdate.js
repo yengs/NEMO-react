@@ -96,8 +96,6 @@ function UserUpdate({ history }) {
 
         if ( memberAddress == '' || memberPw == '') {
             alert("필수 입력항목을 입력해주세요")
-        } else if (ckNickname === false) {
-            alert("닉네임 중복확인 해주세요.")
         } else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
             .then(response => {
@@ -166,7 +164,7 @@ function UserUpdate({ history }) {
 
     // 닉네임 중복 체크
 
-    const [ckNickname, setcheckNickName] = useState(false);
+    // const [ckNickname, setcheckNickName] = useState(false);
 
     const checkNickname = (e) => {
         e.preventDefault();
@@ -175,13 +173,10 @@ function UserUpdate({ history }) {
             .then(nickname => {
                 console.log(nickname);
                 if (nickname.data === "success" && memberNickname !== "") {
-                    setcheckNickName(true);
                     alert("사용 가능한 닉네임입니다.");
                 } else if (nickname.data === "fail" && memberNickname !== "") {
-                    setcheckNickName(false);
                     alert("이미 사용중인 닉네임입니다.")
                 } else {
-                    setcheckNickName(false);
                     alert("닉네임을 입력해주세요");
                 }
             });
