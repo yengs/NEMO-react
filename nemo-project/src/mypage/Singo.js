@@ -414,6 +414,7 @@ const SingoContainer = styled.div`
   .memberPage2 .inputTable table {
     width: 100%;
     border-spacing: 0;
+    padding-top: 25px
   }
   
   .memberPage2 .inputTable table tr>td {
@@ -498,6 +499,7 @@ const SingoContainer = styled.div`
     width: 100%;
     text-align: center;
     padding-bottom: 0px;
+    padding-top: 25px;
   }
   
   .loginForm2 {
