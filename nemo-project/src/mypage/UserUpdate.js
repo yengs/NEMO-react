@@ -69,6 +69,8 @@ function UserUpdate({ history }) {
                 setMemberEmail(response.data.memberEmail);
                 setMemberPhone(response.data.memberPhone);
                 setMemberAddress(response.data.memberAddress);
+                setMzipCode(response.data.memberZipCode);
+                setMsigungu(response.data.memberSigungu);
             })
             .catch(error => console.log(error));
     }, []);
