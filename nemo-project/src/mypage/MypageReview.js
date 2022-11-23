@@ -160,7 +160,7 @@ function MypageReview() {
                                             <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
                                         <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
-                                        <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice}</td>
+                                        <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                         <td className='ReviewContent' rowSpan={3}>
                                             <div className="myReviewContents">{review.reviewContents}</div>
                                         </td>
