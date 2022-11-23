@@ -15,6 +15,10 @@ function ReviewUpdate({ history, match }) {
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/no_image.gif';
+    }
+
     const [showCom, setShowCom] = useState(false);
     const showComment = () => {
         setShowCom(true)
@@ -132,14 +136,14 @@ function ReviewUpdate({ history, match }) {
                             {
                                 imageSrc ?
                                     <div className="itemImg">
-                                        <img src={imageSrc} alt="preview-img" className="previewImg" onMouseEnter={showComment} />
+                                        <img src={imageSrc} alt="preview-img" className="previewImg" onMouseEnter={showComment} onError={handleImgError}/>
                                         <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                             이미지 변경을 하시려면<br/>클릭해주세요.
                                         </div>
                                     </div>
                                     :
                                     <div className="itemImg">
-                                        <img className="previewImg" src={`../../../files_review/${data.reviewFiles}`} onMouseEnter={showComment}/>
+                                        <img className="previewImg" src={`../../../files_review/${data.reviewFiles}`} onMouseEnter={showComment} onError={handleImgError}/>
                                         <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                             이미지 변경을 하시려면<br/>클릭해주세요.
                                         </div>
