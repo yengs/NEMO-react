@@ -124,16 +124,17 @@ function ItemDetail({ match, history }) {
 
     const dateWhat = () => {
         
-        if (new Date(itemRentalend) > now) {
+        if (sessionStorage.getItem("memberId") === data.itemWriter) {
+            alert("본인물품은 대여신청할 수 없습니다.");
+            history.goBack();
+        }else if (sessionStorage.getItem("memberId") === null){
+            alert("로그인 해주세요.");
+            history.push('/member/login');
+        }else if (new Date(itemRentalend) > now) {
             history.push(`/item/bookingupload/${match.params.itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`);
         } else {
             alert("대여기간이 지난 상품입니다")
             history.push(`/item/cate/sub/${data.itemSubcategory}`);
-        }
-
-        if (sessionStorage.getItem("memberId") === data.itemWriter) {
-            alert("본인물품은 대여신청할 수 없습니다.");
-            history.goBack();
         }
 
     }
