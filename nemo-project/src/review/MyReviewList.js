@@ -19,6 +19,8 @@ function MyReviewList({ history, match }) {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
 
+    const handlerClickList = () => history.goBack();
+
     // 후기 데이터 가져오기
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
@@ -103,7 +105,7 @@ function MyReviewList({ history, match }) {
                                             <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
                                         <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
-                                        <td className='ReviewWriter'>{review.reviewItemprice}</td>
+                                        <td className='ReviewWriter'>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
                                         <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img>
@@ -117,7 +119,7 @@ function MyReviewList({ history, match }) {
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>
                                                     {review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
-                                            }
+                                            } 
                                             <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}> [ 수정 ] </button>
                                             <button className="moreBtn" onClick={() => handlerReviewDelete(review.reviewNum)}> [ 삭제 ] </button>
                                         </div>
@@ -163,7 +165,13 @@ function MyReviewList({ history, match }) {
                     </tbody>
                 </table>
                 <div>
-                    <Paging page={page} count={count} setPage={changePage} />
+                    <table className="sun">
+                       <tr >
+                        <td>
+                        <Paging page={page} count={count} setPage={changePage} />
+                        </td><td> <input type="button" id="list" className="greyBtnMPID" value="뒤로가기" onClick={handlerClickList} />
+                        </td> </tr>
+                    </table>
                 </div>
             </div>
         </>

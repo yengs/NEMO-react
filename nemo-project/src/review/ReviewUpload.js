@@ -116,7 +116,7 @@ export default function ReviewUpload({ history, match }) {
         }));
         formData.append("reviewFiles", reviewFiles);
 
-        if (reviewContents.length > 30 && reviewSatisfaction != null) {
+        if (reviewContents.length > 20 && reviewSatisfaction != null) {
             axios.post(`http://localhost:8080/api/review/reviewWrite/${bookingNumm}`, formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } })
                 .then(response => {
@@ -126,7 +126,7 @@ export default function ReviewUpload({ history, match }) {
                     }
                 }).catch(error => { console.log(error); alert("등록에 실패했습니다."); });
         } else {
-            alert("내용 30자 이상, 상품의 만족도를 입력했는지 확인해주세요.");
+            alert("내용 20자 이상, 상품의 만족도를 입력했는지 확인해주세요.");
         }
 
     };
@@ -197,7 +197,7 @@ export default function ReviewUpload({ history, match }) {
                 </AppStyle>
             </div>
             <div className='reviewContent'>
-                <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="최소 30자 이상 내용을 입력해주세요."></textarea>
+                <textarea value={reviewContents} onChange={handlerChangeReviewContents} placeholder="최소 20자 이상 내용을 입력해주세요."></textarea>
             </div>
             <div className='satisfyingReview'>
                 <span>상품의 만족도는 어떠셨나요?</span>

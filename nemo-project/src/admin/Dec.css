@@ -1,6 +1,6 @@
 /* 마이페이지 내의 페이지 */
 .adminInnerPage{
-    width: calc(100% - 230px);
+    width: calc(80% - 230px);
     /* width: 100%; */
     padding: 20px;
     height: 700px;
