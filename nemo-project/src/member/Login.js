@@ -148,9 +148,9 @@ function Login({ history }) {
 
                 <div className="btnWrap">
                     <Link to="/member/join" className="btn grayBtn joinBtn">회원가입</Link>
-                    <Link to="/" className="btn googleLoginBtnLink">
+                    {/* <Link to="/" className="btn googleLoginBtnLink">
                         <div style={{ backgroundImage: `url(${GoogleLogin})` }} className="googleLoginBtn"></div>
-                    </Link>
+                    </Link> */}
                 </div>
                 {/* <div className="socialLogin">
                 <p>소셜로 로그인하기</p>

@@ -150,6 +150,10 @@ function MyPageItemDetail({ match, location, history }) {
         setShowCom(false)
     }
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noimage.gif';
+    }
+
 
     return (
         <MyPageItemDetailContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
@@ -161,7 +165,7 @@ function MyPageItemDetail({ match, location, history }) {
                             <label htmlFor="item_review_input" className="item_review_input">
                                 {imageSrc == '' ?
                                     <div className="itemImg">
-                                        <img className="previewImg" src={`../../files/${data.files}`} onMouseEnter={showComment} />
+                                        <img className="previewImg" src={`../../files/${data.files}`} onMouseEnter={showComment} onError={handleImgError}/>
                                         <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                             이미지 변경을 하시려면<br />클릭해주세요.
                                         </div>
@@ -224,6 +228,7 @@ function MyPageItemDetail({ match, location, history }) {
                                                             <option value="반팔">반팔</option>
                                                             <option value="긴팔">긴팔</option>
                                                             <option value="니트">니트</option>
+                                                            <option value="셔츠">셔츠</option>
                                                             <option value="블라우스">블라우스</option>
 
                                                         </select>;
@@ -242,15 +247,18 @@ function MyPageItemDetail({ match, location, history }) {
                                                         return <select type="text" value={itemSubcategory} onChange={handlerChangeItemSubcategory}>
                                                             <option value="패딩">패딩</option>
                                                             <option value="코트">코트</option>
+                                                            <option value="자켓">자켓</option>
+                                                            <option value="점퍼">점퍼</option>
+                                                            <option value="후드집업">후드집업</option>
                                                             <option value="바람막이">바람막이</option>
 
                                                         </select>;
                                                     }
                                                     else {
                                                         return <select type="text" value={itemSubcategory} onChange={handlerChangeItemSubcategory}>
-                                                            <option value="패딩">롱</option>
-                                                            <option value="코트">미디</option>
-                                                            <option value="바람막이">미니</option>
+                                                            <option value="롱">롱</option>
+                                                            <option value="미디">미디</option>
+                                                            <option value="미니">미니</option>
                                                         </select>;
                                                     }
                                                 })()
@@ -259,11 +267,11 @@ function MyPageItemDetail({ match, location, history }) {
                                     </tr>
                                     <tr>
                                         <th scope="row">가격</th>
-                                        <td><input type="text" value={itemPrice} onChange={handlerChangePrice} /></td>
+                                        <td><input type="text" value={itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} onChange={handlerChangePrice} /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">보증금</th>
-                                        <td><input type="text" value={itemDeposit} onChange={handlerChangeItemDeposit} /></td>
+                                        <td><input type="text" value={itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} onChange={handlerChangeItemDeposit} /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">사이즈</th>

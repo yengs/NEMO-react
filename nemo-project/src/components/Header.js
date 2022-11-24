@@ -135,6 +135,7 @@ function Header() {
                                     <a href='/item/cate/sub/반팔'>반팔</a>
                                     <a href='/item/cate/sub/긴팔'>긴팔</a>
                                     <a href='/item/cate/sub/니트'>니트</a>
+                                    <a href='/item/cate/sub/셔츠'>셔츠</a>
                                     <a href='/item/cate/sub/블라우스'>블라우스</a>
                                 </div>
                             </li>
@@ -153,6 +154,9 @@ function Header() {
                                 <div class="dropdown-content">
                                     <a href='/item/cate/sub/패딩'>패딩</a>
                                     <a href='/item/cate/sub/코트'>코트</a>
+                                    <a href='/item/cate/sub/자켓'>자켓</a>
+                                    <a href='/item/cate/sub/점퍼'>점퍼</a>
+                                    <a href='/item/cate/sub/후드집업'>후드집업</a>
                                     <a href='/item/cate/sub/바람막이'>바람막이</a>
                                 </div>
                             </li>

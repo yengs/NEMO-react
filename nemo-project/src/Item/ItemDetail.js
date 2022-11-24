@@ -27,6 +27,7 @@ function ItemDetail({ match, history }) {
     const [itemRentalstart, setItemRentalstart] = useState('');
     const [itemRentalend, setItemRentalend] = useState('');
     const [memberImg, setMemberImg] = useState('');
+    const [memberNickname,setMemberNickname]= useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
     const { itemNum } = match.params;
@@ -61,6 +62,7 @@ function ItemDetail({ match, history }) {
                 setItemRentalstart(response.data.itemRentalstart);
                 setItemRentalend(response.data.itemRentalend);
                 setMemberImg(response.data.memberImg);
+                setMemberNickname(response.data.memberNickname);
 
                 // 리뷰어의 클린지수 조회
                 axios.get(`http://localhost:8080/api/clean/${response.data.itemWriter}`)
@@ -97,7 +99,7 @@ function ItemDetail({ match, history }) {
     const handlerChangeDeposit = (e) => setItemDeposit(e.target.value);
     const handlerChangeDetail = (e) => setItemDetail(e.target.value);
 
-    const handlerClickList = () => history.goBack();
+    const handlerClickList = () => history.push(`/item/cate/sub/${data.itemSubcategory}`);
     const handlerClickDelete = () => {
         axios.delete(`http://localhost:8080/api/item/${match.params.itemNum}`)
             .then(response => {
@@ -168,16 +170,17 @@ function ItemDetail({ match, history }) {
 
 
     const chatting = () => {
-
-        if (sessionStorage.getItem("memberId") !== data.itemWriter) {
+        if (sessionStorage.getItem("memberId") === null) {
+            alert("로그인이 필요합니다.");
+            history.push('/member/login');
+        }
+        else if (sessionStorage.getItem("memberId") !== data.itemWriter) {
             history.push(`/chatting/${itemWriter}`);
         }
-
         else if (sessionStorage.getItem("memberId") === data.itemWriter) {
             alert("본인은 본인에게 채팅을 할수 없습니다.");
             history.goBack();
         }
-
     }
 
     return (
@@ -203,7 +206,7 @@ function ItemDetail({ match, history }) {
                     <br></br>
                     <div className="tablePlusForm">
                         <div className="imageDiv">
-                            <img className="itemImg" src={`../../files/${data.files}`} />
+                            <img className="itemImg" src={`../../files/${data.files}`} onError={handleImgError} />
                         </div>
                         <div className="tableform">
                             <div>
@@ -242,10 +245,10 @@ function ItemDetail({ match, history }) {
 
                             <div className="writerDiv" style={{ cursor: "pointer" }} onClick={goUserStore}>
                                 <h3>대여자</h3>
-                                <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
+                                <img className="memberImg" src={`../../memberImg/${memberImg}`} onError={handleImgError}></img>
                             </div>
                             <div style={{ cursor: "pointer" }} onClick={goUserStore} className="cleanDiv">
-                                <h4>{itemWriter}</h4>
+                                <h4>{memberNickname}</h4>
                                 <div>
 
                                     {reviewSatisfaction == 0 ?
@@ -295,7 +298,7 @@ function ItemDetail({ match, history }) {
                                             <div key={items.itemNum} >
                                                 <div className="itemInfoWrap" style={{ width: "130px", height: "140px", backgroundColor: "rgb(194 217 204)", marginLeft: "20px" }}  >
                                                     <Link to={`/item/detail/${items.itemNum}`}>
-                                                        <img className="itemImggg" src={`../../files/${items.files}`} ></img>
+                                                        <img className="itemImggg" src={`../../files/${items.files}`} onError={handleImgError}></img>
                                                     </Link>
                                                 </div>
                                             </div>
