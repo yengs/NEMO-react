@@ -57,7 +57,6 @@ function MypageReview() {
                             <button className="plusBtn" onClick={goYourReview}> + 더보기</button>
                         </div>
                     </div>
-
                     <table className="yourReviewListAboutStore">
                         <colgroup>
                             <col width="10%" />
@@ -80,7 +79,6 @@ function MypageReview() {
                                     <tr key={review.reviewNum}>
                                         <td rowSpan={2} className="rReviewItemImageOrigin">
                                             <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
-                                            {/* <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`}/>         -----> 리뷰등록 사진*/}
                                         </td>
                                         <td className='ReviewItemNameOrigin' rowSpan={3} >
                                             <Link to={`/item/detail/${review.reviewProductIdx}`}>
@@ -89,7 +87,9 @@ function MypageReview() {
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
                                         <td className='ReviewContent' rowSpan={3}>
-                                            <div className="myReviewContents">{review.reviewContents}</div>
+                                            <div className="myReviewContents">
+                                              {review.reviewContents.length < 30 ? review.reviewContents : review.reviewContents  + "..." }
+                                            </div>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>
@@ -171,7 +171,9 @@ function MypageReview() {
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                         <td className='ReviewContent' rowSpan={3}>
-                                            <div className="myReviewContents">{review.reviewContents}</div>
+                                            <div className="myReviewContents">
+                                                {review.reviewContents.length < 30 ? review.reviewContents : review.reviewContents  + "..." }
+                                            </div>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>
@@ -233,6 +235,7 @@ const MypageReviewContainer = styled.div`
 .myReviewContents {
     display: flex;
     max-height: 32px;
+    max-width: 300px;
     overflow: hidden;
     // justify-content: flex-start;
     white-space: pre-wrap;
@@ -241,8 +244,10 @@ const MypageReviewContainer = styled.div`
 
 .bookingitemImg{
     width: 100%;
-    height : 82px;
+    height: 82px;
+    margin: 5px 5px 0px 5px;
 }
+
 .myPageWrap {
     width: 100%;
     height: calc(100vh - 250px);
