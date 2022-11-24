@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
+import { Link } from "react-router-dom";
 
 function MyReviewList({ history, match }) {
 
@@ -13,6 +14,13 @@ function MyReviewList({ history, match }) {
     const [count, setCount] = useState(0);                              // 전체 개수
     const [page, setPage] = useState(1);                                // 보여지는 페이지
     const [items, setItems] = useState([]);                             // 페이징을 통해서 보여줄 데이터
+
+
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noreviewimage.png';
+    }
+
+    const handlerClickList = () => history.goBack();
 
     // 후기 데이터 가져오기
     useEffect(() => {
@@ -97,11 +105,15 @@ function MyReviewList({ history, match }) {
                                     <td className="rReviewItemImageOrigin">
                                             <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
-                                        <td className='ReviewWriter'>{review.reviewItemprice}</td>
+                                        <td className='ReviewItemNameOrigin'>
+                                        <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                            {review.reviewItemname}
+                                            </Link>
+                                            </td>
+                                        <td className='ReviewWriter'>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
-                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`}></img>
+                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
@@ -111,7 +123,7 @@ function MyReviewList({ history, match }) {
                                             {review.reviewContents.length > 18 ?
                                                 <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
-                                            }
+                                            } 
                                             <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}> [ 수정 ] </button>
                                             <button className="moreBtn" onClick={() => handlerReviewDelete(review.reviewNum)}> [ 삭제 ] </button>
                                         </div>
@@ -157,7 +169,13 @@ function MyReviewList({ history, match }) {
                     </tbody>
                 </table>
                 <div>
-                    <Paging page={page} count={count} setPage={changePage} />
+                    <table className="sun">
+                       <tr >
+                        <td>
+                        <Paging page={page} count={count} setPage={changePage} />
+                        </td><td> <input type="button" id="list" className="greyBtnMPID" value="뒤로가기" onClick={handlerClickList} />
+                        </td> </tr>
+                    </table>
                 </div>
             </div>
         </>

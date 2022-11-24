@@ -4,12 +4,19 @@ import { useEffect, useState } from "react";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Paging from "../pagination/Paging";
+import Pagination from "react-js-pagination"
 
 function ItemDetail({ match, history }) {
+
+    const ITEM_COUNT_PER_PAGE = 5;
 
     const [data, setData] = useState({});
     const [datas, setDatas] = useState([]);
     const [datas2, setDatas2] = useState([]);
+    const [page, setPage] = useState(1);   
+    const [count, setCount] = useState(0); 
+    const [items, setItems] = useState([]);   
 
     const [itemName, setItemName] = useState('');
     const [itemPrice, setItemPrice] = useState('');
@@ -20,12 +27,30 @@ function ItemDetail({ match, history }) {
     const [itemRentalstart, setItemRentalstart] = useState('');
     const [itemRentalend, setItemRentalend] = useState('');
     const [memberImg, setMemberImg] = useState('');
+    const [memberNickname,setMemberNickname]= useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
-    const reviewProductIdx = match.params;
+    const { itemNum } = match.params;
+    const reviewProductIdx = itemNum;
+
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noimage.gif';
+    }
+
+    const changePage = page => {
+        setPage(page);
+        setItems(datas.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+    };
+
+    const handelrMoreBtn = (reviewNum) => {
+        setItems(items.map(item =>
+            item.reviewNum === reviewNum ? ({ ...item, closed: !item.closed }) : item
+        ));
+    };
+
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/detail/${match.params.itemNum}`)
+        axios.get(`http://localhost:8080/api/item/detail/${itemNum}`)
             .then(response => {
                 setData(response.data);
                 setItemName(response.data.itemName);
@@ -37,6 +62,7 @@ function ItemDetail({ match, history }) {
                 setItemRentalstart(response.data.itemRentalstart);
                 setItemRentalend(response.data.itemRentalend);
                 setMemberImg(response.data.memberImg);
+                setMemberNickname(response.data.memberNickname);
 
                 // 리뷰어의 클린지수 조회
                 axios.get(`http://localhost:8080/api/clean/${response.data.itemWriter}`)
@@ -48,20 +74,24 @@ function ItemDetail({ match, history }) {
 
                 axios.get(`http://localhost:8080/api/mypage/mypageitem/${response.data.itemWriter}`)
                     .then(response => {
-                      setDatas2(response.data);        
+                        setDatas2(response.data);
                     })
                     .catch(error => console.log(error));
             })
             .catch(error => { console.log(error); });
 
-    }, [match.params]);
-
-    //후기조회
-    useEffect(() => {
-        axios.get(`http://localhost:8080/api/itemreview/${reviewProductIdx.itemNum}`)
-            .then(response => { setDatas(response.data); })
+        //후기조회
+        axios.get(`http://localhost:8080/api/itemreview/${reviewProductIdx}`)
+            .then(response => { 
+                const list = response.data.map(data => ({ ...data, closed: true }));
+                console.log(list);
+                setDatas(list)
+                setCount(list.length);
+                setItems(list.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+                })
             .catch(error => { console.log(error); });
-    }, []);
+
+    }, [match.params]);
 
 
     const handlerChangeName = (e) => setItemName(e.target.value);
@@ -69,7 +99,7 @@ function ItemDetail({ match, history }) {
     const handlerChangeDeposit = (e) => setItemDeposit(e.target.value);
     const handlerChangeDetail = (e) => setItemDetail(e.target.value);
 
-    const handlerClickList = () => history.goBack();
+    const handlerClickList = () => history.push(`/item/cate/sub/${data.itemSubcategory}`);
     const handlerClickDelete = () => {
         axios.delete(`http://localhost:8080/api/item/${match.params.itemNum}`)
             .then(response => {
@@ -123,245 +153,270 @@ function ItemDetail({ match, history }) {
     let now = new Date();
 
     const dateWhat = () => {
-        
-        if (new Date(itemRentalend) > now) {
+
+        if (sessionStorage.getItem("memberId") === data.itemWriter) {
+            alert("본인물품은 대여신청할 수 없습니다.");
+        } else if (sessionStorage.getItem("memberId") === null) {
+            alert("로그인 해주세요.");
+            history.push('/member/login');
+        } else if (new Date(itemRentalend) > now) {
             history.push(`/item/bookingupload/${match.params.itemNum},${itemName},${itemDeposit},${itemPrice},${itemWriter},${files},${itemRentalstart},${itemRentalend}`);
         } else {
             alert("대여기간이 지난 상품입니다")
             history.push(`/item/cate/sub/${data.itemSubcategory}`);
         }
 
-        if (sessionStorage.getItem("memberId") === data.itemWriter) {
-            alert("본인물품은 대여신청할 수 없습니다.");
-            history.goBack();
-        }
-
     }
 
 
     const chatting = () => {
-        
-        if (sessionStorage.getItem("memberId") !== data.itemWriter) {
+        if (sessionStorage.getItem("memberId") === null) {
+            alert("로그인이 필요합니다.");
+            history.push('/member/login');
+        }
+        else if (sessionStorage.getItem("memberId") !== data.itemWriter) {
             history.push(`/chatting/${itemWriter}`);
-        } 
-
-       else if (sessionStorage.getItem("memberId") === data.itemWriter) {
+        }
+        else if (sessionStorage.getItem("memberId") === data.itemWriter) {
             alert("본인은 본인에게 채팅을 할수 없습니다.");
             history.goBack();
         }
-
     }
 
     return (
-       
+
         <ItemDatailContainer style={{ padding: "80px 0" }}>
-             <>
-            <div className="DetailContainer" style={{ maxWidth: '1000px' }}>
-                <h2>상품 상세</h2>
-                <div className="clickList">
+            <>
+                <div className="DetailContainer" style={{ maxWidth: '1000px' }}>
+                    <h2>상품 상세</h2>
+                    <div className="clickList">
 
-                    <div className="Breadcrumb">
-                        <Breadcrumb tag='nav' listTag='div'>
-                            <BreadcrumbItem tag='a' onClick={handlerMaincate}>{data.itemMaincategory}</BreadcrumbItem>
-                            {' > '}
-                            <BreadcrumbItem tag='a' onClick={handlerSubcate}>{data.itemSubcategory}</BreadcrumbItem>
-                        </Breadcrumb>
-                    </div>
-                    <div>
-                        <a className="goList" onClick={handlerClickList}>목록으로</a>
-                        <p>👀 {data.itemReadcount} 📅 {data.itemDate}</p>
-                    </div>
-                </div>
-                <br></br>
-                <div className="tablePlusForm">
-                    <div className="imageDiv">
-                        <img className="itemImg" src={`../../files/${data.files}`} />
-                    </div>
-                    <div className="tableform">
+                        <div className="Breadcrumb">
+                            <Breadcrumb tag='nav' listTag='div'>
+                                <BreadcrumbItem tag='a' onClick={handlerMaincate}>{data.itemMaincategory}</BreadcrumbItem>
+                                {' > '}
+                                <BreadcrumbItem tag='a' onClick={handlerSubcate}>{data.itemSubcategory}</BreadcrumbItem>
+                            </Breadcrumb>
+                        </div>
                         <div>
-                            <h2 className="itemName">{data.itemName}</h2>
-                            <h3 className="itemPrice"><span>{data.itemPrice}</span>원</h3>
-                            <p className="itemDeposit">보증금<span>{data.itemDeposit}</span>원</p>
-                            <div style={{ borderBottom: "1px solid #ddd" }}></div>
-                            <p className="itemSize">사이즈
-                                {
-                                    (function () {
-                                        if (data.itemMaincategory === "상의") {
-                                            return <span>{data.itemTopsize}</span>
-                                        }
-                                        else if (data.itemMaincategory === "하의") {
-                                            return <span>{data.itemBottomsize}</span>
-                                        }
-                                        else { return <span>{data.itemEtcsize}</span> }
-                                    })()
-                                }
-                            </p>
-                            <h4 className="itemRentalPeriod">대여기간<span>{data.itemRentalstart} ~ {data.itemRentalend}</span></h4>
-                            <p className="itemDetailContent">{data.itemDetail}</p>
-                        </div>
-
-                        <div className="buttonDiv">
-                            <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
-                            <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
+                            <a className="goList" onClick={handlerClickList}>목록으로</a>
+                            <p>👀 {data.itemReadcount} 📅 {data.itemDate}</p>
                         </div>
                     </div>
-                </div>
-
-                <div className="middleDiv">
-                    {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
-                        + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
-                    <div className="writerWrap">
-
-                        <div className="writerDiv" style={{ cursor: "pointer" }} onClick={goUserStore}>
-                            <h3>대여자</h3>
-                            <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
+                    <br></br>
+                    <div className="tablePlusForm">
+                        <div className="imageDiv">
+                            <img className="itemImg" src={`../../files/${data.files}`} onError={handleImgError} />
                         </div>
-                        <div style={{ cursor: "pointer" }} onClick={goUserStore} className="cleanDiv">
-                            <h4>{itemWriter}</h4>
+                        <div className="tableform">
                             <div>
+                                <h2 className="itemName">{data.itemName}</h2>
+                                <h3 className="itemPrice"><span>{itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</h3>
+                                <p className="itemDeposit">보증금<span>{itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
+                                <div style={{ borderBottom: "1px solid #ddd" }}></div>
+                                <p className="itemSize">사이즈
+                                    {
+                                        (function () {
+                                            if (data.itemMaincategory === "상의") {
+                                                return <span>{data.itemTopsize}</span>
+                                            }
+                                            else if (data.itemMaincategory === "하의") {
+                                                return <span>{data.itemBottomsize}</span>
+                                            }
+                                            else { return <span>{data.itemEtcsize}</span> }
+                                        })()
+                                    }
+                                </p>
+                                <h4 className="itemRentalPeriod">대여기간<span>{data.itemRentalstart} ~ {data.itemRentalend}</span></h4>
+                                <p className="itemDetailContent">{data.itemDetail}</p>
+                            </div>
 
-                                {reviewSatisfaction == 0 ?
-                                    <div>
-                                        <div className='item-detail-clean'> 클린지수 50 % </div>
-                                        <img className="myMenu-img" src="/clean/fourtyp.png" alt="50" />
-                                    </div>
-                                    :
-                                    <div>
-                                        <div className='item-detail-clean'> 클린지수 {reviewSatisfaction}% </div>
-                                        <div> {
-                                            (function () {
-                                                if (reviewSatisfaction === 0) {
-                                                    return <img className="item-detail-Img" src="/clean/zero.png" alt="0percentlass" />
-                                                } else if (reviewSatisfaction > 0 && reviewSatisfaction <= 20) {
-                                                    return <img className="item-detail-Img" src="/clean/tenp.png" alt="10"></img>
-                                                } else if (reviewSatisfaction > 20 && reviewSatisfaction <= 40) {
-                                                    return <img className="item-detail-Img" src="/clean/thirtyp.png" alt="40" />
-                                                } else if (reviewSatisfaction > 40 && reviewSatisfaction <= 50) {
-                                                    return <img className="item-detail-Img" src="/clean/fourtyp.png" alt="50" />
-                                                } else if (reviewSatisfaction > 50 && reviewSatisfaction <= 60) {
-                                                    return <img className="item-detail-Img" src="/clean/sixtyp.png" alt="60" />
-                                                } else if (reviewSatisfaction > 60 && reviewSatisfaction <= 70) {
-                                                    return <img className="item-detail-Img" src="/clean/seventyp.png" alt="70" />
-                                                } else if (reviewSatisfaction > 70 && reviewSatisfaction <= 80) {
-                                                    return <img className="item-detail-Img" src="/clean/eightyp.png" alt="80" />
-                                                } else if (reviewSatisfaction > 80 && reviewSatisfaction <= 99) {
-                                                    return <img className="item-detail-Img" src="/clean/ninetyp.png" alt="99" />
-                                                } else {
-                                                    return <img className="item-detail-Img" src="/clean/onehundredp.png" alt="100" />
-                                                }
-                                            })()
-                                        }</div>
-                                    </div>
+                            <div className="buttonDiv">
+                                <input type="button" id="chatting" className="ItemgreenBtn" value="채팅하기" onClick={chatting} />
+                                <input type="button" id="retals" className="ItemgreenBtn" value="대여하기" onClick={dateWhat} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="middleDiv">
+                        {/* 대여자 프로필 사진이 떠야함 + 클린지수 퍼센트 숫자 수정
+                        + 클린지수 퍼센트에 따라 게이지 차게끔 수정 */}
+                        <div className="writerWrap">
+
+                            <div className="writerDiv" style={{ cursor: "pointer" }} onClick={goUserStore}>
+                                <h3>대여자</h3>
+                                <img className="memberImg" src={`../../memberImg/${memberImg}`} onError={handleImgError}></img>
+                            </div>
+                            <div style={{ cursor: "pointer", marginTop:'25px' }} onClick={goUserStore} className="cleanDiv">
+                                <h4>{memberNickname}</h4>
+                                <div>
+
+                                    {reviewSatisfaction == 0 ?
+                                        <div>
+                                            <div className='item-detail-clean'> 클린지수 50 % </div>
+                                            <img className="myMenu-img" src="/clean/fourtyp.png" alt="50" />
+                                        </div>
+                                        :
+                                        <div>
+                                            <div className='item-detail-clean' style={{marginTop: '12px'}}> 클린지수 {reviewSatisfaction}% </div>
+                                            <div> {
+                                                (function () {
+                                                    if (reviewSatisfaction === 0) {
+                                                        return <img className="item-detail-Img" src="/clean/zero.png" alt="0percentlass" />
+                                                    } else if (reviewSatisfaction > 0 && reviewSatisfaction <= 20) {
+                                                        return <img className="item-detail-Img" src="/clean/tenp.png" alt="10"></img>
+                                                    } else if (reviewSatisfaction > 20 && reviewSatisfaction <= 40) {
+                                                        return <img className="item-detail-Img" src="/clean/thirtyp.png" alt="40" />
+                                                    } else if (reviewSatisfaction > 40 && reviewSatisfaction <= 50) {
+                                                        return <img className="item-detail-Img" src="/clean/fourtyp.png" alt="50" />
+                                                    } else if (reviewSatisfaction > 50 && reviewSatisfaction <= 60) {
+                                                        return <img className="item-detail-Img" src="/clean/sixtyp.png" alt="60" />
+                                                    } else if (reviewSatisfaction > 60 && reviewSatisfaction <= 70) {
+                                                        return <img className="item-detail-Img" src="/clean/seventyp.png" alt="70" />
+                                                    } else if (reviewSatisfaction > 70 && reviewSatisfaction <= 80) {
+                                                        return <img className="item-detail-Img" src="/clean/eightyp.png" alt="80" />
+                                                    } else if (reviewSatisfaction > 80 && reviewSatisfaction <= 99) {
+                                                        return <img className="item-detail-Img" src="/clean/ninetyp.png" alt="99" />
+                                                    } else {
+                                                        return <img className="item-detail-Img" src="/clean/onehundredp.png" alt="100" />
+                                                    }
+                                                })()
+                                            }</div>
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+                            <div className="myitem1">
+
+
+                                <div className="myitem">
+
+                                    {
+                                        datas2 && datas2.map(items => (
+                                            <div key={items.itemNum} >
+                                                <div className="itemInfoWrap" style={{ width: "130px", height: "140px", backgroundColor: "transparent", marginLeft: "20px" }}  >
+                                                    <Link to={`/item/detail/${items.itemNum}`}>
+                                                        <img className="itemImggg" src={`../../files/${items.files}`} onError={handleImgError}></img>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        )).slice(0, 4)
+                                    }
+                                    {
+                                        datas2.length === 0 && (
+                                            <tr>
+                                                <td colSpan="4">일치는 데이터가 없습니다!.</td>
+                                            </tr>
+                                        )
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div className="reviewDiv">
+                        <h3>대여후기</h3>
+                        <div>
+                            <table className="reviewTable">
+                                <colgroup>
+                                    <col width={"13%"}></col>
+                                    <col width={"auto"}></col>
+                                    <col width={"54%"}></col>
+                                    <col width={"auto"}></col>
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>작성자</th>
+                                        <th>리뷰사진</th>
+                                        <th>내용</th>
+                                        <th>만족도</th>
+                                    </tr>
+                                </thead>
+                                {
+                                    items && items.map(review => (
+                                        <tbody>
+                                            <tr key={review.reviewNum}>
+                                                <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
+                                                <td rowSpan={2} className="ReviewItemImage2">
+                                                <Link to={`/review/yourReview/${review.reviewWriter}/${review.reviewNum}`}>
+                                                    <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError} />
+                                                </Link>
+                                                </td>
+                                                <td>
+                                                    <div className="reviewContents">
+                                                        <p className={review.closed ? "close" : ""}>{review.reviewContents}</p>
+                                                    </div>
+                                                    <div id="btnView">
+                                                        {review.reviewContents.length > 28 ?
+                                                            <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
+                                                            : null
+                                                        }
+                                                    </div>
+                                                </td>
+                                                <td className='ReviewWriter' rowSpan={3}>
+                                                    {review.reviewSatisfaction}
+                                                    <div>
+                                                        {
+                                                            (function () {
+                                                                if (review.reviewSatisfaction === 0) {
+                                                                    return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
+                                                                } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
+                                                                    return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
+                                                                } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
+                                                                    return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
+                                                                } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
+                                                                    return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
+                                                                } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
+                                                                    return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
+                                                                } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
+                                                                    return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
+                                                                } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
+                                                                    return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
+                                                                } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
+                                                                    return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
+                                                                } else {
+                                                                    return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
+                                                                }
+                                                            })()
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    ))
+                                }
+                                {
+                                    datas.length === 0 && (
+                                        <tr>
+                                            <td colSpan="4"> 작성된 글이 없습니다. </td>
+                                        </tr>
+                                    )
                                 }
 
+                            </table>
+                            <div>
+                             {/* <Paging page={page} count={count} setPage={changePage} /> */}
+                             <Pagination
+                                activePage={page}   // 현재 페이지
+                                itemsCountPerPage={5}  // 한 페이지당 보여줄 게시글 개수
+                                totalItemsCount={count}   // 모든 게시글 수
+                                pageRangeDisplayed={10}  // paginator안에서 보여줄 페이지의 범위
+                                prevPageText={"<"}  // 이전을
+                                nextPageText={">"}  // 다음
+                                onChange={changePage}    // 페이지가 바뀔 때 핸들러 함수 
+                            />
                             </div>
-
-                        </div>
-                        <div className="myitem1">
-
-                       
-                         <div className="myitem">
-                    
-                        { 
-                        datas2 && datas2.map(items => (
-                            <div key={items.itemNum} >
-                                    <div className="itemInfoWrap"  style={{width:"130px", height:"140px", backgroundColor:"rgb(194 217 204)", marginLeft:"20px"}}  >
-                                    <Link to={`/item/detail/${items.itemNum}`}>
-                                        <img className="itemImggg" src={`../../files/${items.files}` } ></img>
-                                    </Link> 
-                                    </div>
-                            </div>
-                        )).slice(0,4)
-                        }
-                           {
-                        datas2.length === 0 && (
-                            <tr>
-                                <td colSpan="4">일치는 데이터가 없습니다!.</td>
-                            </tr>
-                        )
-                    }
-                        </div>
                         </div>
                     </div>
                 </div>
 
-
-                <div className="reviewDiv">
-                    <h3>대여후기</h3>
-                    <div>
-                        <table className="reviewTable">
-                            <colgroup>
-                                <col width={"13%"}></col>
-                                <col width={"auto"}></col>
-                                <col width={"54%"}></col>
-                                <col width={"auto"}></col>
-                            </colgroup>
-                            <thead>
-                                <tr>
-                                    <th>작성자</th>
-                                    <th>리뷰사진</th>
-                                    <th>내용</th>
-                                    <th>만족도</th>
-                                </tr>
-                            </thead>
-                            {
-                                datas && datas.map(review => (
-                                    <tbody>
-                                        <tr key={review.reviewNum}>
-                                            <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
-                                            <td rowSpan={2} className="ReviewItemImage2">
-                                                <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`} />
-                                            </td>
-                                            <td className='ReviewContent' rowSpan={3}>{review.reviewContents}</td>
-                                            <td className='ReviewWriter' rowSpan={3}>
-                                                {review.reviewSatisfaction}
-                                                <div>
-                                                    {
-                                                        (function () {
-                                                            if (review.reviewSatisfaction === 0) {
-                                                                return <img className="reviewSatisImg" src="/clean/zero.png" alt="0percentlass" />
-                                                            } else if (review.reviewSatisfaction > 0 && review.reviewSatisfaction <= 20) {
-                                                                return <img className="reviewSatisImg" src="/clean/tenp.png" alt="10"></img>
-                                                            } else if (review.reviewSatisfaction > 20 && review.reviewSatisfaction <= 40) {
-                                                                return <img className="reviewSatisImg" src="/clean/thirtyp.png" alt="40" />
-                                                            } else if (review.reviewSatisfaction > 40 && review.reviewSatisfaction <= 50) {
-                                                                return <img className="reviewSatisImg" src="/clean/fourtyp.png" alt="40" />
-                                                            } else if (review.reviewSatisfaction > 50 && review.reviewSatisfaction <= 60) {
-                                                                return <img className="reviewSatisImg" src="/clean/sixtyp.png" alt="40" />
-                                                            } else if (review.reviewSatisfaction > 60 && review.reviewSatisfaction <= 70) {
-                                                                return <img className="reviewSatisImg" src="/clean/seventyp.png" alt="40" />
-                                                            } else if (review.reviewSatisfaction > 70 && review.reviewSatisfaction <= 80) {
-                                                                return <img className="reviewSatisImg" src="/clean/eightyp.png" alt="40" />
-                                                            } else if (review.reviewSatisfaction > 80 && review.reviewSatisfaction <= 99) {
-                                                                return <img className="reviewSatisImg" src="/clean/ninetyp.png" alt="40" />
-                                                            } else {
-                                                                return <img className="reviewSatisImg" src="/clean/onehundredp.png" alt="81~100" />
-                                                            }
-                                                        })()
-                                                    }
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                ))
-                            }
-                            {
-                                datas.length === 0 && (
-                                    <tr>
-                                        <td colSpan="4"> 작성된 글이 없습니다. </td>
-                                    </tr>
-                                )
-                            }
-
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div className="blank"></div>
+                <div className="blank"></div>
             </>
         </ItemDatailContainer>
-     
+
     );
 }
 
@@ -370,7 +425,7 @@ const ItemDatailContainer = styled.div`
 .itemImggg{
     width: 100% !important;
     height: 100%;
-    border: 1px solid #ddd;
+    border: 1px solid rgb(194, 217, 204);
     border-radius: 5px;
     background-position: center;
     background-repeat: no-repeat;
@@ -558,8 +613,28 @@ td.reviewImg,
     text-align: center;
 }
 
-.reviewDiv .ReviewContent {
+
+.reviewContents p {
+    display: -webkit-box;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    // font-size: 13px;
+    color: rgb(85, 85, 85);
     text-align: left;
+    width: auto;
+}
+
+.reviewContents p.close {
+    display: -webkit-box;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-align: left;
+    width: auto;
 }
 
 .DetailContainer form tr>td>input {

@@ -11,8 +11,14 @@ function MyMenu({ history , location}) {
     const itemWriter = sessionStorage.getItem('memberId');
     const reviewId = sessionStorage.getItem('memberId');
 
+    const memberNickname = sessionStorage.getItem('memberNickname');
+
     const [memberImg, setMemberImg] = useState('');
     const [imageSrc, setImageSrc] = useState('');
+
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/no-profile.PNG';
+    }
 
     //--------------프사 GET--------------
 
@@ -111,7 +117,7 @@ function MyMenu({ history , location}) {
 
         <div className="myMenuWrap">
             <AppStyle >
-            <img className="memberImg" src={`../../memberImg/${data.memberImg}`}  onMouseEnter={showComment}></img>
+            <img className="memberImg" src={`../../memberImg/${data.memberImg}`}  onMouseEnter={showComment} onError={handleImgError}></img>
             <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment} onClick={openModal}>
                                             이미지를 변경하시려면<br/>클릭해주세요.
                                         </div>
@@ -123,7 +129,7 @@ function MyMenu({ history , location}) {
                 <div className="ChoiseFile">
                 <div className="myDetailImage">
                     {imageSrc == '' ?
-                        <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} />
+                        <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} onError={handleImgError}/>
                         : <div className="myDetailImage">
                         {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" />} </div>
                     }
@@ -141,7 +147,7 @@ function MyMenu({ history , location}) {
             {/* ---프사모달 end--- */}
 
             
-            <div className='myMenuUserName'>{itemWriter}</div>
+            <div className='myMenuUserName'>{memberNickname}</div>
             <div className='cleanG'>
                 {reviewSatisfaction == 0 ?
                     <div>
@@ -187,6 +193,7 @@ const AppStyle = styled.div`
     line-height: 25px;
     margin-left: 24px;
     margin-top: -114px;
+    cursor: pointer;
 }
 
 .showCom {

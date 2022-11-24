@@ -59,15 +59,27 @@ hr{
 }
 
  .inputLogTable{
-  margin:70px auto;
+  margin:43px auto;
   width: 640px;
-  border-top: 2px solid rgb(170, 168, 168);
+  /* border-top: 2px solid rgb(170, 168, 168);
   border-bottom: 2px solid rgb(170, 168, 168);
   border-right: 2px solid rgb(170, 168, 168);
-  border-left: 2px solid rgb(170, 168, 168);
+  border-left: 2px solid rgb(170, 168, 168); */
   padding-top: 10px;
-  height: 740px;
- 
+  height: 688px;
+  /* border: 1px solid #eee; */
+}
+
+.inputLogTable2{
+  margin:43px auto;
+  width: 640px;
+  /* border-top: 2px solid rgb(170, 168, 168);
+  border-bottom: 2px solid rgb(170, 168, 168);
+  border-right: 2px solid rgb(170, 168, 168);
+  border-left: 2px solid rgb(170, 168, 168); */
+  padding-top: 10px;
+  height: 793px;
+  /* border: 1px solid #eee; */
 }
 
 .memberPagelog .pageTitle p{
@@ -194,8 +206,15 @@ text-align: left;
   font-weight: bold;  
 }
 
+.inputLogTable2 a:-webkit-any-link {
+  color: -webkit-link;
+  cursor: pointer;
+  color:#555;
+  font-weight: bold;  
+}
+
  .btnlog{
-  margin: 30px 90px 0;
+  margin: 15px 90px 0;
   font-size: 15px;
   border-radius: 3px;
   width: 420px;

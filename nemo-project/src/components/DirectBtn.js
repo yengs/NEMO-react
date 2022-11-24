@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 
 export default function DirectBtn() {
-    const [isShow, setIsShow] = useState(false);
+    const [isShow, setIsShow] = useState(true);
 
     const handlerHideNshow = () => {
         if(!isShow) {
@@ -47,7 +47,7 @@ export default function DirectBtn() {
                     }
                 </div>
             </div>
-            <div className="plusBtn" onClick={handlerHideNshow}>
+            <div className="directPlusBtn" onClick={handlerHideNshow}>
                 <BsFillPlusCircleFill/>
             </div>
         </div>
@@ -68,7 +68,7 @@ const DirectMenu = styled.div`
     position: relative;
  }
 
- .plusBtn, .directBtn > a {
+ .directPlusBtn, .directBtn > a {
     width: 90px;
     height: 90px;
     // background-color: pink;
@@ -77,16 +77,17 @@ const DirectMenu = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    color: #555;
  }
 
- .plusBtn {
+ .directPlusBtn {
     position: absolute;
     bottom: 0;
     background-color: #fff;
     cursor: pointer;
  }
 
- .plusBtn > svg {
+ .directPlusBtn > svg {
     width: 100%;
     height: 100%;
     color: rgb(88, 145, 112);

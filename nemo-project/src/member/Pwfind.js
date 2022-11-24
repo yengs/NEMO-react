@@ -33,19 +33,18 @@ function Pwfind({history}) {
                         }
                     }) .then(response2 => {
                         console.log(response2);
-                        alert(response2.data);
                         setCode(response2.data);
                     })
                     .catch(function () {
                         console.log('실패함')
                     })
                 } else {
-                    alert("내ㄴ다");
+                    alert("실패함");
                     return;
                 }
             })
             .catch(error => {
-                alert("아이디 또는 이메일을 확인해주세요");
+                alert("아이디 또는 이메일을 확인해주세요.");
                 console.log(memberInfo);
             });
     }
@@ -60,7 +59,9 @@ function Pwfind({history}) {
 
      //이메일 코드 일치확인
      const clickCode = () => {
-        if (String(userInputCode).length !== 5) {
+        if(memberId =='' || mEmail ==''){
+            alert('입력란을 작성해주세요')
+        } else if (String(userInputCode).length !== 5) {
             alert('5자리의 숫자코드를 입력해주세요.');
         } else if (code !== userInputCode) {
            alert('이메일 코드가 일치하지 않습니다.');
@@ -73,7 +74,7 @@ function Pwfind({history}) {
 
    
     return (
-        <div className="inputLogTable">
+        <div className="inputLogTable2">
         <div className="joinWrap memberPagelog container">
             
             <div className="pageTitle">

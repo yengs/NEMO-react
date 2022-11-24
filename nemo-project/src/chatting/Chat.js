@@ -14,13 +14,15 @@ const Chat = ({match}) => {
     const [datas, setDatas] = useState({});
     const {itemWriter} = match.params;
 
-    const ws = useRef(null);    //webSocket을 담는 변수, 
-                                //컴포넌트가 변경될 때 객체가 유지되어야하므로 'ref'로 저장
+    const ws = useRef(null);    //webSocket을 담는 변수
 
     const msgBox = chatt.map((item, idx) => (
-        <div key={idx} className={item.name === name ? 'me' : 'other'}>
-            <span><b>{item.name}</b></span> [ {item.date} ]<br/>
+        <div key={idx} >
+            <div className={item.name === name ? 'me' : 'other'}>
+            <span><b>{item.name}</b></span> <br/><br/>
             <span>{item.msg}</span>
+        </div>
+        <span className={item.name === name ? 'me' : 'other'}>{item.date}</span>
         </div>
     ));
 
@@ -33,7 +35,7 @@ const Chat = ({match}) => {
                 console.log("업데이트페이지 멤버넘버::::" + memberNum);
                 console.log(response);
                 setDatas(response.data);
-                setName(response.data.memberId);
+                setName(response.data.memberNickname);
                 webSocketLogin();
             })
             .catch(error => console.log(error));
@@ -59,11 +61,6 @@ const Chat = ({match}) => {
    
 
     //webSocket
-    //webSocket
-    //webSocket
-    //webSocket
-    //webSocket
-    //webSocket
     const onText = event => {
         console.log(event.target.value);
         setMsg(event.target.value);
@@ -88,13 +85,13 @@ const Chat = ({match}) => {
             const data = {
                 name,
                 msg,
-                date: new Date().toLocaleString(),
+                date: new Date().toLocaleTimeString(['en-GB'], {timeStyle: 'short'}),
             };  //전송 데이터(JSON)
 
             const temp = JSON.stringify(data);
             
             if(ws.current.readyState === 0) {   //readyState는 웹 소켓 연결 상태를 나타냄
-                ws.current.onopen = () => { //webSocket이 맺어지고 난 후, 실행
+                ws.current.onopen = () => {    //webSocket이 맺어지고 난 후, 실행
                     console.log(ws.current.readyState);
                     ws.current.send(temp);
                 }
@@ -128,17 +125,11 @@ const Chat = ({match}) => {
                         <div className='talk-shadow'></div>
                         {msgBox}
                     </div>
-                    <input disabled={chkLog}
-                        type='text' 
-                        id='name' 
-                        value={datas.memberId} 
-                        readOnly     
-                        />
-                    <div id='sendZone'>
-                        <textarea id='msg' value={msg} onChange={onText}
-                            onKeyDown={(ev) => {if(ev.keyCode === 13){send();}}}></textarea>
-                        <input type='button' value='전송' id='btnSend' onClick={send}/>
-                    </div>
+                     <div className="chat" >
+                                       <input className="chat-input"  id='msg' value={msg} onChange={onText}
+                            onKeyDown={(ev) => {if(ev.keyCode === 13){send();}}}  required/>
+                                       <button   className="chat-botton"   id='btnSend' onClick={send} type="submit">↑</button>
+                                 </div> 
                 </div>
             </div>
             </MyWebsocket>
@@ -149,6 +140,41 @@ const Chat = ({match}) => {
 
 
 const MyWebsocket = styled.div`
+
+.chat {
+    position: relative;
+    width: 460px;
+  }
+
+
+  .chat-input {
+    border: 1px solid rgb(241,241,241);
+    background-color: #ffffff;
+    padding: 10px 46px;
+    padding-left: 8px !important;
+    border-radius: 34px;
+    font-size: 15px;
+    margin-left: 10px;
+    outline: none;
+    width:100%
+}
+  .chat-botton {
+    position: absolute;
+    right: -5px;
+    top: 5px;
+    bottom: 8px;
+    border: 0;
+    background: rgb(100 165 127);
+    color: #fff;
+    outline: none;
+    margin: 0;
+    border-radius: 41px;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+}
+
 & {
     width:500px;
     background-color: #ededed;
@@ -186,21 +212,21 @@ const MyWebsocket = styled.div`
   
     #talk{
       width: 100%;
-      height: 400px;
+      height: 500px;
       overflow-y: auto;
-      border-radius: 18px;
       position: relative;
-  
+
       .talk-shadow{
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        
       }
   
       div{
-        width: 60%;
+        width: 220px;
         display: block;
         padding: 10px;
         border-radius:10px;
@@ -208,16 +234,26 @@ const MyWebsocket = styled.div`
   
         &.me{
           background-color : #ffc;
-          margin : 0px 0px 20px 40%;	
+          margin : 20px 0px 5px 240px;	
         }
   
         &.other{
             background-color : #fff;
-          margin : 20px 0px 2px 0;	
+          margin : 20px 0px 5px 0;	
         }
       }
     }
   
+    span{
+      &.me{
+       
+        margin : 20px 0px 5px 410px;	
+      }
+
+      &.other{
+        margin : 20px 0px 5px 10px;	
+      }
+    }
     #name{
       display: block;
       border: 1px solid #dcdcdc;

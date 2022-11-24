@@ -28,11 +28,12 @@ function Join() {
     const handlerChangeEmail = (e) => setMemail(e.target.value);
     const handlerChangePhone = (e) => setMphone(e.target.value);
     
-
-    const handleComplete = (data) => {
+    
+    // 주소검색창 팝업열기
+    const open = useDaumPostcodePopup();
+    const handleComplete = (data) => {     
         let fullAddress = data.address;
         let extraAddress = '';
-
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -48,9 +49,9 @@ function Join() {
         setMsigungu(data.sigungu);
     };
 
-    // 주소검색창 팝업열기
-    const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
-    const handleOpenSearchAddress = () => {
+    // const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
+    const handleOpenSearchAddress = (e) => {
+        e.preventDefault();
         open({ onComplete: handleComplete });
     };
 
@@ -79,8 +80,8 @@ function Join() {
         }else if(mPw !== mPwCheck){
             alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
             return setPasswordError(true);
-        } else if(!emailtest.test(mEmail)){
-            alert("이메일은 nemo@nemo.com 형식에 맞게 입력해주세요")
+        } else if(ckNickname===false){
+            alert("닉네임 중복확인을 해주세요.")
         }
         //이메일 인증은 나중에 보여줄때만 하기로 번거로워서 (확인은 했습니다!) --------삭제 금지-----
         // else if(ckEmail === false){
@@ -240,6 +241,29 @@ function Join() {
             });
     }
 
+    // 닉네임 중복 체크
+
+    const [ckNickname,setcheckNickName] = useState(false);
+    
+    const checkNickname = (e) => {
+        e.preventDefault();
+
+        axios.post('http://localhost:8080/api/member/join/checknickname', `memberNickname=${mNickname}`)
+            .then(nickname => {
+                console.log(nickname);
+                if (nickname.data === "success" && mNickname !== "") {
+                    setcheckNickName(true);
+                    alert("사용 가능한 닉네임입니다.");
+                } else if (nickname.data === "fail" && mNickname !== "") {
+                    setcheckNickName(false);
+                    alert("이미 사용중인 닉네임입니다.")
+                } else{
+                    setcheckNickName(false);
+                    alert("닉네임을 입력해주세요");
+                }
+            });
+    }
+
 
 // 이메일 관련 --------------------------------
     const [code, setCode] = useState();
@@ -252,11 +276,14 @@ function Join() {
 
     // 이메일 중복 체크 + 이메일 발송
     const checkEmail = (e) => {
-
+        e.preventDefault();
         axios.post('http://localhost:8080/api/member/join/checkemail', `memberEmail=${mEmail}`)
             .then(email => {
                 console.log(email);
-                if (email.data === "success" && mEmail !== "") {
+                if(!emailtest.test(mEmail)){
+                    alert("이메일은 nemo@nemo.com 형식에 맞게 입력해주세요")
+                }
+                else if (email.data === "success" && mEmail !== "") {
                     setCkEmail(true);
                     alert("사용 가능한 이메일입니다. 이메일 코드 발송");
                     axios.get(`http://localhost:8080/api/mail`, {
@@ -281,7 +308,8 @@ function Join() {
     }
 
      //이메일 코드 일치확인
-     const clickCode = () => {
+     const clickCode = (e) => {
+        e.preventDefault();
         if (String(userInputCode).length !== 5) {
             setCkCode(false);
             return alert('5자리의 숫자코드를 입력해주세요.');
@@ -316,6 +344,9 @@ function Join() {
                                 <td className="requiredMark">닉네임</td>
                                 <td>
                                     <input type="text" name="mNickname" value={mNickname} onChange={handlerChangeNickname} required />
+                                </td>
+                                <td className="memberTableBtn">
+                                    <button className="beigeBtn btn" onClick={checkNickname}>중복확인</button>
                                 </td>
                                 <td></td>
                             </tr>

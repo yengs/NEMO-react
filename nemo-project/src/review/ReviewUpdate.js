@@ -15,6 +15,10 @@ function ReviewUpdate({ history, match }) {
     const [reviewContents, setReviewContents] = useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState('');
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/no_image.gif';
+    }
+
     const [showCom, setShowCom] = useState(false);
     const showComment = () => {
         setShowCom(true)
@@ -81,12 +85,12 @@ function ReviewUpdate({ history, match }) {
             })
             .then(response => {
                 if (response.status === 200) {
-                    if (reviewContents.length > 30 && reviewSatisfaction != null) {
+                    if (reviewContents.length > 20 && reviewSatisfaction != null) {
                         alert("정상적으로 등록되었습니다.");
                         history.push(`/review/myReview/${reviewWriter}/${reviewNum}`);
                         window.location.href = `/review/myReview/${reviewWriter}`
                     } else {
-                        alert("내용 30자 이상, 상품의 만족도를 입력했는지 확인해주세요.")
+                        alert("내용 20자 이상, 상품의 만족도를 입력했는지 확인해주세요.")
                     }
                 } else {
                     alert("등록에 실패했습니다.");
@@ -132,14 +136,14 @@ function ReviewUpdate({ history, match }) {
                             {
                                 imageSrc ?
                                     <div className="itemImg">
-                                        <img src={imageSrc} alt="preview-img" className="previewImg" onMouseEnter={showComment} />
+                                        <img src={imageSrc} alt="preview-img" className="previewImg" onMouseEnter={showComment} onError={handleImgError}/>
                                         <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                             이미지 변경을 하시려면<br/>클릭해주세요.
                                         </div>
                                     </div>
                                     :
                                     <div className="itemImg">
-                                        <img className="previewImg" src={`../../../files_review/${data.reviewFiles}`} onMouseEnter={showComment}/>
+                                        <img className="previewImg" src={`../../../files_review/${data.reviewFiles}`} onMouseEnter={showComment} onError={handleImgError}/>
                                         <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                             이미지 변경을 하시려면<br/>클릭해주세요.
                                         </div>

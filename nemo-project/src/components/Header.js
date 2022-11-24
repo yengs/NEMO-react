@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaTemperatureHigh } from "react-icons/fa";
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaUserPlus } from "react-icons/fa";
 import { BsChatDotsFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -54,6 +54,24 @@ function Header() {
 
     return (
         <header>
+            {sessionStorage.getItem("memberId") === 'admin' ?
+            <div className="topHeader">
+            <div className="logo">
+            <img src={logo} alt="로고"></img>
+        </div>
+        <div className="mainTitle">
+            <h2>내일 모입지?</h2>
+        </div>
+        <div className="member">
+        <Link to="/" onClick={handlerLogout}>
+                        <IconContext.Provider value={{ className: "headerIcons" }}>
+                            <FaLock />
+                        </IconContext.Provider>
+                        <p>로그아웃</p>
+                    </Link>
+                    </div>
+        </div>
+            :
             <div className="topHeader">
                 <div className="logo" onClick={handlerGoMain}>
                     <img src={logo} alt="로고"></img>
@@ -90,15 +108,18 @@ function Header() {
                     </IconContext.Provider>
                     <p>로그인</p>
                 </Link>
-                <Link to="/chat">
+                <Link to="/member/join">
                     <IconContext.Provider value={{ className: "headerIcons" }}>
-                        <BsChatDotsFill />
+                        <FaUserPlus />
                     </IconContext.Provider>
-                    <p>내모톡</p>
+                    <p>회원가입</p>
                 </Link>
             </div>
                 }</div>
-            </div>
+            </div>}
+             {sessionStorage.getItem("memberId") === 'admin' ?
+                    null
+                    : 
             <div className='underHeader'>
                 <div className="navBar">
                     <div className="location">
@@ -111,6 +132,7 @@ function Header() {
                             }
                         </span>
                     </div>
+                    
                     <div className='navWrap'>
                         <ul className="nav">
                             <li className="dropdown">
@@ -119,6 +141,7 @@ function Header() {
                                     <a href='/item/cate/sub/반팔'>반팔</a>
                                     <a href='/item/cate/sub/긴팔'>긴팔</a>
                                     <a href='/item/cate/sub/니트'>니트</a>
+                                    <a href='/item/cate/sub/셔츠'>셔츠</a>
                                     <a href='/item/cate/sub/블라우스'>블라우스</a>
                                 </div>
                             </li>
@@ -137,6 +160,9 @@ function Header() {
                                 <div class="dropdown-content">
                                     <a href='/item/cate/sub/패딩'>패딩</a>
                                     <a href='/item/cate/sub/코트'>코트</a>
+                                    <a href='/item/cate/sub/자켓'>자켓</a>
+                                    <a href='/item/cate/sub/점퍼'>점퍼</a>
+                                    <a href='/item/cate/sub/후드집업'>후드집업</a>
                                     <a href='/item/cate/sub/바람막이'>바람막이</a>
                                 </div>
                             </li>
@@ -163,6 +189,7 @@ function Header() {
                     </div>
                 </div>
             </div>
+            }
         </header>
     )
 }

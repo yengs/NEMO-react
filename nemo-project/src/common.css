@@ -135,12 +135,14 @@ header .navBar>div {
 
 header .topHeader .logo img {
   width: 33px;
+  cursor: pointer;
 }
 
 header .topHeader .mainTitle h2 {
   font-weight: 600;
   font-size: 23px;
   text-align: center;
+  cursor: pointer;
 }
 
 header .topHeader .member {
@@ -307,7 +309,7 @@ footer {
 /* 로그인, 회원가입 페이지 */
 .memberPage {
   max-width: 900px;
-  margin: 100px auto;
+  margin: 70px auto;
 }
 
 .memberPage .pageTitle h2 {
@@ -548,7 +550,7 @@ footer {
 .recWeeklyWrap {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 90px 0;
+  padding: 30px 0;
 }
 
 .recWeekly {
@@ -597,7 +599,6 @@ footer {
 .itemInfoWrap .itemImg {
   width: 100% !important;
   height: 68%;
-  border: 1px solid #ddd;
   border-radius: 5px;
   background-position: center;
   background-repeat: no-repeat;
@@ -683,4 +684,12 @@ footer {
   font-size: 20px;
   font-weight: 800;
   margin: 7px 0;
+}
+
+.storeWrap2 {
+  margin-right: 4%;
+}
+
+.storeWrap2:last-child {
+  margin-right: 0;
 }

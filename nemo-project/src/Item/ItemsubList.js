@@ -39,10 +39,10 @@ function ItemsubList({ match }) {
 
                 <div className="titleNplusBtn">
                     <h3>{itemSubcategory}</h3>
-                    <div>{sessionStorage.getItem("jwtToken") != null ?
+                    {/* <div>{sessionStorage.getItem("jwtToken") != null ?
                     <Link className="btn" to="/item/write">상품등록</Link>
                     :null
-                    }</div>
+                    }</div> */}
                 </div>
                 <div className="itemWrap">
                     {
@@ -51,9 +51,9 @@ function ItemsubList({ match }) {
                                 <Link to={`/item/detail/${item.itemNum}`}>
                                     <img className="itemImg" src={`../../../files/${item.files}`} onError={handleImgError}></img>
                                     <div className="itemInfo">
-                                        <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
+                                        <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                         <p className="itemName" id="overflow">{item.itemName}</p>
-                                        <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                        <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                         <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                     </div>
                                 </Link>
@@ -63,7 +63,7 @@ function ItemsubList({ match }) {
                     {
                         datas.length === 0 && (
                             <tr>
-                                <td colSpan="4">일치하는 데이터가 없습니다!.</td>
+                                <td colSpan="4">등록된 상품이 없습니다.</td>
                             </tr>
                         )
                     }

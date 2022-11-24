@@ -95,9 +95,9 @@
     overflow: auto;
 }
 
-.mypageInnerPage::-webkit-scrollbar {
+/* .mypageInnerPage::-webkit-scrollbar {
     display: none; 
-  }
+  } */
 
 .mypageInnerPage .pageTitle {
     padding: 0;

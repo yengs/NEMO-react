@@ -1,7 +1,7 @@
 /* 마이페이지 내의 페이지 */
 .adminInnerPage{
-    width: calc(100% - 230px);
-    /* width: 100%; */
+    /* width: calc(80% - 230px); */
+    max-width: 1200px;
     padding: 20px;
     height: 700px;
     box-sizing: border-box;
@@ -13,7 +13,7 @@
     border: 2px solid #bbb;
     flex: 1 1;
     margin: 60px auto auto auto;
-    overflow: scroll;
+    overflow: hidden;
 }
 ::-webkit-scrollbar { display: none; }
 
@@ -72,6 +72,10 @@
     border-bottom: 1px solid #ddd;
     padding: 17px 3px;
     font-size: 15px;
+}
+
+.userReviewListAboutStoreWrapAdmin .userReviewListAboutStore2 tbody .Dec a {
+    color: #666;
 }
 
 .userReviewListAboutStoreWrapAdmin .userReviewListAboutStore2 tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
