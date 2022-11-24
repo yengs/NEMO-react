@@ -453,7 +453,7 @@ td.reviewImg,
     font-size; 17px;
     line-height: 23px;
     overflow-y: scroll;
-    height: 276px;
+    height: 285px;
     white-space: pre-wrap;
     word-break: break-all;
     border-radius: 5px;
@@ -478,6 +478,7 @@ a.ItemReviewList {
     background-color: rgb(219, 219, 219);
     max-width: 350px;
     height: fit-content;
+    max-height: 370px;
     // margin-left : 150px;
     // margin-top : 50px;
 }
