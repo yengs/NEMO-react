@@ -42,7 +42,7 @@ function MyPageItem({ match }) {
 
                 <div className="titleNplusBtn">
                     <h3>내 상품 목록</h3>
-                    <Link className="btn" to="/item/write">상품등록</Link>
+                    {/* <Link className="btn" to="/item/write">상품등록</Link> */}
                 </div>
                 <div className="itemWrap3">
                     {

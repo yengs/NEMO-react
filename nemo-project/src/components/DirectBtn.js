@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 
 export default function DirectBtn() {
-    const [isShow, setIsShow] = useState(false);
+    const [isShow, setIsShow] = useState(true);
 
     const handlerHideNshow = () => {
         if(!isShow) {

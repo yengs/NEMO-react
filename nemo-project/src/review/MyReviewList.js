@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
+import { Link } from "react-router-dom";
 
 function MyReviewList({ history, match }) {
 
@@ -18,6 +19,8 @@ function MyReviewList({ history, match }) {
     const handleImgError = (e) => {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
+
+    const handlerClickList = () => history.goBack();
 
     // 후기 데이터 가져오기
     useEffect(() => {
@@ -102,7 +105,11 @@ function MyReviewList({ history, match }) {
                                     <td className="rReviewItemImageOrigin">
                                             <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                        <td className='ReviewItemNameOrigin'>
+                                        <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                            {review.reviewItemname}
+                                            </Link>
+                                            </td>
                                         <td className='ReviewWriter'>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
@@ -162,7 +169,13 @@ function MyReviewList({ history, match }) {
                     </tbody>
                 </table>
                 <div>
-                    <Paging page={page} count={count} setPage={changePage} />
+                    <table className="sun">
+                       <tr >
+                        <td>
+                        <Paging page={page} count={count} setPage={changePage} />
+                        </td><td> <input type="button" id="list" className="greyBtnMPID" value="뒤로가기" onClick={handlerClickList} />
+                        </td> </tr>
+                    </table>
                 </div>
             </div>
         </>
