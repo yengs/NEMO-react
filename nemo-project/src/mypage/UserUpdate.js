@@ -94,7 +94,7 @@ function UserUpdate({ history }) {
             "memberSigungu": mSigungu
         }
 
-        if ( memberAddress == '' || memberPw == '') {
+        if ( memberNickname == '' || memberAddress == '' || memberPw == '') {
             alert("필수 입력항목을 입력해주세요")
         } else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
@@ -108,7 +108,7 @@ function UserUpdate({ history }) {
                 }
             })
             .catch(error => {
-                alert("에러");
+                alert("닉네임 중복확인을 해주세요");
                 console.log(memberInfo);
                 console.log(error)
             });
