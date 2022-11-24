@@ -62,9 +62,12 @@ function Login({ history }) {
                 if (response.status === 200 && response.data !== "") {
                     let jwtToken = response.headers.get("jwtToken");
 
+                    console.log(response.data);
+
                     sessionStorage.setItem("jwtToken", jwtToken);
                     sessionStorage.setItem("memberNum", response.data.memberNum);
                     sessionStorage.setItem("memberId", id);
+                    sessionStorage.setItem("memberNickname", response.data.memberNickname);
                     sessionStorage.setItem("memberImg", response.data.memberImg);
 
                     localStorage.setItem("memberIdLocal", id);
