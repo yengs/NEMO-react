@@ -122,7 +122,7 @@ const Chat = ({match}) => {
                     <h1 id="title">네모 채팅방</h1>
                     <br/>
                     <div id='talk'>
-                        <div className='talk-shadow'></div>
+                        {/* <div className='talk-shadow'></div> */}
                         {msgBox}
                     </div>
                      <div className="chat" >
@@ -141,16 +141,21 @@ const Chat = ({match}) => {
 
 const MyWebsocket = styled.div`
 
+.jesJjI {
+
+}
+
 .chat {
     position: relative;
     width: 460px;
+    padding: 15px 0 0 0;
   }
 
 
   .chat-input {
     border: 1px solid rgb(241,241,241);
     background-color: #ffffff;
-    padding: 10px 46px;
+    padding: 10px 9px;
     padding-left: 8px !important;
     border-radius: 34px;
     font-size: 15px;
@@ -160,9 +165,8 @@ const MyWebsocket = styled.div`
 }
   .chat-botton {
     position: absolute;
-    right: -5px;
-    top: 5px;
-    bottom: 8px;
+    right: -3px;
+    top: 20px;
     border: 0;
     background: rgb(100 165 127);
     color: #fff;
@@ -179,7 +183,7 @@ const MyWebsocket = styled.div`
     width:500px;
     background-color: #ededed;
     margin: 50px auto;
-    padding:20px 10px;
+    padding:20px 10px 15px;
     border-radius: 20px;
 
   }
