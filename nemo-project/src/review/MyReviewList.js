@@ -19,6 +19,8 @@ function MyReviewList({ history, match }) {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
 
+    const handlerClickList = () => history.goBack();
+
     // 후기 데이터 가져오기
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/myReview/${reviewWriter}`,
@@ -162,7 +164,13 @@ function MyReviewList({ history, match }) {
                     </tbody>
                 </table>
                 <div>
-                    <Paging page={page} count={count} setPage={changePage} />
+                    <table className="sun">
+                       <tr >
+                        <td>
+                        <Paging page={page} count={count} setPage={changePage} />
+                        </td><td> <input type="button" id="list" className="greyBtnMPID" value="뒤로가기" onClick={handlerClickList} />
+                        </td> </tr>
+                    </table>
                 </div>
             </div>
         </>
