@@ -102,9 +102,9 @@ function MyStore({ itemWriter }) {
                                         <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
                                         <td className='ReviewWriter' style={{width:'17%'}} rowSpan={3}>{review.reviewWriter}</td>
                                         <td className='ReviewContent' rowSpan={3}>
-                                            {/* <div className="myReviewContents"> */}
+                                            <div className="myReviewContents">
                                                 {review.reviewContents}
-                                                {/* </div> */}
+                                                </div>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>
@@ -156,7 +156,7 @@ const MyUserStoreContainer = styled.div`
     display: flex;
     max-height: 31px;
     overflow: hidden;
-    justify-content: center;
+    justify-content: left;
     white-space: pre-wrap;
 }
 

@@ -4,7 +4,7 @@ import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
 import { Link } from "react-router-dom";
 
-function YourReviewList({ match }) {
+function YourReviewList({ match,history  }) {
 
     const { reviewId } = match.params;
 
@@ -17,6 +17,8 @@ function YourReviewList({ match }) {
     const handleImgError = (e) => {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
+
+    const handlerClickList = () => history.goBack();
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
@@ -48,13 +50,13 @@ function YourReviewList({ match }) {
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
-                    <col width="10%" />
                         <col width="10%" />
                         <col width="10%" />
-                        <col width="15%" />
+                        <col width="5%" />
+                        <col width="6%" />
                         <col width="10%" />
-                        <col width="25%" />
-                        <col width="10%" />
+                        <col width="35%" />
+                        {/* <col width="20%" /> */}
                         <col width="10%" />
                     </colgroup>
                     <thead>
@@ -63,7 +65,7 @@ function YourReviewList({ match }) {
                             <th colSpan={2}>상품정보</th>
                             <th scope='col'>작성자</th>
                             <th colSpan={2}>내용</th>
-                            <th></th>
+                            {/* <th></th> */}
                             <th scope='col'>만족도</th>
                         </tr>
                     </thead>
@@ -75,11 +77,14 @@ function YourReviewList({ match }) {
                                     <td className="rReviewItemImageOrigin">
                                         <img className="yourBbookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                     </td>
-                                    <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                    <td className='ReviewItemNameOrigin'>
+                                    <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                        {review.reviewItemname}
+                                        </Link>
+                                        </td>
                                     <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
-                                        {/* 이미지 업로드 부분 여기 사진 안뜨는거 수정하긴 함 */}
-                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img>
+                                        <Link to={`/review/yourReview/${review.reviewWriter}/${review.reviewNum}`}><img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img></Link>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
@@ -87,9 +92,9 @@ function YourReviewList({ match }) {
                                         </div>
                                         <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                     </td>
-                                    <td className="ReviewWriter">
+                                    {/* <td className="ReviewWriter">
                                         <Link to={`/review/yourReview/${review.reviewWriter}/${review.reviewNum}`}>상세보기</Link>
-                                    </td>
+                                    </td> */}
                                     <td>
                                         <div className="reviewSatisImg">
                                             {review.reviewSatisfaction}
@@ -131,7 +136,13 @@ function YourReviewList({ match }) {
                     </tbody>
                 </table>
                 <div>
-                    <Paging page={page} count={count} setPage={changePage} />
+                <table className="sun">
+                       <tr >
+                        <td>
+                        <Paging page={page} count={count} setPage={changePage} />
+                        </td><td> <input type="button" id="list" className="greyBtnMPID" value="뒤로가기" onClick={handlerClickList} />
+                        </td> </tr>
+                    </table>
                 </div>
             </div>
         </>

@@ -1,7 +1,7 @@
 /* 마이페이지 내의 페이지 */
 .adminInnerPage{
-    width: calc(80% - 230px);
-    /* width: 100%; */
+    /* width: calc(80% - 230px); */
+    max-width: 1200px;
     padding: 20px;
     height: 700px;
     box-sizing: border-box;
@@ -74,6 +74,10 @@
     font-size: 15px;
 }
 
+.userReviewListAboutStoreWrapAdmin .userReviewListAboutStore2 tbody .Dec a {
+    color: #666;
+}
+
 .userReviewListAboutStoreWrapAdmin .userReviewListAboutStore2 tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
     border: none;
 }
@@ -117,7 +121,6 @@
   border-radius: 3px;
   width: 80px;
   padding: 5px 10px;
-  margin-top: 7px;
 }
 
 
