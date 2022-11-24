@@ -149,11 +149,11 @@ const Container = styled.div`
 .weatherRecItemListWrap {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 90px 0;
+    padding: 30px 0;
 }
 
 .tomWetherWrap {
-    background-color: #eee;
+    background-color: #f9f9f9;
     border-radius: 10px;
     padding: 28px;
 }
