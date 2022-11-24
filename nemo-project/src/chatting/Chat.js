@@ -35,7 +35,7 @@ const Chat = ({match}) => {
                 console.log("업데이트페이지 멤버넘버::::" + memberNum);
                 console.log(response);
                 setDatas(response.data);
-                setName(response.data.memberId);
+                setName(response.data.memberNickname);
                 webSocketLogin();
             })
             .catch(error => console.log(error));

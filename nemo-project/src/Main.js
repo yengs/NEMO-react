@@ -188,7 +188,7 @@ function Main({ history }) {
 
                                             <img className="storeImg" src={`../../memberImg/${item.memberImg}`} key={item.itemNum} ></img>
                                             <div className="storeInfo">
-                                                <p className="storeName">{item.itemWriter} 스토어</p>
+                                                <p className="storeName">{item.memberNickname} 스토어</p>
 
                                             </div>
                                         </div>

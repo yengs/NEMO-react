@@ -11,10 +11,11 @@ import MemberDelete from "./MemberDelete";
 // 회원정보수정
 function UserUpdate({ history }) {
 
+    // 주소검색창 팝업열기
+    const open = useDaumPostcodePopup();
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
-
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -28,12 +29,10 @@ function UserUpdate({ history }) {
         setMemberAddress(fullAddress);
         setMzipCode(data.zonecode);
         setMsigungu(data.sigungu);
-        // console.log(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     };
 
-    // 주소검색창 팝업열기
-    const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
-    const handleOpenSearchAddress = () => {
+    const handleOpenSearchAddress = (e) => {
+        e.preventDefault();
         open({ onComplete: handleComplete });
     };
 
@@ -65,7 +64,7 @@ function UserUpdate({ history }) {
                 setMemberName(response.data.memberName);
                 setMemberId(response.data.memberId);
                 setMemberPw(response.data.memberPw);
-                setMemberPwCheck(response.data.memberPwCheck);
+                // setMemberPwCheck(response.data.memberPwCheck);
                 setMemberEmail(response.data.memberEmail);
                 setMemberPhone(response.data.memberPhone);
                 setMemberAddress(response.data.memberAddress);
@@ -95,13 +94,12 @@ function UserUpdate({ history }) {
         }
 
         if ( memberNickname == '' || memberAddress == '' || memberPw == '') {
-            alert("필수 입력항목을 입력해주세요")
-        } else {
+            alert("빈칸을 채워주세요")
+        }else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
             .then(response => {
                 if (response.status === 200) {
                     alert("수정완료");
-                    history.push('/mypage/mybooking');
                 } else {
                     alert("수정실패");
                     return;
@@ -163,9 +161,6 @@ function UserUpdate({ history }) {
     };
 
     // 닉네임 중복 체크
-
-    // const [ckNickname, setcheckNickName] = useState(false);
-
     const checkNickname = (e) => {
         e.preventDefault();
 
@@ -189,7 +184,6 @@ function UserUpdate({ history }) {
                         <h2>회원정보 수정</h2>
                     </div>
                     <form>
-                        <div className="requiredMark requiredInfo"><span>필수입력항목</span></div>
                             <div className="inputTable">
                                 <table border="0" cellpadding="0" cellspacing="0">
                                     <tbody>
@@ -218,12 +212,19 @@ function UserUpdate({ history }) {
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td className="requiredMark">패스워드</td>
+                                            <td>패스워드</td>
                                             <td>
-                                                <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw} />
+                                                <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
                                             </td>
                                             <td></td>
                                         </tr>
+                                        {/* <tr>
+                                        <td className="requiredMark">패스워드 확인</td>
+                                        <td>
+                                            <input type="password" name="mPwCheck" value={memberPwCheck} onChange={onChangePasswordChk} required />
+                                         
+                                        </td><td></td>
+                                    </tr> */}
                                         <tr>
                                             <td>이메일</td>
                                             <td>
@@ -238,9 +239,9 @@ function UserUpdate({ history }) {
                                             <td></td>
                                         </tr>
                                         <tr className="updateAddress">
-                                            <td className="requiredMark">주소</td>
+                                            <td>주소</td>
                                             <td>
-                                                <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress} />
+                                                <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress} required />
                                             </td>
                                             <td className="updateTableBtn">
                                                 <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
