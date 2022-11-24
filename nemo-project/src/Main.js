@@ -181,7 +181,7 @@ function Main({ history }) {
                     <div className="titleNplusBtn">
                         <h3 style={{fontSize:'23px'}}>베스트 스토어</h3>
                     </div>
-                    <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
+                    <div style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
                         {console.log(storeUrl)}
                     {
                         bestItemStore && bestItemStore.map(item => (
@@ -192,7 +192,7 @@ function Main({ history }) {
 
                                             <img className="storeImg" src={`../../memberImg/${item.memberImg}`} key={item.itemNum} ></img>
                                             <div className="storeInfo">
-                                                <p className="storeName">{item.itemWriter} 스토어</p>
+                                                <p className="storeName">{item.memberNickname} 스토어</p>
 
                                             </div>
                                         </div>

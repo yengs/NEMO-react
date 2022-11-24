@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 function MypageReview() {
 
@@ -80,7 +81,11 @@ function MypageReview() {
                                         <td rowSpan={2} className="rReviewItemImageOrigin">
                                             <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
+                                        <td className='ReviewItemNameOrigin' rowSpan={3} >
+                                            <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                                {review.reviewItemname}
+                                            </Link>
+                                        </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
                                         <td className='ReviewContent' rowSpan={3}>
                                             <div className="myReviewContents">
@@ -160,7 +165,11 @@ function MypageReview() {
                                         <td rowSpan={2} className="rReviewItemImageOrigin">
                                             <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
+                                        <td className='ReviewItemNameOrigin' rowSpan={3} >
+                                            <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                                {review.reviewItemname}
+                                            </Link>
+                                        </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                         <td className='ReviewContent' rowSpan={3}>
                                             <div className="myReviewContents">
@@ -389,9 +398,15 @@ const MypageReviewContainer = styled.div`
     background-position: center;
 }
 
-.rReviewItemNameOrigin {
+.ReviewItemNameOrigin {
     width: 15%;
     text-align: center;
+}
+
+.ReviewItemNameOrigin a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
 }
 
 .rReviewWriter {
@@ -425,7 +440,7 @@ table-layout: fixed;
     background-position: center;
 }
 
-.rReviewItemNameOrigin {
+.ReviewItemNameOrigin {
     width: 15%;
     text-align: center;
 }

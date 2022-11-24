@@ -11,6 +11,8 @@ function MyMenu({ history , location}) {
     const itemWriter = sessionStorage.getItem('memberId');
     const reviewId = sessionStorage.getItem('memberId');
 
+    const memberNickname = sessionStorage.getItem('memberNickname');
+
     const [memberImg, setMemberImg] = useState('');
     const [imageSrc, setImageSrc] = useState('');
 
@@ -145,7 +147,7 @@ function MyMenu({ history , location}) {
             {/* ---프사모달 end--- */}
 
             
-            <div className='myMenuUserName'>{itemWriter}</div>
+            <div className='myMenuUserName'>{memberNickname}</div>
             <div className='cleanG'>
                 {reviewSatisfaction == 0 ?
                     <div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
+import { Link } from "react-router-dom";
 
 function MyReviewList({ history, match }) {
 
@@ -104,7 +105,11 @@ function MyReviewList({ history, match }) {
                                     <td className="rReviewItemImageOrigin">
                                             <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                        <td className='ReviewItemNameOrigin'>
+                                        <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                            {review.reviewItemname}
+                                            </Link>
+                                            </td>
                                         <td className='ReviewWriter'>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
