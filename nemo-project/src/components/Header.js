@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaTemperatureHigh } from "react-icons/fa";
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaUserPlus } from "react-icons/fa";
 import { BsChatDotsFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -107,6 +107,12 @@ function Header() {
                         <FaLock />
                     </IconContext.Provider>
                     <p>로그인</p>
+                </Link>
+                <Link to="/member/join">
+                    <IconContext.Provider value={{ className: "headerIcons" }}>
+                        <FaUserPlus />
+                    </IconContext.Provider>
+                    <p>회원가입</p>
                 </Link>
             </div>
                 }</div>
