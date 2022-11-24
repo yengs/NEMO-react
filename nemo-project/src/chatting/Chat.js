@@ -150,15 +150,17 @@ const MyWebsocket = styled.div`
   .chat-input {
     border: 1px solid rgb(241,241,241);
     background-color: #ffffff;
-    padding: 10px 258px;
+    padding: 10px 46px;
     padding-left: 8px !important;
     border-radius: 34px;
     font-size: 15px;
     margin-left: 10px;
+    outline: none;
+    width:100%
 }
   .chat-botton {
     position: absolute;
-    right: -15px;
+    right: -5px;
     top: 5px;
     bottom: 8px;
     border: 0;
