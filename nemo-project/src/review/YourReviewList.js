@@ -50,13 +50,13 @@ function YourReviewList({ match,history  }) {
                 <hr className="lineH"></hr>
                 <table className="myreview">
                     <colgroup>
-                    <col width="10%" />
                         <col width="10%" />
                         <col width="10%" />
-                        <col width="15%" />
+                        <col width="5%" />
+                        <col width="6%" />
                         <col width="10%" />
-                        <col width="25%" />
-                        <col width="10%" />
+                        <col width="35%" />
+                        {/* <col width="20%" /> */}
                         <col width="10%" />
                     </colgroup>
                     <thead>
@@ -65,7 +65,7 @@ function YourReviewList({ match,history  }) {
                             <th colSpan={2}>상품정보</th>
                             <th scope='col'>작성자</th>
                             <th colSpan={2}>내용</th>
-                            <th></th>
+                            {/* <th></th> */}
                             <th scope='col'>만족도</th>
                         </tr>
                     </thead>
@@ -77,11 +77,14 @@ function YourReviewList({ match,history  }) {
                                     <td className="rReviewItemImageOrigin">
                                         <img className="yourBbookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                     </td>
-                                    <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                    <td className='ReviewItemNameOrigin'>
+                                    <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                        {review.reviewItemname}
+                                        </Link>
+                                        </td>
                                     <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
-                                        {/* 이미지 업로드 부분 여기 사진 안뜨는거 수정하긴 함 */}
-                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img>
+                                        <Link to={`/review/yourReview/${review.reviewWriter}/${review.reviewNum}`}><img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img></Link>
                                     </td>
                                     <td>
                                         <div className="reviewContents">
@@ -89,9 +92,9 @@ function YourReviewList({ match,history  }) {
                                         </div>
                                         <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                     </td>
-                                    <td className="ReviewWriter">
+                                    {/* <td className="ReviewWriter">
                                         <Link to={`/review/yourReview/${review.reviewWriter}/${review.reviewNum}`}>상세보기</Link>
-                                    </td>
+                                    </td> */}
                                     <td>
                                         <div className="reviewSatisImg">
                                             {review.reviewSatisfaction}

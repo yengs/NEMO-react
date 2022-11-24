@@ -72,21 +72,27 @@ function Login({ history }) {
 
                     localStorage.setItem("memberIdLocal", id);
 
-                    if (isRemember === true) {
-                        setCookie('rememberId', id);
+                    console.log(response.data.currentState);
+                    if(response.data.currentState === 'Y') {
+                        alert("정지된 회원입니다.")
                     } else {
-                        removeCookie('rememberId');
+                        // alert("로그인완료");
+                        alert("반갑습니다! " + id + " 회원님");
+                        if(id == "admin"){
+                        window.location.href = "/admin/dec";
+                        }else{
+                        window.location.reload();
+                        window.location.href = "/";
+                        }
+                        if (isRemember === true) {
+                            setCookie('rememberId', id);
+                        } else {
+                            removeCookie('rememberId');
+                        }
                     }
 
 
-                    // alert("로그인완료");
-                    alert("반갑습니다! " + id + " 회원님");
-                    if(id == "admin"){
-                    window.location.href = "/admin/dec";
-                    }else{
-                    window.location.reload();
-                    window.location.href = "/";
-                    }
+
 
                 } else if(response.data === ''){
                     sessionStorage.clear();
@@ -147,6 +153,7 @@ function Login({ history }) {
                 </div>
 
                 <div className="btnWrap">
+                    <p style={{marginRight:'10px', color:"#666"}}>지금 바로 내모회원이 되어 내모를 이용해보세요!</p>
                     <Link to="/member/join" className="btn grayBtn joinBtn">회원가입</Link>
                     {/* <Link to="/" className="btn googleLoginBtnLink">
                         <div style={{ backgroundImage: `url(${GoogleLogin})` }} className="googleLoginBtn"></div>
