@@ -206,7 +206,7 @@ function ItemDetail({ match, history }) {
                     <br></br>
                     <div className="tablePlusForm">
                         <div className="imageDiv">
-                            <img className="itemImg" src={`../../files/${data.files}`} />
+                            <img className="itemImg" src={`../../files/${data.files}`} onError={handleImgError} />
                         </div>
                         <div className="tableform">
                             <div>
@@ -245,7 +245,7 @@ function ItemDetail({ match, history }) {
 
                             <div className="writerDiv" style={{ cursor: "pointer" }} onClick={goUserStore}>
                                 <h3>대여자</h3>
-                                <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
+                                <img className="memberImg" src={`../../memberImg/${memberImg}`} onError={handleImgError}></img>
                             </div>
                             <div style={{ cursor: "pointer" }} onClick={goUserStore} className="cleanDiv">
                                 <h4>{memberNickname}</h4>
@@ -298,7 +298,7 @@ function ItemDetail({ match, history }) {
                                             <div key={items.itemNum} >
                                                 <div className="itemInfoWrap" style={{ width: "130px", height: "140px", backgroundColor: "rgb(194 217 204)", marginLeft: "20px" }}  >
                                                     <Link to={`/item/detail/${items.itemNum}`}>
-                                                        <img className="itemImggg" src={`../../files/${items.files}`} ></img>
+                                                        <img className="itemImggg" src={`../../files/${items.files}`} onError={handleImgError}></img>
                                                     </Link>
                                                 </div>
                                             </div>
