@@ -57,7 +57,6 @@ function MypageReview() {
                             <button className="plusBtn" onClick={goYourReview}> + 더보기</button>
                         </div>
                     </div>
-
                     <table className="yourReviewListAboutStore">
                         <colgroup>
                             <col width="10%" />
