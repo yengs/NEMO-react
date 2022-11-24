@@ -31,7 +31,7 @@ function Idfind() {
                 }
             })
             .catch(error => {
-                alert("Error!!!");
+                alert("이름 또는 이메일을 확인해주세요.");
                 console.log(memberInfo);
             });
             
