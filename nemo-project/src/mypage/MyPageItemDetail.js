@@ -198,7 +198,7 @@ function MyPageItemDetail({ match, location, history }) {
                                 <tbody>
                                     <tr>
                                         <th scope="row">상품명</th>
-                                        <td><input type="text" value={itemName} onChange={handlerChangeName} /></td>
+                                        <td><input type="text" value={itemName} onChange={handlerChangeName} maxlength="25"/></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">어울리는 계절</th>
