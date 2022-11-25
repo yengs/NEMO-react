@@ -11,14 +11,25 @@ function MyMenu({ history , location}) {
     const itemWriter = sessionStorage.getItem('memberId');
     const reviewId = sessionStorage.getItem('memberId');
 
-    const memberNickname = sessionStorage.getItem('memberNickname');
+    // const memberNickname = sessionStorage.getItem('memberNickname');
 
     const [memberImg, setMemberImg] = useState('');
     const [imageSrc, setImageSrc] = useState('');
 
+    const [memberNickname, setMemberNickname] = useState('');
+
+
     const handleImgError = (e) => {
         e.target.src = '../../../noimage/no-profile.PNG';
     }
+
+    // -------------회원 닉네임-----------
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
+        .then(response => {
+            setMemberNickname(response.data.memberNickname);
+        })
+    },[])
 
     //--------------프사 GET--------------
 

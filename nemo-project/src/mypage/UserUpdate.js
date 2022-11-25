@@ -102,6 +102,7 @@ function UserUpdate({ history }) {
             .then(response => {
                 if (response.status === 200) {
                     alert("수정완료");
+                    history.put();
                 } else {
                     alert("수정실패");
                     return;
