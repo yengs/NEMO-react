@@ -20,7 +20,7 @@ function MyReviewList({ history, match }) {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
 
-    const handlerClickList = () => history.goBack();
+    const handlerClickList = () => history.push(`/mypage/review`);
 
     // 후기 데이터 가져오기
     useEffect(() => {
