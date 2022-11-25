@@ -95,7 +95,9 @@ function UserUpdate({ history }) {
 
         if ( memberNickname == '' || memberAddress == '' || memberPw == '') {
             alert("빈칸을 채워주세요")
-        }else {
+        } else if(memberNickname !== sessionStorage.getItem('memberNickname')) {
+            alert("닉네임 중복확인을 해주세요");
+        } else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
             .then(response => {
                 if (response.status === 200) {
@@ -106,7 +108,6 @@ function UserUpdate({ history }) {
                 }
             })
             .catch(error => {
-                alert("닉네임 중복확인을 해주세요");
                 console.log(memberInfo);
                 console.log(error)
             });
@@ -169,6 +170,7 @@ function UserUpdate({ history }) {
                 console.log(nickname);
                 if (nickname.data === "success" && memberNickname !== "") {
                     alert("사용 가능한 닉네임입니다.");
+                    sessionStorage.setItem('memberNickname', memberNickname);
                 } else if (nickname.data === "fail" && memberNickname !== "") {
                     alert("이미 사용중인 닉네임입니다.")
                 } else {
