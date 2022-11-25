@@ -29,6 +29,10 @@ function Main({ history }) {
     
     const [storeUrl, setStoreUrl] =useState();
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noimage.gif';
+    }
+
     useEffect(() => {
         if (sessionStorage.getItem("weather") !== null) {
             axios.get(`http://localhost:8080/api/item/weather/${sessionStorage.getItem("weather")}`)
@@ -111,11 +115,11 @@ function Main({ history }) {
 
                                     <div className="itemInfoWrap" key={item.itemNum}>
                                         <Link to={`/item/detail/${item.itemNum}`}>
-                                            <img className="itemImg" src={`../../files/${item.files}`}></img>
+                                            <img className="itemImg" onError={handleImgError} src={`../../files/${item.files}` }></img>
                                             <div className="itemInfo">
-                                                <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
-                                                <p className="itemName">{item.itemName}</p>
-                                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                                <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
+                                                <p className="itemName" id="overflow">{item.itemName}</p>
+                                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                                 <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                             </div>
                                         </Link>
@@ -125,11 +129,11 @@ function Main({ history }) {
                                 randomDatas && randomDatas.map(item => (
                                     <div className="itemInfoWrap" key={item.itemNum}>
                                         <Link to={`/item/detail/${item.itemNum}`}>
-                                            <img className="itemImg" src={`../../files/${item.files}`}></img>
+                                            <img className="itemImg" onError={handleImgError} src={`../../files/${item.files}`}></img>
                                             <div className="itemInfo">
-                                                <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
-                                                <p className="itemName">{item.itemName}</p>
-                                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                                <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
+                                                <p className="itemName" id="overflow">{item.itemName}</p>
+                                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                                 <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                             </div>
                                         </Link>
@@ -158,11 +162,11 @@ function Main({ history }) {
 
                                     <div className="itemInfoWrap" key={item.itemNum}>
                                         <Link to={`/item/detail/${item.itemNum}`}>
-                                            <img className="itemImg" src={`../../files/${item.files}`}></img>
+                                            <img className="itemImg" src={`../../files/${item.files}`} onError={handleImgError}></img>
                                             <div className="itemInfo">
-                                                <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
-                                                <p className="itemName">{item.itemName}</p>
-                                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
+                                                <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
+                                                <p className="itemName" id="overflow">{item.itemName}</p>
+                                                <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                                 <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                             </div>
                                         </Link>
@@ -177,18 +181,18 @@ function Main({ history }) {
                     <div className="titleNplusBtn">
                         <h3 style={{fontSize:'23px'}}>베스트 스토어</h3>
                     </div>
-                    <div style={{display:'flex', justifyContent:'space-between', alignItems: 'center'}}>
+                    <div style={{display:'flex', justifyContent:'flex-start', alignItems: 'center'}}>
                         {console.log(storeUrl)}
                     {
                         bestItemStore && bestItemStore.map(item => (
                             <div className="storeWrap2" >
-                                    <Link to={`/userstoreinfo/${item.itemWriter},${item.memberImg}`}
+                                    <Link to={`/userstoreinfo/${item.memberNickname},${item.itemWriter},${item.memberImg}`}
                                     style={{color: '#333', textDecoration:"none"}}>
                                         <div className="storeInfoWrap">
 
                                             <img className="storeImg" src={`../../memberImg/${item.memberImg}`} key={item.itemNum} ></img>
                                             <div className="storeInfo">
-                                                <p className="storeName">{item.itemWriter} 스토어</p>
+                                                <p className="storeName">{item.memberNickname} 스토어</p>
 
                                             </div>
                                         </div>

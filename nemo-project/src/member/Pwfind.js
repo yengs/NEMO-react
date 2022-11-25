@@ -33,19 +33,18 @@ function Pwfind({history}) {
                         }
                     }) .then(response2 => {
                         console.log(response2);
-                        alert(response2.data);
                         setCode(response2.data);
                     })
                     .catch(function () {
                         console.log('실패함')
                     })
                 } else {
-                    alert("내ㄴ다");
+                    alert("실패함");
                     return;
                 }
             })
             .catch(error => {
-                alert("아이디 또는 이메일을 확인해주세요");
+                alert("아이디 또는 이메일을 확인해주세요.");
                 console.log(memberInfo);
             });
     }
@@ -60,7 +59,9 @@ function Pwfind({history}) {
 
      //이메일 코드 일치확인
      const clickCode = () => {
-        if (String(userInputCode).length !== 5) {
+        if(memberId =='' || mEmail ==''){
+            alert('입력란을 작성해주세요')
+        } else if (String(userInputCode).length !== 5) {
             alert('5자리의 숫자코드를 입력해주세요.');
         } else if (code !== userInputCode) {
            alert('이메일 코드가 일치하지 않습니다.');
@@ -106,7 +107,7 @@ function Pwfind({history}) {
                             </tr>
                             <tr>
                                  <td>
-                                     <input type="number" name="Code" value={userInputCode}  placeholder="발송된 코드를 입력하세요" onChange={handlerChangeUserInputCode} required/>
+                                     <input type="text" name="Code" value={userInputCode}  placeholder="발송된 코드를 입력하세요" onChange={handlerChangeUserInputCode} required/>
 
                                  </td>
                                        
@@ -122,7 +123,7 @@ function Pwfind({history}) {
                 </div>
                 <br/>
                 <br/>
-                <li>비밀번호를 찾지 못하셨다면 고객센터(1111-1111)로 문의해주세요.</li>
+                <li>비밀번호를 찾지 못하셨다면 고객센터(1017-1130)로 문의해주세요.</li>
                 <li>아직 내모 회원이 아니신가요? &nbsp; 
                     <Link to="/member/join">회원가입</Link>
 

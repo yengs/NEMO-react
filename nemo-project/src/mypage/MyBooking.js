@@ -189,16 +189,16 @@ function MyBooking({ history }) {
                                             <td rowSpan={2} className="ReviewItemImageOrigin">
                                                 <img className="bookingitemImg" src={`../../files/${booking.bookingItemfiles}`}></img>
                                             </td>
-                                            <td className='ReviewItemNameOrigin' rowSpan={3} >
+                                            <td className='ReviewItemNameOrigin' >
                                                 <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                             </td>
-                                            <td className='ReviewWriter' rowSpan={3}>￦{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                                            <td className='ReviewWriter' rowSpan={3}>{booking.bookingMember}</td>
+                                            <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                            <td className='ReviewWriter' rowSpan={3} onClick={()=>  history.push(`/userstoreinfo/${booking.bookingMember},${booking.memberImg}`)}>{booking.memberNickname}</td>
                                             <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}
                                                 {booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}
                                             </td>
                                             <td className='ReviewWriter' rowSpan={3}>
-                                                {booking.bookingDepositstate === "반환완료" || booking.bookingDepositstate === "미반환(물품훼손)" || booking.bookingDepositstate === "미반환(미반납)" ? <p>{booking.bookingDepositstate}</p> :
+                                                {booking.bookingDepositstate === "반환완료" ?  <p>{booking.bookingDepositstate}</p> : booking.bookingDepositstate === "미반환(물품훼손)" || booking.bookingDepositstate === "미반환(미반납)" ? <p>{booking.bookingDepositstate.slice(4,-1)}</p> :
                                                     booking.bookingBookingstate === "기간만료" ?
                                                         <select onChange={handleritemstate}>
                                                             <option value="">--</option>
@@ -267,14 +267,14 @@ function MyBooking({ history }) {
 
                                             <img className="bookingitemImg" src={`../../files/${booking.bookingItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin' style={{ width: '15%' }}>
+                                        <td className='ReviewItemNameOrigin'>
                                             <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                         </td>
 
-                                <td className='ReviewWriter' rowSpan={3}>￦{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemwriter}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                                <td className='ReviewWriter' rowSpan={3}>{booking.memberNickname}</td>
                                 <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
-                                {booking.bookingDepositstate != "반환완료" ? null : booking.reviewCount > 0 ? <button className="grayBtn btnBok" onClick={handlerreview}>후기작성</button> :<button className="greenBtn btnBok"><Link to = {`/review/reviewWrite/${booking.bookingNum},${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}
+                                {booking.bookingDepositstate != "반환완료" ? null : booking.reviewCount > 0 ? <button className="greenBtn reviewBtn" onClick={handlerreview}>후기작성</button> :<button className="greenBtn reviewBtn"><Link to = {`/review/reviewWrite/${booking.bookingNum},${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}
 
                                         </td>
 
@@ -312,18 +312,31 @@ function MyBooking({ history }) {
 }
 
 const MyBookingContainer = styled.div`
+
+    .reviewBtn {
+        back
+        font-size: 15px;
+        border-radius: 3px;
+        width: 80px;
+        padding: 5px 10px;
+        color: #fff;
+        text-decoration: none;
+        background-color: rgb(88,145,112);
+    }
+
     .tableWrap{
         height : 45%;
     }
 
     .bookingitemImg{
-        width: 100%;
+        width: 90px;
         height : 82px;
     }
 
     .mypageInnerPage {
         width: 100%;
         height: 100%;
+        overflow: hidden;
     }
 
     // .userReviewListAboutStore2 tr td {
@@ -453,7 +466,7 @@ const MyBookingContainer = styled.div`
 
 
 .ReviewItemImageOrigin {
-    width: 10%;
+    width: 4%;
     height: 52px;
 }
 
@@ -503,6 +516,19 @@ const MyBookingContainer = styled.div`
     text-decoration: none;
 }
 
+.reviewBtn {
+    margin-top: 5px;
+    font-size: 15px;
+    border-radius: 3px;
+    width: 80px;
+    padding: 5px 10px;
+}
+
+.reviewBtn a {
+    color: #fff;
+    text-decoration: none;
+}
+
 .ReviewItemImg, .ReviewContent, .satisfing {
     width: 45%;
 }
@@ -521,6 +547,14 @@ const MyBookingContainer = styled.div`
 .satisfing div {
     width: 150px;
     font-size: 12px;
+}
+
+// .pagination li {
+//     background-color: #fff;
+// }
+
+.pagination li.active {
+    font-weight: 800
 }
 
 `

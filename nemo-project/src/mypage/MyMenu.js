@@ -11,12 +11,25 @@ function MyMenu({ history , location}) {
     const itemWriter = sessionStorage.getItem('memberId');
     const reviewId = sessionStorage.getItem('memberId');
 
+    // const memberNickname = sessionStorage.getItem('memberNickname');
+
     const [memberImg, setMemberImg] = useState('');
     const [imageSrc, setImageSrc] = useState('');
+
+    const [memberNickname, setMemberNickname] = useState('');
+
 
     const handleImgError = (e) => {
         e.target.src = '../../../noimage/no-profile.PNG';
     }
+
+    // -------------회원 닉네임-----------
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
+        .then(response => {
+            setMemberNickname(response.data.memberNickname);
+        })
+    },[])
 
     //--------------프사 GET--------------
 
@@ -145,7 +158,7 @@ function MyMenu({ history , location}) {
             {/* ---프사모달 end--- */}
 
             
-            <div className='myMenuUserName'>{itemWriter}</div>
+            <div className='myMenuUserName'>{memberNickname}</div>
             <div className='cleanG'>
                 {reviewSatisfaction == 0 ?
                     <div>

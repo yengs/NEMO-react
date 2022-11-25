@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaTemperatureHigh } from "react-icons/fa";
-import { FaLock } from "react-icons/fa";
+import { FaLock, FaUserPlus } from "react-icons/fa";
 import { BsChatDotsFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -108,6 +108,12 @@ function Header() {
                     </IconContext.Provider>
                     <p>로그인</p>
                 </Link>
+                <Link to="/member/join">
+                    <IconContext.Provider value={{ className: "headerIcons" }}>
+                        <FaUserPlus />
+                    </IconContext.Provider>
+                    <p>회원가입</p>
+                </Link>
             </div>
                 }</div>
             </div>}
@@ -155,6 +161,7 @@ function Header() {
                                     <a href='/item/cate/sub/패딩'>패딩</a>
                                     <a href='/item/cate/sub/코트'>코트</a>
                                     <a href='/item/cate/sub/자켓'>자켓</a>
+                                    <a href='/item/cate/sub/점퍼'>점퍼</a>
                                     <a href='/item/cate/sub/후드집업'>후드집업</a>
                                     <a href='/item/cate/sub/바람막이'>바람막이</a>
                                 </div>

@@ -42,7 +42,7 @@ function MyPageItem({ match }) {
 
                 <div className="titleNplusBtn">
                     <h3>내 상품 목록</h3>
-                    <Link className="btn" to="/item/write">상품등록</Link>
+                    {/* <Link className="btn" to="/item/write">상품등록</Link> */}
                 </div>
                 <div className="itemWrap3">
                     {
@@ -96,13 +96,21 @@ const MyPageItemContainer = styled.div`
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     overflow: auto;
+    border-radius : 0px;
 }
 
-/* 스크롤바 숨김 */
 .mypageInnerPage2::-webkit-scrollbar {
-    display: none; 
+  display: block;
+  width: 6px !important;
+  height: 6px !important;
+  border-radius: 6px !important;
+  background: rgba(200, 200, 200, 0.25) !important;
 }
 
+.mypageInnerPage2::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15) !important;
+  border-radius: 6px !important;
+}
 
 .mypageInnerPage .pageTitle {
     padding: 0;

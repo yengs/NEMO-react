@@ -27,6 +27,7 @@ function ItemDetail({ match, history }) {
     const [itemRentalstart, setItemRentalstart] = useState('');
     const [itemRentalend, setItemRentalend] = useState('');
     const [memberImg, setMemberImg] = useState('');
+    const [memberNickname,setMemberNickname]= useState('');
     const [reviewSatisfaction, setReviewSatisfaction] = useState(0);
 
     const { itemNum } = match.params;
@@ -61,6 +62,7 @@ function ItemDetail({ match, history }) {
                 setItemRentalstart(response.data.itemRentalstart);
                 setItemRentalend(response.data.itemRentalend);
                 setMemberImg(response.data.memberImg);
+                setMemberNickname(response.data.memberNickname);
 
                 // 리뷰어의 클린지수 조회
                 axios.get(`http://localhost:8080/api/clean/${response.data.itemWriter}`)
@@ -136,7 +138,7 @@ function ItemDetail({ match, history }) {
         if (sessionStorage.getItem("memberId") === data.itemWriter) {
             history.push(`/mypage/mypageitem/${sessionStorage.getItem("memberId")}`);
         } else {
-            history.push(`/userstoreinfo/${data.itemWriter},${data.memberImg}`);
+            history.push(`/userstoreinfo/${data.memberNickname},${data.itemWriter},${data.memberImg}`);
         }
     }
 
@@ -168,21 +170,22 @@ function ItemDetail({ match, history }) {
 
 
     const chatting = () => {
-
-        if (sessionStorage.getItem("memberId") !== data.itemWriter) {
+        if (sessionStorage.getItem("memberId") === null) {
+            alert("로그인이 필요합니다.");
+            history.push('/member/login');
+        }
+        else if (sessionStorage.getItem("memberId") !== data.itemWriter) {
             history.push(`/chatting/${itemWriter}`);
         }
-
         else if (sessionStorage.getItem("memberId") === data.itemWriter) {
             alert("본인은 본인에게 채팅을 할수 없습니다.");
             history.goBack();
         }
-
     }
 
     return (
 
-        <ItemDatailContainer style={{ padding: "80px 0" }}>
+        <ItemDatailContainer style={{ padding: "30px 0" }}>
             <>
                 <div className="DetailContainer" style={{ maxWidth: '1000px' }}>
                     <h2>상품 상세</h2>
@@ -203,7 +206,7 @@ function ItemDetail({ match, history }) {
                     <br></br>
                     <div className="tablePlusForm">
                         <div className="imageDiv">
-                            <img className="itemImg" src={`../../files/${data.files}`} />
+                            <img className="itemImg" src={`../../files/${data.files}`} onError={handleImgError} />
                         </div>
                         <div className="tableform">
                             <div>
@@ -242,10 +245,10 @@ function ItemDetail({ match, history }) {
 
                             <div className="writerDiv" style={{ cursor: "pointer" }} onClick={goUserStore}>
                                 <h3>대여자</h3>
-                                <img className="memberImg" src={`../../memberImg/${memberImg}`}></img>
+                                <img className="memberImg" src={`../../memberImg/${memberImg}`} onError={handleImgError}></img>
                             </div>
-                            <div style={{ cursor: "pointer" }} onClick={goUserStore} className="cleanDiv">
-                                <h4>{itemWriter}</h4>
+                            <div style={{ cursor: "pointer", marginTop:'25px' }} onClick={goUserStore} className="cleanDiv">
+                                <h4>{memberNickname}</h4>
                                 <div>
 
                                     {reviewSatisfaction == 0 ?
@@ -255,7 +258,7 @@ function ItemDetail({ match, history }) {
                                         </div>
                                         :
                                         <div>
-                                            <div className='item-detail-clean'> 클린지수 {reviewSatisfaction}% </div>
+                                            <div className='item-detail-clean' style={{marginTop: '12px'}}> 클린지수 {reviewSatisfaction}% </div>
                                             <div> {
                                                 (function () {
                                                     if (reviewSatisfaction === 0) {
@@ -293,9 +296,9 @@ function ItemDetail({ match, history }) {
                                     {
                                         datas2 && datas2.map(items => (
                                             <div key={items.itemNum} >
-                                                <div className="itemInfoWrap" style={{ width: "130px", height: "140px", backgroundColor: "rgb(194 217 204)", marginLeft: "20px" }}  >
+                                                <div className="itemInfoWrap" style={{ width: "130px", height: "140px", backgroundColor: "transparent", marginLeft: "20px" }}  >
                                                     <Link to={`/item/detail/${items.itemNum}`}>
-                                                        <img className="itemImggg" src={`../../files/${items.files}`} ></img>
+                                                        <img className="itemImggg" src={`../../files/${items.files}`} onError={handleImgError}></img>
                                                     </Link>
                                                 </div>
                                             </div>
@@ -422,7 +425,7 @@ const ItemDatailContainer = styled.div`
 .itemImggg{
     width: 100% !important;
     height: 100%;
-    border: 1px solid #ddd;
+    border: 1px solid rgb(194, 217, 204);
     border-radius: 5px;
     background-position: center;
     background-repeat: no-repeat;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
+import { Link } from "react-router-dom";
 
 function MyReviewList({ history, match }) {
 
@@ -18,6 +19,8 @@ function MyReviewList({ history, match }) {
     const handleImgError = (e) => {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
+
+    const handlerClickList = () => history.push(`/mypage/review`);
 
     // 후기 데이터 가져오기
     useEffect(() => {
@@ -102,7 +105,11 @@ function MyReviewList({ history, match }) {
                                     <td className="rReviewItemImageOrigin">
                                             <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                        <td className='ReviewItemNameOrigin'>
+                                        <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                            {review.reviewItemname}
+                                            </Link>
+                                            </td>
                                         <td className='ReviewWriter'>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
@@ -114,7 +121,8 @@ function MyReviewList({ history, match }) {
                                         </div>
                                         <div id="btnView">
                                             {review.reviewContents.length > 18 ?
-                                                <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
+                                                <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>
+                                                    {review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             } 
                                             <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}> [ 수정 ] </button>
@@ -155,14 +163,20 @@ function MyReviewList({ history, match }) {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
+                                    <td className="nonedata" colSpan="7"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }
                     </tbody>
                 </table>
                 <div>
-                    <Paging page={page} count={count} setPage={changePage} />
+                    <table className="sun">
+                       <tr >
+                        <td>
+                        <Paging page={page} count={count} setPage={changePage} />
+                        </td><td> <input type="button" id="list" className="greyBtnMPID" value="뒤로가기" onClick={handlerClickList} />
+                        </td> </tr>
+                    </table>
                 </div>
             </div>
         </>

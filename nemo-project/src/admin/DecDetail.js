@@ -7,7 +7,7 @@ import styled from "styled-components";
 const styles = {
     adminInnerPage: {  
         borderRadius: 20, 
-        width: "calc(100% - 230px)",
+        maxWidth: "1200px",
         padding: "10px 10px 30px 10px", 
         margin: "60px auto auto auto",
         backgroundColor: "rgb(248, 248, 248)",
@@ -24,6 +24,10 @@ const styles = {
 };
 
 function DecDetail({history, match}){
+
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noimage.gif';
+    }
 
     const [data, setData] = useState([]);
     const [singoNum, setSingoNum] = useState('');
@@ -97,19 +101,18 @@ function DecDetail({history, match}){
                         data && data.map(data => (
             <div className="tablePlusForm">
                     <div className="imageDiv">
-                        <img className="itemImg" src={`../../files_singo/${data.singoImage}`} />
+                        <img className="itemImg" src={`../../files_singo/${data.singoImage}`} onError={handleImgError} />
                     </div>
                     <div className="tableform">
                     
                         <div className='DecCon'>
                             <h2 className="itemName">{data.itemName}</h2>
-                            <h3 className="itemPrice">신고사유   : <span>{data.singoReason}</span></h3>
-                            <p className="itemDeposit">피신고자 ID :<span>{data.singoPisingoja}</span></p>
-                            <div style={{ borderBottom: "1px solid #ddd" }}></div>
-                            
-                           
-                            <p>신고자 ID : {data.singoWriter}</p>
-                            <p className="itemDetailContent">신고 내용 : {data.singoContent}</p>
+                            <h3 className="itemPrice">신고 사유 <span>{"[ "}{data.singoReason}{" ]"}</span></h3>
+                            <p className="itemDeposit">신고 대상자 ID :<span>{data.singoPisingoja}
+                            　/　신고 작성자 ID : {data.singoWriter}</span></p>
+                            {/* <div style={{ borderBottom: "1px solid #ddd" }}></div> */}
+                            {/* <p>신고 작성자 ID : {data.singoWriter}</p> */}
+                            <p className="itemDetailContent" style={{color: "#666"}}>{data.singoContent}</p>
                         </div>
                          
                     </div>
@@ -138,7 +141,7 @@ const DecDetailContainer = styled.div`
 }
 
 .DecCon{
-    margin-top : 50px;
+    // margin-top : 50px;
 }
 
 .itemImggg{
@@ -371,8 +374,9 @@ td.reviewImg,
 
 .tablePlusForm{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    margin-top:90px;
 }
 
 .tableform {
@@ -449,10 +453,12 @@ td.reviewImg,
     font-size; 17px;
     line-height: 23px;
     overflow-y: scroll;
-    height: 155px;
+    height: 285px;
     white-space: pre-wrap;
     word-break: break-all;
-    
+    border-radius: 5px;
+    padding: 15px;
+    background-color: rgba(100,165,127,0.1)
 }
 
 
@@ -470,11 +476,11 @@ a.ItemReviewList {
 
 .tablePlusForm .itemImg {
     background-color: rgb(219, 219, 219);
-    width: 350px;
-    height: 400px;
-    margin-left : 150px;
-    margin-right : 50px;
-    margin-top : 50px;
+    max-width: 350px;
+    height: fit-content;
+    max-height: 370px;
+    // margin-left : 150px;
+    // margin-top : 50px;
 }
 
 /* -- clean */

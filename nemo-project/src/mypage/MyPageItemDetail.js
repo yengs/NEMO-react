@@ -48,9 +48,9 @@ function MyPageItemDetail({ match, location, history }) {
     }, []);
 
 
-
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    var now = new Date();
+    const [startDate, setStartDate] = useState(now.setDate(now.getDate() + 1));
+    const [endDate, setEndDate] = useState(now.setDate(now.getDate() + 1));
 
 
     const handlerChangeName = (e) => setItemName(e.target.value);
@@ -113,10 +113,11 @@ function MyPageItemDetail({ match, location, history }) {
         })], {
             type: "application/json"
         }));
-        // formData.append("files", new Blob(files, { type: "image/*" }));
         formData.append("files", files);
 
-
+        if(startDate > endDate){
+            alert("대여 마감날짜를 확인해주세요.")
+        }else{
         axios.put(`http://localhost:8080/api/item/${itemNum}`,
             formData,
             {
@@ -140,6 +141,7 @@ function MyPageItemDetail({ match, location, history }) {
             })
             .catch(error => console.log(error));
     };
+}
 
     const [showCom, setShowCom] = useState(false);
     const showComment = () => {
@@ -148,6 +150,10 @@ function MyPageItemDetail({ match, location, history }) {
 
     const hideComment = () => {
         setShowCom(false)
+    }
+
+    const handleImgError = (e) => {
+        e.target.src = '../../../noimage/noimage.gif';
     }
 
 
@@ -161,7 +167,7 @@ function MyPageItemDetail({ match, location, history }) {
                             <label htmlFor="item_review_input" className="item_review_input">
                                 {imageSrc == '' ?
                                     <div className="itemImg">
-                                        <img className="previewImg" src={`../../files/${data.files}`} onMouseEnter={showComment} />
+                                        <img className="previewImg" src={`../../files/${data.files}`} onMouseEnter={showComment} onError={handleImgError}/>
                                         <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                             이미지 변경을 하시려면<br />클릭해주세요.
                                         </div>
@@ -194,7 +200,7 @@ function MyPageItemDetail({ match, location, history }) {
                                 <tbody>
                                     <tr>
                                         <th scope="row">상품명</th>
-                                        <td><input type="text" value={itemName} onChange={handlerChangeName} /></td>
+                                        <td><input type="text" value={itemName} onChange={handlerChangeName} maxlength="25"/></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">어울리는 계절</th>
@@ -244,6 +250,7 @@ function MyPageItemDetail({ match, location, history }) {
                                                             <option value="패딩">패딩</option>
                                                             <option value="코트">코트</option>
                                                             <option value="자켓">자켓</option>
+                                                            <option value="점퍼">점퍼</option>
                                                             <option value="후드집업">후드집업</option>
                                                             <option value="바람막이">바람막이</option>
 
@@ -262,11 +269,11 @@ function MyPageItemDetail({ match, location, history }) {
                                     </tr>
                                     <tr>
                                         <th scope="row">가격</th>
-                                        <td><input type="text" value={itemPrice} onChange={handlerChangePrice} /></td>
+                                        <td><input type="text" value={itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} onChange={handlerChangePrice} /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">보증금</th>
-                                        <td><input type="text" value={itemDeposit} onChange={handlerChangeItemDeposit} /></td>
+                                        <td><input type="text" value={itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} onChange={handlerChangeItemDeposit} /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">사이즈</th>
@@ -316,7 +323,7 @@ function MyPageItemDetail({ match, location, history }) {
                                         <th scope="row">대여기간</th>
                                         <td>
                                             <div className="rentalDiv">
-                                                <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()} />
+                                                <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={now.setDate(now.getDate() -1)} />
                                                 <span style={{ margin: '0 5px' }}>{' ~ '}</span>
                                                 <DatePicker dateFormat="yyyy-MM-dd" className="endDate" selected={endDate} onChange={date => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate} locale={ko} minDate={startDate} />
                                             </div>
