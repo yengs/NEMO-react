@@ -34,7 +34,7 @@ function MyMenu() {
         <div className='myPageWrap'>
             <div className="myMenuWrap">
                 <img className="memberImg" src={`../../memberImg/${params.memberImg}`}></img>
-                <div className='myMenuUserName'>{params.itemWriter}</div>
+                <div className='myMenuUserName'>{params.memberNickname}</div>
                 <div className='cleanG'>
                     {reviewSatisfaction == 0 || reviewSatisfaction == null ?
                         <div>

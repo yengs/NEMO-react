@@ -95,18 +95,20 @@ function UserUpdate({ history }) {
 
         if ( memberNickname == '' || memberAddress == '' || memberPw == '') {
             alert("빈칸을 채워주세요")
-        }else {
+        } else if(memberNickname !== sessionStorage.getItem('memberNickname')) {
+            alert("닉네임 중복확인을 해주세요");
+        } else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
             .then(response => {
                 if (response.status === 200) {
                     alert("수정완료");
+                    history.put();
                 } else {
                     alert("수정실패");
                     return;
                 }
             })
             .catch(error => {
-                alert("닉네임 중복확인을 해주세요");
                 console.log(memberInfo);
                 console.log(error)
             });
@@ -130,7 +132,7 @@ function UserUpdate({ history }) {
         if (memberPw == memberPwCheck && check4 === false) {
             alert("안내사항에 동의해주세요")
         } else if (memberPw !== memberPwCheck && check4 === true) {
-            alert("패스워드를 확인해주세요")
+            alert("비밀번호를 확인해주세요")
         } else if (memberPw == memberPwCheck && check4 === true) {
             axios.delete(`http://localhost:8080/api/member/delete/${memberNum}`)
                 .then(response => {
@@ -146,7 +148,7 @@ function UserUpdate({ history }) {
                 })
                 .catch(error => console.log(error));
         } else {
-            alert("패스워드 확인과 안내사항 동의를 해주세요")
+            alert("비밀번호 확인과 안내사항 동의를 해주세요")
         }
     };
 
@@ -169,6 +171,7 @@ function UserUpdate({ history }) {
                 console.log(nickname);
                 if (nickname.data === "success" && memberNickname !== "") {
                     alert("사용 가능한 닉네임입니다.");
+                    sessionStorage.setItem('memberNickname', memberNickname);
                 } else if (nickname.data === "fail" && memberNickname !== "") {
                     alert("이미 사용중인 닉네임입니다.")
                 } else {
@@ -212,7 +215,7 @@ function UserUpdate({ history }) {
                                             <td></td>
                                         </tr>
                                         <tr>
-                                            <td>패스워드</td>
+                                            <td>비밀번호</td>
                                             <td>
                                                 <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
                                             </td>
@@ -256,17 +259,17 @@ function UserUpdate({ history }) {
                                 </div>
                                 <MemberDelete open={modalOpen} close={closeModal} header="회원탈퇴페이지">
                                     <div className="txt3"><li>
-                                        패스워드 확인을 통해 본인인증을 해주세요
+                                        비밀번호 확인을 통해 본인인증을 해주세요
                                     </li>
                                     </div>
                                     <tr>
-                                        <td className="requiredMark">패스워드</td>
+                                        <td className="requiredMark">비밀번호</td>
                                         <td>
                                             <input className="pw" type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td className="requiredMark">패스워드확인</td>
+                                        <td className="requiredMark">비밀번호 확인</td>
                                         <td>
                                             <input className="pw" type="password" name="mIdCheck" value={memberPwCheck} onChange={handlerChangePwCheck} required />
                                         </td>

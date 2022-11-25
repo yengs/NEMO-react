@@ -48,9 +48,9 @@ function MyPageItemDetail({ match, location, history }) {
     }, []);
 
 
-
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    var now = new Date();
+    const [startDate, setStartDate] = useState(now.setDate(now.getDate() + 1));
+    const [endDate, setEndDate] = useState(now.setDate(now.getDate() + 1));
 
 
     const handlerChangeName = (e) => setItemName(e.target.value);
@@ -113,10 +113,11 @@ function MyPageItemDetail({ match, location, history }) {
         })], {
             type: "application/json"
         }));
-        // formData.append("files", new Blob(files, { type: "image/*" }));
         formData.append("files", files);
 
-
+        if(startDate > endDate){
+            alert("대여 마감날짜를 확인해주세요.")
+        }else{
         axios.put(`http://localhost:8080/api/item/${itemNum}`,
             formData,
             {
@@ -140,6 +141,7 @@ function MyPageItemDetail({ match, location, history }) {
             })
             .catch(error => console.log(error));
     };
+}
 
     const [showCom, setShowCom] = useState(false);
     const showComment = () => {
@@ -198,7 +200,7 @@ function MyPageItemDetail({ match, location, history }) {
                                 <tbody>
                                     <tr>
                                         <th scope="row">상품명</th>
-                                        <td><input type="text" value={itemName} onChange={handlerChangeName} /></td>
+                                        <td><input type="text" value={itemName} onChange={handlerChangeName} maxlength="25"/></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">어울리는 계절</th>
@@ -321,7 +323,7 @@ function MyPageItemDetail({ match, location, history }) {
                                         <th scope="row">대여기간</th>
                                         <td>
                                             <div className="rentalDiv">
-                                                <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()} />
+                                                <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={now.setDate(now.getDate() -1)} />
                                                 <span style={{ margin: '0 5px' }}>{' ~ '}</span>
                                                 <DatePicker dateFormat="yyyy-MM-dd" className="endDate" selected={endDate} onChange={date => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate} locale={ko} minDate={startDate} />
                                             </div>

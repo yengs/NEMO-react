@@ -99,8 +99,8 @@ export default function WeatherRecItemList({ match }) {
 
                                                 {/* {data.weather[0].description} */}
                                             </div>
-                                            <div className="feelsLikeTemp timeTemp">체감온도<span className="feelTemp temp">{data.main.feels_like}</span>℃</div>
-                                            <div className="timeTemp">기온<span className="temp">{data.main.temp_max}</span>℃</div>
+                                            <div className="feelsLikeTemp timeTemp">체감온도<span className="feelTemp temp">{Math.round(data.main.feels_like)}</span>℃</div>
+                                            <div className="timeTemp">기온<span className="temp">{Math.round(data.main.temp_max)}</span>℃</div>
                                             {/* <div className="timeTemp">최저<span className="temp">{data.main.temp_min}</span>℃</div> */}
                                         </div>
                                     );
