@@ -52,7 +52,6 @@ function UserUpdate({ history }) {
     const [memberAddress, setMemberAddress] = useState('');
     const [mZipCode, setMzipCode] = useState('');
     const [mSigungu, setMsigungu] = useState('');
-    const [ckNickname, setcheckNickName] = useState(true);
 
 
     useEffect(() => {
@@ -75,8 +74,7 @@ function UserUpdate({ history }) {
             .catch(error => console.log(error));
     }, []);
 
-    const handlerChangeNickname = (e) => {setMemberNickname(e.target.value);
-                                          setcheckNickName(false);}
+    const handlerChangeNickname = (e) => setMemberNickname(e.target.value);
     const handlerChangePw = (e) => setMemberPw(e.target.value);
     const handlerChangePwCheck = (e) => setMemberPwCheck(e.target.value);
     const handlerChangePhone = (e) => setMemberPhone(e.target.value);
@@ -97,9 +95,9 @@ function UserUpdate({ history }) {
 
         if ( memberNickname == '' || memberAddress == '' || memberPw == '') {
             alert("빈칸을 채워주세요")
-        } else if (ckNickname === false) {
-            alert("닉네임 중복확인 해주세요.")
-        }else {
+        } else if(memberNickname !== sessionStorage.getItem('memberNickname')) {
+            alert("닉네임 중복확인을 해주세요");
+        } else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
             .then(response => {
                 if (response.status === 200) {
@@ -171,13 +169,11 @@ function UserUpdate({ history }) {
             .then(nickname => {
                 console.log(nickname);
                 if (nickname.data === "success" && memberNickname !== "") {
-                    setcheckNickName(true);
                     alert("사용 가능한 닉네임입니다.");
+                    sessionStorage.setItem('memberNickname', memberNickname);
                 } else if (nickname.data === "fail" && memberNickname !== "") {
-                    setcheckNickName(false);
                     alert("이미 사용중인 닉네임입니다.")
                 } else {
-                    setcheckNickName(false);
                     alert("닉네임을 입력해주세요");
                 }
             });
@@ -206,8 +202,7 @@ function UserUpdate({ history }) {
                                                 <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname} />
                                             </td>
                                             <td className="updateTableBtn">
-                                                {ckNickname === false ?
-                                                <button className="beigeBtn btn" onClick={checkNickname}>중복확인</button> : null}
+                                                <button className="beigeBtn btn" onClick={checkNickname}>중복확인</button>
                                             </td>
                                             <td></td>
                                         </tr>
