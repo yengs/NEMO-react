@@ -113,10 +113,11 @@ function MyPageItemDetail({ match, location, history }) {
         })], {
             type: "application/json"
         }));
-        // formData.append("files", new Blob(files, { type: "image/*" }));
         formData.append("files", files);
 
-
+        if(startDate > endDate){
+            alert("대여 마감날짜를 확인해주세요.")
+        }else{
         axios.put(`http://localhost:8080/api/item/${itemNum}`,
             formData,
             {
@@ -140,6 +141,7 @@ function MyPageItemDetail({ match, location, history }) {
             })
             .catch(error => console.log(error));
     };
+}
 
     const [showCom, setShowCom] = useState(false);
     const showComment = () => {
