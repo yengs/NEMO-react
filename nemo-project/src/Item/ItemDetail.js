@@ -138,7 +138,7 @@ function ItemDetail({ match, history }) {
         if (sessionStorage.getItem("memberId") === data.itemWriter) {
             history.push(`/mypage/mypageitem/${sessionStorage.getItem("memberId")}`);
         } else {
-            history.push(`/userstoreinfo/${data.itemWriter},${data.memberImg}`);
+            history.push(`/userstoreinfo/${data.memberNickname},${data.itemWriter},${data.memberImg}`);
         }
     }
 
