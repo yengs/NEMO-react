@@ -27,8 +27,6 @@ function MyMenu({ history , location}) {
     useEffect(() => {
         axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
         .then(response => {
-            console.log(response.data);
-            console.log(memberNum);
             setMemberNickname(response.data.memberNickname);
         })
     },[])
