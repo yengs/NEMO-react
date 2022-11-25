@@ -119,10 +119,9 @@ const Chat = ({match}) => {
             <MyWebsocket>
             <div id="chat-wrap">
                 <div id='chatt'>
-                    <h1 id="title">네모 채팅방</h1>
+                    <h1 id="title">내모 채팅방</h1>
                     <br/>
                     <div id='talk'>
-                        {/* <div className='talk-shadow'></div> */}
                         {msgBox}
                     </div>
                      <div className="chat" >
@@ -181,7 +180,7 @@ const MyWebsocket = styled.div`
 
 & {
     width:500px;
-    background-color: #ededed;
+    background-color: rgb(220 241 229);
     margin: 50px auto;
     padding:20px 10px 15px;
     border-radius: 20px;
@@ -242,7 +241,7 @@ const MyWebsocket = styled.div`
         }
   
         &.other{
-            background-color : #fff;
+            background-color :rgb(251 251 251);
           margin : 20px 0px 5px 0;	
         }
       }

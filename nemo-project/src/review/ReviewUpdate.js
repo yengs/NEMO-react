@@ -127,7 +127,7 @@ function ReviewUpdate({ history, match }) {
         <div className="reviewUpload">
 
             <div className='pageTitle'>
-                <h3>후기 작성</h3>
+                <h3>후기 수정</h3>
             </div>
             <div>
                 <h4>사진첨부</h4>
