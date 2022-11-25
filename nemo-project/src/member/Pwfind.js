@@ -107,7 +107,7 @@ function Pwfind({history}) {
                             </tr>
                             <tr>
                                  <td>
-                                     <input type="number" name="Code" value={userInputCode}  placeholder="발송된 코드를 입력하세요" onChange={handlerChangeUserInputCode} required/>
+                                     <input type="text" name="Code" value={userInputCode}  placeholder="발송된 코드를 입력하세요" onChange={handlerChangeUserInputCode} required/>
 
                                  </td>
                                        
@@ -123,7 +123,7 @@ function Pwfind({history}) {
                 </div>
                 <br/>
                 <br/>
-                <li>비밀번호를 찾지 못하셨다면 고객센터(1111-1111)로 문의해주세요.</li>
+                <li>비밀번호를 찾지 못하셨다면 고객센터(1017-1130)로 문의해주세요.</li>
                 <li>아직 내모 회원이 아니신가요? &nbsp; 
                     <Link to="/member/join">회원가입</Link>
 
