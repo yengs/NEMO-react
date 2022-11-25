@@ -48,9 +48,9 @@ function MyPageItemDetail({ match, location, history }) {
     }, []);
 
 
-
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    var now = new Date();
+    const [startDate, setStartDate] = useState(now.setDate(now.getDate() + 1));
+    const [endDate, setEndDate] = useState(now.setDate(now.getDate() + 1));
 
 
     const handlerChangeName = (e) => setItemName(e.target.value);
@@ -198,7 +198,7 @@ function MyPageItemDetail({ match, location, history }) {
                                 <tbody>
                                     <tr>
                                         <th scope="row">상품명</th>
-                                        <td><input type="text" value={itemName} onChange={handlerChangeName} /></td>
+                                        <td><input type="text" value={itemName} onChange={handlerChangeName} maxlength="25"/></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">어울리는 계절</th>
@@ -321,7 +321,7 @@ function MyPageItemDetail({ match, location, history }) {
                                         <th scope="row">대여기간</th>
                                         <td>
                                             <div className="rentalDiv">
-                                                <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={new Date()} />
+                                                <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={now.setDate(now.getDate() -1)} />
                                                 <span style={{ margin: '0 5px' }}>{' ~ '}</span>
                                                 <DatePicker dateFormat="yyyy-MM-dd" className="endDate" selected={endDate} onChange={date => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate} locale={ko} minDate={startDate} />
                                             </div>

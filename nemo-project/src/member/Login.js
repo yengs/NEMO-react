@@ -129,7 +129,7 @@ function Login({ history }) {
                                 </td>
                             </tr>
                             <tr>
-                                <td style={{ borderTop: 'none' }}>패스워드</td>
+                                <td style={{ borderTop: 'none' }}>비밀번호</td>
                                 <td style={{ borderTop: 'none' }}>
                                     <input type="password" value={pw} onChange={changePw} required />
                                 </td>

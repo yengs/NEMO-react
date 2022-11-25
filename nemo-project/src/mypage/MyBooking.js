@@ -198,7 +198,7 @@ function MyBooking({ history }) {
                                                 {booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}
                                             </td>
                                             <td className='ReviewWriter' rowSpan={3}>
-                                                {booking.bookingDepositstate === "반환완료" || booking.bookingDepositstate === "미반환(물품훼손)" || booking.bookingDepositstate === "미반환(미반납)" ? <p>{booking.bookingDepositstate.slice(4,-1)}</p> :
+                                                {booking.bookingDepositstate === "반환완료" ?  <p>{booking.bookingDepositstate}</p> : booking.bookingDepositstate === "미반환(물품훼손)" || booking.bookingDepositstate === "미반환(미반납)" ? <p>{booking.bookingDepositstate.slice(4,-1)}</p> :
                                                     booking.bookingBookingstate === "기간만료" ?
                                                         <select onChange={handleritemstate}>
                                                             <option value="">--</option>
