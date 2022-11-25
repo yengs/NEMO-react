@@ -185,7 +185,7 @@ function ItemDetail({ match, history }) {
 
     return (
 
-        <ItemDatailContainer style={{ padding: "80px 0" }}>
+        <ItemDatailContainer style={{ padding: "30px 0" }}>
             <>
                 <div className="DetailContainer" style={{ maxWidth: '1000px' }}>
                     <h2>상품 상세</h2>

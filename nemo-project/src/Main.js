@@ -181,7 +181,7 @@ function Main({ history }) {
                     <div className="titleNplusBtn">
                         <h3 style={{fontSize:'23px'}}>베스트 스토어</h3>
                     </div>
-                    <div style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
+                    <div style={{display:'flex', justifyContent:'flex-start', alignItems: 'center'}}>
                         {console.log(storeUrl)}
                     {
                         bestItemStore && bestItemStore.map(item => (

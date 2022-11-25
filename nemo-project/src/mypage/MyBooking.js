@@ -189,7 +189,7 @@ function MyBooking({ history }) {
                                             <td rowSpan={2} className="ReviewItemImageOrigin">
                                                 <img className="bookingitemImg" src={`../../files/${booking.bookingItemfiles}`}></img>
                                             </td>
-                                            <td className='ReviewItemNameOrigin' rowSpan={3} >
+                                            <td className='ReviewItemNameOrigin' >
                                                 <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                             </td>
                                             <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
@@ -267,7 +267,7 @@ function MyBooking({ history }) {
 
                                             <img className="bookingitemImg" src={`../../files/${booking.bookingItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin' style={{ width: '15%' }}>
+                                        <td className='ReviewItemNameOrigin'>
                                             <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                         </td>
 
@@ -454,7 +454,7 @@ const MyBookingContainer = styled.div`
 
 
 .ReviewItemImageOrigin {
-    width: 10%;
+    width: 4%;
     height: 52px;
 }
 
