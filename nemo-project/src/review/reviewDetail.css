@@ -83,6 +83,10 @@
     word-break: break-word;
 }
 
+.nonedata {
+    line-height: 30px;
+}
+
 .lineH {
     height: 3.1px !important;
     width: 100%;
