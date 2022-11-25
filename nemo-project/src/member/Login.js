@@ -96,7 +96,8 @@ function Login({ history }) {
 
                 } else if(response.data === ''){
                     sessionStorage.clear();
-                    alert("로그인 실패");
+                    console.log(response.data)
+                    alert("아이디나 비밀번호를 다시 확인해주세요");
                     return;
                 }
             })
