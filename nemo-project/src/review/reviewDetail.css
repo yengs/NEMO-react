@@ -55,7 +55,7 @@
     font-size: 14px;
     height: 10px;
     max-width: 300px;
-    padding: 10px;
+    padding-top: 4px;
     text-align: center;
     /* padding-bottom: 10px; */
     word-break: break-word;
@@ -77,10 +77,14 @@
     font-size: 14px;
     height: 10px;
     max-width: 300px;
-    padding: 10px;
+    padding-top: 4px;
     text-align: center;
     /* padding-bottom: 10px; */
     word-break: break-word;
+}
+
+.nonedata {
+    line-height: 30px;
 }
 
 .lineH {
