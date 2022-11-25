@@ -7,7 +7,7 @@ import styled from "styled-components";
 const styles = {
     adminInnerPage: {  
         borderRadius: 20, 
-        width: "calc(100% - 230px)",
+        maxWidth: "1200px",
         padding: "10px 10px 30px 10px", 
         margin: "60px auto auto auto",
         backgroundColor: "rgb(248, 248, 248)",
@@ -141,7 +141,7 @@ const DecDetailContainer = styled.div`
 }
 
 .DecCon{
-    margin-top : 50px;
+    // margin-top : 50px;
 }
 
 .itemImggg{
@@ -374,8 +374,9 @@ td.reviewImg,
 
 .tablePlusForm{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
+    margin-top:90px;
 }
 
 .tableform {
@@ -452,7 +453,7 @@ td.reviewImg,
     font-size; 17px;
     line-height: 23px;
     overflow-y: scroll;
-    height: 276px;
+    height: 285px;
     white-space: pre-wrap;
     word-break: break-all;
     border-radius: 5px;
@@ -475,10 +476,11 @@ a.ItemReviewList {
 
 .tablePlusForm .itemImg {
     background-color: rgb(219, 219, 219);
-    width: 350px;
-    height: 400px;
-    margin-left : 150px;
-    margin-top : 50px;
+    max-width: 350px;
+    height: fit-content;
+    max-height: 370px;
+    // margin-left : 150px;
+    // margin-top : 50px;
 }
 
 /* -- clean */

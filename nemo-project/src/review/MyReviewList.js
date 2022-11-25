@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
+import { Link } from "react-router-dom";
 
 function MyReviewList({ history, match }) {
 
@@ -104,7 +105,11 @@ function MyReviewList({ history, match }) {
                                     <td className="rReviewItemImageOrigin">
                                             <img className="bookingitemImgreview" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin'>{review.reviewItemname}</td>
+                                        <td className='ReviewItemNameOrigin'>
+                                        <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                            {review.reviewItemname}
+                                            </Link>
+                                            </td>
                                         <td className='ReviewWriter'>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td>
                                         {/* 이미지 업로드 부분 */}
@@ -116,7 +121,8 @@ function MyReviewList({ history, match }) {
                                         </div>
                                         <div id="btnView">
                                             {review.reviewContents.length > 18 ?
-                                                <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>{review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
+                                                <button className="moreBtn" onClick={() => handelrMoreBtn(review.reviewNum)}>
+                                                    {review.closed ? " [ + 더보기 ] " : " [ 닫기 ] "}</button>
                                                 : null
                                             } 
                                             <button className="moreBtn" onClick={() => handlerReviewUpdate(review.reviewNum)}> [ 수정 ] </button>

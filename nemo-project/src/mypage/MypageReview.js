@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 function MypageReview() {
 
@@ -9,7 +10,7 @@ function MypageReview() {
 
     const [data, setData] = useState([]);                           // 다른 회원이 쓴 후기
     const [datas, setDatas] = useState([]);                         // 내가 작성한 후기
-    
+
     const [items, setItems] = useState('');                         // 상품 전체 데이터
     const [reviewIcon, setReviewIcon] = useState('');               // 만족도 
 
@@ -49,14 +50,13 @@ function MypageReview() {
     return (
         <MypageReviewContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
             <div className="mypageInnerPage">
-            <div className='tableWrap'>
-                <div className="myStoreReview">
-                    <div className="titleNplusBtn">
-                        <h3 style={{ marginTop: '0' }}>내 상점 후기</h3>
-                        <button className="plusBtn" onClick={goYourReview}> + 더보기</button>
+                <div className='tableWrap'>
+                    <div className="myStoreReview">
+                        <div className="titleNplusBtn">
+                            <h3 style={{ marginTop: '0' }}>내 상점 후기</h3>
+                            <button className="plusBtn" onClick={goYourReview}> + 더보기</button>
+                        </div>
                     </div>
-                </div>
-               
                     <table className="yourReviewListAboutStore">
                         <colgroup>
                             <col width="10%" />
@@ -79,12 +79,17 @@ function MypageReview() {
                                     <tr key={review.reviewNum}>
                                         <td rowSpan={2} className="rReviewItemImageOrigin">
                                             <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
-                                            {/* <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`}/>         -----> 리뷰등록 사진*/}
                                         </td>
-                                        <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
+                                        <td className='ReviewItemNameOrigin' rowSpan={3} >
+                                            <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                                {review.reviewItemname}
+                                            </Link>
+                                        </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
                                         <td className='ReviewContent' rowSpan={3}>
-                                            <div className="myReviewContents">{review.reviewContents}</div>
+                                            <div className="myReviewContents">
+                                              {review.reviewContents.length < 30 ? review.reviewContents : review.reviewContents  + "..." }
+                                            </div>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>
@@ -129,13 +134,13 @@ function MypageReview() {
 
                 <div className='marging'></div>
                 <div className='tableWrap2'>
-                <div className="myStoreReview">
-                    <div className="titleNplusBtn">
-                        <h3>내 작성 후기</h3>
-                        <button className="plusBtn" onClick={goMyReview}> + 더보기</button>
+                    <div className="myStoreReview">
+                        <div className="titleNplusBtn">
+                            <h3>내 작성 후기</h3>
+                            <button className="plusBtn" onClick={goMyReview}> + 더보기</button>
+                        </div>
                     </div>
-                </div>
-                
+
                     <table className="yourReviewListAboutStore">
                         <colgroup>
                             <col width="10%" />
@@ -159,10 +164,16 @@ function MypageReview() {
                                         <td rowSpan={2} className="rReviewItemImageOrigin">
                                             <img className="bookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                         </td>
-                                        <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
+                                        <td className='ReviewItemNameOrigin' rowSpan={3} >
+                                            <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                                {review.reviewItemname}
+                                            </Link>
+                                        </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                         <td className='ReviewContent' rowSpan={3}>
-                                            <div className="myReviewContents">{review.reviewContents}</div>
+                                            <div className="myReviewContents">
+                                                {review.reviewContents.length < 30 ? review.reviewContents : review.reviewContents  + "..." }
+                                            </div>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>
@@ -224,6 +235,7 @@ const MypageReviewContainer = styled.div`
 .myReviewContents {
     display: flex;
     max-height: 32px;
+    max-width: 300px;
     overflow: hidden;
     // justify-content: flex-start;
     white-space: pre-wrap;
@@ -232,8 +244,10 @@ const MypageReviewContainer = styled.div`
 
 .bookingitemImg{
     width: 100%;
-    height : 82px;
+    height: 82px;
+    margin: 5px 5px 0px 5px;
 }
+
 .myPageWrap {
     width: 100%;
     height: calc(100vh - 250px);
@@ -383,9 +397,15 @@ const MypageReviewContainer = styled.div`
     background-position: center;
 }
 
-.rReviewItemNameOrigin {
+.ReviewItemNameOrigin {
     width: 15%;
     text-align: center;
+}
+
+.ReviewItemNameOrigin a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
 }
 
 .rReviewWriter {
@@ -419,7 +439,7 @@ table-layout: fixed;
     background-position: center;
 }
 
-.rReviewItemNameOrigin {
+.ReviewItemNameOrigin {
     width: 15%;
     text-align: center;
 }
