@@ -20,7 +20,7 @@ function MyReviewList({ history, match }) {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
 
-    const handlerClickList = () => history.goBack();
+    const handlerClickList = () => history.push(`/mypage/review`);
 
     // 후기 데이터 가져오기
     useEffect(() => {
@@ -163,7 +163,7 @@ function MyReviewList({ history, match }) {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
+                                    <td className="nonedata" colSpan="7"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }

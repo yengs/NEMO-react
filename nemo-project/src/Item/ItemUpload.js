@@ -313,7 +313,7 @@ function ItemUpload({ history }) {
 
                         <tr>
                             <td>대여시작일</td>
-                            <td><DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={startDate} required /> </td>
+                            <td><DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => {setStartDate(date) ;setEndDate(date)}} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={now.setDate(now.getDate() -1)} required /> </td>
                         </tr>
                         <tr>
                             <td>대여마감일</td>

@@ -186,7 +186,7 @@ function Main({ history }) {
                     {
                         bestItemStore && bestItemStore.map(item => (
                             <div className="storeWrap2" >
-                                    <Link to={`/userstoreinfo/${item.itemWriter},${item.memberImg}`}
+                                    <Link to={`/userstoreinfo/${item.memberNickname},${item.itemWriter},${item.memberImg}`}
                                     style={{color: '#333', textDecoration:"none"}}>
                                         <div className="storeInfoWrap">
 
