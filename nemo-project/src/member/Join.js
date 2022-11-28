@@ -5,7 +5,7 @@ import { ErrorMessage } from '@hookform/error-message';
 // 주소 api사용 (팝업방식)
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
-function Join() {
+function Join({ history }) {
 
     
     const [mName, setMname] = useState('');
@@ -320,6 +320,10 @@ function Join() {
         }
     }
 
+    const goMain = () => {
+        history.push('/');
+    }
+
 
     return (
         <div className="joinWrap memberPage container">
@@ -472,7 +476,7 @@ function Join() {
                     </ul>
                 </div>
                 <div className="btnWrap">
-                    <input type="button" value="취소" className="grayBtn btn" />
+                    <input type="button" value="취소" className="grayBtn btn" onClick={goMain}/>
                     <input type="submit" value="확인" className="greenBtn btn" onClick={memberDataInsert} />
                 </div>
             </form>

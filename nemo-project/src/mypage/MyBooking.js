@@ -193,7 +193,7 @@ function MyBooking({ history }) {
                                                 <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                             </td>
                                             <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                                            <td className='ReviewWriter' rowSpan={3} onClick={()=>  history.push(`/userstoreinfo/${booking.bookingMember},${booking.memberImg}`)}>{booking.memberNickname}</td>
+                                            <td className='ReviewWriter' rowSpan={3} onClick={()=>  history.push(`/userstoreinfo/${booking.memberNickname},${booking.bookingMember},${booking.memberImg}`)} style={{cursor:'pointer'}}>{booking.memberNickname}</td>
                                             <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}
                                                 {booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}
                                             </td>
