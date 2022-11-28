@@ -218,7 +218,6 @@ function Join() {
 
 
     // 아이디 한글 입력 불가 처리
-
     const [ckId,setcheckId] = useState(false);
 
     // 아이디 중복 체크
@@ -242,7 +241,6 @@ function Join() {
     }
 
     // 닉네임 중복 체크
-
     const [ckNickname,setcheckNickName] = useState(false);
     
     const checkNickname = (e) => {
