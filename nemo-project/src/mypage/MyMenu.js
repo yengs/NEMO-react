@@ -131,7 +131,7 @@ function MyMenu({ history, location }) {
 
         <div className="myMenuWrap">
             <AppStyle style={{ position: 'relative' }}>
-                <img className="memberImg" src={`../../memberImg/${data.memberImg}`} onMouseEnter={showComment} onError={handleImgError}></img>
+                <img className="memberImg" src={`../../memberImg/${data.memberImg}`} onMouseEnter={showComment} onError={handleImgError} style={{objectFit:'cover'}}></img>
                 <div style={{ width: '30px', height: '30px', backgroundColor: '#888', padding: '5px', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', right: '25px', bottom: '5px', zIndex: '2' }}><BsCameraFill style={{ color: "#fff" }} /></div>
                 <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment} onClick={openModal}>
                     이미지를 변경하시려면<br />클릭해주세요.
@@ -152,7 +152,7 @@ function MyMenu({ history, location }) {
                                         // <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} onError={handleImgError} style={{ margin: '0', width:'190px', height:'190px' }} />
                                         <div id="imgsrccc" className="memberImg" style={{ margin: '30px 0 0 0', width:'170px', height:'170px', backgroundColor:'#ddd', textAlign:'center', color: '#333', fontSize:'15px', padding:'62px 20px', lineHeight:'22px' }}>이 곳을 눌러<br />파일을 선택해주세요.</div>
                                         : <div className="myDetailImage">
-                                            {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" style={{ margin: '30px 0 0 0', border: '1px solid #eee', width:'170px', height:'170px' }} />} </div>
+                                            {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" style={{ margin: '30px 0 0 0', border: '1px solid #eee', width:'170px', height:'170px', objectFit:'cover' }} />} </div>
                                     }
                                 </div>
                             </label>
