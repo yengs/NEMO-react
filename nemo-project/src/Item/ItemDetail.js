@@ -48,10 +48,13 @@ function ItemDetail({ match, history }) {
         ));
     };
 
+    const [isFetched, setFetched] = useState(false);
+    
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/item/detail/${itemNum}`)
             .then(response => {
+                setFetched(true);
                 setData(response.data);
                 setItemName(response.data.itemName);
                 setItemPrice(response.data.itemPrice);
@@ -78,8 +81,7 @@ function ItemDetail({ match, history }) {
                     })
                     .catch(error => console.log(error));
             })
-            .catch(error => { console.log(error); });
-
+            .catch(error => { setFetched(true); console.log(error); });
         //후기조회
         axios.get(`http://localhost:8080/api/itemreview/${reviewProductIdx}`)
             .then(response => { 
@@ -187,10 +189,11 @@ function ItemDetail({ match, history }) {
             history.goBack();
         }
         
-        console.log(">>>>>>>>>>>>>>>>>>>>",data)
-        
+       
+    
     }
 
+    if (isFetched && data.itemName !== undefined) {
     return (
         <ItemDatailContainer style={{ padding: "30px 0" }}>
             <>
@@ -425,7 +428,11 @@ function ItemDetail({ match, history }) {
         </ItemDatailContainer>
 
     );
-                         
+                            }
+                            if (isFetched && data.itemName === undefined) {
+                               history.goBack();
+                               alert("정지된 회원의 상품입니다.")
+                            }                  
                                             
 }
 
@@ -799,6 +806,31 @@ a.ItemReviewList {
     margin-top: 7px;
     width: 140px;
     margin-bottom: 3px;
+}
+
+.deleteitem{
+    background-color:rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 200px;
+    margin-top : 10%;
+}
+
+.deleteitem2{
+    text-align: center;
+    vertical-align : middle;
+    font-size: 80px;
+}
+
+.backBtn {
+    padding: 10px 10px;
+    margin: 0px 3px 0;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 3px;
+
+    border: rgb(100, 165, 127);
+    background-color: rgb(100, 165, 127);
+    color: #fff;
 }
 
 /* -------- */
