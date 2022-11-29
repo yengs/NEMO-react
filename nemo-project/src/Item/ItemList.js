@@ -37,7 +37,7 @@ function ItemList({ match }) {
             <div className="recWeather">
 
                 <div className="titleNplusBtn">
-                    <h3>{itemMaincategory}</h3>
+                    <h3 style={{fontSize:'23px'}}>{itemMaincategory}</h3>
                     {/* <div>{sessionStorage.getItem("jwtToken") != null ?
                     <Link className="btn" to="/item/write">상품등록</Link>
                     :null

@@ -33,7 +33,7 @@ function BestItemList({ match }) {
             <div className="recWeather">
 
                 <div className="titleNplusBtn">
-                    <h3>베스트 아이템</h3>
+                    <h3 style={{fontSize:'23px'}}>베스트 아이템</h3>
                     {/* <div>{sessionStorage.getItem("jwtToken") != null ?
                     <Link className="btn" to="/item/write">상품등록</Link>
                     :null
@@ -47,7 +47,7 @@ function BestItemList({ match }) {
                                     <img className="itemImg" src={`../../files/${item.files}`}></img>
                                     <div className="itemInfo">
                                         <p className="itemPrice"><span className="price">{item.itemPrice}</span>원</p>
-                                        <p className="itemName">{item.itemName}</p>
+                                        <p className="itemName" id="overflow">{item.itemName}</p>
                                         <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit}</span>원</p>
                                         <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                     </div>

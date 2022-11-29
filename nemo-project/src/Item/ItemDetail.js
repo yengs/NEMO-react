@@ -191,7 +191,7 @@ function ItemDetail({ match, history }) {
         
     }
 
-    if(itemWriter  !=  ''){   
+    if(itemWriter  !=  '' ||  itemWriter  !=  null  || itemWriter  !=  undefined){   
     return (
 
         <ItemDatailContainer style={{ padding: "30px 0" }}>
@@ -791,6 +791,7 @@ a.ItemReviewList {
     background-color: rgb(219, 219, 219);
     width: 350px;
     height: 400px;
+    object-fit: cover;
 }
 
 /* -- clean */

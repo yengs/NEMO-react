@@ -122,7 +122,7 @@ export default function ReviewUpload({ history, match }) {
                 .then(response => {
                     if (response.status === 200) {
                         alert("정상적으로 등록되었습니다.");
-                        history.push(`/review/myReview/${reviewWriter}`);
+                        history.push(`/mypage/review`);
                     }
                 }).catch(error => { console.log(error); alert("등록에 실패했습니다."); });
         } else {

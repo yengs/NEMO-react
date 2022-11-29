@@ -18,7 +18,7 @@ function YourReviewList({ match,history  }) {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
 
-    const handlerClickList = () => history.push(`/mypage/review`);
+    const handlerClickList = () => history.goBack();
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
