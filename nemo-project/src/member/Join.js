@@ -34,6 +34,7 @@ function Join({ history }) {
     const handleComplete = (data) => {     
         let fullAddress = data.address;
         let extraAddress = '';
+        let sigungu = (data.sido) + (data.sigungu);
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -43,10 +44,12 @@ function Join({ history }) {
             }
             fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
         }
-
+        
+        console.log(">>>>>>>>>>>>>>>>>>");
+        console.log(data);
         setMaddress(fullAddress);
         setMzipCode(data.zonecode);
-        setMsigungu(data.sigungu);
+        setMsigungu(sigungu);
     };
 
     // const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
