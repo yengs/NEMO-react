@@ -112,8 +112,9 @@ function MyReviewList({ history, match }) {
                                             </td>
                                         <td className='ReviewWriter'>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                     <td>
+                                    <Link to={`/review/yourReview/${review.reviewWriter}/${review.reviewNum}`}><img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img></Link>
                                         {/* 이미지 업로드 부분 */}
-                                        <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img>
+                                        {/* <img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img> */}
                                     </td>
                                     <td>
                                         <div className="reviewContents">

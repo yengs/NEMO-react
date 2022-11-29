@@ -269,11 +269,11 @@ function MyPageItemDetail({ match, location, history }) {
                                     </tr>
                                     <tr>
                                         <th scope="row">가격</th>
-                                        <td><input type="text" value={itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} onChange={handlerChangePrice} /></td>
+                                        <td><input type="text" value={itemPrice} onChange={handlerChangePrice} /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">보증금</th>
-                                        <td><input type="text" value={itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} onChange={handlerChangeItemDeposit} /></td>
+                                        <td><input type="text" value={itemDeposit} onChange={handlerChangeItemDeposit} /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">사이즈</th>
