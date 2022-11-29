@@ -112,6 +112,7 @@ function MyMenu({ history, location }) {
         setModalOpen(true);
     };
     const closeModal = () => {
+        setImageSrc('');
         setModalOpen(false);
     };
     // ---프사 모달 end---
@@ -141,15 +142,17 @@ function MyMenu({ history, location }) {
             <React.Fragment>
                 <Modal open={modalOpen} close={closeModal} header="사진 변경">
                     <div className="ChoiseFile">
+                        {/* <p style={{textAlign:'center', marginTop:'10px', fontSize:'14px'}}>이미지를 눌러 파일을 선택해주세요.</p> */}
                         <AppStyle2 style={{ display: 'flex', justifyContent: 'center' }}>
 
                             <label for={'memberImg'}>
 
                                 <div className="myDetailImage">
                                     {imageSrc == '' ?
-                                        <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} onError={handleImgError} style={{ margin: '50px 0 0 0' }} />
+                                        // <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} onError={handleImgError} style={{ margin: '0', width:'190px', height:'190px' }} />
+                                        <div id="imgsrccc" className="memberImg" style={{ margin: '30px 0 0 0', width:'170px', height:'170px', backgroundColor:'#ddd', textAlign:'center', color: '#333', fontSize:'15px', padding:'62px 20px', lineHeight:'22px' }}>이 곳을 눌러<br />파일을 선택해주세요.</div>
                                         : <div className="myDetailImage">
-                                            {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" />} </div>
+                                            {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" style={{ margin: '30px 0 0 0', border: '1px solid #eee', width:'170px', height:'170px' }} />} </div>
                                     }
                                 </div>
                             </label>
@@ -159,7 +162,7 @@ function MyMenu({ history, location }) {
                             </div>
                         </AppStyle2>
                     </div>
-                    <input type="button" id="edit" className="myimgupdate" value="수정하기" onClick={handlerClickUpdate} style={{margin:'15px 50%', transform:'translateX(-50%)'}} />
+                    <input type="button" id="edit" className="myimgupdate" value="완료" onClick={handlerClickUpdate} style={{margin:'15px 50%', transform:'translateX(-50%)', backgroundColor:'rgb(88, 145, 112)', border:'none', fontSize:'15px'}} />
 
                 </Modal>
             </React.Fragment>
