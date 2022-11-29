@@ -191,8 +191,8 @@ function ItemDetail({ match, history }) {
         
     }
 
+    
     return (
-
         <ItemDatailContainer style={{ padding: "30px 0" }}>
             <>
                 <div className="DetailContainer" style={{ maxWidth: '1000px' }}>
@@ -426,6 +426,8 @@ function ItemDetail({ match, history }) {
         </ItemDatailContainer>
 
     );
+                         
+                                            
 }
 
 const ItemDatailContainer = styled.div`
