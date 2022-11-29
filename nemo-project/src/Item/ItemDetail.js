@@ -191,6 +191,7 @@ function ItemDetail({ match, history }) {
         
     }
 
+    if(itemWriter  !=  ''){   
     return (
 
         <ItemDatailContainer style={{ padding: "30px 0" }}>
@@ -426,6 +427,11 @@ function ItemDetail({ match, history }) {
         </ItemDatailContainer>
 
     );
+                            }  
+                            else{
+                                history.goBack();
+                                alert("삭제된 상품입니다.")
+                            }                  
 }
 
 const ItemDatailContainer = styled.div`
