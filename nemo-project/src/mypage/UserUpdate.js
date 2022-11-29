@@ -16,6 +16,7 @@ function UserUpdate({ history }) {
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
+        let sigungu = data.sido + ' ' + data.sigungu;
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -28,7 +29,7 @@ function UserUpdate({ history }) {
 
         setMemberAddress(fullAddress);
         setMzipCode(data.zonecode);
-        setMsigungu(data.sigungu);
+        setMsigungu(sigungu);
     };
 
     const handleOpenSearchAddress = (e) => {
@@ -97,6 +98,8 @@ function UserUpdate({ history }) {
             alert("빈칸을 채워주세요")
         } else if(memberNickname !== sessionStorage.getItem('memberNickname')) {
             alert("닉네임 중복확인을 해주세요");
+        } else if(memberPw.length < 8) {
+            alert("비밀번호를 8이상 작성해주세요")
         } else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
             .then(response => {

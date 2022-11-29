@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import CleanG from '../member/CleanG';
 import Modal from './ImgModal';
 import styled from "styled-components";
+import { BsCameraFill } from "react-icons/bs";
 
-function MyMenu({ history , location}) {
+function MyMenu({ history, location }) {
 
     const memberNum = sessionStorage.getItem('memberNum');
     const itemWriter = sessionStorage.getItem('memberId');
@@ -26,10 +27,10 @@ function MyMenu({ history , location}) {
     // -------------회원 닉네임-----------
     useEffect(() => {
         axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
-        .then(response => {
-            setMemberNickname(response.data.memberNickname);
-        })
-    },[])
+            .then(response => {
+                setMemberNickname(response.data.memberNickname);
+            })
+    }, [])
 
     //--------------프사 GET--------------
 
@@ -37,16 +38,16 @@ function MyMenu({ history , location}) {
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/memberimg/${memberNum}`)
-        .then(response => { 
-            setData(response.data);
-            setMemberImg(response.data.memberImg);
-        })
-        .catch(error => { console.log(error); });
+            .then(response => {
+                setData(response.data);
+                setMemberImg(response.data.memberImg);
+            })
+            .catch(error => { console.log(error); });
     }, []);
 
     // -----------------프사수정-----------------
-    
-    const handlerChangefiles =(e) => {
+
+    const handlerChangefiles = (e) => {
         setMemberImg(e.target.files[0]);
         encodeFileToBase64(e.target.files[0]);
     }
@@ -55,28 +56,29 @@ function MyMenu({ history , location}) {
         const reader = new FileReader();
         reader.readAsDataURL(fileBlob);
         return new Promise((resolve) => {
-          reader.onload = () => {
-            setImageSrc(reader.result);
-            resolve();
-          };
+            reader.onload = () => {
+                setImageSrc(reader.result);
+                resolve();
+            };
         });
-      };
+    };
 
-      const handlerClickUpdate = () => {
+    const handlerClickUpdate = () => {
 
         const formData = new FormData();
-        formData.append('data', new Blob([JSON.stringify({'memberId': reviewId})], {
+        formData.append('data', new Blob([JSON.stringify({ 'memberId': reviewId })], {
             type: "application/json"
         }));
         // formData.append("files", new Blob(files, { type: "image/*" }));
         formData.append("memberImg", memberImg);
 
 
-        axios.put(`http://localhost:8080/api/memberimg/update/${memberNum}`, 
+        axios.put(`http://localhost:8080/api/memberimg/update/${memberNum}`,
             formData,
-            { headers: {
-                'Content-Type': 'multipart/form-data'
-              }
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             })
             .then(response => {
                 if (response.status === 200) {
@@ -124,40 +126,46 @@ function MyMenu({ history , location}) {
     }
 
     return (
-      
+
 
         <div className="myMenuWrap">
-            <AppStyle >
-            <img className="memberImg" src={`../../memberImg/${data.memberImg}`}  onMouseEnter={showComment} onError={handleImgError}></img>
-            <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment} onClick={openModal}>
-                                            이미지를 변경하시려면<br/>클릭해주세요.
-                                        </div>
+            <AppStyle style={{ position: 'relative' }}>
+                <img className="memberImg" src={`../../memberImg/${data.memberImg}`} onMouseEnter={showComment} onError={handleImgError}></img>
+                <div style={{ width: '30px', height: '30px', backgroundColor: '#888', padding: '5px', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'absolute', right: '25px', bottom: '5px', zIndex: '2' }}><BsCameraFill style={{ color: "#fff" }} /></div>
+                <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment} onClick={openModal}>
+                    이미지를 변경하시려면<br />클릭해주세요.
+                </div>
             </AppStyle>
 
             {/* ---프사모달--- */}
             <React.Fragment>
                 <Modal open={modalOpen} close={closeModal} header="사진 변경">
-                <div className="ChoiseFile">
-                <div className="myDetailImage">
-                    {imageSrc == '' ?
-                        <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} onError={handleImgError}/>
-                        : <div className="myDetailImage">
-                        {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" />} </div>
-                    }
-                </div>
-                
-                <div className="imageChoose">
-                    <input className="form-control-image" type = "file" name="file" multiple onChange={handlerChangefiles}></input>
-                </div>
-            </div>
+                    <div className="ChoiseFile">
+                        <AppStyle2 style={{ display: 'flex', justifyContent: 'center' }}>
 
-            <input type="button" id="edit"  className="myimgupdate" value="수정하기" onClick={handlerClickUpdate} />
-            
+                            <label for={'memberImg'}>
+
+                                <div className="myDetailImage">
+                                    {imageSrc == '' ?
+                                        <img id="imgsrccc" className="memberImg" src={`../../memberImg/${data.memberImg}`} onError={handleImgError} style={{ margin: '50px 0 0 0' }} />
+                                        : <div className="myDetailImage">
+                                            {imageSrc && <img src={imageSrc} alt="preview-img" className="memberImg22" id="imgsrccc" />} </div>
+                                    }
+                                </div>
+                            </label>
+
+                            <div className="imageChoose">
+                                <input id={'memberImg'} className="form-control-image" type="file" name="file" multiple onChange={handlerChangefiles}></input>
+                            </div>
+                        </AppStyle2>
+                    </div>
+                    <input type="button" id="edit" className="myimgupdate" value="수정하기" onClick={handlerClickUpdate} style={{margin:'15px 50%', transform:'translateX(-50%)'}} />
+
                 </Modal>
             </React.Fragment>
             {/* ---프사모달 end--- */}
 
-            
+
             <div className='myMenuUserName'>{memberNickname}</div>
             <div className='cleanG'>
                 {reviewSatisfaction == 0 ?
@@ -182,7 +190,7 @@ function MyMenu({ history , location}) {
                 </ul>
             </div>
         </div>
-        
+
     );
 }
 
@@ -211,6 +219,28 @@ const AppStyle = styled.div`
 visibility: visible;
 }
 
+`
+
+const AppStyle2 = styled.div`
+label {
+    // width: 270px;
+    // height: 270px;
+  display: inline-block;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  cursor: pointer;
+}
+input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 `
 
 
