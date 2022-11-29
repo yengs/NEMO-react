@@ -18,7 +18,7 @@ function YourReviewList({ match,history  }) {
         e.target.src = '../../../noimage/noreviewimage.png';
     }
 
-    const handlerClickList = () => history.goBack();
+    const handlerClickList = () => history.push(`/mypage/review`);
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/review/yourReview/${reviewId}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
@@ -129,7 +129,7 @@ function YourReviewList({ match,history  }) {
                         {
                             datas.length === 0 && (
                                 <tr>
-                                    <td colSpan="7"> 작성된 글이 없습니다. </td>
+                                    <td className="nonedata" colSpan="7"> 작성된 글이 없습니다. </td>
                                 </tr>
                             )
                         }

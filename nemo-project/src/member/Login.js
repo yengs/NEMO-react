@@ -75,6 +75,7 @@ function Login({ history }) {
                     console.log(response.data.currentState);
                     if(response.data.currentState === 'Y') {
                         alert("정지된 회원입니다.")
+                        sessionStorage.clear();
                     } else {
                         // alert("로그인완료");
                         alert("반갑습니다! " + id + " 회원님");

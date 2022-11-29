@@ -283,9 +283,14 @@ function ItemUpload({ history }) {
                                         else {
                                             return <select type="text" required id="itemEtcsize" name="itemEtcsize" value={itemEtcsize} onChange={handlerChangeitemEtcsize} className="itemInfoSelect">
                                                 <option value="">----------------선택----------------</option>
+                                                <option value="Free">Free</option>
+                                                <option value="XXS">XXS</option>
+                                                <option value="XS">XS</option>
                                                 <option value="S">S</option>
                                                 <option value="M">M</option>
                                                 <option value="L">L</option>
+                                                <option value="XS">XS</option>
+                                                <option value="XXL">XXL</option>
                                             </select>;
                                         }
                                     })()

@@ -16,6 +16,7 @@ function UserUpdate({ history }) {
     const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
+        let sigungu = data.sido + ' ' + data.sigungu;
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -28,7 +29,7 @@ function UserUpdate({ history }) {
 
         setMemberAddress(fullAddress);
         setMzipCode(data.zonecode);
-        setMsigungu(data.sigungu);
+        setMsigungu(sigungu);
     };
 
     const handleOpenSearchAddress = (e) => {
@@ -97,11 +98,14 @@ function UserUpdate({ history }) {
             alert("빈칸을 채워주세요")
         } else if(memberNickname !== sessionStorage.getItem('memberNickname')) {
             alert("닉네임 중복확인을 해주세요");
+        } else if(memberPw.length < 8) {
+            alert("비밀번호를 8이상 작성해주세요")
         } else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
             .then(response => {
                 if (response.status === 200) {
                     alert("수정완료");
+                    history.put();
                 } else {
                     alert("수정실패");
                     return;
@@ -278,7 +282,7 @@ function UserUpdate({ history }) {
                                     </div>
                                     <div className="txt2">
                                         <li>채팅, 회원정보의 데이터는 삭제됩니다.</li>
-                                        <li>게시한 대여상품, 후기 등의 게시글은 삭제되지 않습니다.반드시 탈퇴 전 직접 삭제하셔야 합니다.</li>
+                                        <li>게시한 대여상품,대여정보, 후기 등의 게시글은 자동으로 삭제됩니다.</li>
                                         <li>회원 탈퇴 즉시 모든 회원 정보가 삭제되며, 재가입시에는 기존 아이디는 사용하실 수 있습니다.</li>
                                         <li>회원 탈퇴 후 모든 스토어 주문 정보는 5년간 분리 보관됩니다.</li>
                                         <li>회원 탈퇴 시 내모의 대여상품을 이용하실수 없습니다.</li>

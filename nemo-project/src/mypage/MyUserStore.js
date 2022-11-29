@@ -46,7 +46,7 @@ function MyStore({ itemWriter }) {
    const [sliderData, setSliderData] = useState([]);
     useEffect(() => {
         console.log(reviewId);
-        axios.get(`http://localhost:8080/api/mypage/mypageitem/${reviewId}`)
+        axios.get(`http://localhost:8080/api/mypage/yourpageitem/${reviewId}`)
         .then(response => {
             console.log(reviewId, response.data);
             setSliderData(response.data);
