@@ -138,7 +138,7 @@ function ItemDetail({ match, history }) {
         if (sessionStorage.getItem("memberId") === data.itemWriter) {
             history.push(`/mypage/mypageitem/${sessionStorage.getItem("memberId")}`);
         } else {
-            history.push(`/userstoreinfo/${data.itemWriter},${data.memberImg}`);
+            history.push(`/userstoreinfo/${data.memberNickname},${data.itemWriter},${data.memberImg}`);
         }
     }
 
@@ -156,6 +156,7 @@ function ItemDetail({ match, history }) {
 
         if (sessionStorage.getItem("memberId") === data.itemWriter) {
             alert("본인물품은 대여신청할 수 없습니다.");
+            history.goBack();
         } else if (sessionStorage.getItem("memberId") === null) {
             alert("로그인 해주세요.");
             history.push('/member/login');
@@ -174,6 +175,10 @@ function ItemDetail({ match, history }) {
             alert("로그인이 필요합니다.");
             history.push('/member/login');
         }
+        else if (new Date(itemRentalend) < now) {
+            alert("대여기간 지난 상품입니다.");
+            history.goBack();
+        }
         else if (sessionStorage.getItem("memberId") !== data.itemWriter) {
             history.push(`/chatting/${itemWriter}`);
         }
@@ -181,8 +186,12 @@ function ItemDetail({ match, history }) {
             alert("본인은 본인에게 채팅을 할수 없습니다.");
             history.goBack();
         }
+        
+        console.log(">>>>>>>>>>>>>>>>>>>>",data)
+        
     }
 
+    if(itemWriter  !=  ''){   
     return (
 
         <ItemDatailContainer style={{ padding: "30px 0" }}>
@@ -418,6 +427,11 @@ function ItemDetail({ match, history }) {
         </ItemDatailContainer>
 
     );
+                            }  
+                            else{
+                                history.goBack();
+                                alert("삭제된 상품입니다.")
+                            }                  
 }
 
 const ItemDatailContainer = styled.div`

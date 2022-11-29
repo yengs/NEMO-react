@@ -283,9 +283,14 @@ function ItemUpload({ history }) {
                                         else {
                                             return <select type="text" required id="itemEtcsize" name="itemEtcsize" value={itemEtcsize} onChange={handlerChangeitemEtcsize} className="itemInfoSelect">
                                                 <option value="">----------------선택----------------</option>
+                                                <option value="Free">Free</option>
+                                                <option value="XXS">XXS</option>
+                                                <option value="XS">XS</option>
                                                 <option value="S">S</option>
                                                 <option value="M">M</option>
                                                 <option value="L">L</option>
+                                                <option value="XS">XS</option>
+                                                <option value="XXL">XXL</option>
                                             </select>;
                                         }
                                     })()
@@ -313,7 +318,7 @@ function ItemUpload({ history }) {
 
                         <tr>
                             <td>대여시작일</td>
-                            <td><DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={startDate} required /> </td>
+                            <td><DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => {setStartDate(date) ;setEndDate(date)}} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={now.setDate(now.getDate() -1)} required /> </td>
                         </tr>
                         <tr>
                             <td>대여마감일</td>

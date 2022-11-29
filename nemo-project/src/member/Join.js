@@ -5,7 +5,7 @@ import { ErrorMessage } from '@hookform/error-message';
 // 주소 api사용 (팝업방식)
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
-function Join() {
+function Join({ history }) {
 
     
     const [mName, setMname] = useState('');
@@ -34,6 +34,7 @@ function Join() {
     const handleComplete = (data) => {     
         let fullAddress = data.address;
         let extraAddress = '';
+        let sigungu = (data.sido) + (data.sigungu);
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -43,10 +44,12 @@ function Join() {
             }
             fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
         }
-
+        
+        console.log(">>>>>>>>>>>>>>>>>>");
+        console.log(data);
         setMaddress(fullAddress);
         setMzipCode(data.zonecode);
-        setMsigungu(data.sigungu);
+        setMsigungu(sigungu);
     };
 
     // const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
@@ -218,7 +221,6 @@ function Join() {
 
 
     // 아이디 한글 입력 불가 처리
-
     const [ckId,setcheckId] = useState(false);
 
     // 아이디 중복 체크
@@ -242,7 +244,6 @@ function Join() {
     }
 
     // 닉네임 중복 체크
-
     const [ckNickname,setcheckNickName] = useState(false);
     
     const checkNickname = (e) => {
@@ -320,6 +321,10 @@ function Join() {
             setCkCode(true);
             return alert('숫자코드가 일치합니다');
         }
+    }
+
+    const goMain = () => {
+        history.push('/');
     }
 
 
@@ -474,7 +479,7 @@ function Join() {
                     </ul>
                 </div>
                 <div className="btnWrap">
-                    <input type="button" value="취소" className="grayBtn btn" />
+                    <input type="button" value="취소" className="grayBtn btn" onClick={goMain}/>
                     <input type="submit" value="확인" className="greenBtn btn" onClick={memberDataInsert} />
                 </div>
             </form>

@@ -193,7 +193,7 @@ function MyBooking({ history }) {
                                                 <Link to={`/item/detail/${booking.bookingItemnum}`}>{booking.bookingItemname}</Link>
                                             </td>
                                             <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                                            <td className='ReviewWriter' rowSpan={3} onClick={()=>  history.push(`/userstoreinfo/${booking.bookingMember},${booking.memberImg}`)}>{booking.memberNickname}</td>
+                                            <td className='ReviewWriter' rowSpan={3} onClick={()=>  history.push(`/userstoreinfo/${booking.memberNickname},${booking.bookingMember},${booking.memberImg}`)} style={{cursor:'pointer'}}>{booking.memberNickname}</td>
                                             <td className='ReviewWriter' rowSpan={3}> {booking.bookingBookingstate}
                                                 {booking.bookingBookingstate != "예약중" ? null : <button className="greenBtn btnBok" value={booking.bookingNum} onClick={handlercancel}>예약취소</button>}
                                             </td>
@@ -274,7 +274,7 @@ function MyBooking({ history }) {
                                 <td className='ReviewWriter' rowSpan={3}>{booking.bookingItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                 <td className='ReviewWriter' rowSpan={3}>{booking.memberNickname}</td>
                                 <td className='ReviewWriter' rowSpan={3}> { booking.bookingBookingstate == "예약취소" ?  <div>{booking.bookingBookingstate}</div> : booking.bookingDepositstate != "반환완료" ? <div>{booking.bookingBookingstate}</div>:"반납완료"}
-                                {booking.bookingDepositstate != "반환완료" ? null : booking.reviewCount > 0 ? <button className="grayBtn btnBok" onClick={handlerreview}>후기작성</button> :<button className="greenBtn btnBok"><Link to = {`/review/reviewWrite/${booking.bookingNum},${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}
+                                {booking.bookingDepositstate != "반환완료" ? null : booking.reviewCount > 0 ? <button className="grayBtn reviewBtn " onClick={handlerreview}>후기작성</button> : <button className="greenBtn reviewBtn"><Link to = {`/review/reviewWrite/${booking.bookingNum},${booking.bookingItemnum},${booking.bookingItemwriter},${booking.bookingItemfiles},${booking.bookingItemname},${booking.bookingItemprice}`}>후기작성</Link></button>}
 
                                         </td>
 
@@ -312,6 +312,18 @@ function MyBooking({ history }) {
 }
 
 const MyBookingContainer = styled.div`
+
+    .reviewBtn {
+        back
+        font-size: 15px;
+        border-radius: 3px;
+        width: 80px;
+        padding: 5px 10px;
+        color: #fff;
+        text-decoration: none;
+        background-color: rgb(88,145,112);
+    }
+
     .tableWrap{
         height : 45%;
     }
@@ -500,6 +512,19 @@ const MyBookingContainer = styled.div`
 }
 
 .btnBok a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.reviewBtn {
+    margin-top: 5px;
+    font-size: 15px;
+    border-radius: 3px;
+    width: 80px;
+    padding: 5px 10px;
+}
+
+.reviewBtn a {
     color: #fff;
     text-decoration: none;
 }

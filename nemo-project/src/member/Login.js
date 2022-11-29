@@ -75,6 +75,7 @@ function Login({ history }) {
                     console.log(response.data.currentState);
                     if(response.data.currentState === 'Y') {
                         alert("정지된 회원입니다.")
+                        sessionStorage.clear();
                     } else {
                         // alert("로그인완료");
                         alert("반갑습니다! " + id + " 회원님");
@@ -96,7 +97,8 @@ function Login({ history }) {
 
                 } else if(response.data === ''){
                     sessionStorage.clear();
-                    alert("로그인 실패");
+                    console.log(response.data)
+                    alert("아이디나 비밀번호를 다시 확인해주세요");
                     return;
                 }
             })
@@ -129,7 +131,7 @@ function Login({ history }) {
                                 </td>
                             </tr>
                             <tr>
-                                <td style={{ borderTop: 'none' }}>패스워드</td>
+                                <td style={{ borderTop: 'none' }}>비밀번호</td>
                                 <td style={{ borderTop: 'none' }}>
                                     <input type="password" value={pw} onChange={changePw} required />
                                 </td>

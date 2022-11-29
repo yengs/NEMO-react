@@ -99,8 +99,8 @@ export default function WeatherRecItemList({ match }) {
 
                                                 {/* {data.weather[0].description} */}
                                             </div>
-                                            <div className="feelsLikeTemp timeTemp">체감온도<span className="feelTemp temp">{data.main.feels_like}</span>℃</div>
-                                            <div className="timeTemp">기온<span className="temp">{data.main.temp_max}</span>℃</div>
+                                            <div className="feelsLikeTemp timeTemp">체감온도<span className="feelTemp temp">{Math.round(data.main.feels_like)}</span>℃</div>
+                                            <div className="timeTemp">기온<span className="temp">{Math.round(data.main.temp_max)}</span>℃</div>
                                             {/* <div className="timeTemp">최저<span className="temp">{data.main.temp_min}</span>℃</div> */}
                                         </div>
                                     );
@@ -118,7 +118,7 @@ export default function WeatherRecItemList({ match }) {
                                     <img className="itemImg" src={`../../files/${item.files}`}></img>
                                     <div className="itemInfo">
                                         <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
-                                        <p className="itemName">{item.itemName}</p>
+                                        <p className="itemName" id='overflow'>{item.itemName}</p>
                                         <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                         <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
                                     </div>
