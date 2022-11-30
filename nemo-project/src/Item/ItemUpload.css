@@ -1,0 +1,73 @@
+.btnWrapItem .btn {
+    font-weight: 100;
+    margin: 20px 15px 0;
+    font-size: 15px;
+    padding: 10px 50px;
+    border-radius: 3px;
+    font-weight: 100;
+  }
+
+.btnWrapItem{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.containerWrap {
+    flex: 1;
+  }
+
+.itemcontainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* text-align: center; */
+    padding: 80px 0;
+  }
+
+.itemcontainer form {
+    display: flex;
+    justify-content: center;
+}
+
+.itemcontainer td {
+    width: 20%;
+    height: 25px;
+    padding-inline: 20px;
+    padding-top: 10px;
+}
+
+.itemcontainer form tr>td>input {
+    border: 1px solid #ddd;
+    width: 95%;
+    padding: 8px 6px;
+    border-radius: 3px;
+  }
+
+.react-datepicker__input-container{
+    border: 1px solid #ddd;
+    width: 95%;
+    padding: 8px 6px;
+    border-radius: 3px;
+    border-style: none;
+}
+
+.itemcontainer input.form-control-image{
+    border-style: none;
+}
+
+.itemcontainer select{
+    width: 100%;
+    border-color: #ddd;
+}
+
+.itemMaincategory {
+    border: 1px solid #ddd;
+    width: 95%;
+    padding: 8px 6px;
+    border-radius: 3px;
+}
+
+.itemcontainer input#itemDetail{
+    height: 100px;
+    white-space: pre-line;
+}

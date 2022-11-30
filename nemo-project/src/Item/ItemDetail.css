@@ -1,0 +1,240 @@
+.middleDiv {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 150px;
+    margin-top: 50px;
+}
+
+.writerDiv {
+    align-self: center;
+    position: relative;
+    text-align: center;
+}
+
+.cleanDiv {
+    justify-content: right;
+    align-self: center;
+    text-align: -webkit-center;
+    margin-top: 40px;
+    font-size: 15px;
+    margin-right: 50%;
+}
+
+.middleDiv .memberImg {
+    background-color: rgb(219, 219, 219);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 10px;
+}
+.ReviewItemImage2 .bookingitemImg{
+    width: 100px;
+    height: 100px;
+}
+
+.reviewDiv .reviewTable th{
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #bbb;
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.reviewDiv .reviewTable tr{
+    border-bottom: 1px solid #ccc;
+    padding: 10px 5px;
+    text-align: center;
+}
+
+.DetailContainer p {
+    font-size: 15px;
+}
+
+a.goList {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.Breadcrumb {
+    margin-right: 80%;
+    font-size: medium;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+p.cate {
+    margin-right: 80%;
+    font-size: medium;
+}
+
+th {
+    height: 48px;
+}
+
+h4 {
+    margin-bottom: 7px;
+    font-size: medium;
+    text-align: left;
+}
+
+.middleDiv .input {
+    font-weight: 100;
+    margin: 20px 15px 0;
+    font-size: 15px;
+    padding: 10px 30px;
+    border-radius: 3px;
+}
+
+.ItemgreenBtn {
+    padding: 10px 10px;
+    margin: 0px 3px 0;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 3px;
+
+    border: rgb(100, 165, 127);
+    background-color: rgb(100, 165, 127);
+    color: #fff;
+}
+
+.buttonDiv {
+    text-align: right;
+    margin-bottom: 100px;
+}
+
+.writeDate {
+    flex-direction: row-reverse;
+}
+
+.DetailContainer form {
+    display: inline;
+    justify-content: center;
+    align-content: center;
+}
+
+.DetailContainer th {
+    text-align: left;
+    vertical-align: middle;
+}
+
+.DetailContainer .reviewCate {
+    text-align: center;
+    height: 30px;
+    border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+/* .DetailContainer td {
+    text-align: left;
+    vertical-align: middle;
+    width: 100%;
+    height: 48px;
+    padding-inline: 20px;
+    padding-top: 5px;
+} */
+
+.reviewDiv table {
+    width: 100%;
+    height: max-content;
+    border-top: 1px solid rgb(219, 219, 219);
+    border-collapse: collapse;
+}
+
+.reviewDiv tr,
+th,
+td {
+    align-content: center;
+    width: auto;
+    /* text-align: center; */
+    padding: 10px;
+    vertical-align: middle;
+}
+
+td.reviewImg,
+.reviewCtns,
+.reviewClean {
+    text-align: left;
+}
+
+.reviewDiv .reviewClean,
+.leftside {
+    border-bottom: 1px solid rgb(219, 219, 219);
+}
+
+.reviewDiv .leftside {
+    text-align: center;
+}
+
+.DetailContainer form tr>td>input {
+    border: 1px solid #ddd;
+    width: 95%;
+    padding: 8px 6px;
+    border-radius: 3px;
+}
+
+.clickList,
+.p {
+    position: relative;
+    /* top: 10px; */
+    right: 30px;
+    text-align: right;
+}
+
+.DetailContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.DetailContainer h2 {
+    position: relative;
+    left: 30px;
+    text-align: left;
+}
+
+.table_form {
+    align-items: center;
+    float: right;
+}
+
+.tableform {
+    padding-right: 10%;
+}
+
+.imageDiv {
+    float: left;
+    padding-left: 15%;
+}
+
+.DetailContainer form {
+    width: 500px;
+    margin: auto;
+    text-align: -webkit-center;
+}
+
+/* 후기 아래로 푸터랑 너무 붙길래 만든 공간 */
+.blank {
+    padding-bottom: 50px;
+}
+
+a.ItemReviewList {
+    padding-left: 95%;
+    text-decoration: none;
+}
+
+.tablePlusForm .memberImg {
+    background-color: rgb(219, 219, 219);
+    width: 300px;
+    height: 350px;
+}
+
+/* -- clean */
+
+.item-detail-clean {
+    text-align: left;
+}
+
+.item-detail-Img {
+    margin-top: 5px;
+    width: 110px;
+}
+
+/* -------- */

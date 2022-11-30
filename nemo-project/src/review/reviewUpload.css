@@ -1,0 +1,81 @@
+.reviewUpload {
+    width: 900px;
+    height: auto;
+    border-radius: 10px;
+    margin: 50px auto;
+}
+
+.reviewUpload .pageTitle {
+    margin-bottom: 30px;
+    font-size: 23px;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.reviewUpload .pageTitle h3 {
+    margin: 0;
+}
+
+.reviewUpload h4 {
+    margin: 9px 0;
+    font-size: 17px;
+}
+
+.reviewImage>img, .myDetailImageReview>img {
+    width: 500px;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+}
+
+/* .myDetailImage{
+    width: 300px;
+    height: 300px;
+} */
+
+.myDetailImage > img{
+    width: 300px;
+    height: 300px;
+}
+
+.reviewContent {
+    margin-top: 45px;
+}
+
+
+.reviewContent textarea {
+    width: 100%;
+    height: 350px;
+    resize: none;
+    overflow: auto;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.satisfyingReview {
+    margin-top: 10px;
+}
+
+.satisfyingReview span {
+    font-size: 15px;
+    color: #666;
+}
+
+.satisfyingReview input[type="number"] {
+    border: 1px solid #ddd;
+    padding: 5px 6px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+.reviewUpload .btnWrap {
+    margin-top: 30px;
+    text-align: center;
+}
+
+
+  

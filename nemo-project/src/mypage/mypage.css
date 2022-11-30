@@ -1,0 +1,230 @@
+.myPageWrap {
+    width: 100%;
+    height: calc(100vh - 250px);
+    max-width: 1200px;
+    margin: 55px auto;
+    display: flex;
+}
+
+.myMenuWrap {
+    width: 230px;
+    background-color: rgba(88, 145, 112, 0.253);
+    padding: 50px 35px;
+    box-sizing: border-box;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.myMenuWrap .memberImg, .myMenuWrap .cleanG, .myMenuWrap .myMenuWrap {
+    margin: auto;
+}
+
+.myMenuWrap .cleanG {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.myMenuWrap .memberImg {
+    background-color: rgb(255, 255, 255);
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin-left: 15%;
+}
+
+.myDetailImage > #imgsrccc {
+    background-color: rgb(255, 255, 255);
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin-left: 36%;
+    margin-top: 20px;
+}
+
+
+.myMenuWrap .menu {
+    height: calc(100% - 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.myMenuWrap .menu ul {
+    margin: 50px 0 0 0;
+    padding: 0;
+    width: 100%;
+}
+
+.myMenuWrap .menu li {
+    list-style: none;
+    padding: 13px 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.myMenuWrap .menu li a {
+    color: #333;
+    font-weight: 100;
+    text-decoration: none;
+    padding: 10px 10px;
+}
+
+.warnBtn {
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+/* ----------------------------- */
+/* 마이페이지 내의 페이지 */
+.mypageInnerPage {
+    width: calc(100% - 230px);
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: auto;
+}
+
+/* .mypageInnerPage::-webkit-scrollbar {
+    display: none; 
+  } */
+
+.mypageInnerPage .pageTitle {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+/* 다른사람이 보는 마이페이지 */
+.regiUserItemWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prev {
+    font-size: 100px;
+    color: #666;
+    cursor: pointer;
+}
+
+.back {
+    color: #666;
+    font-size: 100px;
+    cursor: pointer;
+}
+
+.regiUserItemWrap .regiUserItem {
+    width: 17%;
+    height: 210px;
+    border: 1px solid #ddd;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+}
+
+.userReviewListAboutStoreWrap {
+    margin-top: 58px;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore {
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore thead th {
+    border-bottom: 1px solid #bbb;
+    padding: 10px 5px;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: 7px 3px;
+    font-size: 15px;
+}
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
+    border: none;
+}
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent{
+    padding: 0;
+}
+
+.ReviewItemImageOrigin {
+    width: 10%;
+}
+
+.ReviewItemImageOrigin div {
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.ReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.ReviewWriter {
+    width: 20%;
+    text-align: center;
+}
+
+.ReviewItemImg, .ReviewContent, .satisfing {
+    width: 45%;
+}
+
+.ReviewItemImg div {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.ReviewContent {
+    font-size: 13px !important;
+}
+
+.satisfing div {
+    width: 150px;
+    font-size: 12px;
+}
+
+/* 내프사수정모달 내 수정하기버튼 */
+.myimgupdate{
+    border: 1px solid #7a7a7a;
+    background: #7a7a7a;
+    color: #fff;
+    font: 13px 'Trebuchet MS';
+    padding: 4px;
+    cursor: pointer;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    width: 90px;
+    height: 40px;
+    margin-top: 80px;
+    margin-left: 170px;
+    
+}
+
+
+
+/* 다른사람이 보는 마이페이지 신고하기 팝업 */
+.myPageWrap.forOthers {
+    position: relative;
+}
+
+
+

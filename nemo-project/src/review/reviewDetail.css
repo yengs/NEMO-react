@@ -1,0 +1,166 @@
+.greyBtnMPID {
+    border: #999;
+    background-color: #999;
+    color: #fff;
+    font-weight: 100;
+    margin:0 251px 0px;
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: 100;
+  }
+  .sun{
+    margin-left: 400px;
+  }
+.rcontainer {
+    width: 900px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.myStoreReview .reviewTitle {
+    margin-left: 5px;
+    margin-bottom: -8px;
+    margin-top: 30px;
+}
+
+.YourReviewList table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+}
+
+.myreview {
+    border-spacing: 0;
+    font-size: 15px;
+}
+
+.yourreview {
+    border-spacing: 0;
+    font-size: 15px;
+}
+
+.myreview th {
+    border-bottom: 1px solid #777;
+    font-size: 15px;
+    height: 10px;
+    width: 300px;
+    padding-top: 0px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.myreview td {
+    border-bottom: 1px solid #bbb;
+    font-size: 14px;
+    height: 10px;
+    max-width: 300px;
+    padding-top: 4px;
+    text-align: center;
+    /* padding-bottom: 10px; */
+    word-break: break-word;
+}
+
+.yourreview th {
+    border-bottom: 1px solid #777;
+    font-size: 15px;
+    height: 10px;
+    width: 300px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.yourreview td {
+    border-bottom: 1px solid #bbb;
+    font-size: 14px;
+    height: 10px;
+    max-width: 300px;
+    padding-top: 4px;
+    text-align: center;
+    /* padding-bottom: 10px; */
+    word-break: break-word;
+}
+
+.nonedata {
+    line-height: 30px;
+}
+
+.lineH {
+    height: 3.1px !important;
+    width: 100%;
+    color: #747474;
+}
+
+.reviewListItemImg, .bookingitemImgreview {
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    display: inline-flex;
+    margin: 4px;
+}
+
+.ReviewItemNameOrigin a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+/* 리뷰 내용 더보기 관련 */
+.moreBtn {
+    padding: 0 0 9px 0;
+    color: cadetblue;
+    font-size: 13px;
+    border: none;
+    background-color: #ffffff;
+    float: left;
+}
+
+.reviewUpdateBtn {
+    padding: 0;
+    color: cadetblue;
+    font-size: 13px;
+    border: none;
+    background-color: #ffffff;
+}
+
+.reviewContents p {
+    display: -webkit-box;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    font-size: 13px;
+    color: rgb(85, 85, 85);
+    text-align: left;
+    width: 250px;
+}
+
+.reviewContents p.close {
+    display: -webkit-box;
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-align: left;
+    width: 250px;
+}
+
+/* 상품 만족도 이미지 관련 */
+.reviewSatisImg {
+    width: 80px;
+}
+
+.yourBbookingitemImg {
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    margin: 4px;
+}
+
+.nullReview {
+    height: 172px;
+    text-align: center;
+}

@@ -1,0 +1,14 @@
+.ListContainer{
+    text-align: center;
+}
+
+.ListContainer th, td {
+    width: 1;
+    height: 30px;
+    padding: 10px;
+}
+
+.ListbtnWrap {
+    flex:1;
+    display: flex;
+}

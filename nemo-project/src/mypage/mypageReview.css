@@ -1,0 +1,208 @@
+.myPageWrap {
+    width: 100%;
+    height: calc(100vh - 250px);
+    max-width: 1200px;
+    margin: 55px auto;
+    display: flex;
+}
+
+.myMenuWrap {
+    width: 230px;
+    background-color: rgba(88, 145, 112, 0.253);
+    padding: 50px 35px;
+    box-sizing: border-box;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.myMenuWrap .memberImg, .myMenuWrap .cleanG, .myMenuWrap .myMenuWrap {
+    margin: auto;
+}
+
+.myMenuWrap .cleanG {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.myMenuWrap .memberImg {
+    background-color: rgb(255, 255, 255);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.myMenuWrap .menu {
+    height: calc(100% - 160px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.myMenuWrap .menu ul {
+    margin: 50px 0 0 0;
+    padding: 0;
+    width: 100%;
+}
+
+.myMenuWrap .menu li {
+    list-style: none;
+    padding: 10px 0;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+}
+
+.warnBtn {
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+/* ----------------------------- */
+/* 마이페이지 내의 페이지 */
+/* .mypageInnerPage {
+    width: calc(100% - 230px);
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+} */
+
+.mypageInnerPage .titleNplusBtn h3 {
+    font-size: 1.17em;
+}
+
+.myStoreReview .reviewTitle {
+    margin-left: 5px;
+    margin-bottom: -8px;
+    margin-top: 15px;
+}
+
+.moreReviewDetailPage { 
+    float: right;
+    margin-bottom: 6px;
+    margin-top: -5px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.yourReviewListAboutStore {
+    border-spacing: 0;
+}
+
+.yourReviewListAboutStore {
+    font-size: 15px;
+}
+
+.lineH {
+    height: 3.1px !important;
+    width: 100%;
+    color: #747474;
+}
+
+.rReviewItemImg div {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemImageOrigin div {
+    width: 100%;
+    height: 100%;
+    /* border: 1px solid #000; */
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.rReviewWriter {
+    text-align: center;
+}
+
+.yourReviewListAboutStore th {
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    font-size: 16px;
+    height: 10px;
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+}
+
+.yourReviewListAboutStore tr td {
+    border-bottom: 1px solid #bbb;
+}
+
+.marging {
+    height: 50px;
+}
+
+table {
+table-layout: fixed;
+}
+
+.reviewMainTitle {
+    padding-bottom: 10px;
+}
+
+/* ------------------------ */
+/* 다른사람이 보는 마이페이지 */
+
+.rReviewItemImageOrigin {
+    width: 10%;
+}
+
+.rReviewItemImageOrigin div {
+    width: 100%;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewItemNameOrigin {
+    width: 15%;
+    text-align: center;
+}
+
+.rReviewWriter {
+    width: 20%;
+    text-align: center;
+}
+
+.rReviewItemImg, .rReviewContent, .rsatisfing {
+    width: 45%;
+}
+
+.rReviewItemImg {
+    width: 52px;
+    height: 52px;
+    background-size: cover;
+    background-position: center;
+}
+
+.rReviewContent {
+    font-size: 13px !important;
+    padding-bottom: 0px !important;
+    margin: 10px 0;
+    width: 100%;;
+}
+
+.rsatisfing {
+    width: 140px;
+    font-size: 12px;
+}
+
+

@@ -1,0 +1,91 @@
+
+.decDetailcontainer h3 {
+    position: fixed;
+
+}
+
+.decDetailContainer form {
+    display: inline;
+    justify-content: center;
+    align-content: center;
+}
+
+.decDetailContainer .decDetail{
+    width: 150%;
+    height: 100%;
+    border-spacing: 0;
+}
+
+.decDetail{
+    border-collapse: collapse;
+    text-indent: initial;
+  }
+
+.decDetailContainer tr th td {
+    /* border: 1px solid #444444; */
+    width: auto;
+    vertical-align: middle;
+    align-content: center;
+    /* text-align: left; */
+    padding : 10px;
+  }
+
+.decDetailGrayBtn{
+    border: 2px solid rgb(100, 165, 127);
+    background-color: rgb(100, 165, 127);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    border-radius: 3px;
+    /* width: 70px; */
+    padding: 5px 10px;
+    position: absolute;
+    right: 0px;
+    margin-top: 20px;
+}
+
+.btnDivDec{
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    text-align: -webkit-center;
+    display: flex;
+    float: inline-end;
+    padding-top: 50px;
+}
+
+.grayBtnDec {
+    border: #999;
+    background-color: #999;
+    color: #fff;
+    font-weight: 100;
+    margin: 20px 5px 0;
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: 100;
+  }
+
+  .greyDec {
+    border: rgb(100, 165, 127);
+    background-color: rgb(100, 165, 127);
+    color :#fff;
+    font-weight: 100;
+    margin: 20px 5px 0;
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: 100;
+    /* font-weight: bold; */
+  }
+  
+  .redBtnDec {
+    border: rgb(196, 98, 98);
+    background-color: rgb(196, 98, 98);
+    color: #fff;
+    font-weight: 100;
+    margin: 20px 5px 0;
+    font-size: 15px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: 100;
+  }

@@ -1,0 +1,186 @@
+/* ----------------------------- */
+/* 마이페이지 내의 페이지 */
+.mypageInnerPage {
+    width: calc(100% - 230px);
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 245);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.mypageInnerPage .pageTitle {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+/* ---------------------------------------------------------- */
+
+.userUpdateContainer .pageTitle {
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+.pageTitle>h2{
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-align: left;
+}
+
+
+.userUpdateContainer .userUpdateinputTable {
+  border-top: 1px solid #999;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.userUpdateContainer .userUpdateinputTable {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.userUpdateContainer .userUpdateinputTabletr>td {
+  padding-top: 15px;
+  padding-bottom: 5px;
+  border-top: 1px solid #ddd;
+}
+
+.userUpdateContainer .userUpdateinputTable tr>td {
+  border: none;
+}
+
+.userUpdateContainer .userUpdateinputTable tr>td:first-child {
+  width: 25%;
+  padding-left: 60px;
+  font-size: 16px;
+  color: #333;
+}
+
+.userUpdateContainer .userUpdateinputTable tr>td:nth-child(2) {
+  width: 45%
+}
+
+.userUpdateContainer .userUpdateinputTable tr>td>input {
+  border: 1px solid #ddd;
+    width: 100%;
+    padding: 10px 170px;
+    padding-left: 20px !important;
+    border-radius: 3px;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.userUpdateContainer .userUpdateinputTable tr>.updateTableBtn>addressBtn {
+  padding: 6px 15px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.userUpdateContainer .userUpdateinputTable .updateAddress select {
+  border: 1px solid #ddd;
+  padding: 8px 6px;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+.userUpdateContainer {
+  padding: 0;
+  position: relative;
+}
+
+.userUpdateContainer {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.userUpdateContainer {
+  font-size: 13px;
+  color: #999;
+  display: block;
+  font-weight: 300;
+  line-height: 18px;
+  margin-top: 5px;
+}
+
+.userUpdateContainer {
+  width: 100%;
+  padding: 12px;
+  margin: 3px 0;
+  background-color: #eee;
+  font-size: 15px;
+  color: #555;
+}
+
+.userUpdateContainer {
+  background-color: transparent;
+}
+
+.userUpdateContainer .userUpdatebtnWrap {
+  width: 100%;
+  text-align: center;
+}
+
+.userUpdateContainer{
+  width: 1500px;
+  position: relative;
+  left: 60px;
+  bottom: 100px;
+  margin: 100px auto;
+}
+
+.resignMembership{
+  position: absolute;
+  left: 130px;
+  margin-top: 15px; 
+}
+
+.userUpdateContainer .userUpdateinputTable table tr>.updateTableBtn>button{
+
+  padding: 6px 15px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 160px;
+
+}
+
+.userUpdateContainer .userUpdateinputTable table .updateAddress {
+  border: 1px solid #ddd;
+  padding: 8px 6px;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+.userUpdateContainer .userUpdateBtnWrap {
+  width: 100%;
+  text-align: center;
+}
+
+.userUpdategreenBtn {
+  border: 2px solid rgb(100, 165, 127);
+  background-color: rgb(100, 165, 127);
+  color: rgb(255, 255, 255);
+  position: absolute;
+  left: 650px;
+  top: auto;
+  margin-top: 35px;
+}
+
+.userUpdategrayBtn {
+  border: 2px solid rgb(151, 151, 151);
+  background-color: rgb(151, 151, 151);
+  color: rgb(255, 255, 255);
+  position: absolute;
+  left: 715px;
+  top: auto;
+  margin-top: 35px;
+}
+
+.userUpdateContainer .userUpdateinputTable table >.userUpdateBtnWrap>input{
+  padding: 6px 15px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 160px;
+}
