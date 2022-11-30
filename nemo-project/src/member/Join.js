@@ -1,13 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
-import { ErrorMessage } from '@hookform/error-message';
-
 // 주소 api사용 (팝업방식)
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 function Join({ history }) {
 
-    
+
     const [mName, setMname] = useState('');
     const [mNickname, setMnickname] = useState('');
     const [mId, setMid] = useState('');
@@ -19,7 +17,7 @@ function Join({ history }) {
     const [mZipCode, setMzipCode] = useState('');
 
     const [mSigungu, setMsigungu] = useState('');
-    
+
     const handlerChangeName = (e) => setMname(e.target.value);
     const handlerChangeNickname = (e) => setMnickname(e.target.value);
     const handlerChangeId = (e) => setMid(e.target.value);
@@ -27,11 +25,11 @@ function Join({ history }) {
     const handlerChangePwCheck = (e) => setMpwCheck(e.target.value);
     const handlerChangeEmail = (e) => setMemail(e.target.value);
     const handlerChangePhone = (e) => setMphone(e.target.value);
-    
-    
+
+
     // 주소검색창 팝업열기
     const open = useDaumPostcodePopup();
-    const handleComplete = (data) => {     
+    const handleComplete = (data) => {
         let fullAddress = data.address;
         let extraAddress = '';
         let sigungu = (data.sido) + (data.sigungu);
@@ -44,7 +42,7 @@ function Join({ history }) {
             }
             fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
         }
-        
+
         console.log(">>>>>>>>>>>>>>>>>>");
         console.log(data);
         setMaddress(fullAddress);
@@ -61,7 +59,7 @@ function Join({ history }) {
 
     const memberDataInsert = (e) => {
         e.preventDefault();
-        
+
         const memberInfo = {
             "memberName": mName,
             "memberNickname": mNickname,
@@ -70,20 +68,20 @@ function Join({ history }) {
             "memberEmail": mEmail,
             "memberPhone": mPhone,
             "memberAddress": mAddress,
-            "memberZipCode" : mZipCode,
-            "memberSigungu" : mSigungu
+            "memberZipCode": mZipCode,
+            "memberSigungu": mSigungu
         }
 
-        if( mName==''|| mNickname==''||mId==''|| mPw==''|| mEmail=='' || mAddress==''){
+        if (mName == '' || mNickname == '' || mId == '' || mPw == '' || mEmail == '' || mAddress == '') {
             alert("필수 입력항목을 입력해주세요")
-        } else if(ckId===false){
+        } else if (ckId === false) {
             alert("아이디 중복확인을 해주세요.");
-        }else if(mPw.length < 8) {
+        } else if (mPw.length < 8) {
             alert("비밀번호를 8이상 작성해주세요")
-        }else if(mPw !== mPwCheck){
+        } else if (mPw !== mPwCheck) {
             alert("비밀번호를 올바르게 작성했는지 확인해주세요.");
             return setPasswordError(true);
-        } else if(ckNickname===false){
+        } else if (ckNickname === false) {
             alert("닉네임 중복확인을 해주세요.")
         }
         //이메일 인증은 나중에 보여줄때만 하기로 번거로워서 (확인은 했습니다!) --------삭제 금지-----
@@ -92,26 +90,27 @@ function Join({ history }) {
         // }else if(ckCode===false){
         //     alert("인증코드를 확인해주세요")
         // }
-        else if(check1 === false || check2 === false || check3 === false || check4 === false){
+        else if (check1 === false || check2 === false || check3 === false || check4 === false) {
             alert("필수동의를 해주세요")
         }
-        else{
-        axios.post('http://localhost:8080/api/member/join', memberInfo)
-            .then(response => {
-                if (response.status === 200){
-                    alert("반갑습니다! " + mName + " 회원님.");
-                    window.location.href = "/member/login";
-                }  else {
-                    alert("회원가입이 실패하였습니다.");
-                    return;
-                }
-            })
-            .catch(error => {
-                alert("기존에 있는 정보입니다.다시 확인해주세요");
-                console.log(memberInfo);
-            });
-    }};
-    
+        else {
+            axios.post('http://localhost:8080/api/member/join', memberInfo)
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("반갑습니다! " + mName + " 회원님.");
+                        window.location.href = "/member/login";
+                    } else {
+                        alert("회원가입이 실패하였습니다.");
+                        return;
+                    }
+                })
+                .catch(error => {
+                    alert("기존에 있는 정보입니다.다시 확인해주세요");
+                    console.log(memberInfo);
+                });
+        }
+    };
+
     // 비밀번호 일치 확인
     const [mPwConfirm, setMpwConfirm] = useState('');
     const [passwordError, setPasswordError] = useState(false);
@@ -136,14 +135,14 @@ function Join({ history }) {
     const [check5, setCheck5] = useState(false);
 
     const checkAllHandler = () => {
-        if(checkAll === false){
+        if (checkAll === false) {
             setCheckAll(true);
             setCheck1(true);
             setCheck2(true);
             setCheck3(true);
             setCheck4(true);
             setCheck5(true);
-        }else{
+        } else {
             setCheckAll(false);
             setCheck1(false);
             setCheck2(false);
@@ -153,7 +152,7 @@ function Join({ history }) {
         }
     };
 
-    if(check1&&check2&&check3&&check4&&check5&&checkAll===false){
+    if (check1 && check2 && check3 && check4 && check5 && checkAll === false) {
         setCheckAll(true);
         setCheck1(true);
         setCheck2(true);
@@ -163,49 +162,49 @@ function Join({ history }) {
     };
 
     const check1Handler = () => {
-        if(check1 === false){
+        if (check1 === false) {
             setCheck1(true)
-        }else {
+        } else {
             setCheck1(false);
         }
     };
 
     const check2Handler = () => {
-        if(check2 === false){
+        if (check2 === false) {
             setCheck2(true)
-        }else {
+        } else {
             setCheck2(false);
         }
     };
 
     const check3Handler = () => {
-        if(check3 === false){
+        if (check3 === false) {
             setCheck3(true)
-        }else {
+        } else {
             setCheck3(false);
         }
     };
 
     const check4Handler = () => {
-        if(check4 === false){
+        if (check4 === false) {
             setCheck4(true)
-        }else {
+        } else {
             setCheck4(false);
         }
     };
 
     const check5Handler = () => {
-        if(check5 === false){
+        if (check5 === false) {
             setCheck5(true)
-        }else {
+        } else {
             setCheck5(false);
         }
     };
 
     useEffect(() => {
-        if(checkAll === true && check1 === true && check2 === true && check3 === true && check4 === true && check5 === true) {
+        if (checkAll === true && check1 === true && check2 === true && check3 === true && check4 === true && check5 === true) {
             setCheckAll(true)
-        }else {
+        } else {
             setCheckAll(false)
         }
     }, [checkAll, check1, check2, check3, check4, check5])
@@ -221,7 +220,7 @@ function Join({ history }) {
 
 
     // 아이디 한글 입력 불가 처리
-    const [ckId,setcheckId] = useState(false);
+    const [ckId, setcheckId] = useState(false);
 
     // 아이디 중복 체크
     const checkId = (e) => {
@@ -236,7 +235,7 @@ function Join({ history }) {
                 } else if (result.data === "fail" && mId !== "") {
                     setcheckId(false);
                     alert("이미 사용중인 아이디입니다.")
-                } else{
+                } else {
                     setcheckId(false);
                     alert("아이디를 입력해주세요");
                 }
@@ -244,8 +243,8 @@ function Join({ history }) {
     }
 
     // 닉네임 중복 체크
-    const [ckNickname,setcheckNickName] = useState(false);
-    
+    const [ckNickname, setcheckNickName] = useState(false);
+
     const checkNickname = (e) => {
         e.preventDefault();
 
@@ -258,7 +257,7 @@ function Join({ history }) {
                 } else if (nickname.data === "fail" && mNickname !== "") {
                     setcheckNickName(false);
                     alert("이미 사용중인 닉네임입니다.")
-                } else{
+                } else {
                     setcheckNickName(false);
                     alert("닉네임을 입력해주세요");
                 }
@@ -266,7 +265,7 @@ function Join({ history }) {
     }
 
 
-// 이메일 관련 --------------------------------
+    // 이메일 관련 --------------------------------
     const [code, setCode] = useState();
     const [userInputCode, setUserInputCode] = useState();
     const handlerChangeUserInputCode = (e) => setUserInputCode(Number(e.target.value));
@@ -281,7 +280,7 @@ function Join({ history }) {
         axios.post('http://localhost:8080/api/member/join/checkemail', `memberEmail=${mEmail}`)
             .then(email => {
                 console.log(email);
-                if(!emailtest.test(mEmail)){
+                if (!emailtest.test(mEmail)) {
                     alert("이메일은 nemo@nemo.com 형식에 맞게 입력해주세요")
                 }
                 else if (email.data === "success" && mEmail !== "") {
@@ -291,25 +290,25 @@ function Join({ history }) {
                         params: {
                             memberEmail: mEmail
                         }
-                    }) .then(response2 => {
+                    }).then(response2 => {
                         console.log(response2);
                         setCode(response2.data);
                     })
-                    .catch(function () {
-                        console.log('실패함')
-                    })
-                } else if(email.data === "fail" && mEmail !== ""){
+                        .catch(function () {
+                            console.log('실패함')
+                        })
+                } else if (email.data === "fail" && mEmail !== "") {
                     setCkEmail(false);
                     alert("중복된 이메일입니다.");
-                }else{
+                } else {
                     setCkEmail(false);
                     alert("이메일을 입력해주세요.")
                 }
             });
     }
 
-     //이메일 코드 일치확인
-     const clickCode = (e) => {
+    //이메일 코드 일치확인
+    const clickCode = (e) => {
         e.preventDefault();
         if (String(userInputCode).length !== 5) {
             setCkCode(false);
@@ -360,7 +359,7 @@ function Join({ history }) {
                                 <td>
                                     <input type="text" name="mId" value={mId} onKeyDown={(e) => checkCapsLock(e)} onChange={handlerChangeId} required />
                                     {<div className={capsLock ? "caps-lock caps-lock-on" : "caps-lock"}>
-                                    {capsLock ? "Caps Lock On" : "Caps Lock Off"}</div>}
+                                        {capsLock ? "Caps Lock On" : "Caps Lock Off"}</div>}
                                 </td>
                                 <td className="memberTableBtn">
                                     <button className="beigeBtn btn" onClick={checkId}>중복확인</button>
@@ -371,7 +370,7 @@ function Join({ history }) {
                                 <td>
                                     <input type="password" name="mPw" value={mPw} onKeyDown={(e) => checkCapsLock(e)} onChange={onChangePassword} placeholder="최소 8자 이상의 숫자를 사용하세요." required />
                                     {<div className={capsLock ? "caps-lock caps-lock-on" : "caps-lock"}>
-                                    {capsLock ? "Caps Lock On" : "Caps Lock Off"}</div>}
+                                        {capsLock ? "Caps Lock On" : "Caps Lock Off"}</div>}
                                 </td>
                                 <td></td>
                             </tr>
@@ -379,7 +378,7 @@ function Join({ history }) {
                                 <td className="requiredMark">비밀번호 확인</td>
                                 <td>
                                     <input type="password" name="mPwCheck" value={mPwCheck} onChange={onChangePasswordChk} required />
-                                    {passwordError && <div className="PwCheck" style={{color : 'red'}}>비밀번호가 일치하지 않습니다.</div>} 
+                                    {passwordError && <div className="PwCheck" style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>}
                                 </td><td></td>
                             </tr>
                             <tr>
@@ -392,14 +391,14 @@ function Join({ history }) {
                                 </td>
                             </tr>
                             <tr>
-                                        <td className="requiredMark">인증코드</td>
-                                        <td>
-                                            <input type="number" name="Code" value={userInputCode} onChange={handlerChangeUserInputCode} placeholder="이메일로 발송된 코드를 입력하세요."/>
+                                <td className="requiredMark">인증코드</td>
+                                <td>
+                                    <input type="number" name="Code" value={userInputCode} onChange={handlerChangeUserInputCode} placeholder="이메일로 발송된 코드를 입력하세요." />
 
-                                        </td>
-                                        <td className="memberTableBtn">
-                                            <button className="beigeBtn btn" onClick={clickCode}>코드확인</button>
-                                        </td>
+                                </td>
+                                <td className="memberTableBtn">
+                                    <button className="beigeBtn btn" onClick={clickCode}>코드확인</button>
+                                </td>
                             </tr>
                             <tr>
                                 <td>핸드폰 번호</td>
@@ -479,7 +478,7 @@ function Join({ history }) {
                     </ul>
                 </div>
                 <div className="btnWrap">
-                    <input type="button" value="취소" className="grayBtn btn" onClick={goMain}/>
+                    <input type="button" value="취소" className="grayBtn btn" onClick={goMain} />
                     <input type="submit" value="확인" className="greenBtn btn" onClick={memberDataInsert} />
                 </div>
             </form>

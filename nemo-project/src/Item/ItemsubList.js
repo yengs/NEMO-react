@@ -20,7 +20,7 @@ function ItemsubList({ match }) {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/item/cate/sub/${itemSubcategory}`, { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
+        axios.get(`http://localhost:8080/api/item/cate/sub/${itemSubcategory}`, { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
             .then(response => {
                 setDatas(response.data);
                 setCount(response.data.length);
@@ -31,7 +31,7 @@ function ItemsubList({ match }) {
 
     const changePage = page => {
         setPage(page);
-        setItems(datas.slice((page-1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+        setItems(datas.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
     };
     return (
         <>
@@ -39,10 +39,6 @@ function ItemsubList({ match }) {
 
                 <div className="titleNplusBtn">
                     <h3>{itemSubcategory}</h3>
-                    {/* <div>{sessionStorage.getItem("jwtToken") != null ?
-                    <Link className="btn" to="/item/write">상품등록</Link>
-                    :null
-                    }</div> */}
                 </div>
                 <div className="itemWrap">
                     {

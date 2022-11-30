@@ -1,12 +1,8 @@
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
-// import { Route } from "react-router-dom";
-// import "./MyPageItemDetail.css";
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from "react-datepicker";
 import styled from 'styled-components';
-import addImage from "../img/review-add-img.png";
-// import Shirt from '../img/shirt.jpg';
 
 function MyPageItemDetail({ match, location, history }) {
     const { itemNum } = match.params;
@@ -41,8 +37,8 @@ function MyPageItemDetail({ match, location, history }) {
                 setItemEtcsize(response.data.itemEtcsize);
                 setItemRentalstart(response.data.itemRentalstart);
                 setItemRentalend(response.data.itemRentalend);
-            setStartDate(new Date(response.data.itemRentalstart));
-            setEndDate(new Date(response.data.itemRentalend));
+                setStartDate(new Date(response.data.itemRentalstart));
+                setEndDate(new Date(response.data.itemRentalend));
             })
             .catch(error => { console.log(error); });
     }, []);
@@ -115,33 +111,33 @@ function MyPageItemDetail({ match, location, history }) {
         }));
         formData.append("files", files);
 
-        if(startDate > endDate){
+        if (startDate > endDate) {
             alert("대여 마감날짜를 확인해주세요.")
-        }else{
-        axios.put(`http://localhost:8080/api/item/${itemNum}`,
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then(response => {
-                if (response.status === 200) {
-                    console.log(itemRentalstart);
-                    console.log(itemRentalend);
-                    console.log(startDate);
-                    console.log(endDate);
-                    alert("정상적으로 수정되었습니다.");
-                    history.goBack();
+        } else {
+            axios.put(`http://localhost:8080/api/item/${itemNum}`,
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        console.log(itemRentalstart);
+                        console.log(itemRentalend);
+                        console.log(startDate);
+                        console.log(endDate);
+                        alert("정상적으로 수정되었습니다.");
+                        history.goBack();
 
-                } else {
-                    alert("수정에 실패했습니다.");
-                    return;
-                }
-            })
-            .catch(error => console.log(error));
-    };
-}
+                    } else {
+                        alert("수정에 실패했습니다.");
+                        return;
+                    }
+                })
+                .catch(error => console.log(error));
+        };
+    }
 
     const [showCom, setShowCom] = useState(false);
     const showComment = () => {
@@ -167,7 +163,7 @@ function MyPageItemDetail({ match, location, history }) {
                             <label htmlFor="item_review_input" className="item_review_input">
                                 {imageSrc == '' ?
                                     <div className="itemImg">
-                                        <img className="previewImg" src={`../../files/${data.files}`} onMouseEnter={showComment} onError={handleImgError}/>
+                                        <img className="previewImg" src={`../../files/${data.files}`} onMouseEnter={showComment} onError={handleImgError} />
                                         <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
                                             이미지 변경을 하시려면<br />클릭해주세요.
                                         </div>
@@ -200,7 +196,7 @@ function MyPageItemDetail({ match, location, history }) {
                                 <tbody>
                                     <tr>
                                         <th scope="row">상품명</th>
-                                        <td><input type="text" value={itemName} onChange={handlerChangeName} maxlength="25"/></td>
+                                        <td><input type="text" value={itemName} onChange={handlerChangeName} maxlength="25" /></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">어울리는 계절</th>
@@ -323,7 +319,7 @@ function MyPageItemDetail({ match, location, history }) {
                                         <th scope="row">대여기간</th>
                                         <td>
                                             <div className="rentalDiv">
-                                                <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={now.setDate(now.getDate() -1)} />
+                                                <DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => setStartDate(date)} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={now.setDate(now.getDate() - 1)} />
                                                 <span style={{ margin: '0 5px' }}>{' ~ '}</span>
                                                 <DatePicker dateFormat="yyyy-MM-dd" className="endDate" selected={endDate} onChange={date => setEndDate(date)} selectEnd startDate={startDate} endDate={endDate} locale={ko} minDate={startDate} />
                                             </div>

@@ -221,7 +221,6 @@ function BookingUpload({ history, match }) {
               <div className='payselect' name="payment" onClick={selectcard}>신용/체크카드</div>
               <div className='payselect' name="payment" onClick={selectkakao}>카카오페이</div>
               <div className='payselect' name="payment" onClick={selecttoss}>토스페이</div>
-              {/* <div className='payselect' name="payment" onClick={selecttransfer}>간편계좌결제</div> */}
               <div className='payselect' name="payment" onClick={selectaccount}>무통장입금</div>
               <div className='payselect' name="payment" onClick={selectcell}>휴대폰 결제</div>
 
@@ -242,7 +241,6 @@ function BookingUpload({ history, match }) {
                   }
                   else if (payment == "2") {
                     return <div><select className='payment2' style={{ borderRadius: '3px', border: '1px solid #ccc', padding: '0 5px', outline: 'none' }}>
-                      {/* <option disabled selected>선택</option> */}
                       <option value='카카오페이'>카카오페이</option>
 
                     </select>
@@ -254,24 +252,12 @@ function BookingUpload({ history, match }) {
                     return <div>
                       <select className='payment2' style={{ borderRadius: '3px', border: '1px solid #ccc', padding: '0 5px', outline: 'none' }}>
                         <option value='토스'>토스페이</option>
-                  </select>
-                      {/* <div className='paynotice'>
-                      </div> */}
+                      </select>
                     </div>
                   }
-                  // else if (payment == "4") {
-                  //   return <div><select className='payment2' style={{borderRadius:'3px', border:'1px solid #ccc', padding:'0 5px'}}>
-                  //     {/* <option disabled selected>선택</option> */}
-                  //     <option value='계좌'>가상계좌</option>
 
-                  //   </select>
-                  //     <div className='paynotice'>
-                  //     </div>
-                  //   </div>
-                  // }
                   else if (payment == "5") {
                     return <div><select className='payment2' style={{ borderRadius: '3px', border: '1px solid #ccc', padding: '0 5px', outline: 'none' }}>
-                      {/* <option disabled selected>선택</option> */}
                       <option disabled selected>은행선택</option>
                       <option value='농협은행'>농협은행</option>
                       <option value='국민은행'>국민은행</option>

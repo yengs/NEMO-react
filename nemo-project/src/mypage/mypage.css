@@ -15,7 +15,9 @@
     border-bottom-left-radius: 20px;
 }
 
-.myMenuWrap .memberImg, .myMenuWrap .cleanG, .myMenuWrap .myMenuWrap {
+.myMenuWrap .memberImg,
+.myMenuWrap .cleanG,
+.myMenuWrap .myMenuWrap {
     margin: auto;
 }
 
@@ -33,7 +35,7 @@
     margin-left: 15%;
 }
 
-.myDetailImage > #imgsrccc {
+.myDetailImage>#imgsrccc {
     background-color: rgb(255, 255, 255);
     width: 130px;
     height: 130px;
@@ -153,10 +155,12 @@
     font-size: 15px;
 }
 
-.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewItemImg,
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
     border: none;
 }
-.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent{
+
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
     padding: 0;
 }
 
@@ -182,7 +186,9 @@
     text-align: center;
 }
 
-.ReviewItemImg, .ReviewContent, .satisfing {
+.ReviewItemImg,
+.ReviewContent,
+.satisfing {
     width: 45%;
 }
 
@@ -203,7 +209,7 @@
 }
 
 /* 내프사수정모달 내 수정하기버튼 */
-.myimgupdate{
+.myimgupdate {
     border: 1px solid #7a7a7a;
     background: #7a7a7a;
     color: #fff;
@@ -216,7 +222,7 @@
     height: 40px;
     margin-top: 80px;
     margin-left: 170px;
-    
+
 }
 
 
@@ -225,6 +231,3 @@
 .myPageWrap.forOthers {
     position: relative;
 }
-
-
-

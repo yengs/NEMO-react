@@ -12,7 +12,7 @@ import MyBooking from "./MyBooking";
 
 
 function MyPage() {
-    return(
+    return (
         <div className="myPageWrap">
             <MyMenu />
             <Route path="/mypage/mybooking" component={MyBooking} exact={true} />

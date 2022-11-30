@@ -7,7 +7,7 @@
     border-bottom-right-radius: 20px;
 }
 
-.myDetailPage h3{
+.myDetailPage h3 {
     padding-left: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #bbb;
@@ -31,29 +31,30 @@
     border-radius: 3px;
     display: flex;
     padding: 10px;
-  }
+}
 
 .myDetailTable form tr>td>input {
     border: 1px solid #ddd;
     width: 100%;
     padding: 8px 6px;
     border-radius: 3px;
-  }
+}
 
-  .myDetailTable .rentalInput {
+.myDetailTable .rentalInput {
     border: 1px solid #ddd;
     width: 44%;
     padding: 8px 6px;
     border-radius: 3px;
     border-style: none;
-  }
+}
 
-  .myDetailPage input.endDate, .myDetailPage input.startDate{
+.myDetailPage input.endDate,
+.myDetailPage input.startDate {
     border-style: none;
     width: 80px;
 }
 
-.btnDivMPID{
+.btnDivMPID {
     justify-content: center;
     align-items: center;
     vertical-align: middle;
@@ -73,9 +74,9 @@
     padding: 10px 20px;
     border-radius: 3px;
     font-weight: 100;
-  }
-  
-  .redBtnMPID {
+}
+
+.redBtnMPID {
     border: rgb(196, 98, 98);
     background-color: rgb(196, 98, 98);
     color: #fff;
@@ -85,9 +86,9 @@
     padding: 10px 20px;
     border-radius: 3px;
     font-weight: 100;
-  }
+}
 
-  .greyBtnMPID {
+.greyBtnMPID {
     border: #999;
     background-color: #999;
     color: #fff;
@@ -97,7 +98,7 @@
     padding: 10px 20px;
     border-radius: 3px;
     font-weight: 100;
-  }
+}
 
 /* 대충 이미지 보여주기 */
 
@@ -112,7 +113,7 @@
     height: 250px;
 }
 
-.rentalDiv .react-datepicker__input-container{
+.rentalDiv .react-datepicker__input-container {
     border: 1px solid #ddd;
     padding: 8px 6px;
     border-radius: 3px;

@@ -43,7 +43,7 @@
 
 
 /* 빌려줬어요 */
-.userReviewListAboutStoreWrapBooking{
+.userReviewListAboutStoreWrapBooking {
     margin-top: 2px;
 }
 
@@ -67,17 +67,20 @@
     font-size: 15px;
 }
 
-.userReviewListAboutStoreWrapBooking .userReviewListAboutStore2 tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
+.userReviewListAboutStoreWrapBooking .userReviewListAboutStore2 tbody .ReviewItemImg,
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
     border: none;
 }
-.userReviewListAboutStoreWrapBooking .userReviewListAboutStore2 tbody .ReviewContent{
+
+.userReviewListAboutStoreWrapBooking .userReviewListAboutStore2 tbody .ReviewContent {
     padding: 0;
 }
+
 /* ---------------------- */
 
 
 /* 빌려왔어요 */
-.userReviewListAboutStoreWrapBooking2{
+.userReviewListAboutStoreWrapBooking2 {
     margin-top: 60px;
 }
 
@@ -99,13 +102,15 @@
     font-size: 15px;
 }
 
-.userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
+.userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 tbody .ReviewItemImg,
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
     border: none;
 }
-.userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 tbody .ReviewContent{
+
+.userReviewListAboutStoreWrapBooking2 .userReviewListAboutStore2 tbody .ReviewContent {
     padding: 0;
 }
- 
+
 /* ---------------------------- */
 
 
@@ -134,29 +139,32 @@
     text-align: center;
 }
 
-.ReviewWriter td{
+.ReviewWriter td {
     width: 10%;
     text-align: center;
 
 }
-.ReviewWriter td{
+
+.ReviewWriter td {
     border-bottom: none !important;
 }
 
 
 
-.btnBok{
-  font-size: 15px;
-  border-radius: 3px;
-  width: 80px;
-  padding: 5px 10px;
+.btnBok {
+    font-size: 15px;
+    border-radius: 3px;
+    width: 80px;
+    padding: 5px 10px;
 }
 
 
 
 
 
-.ReviewItemImg, .ReviewContent, .satisfing {
+.ReviewItemImg,
+.ReviewContent,
+.satisfing {
     width: 45%;
 }
 

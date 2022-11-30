@@ -15,7 +15,9 @@
     border-bottom-left-radius: 20px;
 }
 
-.myMenuWrap .memberImg, .myMenuWrap .cleanG, .myMenuWrap .myMenuWrap {
+.myMenuWrap .memberImg,
+.myMenuWrap .cleanG,
+.myMenuWrap .myMenuWrap {
     margin: auto;
 }
 
@@ -86,7 +88,7 @@
     margin-top: 15px;
 }
 
-.moreReviewDetailPage { 
+.moreReviewDetailPage {
     float: right;
     margin-bottom: 6px;
     margin-top: -5px;
@@ -151,7 +153,7 @@
 }
 
 table {
-table-layout: fixed;
+    table-layout: fixed;
 }
 
 .reviewMainTitle {
@@ -182,7 +184,9 @@ table-layout: fixed;
     text-align: center;
 }
 
-.rReviewItemImg, .rReviewContent, .rsatisfing {
+.rReviewItemImg,
+.rReviewContent,
+.rsatisfing {
     width: 45%;
 }
 
@@ -197,12 +201,11 @@ table-layout: fixed;
     font-size: 13px !important;
     padding-bottom: 0px !important;
     margin: 10px 0;
-    width: 100%;;
+    width: 100%;
+    ;
 }
 
 .rsatisfing {
     width: 140px;
     font-size: 12px;
 }
-
-

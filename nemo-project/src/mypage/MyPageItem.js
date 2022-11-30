@@ -7,81 +7,81 @@ import styled from 'styled-components';
 import MyPageItemPaging from '../pagination/MyPageItemPaging';
 import Pagination from "react-js-pagination"
 
-function MyPageItem({ match }) {
+function MyPageItem({ match }) {DOMException
   const { itemWriter } = match.params;
 
-    const ITEM_COUNT_PER_PAGE = 6;
+  const ITEM_COUNT_PER_PAGE = 6;
 
-    const [datas, setDatas] = useState([]);
-    const [count, setCount] = useState(0);
-    const [page, setPage] = useState(1);
-    const [items, setItems] = useState([]);
+  const [datas, setDatas] = useState([]);
+  const [count, setCount] = useState(0);
+  const [page, setPage] = useState(1);
+  const [items, setItems] = useState([]);
 
-    useEffect(() => {
-        axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
-            .then(response => {
-              setDatas(response.data);
-              setCount(response.data.length);
-              setItems(response.data.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
-            })
-            .catch(error => console.log(error));
-    }, []);
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/mypage/mypageitem/${itemWriter}`)
+      .then(response => {
+        setDatas(response.data);
+        setCount(response.data.length);
+        setItems(response.data.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+      })
+      .catch(error => console.log(error));
+  }, []);
 
-    const changePage = page => {
-      setPage(page);
-      setItems(datas.slice((page-1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+  const changePage = page => {
+    setPage(page);
+    setItems(datas.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
   };
 
   const handleImgError = (e) => {
     e.target.src = '../../../noimage/noimage.gif';
-}
+  }
 
-    return (
-        <MyPageItemContainer style={{width:'calc(100% - 230px)', height:'100%'}}>
-            <div className="mypageInnerPage2">
+  return (
+    <MyPageItemContainer style={{ width: 'calc(100% - 230px)', height: '100%' }}>
+      <div className="mypageInnerPage2">
 
-                <div className="titleNplusBtn">
-                    <h3>내 상품 목록</h3>
-                    {/* <Link className="btn" to="/item/write">상품등록</Link> */}
-                </div>
-                <div className="itemWrap3">
-                    {
-                        items && items.map(item => (
-                            <div className="itemInfoWrap" key={item.itemNum} style={{'backgroundColor':"rgb(235,235,235)"}}>
-                              <Link to={`/mypage/mypageitemdetail/${item.itemNum}`} style={{'textDecoration':'none'}}>
-                                    <img className="itemImg" src={`../../files/${item.files}`} onError={handleImgError}></img>
-                                    <div className="itemInfo">
-                                        <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
-                                        <p className="itemName" id="overflow">{item.itemName}</p>
-                                        <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
-                                        <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
-                                    </div>
-                              </Link>
-                            </div>
-                        ))
-                    }
-                    {
-                        datas.length === 0 && (
-                            <tr>
-                                <td colSpan="4">작성된 글이 없습니다.</td>
-                            </tr>
-                        )
-                    }
-                </div>
-                <div>
-                <Pagination
-                                activePage={page}   // 현재 페이지
-                                itemsCountPerPage={6}  // 한 페이지당 보여줄 게시글 개수
-                                totalItemsCount={count}   // 모든 게시글 수
-                                pageRangeDisplayed={10}  // paginator안에서 보여줄 페이지의 범위
-                                prevPageText={"<"}  // 이전을
-                                nextPageText={">"}  // 다음
-                                onChange={changePage}    // 페이지가 바뀔 때 핸들러 함수 
-                            />
-                </div>
-            </div>
-        </MyPageItemContainer>
-    );
+        <div className="titleNplusBtn">
+          <h3>내 상품 목록</h3>
+          {/* <Link className="btn" to="/item/write">상품등록</Link> */}
+        </div>
+        <div className="itemWrap3">
+          {
+            items && items.map(item => (
+              <div className="itemInfoWrap" key={item.itemNum} style={{ 'backgroundColor': "rgb(235,235,235)" }}>
+                <Link to={`/mypage/mypageitemdetail/${item.itemNum}`} style={{ 'textDecoration': 'none' }}>
+                  <img className="itemImg" src={`../../files/${item.files}`} onError={handleImgError}></img>
+                  <div className="itemInfo">
+                    <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
+                    <p className="itemName" id="overflow">{item.itemName}</p>
+                    <p className="itemDeposit"><span className="depositTitle">보증금</span><span className="deposit">{item.itemDeposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
+                    <p className="itemPeriod">대여기간<br /><span className="period">{item.itemRentalstart} ~ {item.itemRentalend}</span></p>
+                  </div>
+                </Link>
+              </div>
+            ))
+          }
+          {
+            datas.length === 0 && (
+              <tr>
+                <td colSpan="4">작성된 글이 없습니다.</td>
+              </tr>
+            )
+          }
+        </div>
+        <div>
+          <Pagination
+            activePage={page}   // 현재 페이지
+            itemsCountPerPage={6}  // 한 페이지당 보여줄 게시글 개수
+            totalItemsCount={count}   // 모든 게시글 수
+            pageRangeDisplayed={10}  // paginator안에서 보여줄 페이지의 범위
+            prevPageText={"<"}  // 이전을
+            nextPageText={">"}  // 다음
+            onChange={changePage}    // 페이지가 바뀔 때 핸들러 함수 
+          />
+        </div>
+      </div>
+    </MyPageItemContainer>
+  );
 }
 
 const MyPageItemContainer = styled.div`

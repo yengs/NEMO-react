@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
-
 import styled from 'styled-components';
-
 import { useEffect } from "react";
-
-import moment from 'moment';
 import 'moment/locale/ko';
 import axios from "axios";
 import { useState } from "react";
@@ -19,15 +15,15 @@ function Main({ history }) {
     const goBestItemList = () => {
         window.location.href = "/item/bestItem";
     }
-    
+
     const [weatherDatas, setWeatherDatas] = useState([]);
     const [randomDatas, setRandomDatas] = useState([]);
-    
+
     const [bestItemDatas, setBestItemDatas] = useState([]);
     const [bestItemStore, setBestItemStore] = useState([]);
     const [tomorrowTemp, setTomorrowTemp] = useState(0);
-    
-    const [storeUrl, setStoreUrl] =useState();
+
+    const [storeUrl, setStoreUrl] = useState();
 
     const handleImgError = (e) => {
         e.target.src = '../../../noimage/noimage.gif';
@@ -39,7 +35,7 @@ function Main({ history }) {
                 .then(response => {
                     setWeatherDatas(response.data);
                     if (sessionStorage.getItem("tempAvg")) {
-                        setTomorrowTemp(Math.round(sessionStorage.getItem("tempAvg")*10)/10);
+                        setTomorrowTemp(Math.round(sessionStorage.getItem("tempAvg") * 10) / 10);
                     }
                 })
                 .catch(error => console.log(error));
@@ -59,23 +55,10 @@ function Main({ history }) {
         axios.get('http://localhost:8080/api/item/beststore')
             .then(response => {
                 setBestItemStore(response.data)
-                
+
             })
             .catch(error => console.log(error));
-        }, []);
-
-
-    // //베스트 스토어 관련
-    // const goUserStore = () => {
-    //     if (sessionStorage.getItem("memberId") === bestItemStore.itemWriter) {
-    //         // history.push(`/mypage/mypageitem/${sessionStorage.getItem("memberId")}`);
-    //         // window.location.href = `/mypage/mypageitem/${sessionStorage.getItem("memberId")}`
-    //         setStoreUrl(`/mypage/mypageitem/${bestItemStore.itemWriter}`);
-    //     } else {
-    //         // history.push(`/userstoreinfo/${bestItemStore.itemWriter},${bestItemStore.memberImg}`);
-    //         setStoreUrl(`/userstoreinfo/${bestItemStore.itemWriter},${bestItemStore.memberImg}`);
-    //     }
-    // }
+    }, []);
 
 
     return (
@@ -92,14 +75,14 @@ function Main({ history }) {
                                     {tomorrowTemp}
                                 </span> ℃</h4>
                                 <div className="titleNplusBtn">
-                                    <h3 style={{fontSize:'23px'}}>이런 옷 어때요?</h3>
+                                    <h3 style={{ fontSize: '23px' }}>이런 옷 어때요?</h3>
                                     <button className="plusBtn" onClick={goWeatherItemList}>+ 더보기</button>
                                 </div>
                             </div>
                             :
                             <div className="tomorrowWeather" style={{ marginBottom: "-35px" }}>
                                 <div className="titleNplusBtn">
-                                    <h3 style={{ marginBottom: "35px", fontSize:'23px' }}>로그인하고 추천아이템을 확인해보세요!</h3>
+                                    <h3 style={{ marginBottom: "35px", fontSize: '23px' }}>로그인하고 추천아이템을 확인해보세요!</h3>
                                 </div>
                             </div>
 
@@ -115,7 +98,7 @@ function Main({ history }) {
 
                                     <div className="itemInfoWrap" key={item.itemNum}>
                                         <Link to={`/item/detail/${item.itemNum}`}>
-                                            <img className="itemImg" onError={handleImgError} src={`../../files/${item.files}` }></img>
+                                            <img className="itemImg" onError={handleImgError} src={`../../files/${item.files}`}></img>
                                             <div className="itemInfo">
                                                 <p className="itemPrice"><span className="price">{item.itemPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>원</p>
                                                 <p className="itemName" id="overflow">{item.itemName}</p>
@@ -153,7 +136,7 @@ function Main({ history }) {
                 <div className="recWeekly">
                     <div className="recWeeklyWrap">
                         <div className="titleNplusBtn" style={{ marginBottom: "-15px" }}>
-                            <h3 style={{fontSize:'23px'}}>주간 베스트</h3>
+                            <h3 style={{ fontSize: '23px' }}>주간 베스트</h3>
                             <button className="plusBtn" onClick={goBestItemList}>+ 더보기</button>
                         </div>
                         <div className="itemWrap">
@@ -179,15 +162,15 @@ function Main({ history }) {
                 </div>
                 <div className="recBestStore">
                     <div className="titleNplusBtn">
-                        <h3 style={{fontSize:'23px'}}>베스트 스토어</h3>
+                        <h3 style={{ fontSize: '23px' }}>베스트 스토어</h3>
                     </div>
-                    <div style={{display:'flex', justifyContent:'flex-start', alignItems: 'center'}}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                         {console.log(storeUrl)}
-                    {
-                        bestItemStore && bestItemStore.map(item => (
-                            <div className="storeWrap2" >
+                        {
+                            bestItemStore && bestItemStore.map(item => (
+                                <div className="storeWrap2" >
                                     <Link to={`/userstoreinfo/${item.memberNickname},${item.itemWriter},${item.memberImg}`}
-                                    style={{color: '#333', textDecoration:"none"}}>
+                                        style={{ color: '#333', textDecoration: "none" }}>
                                         <div className="storeInfoWrap">
 
                                             <img className="storeImg" src={`../../memberImg/${item.memberImg}`} key={item.itemNum} ></img>
@@ -198,9 +181,9 @@ function Main({ history }) {
                                         </div>
                                     </Link>
                                 </div>
-                        ))
-                    }
-                    {console.log(storeUrl)}
+                            ))
+                        }
+                        {console.log(storeUrl)}
                     </div>
 
                 </div>
@@ -208,11 +191,5 @@ function Main({ history }) {
         </div>
     );
 }
-
-
-
-
- 
-
 
 export default Main;

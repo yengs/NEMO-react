@@ -82,16 +82,16 @@ function App() {
               }
             })
             .catch(error => console.log(error))
-            // .finally(() => setLoaded(true));
+          // .finally(() => setLoaded(true));
         })
         .catch(error => console.log(error))
-        // .finally(() => setLoaded(true));
+      // .finally(() => setLoaded(true));
     } else {
       setLoaded(true);
     }
   }, []);
 
-  
+
 
   return (
     loaded &&
@@ -135,7 +135,7 @@ function App() {
         <Route path="/review/myReview/:reviewWriter/:reviewNum" component={ReviewUpdate} exact={true} />
         <Route path="/review/yourReview/:reviewId" component={YourReviewList} exact={true} />
         <Route path="/review/yourReview/:reviewWriter/:reviewNum" component={ReviewMore} exact={true} />
-      
+
 
         {/* mypage */}
         <Route path="/mypage" component={MyPage} />

@@ -26,31 +26,31 @@ function ReviewMore({ history, match }) {
             .catch(error => console.log(error));
     }, []);
 
-    const detailList = () => history.goBack();    
+    const detailList = () => history.goBack();
 
     return (
         <AppStyle>
-        <div className="reviewUpload">
+            <div className="reviewUpload">
 
-            <div className='pageTitle'>
-                <h3>후기 상세보기</h3>
-            </div>
-            <div className="itemDetailImg" >
-                {data.reviewFiles == null ? <img className="DetailImg" src={'../../../noimage/no_image.gif'}/>:
-                <img className="DetailImg"  src={`../../../files_review/${data.reviewFiles}`}/>
-                }
+                <div className='pageTitle'>
+                    <h3>후기 상세보기</h3>
                 </div>
-            <div className='moreContent'>
-                <div className="moreNum">{reviewContents}</div>
+                <div className="itemDetailImg" >
+                    {data.reviewFiles == null ? <img className="DetailImg" src={'../../../noimage/no_image.gif'} /> :
+                        <img className="DetailImg" src={`../../../files_review/${data.reviewFiles}`} />
+                    }
+                </div>
+                <div className='moreContent'>
+                    <div className="moreNum">{reviewContents}</div>
+                </div>
+                <div className='satisfyingReview'>
+                    <span>{reviewWriter} 님이 평가한 상품 만족도는?</span>
+                    <input type="moreNum" value={`${reviewSatisfaction}%`} readOnly />
+                </div>
+                <div className='btnWrap'>
+                    <input type="button" className='greenBtn btn' value="목록으로" onClick={detailList} />
+                </div>
             </div>
-            <div className='satisfyingReview'>
-                <span>{reviewWriter} 님이 평가한 상품 만족도는?</span>
-                <input type="moreNum" value={`${reviewSatisfaction}%`} readOnly/>
-            </div>
-            <div className='btnWrap'>
-                <input type="button" className='greenBtn btn' value="목록으로" onClick={detailList}/>
-            </div>
-        </div>
         </AppStyle>
     );
 
@@ -121,7 +121,7 @@ const AppStyle = styled.div`
 
   
   `;
-  
+
 
 
 export default ReviewMore;

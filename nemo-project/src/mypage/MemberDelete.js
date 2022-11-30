@@ -2,29 +2,29 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MemberDelete = (props) => {
-    const { open, close, header } = props;
-    
+  const { open, close, header } = props;
 
-    return (
-        <><Modal>
- <div className={open ? 'openModal modal' : 'modal'}>
-      {open ? (
-        <section>
-          <header>
-            {header}
-            <button className="close" onClick={close}>
-              &times;
-            </button>
-          </header>
-          <main>{props.children}</main>
-          <footer>
-          </footer>
-        </section>
-      ) : null}
-    </div>
+
+  return (
+    <><Modal>
+      <div className={open ? 'openModal modal' : 'modal'}>
+        {open ? (
+          <section>
+            <header>
+              {header}
+              <button className="close" onClick={close}>
+                &times;
+              </button>
+            </header>
+            <main>{props.children}</main>
+            <footer>
+            </footer>
+          </section>
+        ) : null}
+      </div>
     </Modal>
-        </>
-    );
+    </>
+  );
 }
 
 const Modal = styled.div`

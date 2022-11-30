@@ -14,7 +14,7 @@ function BestItemList({ match }) {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/item/best', { headers: { "Authorization" : `Bearer ${sessionStorage.getItem("jwtToken")}` }})
+        axios.get('http://localhost:8080/api/item/best', { headers: { "Authorization": `Bearer ${sessionStorage.getItem("jwtToken")}` } })
             .then(response => {
                 setDatas(response.data);
                 setCount(response.data.length);
@@ -25,7 +25,7 @@ function BestItemList({ match }) {
 
     const changePage = page => {
         setPage(page);
-        setItems(datas.slice((page-1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
+        setItems(datas.slice((page - 1) * ITEM_COUNT_PER_PAGE, page * ITEM_COUNT_PER_PAGE));
     };
 
     return (

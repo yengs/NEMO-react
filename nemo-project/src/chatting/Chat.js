@@ -3,138 +3,138 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import axios from "axios";
 
 
-const Chat = ({match}) => {
+const Chat = ({ match }) => {
 
-    const [msg, setMsg] = useState("");
-    const [name, setName] = useState("");
-    const [chatt, setChatt] = useState([]);
-    const [chkLog, setChkLog] = useState(false);
-    const [socketData, setSocketData] = useState();
-    
-    const [datas, setDatas] = useState({});
-    const {itemWriter} = match.params;
+  const [msg, setMsg] = useState("");
+  const [name, setName] = useState("");
+  const [chatt, setChatt] = useState([]);
+  const [chkLog, setChkLog] = useState(false);
+  const [socketData, setSocketData] = useState();
 
-    const ws = useRef(null);    //webSocket을 담는 변수
+  const [datas, setDatas] = useState({});
+  const { itemWriter } = match.params;
 
-    const msgBox = chatt.map((item, idx) => (
-        <div key={idx} >
-            <div className={item.name === name ? 'me' : 'other'}>
-            <span><b>{item.name}</b></span> <br/><br/>
-            <span>{item.msg}</span>
-        </div>
-        <span className={item.name === name ? 'me' : 'other'}>{item.date}</span>
-        </div>
-    ));
+  const ws = useRef(null);    //webSocket을 담는 변수
 
-
-    const memberNum = sessionStorage.getItem('memberNum');
-
-    useEffect(() => {
-        axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
-            .then(response => {
-                console.log("업데이트페이지 멤버넘버::::" + memberNum);
-                console.log(response);
-                setDatas(response.data);
-                setName(response.data.memberNickname);
-                webSocketLogin();
-            })
-            .catch(error => console.log(error));
-    }, []);
+  const msgBox = chatt.map((item, idx) => (
+    <div key={idx} >
+      <div className={item.name === name ? 'me' : 'other'}>
+        <span><b>{item.name}</b></span> <br /><br />
+        <span>{item.msg}</span>
+      </div>
+      <span className={item.name === name ? 'me' : 'other'}>{item.date}</span>
+    </div>
+  ));
 
 
-    useEffect(() => {
-        if(socketData !== undefined) {
-            const tempData = chatt.concat(socketData);
-            console.log(">>>", tempData);
-            setChatt(tempData);
-            sessionStorage.setItem("chatLog", JSON.stringify(tempData));
-        }
-    }, [socketData]);
+  const memberNum = sessionStorage.getItem('memberNum');
 
-    useEffect(() => {
-        const tempData = sessionStorage.getItem("chatLog");
-        if (tempData) 
-            setChatt(JSON.parse(tempData));
-    }, []);
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/member/info/${memberNum}`)
+      .then(response => {
+        console.log("업데이트페이지 멤버넘버::::" + memberNum);
+        console.log(response);
+        setDatas(response.data);
+        setName(response.data.memberNickname);
+        webSocketLogin();
+      })
+      .catch(error => console.log(error));
+  }, []);
 
-    console.log(sessionStorage.getItem("chatLog"))
-   
 
-    //webSocket
-    const onText = event => {
-        console.log(event.target.value);
-        setMsg(event.target.value);
+  useEffect(() => {
+    if (socketData !== undefined) {
+      const tempData = chatt.concat(socketData);
+      console.log(">>>", tempData);
+      setChatt(tempData);
+      sessionStorage.setItem("chatLog", JSON.stringify(tempData));
+    }
+  }, [socketData]);
+
+  useEffect(() => {
+    const tempData = sessionStorage.getItem("chatLog");
+    if (tempData)
+      setChatt(JSON.parse(tempData));
+  }, []);
+
+  console.log(sessionStorage.getItem("chatLog"))
+
+
+  //webSocket
+  const onText = event => {
+    console.log(event.target.value);
+    setMsg(event.target.value);
+  }
+
+
+  const webSocketLogin = useCallback(() => {
+    ws.current = new WebSocket("ws://localhost:8080/socket/chatt");
+
+    ws.current.onmessage = (message) => {
+      const dataSet = JSON.parse(message.data);
+      setSocketData(dataSet);
+    }
+  });
+
+  const send = useCallback(() => {
+    if (!chkLog) {
+      setChkLog(true);
     }
 
-    
-    const webSocketLogin = useCallback(() => {
-        ws.current = new WebSocket("ws://localhost:8080/socket/chatt");
+    if (msg !== '') {
+      const data = {
+        name,
+        msg,
+        date: new Date().toLocaleTimeString(['en-GB'], { timeStyle: 'short' }),
+      };  //전송 데이터(JSON)
 
-        ws.current.onmessage = (message) => {
-            const dataSet = JSON.parse(message.data);
-            setSocketData(dataSet);
+      const temp = JSON.stringify(data);
+
+      if (ws.current.readyState === 0) {   //readyState는 웹 소켓 연결 상태를 나타냄
+        ws.current.onopen = () => {    //webSocket이 맺어지고 난 후, 실행
+          console.log(ws.current.readyState);
+          ws.current.send(temp);
         }
-    });
-   
-    const send = useCallback(() => {
-        if(!chkLog) {
-            setChkLog(true);
-        }
-
-        if(msg !== ''){
-            const data = {
-                name,
-                msg,
-                date: new Date().toLocaleTimeString(['en-GB'], {timeStyle: 'short'}),
-            };  //전송 데이터(JSON)
-
-            const temp = JSON.stringify(data);
-            
-            if(ws.current.readyState === 0) {   //readyState는 웹 소켓 연결 상태를 나타냄
-                ws.current.onopen = () => {    //webSocket이 맺어지고 난 후, 실행
-                    console.log(ws.current.readyState);
-                    ws.current.send(temp);
-                }
-            }else {
-                ws.current.send(temp);
-            }
-        }else {
-            alert("메세지를 입력하세요.");
-            document.getElementById("msg").focus();
-            return;
-        }
-        setMsg("");
-    });
-    //webSocket
-    //webSocket
-    //webSocket
-    //webSocket
-    //webSocket
-    //webSocket
+      } else {
+        ws.current.send(temp);
+      }
+    } else {
+      alert("메세지를 입력하세요.");
+      document.getElementById("msg").focus();
+      return;
+    }
+    setMsg("");
+  });
+  //webSocket
+  //webSocket
+  //webSocket
+  //webSocket
+  //webSocket
+  //webSocket
 
 
-    
-    return (
-        <>
-            <MyWebsocket>
-            <div id="chat-wrap">
-                <div id='chatt'>
-                    <h1 id="title">내모 채팅방</h1>
-                    <br/>
-                    <div id='talk'>
-                        {msgBox}
-                    </div>
-                     <div className="chat" >
-                                       <input className="chat-input"  id='msg' value={msg} onChange={onText}
-                            onKeyDown={(ev) => {if(ev.keyCode === 13){send();}}}  required/>
-                                       <button   className="chat-botton"   id='btnSend' onClick={send} type="submit">↑</button>
-                                 </div> 
-                </div>
+
+  return (
+    <>
+      <MyWebsocket>
+        <div id="chat-wrap">
+          <div id='chatt'>
+            <h1 id="title">내모 채팅방</h1>
+            <br />
+            <div id='talk'>
+              {msgBox}
             </div>
-            </MyWebsocket>
-        </>
-        
-    );
+            <div className="chat" >
+              <input className="chat-input" id='msg' value={msg} onChange={onText}
+                onKeyDown={(ev) => { if (ev.keyCode === 13) { send(); } }} required />
+              <button className="chat-botton" id='btnSend' onClick={send} type="submit">↑</button>
+            </div>
+          </div>
+        </div>
+      </MyWebsocket>
+    </>
+
+  );
 };
 
 

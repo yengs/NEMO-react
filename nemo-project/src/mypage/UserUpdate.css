@@ -1,18 +1,19 @@
 /* ----------------------------- */
 /* 마이페이지 내의 페이지 */
 .mypageInnerPage {
-    width: calc(100% - 230px);
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: rgb(245, 245, 245);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+  width: calc(100% - 230px);
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: rgb(245, 245, 245);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .mypageInnerPage .pageTitle {
-    padding: 0;
-    margin: 0 0 10px 0;
+  padding: 0;
+  margin: 0 0 10px 0;
 }
+
 /* ---------------------------------------------------------- */
 
 .userUpdateContainer .pageTitle {
@@ -21,7 +22,7 @@
   text-align: center;
 }
 
-.pageTitle>h2{
+.pageTitle>h2 {
   font-size: 1.5rem;
   font-weight: 300;
   text-align: left;
@@ -62,12 +63,12 @@
 
 .userUpdateContainer .userUpdateinputTable tr>td>input {
   border: 1px solid #ddd;
-    width: 100%;
-    padding: 10px 170px;
-    padding-left: 20px !important;
-    border-radius: 3px;
-    font-size: 15px;
-    margin-left: 10px;
+  width: 100%;
+  padding: 10px 170px;
+  padding-left: 20px !important;
+  border-radius: 3px;
+  font-size: 15px;
+  margin-left: 10px;
 }
 
 .userUpdateContainer .userUpdateinputTable tr>.updateTableBtn>addressBtn {
@@ -121,7 +122,7 @@
   text-align: center;
 }
 
-.userUpdateContainer{
+.userUpdateContainer {
   width: 1500px;
   position: relative;
   left: 60px;
@@ -129,13 +130,13 @@
   margin: 100px auto;
 }
 
-.resignMembership{
+.resignMembership {
   position: absolute;
   left: 130px;
-  margin-top: 15px; 
+  margin-top: 15px;
 }
 
-.userUpdateContainer .userUpdateinputTable table tr>.updateTableBtn>button{
+.userUpdateContainer .userUpdateinputTable table tr>.updateTableBtn>button {
 
   padding: 6px 15px;
   border-radius: 3px;
@@ -177,7 +178,7 @@
   margin-top: 35px;
 }
 
-.userUpdateContainer .userUpdateinputTable table >.userUpdateBtnWrap>input{
+.userUpdateContainer .userUpdateinputTable table>.userUpdateBtnWrap>input {
   padding: 6px 15px;
   border-radius: 3px;
   font-size: 12px;

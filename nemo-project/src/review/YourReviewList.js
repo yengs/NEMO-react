@@ -4,7 +4,7 @@ import "./reviewDetail.css";
 import Paging from "../pagination/Paging";
 import { Link } from "react-router-dom";
 
-function YourReviewList({ match,history  }) {
+function YourReviewList({ match, history }) {
 
     const { reviewId } = match.params;
 
@@ -78,10 +78,10 @@ function YourReviewList({ match,history  }) {
                                         <img className="yourBbookingitemImg" src={`../../files/${review.reviewItemfiles}`} />
                                     </td>
                                     <td className='ReviewItemNameOrigin'>
-                                    <Link to={`/item/detail/${review.reviewProductIdx}`}>
-                                        {review.reviewItemname}
+                                        <Link to={`/item/detail/${review.reviewProductIdx}`}>
+                                            {review.reviewItemname}
                                         </Link>
-                                        </td>
+                                    </td>
                                     <td className='ReviewWriter'>{review.reviewWriter}</td>
                                     <td>
                                         <Link to={`/review/yourReview/${review.reviewWriter}/${review.reviewNum}`}><img className="reviewListItemImg" src={`../../files_review/${review.reviewFiles}`} onError={handleImgError}></img></Link>
@@ -136,12 +136,12 @@ function YourReviewList({ match,history  }) {
                     </tbody>
                 </table>
                 <div>
-                <table className="sun">
-                       <tr >
-                        <td>
-                        <Paging page={page} count={count} setPage={changePage} />
-                        </td><td> <input type="button" id="list" className="greyBtnMPID" value="뒤로가기" onClick={handlerClickList} />
-                        </td> </tr>
+                    <table className="sun">
+                        <tr >
+                            <td>
+                                <Paging page={page} count={count} setPage={changePage} />
+                            </td><td> <input type="button" id="list" className="greyBtnMPID" value="뒤로가기" onClick={handlerClickList} />
+                            </td> </tr>
                     </table>
                 </div>
             </div>

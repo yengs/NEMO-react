@@ -20,12 +20,12 @@ function Singo({ itemWriter, setSingo }) {
 
   const handlerChangeReason = (e) => setSingoReason(e.target.value);
   const handlerChangeContent = (e) => setSingoContent(e.target.value);
-  const handlerChangefiles =(e) => {
+  const handlerChangefiles = (e) => {
     setSingoImage(e.target.files[0]);
     encodeFileToBase64(e.target.files[0]);
-}
+  }
 
-const encodeFileToBase64 = (fileBlob) => {
+  const encodeFileToBase64 = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
@@ -37,10 +37,10 @@ const encodeFileToBase64 = (fileBlob) => {
   };
 
   const singoInfo = {
-    "singoPisingoja" : Pisingoja,
-    "singoReason" : singoReason,
-    "singoContent" : singoContent,
-    "singoWriter" : singoWriter,
+    "singoPisingoja": Pisingoja,
+    "singoReason": singoReason,
+    "singoContent": singoContent,
+    "singoWriter": singoWriter,
     "singoDate": singoDate
   }
 
@@ -48,37 +48,39 @@ const encodeFileToBase64 = (fileBlob) => {
     e.preventDefault();
 
     const formData = new FormData();
-        formData.append('data', new Blob([JSON.stringify({
-        "singoPisingoja" : Pisingoja,
-        "singoReason" : singoReason,
-        "singoContent" : singoContent,
-        "singoWriter" : singoWriter,
-        "singoDate": singoDate})], {
-            type: "application/json"
-        }));
-        // formData.append("files", new Blob(files, { type: "image/*" }));
-        formData.append("singoImage", singoImage);
+    formData.append('data', new Blob([JSON.stringify({
+      "singoPisingoja": Pisingoja,
+      "singoReason": singoReason,
+      "singoContent": singoContent,
+      "singoWriter": singoWriter,
+      "singoDate": singoDate
+    })], {
+      type: "application/json"
+    }));
+    // formData.append("files", new Blob(files, { type: "image/*" }));
+    formData.append("singoImage", singoImage);
 
 
 
 
-        axios.post('http://localhost:8080/api/singo/take', 
-            formData, 
-            { headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            })
-        .then(response => {
-            if (response.status === 200) {
-                alert("정상적으로 등록되었습니다.");
-                setSingo(false);
-            } else {
-                alert("등록에 실패했습니다.");
-                return;
-            }
-        })
-        .catch(error => console.log(error));
-    }
+    axios.post('http://localhost:8080/api/singo/take',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(response => {
+        if (response.status === 200) {
+          alert("정상적으로 등록되었습니다.");
+          setSingo(false);
+        } else {
+          alert("등록에 실패했습니다.");
+          return;
+        }
+      })
+      .catch(error => console.log(error));
+  }
 
   const goBack = (e) => {
     console.log(`/userstoreinfo/${itemWriter}`)
@@ -108,12 +110,12 @@ const encodeFileToBase64 = (fileBlob) => {
                         <AppStyle>
                           <label htmlFor="item_review_input">
                             <div className="btnStart">
-                            {imageSrc == '' ?
-                        <img src={addImage} alt="ReviewAddImg" />
-                        : <div className="mySingoImage"> 
-                        {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
-                    }
-                             
+                              {imageSrc == '' ?
+                                <img src={addImage} alt="ReviewAddImg" />
+                                : <div className="mySingoImage">
+                                  {imageSrc && <img src={imageSrc} alt="preview-img" />} </div>
+                              }
+
                             </div>
                           </label>
                           <input

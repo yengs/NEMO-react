@@ -94,27 +94,27 @@ function UserUpdate({ history }) {
             "memberSigungu": mSigungu
         }
 
-        if ( memberNickname == '' || memberAddress == '' || memberPw == '') {
+        if (memberNickname == '' || memberAddress == '' || memberPw == '') {
             alert("빈칸을 채워주세요")
-        } else if(memberNickname !== sessionStorage.getItem('memberNickname')) {
+        } else if (memberNickname !== sessionStorage.getItem('memberNickname')) {
             alert("닉네임 중복확인을 해주세요");
-        } else if(memberPw.length < 8) {
+        } else if (memberPw.length < 8) {
             alert("비밀번호를 8이상 작성해주세요")
         } else {
             axios.put(`http://localhost:8080/api/member/update/${memberNum}`, memberInfo)
-            .then(response => {
-                if (response.status === 200) {
-                    alert("수정완료");
-                    history.put();
-                } else {
-                    alert("수정실패");
-                    return;
-                }
-            })
-            .catch(error => {
-                console.log(memberInfo);
-                console.log(error)
-            });
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("수정완료");
+                        history.put();
+                    } else {
+                        alert("수정실패");
+                        return;
+                    }
+                })
+                .catch(error => {
+                    console.log(memberInfo);
+                    console.log(error)
+                });
         }
     };
 
@@ -190,118 +190,118 @@ function UserUpdate({ history }) {
                         <h2>회원정보 수정</h2>
                     </div>
                     <form>
-                            <div className="inputTable">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                    <tbody>
-                                        <tr>
-                                            <td>이름</td>
-                                            <td>
-                                                <input type="text" name="mName" value={datas.memberName} readOnly disabled />
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>닉네임</td>
-                                            <td>
-                                                <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname} />
-                                            </td>
-                                            <td className="updateTableBtn">
-                                                <button className="beigeBtn btn" onClick={checkNickname}>중복확인</button>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>아이디</td>
-                                            <td>
-                                                <input type="text" name="mId" value={datas.memberId} readOnly disabled />
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>비밀번호</td>
-                                            <td>
-                                                <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        {/* <tr>
+                        <div className="inputTable">
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td>이름</td>
+                                        <td>
+                                            <input type="text" name="mName" value={datas.memberName} readOnly disabled />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>닉네임</td>
+                                        <td>
+                                            <input type="text" name="mNickname" value={memberNickname} onChange={handlerChangeNickname} />
+                                        </td>
+                                        <td className="updateTableBtn">
+                                            <button className="beigeBtn btn" onClick={checkNickname}>중복확인</button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>아이디</td>
+                                        <td>
+                                            <input type="text" name="mId" value={datas.memberId} readOnly disabled />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>비밀번호</td>
+                                        <td>
+                                            <input type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    {/* <tr>
                                         <td className="requiredMark">패스워드 확인</td>
                                         <td>
                                             <input type="password" name="mPwCheck" value={memberPwCheck} onChange={onChangePasswordChk} required />
                                          
                                         </td><td></td>
                                     </tr> */}
-                                        <tr>
-                                            <td>이메일</td>
-                                            <td>
-                                                <input type="text" name="mEmail" value={datas.memberEmail} disabled />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>핸드폰 번호</td>
-                                            <td>
-                                                <input type="text" name="mPhone" value={memberPhone} onChange={handlerChangePhone} />
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr className="updateAddress">
-                                            <td>주소</td>
-                                            <td>
-                                                <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress} required />
-                                            </td>
-                                            <td className="updateTableBtn">
-                                                <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                    <tr>
+                                        <td>이메일</td>
+                                        <td>
+                                            <input type="text" name="mEmail" value={datas.memberEmail} disabled />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>핸드폰 번호</td>
+                                        <td>
+                                            <input type="text" name="mPhone" value={memberPhone} onChange={handlerChangePhone} />
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr className="updateAddress">
+                                        <td>주소</td>
+                                        <td>
+                                            <input type="text" name="mAddress" value={memberAddress} onChange={handlerChangeAddress} required />
+                                        </td>
+                                        <td className="updateTableBtn">
+                                            <button className="beigeBtn btn" onClick={handleOpenSearchAddress}>주소검색</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <React.Fragment>
+                            <div className="resignMembership">
+                                <Link onClick={openModal} type="submit">회원탈퇴하기</Link>
                             </div>
-                            <React.Fragment>
-                                <div className="resignMembership">
-                                    <Link onClick={openModal} type="submit">회원탈퇴하기</Link>
+                            <MemberDelete open={modalOpen} close={closeModal} header="회원탈퇴페이지">
+                                <div className="txt3"><li>
+                                    비밀번호 확인을 통해 본인인증을 해주세요
+                                </li>
                                 </div>
-                                <MemberDelete open={modalOpen} close={closeModal} header="회원탈퇴페이지">
-                                    <div className="txt3"><li>
-                                        비밀번호 확인을 통해 본인인증을 해주세요
-                                    </li>
-                                    </div>
-                                    <tr>
-                                        <td className="requiredMark">비밀번호</td>
-                                        <td>
-                                            <input className="pw" type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="requiredMark">비밀번호 확인</td>
-                                        <td>
-                                            <input className="pw" type="password" name="mIdCheck" value={memberPwCheck} onChange={handlerChangePwCheck} required />
-                                        </td>
-                                    </tr>
-                                    <div className="txt">
-                                        탈퇴 유의사항
-                                    </div>
-                                    <div className="txt2">
-                                        <li>채팅, 회원정보의 데이터는 삭제됩니다.</li>
-                                        <li>게시한 대여상품,대여정보, 후기 등의 게시글은 자동으로 삭제됩니다.</li>
-                                        <li>회원 탈퇴 즉시 모든 회원 정보가 삭제되며, 재가입시에는 기존 아이디는 사용하실 수 있습니다.</li>
-                                        <li>회원 탈퇴 후 모든 스토어 주문 정보는 5년간 분리 보관됩니다.</li>
-                                        <li>회원 탈퇴 시 내모의 대여상품을 이용하실수 없습니다.</li>
+                                <tr>
+                                    <td className="requiredMark">비밀번호</td>
+                                    <td>
+                                        <input className="pw" type="password" name="mPw" value={memberPw} onChange={handlerChangePw} required />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="requiredMark">비밀번호 확인</td>
+                                    <td>
+                                        <input className="pw" type="password" name="mIdCheck" value={memberPwCheck} onChange={handlerChangePwCheck} required />
+                                    </td>
+                                </tr>
+                                <div className="txt">
+                                    탈퇴 유의사항
+                                </div>
+                                <div className="txt2">
+                                    <li>채팅, 회원정보의 데이터는 삭제됩니다.</li>
+                                    <li>게시한 대여상품,대여정보, 후기 등의 게시글은 자동으로 삭제됩니다.</li>
+                                    <li>회원 탈퇴 즉시 모든 회원 정보가 삭제되며, 재가입시에는 기존 아이디는 사용하실 수 있습니다.</li>
+                                    <li>회원 탈퇴 후 모든 스토어 주문 정보는 5년간 분리 보관됩니다.</li>
+                                    <li>회원 탈퇴 시 내모의 대여상품을 이용하실수 없습니다.</li>
 
-                                    </div>
-                                    <div className="line"></div>
-                                    <label className="req">
-                                        <input type="checkbox" required
-                                            id="check4" checked={check4} onChange={check4Handler} />
-                                        &nbsp;&nbsp;안내사항을 모두 확인하였으며, 이에 동의합니다.
-                                    </label>
-                                    <div className="btnWrap">
-                                        <input type="button" id="delete" className="redBtn btn bon" value="탈퇴하기" onClick={handlerClickDelete} style={{ float: "right" }} />
-                                    </div>
-                                </MemberDelete>
-                            </React.Fragment>
-                            <div className="btnWrap" >
-                                <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} style={{ marginTop: '0' }} />
-                            </div>
+                                </div>
+                                <div className="line"></div>
+                                <label className="req">
+                                    <input type="checkbox" required
+                                        id="check4" checked={check4} onChange={check4Handler} />
+                                    &nbsp;&nbsp;안내사항을 모두 확인하였으며, 이에 동의합니다.
+                                </label>
+                                <div className="btnWrap">
+                                    <input type="button" id="delete" className="redBtn btn bon" value="탈퇴하기" onClick={handlerClickDelete} style={{ float: "right" }} />
+                                </div>
+                            </MemberDelete>
+                        </React.Fragment>
+                        <div className="btnWrap" >
+                            <input type="submit" value="완료" className="greenBtn btn" onClick={UpdateProfile} style={{ marginTop: '0' }} />
+                        </div>
                     </form>
                 </div>
             </div>

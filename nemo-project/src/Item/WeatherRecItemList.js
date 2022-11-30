@@ -1,12 +1,7 @@
 import styled from "styled-components";
-import { BsCloudy, BsFillCloudSunFill, BsFillCloudLightningRainFill, BsSnow, BsFillCloudRainFill, BsFillCloudLightningFill, BsSun } from "react-icons/bs";
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
-import Shirt from '../img/shirt.jpg';
-
 import moment from 'moment';
 import 'moment/locale/ko';
 
@@ -53,19 +48,6 @@ export default function WeatherRecItemList({ match }) {
         }
 
     }, []);
-
-
-    // useEffect(() => {
-    //     if(itemWeather != '') {
-    //         axios.get(`http://localhost:8080/api/item/cate/sub/${itemWeather}`)
-    //         .then(response => {
-    //             setDatas(response.data);
-    //             console.log(response.data);
-    //         })
-    //         .catch(error => console.log(error));
-    //     }
-    // }, []);
-
 
     return (
         <Container>

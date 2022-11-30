@@ -8,14 +8,14 @@ import { useHistory, useParams } from 'react-router-dom';
 function MyStore({ itemWriter }) {
 
 
-    const [data, setData] = useState([]);     
+    const [data, setData] = useState([]);
 
     const history = useHistory();
     const [piName, setPiName] = useState('');
     const params = useParams();
 
     const YOURREVIEW_COUNT_PER_PAGE = 3;
-    const [reviewIcon, setReviewIcon] = useState('');   
+    const [reviewIcon, setReviewIcon] = useState('');
 
     // useEffect(() => {
     //     axios.get(`http://localhost:8080/api/userstoreinfo/${itemWriter}`)
@@ -43,15 +43,15 @@ function MyStore({ itemWriter }) {
 
 
 
-   const [sliderData, setSliderData] = useState([]);
+    const [sliderData, setSliderData] = useState([]);
     useEffect(() => {
         console.log(reviewId);
         axios.get(`http://localhost:8080/api/mypage/yourpageitem/${reviewId}`)
-        .then(response => {
-            console.log(reviewId, response.data);
-            setSliderData(response.data);
-        })
-        .catch(error => console.log(error));
+            .then(response => {
+                console.log(reviewId, response.data);
+                setSliderData(response.data);
+            })
+            .catch(error => console.log(error));
     }, []);
 
 
@@ -64,14 +64,14 @@ function MyStore({ itemWriter }) {
             <div className="mypageInnerPage myUserStoreInnerPage">
                 <div className="regiUserItemList">
                     <h3 className="pageTitle">대여 가능 목록</h3>
-                    <ItemSlider sliderData={sliderData}/>
+                    <ItemSlider sliderData={sliderData} />
                 </div>
                 <div className="myStoreReview">
                     <div className="titleNplusBtn">
                         {/* 상점 후기 두개까지만 출력되도록 수정 */}
                         <h3>상점 후기</h3>
-                        <button className="plusBtn" 
-                        onClick={goYourReview}>+ 더보기</button>
+                        <button className="plusBtn"
+                            onClick={goYourReview}>+ 더보기</button>
                     </div>
                 </div>
                 <div className='tableWrap'>
@@ -100,11 +100,11 @@ function MyStore({ itemWriter }) {
                                             {/* <img className="bookingitemImg" src={`../../files_review/${review.reviewFiles}`}/>         -----> 리뷰등록 사진*/}
                                         </td>
                                         <td className='ReviewItemNameOrigin' rowSpan={3} >{review.reviewItemname}</td>
-                                        <td className='ReviewWriter' style={{width:'17%'}} rowSpan={3}>{review.reviewWriter}</td>
+                                        <td className='ReviewWriter' style={{ width: '17%' }} rowSpan={3}>{review.reviewWriter}</td>
                                         <td className='ReviewContent' rowSpan={3}>
                                             <div className="myReviewContents">
                                                 {review.reviewContents}
-                                                </div>
+                                            </div>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
                                             <div>

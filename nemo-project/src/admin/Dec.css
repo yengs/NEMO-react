@@ -1,5 +1,5 @@
 /* 마이페이지 내의 페이지 */
-.adminInnerPage{
+.adminInnerPage {
     /* width: calc(80% - 230px); */
     max-width: 1200px;
     padding: 20px;
@@ -15,7 +15,10 @@
     margin: 60px auto auto auto;
     overflow: hidden;
 }
-::-webkit-scrollbar { display: none; }
+
+::-webkit-scrollbar {
+    display: none;
+}
 
 .adminInnerPage .pageTitle {
     padding: 0;
@@ -23,35 +26,10 @@
 }
 
 
-/* 다른사람이 보는 마이페이지 */
-/* .regiUserItemWrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.regiUserItemWrap .prev {
-    font-size: 35px;
-    color: #666;
-    cursor: pointer;
-}
-.regiUserItemWrap .back {
-    font-size: 35px;
-    cursor: pointer;
-}
-.regiUserItemWrap .regiUserItem {
-    width: 17%;
-    height: 210px;
-    border: 1px solid #ddd;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-radius: 5px;
-} */
-
-
 
 
 /* 빌려왔어요 */
-.userReviewListAboutStoreWrapAdmin{
+.userReviewListAboutStoreWrapAdmin {
     margin-top: 10px;
 }
 
@@ -78,13 +56,15 @@
     color: #666;
 }
 
-.userReviewListAboutStoreWrapAdmin .userReviewListAboutStore2 tbody .ReviewItemImg, .userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
+.userReviewListAboutStoreWrapAdmin .userReviewListAboutStore2 tbody .ReviewItemImg,
+.userReviewListAboutStoreWrap .userReviewListAboutStore tbody .ReviewContent {
     border: none;
 }
-.userReviewListAboutStoreWrapAdmin .userReviewListAboutStore2 tbody .ReviewContent{
+
+.userReviewListAboutStoreWrapAdmin .userReviewListAboutStore2 tbody .ReviewContent {
     padding: 0;
 }
- 
+
 /* ---------------------------- */
 
 
@@ -110,25 +90,22 @@
 .Dec {
     width: 10%;
     text-align: center;
-}  
-
-.Dec td{
-    border-bottom: none !important; 
 }
 
-.btnBok{
-  font-size: 15px;
-  border-radius: 3px;
-  width: 80px;
-  padding: 5px 10px;
+.Dec td {
+    border-bottom: none !important;
+}
+
+.btnBok {
+    font-size: 15px;
+    border-radius: 3px;
+    width: 80px;
+    padding: 5px 10px;
 }
 
 
-.RedBtn{
+.RedBtn {
     border: 2px solid rgb(206, 60, 34);
     background-color: rgb(206, 60, 34);
     color: #fff;
-  }
-
-
-
+}

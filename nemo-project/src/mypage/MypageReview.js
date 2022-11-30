@@ -88,7 +88,7 @@ function MypageReview() {
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewWriter}</td>
                                         <td className='ReviewContent' rowSpan={3}>
                                             <div className="myReviewContents">
-                                              {review.reviewContents.length < 30 ? review.reviewContents : review.reviewContents  + "..." }
+                                                {review.reviewContents.length < 30 ? review.reviewContents : review.reviewContents + "..."}
                                             </div>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}
@@ -172,7 +172,7 @@ function MypageReview() {
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewItemprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                         <td className='ReviewContent' rowSpan={3}>
                                             <div className="myReviewContents">
-                                                {review.reviewContents.length < 30 ? review.reviewContents : review.reviewContents  + "..." }
+                                                {review.reviewContents.length < 30 ? review.reviewContents : review.reviewContents + "..."}
                                             </div>
                                         </td>
                                         <td className='ReviewWriter' rowSpan={3}>{review.reviewSatisfaction}

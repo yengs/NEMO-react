@@ -5,25 +5,25 @@ import './DecDetail.css';
 import styled from "styled-components";
 
 const styles = {
-    adminInnerPage: {  
-        borderRadius: 20, 
+    adminInnerPage: {
+        borderRadius: 20,
         maxWidth: "1200px",
-        padding: "10px 10px 30px 10px", 
+        padding: "10px 10px 30px 10px",
         margin: "60px auto auto auto",
         backgroundColor: "rgb(248, 248, 248)",
         border: "2px solid #bbb"
-    }, 
+    },
     form: {
         position: "relative"
-    }, 
+    },
     table: {
         minWidth: "100%",
-        borderSpacing: 0, 
-        borderCollapse: "collapse", 
+        borderSpacing: 0,
+        borderCollapse: "collapse",
     }
 };
 
-function DecDetail({history, match}){
+function DecDetail({ history, match }) {
 
     const handleImgError = (e) => {
         e.target.src = '../../../noimage/noimage.gif';
@@ -32,27 +32,27 @@ function DecDetail({history, match}){
     const [data, setData] = useState([]);
     const [singoNum, setSingoNum] = useState('');
 
-     // 신고 상세보기
-     useEffect(() => {
+    // 신고 상세보기
+    useEffect(() => {
         axios.get(`http://localhost:8080/api/dec/detail/${match.params.singoNum}`)
-          .then(response => {
-            console.log(response);
-            if (response.status === 200){
-                setData(response.data);
-                setSingoNum(response.data.singoNum);
-            }else {
-              alert("신고 정보를 불러올 수 없습니다.");
-              return;
-            }
-          })
-          .catch(error => console.log(error));
-      }, []);
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    setData(response.data);
+                    setSingoNum(response.data.singoNum);
+                } else {
+                    alert("신고 정보를 불러올 수 없습니다.");
+                    return;
+                }
+            })
+            .catch(error => console.log(error));
+    }, []);
 
     // 목록으로
     const decList = () => history.goBack();
 
     const singoInfo = {
-        "singoNum" : match.params.singoNum
+        "singoNum": match.params.singoNum
     }
 
     // 접수하기
@@ -60,18 +60,18 @@ function DecDetail({history, match}){
         e.preventDefault();
 
         axios.put(`http://localhost:8080/api/dec/detail/${match.params.singoNum}`, singoInfo)
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-            console.log(singoInfo);
-            alert("정상적으로 접수되었습니다.");
-            history.goBack();
-        } else {
-            alert("접수 실패했습니다.");
-            return;
-        }
-      })
-      .catch(error => console.log(error));
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    console.log(singoInfo);
+                    alert("정상적으로 접수되었습니다.");
+                    history.goBack();
+                } else {
+                    alert("접수 실패했습니다.");
+                    return;
+                }
+            })
+            .catch(error => console.log(error));
     }
 
     // 취소하기
@@ -79,54 +79,54 @@ function DecDetail({history, match}){
         axios.delete(`http://localhost:8080/api/dec/detail/${match.params.singoNum}`)
             .then(response => {
                 console.log(response);
-                if(response.status == 200) {
+                if (response.status == 200) {
                     alert("정상적으로 삭제되었습니다.");
                     console.log(match.params.singoNum);
                     history.goBack();
-                }else{
+                } else {
                     alert("삭제에 실패했습니다.");
                     return;
                 }
             })
             .catch(error => console.log(error));
     }
-    
-    return(
+
+    return (
         <DecDetailContainer style={{ padding: "0 190px" }}>
-        <div style={styles.adminInnerPage}>
-            <h3 className='h3h3'>신고 상세</h3>
-            {/* <a className='greyDec' onclick={decList}>목록으로</a> */}
-            {/* <input type="button" id="list" className="greyDec" value="목록으로" onClick={decList} /> */}
-            {
-                        data && data.map(data => (
-            <div className="tablePlusForm">
-                    <div className="imageDiv">
-                        <img className="itemImg" src={`../../files_singo/${data.singoImage}`} onError={handleImgError} />
-                    </div>
-                    <div className="tableform">
-                    
-                        <div className='DecCon'>
-                            <h2 className="itemName">{data.itemName}</h2>
-                            <h3 className="itemPrice">신고 사유 <span>{"[ "}{data.singoReason}{" ]"}</span></h3>
-                            <p className="itemDeposit">신고 대상자 ID :<span>{data.singoPisingoja}
-                            　/　신고 작성자 ID : {data.singoWriter}</span></p>
-                            {/* <div style={{ borderBottom: "1px solid #ddd" }}></div> */}
-                            {/* <p>신고 작성자 ID : {data.singoWriter}</p> */}
-                            <p className="itemDetailContent" style={{color: "#666"}}>{data.singoContent}</p>
+            <div style={styles.adminInnerPage}>
+                <h3 className='h3h3'>신고 상세</h3>
+                {/* <a className='greyDec' onclick={decList}>목록으로</a> */}
+                {/* <input type="button" id="list" className="greyDec" value="목록으로" onClick={decList} /> */}
+                {
+                    data && data.map(data => (
+                        <div className="tablePlusForm">
+                            <div className="imageDiv">
+                                <img className="itemImg" src={`../../files_singo/${data.singoImage}`} onError={handleImgError} />
+                            </div>
+                            <div className="tableform">
+
+                                <div className='DecCon'>
+                                    <h2 className="itemName">{data.itemName}</h2>
+                                    <h3 className="itemPrice">신고 사유 <span>{"[ "}{data.singoReason}{" ]"}</span></h3>
+                                    <p className="itemDeposit">신고 대상자 ID :<span>{data.singoPisingoja}
+                                        /　신고 작성자 ID : {data.singoWriter}</span></p>
+                                    {/* <div style={{ borderBottom: "1px solid #ddd" }}></div> */}
+                                    {/* <p>신고 작성자 ID : {data.singoWriter}</p> */}
+                                    <p className="itemDetailContent" style={{ color: "#666" }}>{data.singoContent}</p>
+                                </div>
+
+                            </div>
+
                         </div>
-                         
-                    </div>
-                    
-                </div> 
-                ))
-            }
+                    ))
+                }
                 <div className="btnDivDec">
                     <input type="button" id="list" className="greyDec" value="목록으로" onClick={decList} />
-                    <input type="button" id="edit"   className="redBtnDec" value="접수하기" onClick={confirmWarn} />
+                    <input type="button" id="edit" className="redBtnDec" value="접수하기" onClick={confirmWarn} />
                     <input type="button" id="delete" className="grayBtnDec" value="삭제하기" onClick={deleteWarn} />
-                </div>      
-        </div>  
-        
+                </div>
+            </div>
+
         </DecDetailContainer>
     );
 }

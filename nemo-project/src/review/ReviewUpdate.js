@@ -97,9 +97,9 @@ function ReviewUpdate({ history, match }) {
                 }
             })
             .catch(error => console.log(error));
-            if(reviewFiles.size > 5000000){
-                alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.")
-            }
+        if (reviewFiles.size > 5000000) {
+            alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.")
+        }
     };
 
     const useConfirm = (message = "취소 ?", onConfirm, onCancel) => {
@@ -131,36 +131,36 @@ function ReviewUpdate({ history, match }) {
             </div>
             <div>
                 <h4>사진첨부</h4>
-                <AppStyle style={{marginTop: "11px"}}>
-                        <label htmlFor="item_review_input" className="item_review_input">
-                            {
-                                imageSrc ?
-                                    <div className="itemImg">
-                                        <img src={imageSrc} alt="preview-img" className="previewImg" onMouseEnter={showComment} onError={handleImgError}/>
-                                        <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
-                                            이미지 변경을 하시려면<br/>클릭해주세요.
-                                        </div>
+                <AppStyle style={{ marginTop: "11px" }}>
+                    <label htmlFor="item_review_input" className="item_review_input">
+                        {
+                            imageSrc ?
+                                <div className="itemImg">
+                                    <img src={imageSrc} alt="preview-img" className="previewImg" onMouseEnter={showComment} onError={handleImgError} />
+                                    <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
+                                        이미지 변경을 하시려면<br />클릭해주세요.
                                     </div>
-                                    :
-                                    <div className="itemImg">
-                                        <img className="previewImg" src={`../../../files_review/${data.reviewFiles}`} onMouseEnter={showComment} onError={handleImgError}/>
-                                        <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
-                                            이미지 변경을 하시려면<br/>클릭해주세요.
-                                        </div>
+                                </div>
+                                :
+                                <div className="itemImg">
+                                    <img className="previewImg" src={`../../../files_review/${data.reviewFiles}`} onMouseEnter={showComment} onError={handleImgError} />
+                                    <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
+                                        이미지 변경을 하시려면<br />클릭해주세요.
                                     </div>
-                                    
-                            }
-                        </label>
-                        <input
-                            type="file"
-                            id="item_review_input"
-                            className="image_inputType_file"
-                            name="file"
-                            
-                            multiple
-                            onChange={handlerChangefiles}
-                        />
-                    </AppStyle>
+                                </div>
+
+                        }
+                    </label>
+                    <input
+                        type="file"
+                        id="item_review_input"
+                        className="image_inputType_file"
+                        name="file"
+
+                        multiple
+                        onChange={handlerChangefiles}
+                    />
+                </AppStyle>
                 {/* <div className="ChoiseFile">
                     <div className="myDetailImageReview">
                         {imageSrc == '' ?
@@ -254,7 +254,7 @@ const AppStyle = styled.div`
   }
   
   `;
-  
+
 
 
 export default ReviewUpdate;

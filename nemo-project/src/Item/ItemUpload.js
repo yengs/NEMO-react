@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { useState } from "react";
 import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,7 +23,6 @@ function ItemUpload({ history }) {
     const [itemEtcsize, setitemEtcsize] = useState('');
     const [files, setFiles] = useState('');
     const [imageSrc, setImageSrc] = useState('');
-    // const [itemRentalperiod, setitemRentalperiod] = useState('');
 
 
     const handlerChangeitemName = (e) => setitemName(e.target.value);
@@ -42,7 +40,6 @@ function ItemUpload({ history }) {
         encodeFileToBase64(e.target.files[0]);
     }
 
-    // const handlerChangeitemRentalperiod=(e) => setitemRentalperiod(e.target.value);
 
 
     const encodeFileToBase64 = (fileBlob) => {
@@ -55,7 +52,7 @@ function ItemUpload({ history }) {
             };
         });
     };
-    
+
 
     var now = new Date();
     const [startDate, setStartDate] = useState(now.setDate(now.getDate() + 1));
@@ -64,64 +61,64 @@ function ItemUpload({ history }) {
     const handlerClickGoback = () => history.goBack();
 
     const handlerClickSubmit = (e) => {
-        if(itemName.trim() == ''){
+        if (itemName.trim() == '') {
             alert("상품명을 입력해주세요.")
-        }else if(itemMaincategory.trim() == ''){
+        } else if (itemMaincategory.trim() == '') {
             alert("상품 대분류를 선택해주세요.")
-        }else if(itemSubcategory.trim() == ''){
+        } else if (itemSubcategory.trim() == '') {
             alert("상품 소분류를 선택해주세요.")
-        }else if(itemWeather.trim() == ''){
+        } else if (itemWeather.trim() == '') {
             alert("어울리는 계절을 선택해주세요.")
-        }else if(itemTopsize.trim() == '' && itemBottomsize.trim() == '' && itemEtcsize.trim() == '' ){
+        } else if (itemTopsize.trim() == '' && itemBottomsize.trim() == '' && itemEtcsize.trim() == '') {
             alert("사이즈를 선택해주세요.")
-        }else if(itemPrice.trim() == ''){
+        } else if (itemPrice.trim() == '') {
             alert("가격이 제대로 입력되었는지 확인해주세요.")
-        }else if(itemDeposit.trim() == ''){
+        } else if (itemDeposit.trim() == '') {
             alert("보증금이 제대로 입력되었는지 확인해주세요.")
-        }else if(itemPrice > 2147483647 || itemDeposit > 2147483647){
+        } else if (itemPrice > 2147483647 || itemDeposit > 2147483647) {
             alert("금액이 너무 큽니다.")
-        }else if(itemDetail.trim() == ''){
+        } else if (itemDetail.trim() == '') {
             alert("상품설명을 입력해주세요.")
-        }else{
-        e.preventDefault();
+        } else {
+            e.preventDefault();
 
-        const formData = new FormData();
-        formData.append('data', new Blob([JSON.stringify({
-            "itemName": itemName, "itemPrice": itemPrice, "itemWriter": itemWriter, "itemMaincategory": itemMaincategory, "itemSubcategory": itemSubcategory, "itemDeposit": itemDeposit,
-            "itemDetail": itemDetail, "itemWeather": itemWeather, "itemTopsize": itemTopsize, "itemBottomsize": itemBottomsize,
-            "itemEtcsize": itemEtcsize, "itemRentalstart": startDate, "itemRentalend": endDate
-        })], {
-            type: "application/json"
-        }));
-        // formData.append("files", new Blob(files, { type: "image/*" }));
-        formData.append("files", files);
+            const formData = new FormData();
+            formData.append('data', new Blob([JSON.stringify({
+                "itemName": itemName, "itemPrice": itemPrice, "itemWriter": itemWriter, "itemMaincategory": itemMaincategory, "itemSubcategory": itemSubcategory, "itemDeposit": itemDeposit,
+                "itemDetail": itemDetail, "itemWeather": itemWeather, "itemTopsize": itemTopsize, "itemBottomsize": itemBottomsize,
+                "itemEtcsize": itemEtcsize, "itemRentalstart": startDate, "itemRentalend": endDate
+            })], {
+                type: "application/json"
+            }));
+            // formData.append("files", new Blob(files, { type: "image/*" }));
+            formData.append("files", files);
 
 
 
-        axios.post('http://localhost:8080/api/item',
-            formData,
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            .then(response => {
-                if (response.status === 200) {
-                    alert("정상적으로 등록되었습니다.");
-                    window.location.href = `/item/cate/${itemMaincategory}`;
-                } else {
-                    alert("등록에 실패했습니다.");
-                    return;
-                }
-            })
-            .catch(error => console.log(error));
-            console.log("사진",files)
-            if(files.trim() == ''){
+            axios.post('http://localhost:8080/api/item',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("정상적으로 등록되었습니다.");
+                        window.location.href = `/item/cate/${itemMaincategory}`;
+                    } else {
+                        alert("등록에 실패했습니다.");
+                        return;
+                    }
+                })
+                .catch(error => console.log(error));
+            console.log("사진", files)
+            if (files.trim() == '') {
                 alert("사진을 등록해주세요.")
             }
 
-           
-        }      
+
+        }
     };
 
     const [showCom, setShowCom] = useState(false);
@@ -141,14 +138,14 @@ function ItemUpload({ history }) {
                 <h2>상품 등록</h2>
                 <hr />
                 <form id="frm" name="frm">
-                    <AppStyle style={{marginTop: "11px"}}>
+                    <AppStyle style={{ marginTop: "11px" }}>
                         <label htmlFor="item_review_input" className="item_review_input">
                             {
                                 imageSrc ?
                                     <div className="itemImg">
                                         <img src={imageSrc} alt="preview-img" className="previewImg" onMouseEnter={showComment} />
                                         <div className={"commentBox" + (showCom ? ' showCom' : '')} onMouseEnter={showComment} onMouseOut={hideComment}>
-                                            이미지 변경을 하시려면<br/>클릭해주세요.
+                                            이미지 변경을 하시려면<br />클릭해주세요.
                                         </div>
                                     </div>
                                     :
@@ -170,7 +167,7 @@ function ItemUpload({ history }) {
                     <table className="board_detail">
                         <tr>
                             <td>상품명</td>
-                            <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} maxlength="25"/></td>
+                            <td><input type="text" id="itemName" name="itemName" value={itemName} onChange={handlerChangeitemName} maxlength="25" /></td>
                         </tr>
 
                         <tr>
@@ -187,7 +184,6 @@ function ItemUpload({ history }) {
                         </tr>
                         <tr>
                             <td>상품 소분류</td>
-                            {/* <td><input type="text" id="itemSubcategory" name="itemSubcategory" value={itemSubcategory} onChange={handlerChangeitemSubcategory} /></td> */}
                             <td>     {
                                 (function () {
                                     if (itemMaincategory === "상의") {
@@ -318,7 +314,7 @@ function ItemUpload({ history }) {
 
                         <tr>
                             <td>대여시작일</td>
-                            <td><DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => {setStartDate(date) ;setEndDate(date)}} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={now.setDate(now.getDate() -1)} required /> </td>
+                            <td><DatePicker dateFormat="yyyy-MM-dd" className="startDate" selected={startDate} onChange={date => { setStartDate(date); setEndDate(date) }} selectStart startDate={startDate} endDate={endDate} locale={ko} minDate={now.setDate(now.getDate() - 1)} required /> </td>
                         </tr>
                         <tr>
                             <td>대여마감일</td>
@@ -405,8 +401,8 @@ const AppStyle = styled.div`
   }
   
   `;
-  
-  const ItemUploadContainer = styled.div`
+
+const ItemUploadContainer = styled.div`
 
   .itemcontainer form tr>td>input {
     width: 100%;

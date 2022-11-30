@@ -3,15 +3,17 @@
     background-color: #999;
     color: #fff;
     font-weight: 100;
-    margin:0 251px 0px;
+    margin: 0 251px 0px;
     font-size: 15px;
     padding: 10px 20px;
     border-radius: 3px;
     font-weight: 100;
-  }
-  .sun{
+}
+
+.sun {
     margin-left: 400px;
-  }
+}
+
 .rcontainer {
     width: 900px;
     max-width: 1200px;
@@ -93,7 +95,8 @@
     color: #747474;
 }
 
-.reviewListItemImg, .bookingitemImgreview {
+.reviewListItemImg,
+.bookingitemImgreview {
     width: 60px;
     height: 60px;
     margin: auto;

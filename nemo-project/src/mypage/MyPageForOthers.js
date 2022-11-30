@@ -7,11 +7,11 @@ import './mypage.css';
 import { Route } from "react-router-dom";
 
 function MyPage() {
-    return(
+    return (
         <div className="myPageWrap forOthers">
             <MyMenuForOthers />
             {/* <MyUserStore /> */}
-            <Route path="/userstoreinfo/warn" component={Singo} exact={true}/>
+            <Route path="/userstoreinfo/warn" component={Singo} exact={true} />
             <Route path="/userstoreinfo" component={MyUserStore} exact={true} />
             <Route path="/userreviewlist" component={UserReviewList} exact={true} />
         </div>
